@@ -1,0 +1,10 @@
+{
+ "module": "",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "①它跑在哪? - 在 GitHub Actions 中运行，非常驻。②它替换谁? - 不在我们的模块清单中。③它强在哪? - 无法具体量化。"
+}

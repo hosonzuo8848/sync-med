@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "OCR识别准确率",
+ "how": "集成到现有OCR产线中",
+ "effort": "中",
+ "current": "目前使用的是[具体OCR工具或服务名]",
+ "beats": "在识别准确率上可能优于当前工具",
+ "why": "它跑在GitHub Actions里，替换OCR产线中的识别组件；在识别准确率上可能胜过当前工具；它是基于ONNXRuntime的OCR工具包"
+}

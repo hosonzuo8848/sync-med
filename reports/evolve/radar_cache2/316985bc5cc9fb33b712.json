@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "暂无",
+ "beats": "",
+ "why": "它是一个Web服务器，不直接用于阅读器模块；常驻机器，不符合零常驻主机要求"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "RAG grounding + 多段结构化输出",
+ "beats": "无",
+ "why": "已在家底：AI寻脉已使用RAG grounding，且无证据表明superpowers在相关指标上优于现有方案。"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Tesseract OCR",
+ "beats": "",
+ "why": "已在家底:OCR产线使用Tesseract OCR;它跑在常驻机器上;它替换的是OCR产线中的OCR引擎;它在哪个可量化指标上胜过Tesseract OCR不明确"
+}

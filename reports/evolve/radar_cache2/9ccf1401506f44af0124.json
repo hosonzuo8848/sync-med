@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "adopt",
+ "metric": "检索召回率",
+ "how": "替换 tcm-rag-768，使用 LightRAG 进行向量检索",
+ "effort": "中",
+ "current": "tcm-rag-768",
+ "beats": "更高的召回率",
+ "why": "它跑在 Actions 里，增强 RAG 向量检索，召回率更高; 替换 tcm-rag-768; 在召回率上胜过 tcm-rag-768"
+}

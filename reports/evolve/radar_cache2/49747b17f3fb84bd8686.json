@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "暂无具体技术使用情况",
+ "beats": "无",
+ "why": "已在家底：前台阅读器已使用 PDF.js 进行 PDF 到 Markdown 的转换，MinerU 功能相似，但未证明增量。"
+}

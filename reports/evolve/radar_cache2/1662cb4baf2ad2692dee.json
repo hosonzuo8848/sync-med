@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Tesseract 4.1 + 自研预处理",
+ "beats": "",
+ "why": "已在家底：OCR产线已使用 Tesseract"
+}

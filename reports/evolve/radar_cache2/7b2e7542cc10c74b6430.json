@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Cloudflare Vectorize",
+ "beats": "",
+ "why": "已在家底：RAG向量检索已使用Cloudflare Vectorize"
+}

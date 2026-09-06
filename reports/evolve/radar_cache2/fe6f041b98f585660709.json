@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Tesseract Open Source OCR Engine",
+ "beats": "",
+ "why": "已在家底:OCR产线;它跑在哪:常驻机器;它替换谁:OCR产线;它强在哪:无具体指标对比"
+}
