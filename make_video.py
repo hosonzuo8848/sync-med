@@ -853,7 +853,19 @@ def quality_gate(out_path, expected_audio_s, n_sub_lines):
     return (len(reasons) == 0), reasons
 
 
+# 2026-09-05 起视频产物不再写对象存储,只留在 GitHub Actions artifact ——
+# 本 workflow 的 upload-artifact@v4 是 `if: always()`,收 out.mp4 + script.txt,
+# 所以关掉这个出口不会让视频无处可去。那个存储桶另有用途,不该被视频占。
+# 保留函数体与 key 计算,是因为下面 MANIFEST 里的 key 是下游认这条产出的凭据,
+# 改动它会连带弄坏读 MANIFEST 的人;这里只掐写入,不动契约。
+# 要临时恢复写入:显式设环境变量 VIDEO_TO_R2=1,默认关。
+VIDEO_TO_R2 = os.environ.get("VIDEO_TO_R2", "0") == "1"
+
+
 def upload(path, key):
+    if not VIDEO_TO_R2:
+        print("SKIP-R2", key, os.path.getsize(path), "bytes (视频不落 R2,产物在 Actions artifact)", flush=True)
+        return
     s3.put_object(Bucket=S_BUCKET, Key=key, Body=open(path, "rb").read(), ContentType="video/mp4")
     print("UPLOADED", key, os.path.getsize(path), "bytes", flush=True)
 

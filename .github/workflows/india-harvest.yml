@@ -9,8 +9,15 @@ on:
       cap:
         description: books per shard per run (pilot small, full high)
         default: "400"
-  schedule:
-    - cron: "30 */6 * * *"   # resume gently every 6h (idempotent, cron-resumable)
+  # 2026-09-07 暂停定时触发:不是废弃这条线,是它在空转,先止损。
+  # 实测:产出对象的 last_modified 全部集中在 2026-07-09 那一天,此后近两个月零新增;
+  # 而每 6 小时起 20 个 shard、每 shard 跑满 BUDGET_S 才退出,近 30 次 run 全绿但 uploaded=0。
+  # 根因:上游没有 _djvu.txt 的 id(empty/imageonly,每 shard 500+ 条)不留任何完成标记,
+  # 唯一的"已完成"记忆就是已上传的对象本身,所以每轮都对同一批 id 重新发请求、重新判 empty,
+  # 永远推不到 worklist 后面去。要重开 cron,先给 empty 的 id 也落台账(断点续传),否则开了还是空转。
+  # 手动仍可 workflow_dispatch 触发。
+  # schedule:
+  #   - cron: "30 */6 * * *"   # resume gently every 6h (idempotent, cron-resumable)
 
 concurrency:
   group: india-harvest
