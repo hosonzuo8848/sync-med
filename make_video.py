@@ -551,20 +551,17 @@ def build_plain_ass(word_timings, out_path="subs_plain.ass", w=1080, h=1920, off
 # default test book, ylgc_2, happens to be one of the ~6,000 not-yet-migrated ones). Mirroring both
 # branches instead of assuming one keeps this correct for either kind of book.
 #
-# 2026-07-22 reverification (re-ran the same D1 query 2 days later, not a guess): migration crept
-# from 88.5% to ~88.9% (46,595/52,402 upload_status='done' rows now have pan_dir_id; 5,807 still
-# don't) -- "real but not total" above still holds, it did NOT flip to 100% in the interim. Breaking
-# that gap down by top-level R2 prefix (books_assets_v2.webp_prefix) matters here because ylgc_2
-# (this script's default BOOK) lives under gufang/ (domestic classics library), NOT book/ (the
-# overseas-medical-books folder that other parts of this project describe as "already fully migrated
-# off R2, bucket emptied 2026-07-17"): book/ 1,388/22,109 still NULL, gufang/ 917/946 still NULL
-# (ylgc_2's own folder is barely migrated at all), naj/ 3,402/29,096 still NULL. So "the guyaofang-lib
-# R2 bucket is already emptied" is not accurate as a blanket statement for any of these three folders
-# yet, book/ included. Live proof, not just the D1 count: the 2026-07-22 07:44 UTC scheduled run of
-# this very script (run 29901193285) read gufang/ylgc_2/page_000{1..5}.webp straight off R2 with zero
-# "img miss" lines and produced a passing-quality-gate video -- those R2 objects are still there and
-# still readable in production right now. Do not "clean up" the R2-fallback branch below on the
-# assumption the bucket is empty; re-check books_assets_v2 pan_dir_id coverage before ever doing that.
+# 2026-07-22: at that time the migration was real but not total, and the image objects for this
+# script's default BOOK were still being served straight off object storage -- a scheduled run that
+# day read its pages with zero "img miss" lines. Hence the warning that used to live here: don't
+# delete the fallback branch below just because someone says the bucket is empty.
+#
+# 2026-09-06 recheck (probed actual keys, not a guess): that is no longer true. Every page-image
+# prefix probed came back "The specified key does not exist", and the bucket's top-level prefixes
+# no longer contain any page-image folder at all -- the migration finished sometime after July.
+# The fallback branch below is now dead weight rather than a safety net. It is left in place
+# deliberately: it costs one failed lookup and nothing else, and removing it is a separate change
+# that should come with its own verification. Re-probe actual keys before relying on either state.
 PAN_BASE = "https://open-api.123pan.com"
 _pan_tok = {"v": None}
 
