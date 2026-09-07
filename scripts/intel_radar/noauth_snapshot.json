@@ -47,12 +47,6 @@
   "note": "No API key required — public OpenCode endpoint with Kimi, GLM, Qwen, MiMo, MiniMax models.",
   "website": "https://opencode.ai"
  },
- "theoldllm": {
-  "hasFree": true,
-  "noAuth": true,
-  "note": "Free — GPT-5.4, Claude 4.6 Opus/Sonnet/Haiku, + more. No API key — tokens auto-generated via browser.",
-  "website": "https://theoldllm.vercel.app"
- },
  "uncloseai": {
   "hasFree": true,
   "noAuth": true,
