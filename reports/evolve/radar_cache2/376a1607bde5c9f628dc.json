@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "暂无特定视频处理库",
+ "beats": "",
+ "why": "OpenMontage 是视频拼接工具，不适用于文本阅读器模块"
+}

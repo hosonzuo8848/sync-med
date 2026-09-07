@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "暂无特定库",
+ "beats": "",
+ "why": "已在家底：AI寻脉模块目前没有特定依赖库，而是根据具体需求进行定制开发。"
+}
