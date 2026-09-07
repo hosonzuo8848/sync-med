@@ -4,8 +4,8 @@
   "tag": "v1.4.2"
  },
  "HKUDS/LightRAG": {
-  "published_at": "2026-08-19T07:01:48Z",
-  "tag": "v1.5.7rc2"
+  "published_at": "2026-09-02T07:23:55Z",
+  "tag": "v1.5.7"
  },
  "PaddlePaddle/PaddleOCR": {
   "published_at": "2026-06-11T12:09:14Z",
@@ -36,8 +36,8 @@
   "tag": "mineru-3.4.5-released"
  },
  "unclecode/crawl4ai": {
-  "published_at": "2026-07-15T08:27:27Z",
-  "tag": "v0.9.2"
+  "published_at": "2026-08-31T11:34:14Z",
+  "tag": "v0.9.3"
  },
  "vercel/satori": {
   "published_at": "2026-08-24T12:48:18Z",
