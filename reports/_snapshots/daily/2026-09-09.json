@@ -1,0 +1,146 @@
+{
+ "extra": {
+  "traffic": {
+   "err": null,
+   "funnel": {
+    "content": 5641,
+    "logged_in": 9,
+    "nonbot": 38681,
+    "raw": 222154
+   },
+   "pages": [
+    {
+     "by_country": "US:2, CN:2, JP:1",
+     "ips": 5,
+     "name": "阅读器",
+     "path": "/reader%"
+    },
+    {
+     "by_country": "US:11, SG:4, KR:2, IN:2, HK:2, CN:2",
+     "ips": 23,
+     "name": "星图",
+     "path": "/starmap%"
+    },
+    {
+     "by_country": "US:16, CN:4, FR:3, SG:2, GB:2, DE:2",
+     "ips": 29,
+     "name": "寻脉",
+     "path": "/xunmai%"
+    },
+    {
+     "by_country": "US:1, SG:1",
+     "ips": 2,
+     "name": "本草",
+     "path": "/bencao%"
+    },
+    {
+     "by_country": "CN:3, SG:1, HK:1",
+     "ips": 5,
+     "name": "方剂",
+     "path": "/fangji%"
+    },
+    {
+     "by_country": "US:1",
+     "ips": 1,
+     "name": "全文",
+     "path": "/text%"
+    }
+   ],
+   "window": "2026-08-10"
+  }
+ },
+ "generated_at": "2026-09-09T01:57:48.381305+08:00",
+ "key": "2026-09-09",
+ "metrics": {
+  "cand_pending": {
+   "err": null,
+   "value": 5777
+  },
+  "daodu_total": {
+   "err": null,
+   "value": 1953
+  },
+  "formulas_books": {
+   "err": null,
+   "value": 1210
+  },
+  "formulas_names": {
+   "err": null,
+   "value": 44563
+  },
+  "formulas_total": {
+   "err": null,
+   "value": 98174
+  },
+  "graph_edges": {
+   "err": null,
+   "value": 161583
+  },
+  "graph_edges_tier1": {
+   "err": null,
+   "value": 1056
+  },
+  "graph_nodes": {
+   "err": null,
+   "value": 53453
+  },
+  "gufang_lib": {
+   "err": null,
+   "value": 0
+  },
+  "guji_visible": {
+   "err": null,
+   "value": 6925
+  },
+  "med_visible": {
+   "err": null,
+   "value": 46803
+  }
+ },
+ "period": "daily",
+ "range": [
+  "2026-09-09",
+  "2026-09-09"
+ ],
+ "run_id": "34260180675",
+ "tables": {
+  "daodu_by_ver": {
+   "err": null,
+   "rows": [
+    {
+     "k": "daodu-v3-ragground",
+     "n": 898
+    },
+    {
+     "k": "daodu-v3-corpus-batch",
+     "n": 893
+    },
+    {
+     "k": "daodu-multi-v1",
+     "n": 162
+    }
+   ]
+  },
+  "med_by_collection": {
+   "err": null,
+   "rows": [
+    {
+     "k": "overseas_guji",
+     "n": 25621
+    },
+    {
+     "k": "overseas",
+     "n": 20896
+    },
+    {
+     "k": "fojing",
+     "n": 273
+    },
+    {
+     "k": "nonmed_junk",
+     "n": 13
+    }
+   ]
+  }
+ }
+}
