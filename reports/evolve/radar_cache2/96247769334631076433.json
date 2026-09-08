@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "adopt",
+ "metric": "OCR识别准确率",
+ "how": "通过 GitHub Actions 集成 PaddleOCR",
+ "effort": "中",
+ "current": "PaddleOCR / Tesseract / Surya / Marker / Nougat / RapidOCR / PP-StructureV2 / doc2x / MinerU / pdfplumber / PyMuPDF / pdf2image / Pillow / OpenCV",
+ "beats": "在多语言支持、识别准确率上胜过现有方案",
+ "why": "PaddleOCR 是 OCR 领域公认的头牌，具有更好的性能和更广泛的适用性"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "检索路由",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Cloudflare Workers 路由分发 + D1 元数据过滤",
+ "beats": "",
+ "why": "已在家底:检索路由-Elasticsearch - Elasticsearch 是一个分布式搜索引擎，而我们的检索路由模块是基于 Cloudflare Workers 和 D1 元数据过滤实现的，两者在架构和功能上有所不同。"
+}

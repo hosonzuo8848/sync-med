@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "PaddleOCR / Tesseract / Surya / Marker / Nougat / RapidOCR / PP-StructureV2 / doc2x / MinerU / pdfplumber / PyMuPDF / pdf2image / Pillow / OpenCV",
+ "beats": "",
+ "why": "已在家底:OCR产线-MinerU"
+}

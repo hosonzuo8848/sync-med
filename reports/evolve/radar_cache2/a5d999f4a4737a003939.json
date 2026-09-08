@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "D1 存节点/边 + 前端 Cytoscape.js/Three.js 力导向",
+ "beats": "",
+ "why": "已在家底:知识图谱构建工具-Graphify-Labs/graphify"
+}

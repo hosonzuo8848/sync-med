@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "RAG(Grounding) + 结构化 Prompt 链(多轮 Workers 调用)",
+ "beats": "",
+ "why": "已在家底:AI寻脉-结构化 Prompt 链，此插件为 Claude Code 插件，主要限制代理生成更少的代码，与我们的结构化 Prompt 链功能相似。"
+}

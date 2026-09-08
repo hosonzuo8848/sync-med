@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Cloudflare Pages (React/Vue) + CSS 分页/字号 + Workers 门禁",
+ "beats": "",
+ "why": "已在家底:Web服务器-Cloudflare Pages"
+}

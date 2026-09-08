@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "GitHub Actions 批量跑 PaddleOCR / Tesseract / Surya / Marker / Nougat / RapidOCR / PP-StructureV2 / doc2x / MinerU / pdfplumber / PyMuPDF / pdf2image / Pillow / OpenCV",
+ "beats": "",
+ "why": "红灯-常驻进程: Redis 是一个常驻进程数据库，不适合在 Worker 单次执行或 Actions 步骤中运行"
+}

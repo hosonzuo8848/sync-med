@@ -1,0 +1,10 @@
+{
+ "module": "免费模型池",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Workers 网关轮询多供应商(OpenAI兼容/原生) + KV 探活/配额",
+ "beats": "",
+ "why": "已在家底:免费模型池-freeCodeCamp"
+}

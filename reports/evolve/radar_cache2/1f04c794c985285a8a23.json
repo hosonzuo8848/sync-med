@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Cloudflare Pages (React/Vue) + CSS 分页/字号 + Workers 门禁",
+ "beats": "",
+ "why": "红灯-架构定位: README/文档首页明确写着 'Server' 'Database' 'Service' 'Daemon' 'Cluster' 'Self-hosted' 'Control Plane'"
+}

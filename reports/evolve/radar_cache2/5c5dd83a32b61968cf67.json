@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Vectorize (tcm-rag-768, 183万向量) + bge-m3 嵌入",
+ "beats": "",
+ "why": "已在家底:RAG向量检索-Vectorize"
+}
