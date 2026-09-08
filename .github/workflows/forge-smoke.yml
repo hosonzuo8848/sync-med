@@ -1,0 +1,45 @@
+name: forge-smoke
+
+# 私有核心仓能不能在 Actions 里被 checkout —— 这一件卡住了 6 个模块的接线,
+# 所以先用一个最小 workflow 把它验穿,再谈接哪个模块。
+#
+# 凭据用**只读 deploy key**(仓库级 SSH,只能读 sueai-forge 这一个仓),
+# 不用跨账号 PAT:核心仓在另一个账号下,PAT 要么权限过大要么根本读不到。
+# key 泄露的最坏后果是这一个私有仓被读,且随时可在仓库 Settings→Deploy keys 删掉。
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout 私有核心仓
+        uses: actions/checkout@v4
+        with:
+          repository: hosonzuo/sueai-forge
+          ssh-key: ${{ secrets.FORGE_DEPLOY_KEY }}
+          path: forge
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 模块自测(证明拿到的是能跑的代码,不只是文件存在)
+        run: |
+          cd forge
+          echo "── 目录 ──"
+          ls -d *_core | tr '\n' ' '; echo
+          echo "── 行数 ──"
+          find . -name '*.py' -o -name '*.mjs' -o -name '*.js' | xargs cat 2>/dev/null | wc -l
+          echo "── 自测 ──"
+          python -X utf8 chunk_core/chunker.py | tail -1
+          python -X utf8 crawl_core/extract.py | tail -1
+          python -m skills_core._selftest | tail -1
+          python -X utf8 rag_core/_selftest.py | tail -1
+          python -X utf8 research_core/_selftest.py | tail -1
+          python -X utf8 knowledge_core/_selftest.py | tail -1
+          cd route_core && node router.test.mjs | tail -1
