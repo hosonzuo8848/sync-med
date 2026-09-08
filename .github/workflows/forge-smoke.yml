@@ -9,6 +9,10 @@ name: forge-smoke
 
 on:
   workflow_dispatch:
+  schedule:
+    # 每天一次。模块自测是"私有仓代码还能不能跑"的哨兵 —— 只有手动触发的话,
+    # 等真要接线时才发现跑不了,就晚了。
+    - cron: "40 19 * * *"
 
 permissions:
   contents: read
@@ -28,18 +32,39 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: 模块自测(证明拿到的是能跑的代码,不只是文件存在)
+      - name: 装依赖
+        # 私有仓没有 requirements.txt(它是模块集合不是应用),依赖从源码里 grep 出来的:
+        # lxml(自适应解析)/ requests(取页)/ pyyaml(配置)/ numpy(切块打分)/ cssselect(选择器)。
+        # playwright、scrapling 是可选降级路径,不装 —— 模块本身对缺它们有降级分支。
+        run: pip install -q lxml requests pyyaml numpy cssselect
+
+      - name: 模块自测
+        # 每条单独判,失败当场退出。**不许再用 `| tail -1`** ——
+        # 管道会把被测命令的退出码换成 tail 的,首版就是这样:6 个自测全炸,run 照样绿。
+        # 这跟 verify_all 里那条"一个永远说 PASS 的自检等于没有"是同一个道理,
+        # 我在自己的 workflow 里又踩了一次。
         run: |
+          set -eo pipefail
           cd forge
-          echo "── 目录 ──"
-          ls -d *_core | tr '\n' ' '; echo
-          echo "── 行数 ──"
-          find . -name '*.py' -o -name '*.mjs' -o -name '*.js' | xargs cat 2>/dev/null | wc -l
-          echo "── 自测 ──"
-          python -X utf8 chunk_core/chunker.py | tail -1
-          python -X utf8 crawl_core/extract.py | tail -1
-          python -m skills_core._selftest | tail -1
-          python -X utf8 rag_core/_selftest.py | tail -1
-          python -X utf8 research_core/_selftest.py | tail -1
-          python -X utf8 knowledge_core/_selftest.py | tail -1
-          cd route_core && node router.test.mjs | tail -1
+          echo "── 目录 ──"; ls -d *_core | tr '\n' ' '; echo
+          echo "── 行数 ──"; find . -name '*.py' -o -name '*.mjs' -o -name '*.js' | xargs cat 2>/dev/null | wc -l
+          fail=0
+          run_one () {
+            echo "── $1"
+            if out=$(eval "$2" 2>&1); then
+              echo "$out" | tail -1
+            else
+              echo "$out" | tail -5
+              echo "   ✗ $1 失败"
+              fail=1
+            fi
+          }
+          run_one chunk_core      "python -X utf8 chunk_core/chunker.py"
+          run_one crawl_core      "python -X utf8 crawl_core/extract.py"
+          run_one skills_core     "python -m skills_core._selftest"
+          run_one rag_core        "python -X utf8 rag_core/_selftest.py"
+          run_one research_core   "python -X utf8 research_core/_selftest.py"
+          run_one knowledge_core  "python -X utf8 knowledge_core/_selftest.py"
+          run_one route_core      "cd route_core && node router.test.mjs"
+          echo "──────────"
+          [ "$fail" = 0 ] && echo "ALL PASS" || { echo "有模块自测未通过"; exit 1; }
