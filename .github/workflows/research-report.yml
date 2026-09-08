@@ -1,0 +1,127 @@
+name: research-report
+
+# 「古籍辨证参阅报告」的云端流水线:拿生产检索的真实命中,组装成七段结构化报告。
+#
+# 与接线单原稿的两处不同(都是实测后改的,不是照抄):
+#  1. checkout 私有仓用 **只读 deploy key**,不用 FORGE_TOKEN ——
+#     核心仓在另一个账号下,跨账号 PAT 要么权限过大要么根本读不到。
+#     deploy key 是仓库级只读,泄露的最坏后果是这一个私有仓被读。
+#  2. 装依赖走私有仓自己的 requirements.txt。手写清单漏过 trafilatura
+#     (它在 try/except 里 import,缺了不报错只降级),crawl_core 因此云端 33 项过 30、本地 37/37。
+#
+# 报告组装是**纯逻辑,零模型调用** —— 证据全部来自生产 /api/retrieve,
+# 不生成任何没有出处的话。这条线不碰任何模型密钥。
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: '研读主题(必填)'
+        required: true
+      query:
+        description: '检索问句(留空则同主题)'
+        required: false
+        default: ''
+      terms:
+        description: '词典确认术语,逗号分隔(可留空)'
+        required: false
+        default: ''
+
+concurrency:
+  group: research-report
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: checkout 私有核心仓(只读 deploy key)
+        uses: actions/checkout@v4
+        with:
+          repository: hosonzuo/sueai-forge
+          ssh-key: ${{ secrets.FORGE_DEPLOY_KEY }}
+          path: forge
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 装依赖
+        run: pip install -q -r forge/requirements.txt
+
+      - name: 从生产检索取真实命中
+        env:
+          TOPIC: ${{ inputs.topic }}
+          Q: ${{ inputs.query }}
+        run: |
+          python - <<'PY'
+          import json, os, requests
+          # 必须用 requests,不能用 urllib。2026-09-08 本地实测:同一个请求
+          # requests 返回 200、urllib 返回 **403** —— urllib 的默认 UA
+          # `Python-urllib/3.12` 被生产前面的 WAF 挡掉。接线单原稿写的是 urllib,
+          # 照抄上云端就是必然 403,而且报错长得像"限流",会往错的方向查。
+          q = (os.environ.get("Q") or os.environ["TOPIC"]).strip()
+          r = requests.post("https://gufangai.com/api/retrieve",
+                            json={"query": q, "topK": 8}, timeout=60)
+          r.raise_for_status()
+          raw = r.content
+          open("hits.json", "wb").write(raw)
+          d = json.loads(raw)
+          d = d.get("data") or d
+          h = d.get("hits") or {}
+          # 打出各器官命中数:报告空了要能一眼看出是"检索没给"还是"组装丢了"
+          print("fired:", d.get("fired"), "| intent:", d.get("intent"))
+          print({k: len(v) for k, v in h.items() if isinstance(v, list)})
+          PY
+
+      - name: 组装七段报告
+        env:
+          PYTHONUTF8: '1'
+          PYTHONPATH: forge
+        run: |
+          python -m research_core \
+            --topic "${{ inputs.topic }}" \
+            --query "${{ inputs.query }}" \
+            --terms "${{ inputs.terms }}" \
+            --hits hits.json \
+            --out out
+
+      - name: 自检产物(空报告要当场失败,不许交白卷)
+        run: |
+          set -e
+          test -s out/report.md || { echo "report.md 为空或不存在"; exit 1; }
+          echo "── report.md 前 30 行 ──"
+          head -30 out/report.md
+          echo "── 引用编号是否都能查到出处 ──"
+          python - <<'PY'
+          import json, re, sys, pathlib
+          # 判据必须打在**全量引用表**(report.json 的 bibliography)上,不能打在
+          # evidence.json 上 —— 后者是给前台证据栏的,默认 limit=8,拿它校验全量正文
+          # 必然报"编号 9/10/11 查不到"。2026-09-08 首版就是这么设的,自己吓自己一跳。
+          md = pathlib.Path("out/report.md").read_text(encoding="utf-8")
+          rep = json.loads(pathlib.Path("out/report.json").read_text(encoding="utf-8"))
+          bib = rep.get("bibliography") or []
+          have = {int(m.group(1)) for m in (re.match(r"\[(\d+)\]", str(x)) for x in bib) if m}
+          cited = {int(x) for x in re.findall(r"\[(\d+)\]", md)}
+          missing = sorted(cited - have)
+          print(f"正文引用 {len(cited)} 个编号,参考文献 {len(have)} 条")
+          if missing:
+              print("✗ 这些编号在参考文献里查不到:", missing); sys.exit(1)
+          if not cited:
+              print("✗ 报告一个引用都没有 —— 七段报告的命根是出处,空引用等于没写"); sys.exit(1)
+          print("✅ 每个引用编号都能查到出处")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-report-${{ github.run_id }}
+          path: |
+            out/
+            hits.json
