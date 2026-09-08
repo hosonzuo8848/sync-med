@@ -33,10 +33,11 @@ jobs:
           python-version: '3.12'
 
       - name: 装依赖
-        # 私有仓没有 requirements.txt(它是模块集合不是应用),依赖从源码里 grep 出来的:
-        # lxml(自适应解析)/ requests(取页)/ pyyaml(配置)/ numpy(切块打分)/ cssselect(选择器)。
-        # playwright、scrapling 是可选降级路径,不装 —— 模块本身对缺它们有降级分支。
-        run: pip install -q lxml requests pyyaml numpy cssselect
+        # 用私有仓自己的 requirements.txt,不在这里手写清单 ——
+        # 手写的那版漏了 trafilatura(它在 try/except 里 import,缺了不报错只降级),
+        # 于是 crawl_core 云端 engine=fallback、33 项只过 30,而本地 37/37。
+        # 依赖清单跟着代码走才不会漂。
+        run: pip install -q -r forge/requirements.txt
 
       - name: 模块自测
         # 每条单独判,失败当场退出。**不许再用 `| tail -1`** ——
