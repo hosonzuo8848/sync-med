@@ -177,7 +177,7 @@ def ask(chunk):
     truncated = len(text) > TEXT_MAX
     body = {"messages": [{"role": "system", "content": SYS},
                          {"role": "user", "content": USER.format(cid=chunk["chunk_id"], text=text[:TEXT_MAX])}],
-            "json": True, "max_tokens": 900, "temperature": 0, "source": "hyper_s3"}
+            "json": True, "max_tokens": 700, "temperature": 0, "source": "hyper_s3", "timeout_ms": 90000}
     meta = {"provider": None, "latency_ms": None, "err": "", "attempts": 0, "truncated": truncated}
     for attempt in range(3):
         meta["attempts"] = attempt + 1
