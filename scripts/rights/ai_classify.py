@@ -32,7 +32,8 @@ def ask(row):
     for attempt in range(3):
         try:
             req = urllib.request.Request(GW, data=json.dumps(body).encode("utf-8"), method="POST",
-                                         headers={"Content-Type": "application/json; charset=utf-8", "X-Gateway-Key": KEY})
+                                         headers={"Content-Type": "application/json; charset=utf-8", "X-Gateway-Key": KEY,
+                                                  "User-Agent": "sync-med-rights-ai/1.0 (GitHub Actions; +https://github.com/hosonzuo8848/sync-med)"})
             j = json.loads(urllib.request.urlopen(req, timeout=120).read())
             if not j.get("ok"):
                 last = "gateway ok:false " + str(j.get("error"))[:80]; time.sleep(2); continue
