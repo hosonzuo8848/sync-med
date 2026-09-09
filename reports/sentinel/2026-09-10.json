@@ -1,0 +1,96 @@
+[
+  {
+    "checked_at_bj": "2026-09-10 03:19:47",
+    "alert_count": 3,
+    "alerts": [
+      "cover",
+      "page:overseas",
+      "freshness"
+    ],
+    "cover": {
+      "name": "cover_real_ratio",
+      "ok": false,
+      "alert": true,
+      "reason": "D1\u62bd\u6837\u5931\u8d25: HTTPSConnectionPool(host='api.cloudflare.com', port=443): Read timed out. (read timeout=30)"
+    },
+    "pages": {
+      "name": "page_availability",
+      "targets": {
+        "home": {
+          "label": "\u9996\u9875 /",
+          "url": "https://gufangai.com/",
+          "status_list": [
+            200,
+            200,
+            200
+          ],
+          "median_ms": 1008,
+          "item_count": null,
+          "alert": false
+        },
+        "overseas": {
+          "label": "\u6d77\u5916\u533b\u4e66\u5217\u8868 /api/library/overseas?agg=1",
+          "url": "https://gufangai.com/api/library/overseas?agg=1",
+          "status_list": [
+            null,
+            200,
+            200
+          ],
+          "median_ms": 897.5,
+          "item_count": 35,
+          "alert": true
+        },
+        "overseas_guji": {
+          "label": "\u6d77\u5916\u53e4\u7c4d\u5217\u8868 /api/library/overseas-guji?agg=1",
+          "url": "https://gufangai.com/api/library/overseas-guji?agg=1",
+          "status_list": [
+            200,
+            200,
+            200
+          ],
+          "median_ms": 1198,
+          "item_count": 35,
+          "alert": false
+        },
+        "daodu_list": {
+          "label": "AI\u5bfc\u8bfb\u5217\u8868 /api/daodu/list?limit=20",
+          "url": "https://gufangai.com/api/daodu/list?limit=20",
+          "status_list": [
+            200,
+            200,
+            200
+          ],
+          "median_ms": 971,
+          "item_count": 24,
+          "alert": false
+        }
+      },
+      "alert": true
+    },
+    "ai_search": {
+      "name": "ai_search",
+      "url": "https://gufangai.com/api/ai/search",
+      "status": 200,
+      "elapsed_ms": 2027,
+      "alert": false,
+      "evidence_count": 8,
+      "formula_count": 5,
+      "ok_field": true
+    },
+    "graph": {
+      "name": "graph",
+      "url": "https://gufangai.com/api/ai/graph",
+      "elapsed_ms": 1820,
+      "alert": false,
+      "nodes": 2092,
+      "links": 3200,
+      "prev_nodes": 2092,
+      "prev_links": 3200
+    },
+    "freshness": {
+      "name": "d1_freshness",
+      "alert": true,
+      "reason": "D1\u67e5\u8be2\u5931\u8d25: 500 Server Error: Internal Server Error for url: https://api.cloudflare.com/client/v4/accounts/b7362ed77d212bab298a9ae8736c9868/d1/database/2db89d3b-e988-4577-a9e3-fb7c563af72f/query"
+    }
+  }
+]
