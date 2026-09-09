@@ -496,12 +496,14 @@ BLINDSPOT_TOPIC_CLUSTERS = {
     # \u90a3\u4e00\u6761\u91cc\u3002\u7ee7\u7eed\u626b\u7b49\u4e8e\u6bcf\u5929\u82b1 3 \u6b21 GitHub search \u914d\u989d\u6293\u5fc5\u7136\u88ab\u4e22\u5f03\u7684\u4e1c\u897f,
     # \u8fd8\u6bcf\u5929\u5360\u6389\u65e5\u62a5\u7ea6 1.7 KB \u7248\u9762\u3002
     # \u9700\u6c42\u53d8\u4e86\u8981\u6062\u590d:\u628a\u4e0b\u9762\u8fd9\u884c\u53d6\u6d88\u6ce8\u91ca\u5373\u53ef,\u6293\u53d6\u903b\u8f91\u4e00\u4e2a\u5b57\u6ca1\u52a8\u3002
-    # "\u77e5\u8bc6\u56fe\u8c31": ["knowledge-graph", "graphrag", "graph-visualization"],
+    # 2026-09-10 重开:07-29 停扫的前提(知识图谱不需要)已被 08-05 graphify 落地 + 创始人点名 Hyper-Extract 推翻。
+    # 实测 topic:knowledge-graph stars:>2000 pushed:>120d = 42 条,Hyper-Extract 排 27 → 每 topic 8 条截不到它,给 30。
+    "知识抽取": ["knowledge-graph", "hypergraph", "information-extraction", "graphrag"],
     "\u4e2d\u533b\u5782\u76f4": ["tcm", "chinese-medicine"],
 }
 BLINDSPOT_MIN_STARS   = 2000     # \u8001\u724c\u9ad8\u661f\u95e8\u69db
 BLINDSPOT_ACTIVE_DAYS = 120      # pushed \u5728\u8fd1 N \u5929\u5185 = \u4ecd\u6d3b\u8dc3
-BLINDSPOT_PER_TOPIC   = 8
+BLINDSPOT_PER_TOPIC   = 30       # 原 8;多出的行都过 apply_need_filter,版面不会涨
 
 
 def _load_arsenal_names() -> set:
@@ -1581,6 +1583,15 @@ NEEDS = [
          r"traditional[-_ ]?chinese[-_ ]?medicine",
          r"\btcm\b", r"variant[-_ ]?character", r"punctuat"),
     ),
+    (
+        "N4", "知识抽取·图谱/超图构建(黑盒子抽取管线)",
+        # 2026-09-10 创始人点名 yifanfeng97/Hyper-Extract(★3.9k)从没进过精华;07-29「知识图谱不需要」那条
+        # 早被 08-05 graphify 落地(星图)推翻。抽取管线 = 我们黑盒子的本体,不是"RAG 框架"。
+        ("知识抽取", "信息抽取", "图谱构建", "超图", "知识图谱", "三元组", "实体关系", "实体抽取", "关系抽取"),
+        (r"knowledge[-_ ]?(graph|extraction)", r"\bhypergraph", r"information[-_ ]?extraction",
+         r"(triple|entity|relation)[-_ ]?extraction", r"\bgraphrag\b", r"\bkg[-_ ]?(build|construct)",
+         r"unstructured[a-z0-9 _-]{0,20}structured"),
+    ),
 ]
 
 # 「明确不需要」—— 已有解决方案,不再需要情报。
@@ -1590,7 +1601,8 @@ NEEDS = [
 # 「今天丢掉的 N 条里,RAG/判断引擎/多agent 各占多少」—— 把创始人的判断用数字坐实。
 NOT_NEEDED = [
     ("RAG框架/向量库", ("向量库", "向量检索", "检索增强", "知识库问答"),
-     (r"\brag\b", r"retrieval[-_ ]?augmented",
+     # `\brag\b` 撤掉:它只是个 topic 标签,136 个高星仓都挂着;否决要看本体(框架/管线/向量库),不看标签
+     (r"\brag[-_ ]?(framework|pipeline|system|engine|stack)", r"retrieval[-_ ]?augmented",
       r"vector[-_ ]?(db|database|store|index|search)", r"\bembedding",
       r"\bfaiss\b", r"\bmilvus\b", r"\bqdrant\b")),
     ("判断引擎/可解释", ("判断引擎", "可解释", "溯源", "证据链"),
@@ -1714,6 +1726,11 @@ SELFTEST_NEEDS = [
      "", "N1", "公众号 —— 至今没解决的那一条"),
     ("some/awesome-llm-gateway", "openai-compatible, llm-proxy", "", None, "模型网关"),
     ("foo/text-to-video-diffusion", "text-to-video, diffusion", "", None, "视频生成模型"),
+    ("yifanfeng97/Hyper-Extract",
+     "Hypergraph is more powerful. Transform unstructured text into structured knowledge with LLMs. | 话题: ai, ai-agents, cli, hypergraph, information-extraction, knowledge-graph, llm, rag",
+     "", "N4", "2026-09-10 创始人点名的漏网:带 rag 标签也不该被否决"),
+    ("some/langchain-rag-framework", "rag, vector-db, retrieval-augmented generation framework", "", None,
+     "本体是 RAG 框架 → 仍否决"),
 ]
 
 
