@@ -42,7 +42,7 @@ jobs:
           except Exception:
               d = {}
           d = d.get("data") if isinstance(d, dict) and "data" in d else d
-          ids = [it.get("book_id") for it in ((d or {}).get("items") or []) if isinstance(it, dict) and it.get("book_id")]
+          ids = [it.get("book_id") for it in ((d or {}).get("books") or (d or {}).get("items") or []) if isinstance(it, dict) and it.get("book_id")]   # 接口键是 books(首跑就栽在这)
           if not ids:
               # 首跑就在这里 ZeroDivisionError:书目接口没给 items。把状态码和正文头打出来,别让哨兵自己死得不明不白。
               print(f"书目接口 HTTP {resp.status_code} · 正文头: {resp.text[:300]!r}")
