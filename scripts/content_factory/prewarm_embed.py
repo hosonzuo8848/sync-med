@@ -33,21 +33,16 @@ SYMPTOMS = [
 
 def d1_top_formulas(k):
     """从 D1 取高频真方名(有密钥时);无密钥→空,只用症状词。"""
-    acc = os.environ.get("CF_ACCOUNT_ID"); db = os.environ.get("D1_DATABASE_ID"); tok = os.environ.get("D1_API_TOKEN")
-    if not (acc and db and tok):
+    if not (os.environ.get("CF_ACCOUNT_ID") and os.environ.get("D1_DATABASE_ID") and os.environ.get("D1_API_TOKEN")):
         return []
     sql = ("SELECT name_norm FROM sue_formulas WHERE name_norm IS NOT NULL "
            "AND length(name_norm) BETWEEN 3 AND 8 AND is_formula=1 "
            "GROUP BY name_norm ORDER BY COUNT(*) DESC LIMIT %d" % k)
-    url = "https://api.cloudflare.com/client/v4/accounts/%s/d1/database/%s/query" % (acc, db)
-    req = urllib.request.Request(url, data=json.dumps({"sql": sql}).encode(),
-                                 headers={"Authorization": "Bearer " + tok, "Content-Type": "application/json"},
-                                 method="POST")
     try:
-        j = json.loads(urllib.request.urlopen(req, timeout=45).read())
-        return [r["name_norm"] for r in (j["result"][0]["results"] if j.get("success") else [])]
+        from _ai import d1          # single D1 transport (guard_single_source: no hardcoded endpoint copies)
+        return [r["name_norm"] for r in d1(sql)]
     except Exception as e:                                       # noqa: BLE001
-        print("D1 取方名失败,只用症状词: %s" % str(e)[:100])
+        print("D1 top formulas unavailable, symptoms only: %s" % str(e)[:100])
         return []
 
 
