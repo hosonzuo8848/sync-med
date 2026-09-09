@@ -167,7 +167,8 @@ SEARCH_MIN_INTERVAL_ANON = 6.5     # 60/6.5 = ~9 req/min, under the 10 ceiling
 #     block. Sizing it flush would have made the Chinese queries the first thing
 #     to die on any future addition, which is the failure being fixed here.
 # The env override stays the escape hatch if a run ever needs to be cut short.
-SEARCH_BUDGET = int(os.environ.get("ARSENAL_SEARCH_BUDGET", "44"))
+# 2026-09-09 实测 scan_plan 48 条、预算 44 -> 每天固定 skip 最后 4 条(含「中医 大模型」)。认证态节流 2.2s/次,60 条约 132s,远在 GitHub 30 次/分钟内。
+SEARCH_BUDGET = int(os.environ.get("ARSENAL_SEARCH_BUDGET", "60"))
 CORE_MIN_INTERVAL = 0.8
 
 _state = {"search_calls": 0, "core_calls": 0, "last_search": 0.0, "last_core": 0.0,
@@ -768,11 +769,11 @@ def distill(rows, batch=10):
         return rows, {"seat": None, "calls": 0, "ok": 0}
     try:
         roster = _load_roster()
+        seats = roster._bench()     # 2026-09-02 起这里 KeyError 8 天,台账全程没写;提炼失败只该降级,不该拖死台账
     except Exception as e:
-        print("[arsenal] free bench unavailable (%s) -- shipping raw rows"
-              % type(e).__name__, flush=True)
+        print("[arsenal] free bench unavailable (%s: %s) -- shipping raw rows"
+              % (type(e).__name__, e), flush=True)
         return rows, {"seat": None, "calls": 0, "ok": 0}
-    seats = roster._bench()
     if not seats:
         print("[arsenal] no free pool has credentials -- shipping raw rows", flush=True)
         return rows, {"seat": None, "calls": 0, "ok": 0}
@@ -1160,10 +1161,12 @@ def run(limit=60, do_distill=True, today=None):
         d, span = star_delta(hist, r["repo"], today)
         r["stars_delta"] = d
         r["stars_delta_window_days"] = span
+    dstats = {"seat": None, "calls": 0, "ok": 0}
     if do_distill:
-        rows, dstats = distill(rows)
-    else:
-        dstats = {"seat": None, "calls": 0, "ok": 0}
+        try:
+            rows, dstats = distill(rows)
+        except Exception as e:   # 台账三写(candidates/ledger/star_history)必须在提炼之后仍然执行
+            print("[arsenal] distill crashed (%s: %s) -- ledger still written" % (type(e).__name__, e), flush=True)
     scan_stats = {
         "queries": len(per_query),
         "search_calls": _state["search_calls"],
