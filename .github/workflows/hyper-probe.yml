@@ -1,0 +1,93 @@
+name: hyper-probe
+
+# One-off throughput probe for the free gateway pool (2026-09-10, S1 of the hyper-extract plan).
+# Why: the extraction plan assumed ~36,000 gateway calls per night; ai_call_logs shows the whole site only
+# completes 517-1,033 successful calls per day. Before any batch extraction starts, measure what the pool
+# really sustains: N threads for M minutes, one small fixed JSON task per call, only through the gateway,
+# source=hyper_probe so ai_call_logs keeps it apart. Never a paid lane, never a direct provider call.
+# Output: step summary + an Issue with calls / success rate / p95 / per-provider split (from D1).
+
+on:
+  workflow_dispatch:
+    inputs:
+      threads:
+        description: "concurrent threads"
+        default: "3"
+      minutes:
+        description: "duration in minutes"
+        default: "60"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: hyper-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q requests
+      - name: probe
+        env:
+          GW_KEY: ${{ secrets.GW_KEY }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          D1_ID: ${{ secrets.D1_DATABASE_ID }}
+          GH_TOKEN: ${{ github.token }}
+          THREADS: ${{ github.event.inputs.threads }}
+          MINUTES: ${{ github.event.inputs.minutes }}
+        run: |
+          python - <<'PY'
+          import os, json, time, threading, statistics, subprocess, requests
+          GW = "https://gufangai.com/api/gateway/chat"
+          threads = int(os.environ.get("THREADS") or 3); minutes = int(os.environ.get("MINUTES") or 60)
+          deadline = time.time() + minutes * 60
+          SYS = "You are an extraction engine. Reply with JSON only: {\"formula\":\"...\",\"herbs\":[{\"name\":\"...\",\"dose\":\"...\"}]}"
+          USER = "桂枝三两去皮 芍药三两 甘草二两炙 生姜三两切 大枣十二枚擘 上五味㕮咀以水七升微火煮取三升去滓适寒温服一升"
+          H = {"Content-Type": "application/json; charset=utf-8", "X-Gateway-Key": os.environ.get("GW_KEY", "")}
+          lock = threading.Lock(); calls = [];
+          def worker():
+              while time.time() < deadline:
+                  t0 = time.time(); ok = False; status = 0
+                  try:
+                      r = requests.post(GW, json={"messages": [{"role": "system", "content": SYS}, {"role": "user", "content": USER}],
+                                                  "json": True, "max_tokens": 300, "temperature": 0, "source": "hyper_probe"},
+                                        headers=H, timeout=120)
+                      status = r.status_code
+                      if r.status_code == 200:
+                          j = r.json(); ok = bool(j.get("ok")) and bool((j.get("text") or "").strip())
+                  except Exception:
+                      status = -1
+                  with lock: calls.append((ok, status, time.time() - t0))
+                  time.sleep(0.2)
+          ts = [threading.Thread(target=worker, daemon=True) for _ in range(threads)]
+          for t in ts: t.start()
+          while any(t.is_alive() for t in ts):
+              time.sleep(60)
+              with lock: n = len(calls); ok = sum(1 for c in calls if c[0])
+              print(f"[{int((time.time() - (deadline - minutes*60))/60)} min] calls={n} ok={ok}", flush=True)
+          n = len(calls); ok = sum(1 for c in calls if c[0]); lat = sorted(c[2] for c in calls if c[0])
+          p50 = lat[len(lat)//2] if lat else 0; p95 = lat[int(len(lat)*0.95)] if lat else 0
+          per_hour = ok * 60 / minutes
+          # per-provider split from D1 (the gateway logs every attempt with source=hyper_probe)
+          d1 = f"https://api.cloudflare.com/client/v4/accounts/{os.environ['CF_ACCOUNT_ID']}/d1/database/{os.environ['D1_ID']}/query"
+          try:
+              r = requests.post(d1, json={"sql": f"SELECT provider, COUNT(*) AS n, ROUND(AVG(success),3) AS s, ROUND(AVG(cost_ms)) AS ms FROM ai_call_logs WHERE source='hyper_probe' AND ts >= datetime('now','-{minutes+5} minutes') GROUP BY provider ORDER BY n DESC"},
+                                headers={"Authorization": f"Bearer {os.environ['D1_TOKEN']}"}, timeout=60).json()
+              rows = r["result"][0]["results"] if r.get("success") else []
+          except Exception as e:
+              rows = []; print("D1 split failed:", e)
+          lines = [f"hyper-probe: threads={threads} minutes={minutes} calls={n} ok={ok} rate={ok/max(1,n):.3f} p50={p50:.1f}s p95={p95:.1f}s -> {per_hour:.0f} ok/hour, {per_hour*10:.0f} ok per 10h night"]
+          for x in rows: lines.append(f"  {x['provider']}: n={x['n']} success={x['s']} avg_ms={x['ms']}")
+          txt = "\n".join(lines); print(txt)
+          open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8").write("```\n" + txt + "\n```\n")
+          open("issue.md", "w", encoding="utf-8").write("免费池吞吐探针(并发 %d,%d 分钟,只走网关,source=hyper_probe):\n\n```\n%s\n```\n\n黑盒子/超边抽取的开工门槛:1 小时并发 3 成功 >= 1,000。" % (threads, minutes, txt))
+          subprocess.run(["gh", "issue", "create", "-R", os.environ["GITHUB_REPOSITORY"], "-t", f"hyper-probe {time.strftime('%Y-%m-%d')}: {ok}/{n} ok, {per_hour:.0f} ok/hour", "-F", "issue.md"], check=False)
+          PY
