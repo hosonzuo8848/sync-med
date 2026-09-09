@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "OCR识别准确率",
+ "how": "集成到现有OCR产线中，作为备选或辅助工具",
+ "effort": "小",
+ "current": "目前使用的是云端 Actions 批量跑的 OCR 工具",
+ "beats": "在特定字符识别准确率上可能胜出",
+ "why": "RapidOCR 支持多种编程语言，可能提供更优的字符识别效果"
+}
