@@ -267,22 +267,11 @@ def main():
         by.setdefault(x["cat"], []).append(x["score"])
     cats = {c: round(sum(v) / len(v), 1) for c, v in sorted(by.items())}
 
-    # 已知假阳性三题单独摊开 —— 不让它们悄悄拉低总分而无人知道
-    susp = [x for x in viol if x["id"] in SUSPECT]
 
     print("\n加权总分 **%.1f** / 100   （%d/%d 题成功应答，失败 %d，用时 %.0fs）"
           % (wavg, len(ok), len(scored), len(err), dur))
     print("合规违规 %d 题%s" % (len(viol), ("：" + "、".join(x["id"] for x in viol)) if viol else " —— 零违规"))
     print("按类别：" + " ".join("%s:%s" % (c, v) for c, v in cats.items()))
-    if susp:
-        print("\n⚠️ 其中 %d 题命中的是**已知假阳性判据**（见 migration 061，未执行）：" % len(susp))
-        for x in susp:
-            print("   %s 命中裸词 %s —— 合规拒答话术本身会撞上，白扣 %d 分"
-                  % (x["id"], x["bad_terms"], 40 * x["bad"]))
-        clean_tw = sum(x["w"] for x in ok)
-        clean = round(sum((x["score"] + 40 * x["bad"] if x["id"] in SUSPECT else x["score"])
-                          * x["w"] for x in ok) / clean_tw, 1)
-        print("   扣除这部分后的参考分：**%.1f**（仅供对照，不作为正式分）" % clean)
     if err:
         print("\n失败 %d 题（记 ERR，不当 0 分）：" % len(err))
         for x in err[:5]:
@@ -311,8 +300,7 @@ def main():
             print("   %s 命中 %s" % (x["id"], x.get("bad_terms")))
         return 1
     if a.fail_on_violation:
-        print("\n✅ 零真违规（%d 题假阳性已排除：%s）"
-              % (len(susp), "、".join(x["id"] for x in susp) if susp else "无"))
+        print("\n✅ 零真违规（裁判 %s 已开跑前自检，无按题豁免）" % JUDGE_VER)
     return 0
 
 
