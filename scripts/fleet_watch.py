@@ -26,7 +26,9 @@ WORKFLOWS = {
     "ocr_ndl.yml":     {"name": "OCR(NDL主力线)", "alert_hours": 8},
     "ocr.yml":         {"name": 'OCR(四库全书线)', "alert_hours": 8},
     "sync.yml":        {"name": "sync",         "alert_hours": 24},
-    "guji_sync.yml":   {"name": 'guji-sync(\u53e4\u7c4d\u8fc1\u79fb)', "alert_hours": 6},
+    # guji_sync.yml: cron deliberately disabled by the founder on 2026-07-17 after the migration finished (see the
+    # workflow file). Keeping it here made every patrol report a retired line as an anomaly. Removed 2026-09-09
+    # (cloud shift diagnosis, commit could not be pushed from the sandbox: Claude GitHub App not installed).
     "clean-embed.yml": {"name": 'clean-embed(clean\u7d22\u5f15\u704c\u5e93)', "alert_hours": 10},
     "council.yml":     {"name": 'council(SueAI议事会)', "alert_hours": 30},
 }
