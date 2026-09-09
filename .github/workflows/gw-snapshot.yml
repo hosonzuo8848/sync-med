@@ -1,0 +1,60 @@
+name: gw-snapshot
+
+# 网关动态路由层(route_core)的分钟级健康快照。立此因(2026-09-09):网关近 7 天成功率 53%,链序靠人手排、
+# 一周就烂;route_core 已接进生产,但它的 health/latency 打分因子读 KV route:snapshot —— 没有这份快照,
+# 打分层 fail-open、链序回到静态兜底,等于没接。上一版就是聚合 SQL 恒空却没人发现。
+# 每 10 分钟从 D1 ai_call_logs 聚合近 30 分钟各路成功率与 p95 延迟,写 KV(TTL 1800s)。
+# 公开仓:输出只打计数,不打各家成功率数字。
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gw-snapshot
+  cancel-in-progress: true
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q requests
+      - name: 聚合 → KV route:snapshot
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          D1_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          D1_ID: ${{ secrets.D1_DATABASE_ID }}
+        run: |
+          python - <<'PY'
+          import os, json, time, requests, sys
+          acct, cft, d1t, d1id = os.environ["CF_ACCOUNT_ID"], os.environ["CF_TOKEN"], os.environ["D1_TOKEN"], os.environ["D1_ID"]
+          KV_NS = "f7316f9f43744edfaa6d288fbc3c935b"
+          d1 = f"https://api.cloudflare.com/client/v4/accounts/{acct}/d1/database/{d1id}/query"
+          def q(sql):
+              r = requests.post(d1, json={"sql": sql}, headers={"Authorization": f"Bearer {d1t}"}, timeout=60).json()
+              if not r.get("success"): sys.exit("D1 失败: " + json.dumps(r.get("errors"))[:200])
+              return r["result"][0]["results"]
+          # ts 是 UTC 文本(datetime('now')),必须用 datetime 比较 —— 用 strftime('%s')*1000 比数字恒不成立,聚合永远空。
+          WIN = "-30 minutes"
+          a = q(f"SELECT provider, AVG(success) AS succ_rate_5m, COUNT(*) AS samples_5m FROM ai_call_logs WHERE ts >= datetime('now','{WIN}') GROUP BY provider")
+          b = q(f"SELECT provider, MIN(cost_ms) AS p95_latency_5m FROM (SELECT provider, cost_ms, ROW_NUMBER() OVER (PARTITION BY provider ORDER BY cost_ms) AS rn, COUNT(*) OVER (PARTITION BY provider) AS n FROM ai_call_logs WHERE ts >= datetime('now','{WIN}') AND cost_ms IS NOT NULL) WHERE rn >= 0.95 * n GROUP BY provider")
+          p95 = {x["provider"]: x["p95_latency_5m"] for x in b}
+          health = {x["provider"]: {"succ_rate_5m": round(float(x["succ_rate_5m"] or 0), 4), "samples_5m": int(x["samples_5m"] or 0), "p95_latency_5m": p95.get(x["provider"])} for x in a if x.get("provider")}
+          snap = {"agg_at": int(time.time() * 1000), "window": WIN, "health": health}
+          kv = f"https://api.cloudflare.com/client/v4/accounts/{acct}/storage/kv/namespaces/{KV_NS}/values/route:snapshot?expiration_ttl=1800"
+          r = requests.put(kv, data=json.dumps(snap).encode(), headers={"Authorization": f"Bearer {cft}", "Content-Type": "application/json"}, timeout=60)
+          ok = r.status_code == 200 and r.json().get("success")
+          # 谁会在哪里看见:0 家 = 半小时没有任何调用(深夜正常)或 SQL 又空了;连续多次 0 由 health.js 的 snapshot_age_s 暴露给巡查。
+          line = f"gw-snapshot · 窗口 {WIN} · 聚合 {len(health)} 家 · KV 写入 {'OK' if ok else 'FAIL ' + str(r.status_code) + ' ' + r.text[:120]}"
+          open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8").write(line + "\n"); print(line)
+          if not ok: sys.exit(1)
+          PY
