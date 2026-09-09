@@ -351,6 +351,9 @@ def scan_plan():
         ("category", "awesome in:name stars:>2000 pushed:>%s" % d30, "updated"),
         ("category", "agent skill in:name,description stars:>300 pushed:>%s" % d90, "stars"),
         ("category", "free llm api in:name,description stars:>200 pushed:>%s" % d90, "stars"),
+        # 2026-09-10 selftest MISS tashfeenahmed/freellmapi (25k stars): GitHub no longer ranks it for the line above;
+        # its description says "34 free LLM providers" -- the quoted phrase query below returns it at rank 0.
+        ("category", "\"free llm\" in:description stars:>5000 pushed:>%s" % d90, "stars"),
         ("category", "api aggregator llm in:name,description stars:>200", "stars"),
         ("category", "mcp server in:name,description stars:>1000 pushed:>%s" % d30, "updated"),
         # `multi-platform publish in:name,description stars:>100` sat here and
