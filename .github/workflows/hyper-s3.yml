@@ -1,0 +1,58 @@
+name: hyper-s3
+
+# S3 (2026-09-10): AI stage of hyperedge extraction on a small seeded batch of public-domain text chunks.
+# Every AI call goes through the internal free-pool gateway (never a paid lane, never a direct provider,
+# no provider/model pinned). READ-ONLY: D1 is only read (SELECT + pragma); zero R2; the run leaves three
+# artifacts + one Issue for the CTO / judge. Who sees it when it breaks: the Issue title carries
+# chunks / edges / ok% / known-hit%; a missing Issue after 90 min = the run died (check the job log).
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "chunks to sample (one gateway call each)"
+        default: "500"
+      threads:
+        description: "concurrent gateway calls (probe 05:52: 3 threads = 99.9% ok, p95 11s)"
+        default: "3"
+      seed:
+        description: "random seed (same seed + same D1 => same chunks + same sample30)"
+        default: "42"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: hyper-s3
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: hyper s3
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+          D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          GW_KEY: ${{ secrets.GW_KEY }}
+          GH_TOKEN: ${{ github.token }}
+          LIMIT: ${{ github.event.inputs.limit }}
+          THREADS: ${{ github.event.inputs.threads }}
+          SEED: ${{ github.event.inputs.seed }}
+        run: python scripts/hyper/hyper_s3.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hyper_s3
+          path: |
+            hyper_s3.jsonl
+            hyper_s3_summary.json
+            sample30.md
+            issue.md
