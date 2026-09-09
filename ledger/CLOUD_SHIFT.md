@@ -56,6 +56,22 @@ gh run view <run_id> -R hosonzuo8848/sync-med --log-failed
 
 ---
 
+## 今晚接力(2026-09-10 夜班负责人留,做完可删)
+
+本班已把三条新产线推上来,你这轮**优先复核它们**,比第二步的老清单更要紧:
+
+1. **`hyper-s3.yml`(超边 AI 抽取,只读干跑)**:找标题含「超边S3」的最新 Issue(500 段那条),读正文的 summary 与「裁判样本 30 条」表。
+   按表头写明的 C / P / W 判法逐条判(只判「原文有没有明写」:方名是原文方名?成员与剂量是紧跟其后的组成?不判医理;头被截短算 W),
+   把 30 条判语 + C/P/W 计数 + 严格/宽松准确率写成一条 Issue 评论;写不了评论就完整写进你的运行日志。
+   同时报三个数:`ok_pct`、`known_hit_pct`、`quote_in_text_pct`,并说明 `known_hit_pct` 偏低主要是药名表只有 419 条(见 summary 的 known_sizes)。
+2. **`rights-ai-classify.yml`**:最新三条「版权AI分类」Issue 的结论已定——免费池 flash 级模型不认识清代二线书目,**不要再调提示词**;若你想推进,只做一件:
+   写一个只读脚本草案,把 `books_text` 里 `rights_status='unverified'` 的书名与 Kanripo KR3e 医家类目录(https://github.com/kanripo/KR3e)的书名做简繁归一匹配,统计能匹配到多少;不写 D1。
+3. **`hyper-probe.yml`**:最新一条 Issue(1,426 ok/h)是基线;不要再触发新探针。
+
+红线不变:只走本仓 secrets 里的网关钥,不加任何直连供应商;不写 D1;不动 `ledger/` 以外的既有 workflow 触发条件。
+
+---
+
 ## 写不进仓库时怎么办
 
 `git push` / `gh api PUT` / 开 Issue 若回 **403 Resource not accessible by integration**,是 Claude GitHub App 没装到本仓,
