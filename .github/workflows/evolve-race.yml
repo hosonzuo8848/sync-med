@@ -47,6 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
@@ -165,11 +166,11 @@ jobs:
           echo "" >> issue_body.md
           echo "run: $RUN_URL" >> issue_body.md
           TITLE="周度进化 · 改进者赛马结果"
-          NUM=$(gh issue list --label evolve --state open --search "$TITLE" --json number,title                 --jq "[.[] | select(.title|startswith(\"$TITLE\"))][0].number" 2>/dev/null || echo "")
+          NUM=$(gh issue list --label self-evolve --state open --search "$TITLE" --json number,title                 --jq "[.[] | select(.title|startswith(\"$TITLE\"))][0].number" 2>/dev/null || echo "")
           if [ -n "$NUM" ] && [ "$NUM" != "null" ]; then
             gh issue comment "$NUM" --body-file issue_body.md && echo "已评论 Issue #$NUM"
           else
-            gh issue create --title "$TITLE" --label evolve --body-file issue_body.md ||             gh issue create --title "$TITLE" --body-file issue_body.md
+            gh issue create --title "$TITLE" --label self-evolve --body-file issue_body.md ||             gh issue create --title "$TITLE" --body-file issue_body.md
           fi
 
       - uses: actions/upload-artifact@v4
