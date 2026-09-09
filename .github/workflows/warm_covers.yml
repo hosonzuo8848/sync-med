@@ -1,0 +1,62 @@
+name: warm-covers
+
+# 封面热层灌注(2026-09-09)。立此因:全站扫描慢速抽 30 本封面中位 10.4s 一张、凌晨真封面率 46.7%;
+# R2 热层零命中 —— cover.js 只在 pan123thumb 一支写 R2,直链那支从不写(已改),warm_dlink 又连续 transient 全败。
+# 这里不碰 123 API、不写 R2、不需要密钥:只是按用户会看到的顺序(书架前几页)慢慢 GET 公开的封面接口,
+# Worker 取到缩略图自己写进 R2 热层(cover.js 那段);热了的再 GET 就是毫秒级 r2thumb/edge-cache,零成本。
+# 每 3 小时 400 本、1 QPS,书架首页那几百本当天就热;全量 4.4 万本约两周。没 thumb.webp 的老批次(约 1 万本)
+# 走全页图不入热层,要另起缩图作业(见 docs/new/全站健康扫描_2026-09-09.md)。
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 */3 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: warm-covers
+  cancel-in-progress: false
+
+jobs:
+  warm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q requests
+      - name: 按书架顺序 GET 封面(1 QPS)
+        run: |
+          python - <<'PY'
+          import requests, time, os, collections
+          B = "https://gufangai.com"; H = {"User-Agent": "warm-covers/1 (+github actions)"}
+          # 每次跑推进两页(海外医书 + 海外古籍各一页),按 run 序号轮转,一天 8 跑覆盖 8 页 × 2 库
+          k = int(time.time() // 10800) % 60 + 1
+          ids = []
+          for path in (f"/api/library/overseas?agg=1&page={k}&page_size=100&sort=smart",
+                       f"/api/library/overseas-guji?agg=1&page={k}&page_size=100"):
+              try:
+                  d = requests.get(B + path, timeout=90, headers=H).json(); d = d.get("data") or d
+                  ids += [it.get("book_id") or (it.get("cover") or {}).get("book_id") for it in (d.get("items") or [])]
+              except Exception as e:
+                  print("列表接口失败", path, type(e).__name__)
+          ids = [i for i in ids if i][:400]
+          src = collections.Counter(); lat = []
+          for bid in ids:
+              t0 = time.time()
+              try:
+                  r = requests.get(f"{B}/api/reader/{bid}/cover", timeout=60, headers=H, stream=True)
+                  next(r.iter_content(512), b""); r.close()
+                  src[r.headers.get("X-Source", "?")] += 1; lat.append(round((time.time() - t0) * 1000))
+              except Exception as e:
+                  src["EXC:" + type(e).__name__] += 1
+              time.sleep(1)
+          lat.sort(); med = lat[len(lat) // 2] if lat else -1
+          hot = sum(v for s, v in src.items() if s in ("r2thumb", "edge-cache"))
+          line = (f"warm-covers · 第 {k} 页 · {len(ids)} 本 · 已热(r2thumb/edge) {hot} · 来源分布 {dict(src)} · 中位 {med}ms")
+          print(line)
+          open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8").write(line + "\n")
+          PY
