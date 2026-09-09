@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-09-02",
+ "generated": "2026-09-09",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -31,9 +31,9 @@
   ]
  },
  "scan": {
-  "queries": 39,
-  "search_calls": 39,
-  "search_budget": 44,
+  "queries": 48,
+  "search_calls": 48,
+  "search_budget": 60,
   "errors": 0,
   "authenticated": true,
   "dead_queries": [],
@@ -41,130 +41,53 @@
  },
  "distill": {
   "seat": "zhipu",
-  "calls": 7,
-  "ok": 3
+  "calls": 10,
+  "ok": 6
  },
- "count": 22,
+ "count": 60,
  "candidates": [
   {
-   "repo": "yushui2022/MathModel-Skill",
-   "url": "https://github.com/yushui2022/MathModel-Skill",
-   "description": "Agent-native mathematical modeling workflow skills for Trae, Claude Code, and Codex, covering problem parsing, modeling, code generation, evidence checks, paper writing, and Word delivery.",
-   "stars": 332,
-   "topics": [],
+   "repo": "digitalsamba/claude-code-video-toolkit",
+   "url": "https://github.com/digitalsamba/claude-code-video-toolkit",
+   "description": "AI-native video production toolkit for Claude Code",
+   "stars": 2061,
+   "topics": [
+    "ai-video-generator",
+    "claude-code",
+    "developer-tools",
+    "elevenlabs",
+    "open-source",
+    "openclaw",
+    "playwright",
+    "programmatic-video",
+    "qwen-tts",
+    "remotion",
+    "text-to-speech",
+    "video-editing"
+   ],
    "lang": "Python",
-   "created_at": "2026-01-29",
-   "pushed_at": "2026-09-02",
-   "age_days": 216,
-   "stars_per_day_lifetime": 1.54,
+   "created_at": "2025-12-09",
+   "pushed_at": "2026-09-08",
+   "age_days": 274,
+   "stars_per_day_lifetime": 7.52,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 1
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供数学建模工作流程技能，涵盖问题解析、建模、代码生成等",
-   "evidence": "Agent-native mathematical modeling workflow skills",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "VkRainB/ccMesh",
-   "url": "https://github.com/VkRainB/ccMesh",
-   "description": "Claude Code / Codex local AI proxy gateway desktop app (Tauri). Anthropic Messages <-> OpenAI-compatible protocol transform, model mapping, endpoint rotation/failover. 本地桌面代理网关：协议转换、模型映射、多端点轮换/熔断，对接官方 API 或中转站，不改客户端。Windows/macOS/Linux.",
-   "stars": 119,
-   "topics": [
-    "claude",
-    "desktop-app",
-    "gateway",
-    "llm",
-    "local-proxy",
-    "protocol-conversion",
-    "tauri2"
-   ],
-   "lang": "Rust",
-   "created_at": "2026-06-09",
-   "pushed_at": "2026-09-02",
-   "age_days": 85,
-   "stars_per_day_lifetime": 1.4,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "API 中转 in:name,description stars:>100 pushed:>2026-06-04",
+    "query": "topic:ai-video-generator stars:>2000 pushed:>2026-06-11",
     "sort": "stars",
-    "query_breadth": 16,
-    "position": 12
+    "query_breadth": 4,
+    "position": 3
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 Claude Code / Codex 的本地 AI 代理网关桌面应用程序",
-   "evidence": "Claude Code / Codex local AI proxy gateway desktop app",
+   "capability": "AI原生视频生产工具包，支持Claude Code",
+   "evidence": "topics: ai-video-generator, claude-code, programmatic-video, text-to-speech, video-editing",
    "transfer_forms": [
-    "deploy"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "jub0t/Concat",
-   "url": "https://github.com/jub0t/Concat",
-   "description": "Free & Open-Source CapCut replacement. (formerly WolfCut)",
-   "stars": 1056,
-   "topics": [
-    "audio-processor",
-    "auto-caption",
-    "automation",
-    "capcut",
-    "capcut-alternative",
-    "content-creation",
-    "cross-platform",
-    "desktop-app",
-    "ffmpeg",
-    "free-video-editor",
-    "non-linear-editor",
-    "offline-first"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-08-25",
-   "pushed_at": "2026-08-31",
-   "age_days": 8,
-   "stars_per_day_lifetime": 132.0,
-   "license": "MPL-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:content-creation stars:>1000 pushed:>2026-06-04",
-    "sort": "stars",
-    "query_breadth": 17,
-    "position": 15
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供免费且开源的视频编辑替代品",
-   "evidence": "Free & Open-Source CapCut replacement",
-   "transfer_forms": [
+    "skill",
     "deploy"
    ],
    "line_candidates": [
@@ -173,173 +96,186 @@
    "distilled": true
   },
   {
-   "repo": "ZeKaiNie/universal-examprep-skill",
-   "url": "https://github.com/ZeKaiNie/universal-examprep-skill",
-   "description": "Last-night exam-cram coach as a Claude Agent Skill: turns your slides, notes and past papers into a chaptered knowledge base + quiz bank, teaches only what's in your materials, and never fabricates (measured 100% out-of-scope abstention). Bilingual EN/中文 — the 期末极速备考 skill.",
-   "stars": 277,
+   "repo": "lihanghang/NLP-Knowledge-Graph",
+   "url": "https://github.com/lihanghang/NLP-Knowledge-Graph",
+   "description": "自然语言处理、知识图谱、对话系统，大模型等技术研究与应用。",
+   "stars": 1766,
    "topics": [
-    "agent-skill",
-    "ai-tutor",
-    "anthropic",
-    "anti-hallucination",
-    "claude",
-    "claude-code",
-    "claude-skill",
-    "cram",
-    "edtech",
-    "education",
-    "exam-prep",
-    "llm"
+    "agent",
+    "agentic-ai",
+    "bert",
+    "deep-learning",
+    "ernie",
+    "event-driven",
+    "kbqa",
+    "knowledge-graph",
+    "llm",
+    "machine-learning",
+    "ner",
+    "nlp"
    ],
    "lang": "Python",
-   "created_at": "2026-06-24",
-   "pushed_at": "2026-09-02",
-   "age_days": 70,
-   "stars_per_day_lifetime": 3.96,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 5
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供 Claude Agent Skill 的考试冲刺教练功能",
-   "evidence": "Last-night exam-cram coach as a Claude Agent Skill",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "dodolalorc/astro-navfolio",
-   "url": "https://github.com/dodolalorc/astro-navfolio",
-   "description": "🌿 基于 Astro 的静谧个人发布主题，融合主页、博客、作品集的数字花园。✨🌿 A serene Astro theme for personal publishing—bringing your homepage, blog, portfolio, and digital garden together. ✨",
-   "stars": 101,
-   "topics": [
-    "astro",
-    "blog-theme"
-   ],
-   "lang": "Astro",
-   "created_at": "2026-05-11",
-   "pushed_at": "2026-08-14",
-   "age_days": 114,
-   "stars_per_day_lifetime": 0.89,
+   "created_at": "2019-01-29",
+   "pushed_at": "2026-09-03",
+   "age_days": 2780,
+   "stars_per_day_lifetime": 0.64,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "chinese",
-    "query": "数字人 in:name,description stars:>100 pushed:>2026-06-04",
+    "query": "知识图谱 in:name,description stars:>200 pushed:>2026-06-11",
     "sort": "stars",
-    "query_breadth": 20,
-    "position": 19
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供基于 Astro 的个人发布主题",
-   "evidence": "A serene Astro theme for personal publishing",
-   "transfer_forms": [
-    "architecture"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "budtmo/docker-android",
-   "url": "https://github.com/budtmo/docker-android",
-   "description": "Android in docker solution with noVNC supported, video recording and mcp server",
-   "stars": 15799,
-   "topics": [
-    "android",
-    "android-emulator",
-    "aws",
-    "azure",
-    "cloud",
-    "docker",
-    "docker-android",
-    "emulator",
-    "gcp",
-    "genymotion",
-    "jenkins",
-    "kubernetes"
-   ],
-   "lang": "Python",
-   "created_at": "2016-12-22",
-   "pushed_at": "2026-09-01",
-   "age_days": 3541,
-   "stars_per_day_lifetime": 4.46,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp-server stars:>1000 pushed:>2026-08-03",
-    "sort": "stars",
-    "query_breadth": 100,
-    "position": 22
+    "query_breadth": 13,
+    "position": 2
    },
    "matched_by_n_queries": 2,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 Android 在 Docker 中的解决方案，支持视频录制和 MCP 服务器",
-   "evidence": "Android in docker solution with noVNC supported, video recording and mcp server",
+   "capability": "自然语言处理、知识图谱、对话系统技术研究与应用",
+   "evidence": "topics: bert, deep-learning, knowledge-graph, llm, nlp",
    "transfer_forms": [
-    "deploy"
+    "library",
+    "architecture"
    ],
    "line_candidates": [
-    "modelpool"
+    "rag"
    ],
    "distilled": true
   },
   {
-   "repo": "sindresorhus/awesome-nodejs",
-   "url": "https://github.com/sindresorhus/awesome-nodejs",
-   "description": ":zap: Delightful Node.js packages and resources [BECAUSE OF TOO MUCH SPAM AND LOW-QUALITY SUBMISSIONS, SUBMISSIONS ARE PAUSED UNTIL JULY]",
-   "stars": 66678,
+   "repo": "Player-YN/PawWork_ZhuaZhua",
+   "url": "https://github.com/Player-YN/PawWork_ZhuaZhua",
+   "description": "Paw Work - selection-first web agent for Chrome: select on the live page, describe the outcome, take away an editable office file. BYOK, sandboxed, no server.",
+   "stars": 2277,
    "topics": [
-    "awesome",
-    "awesome-list",
-    "javascript",
-    "list",
-    "node",
-    "nodejs"
+    "ai-agent",
+    "browser-agent",
+    "byok",
+    "chrome-extension",
+    "llm",
+    "pptx",
+    "tldraw",
+    "univer"
    ],
-   "lang": "",
-   "created_at": "2014-07-11",
-   "pushed_at": "2026-09-02",
-   "age_days": 4436,
-   "stars_per_day_lifetime": 15.03,
-   "license": "CC0-1.0",
+   "lang": "JavaScript",
+   "created_at": "2026-08-28",
+   "pushed_at": "2026-09-09",
+   "age_days": 12,
+   "stars_per_day_lifetime": 189.75,
+   "license": "MIT",
    "license_family": "permissive",
    "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-03",
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-10",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 17
+    "position": 26
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 Node.js 包和资源的列表",
-   "evidence": "Delightful Node.js packages and resources",
+   "capability": "Paw Work - Chrome浏览器选择优先的Web代理",
+   "evidence": "topics: ai-agent, browser-agent, chrome-extension, llm",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Feelingeouncouple/Canva-Professional",
+   "url": "https://github.com/Feelingeouncouple/Canva-Professional",
+   "description": "Canva Pro Cloud Toolkit & Automation Studio. Advanced graphic design assets, team collaboration workflows, premium template management, and visual content creation tools.",
+   "stars": 598,
+   "topics": [
+    "canva-app",
+    "canva-bulk-create",
+    "canva-editor-tools",
+    "canva-export-tools",
+    "canva-free",
+    "canva-full",
+    "canva-hack",
+    "canva-pro",
+    "canva-pro-team-2026",
+    "followers-ig",
+    "social-media-app",
+    "social-media-design"
+   ],
+   "lang": "",
+   "created_at": "2026-06-14",
+   "pushed_at": "2026-09-07",
+   "age_days": 87,
+   "stars_per_day_lifetime": 6.87,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "content automation in:name,description stars:>500 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 4,
+    "position": 3
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "Canva Pro云端工具包与自动化工作室",
+   "evidence": "topics: canva-app, canva-editor-tools, canva-export-tools, canva-free, canva-pro",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "18534516725/llm-api-setup-guides",
+   "url": "https://github.com/18534516725/llm-api-setup-guides",
+   "description": "88篇中文 AI API中转站与工具配置教程：Codex API、Claude Code API、OpenAI-compatible API、Base URL、Cursor、Cherry Studio、计费验证与错误排查。",
+   "stars": 138,
+   "topics": [
+    "ai-api",
+    "api-proxy",
+    "api-relay",
+    "api-testing",
+    "cherry-studio",
+    "chinese-tutorial",
+    "claude-api",
+    "claude-code",
+    "cline",
+    "codex-api",
+    "codex-cli",
+    "cursor"
+   ],
+   "lang": "Python",
+   "created_at": "2026-07-14",
+   "pushed_at": "2026-09-03",
+   "age_days": 57,
+   "stars_per_day_lifetime": 2.42,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "API 中转 in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 16,
+    "position": 10
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "中文AI API中转站与工具配置教程",
+   "evidence": "topics: ai-api, api-proxy, api-relay, api-testing, cherry-studio, claude-api",
    "transfer_forms": [
     "library"
    ],
@@ -349,109 +285,34 @@
    "distilled": true
   },
   {
-   "repo": "81NewArk/AntiCAP-WebApi",
-   "url": "https://github.com/81NewArk/AntiCAP-WebApi",
-   "description": "基于AntiCAP开发的多类型验证码识别网站，支持点选 滑块 算术 旋转 OCR",
-   "stars": 366,
-   "topics": [],
-   "lang": "HTML",
-   "created_at": "2025-05-30",
-   "pushed_at": "2026-09-01",
-   "age_days": 460,
-   "stars_per_day_lifetime": 0.8,
+   "repo": "ciembor/agent-rules-books",
+   "url": "https://github.com/ciembor/agent-rules-books",
+   "description": "AGENTS.md rules / skills for AI coding agents: Codex, Cursor & Claude Code. Inspired by Clean Code, Refactoring, DDD, Clean Architecture and DDIA programming books.",
+   "stars": 2732,
+   "topics": [
+    "agent-rules",
+    "agent-skills",
+    "agent-skills-manager",
+    "agents-md",
+    "agents-rules",
+    "agents-skills",
+    "agentsmd",
+    "ai-agent",
+    "ai-skills",
+    "claude-code",
+    "claude-code-skills",
+    "code-quality"
+   ],
+   "lang": "",
+   "created_at": "2026-04-16",
+   "pushed_at": "2026-09-09",
+   "age_days": 146,
+   "stars_per_day_lifetime": 18.71,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
-    "dimension": "chinese",
-    "query": "OCR 识别 in:name,description stars:>100 pushed:>2026-06-04",
-    "sort": "stars",
-    "query_breadth": 22,
-    "position": 9
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供基于 AntiCAP 开发的多类型验证码识别网站",
-   "evidence": "基于AntiCAP开发的多类型验证码识别网站",
-   "transfer_forms": [
-    "deploy"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "21st-dev/magic-mcp",
-   "url": "https://github.com/21st-dev/magic-mcp",
-   "description": "It's like v0, but in your Cursor / Claude Code / Windsurf: search 10,000+ React/Tailwind components, generate new UI with AI, and publish your own — right from your editor. Magic MCP is now the 21st MCP; this package keeps old configs working. Setup: 21st.dev/mcp",
-   "stars": 5775,
-   "topics": [
-    "21st",
-    "claude",
-    "cursor",
-    "mcp",
-    "model-context-protocol",
-    "react",
-    "tailwindcss",
-    "ui-components"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2025-02-19",
-   "pushed_at": "2026-09-01",
-   "age_days": 560,
-   "stars_per_day_lifetime": 10.31,
-   "license": "ISC",
-   "license_family": "permissive",
-   "found_by": {
     "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 89
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供类似于 v0 的功能，但集成在 Cursor / Claude Code / Windsurf 中",
-   "evidence": "It's like v0, but in your Cursor / Claude Code / Windsurf",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "steven2358/awesome-generative-ai",
-   "url": "https://github.com/steven2358/awesome-generative-ai",
-   "description": "A curated list of modern Generative Artificial Intelligence projects and services",
-   "stars": 12552,
-   "topics": [
-    "ai",
-    "artificial-intelligence",
-    "awesome",
-    "awesome-list",
-    "generative-ai",
-    "generative-art",
-    "large-language-models",
-    "llm"
-   ],
-   "lang": "",
-   "created_at": "2022-10-20",
-   "pushed_at": "2026-09-01",
-   "age_days": 1413,
-   "stars_per_day_lifetime": 8.88,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-03",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-10",
     "sort": "updated",
     "query_breadth": 100,
     "position": 31
@@ -461,10 +322,10 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供现代生成式人工智能项目和服务的精选列表",
-   "evidence": "A curated list of modern Generative Artificial Intelligence projects and services",
+   "capability": "AI编码代理的规则/技能",
+   "evidence": "topics: agent-rules, agent-skills, claude-code, claude-code-skills",
    "transfer_forms": [
-    "dataset"
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -472,40 +333,48 @@
    "distilled": true
   },
   {
-   "repo": "liyue-aigc/seedance-2-5-video-director",
-   "url": "https://github.com/liyue-aigc/seedance-2-5-video-director",
-   "description": "Seedance 2.5 视频导演 Skill：提示词、脚本、诊断、人物锁定、续写、编辑、转场与首次使用指导",
-   "stars": 254,
+   "repo": "Anil-matcha/Open-Generative-AI",
+   "url": "https://github.com/Anil-matcha/Open-Generative-AI",
+   "description": "Unrestricted Open-source alternative to AI video platforms — Free AI image & video generation studio with 600+ models (Flux, Midjourney, Kling, Sora, Veo). No content filters. Self-hosted, MIT licensed.",
+   "stars": 28193,
    "topics": [
-    "ai-video",
-    "codex-skill",
-    "dreamina",
-    "seedance",
-    "video-prompt"
+    "ai-art-generator",
+    "ai-image-generation",
+    "ai-video-generation",
+    "creative-tools",
+    "fal-ai-alternative",
+    "generative-ai",
+    "image-to-video",
+    "invideo-alternative",
+    "javascript",
+    "kling-ai",
+    "lipsync",
+    "midjourney-alternative"
    ],
-   "lang": "Python",
-   "created_at": "2026-08-18",
-   "pushed_at": "2026-08-26",
-   "age_days": 15,
-   "stars_per_day_lifetime": 16.93,
+   "lang": "JavaScript",
+   "created_at": "2023-05-09",
+   "pushed_at": "2026-09-09",
+   "age_days": 1219,
+   "stars_per_day_lifetime": 23.13,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
-    "dimension": "chinese",
-    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-04",
+    "dimension": "category",
+    "query": "topic:text-to-video stars:>2000 pushed:>2026-06-11",
     "sort": "stars",
-    "query_breadth": 53,
-    "position": 48
+    "query_breadth": 12,
+    "position": 1
    },
-   "matched_by_n_queries": 1,
+   "matched_by_n_queries": 2,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "Seedance 2.5 视频导演 Skill，提供视频提示词、脚本等功能",
-   "evidence": "Seedance 2.5 视频导演 Skill",
+   "capability": "开源AI视频平台替代品，提供图像和视频生成",
+   "evidence": "topics: ai-art-generator, ai-image-generation, ai-video-generation, creative-tools, image-to-video",
    "transfer_forms": [
-    "skill"
+    "skill",
+    "deploy"
    ],
    "line_candidates": [
     "video"
@@ -513,174 +382,69 @@
    "distilled": true
   },
   {
-   "repo": "curiositech/some_claude_skills",
-   "url": "https://github.com/curiositech/some_claude_skills",
-   "description": "Claude skills that make my life easier.",
-   "stars": 209,
+   "repo": "rfhdw0102/YouDaoNoteLM",
+   "url": "https://github.com/rfhdw0102/YouDaoNoteLM",
+   "description": "接入有道云笔记、本地文件、网页与音视频等内容，自动沉淀为可检索知识库；基于 RAG 精准引用你的资料，提供可靠的智能问答与内容生成。兼容主流大模型和向量模型，让知识真正为你所用。",
+   "stars": 201,
    "topics": [],
-   "lang": "TypeScript",
-   "created_at": "2025-11-16",
-   "pushed_at": "2026-09-02",
-   "age_days": 290,
-   "stars_per_day_lifetime": 0.72,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 31
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供 Claude skills，简化生活操作",
-   "evidence": "Claude skills that make my life easier.",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Rzna-5559/Mrite",
-   "url": "https://github.com/Rzna-5559/Mrite",
-   "description": "全网最强数模智能体内置Skill",
-   "stars": 445,
-   "topics": [],
-   "lang": "TeX",
-   "created_at": "2026-06-09",
-   "pushed_at": "2026-08-27",
-   "age_days": 85,
-   "stars_per_day_lifetime": 5.24,
+   "lang": "Go",
+   "created_at": "2026-06-14",
+   "pushed_at": "2026-08-25",
+   "age_days": 87,
+   "stars_per_day_lifetime": 2.31,
    "license": "NONE",
    "license_family": "none",
    "found_by": {
     "dimension": "chinese",
-    "query": "智能体 in:name,description stars:>200",
+    "query": "RAG 知识库 in:name,description stars:>200",
     "sort": "stars",
-    "query_breadth": 100,
-    "position": 98
+    "query_breadth": 22,
+    "position": 21
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "内置 Skill 的数模智能体",
-   "evidence": "全网最强数模智能体内置Skill",
+   "capability": "有道云笔记等内容的自动知识库沉淀与智能问答",
+   "evidence": "topics: YouDaoNoteLM, RAG, 智能问答",
    "transfer_forms": [
-    "skill"
+    "dataset"
    ],
    "line_candidates": [
-    "unknown"
+    "rag"
    ],
    "distilled": true
   },
   {
-   "repo": "lgazo/drawio-mcp-server",
-   "url": "https://github.com/lgazo/drawio-mcp-server",
-   "description": "Draw.io Model Context Protocol (MCP) Server",
-   "stars": 1455,
-   "topics": [],
-   "lang": "TypeScript",
-   "created_at": "2025-04-21",
-   "pushed_at": "2026-09-01",
-   "age_days": 499,
-   "stars_per_day_lifetime": 2.92,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 40
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "Draw.io Model Context Protocol (MCP) 服务器",
-   "evidence": "Draw.io Model Context Protocol (MCP) Server",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "mikalv/awesome-qt-qml",
-   "url": "https://github.com/mikalv/awesome-qt-qml",
-   "description": "A curated list of awesome Qt and QML libraries, resources, projects, and shiny things.",
-   "stars": 2605,
+   "repo": "FailproofAI/failproofai",
+   "url": "https://github.com/FailproofAI/failproofai",
+   "description": "Observability and enforcement for AI agent harnesses. Capture every run and runtime reliability with policy enforcement.  40 built-in policies, a local dashboard, no account required with a generous free cloud plan",
+   "stars": 2526,
    "topics": [
-    "awesome",
-    "awesome-list",
-    "cpp",
-    "javascript",
-    "qml",
-    "qml-bindings",
-    "qpm",
-    "qt",
-    "qt-quick",
-    "qt4",
-    "qt5",
-    "qtcreator"
+    "agent-failure",
+    "agent-harness",
+    "agent-observability",
+    "agent-reliability",
+    "agent-tracing",
+    "ai-agent",
+    "claude-code",
+    "codex",
+    "enforcement",
+    "evals",
+    "guardrails",
+    "hermes"
    ],
-   "lang": "",
-   "created_at": "2017-06-25",
-   "pushed_at": "2026-09-01",
-   "age_days": 3356,
-   "stars_per_day_lifetime": 0.78,
-   "license": "NONE",
-   "license_family": "none",
+   "lang": "MDX",
+   "created_at": "2026-04-06",
+   "pushed_at": "2026-09-09",
+   "age_days": 156,
+   "stars_per_day_lifetime": 16.19,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
    "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 41
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "Qt 和 QML 库、资源、项目列表",
-   "evidence": "A curated list of awesome Qt and QML libraries, resources, projects, and shiny things.",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "subsy/skill-cabinet",
-   "url": "https://github.com/subsy/skill-cabinet",
-   "description": "",
-   "stars": 328,
-   "topics": [],
-   "lang": "JavaScript",
-   "created_at": "2026-08-31",
-   "pushed_at": "2026-09-01",
-   "age_days": 2,
-   "stars_per_day_lifetime": 164.0,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-03",
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-10",
     "sort": "updated",
     "query_breadth": 100,
     "position": 47
@@ -690,8 +454,8 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "Skill 展示柜",
-   "evidence": "skill-cabinet",
+   "capability": "AI代理可观察性和执行策略",
+   "evidence": "topics: agent-failure, agent-harness, agent-observability, agent-reliability",
    "transfer_forms": [
     "skill"
    ],
@@ -701,73 +465,45 @@
    "distilled": true
   },
   {
-   "repo": "Taxuspt/garmin_mcp",
-   "url": "https://github.com/Taxuspt/garmin_mcp",
-   "description": "MCP server to access Garmin data",
-   "stars": 1102,
-   "topics": [],
+   "repo": "NVlabs/Sana",
+   "url": "https://github.com/NVlabs/Sana",
+   "description": "SANA: Efficient High-Resolution Image Synthesis with Linear Diffusion Transformer",
+   "stars": 9018,
+   "topics": [
+    "diffusion",
+    "dit",
+    "linear-transformer",
+    "nvfp4",
+    "pytorch",
+    "reinforcement-learning",
+    "sana",
+    "streaming-video",
+    "system-algorithm-deisgn",
+    "text-to-image-generation",
+    "text-to-video",
+    "transformers"
+   ],
    "lang": "Python",
-   "created_at": "2025-03-08",
-   "pushed_at": "2026-09-01",
-   "age_days": 543,
-   "stars_per_day_lifetime": 2.03,
-   "license": "MIT",
+   "created_at": "2024-10-11",
+   "pushed_at": "2026-09-09",
+   "age_days": 698,
+   "stars_per_day_lifetime": 12.92,
+   "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 51
+    "query": "topic:text-to-video stars:>2000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 12,
+    "position": 3
    },
-   "matched_by_n_queries": 1,
+   "matched_by_n_queries": 2,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "访问 Garmin 数据的 MCP 服务器",
-   "evidence": "MCP server to access Garmin data",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Calinou/awesome-godot",
-   "url": "https://github.com/Calinou/awesome-godot",
-   "description": "A curated list of free/libre plugins, scripts and add-ons for Godot",
-   "stars": 10677,
-   "topics": [
-    "awesome",
-    "awesome-list",
-    "game-development",
-    "godot",
-    "godot-engine"
-   ],
-   "lang": "",
-   "created_at": "2015-04-12",
-   "pushed_at": "2026-09-01",
-   "age_days": 4161,
-   "stars_per_day_lifetime": 2.57,
-   "license": "CC-BY-4.0",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 54
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "Godot 引擎插件、脚本和附加组件列表",
-   "evidence": "A curated list of free/libre plugins, scripts and add-ons for Godot",
+   "capability": "基于线性扩散变换器的图像合成系统",
+   "evidence": "topics: diffusion, dit, linear-transformer, pytorch, text-to-image-generation",
    "transfer_forms": [
     "library"
    ],
@@ -777,28 +513,1734 @@
    "distilled": true
   },
   {
-   "repo": "tmcw/awesome-geojson",
-   "url": "https://github.com/tmcw/awesome-geojson",
-   "description": "GeoJSON utilities that will make your life easier.",
-   "stars": 2535,
+   "repo": "MoFox-Studio/Neo-MoFox",
+   "url": "https://github.com/MoFox-Studio/Neo-MoFox",
+   "description": "一个全新重构的 AI 聊天机器人框架，它的目标不仅仅是回答问题，而是创造一个真正的数字生命体。",
+   "stars": 101,
    "topics": [
-    "awesome",
-    "awesome-list",
-    "geojson",
-    "list"
+    "agent",
+    "ai",
+    "bot",
+    "chatbot"
    ],
+   "lang": "Python",
+   "created_at": "2026-01-28",
+   "pushed_at": "2026-08-29",
+   "age_days": 224,
+   "stars_per_day_lifetime": 0.45,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "数字人 in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 23,
+    "position": 22
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 AI 聊天机器人框架，旨在创造数字生命体。",
+   "evidence": "旨在创造一个真正的数字生命体。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "genspark-ai/genoffice",
+   "url": "https://github.com/genspark-ai/genoffice",
+   "description": "Free, open-source alternative to Microsoft Office with built-in AI agents — Word (.docx), Excel (.xlsx), PowerPoint (.pptx), PDF and Markdown editing for macOS, Windows & Linux.",
+   "stars": 6304,
+   "topics": [
+    "agent",
+    "agentic",
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "ai-office",
+    "docx",
+    "excel",
+    "markdown-editor",
+    "microsoft-office",
+    "office",
+    "office-agent"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-07-31",
+   "pushed_at": "2026-09-09",
+   "age_days": 40,
+   "stars_per_day_lifetime": 157.6,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 49
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供类似 Microsoft Office 的 AI 办公软件替代品。",
+   "evidence": "Free, open-source alternative to Microsoft Office with built-in AI agents",
+   "transfer_forms": [
+    "deploy",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "FurkanGozukara/Stable-Diffusion",
+   "url": "https://github.com/FurkanGozukara/Stable-Diffusion",
+   "description": "FLUX, Stable Diffusion, SDXL, SD3, LoRA, Fine Tuning, DreamBooth, Training, Automatic1111, Forge WebUI, SwarmUI, DeepFake, TTS, Animation, Text To Video, Tutorials, Guides, Lectures, Courses, ComfyUI, Google Colab, RunPod, Kaggle, NoteBooks, ControlNet, TTS, Voice Cloning, AI, AI News, ML, ML News, News, Tech, Tech News, Kohya, Midjourney, RunPod",
+   "stars": 2765,
+   "topics": [
+    "ai-art",
+    "coding",
+    "deepfake-generation",
+    "dreambooth",
+    "education",
+    "flux-dev",
+    "flux-lora",
+    "generative-ai",
+    "guides",
+    "how-to",
+    "image-to-video-generation",
+    "kohya-webui"
+   ],
+   "lang": "Jupyter Notebook",
+   "created_at": "2023-05-01",
+   "pushed_at": "2026-09-04",
+   "age_days": 1227,
+   "stars_per_day_lifetime": 2.25,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:text-to-video stars:>2000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 12,
+    "position": 9
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 AI 艺术生成和深度伪造工具。",
+   "evidence": "FLUX, Stable Diffusion, SDXL, SD3, LoRA, Fine Tuning, DreamBooth, Training, Automatic1111, Forge WebUI, SwarmUI, DeepFak",
+   "transfer_forms": [
+    "deploy",
+    "library"
+   ],
+   "line_candidates": [
+    "image",
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Pangu-Immortal/hunter-ai-content-factory",
+   "url": "https://github.com/Pangu-Immortal/hunter-ai-content-factory",
+   "description": "自动发布 24 小时情报系统：好文章的 80% 在于选题。Hunter AI 自动从 GitHub Trending、Twitter、HackerNews Reddit 等平台采集热点，用 AI 判断哪些值得写，自动生成文章和插图，自动发布。",
+   "stars": 391,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-01-22",
+   "pushed_at": "2026-09-06",
+   "age_days": 230,
+   "stars_per_day_lifetime": 1.7,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 28,
+    "position": 13
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "自动从多个平台采集热点，生成文章和插图。",
+   "evidence": "自动发布 24 小时情报系统：好文章的 80% 在于选题。Hunter AI 自动从 GitHub Trending、Twitter、HackerNews Reddit 等平台采集热点，用 AI 判断哪些值得写，自动生成文章和插图，自动发布",
+   "transfer_forms": [
+    "deploy",
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "oritera/Cairn",
+   "url": "https://github.com/oritera/Cairn",
+   "description": "A AI general-purpose state-space search engine, validated first on autonomous penetration testing.",
+   "stars": 2709,
+   "topics": [
+    "ai",
+    "ai-agent",
+    "ai-cybersecurity",
+    "ai-hacker",
+    "ai-hacking",
+    "blackbox-testing",
+    "ctf",
+    "ctf-tools",
+    "llm",
+    "penetration-testing",
+    "pentesting",
+    "red-teaming"
+   ],
+   "lang": "Python",
+   "created_at": "2026-04-19",
+   "pushed_at": "2026-09-07",
+   "age_days": 143,
+   "stars_per_day_lifetime": 18.94,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 86
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 AI 辅助的渗透测试工具。",
+   "evidence": "A AI general-purpose state-space search engine, validated first on autonomous penetration testing.",
+   "transfer_forms": [
+    "deploy",
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "PKU-YuanGroup/Helios",
+   "url": "https://github.com/PKU-YuanGroup/Helios",
+   "description": "Helios: Real Real-Time Long Video Generation Model",
+   "stars": 2143,
+   "topics": [
+    "acceleration",
+    "diffusion",
+    "diffusion-model",
+    "diffusion-models",
+    "efficient-tuning",
+    "high-quality",
+    "image-to-video",
+    "image2video",
+    "interactive",
+    "long-context",
+    "long-video-generation",
+    "real-time"
+   ],
+   "lang": "Python",
+   "created_at": "2026-03-02",
+   "pushed_at": "2026-08-24",
+   "age_days": 191,
+   "stars_per_day_lifetime": 11.22,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:text-to-video stars:>2000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 12,
+    "position": 11
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供实时长视频生成模型。",
+   "evidence": "Helios: Real Real-Time Long Video Generation Model",
+   "transfer_forms": [
+    "deploy",
+    "library"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "unraous/uxuescript",
+   "url": "https://github.com/unraous/uxuescript",
+   "description": "学习通一键全自动刷课脚本，支持后台刷课、倍速播放、自动回答互动题目，截止 2026/09/09 可用。（免安装打包版已发布至Release）",
+   "stars": 170,
+   "topics": [
+    "chaoxing",
+    "education",
+    "javascript",
+    "xuexitong"
+   ],
+   "lang": "Rust",
+   "created_at": "2025-05-28",
+   "pushed_at": "2026-09-08",
+   "age_days": 469,
+   "stars_per_day_lifetime": 0.36,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 28,
+    "position": 23
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供学习通自动刷课脚本。",
+   "evidence": "学习通一键全自动刷课脚本，支持后台刷课、倍速播放、自动回答互动题目，截止 2026/09/09 可用。（免安装打包版已发布至Release）",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "unslothai/unsloth",
+   "url": "https://github.com/unslothai/unsloth",
+   "description": "Local UI to run and train LLMs and diffusion models. Supports GGUF, MLX, Qwen3.8, DeepSeek-V4, MiniMax-H3, Gemma 4, FLUX and more.",
+   "stars": 75948,
+   "topics": [
+    "agent",
+    "ai",
+    "chatgpt",
+    "deepseek",
+    "fine-tuning",
+    "gemma",
+    "image-generation",
+    "llama",
+    "llm",
+    "llms",
+    "openai",
+    "python"
+   ],
+   "lang": "Python",
+   "created_at": "2023-11-29",
+   "pushed_at": "2026-09-09",
+   "age_days": 1015,
+   "stars_per_day_lifetime": 74.83,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:image-generation stars:>5000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 0
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供本地 UI 运行和训练 LLMs 和扩散模型。",
+   "evidence": "Local UI to run and train LLMs and diffusion models. Supports GGUF, MLX, Qwen3.8, DeepSeek-V4, MiniMax-H3, Gemma 4, FLUX",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "mofahuizhang/Gn",
+   "url": "https://github.com/mofahuizhang/Gn",
+   "description": "Gn 通用病机分析框架——中医理论现代化、结构化与AI大模型结构复用",
+   "stars": 0,
+   "topics": [],
    "lang": "",
-   "created_at": "2015-05-28",
-   "pushed_at": "2026-09-01",
-   "age_days": 4115,
-   "stars_per_day_lifetime": 0.62,
+   "created_at": "2026-09-06",
+   "pushed_at": "2026-09-06",
+   "age_days": 3,
+   "stars_per_day_lifetime": 0.0,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 大模型 in:name,description",
+    "sort": "stars",
+    "query_breadth": 34,
+    "position": 27
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供中医病机分析框架。",
+   "evidence": "Gn 通用病机分析框架——中医理论现代化、结构化与AI大模型结构复用",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "formula"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "khoj-ai/khoj",
+   "url": "https://github.com/khoj-ai/khoj",
+   "description": "Your AI second brain. Self-hostable. Get answers from the web or your docs. Build custom agents, schedule automations, do deep research. Turn any online or local LLM into your personal, autonomous AI (gpt, claude, gemini, llama, qwen, mistral). Get started - free.",
+   "stars": 37229,
+   "topics": [
+    "agent",
+    "ai",
+    "assistant",
+    "chat",
+    "chatgpt",
+    "emacs",
+    "image-generation",
+    "llama3",
+    "llamacpp",
+    "llm",
+    "obsidian",
+    "obsidian-md"
+   ],
+   "lang": "Python",
+   "created_at": "2021-08-16",
+   "pushed_at": "2026-08-02",
+   "age_days": 1850,
+   "stars_per_day_lifetime": 20.12,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:image-generation stars:>5000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 3
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供个人 AI 助手，可自托管。",
+   "evidence": "Your AI second brain. Self-hostable. Get answers from the web or your docs. Build custom agents, schedule automations, d",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "LancelotRar/best-cf-ips",
+   "url": "https://github.com/LancelotRar/best-cf-ips",
+   "description": "提供自动更新的 Cloudflare 优选 IP API，服务于 Cloudflare 免费代理搭建方案，优质 IP 即为优质节点。",
+   "stars": 1159,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-07-22",
+   "pushed_at": "2026-09-09",
+   "age_days": 49,
+   "stars_per_day_lifetime": 23.65,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 35,
+    "position": 10
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供自动更新的 Cloudflare 优选 IP API",
+   "evidence": "提供自动更新的 Cloudflare 优选 IP API",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "huggingface/diffusers",
+   "url": "https://github.com/huggingface/diffusers",
+   "description": "🤗 Diffusers: State-of-the-art diffusion models for image, video, and audio generation in PyTorch.",
+   "stars": 34475,
+   "topics": [
+    "deep-learning",
+    "diffusion",
+    "flux",
+    "image-generation",
+    "image2image",
+    "image2video",
+    "latent-diffusion-models",
+    "pytorch",
+    "qwen-image",
+    "score-based-generative-modeling",
+    "stable-diffusion",
+    "stable-diffusion-diffusers"
+   ],
+   "lang": "Python",
+   "created_at": "2022-05-30",
+   "pushed_at": "2026-09-09",
+   "age_days": 1563,
+   "stars_per_day_lifetime": 22.06,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:image-generation stars:>5000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 4
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 PyTorch 中的图像、视频和音频生成模型",
+   "evidence": "State-of-the-art diffusion models for image, video, and audio generation in PyTorch.",
+   "transfer_forms": [
+    "deploy",
+    "library"
+   ],
+   "line_candidates": [
+    "video",
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "peter123023/awesome-free-llm-api",
+   "url": "https://github.com/peter123023/awesome-free-llm-api",
+   "description": "免费大模型 API 导航 · 只收录能通过 API Key 和 endpoint 调用的永久免费 / 限时免费接口｜A curated list of free LLM APIs — permanently free tiers and limited-time free models, all callable via API key and endpoint. Channel-first, with a model index for DeepSeek, GLM, Qwen and more",
+   "stars": 110,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-09-01",
+   "pushed_at": "2026-09-08",
+   "age_days": 8,
+   "stars_per_day_lifetime": 13.75,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 35,
+    "position": 33
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "导航免费大模型 API",
+   "evidence": "A curated list of free LLM APIs — permanently free tiers and limited-time free models, all callable via API key and endp",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "invoke-ai/InvokeAI",
+   "url": "https://github.com/invoke-ai/InvokeAI",
+   "description": "Invoke is a leading creative engine for Stable Diffusion models, empowering professionals, artists, and enthusiasts to generate and create visual media using the latest AI-driven technologies. The solution offers an industry leading WebUI, and serves as the foundation for multiple commercial products.",
+   "stars": 28173,
+   "topics": [
+    "ai-art",
+    "artificial-intelligence",
+    "generative-art",
+    "image-generation",
+    "img2img",
+    "inpainting",
+    "latent-diffusion",
+    "linux",
+    "macos",
+    "outpainting",
+    "stable-diffusion",
+    "txt2img"
+   ],
+   "lang": "Python",
+   "created_at": "2022-08-17",
+   "pushed_at": "2026-09-06",
+   "age_days": 1484,
+   "stars_per_day_lifetime": 18.98,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:image-generation stars:>5000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 5
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 Stable Diffusion 模型的创意引擎",
+   "evidence": "Invoke is a leading creative engine for Stable Diffusion models, empowering professionals, artists, and enthusiasts to g",
+   "transfer_forms": [
+    "deploy",
+    "library",
+    "skill"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "AIPMAndy/FreeToken",
+   "url": "https://github.com/AIPMAndy/FreeToken",
+   "description": "🎁 收集各种免费 API Token 的获取方法和使用指南",
+   "stars": 105,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-05-04",
+   "pushed_at": "2026-06-21",
+   "age_days": 128,
+   "stars_per_day_lifetime": 0.82,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 35,
+    "position": 34
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集免费 API Token 的获取方法和使用指南",
+   "evidence": "🎁 收集各种免费 API Token 的获取方法和使用指南",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "EvoLinkAI/awesome-gpt-image-2-API-and-Prompts",
+   "url": "https://github.com/EvoLinkAI/awesome-gpt-image-2-API-and-Prompts",
+   "description": "GPT-Image-2 API and Prompts",
+   "stars": 17139,
+   "topics": [
+    "ai-art",
+    "api",
+    "awesome-list",
+    "awesome-lists",
+    "chatgpt",
+    "creative-tools",
+    "generative-ai",
+    "gpt-image-2",
+    "gpt-image-2-api",
+    "gpt-image-2-prompts",
+    "gptimage2",
+    "image-generation"
+   ],
+   "lang": "Python",
+   "created_at": "2026-04-18",
+   "pushed_at": "2026-07-18",
+   "age_days": 144,
+   "stars_per_day_lifetime": 119.02,
    "license": "CC0-1.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
+    "query": "topic:image-generation stars:>5000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 8
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 GPT-Image-2 API 和提示词",
+   "evidence": "GPT-Image-2 API and Prompts",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "strawberrynine/ZiWeiDouShu-Master",
+   "url": "https://github.com/strawberrynine/ZiWeiDouShu-Master",
+   "description": "紫微斗数大师级分析，基于古籍 希夷先生《紫微斗数》，融合倪海厦《天纪》体系，含完整排盘算法、四化系统、格局知识库，可以算任意一年/月/日的感情/健康/财运/事业运/学业运/移民运。需要提供具体到小时的出生时间，和具体到市的出生地点。",
+   "stars": 47,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-09-01",
+   "pushed_at": "2026-09-02",
+   "age_days": 8,
+   "stars_per_day_lifetime": 5.88,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "古籍 in:name,description stars:>20",
+    "sort": "stars",
+    "query_breadth": 43,
+    "position": 31
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供紫微斗数大师级分析",
+   "evidence": "紫微斗数大师级分析，基于古籍 希夷先生《紫微斗数》",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "vercel/satori",
+   "url": "https://github.com/vercel/satori",
+   "description": "Enlightened library to convert HTML and CSS to SVG",
+   "stars": 13927,
+   "topics": [
+    "css",
+    "image",
+    "image-generation",
+    "image-generator",
+    "jsx",
+    "opengraph-images",
+    "satori",
+    "svg",
+    "vercel"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2022-01-27",
+   "pushed_at": "2026-08-24",
+   "age_days": 1686,
+   "stars_per_day_lifetime": 8.26,
+   "license": "MPL-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:image-generation stars:>5000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 10
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "将 HTML 和 CSS 转换为 SVG",
+   "evidence": "Enlightened library to convert HTML and CSS to SVG",
+   "transfer_forms": [
+    "deploy",
+    "library"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "the-wayee/OpenTV",
+   "url": "https://github.com/the-wayee/OpenTV",
+   "description": "OpenTV·灵感画布 — 短视频内容的策划与生产工具:一个项目 = 一张无限画布,节点创作 + 侧边 Agent 副驾",
+   "stars": 201,
+   "topics": [],
+   "lang": "TypeScript",
+   "created_at": "2026-06-23",
+   "pushed_at": "2026-08-10",
+   "age_days": 78,
+   "stars_per_day_lifetime": 2.58,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 49,
+    "position": 35
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "短视频内容的策划与生产工具",
+   "evidence": "短视频内容的策划与生产工具:一个项目 = 一张无限画布,节点创作 + 侧边 Agent 副驾",
+   "transfer_forms": [
+    "deploy",
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "leejet/stable-diffusion.cpp",
+   "url": "https://github.com/leejet/stable-diffusion.cpp",
+   "description": "Diffusion model(SD,Flux,Wan,Qwen Image,Z-Image,...) inference in pure C/C++",
+   "stars": 6948,
+   "topics": [
+    "ai",
+    "cplusplus",
+    "diffusion",
+    "flux",
+    "flux-dev",
+    "ggml",
+    "image-generation",
+    "image2image",
+    "img2img",
+    "latent-diffusion",
+    "ltx-video",
+    "qwen-image"
+   ],
+   "lang": "C++",
+   "created_at": "2023-08-13",
+   "pushed_at": "2026-09-07",
+   "age_days": 1123,
+   "stars_per_day_lifetime": 6.19,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:image-generation stars:>5000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 13
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供纯 C/C++ 的扩散模型推理",
+   "evidence": "Diffusion model(SD,Flux,Wan,Qwen Image,Z-Image,...) inference in pure C/C++",
+   "transfer_forms": [
+    "deploy",
+    "library"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "neopen/story-shot-agent",
+   "url": "https://github.com/neopen/story-shot-agent",
+   "description": "剧本分镜智能体（PenShot）：电影/动漫/短剧/小说→分镜→提示词→视频。| 基于LLM 通过 LangGraph+LlamaIndex实现任意格式剧本的自动解析，生成 Sora/Veo/Runway 等模型可用的连贯text-to-video提示词。保持角色/剧情跨片段一致，支持 MCP/REST API/Function Calls/A2A 多方式集成。（LLM-powered text-to-video-prompt agent. Break scripts into Sora/Veo-ready shots with character consistency）",
+   "stars": 183,
+   "topics": [
+    "agent-to-agent",
+    "ai-filmmaking",
+    "ai-video-generation",
+    "character-consistency",
+    "function-calling",
+    "kling-ai",
+    "langgraph-agent",
+    "llm-agent",
+    "pika-labs",
+    "prompt-engineering",
+    "rag",
+    "screenplay"
+   ],
+   "lang": "Python",
+   "created_at": "2025-10-23",
+   "pushed_at": "2026-09-05",
+   "age_days": 321,
+   "stars_per_day_lifetime": 0.57,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 49,
+    "position": 37
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "自动解析剧本，生成视频提示词，支持角色和剧情一致性保持",
+   "evidence": "电影/动漫/短剧/小说→分镜→提示词→视频",
+   "transfer_forms": [
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "vllm-project/vllm-omni",
+   "url": "https://github.com/vllm-project/vllm-omni",
+   "description": "A framework for efficient model inference with omni-modality models",
+   "stars": 6739,
+   "topics": [
+    "audio-generation",
+    "diffusion",
+    "image-generation",
+    "inference",
+    "model-serving",
+    "multimodal",
+    "pytorch",
+    "transformer",
+    "video-generation",
+    "world-model"
+   ],
+   "lang": "Python",
+   "created_at": "2025-09-11",
+   "pushed_at": "2026-09-09",
+   "age_days": 363,
+   "stars_per_day_lifetime": 18.56,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:image-generation stars:>5000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 15
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "高效模型推理框架，支持多种模态模型",
+   "evidence": "A framework for efficient model inference with omni-modality models",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "renmengwen/MuseDock",
+   "url": "https://github.com/renmengwen/MuseDock",
+   "description": "MuseDock 是一个本地优先的 AI 短视频创作与编辑工作台。输入一个选题，粘贴文章、GitHub 或抖音链接，也可以直接上传图片；MuseDock 会整理来源、补充研究、规划脚本与镜头，生成配音和 HTML 动画帧，最后在本机渲染成视频。",
+   "stars": 110,
+   "topics": [],
+   "lang": "JavaScript",
+   "created_at": "2026-06-06",
+   "pushed_at": "2026-07-26",
+   "age_days": 95,
+   "stars_per_day_lifetime": 1.16,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 49,
+    "position": 47
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "AI短视频创作与编辑工作台，整理来源，生成视频",
+   "evidence": "MuseDock 是一个本地优先的 AI 短视频创作与编辑工作台",
+   "transfer_forms": [
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "multica-ai/andrej-karpathy-skills",
+   "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+   "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
+   "stars": 211865,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-01-27",
+   "pushed_at": "2026-04-20",
+   "age_days": 225,
+   "stars_per_day_lifetime": 941.62,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name,description stars:>50000",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 3
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "改进 Claude Code 行为的 CLAUDE.md 文件",
+   "evidence": "A single CLAUDE.md file to improve Claude Code behavior",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "nndl/llm-beginner",
+   "url": "https://github.com/nndl/llm-beginner",
+   "description": "《大模型与智能体》电子书与 6 个编程任务：Transformer、mini-GPT、SFT/DPO、RAG、工具调用与编程智能体。",
+   "stars": 6730,
+   "topics": [
+    "agent",
+    "fudannlp",
+    "llm",
+    "openmoss",
+    "step-by-step"
+   ],
+   "lang": "Python",
+   "created_at": "2017-03-29",
+   "pushed_at": "2026-09-06",
+   "age_days": 3451,
+   "stars_per_day_lifetime": 1.95,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "大模型 in:name,description stars:>1000 pushed:>2026-08-10",
+    "sort": "stars",
+    "query_breadth": 55,
+    "position": 14
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供大模型与智能体电子书和编程任务",
+   "evidence": "《大模型与智能体》电子书与 6 个编程任务",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Tencent-Hunyuan/HunyuanVideo",
+   "url": "https://github.com/Tencent-Hunyuan/HunyuanVideo",
+   "description": "HunyuanVideo: A Systematic Framework For Large Video Generation Model",
+   "stars": 12508,
+   "topics": [
+    "diffusion-models",
+    "diffusion-transformer",
+    "video-generation"
+   ],
+   "lang": "Python",
+   "created_at": "2024-11-28",
+   "pushed_at": "2026-06-29",
+   "age_days": 650,
+   "stars_per_day_lifetime": 19.24,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 4
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "大型视频生成模型系统框架",
+   "evidence": "A Systematic Framework For Large Video Generation Model",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Java-Edge/Java-Interview-Tutorial",
+   "url": "https://github.com/Java-Edge/Java-Interview-Tutorial",
+   "description": "请star，勿fork，因为爱force push！涵盖国际大厂Java/数据库/DDD/设计模式/微服务/中间件/AI大模型应用/区块链开发最佳实践。关注公众号【JavaEdge】，一起交流学习！",
+   "stars": 2860,
+   "topics": [
+    "architecture",
+    "blockchain",
+    "ddd",
+    "java"
+   ],
+   "lang": "Shell",
+   "created_at": "2019-07-22",
+   "pushed_at": "2026-09-07",
+   "age_days": 2606,
+   "stars_per_day_lifetime": 1.1,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "大模型 in:name,description stars:>1000 pushed:>2026-08-10",
+    "sort": "stars",
+    "query_breadth": 55,
+    "position": 29
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "Java/数据库/DDD/设计模式/微服务/中间件/AI大模型应用/区块链开发最佳实践教程",
+   "evidence": "涵盖国际大厂Java/数据库/DDD/设计模式/微服务/中间件/AI大模型应用/区块链开发最佳实践",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "HKUDS/ViMax",
+   "url": "https://github.com/HKUDS/ViMax",
+   "description": "\"ViMax: Agentic Video Generation (Director, Screenwriter, Producer, and Video Generator All-in-One)\"",
+   "stars": 12313,
+   "topics": [
+    "agentic-aigc",
+    "video-generation"
+   ],
+   "lang": "Python",
+   "created_at": "2025-03-30",
+   "pushed_at": "2026-07-29",
+   "age_days": 528,
+   "stars_per_day_lifetime": 23.32,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 5
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "全功能视频生成系统，包括导演、编剧、制片人和视频生成",
+   "evidence": "ViMax: Agentic Video Generation (Director, Screenwriter, Producer, and Video Generator All-in-One)",
+   "transfer_forms": [
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "GalTransl/GalTransl",
+   "url": "https://github.com/GalTransl/GalTransl",
+   "description": "支持GPT-4/Claude/Deepseek/Sakura等大语言模型的Galgame自动化翻译解决方案  Automated translation solution for visual novels supporting GPT-4/Claude/Deepseek/Sakura",
+   "stars": 2263,
+   "topics": [
+    "ai",
+    "galgame",
+    "translater"
+   ],
+   "lang": "Python",
+   "created_at": "2023-05-31",
+   "pushed_at": "2026-09-08",
+   "age_days": 1197,
+   "stars_per_day_lifetime": 1.89,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "大模型 in:name,description stars:>1000 pushed:>2026-08-10",
+    "sort": "stars",
+    "query_breadth": 55,
+    "position": 38
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "支持大语言模型的 Galgame 自动化翻译解决方案",
+   "evidence": "Automated translation solution for visual novels supporting GPT-4/Claude/Deepseek/Sakura",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Vincentwei1021/video-shotcraft",
+   "url": "https://github.com/Vincentwei1021/video-shotcraft",
+   "description": "AI video skill for Claude Code & Codex — cinematic product videos with Remotion: 152 shot recipe cards, 209 motion previews, a production-ready template",
+   "stars": 7902,
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "ai-video",
+    "claude-code",
+    "claude-code-skills",
+    "claude-skills",
+    "codex",
+    "motion-design",
+    "motion-graphics",
+    "product-video",
+    "promo-video",
+    "remotion"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-07-19",
+   "pushed_at": "2026-09-09",
+   "age_days": 52,
+   "stars_per_day_lifetime": 151.96,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 7
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "为 Claude Code & Codex 提供AI视频技能，制作产品视频",
+   "evidence": "AI video skill for Claude Code & Codex — cinematic product videos with Remotion",
+   "transfer_forms": [
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "ModelEngine-Group/app-platform",
+   "url": "https://github.com/ModelEngine-Group/app-platform",
+   "description": "AppPlatform 是一个前沿的大模型应用工程，旨在通过集成的声明式编程和低代码配置工具，简化和优化大模型的训练与推理应用的开发过程。本工程为软件工程师和产品经理提供一个强大的、可扩展的环境，以支持从概念到部署的全流程 AI 应用开发。",
+   "stars": 1454,
+   "topics": [
+    "agent",
+    "agentic-ai",
+    "agentic-workflow",
+    "ai",
+    "java",
+    "low-code"
+   ],
+   "lang": "Java",
+   "created_at": "2025-03-31",
+   "pushed_at": "2026-08-26",
+   "age_days": 527,
+   "stars_per_day_lifetime": 2.76,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "大模型 in:name,description stars:>1000 pushed:>2026-08-10",
+    "sort": "stars",
+    "query_breadth": 55,
+    "position": 44
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供大模型应用开发的集成声明式编程和低代码配置工具",
+   "evidence": "旨在通过集成的声明式编程和低代码配置工具，简化和优化大模型的训练与推理应用的开发过程。",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video",
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "florinpop17/app-ideas",
+   "url": "https://github.com/florinpop17/app-ideas",
+   "description": "A Collection of application ideas which can be used to improve your coding skills.",
+   "stars": 97431,
+   "topics": [
+    "applications",
+    "coding",
+    "codingchallenges",
+    "css",
+    "hacktoberfest",
+    "html",
+    "ideas",
+    "javascript",
+    "practice"
+   ],
+   "lang": "",
+   "created_at": "2019-02-25",
+   "pushed_at": "2025-10-11",
+   "age_days": 2753,
+   "stars_per_day_lifetime": 35.39,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name,description stars:>50000",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 10
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集应用想法以提升编码技能",
+   "evidence": "A Collection of application ideas which can be used to improve your coding skills.",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "MDX-Tom/gpt-instruct",
+   "url": "https://github.com/MDX-Tom/gpt-instruct",
+   "description": "A Codex jailbreak prompt and test pack for gpt. 针对 gpt 系列的 Codex 破甲提示词与测试包。",
+   "stars": 7940,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-07-11",
+   "pushed_at": "2026-09-07",
+   "age_days": 60,
+   "stars_per_day_lifetime": 132.33,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 58,
+    "position": 6
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供针对 gpt 系列的 Codex 破甲提示词与测试包",
+   "evidence": "A Codex jailbreak prompt and test pack for gpt.",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "nexu-io/html-video",
+   "url": "https://github.com/nexu-io/html-video",
+   "description": "Programmatic video for coding agents — HTML to video on your laptop. Turn HTML, CSS & data into real MP4s with pluggable render engines, 21 templates, AI soundtrack. Apache-2.0, no per-render fees. An official project by the Open Design team.",
+   "stars": 4559,
+   "topics": [
+    "ai-agent",
+    "apache-2",
+    "coding-agent",
+    "css",
+    "ffmpeg",
+    "html",
+    "html-to-video",
+    "hyperframes",
+    "mp4",
+    "open-design",
+    "open-source",
+    "programmatic-video"
+   ],
+   "lang": "HTML",
+   "created_at": "2026-05-27",
+   "pushed_at": "2026-06-21",
+   "age_days": 105,
+   "stars_per_day_lifetime": 43.42,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 11
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "将 HTML、CSS 和数据转换为 MP4 视频的编程工具",
+   "evidence": "Turn HTML, CSS & data into real MP4s with pluggable render engines, 21 templates, AI soundtrack.",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "wfcz10086/AI-automatically-generates-novels",
+   "url": "https://github.com/wfcz10086/AI-automatically-generates-novels",
+   "description": "一个基于ai +提示词 的aigc创作生产力工具， 已经有数百家工作室和个人作者通过该工具实现了快速、批量生成小说、剧本、镜头。",
+   "stars": 936,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2024-12-04",
+   "pushed_at": "2026-09-09",
+   "age_days": 644,
+   "stars_per_day_lifetime": 1.45,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 58,
+    "position": 20
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "基于 AI 和提示词的 AIGC 创作生产力工具",
+   "evidence": "一个基于ai +提示词 的aigc创作生产力工具， 已经有数百家工作室和个人作者通过该工具实现了快速、批量生成小说、剧本、镜头。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Robbyant/lingbot-world",
+   "url": "https://github.com/Robbyant/lingbot-world",
+   "description": "Advancing Open-source World Models",
+   "stars": 4423,
+   "topics": [
+    "aigc",
+    "image-to-video",
+    "lingbot-world",
+    "video-generation",
+    "world-models"
+   ],
+   "lang": "Python",
+   "created_at": "2026-01-28",
+   "pushed_at": "2026-07-09",
+   "age_days": 224,
+   "stars_per_day_lifetime": 19.75,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 12
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "推进开源世界模型的发展",
+   "evidence": "Advancing Open-source World Models",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "yang0/handraw-style",
+   "url": "https://github.com/yang0/handraw-style",
+   "description": "手绘风格编号画廊与双语提示词 Skill",
+   "stars": 604,
+   "topics": [],
+   "lang": "HTML",
+   "created_at": "2026-09-05",
+   "pushed_at": "2026-09-09",
+   "age_days": 4,
+   "stars_per_day_lifetime": 151.0,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 58,
+    "position": 31
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供手绘风格编号画廊与双语提示词 Skill",
+   "evidence": "手绘风格编号画廊与双语提示词 Skill",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "bytedance/deer-flow",
+   "url": "https://github.com/bytedance/deer-flow",
+   "description": "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.",
+   "stars": 82135,
+   "topics": [
+    "agent",
+    "agentic",
+    "agentic-framework",
+    "agentic-workflow",
+    "ai",
+    "ai-agents",
+    "deep-research",
+    "harness",
+    "langchain",
+    "langgraph",
+    "langmanus",
+    "llm"
+   ],
+   "lang": "Python",
+   "created_at": "2025-05-07",
+   "pushed_at": "2026-09-09",
+   "age_days": 490,
+   "stars_per_day_lifetime": 167.62,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name,description stars:>50000",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 13
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "开源长周期 SuperAgent 框架，用于研究和创建",
+   "evidence": "An open-source long-horizon SuperAgent harness that researches, codes, and creates.",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "yilujian/easy-writing",
+   "url": "https://github.com/yilujian/easy-writing",
+   "description": "易创：纯本地、开源的 AI 网文写作桌面软件，支持小说创作、AI 辅助写作、BYOK 与自定义提示词。",
+   "stars": 506,
+   "topics": [
+    "ai-writing",
+    "ai-writing-assistant",
+    "byok",
+    "creative-writing",
+    "desktop-app",
+    "local-first",
+    "novel-writing",
+    "openai-compatible",
+    "tauri",
+    "vue3",
+    "web-novel",
+    "writing-tools"
+   ],
+   "lang": "Vue",
+   "created_at": "2026-08-31",
+   "pushed_at": "2026-09-06",
+   "age_days": 9,
+   "stars_per_day_lifetime": 56.22,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 58,
+    "position": 35
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "纯本地、开源的 AI 网文写作桌面软件",
+   "evidence": "易创：纯本地、开源的 AI 网文写作桌面软件，支持小说创作、AI 辅助写作、BYOK 与自定义提示词。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "hao-ai-lab/FastVideo",
+   "url": "https://github.com/hao-ai-lab/FastVideo",
+   "description": "A unified inference and post-training framework for accelerated video generation.",
+   "stars": 4363,
+   "topics": [
+    "diffusers",
+    "diffusion-models",
+    "distillation",
+    "inference",
+    "post-training",
+    "video-generation"
+   ],
+   "lang": "Python",
+   "created_at": "2024-10-24",
+   "pushed_at": "2026-09-08",
+   "age_days": 685,
+   "stars_per_day_lifetime": 6.37,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 14
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "加速视频生成的统一推理和后训练框架",
+   "evidence": "A unified inference and post-training framework for accelerated video generation.",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "lornshrimp/Lorn.NovelWriteSkills",
+   "url": "https://github.com/lornshrimp/Lorn.NovelWriteSkills",
+   "description": "一个面向长篇网文 / 小说创作工作流的 AI 写作资产库。它不是“随手堆提示词”的仓库，而是一套围绕 题材设计 → 大纲搭建 → 章节创作 → 审阅润色 → 多平台改写 → 质量门禁 → 分发落盘 搭起来的可复用写作系统。",
+   "stars": 205,
+   "topics": [
+    "agent-skills",
+    "ai",
+    "novel",
+    "skills",
+    "writing-assistant"
+   ],
+   "lang": "PowerShell",
+   "created_at": "2026-04-14",
+   "pushed_at": "2026-09-04",
+   "age_days": 148,
+   "stars_per_day_lifetime": 1.39,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 58,
     "position": 56
    },
    "matched_by_n_queries": 1,
@@ -806,8 +2248,169 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "GeoJSON 工具库，简化操作",
-   "evidence": "GeoJSON utilities that will make your life easier.",
+   "capability": "提供围绕小说创作工作流的AI写作资产库",
+   "evidence": "围绕 题材设计 → 大纲搭建 → 章节创作 → 审阅润色 → 多平台改写 → 质量门禁 → 分发落盘 搭起来的可复用写作系统",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "SandAI-org/MAGI-1",
+   "url": "https://github.com/SandAI-org/MAGI-1",
+   "description": "MAGI-1: Autoregressive Video Generation at Scale",
+   "stars": 3782,
+   "topics": [
+    "autoregressive",
+    "diffusion-models",
+    "video-generation"
+   ],
+   "lang": "Python",
+   "created_at": "2025-04-21",
+   "pushed_at": "2026-06-17",
+   "age_days": 506,
+   "stars_per_day_lifetime": 7.47,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 16
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "实现大规模自回归视频生成",
+   "evidence": "Autoregressive Video Generation at Scale",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "zjp1997720/zhijian-ai-bluebook-workbuddy-harness",
+   "url": "https://github.com/zjp1997720/zhijian-ai-bluebook-workbuddy-harness",
+   "description": "智见 AI 蓝皮书：拆解 WorkBuddy 的提示词、记忆、插件、专家、Skill 与安全边界。",
+   "stars": 204,
+   "topics": [
+    "ai-agent",
+    "bluebook",
+    "harness",
+    "workbuddy",
+    "zhijian-ai"
+   ],
+   "lang": "",
+   "created_at": "2026-08-16",
+   "pushed_at": "2026-08-16",
+   "age_days": 24,
+   "stars_per_day_lifetime": 8.5,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 58,
+    "position": 57
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "拆解 WorkBuddy 的提示词、记忆、插件等",
+   "evidence": "拆解 WorkBuddy 的提示词、记忆、插件、专家、Skill 与安全边界",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "GVCLab/PersonaLive",
+   "url": "https://github.com/GVCLab/PersonaLive",
+   "description": "[CVPR 2026] PersonaLive! : Expressive Portrait Image Animation for Live Streaming",
+   "stars": 3690,
+   "topics": [
+    "cvpr",
+    "cvpr2026",
+    "talking-head",
+    "video-generation"
+   ],
+   "lang": "Python",
+   "created_at": "2025-11-25",
+   "pushed_at": "2026-08-28",
+   "age_days": 288,
+   "stars_per_day_lifetime": 12.81,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 21,
+    "position": 17
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "生成直播中的表情丰富的肖像图像动画",
+   "evidence": "Expressive Portrait Image Animation for Live Streaming",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "sollyu/AndroidStudioChineseLanguagePack",
+   "url": "https://github.com/sollyu/AndroidStudioChineseLanguagePack",
+   "description": "AndroidStudio中文插件(官方修改版本）",
+   "stars": 2494,
+   "topics": [
+    "android-studio",
+    "chinese",
+    "plugins"
+   ],
+   "lang": "",
+   "created_at": "2022-03-21",
+   "pushed_at": "2026-09-09",
+   "age_days": 1633,
+   "stars_per_day_lifetime": 1.53,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-08-10",
+    "sort": "updated",
+    "query_breadth": 72,
+    "position": 11
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 AndroidStudio 中文插件",
+   "evidence": "AndroidStudio中文插件(官方修改版本）",
    "transfer_forms": [
     "library"
    ],
@@ -817,45 +2420,81 @@
    "distilled": true
   },
   {
-   "repo": "scaccogatto/okf-skills",
-   "url": "https://github.com/scaccogatto/okf-skills",
-   "description": "The OKF toolkit for Claude Code — author, maintain, validate & visualize Open Knowledge Format bundles. Plugin, agent skills, and a GitHub Action.",
-   "stars": 353,
+   "repo": "jujumilk3/leaked-system-prompts",
+   "url": "https://github.com/jujumilk3/leaked-system-prompts",
+   "description": "Collection of leaked system prompts",
+   "stars": 14924,
    "topics": [
-    "agent-skills",
-    "ai-agents",
-    "claude-code",
-    "claude-code-plugin",
-    "developer-tools",
-    "knowledge-graph",
-    "knowledge-management",
-    "llm-tools",
-    "markdown",
-    "mcp",
-    "okf",
-    "open-knowledge-format"
+    "ai",
+    "document",
+    "llm",
+    "prompt"
    ],
-   "lang": "Python",
-   "created_at": "2026-06-14",
-   "pushed_at": "2026-09-01",
-   "age_days": 80,
-   "stars_per_day_lifetime": 4.41,
-   "license": "MIT",
-   "license_family": "permissive",
+   "lang": "",
+   "created_at": "2023-05-16",
+   "pushed_at": "2026-09-03",
+   "age_days": 1212,
+   "stars_per_day_lifetime": 12.31,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-03",
+    "query": "prompts in:name stars:>300 pushed:>2026-08-10",
     "sort": "updated",
-    "query_breadth": 100,
-    "position": 67
+    "query_breadth": 25,
+    "position": 16
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "Claude Code 工具包，用于创建、维护和验证 Open Knowledge Format 包",
-   "evidence": "The OKF toolkit for Claude Code — author, maintain, validate & visualize Open Knowledge Format bundles.",
+   "capability": "收集泄露的系统提示词",
+   "evidence": "Collection of leaked system prompts",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "metasequoiaime/MSIME-Windows",
+   "url": "https://github.com/metasequoiaime/MSIME-Windows",
+   "description": "水杉输入法 Windows 产品：TSF、Server、GUI、设置页与安装器。内测：tg: https://t.me/msimegroup QQ Group: 829919142",
+   "stars": 1335,
+   "topics": [
+    "chinese",
+    "ime",
+    "input-method",
+    "japanese",
+    "metasequoia",
+    "tsf",
+    "windows",
+    "windows-11"
+   ],
+   "lang": "C++",
+   "created_at": "2023-10-14",
+   "pushed_at": "2026-09-09",
+   "age_days": 1061,
+   "stars_per_day_lifetime": 1.26,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-08-10",
+    "sort": "updated",
+    "query_breadth": 72,
+    "position": 13
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供水杉输入法 Windows 产品",
+   "evidence": "水杉输入法 Windows 产品：TSF、Server、GUI、设置页与安装器",
    "transfer_forms": [
     "library"
    ],
@@ -865,47 +2504,47 @@
    "distilled": true
   },
   {
-   "repo": "edoardottt/awesome-hacker-search-engines",
-   "url": "https://github.com/edoardottt/awesome-hacker-search-engines",
-   "description": "A curated list of awesome search engines useful during Penetration testing, Vulnerability assessments, Red/Blue Team operations, Bug Bounty and more",
-   "stars": 11117,
+   "repo": "hacksider/Deep-Live-Cam",
+   "url": "https://github.com/hacksider/Deep-Live-Cam",
+   "description": "real time face swap and one-click video deepfake with only a single image",
+   "stars": 96578,
    "topics": [
-    "awesome",
-    "awesome-list",
-    "awesome-lists",
-    "bugbounty",
-    "cve",
-    "dns",
-    "exploit",
-    "hacking",
-    "hacking-tools",
-    "hacktoberfest",
-    "osint",
-    "osint-tool"
+    "ai",
+    "ai-deep-fake",
+    "ai-face",
+    "ai-webcam",
+    "artificial-intelligence",
+    "deep-fake",
+    "deepfake",
+    "deepfake-webcam",
+    "faceswap",
+    "fake-webcam",
+    "gan",
+    "real-time-deepfake"
    ],
-   "lang": "Shell",
-   "created_at": "2022-06-20",
-   "pushed_at": "2026-09-01",
-   "age_days": 1535,
-   "stars_per_day_lifetime": 7.24,
-   "license": "MIT",
-   "license_family": "permissive",
+   "lang": "Python",
+   "created_at": "2023-09-24",
+   "pushed_at": "2026-09-09",
+   "age_days": 1081,
+   "stars_per_day_lifetime": 89.34,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-03",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 69
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 3
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "收集渗透测试、漏洞评估、红蓝队操作、赏金猎人等领域的搜索引擎列表",
-   "evidence": "渗透测试、漏洞评估、红蓝队操作、赏金猎人等领域的搜索引擎列表",
+   "capability": "实现实时面部交换和一键视频深度伪造",
+   "evidence": "real time face swap and one-click video deepfake with only a single image",
    "transfer_forms": [
-    "unknown"
+    "deploy"
    ],
    "line_candidates": [
     "unknown"
@@ -913,34 +2552,86 @@
    "distilled": true
   },
   {
-   "repo": "realZillionX/InspireSkill",
-   "url": "https://github.com/realZillionX/InspireSkill",
-   "description": "启智平台的 Agent 驾驶舱：Skill + CLI，一条命令直达。Agent cockpit for the Inspire ML platform: one command, every operation, straight from chat.",
-   "stars": 201,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-04-20",
-   "pushed_at": "2026-09-01",
-   "age_days": 135,
-   "stars_per_day_lifetime": 1.49,
-   "license": "MIT",
+   "repo": "go-ego/gse",
+   "url": "https://github.com/go-ego/gse",
+   "description": "Go efficient multilingual NLP and text segmentation; support English, Chinese, Japanese and others.",
+   "stars": 2841,
+   "topics": [
+    "chinese",
+    "english",
+    "go",
+    "gse",
+    "hmm",
+    "hmm-viterbi-algorithm",
+    "japanese",
+    "jieba",
+    "nlp",
+    "segment",
+    "trie"
+   ],
+   "lang": "Go",
+   "created_at": "2017-06-23",
+   "pushed_at": "2026-09-09",
+   "age_days": 3365,
+   "stars_per_day_lifetime": 0.84,
+   "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-03",
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-08-10",
     "sort": "updated",
-    "query_breadth": 100,
-    "position": 72
+    "query_breadth": 72,
+    "position": 19
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供启智平台的 Agent 驾驶舱，支持 Skill 和 CLI 操作",
-   "evidence": "启智平台的 Agent 驾驶舱：Skill + CLI，一条命令直达。",
+   "capability": "提供多语言 NLP 和文本分割工具",
+   "evidence": "Go efficient multilingual NLP and text segmentation",
    "transfer_forms": [
-    "skill"
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "3b1b/manim",
+   "url": "https://github.com/3b1b/manim",
+   "description": "Animation engine for explanatory math videos",
+   "stars": 93637,
+   "topics": [
+    "3b1b-videos",
+    "animation",
+    "explanatory-math-videos",
+    "python"
+   ],
+   "lang": "Python",
+   "created_at": "2015-03-22",
+   "pushed_at": "2026-09-09",
+   "age_days": 4189,
+   "stars_per_day_lifetime": 22.35,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-11",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 5
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "用于制作解释性数学视频的动画引擎",
+   "evidence": "Animation engine for explanatory math videos",
+   "transfer_forms": [
+    "deploy"
    ],
    "line_candidates": [
     "unknown"
