@@ -10,22 +10,23 @@
 
 ## 第一步 · 检查产线健康(优先级最高)
 
-本仓有 5 条 workflow 在 cron 自动跑:
-
-| workflow | 频率 | 作用 |
-|---|---|---|
-| `content-factory.yml` | 每 6 小时 | 内容工厂:本草对照 / 生物计算条目生成 |
-| `evolve-controller.yml` | 每 6 小时 | 自进化控制器:观察 → 判断 → 记忆 → 改进 |
-| `intel-radar.yml` | 每天 | 情报雷达 + 候选模型落库 |
-| `fleet-watch.yml` | 每小时 | 舰队巡查,异常写 Issue |
-| `nvidia-probe.yml` | 每月 | NVIDIA 模型探针 |
-
-逐条执行:
+本仓的 cron 产线**不要背清单,现查**(2026-09-09 修订:写死的 5 条早就漏了 gw-snapshot / gw-registry-sync / guji-health / frontend-sentinel / warm_covers):
 ```bash
+grep -l "schedule:" .github/workflows/*.yml
 gh run list -R hosonzuo8848/sync-med --workflow=<文件名> --limit 5
 ```
+重点产线:`content-factory.yml`(内容工厂,每 6 小时)、`evolve-controller.yml`(自进化观察者)、`intel-radar.yml`(情报雷达,每天)、
+`fleet-watch.yml`(舰队巡查,每小时)、`gw-snapshot.yml`(网关健康快照,每 10 分钟 —— **超过 30 分钟没跑 = 网关路由退回静态序**)、
+`gw-registry-sync.yml`(网关注册表夜巡,每天)、`guji-health.yml`(古籍出图哨兵,每天)。
 
-**任何 failure 都优先于推进新任务** —— 先看日志定位真因再修:
+**「全部 success」不等于健康。** 再看未关闭的告警 Issue —— 它们是产线自己喊出来的故障:
+```bash
+gh issue list -R hosonzuo8848/sync-med --state open --limit 30 --search "🚨 OR ⚠️ OR 停摆 OR 异常"
+```
+(血证 2026-09-08:夜班看 5 条 run 全绿就写"健康",而 #562 舰队巡查异常、#563 情报雷达吸收停摆 35 天就挂在那没人碰。)
+每条告警 Issue:读正文里的数字 → 定位到脚本/workflow → 能在本仓修的就修并在 Issue 下评论证据;修不了的写清卡点。
+
+**任何 failure / 告警 Issue 都优先于推进新任务** —— 先看日志定位真因再修:
 ```bash
 gh run view <run_id> -R hosonzuo8848/sync-med --log-failed
 ```
@@ -54,6 +55,13 @@ gh run view <run_id> -R hosonzuo8848/sync-med --log-failed
 - 做不动就换下一件,**如实记录卡在哪**,不许粉饰。
 
 ---
+
+## 写不进仓库时怎么办
+
+`git push` / `gh api PUT` / 开 Issue 若回 **403 Resource not accessible by integration**,是 Claude GitHub App 没装到本仓,
+**不是偶发**:别再换三条写路径重试(09-08 夜班四条全 403 白耗一轮)。直接:
+1. 把 diff 与结论完整写进最终回复(负责人在 claude.ai/code/routines 能看到);
+2. 用 PushNotification 推一条,点明「需要在 https://github.com/apps/claude/installations/select_target 给 hosonzuo8848/sync-med 装 Claude GitHub App」。
 
 ## 第三步 · 回写日报
 
