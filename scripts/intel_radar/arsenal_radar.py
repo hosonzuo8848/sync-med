@@ -435,6 +435,15 @@ def scan_plan():
 
         # -- RAG / knowledge graph / document parsing
         # ret=19 PROVEN zhimaAi/chatwiki (2016), moyangzhan/langchain4j-aideepin (1341)
+        # 2026-09-10 英文技术词补齐:此前技术类查询全是中文(Q_kg/Q_ragkb/Q_ocr),英文描述的仓 100% 不可见
+        # (Hyper-Extract 实测:下面第 2/3/4 条各回 6/3/2 条且它都排第 1)。
+        ("category", "topic:knowledge-graph stars:>1000 pushed:>%s" % d30, "updated"),
+        ("category", "topic:hypergraph stars:>300", "stars"),
+        ("category", "topic:information-extraction stars:>500 pushed:>%s" % d90, "stars"),
+        ("category", "knowledge extraction in:name,description stars:>500 pushed:>%s" % d90, "stars"),
+        ("category", "topic:rag stars:>3000 pushed:>%s" % d30, "updated"),
+        ("category", "topic:ocr stars:>1000 pushed:>%s" % d90, "updated"),
+        ("category", "topic:chinese-medicine stars:>50", "stars"),
         ("chinese", ZH["Q_ragkb"] + " in:name,description stars:>200", "stars"),
         # ret=12 PROVEN xerrors/Yuxi (6264), honeyandme/RAGQnASystem (1370)
         ("chinese", ZH["Q_kg"] + " in:name,description stars:>200 pushed:>%s" % d90,
@@ -1188,6 +1197,7 @@ def run(limit=60, do_distill=True, today=None):
 
 # ---------------------------------------------------------------------------
 SELFTEST_TARGETS = [
+    "yifanfeng97/Hyper-Extract",
     "yikart/AiToEarn",
     "tashfeenahmed/freellmapi",
     "tmstack/awesome-persona-skills",
