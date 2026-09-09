@@ -53,6 +53,43 @@ jobs:
             --n "${{ github.event.inputs.n || 50 }}" \
             --report goldset_full.json
 
+      - name: 鹰眼日线哨兵（只读 evolve_trials；日线只写表没人看，09-01→09-10 十天全 0 无人知）
+        if: always()
+        env:
+          CF_ACCOUNT_ID:  ${{ secrets.CF_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+          D1_API_TOKEN:   ${{ secrets.D1_API_TOKEN }}
+          PYTHONIOENCODING: utf-8
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          url = ("https://api.cloudflare.com/client/v4/accounts/%s/d1/database/%s/query"
+                 % (os.environ["CF_ACCOUNT_ID"], os.environ["D1_DATABASE_ID"]))
+          sql = ("SELECT run_ref, raw_score, passed FROM evolve_trials "
+                 "WHERE scope='gold_set' AND created_at > strftime('%s','now')-7*86400 "
+                 "ORDER BY created_at DESC")
+          req = urllib.request.Request(url, data=json.dumps({"sql": sql}).encode(),
+                headers={"Authorization": "Bearer " + os.environ["D1_API_TOKEN"],
+                         "Content-Type": "application/json"})
+          try:
+              rows = json.loads(urllib.request.urlopen(req, timeout=60).read().decode())["result"][0]["results"]
+          except Exception as e:
+              open("daily_alert.md", "w", encoding="utf-8").write(
+                  "> ⚠️ 日线哨兵自己读不到 evolve_trials：`%s`（哨兵失效也要有人看见）\n" % e)
+              open("alert.flag", "w").close()
+              raise SystemExit(0)
+          dead = [r["run_ref"] for r in rows if not r.get("raw_score") and not r.get("passed")]
+          msg = ""
+          if not rows:
+              msg = "> ⚠️ 鹰眼日线近 7 天**一条记录都没有** —— 日线没在跑，不是模型变差。\n"
+          elif len(dead) >= 3:
+              msg = ("> ⚠️ 鹰眼日线近 7 天有 **%d/%d 天全 0 分、0 通过**（%s）—— 日线大概率已死，"
+                     "上面那句“日线在跑当体温计”此刻不成立。\n" % (len(dead), len(rows), "、".join(dead)))
+          open("daily_alert.md", "w", encoding="utf-8").write(msg)
+          if msg:
+              open("alert.flag", "w").close()
+          print(msg or "日线哨兵：近 7 天 %d 条，全 0 的 %d 条，正常。" % (len(rows), len(dead)))
+          PY
       - name: 结果进固定 Issue（失败也发 —— 静默失败比失败本身更贵）
         if: always()
         env:
@@ -70,9 +107,16 @@ jobs:
           print(f"## 加权总分 **{d['weighted_score']}** / 100\n")
           print(f"- 题数 **{d['n']}**（{d['sampling']}）· 成功 {d['ok']} · 失败 {d['err']}")
           print(f"- 合规违规 **{d['violations']}** 题 · 用时 {d['duration_sec']}s")
-          if d.get("suspect_violations"):
-              print(f"- ⚠️ 其中 {len(d['suspect_violations'])} 题命中的是**已知假阳性判据**"
-                    f"（{'、'.join(d['suspect_violations'])}）—— 修法见 migration 061，未执行")
+          if d.get("real_violations"):
+              print(f"- ❌ 违规题：{'、'.join(d['real_violations'])}（每命中一词 −40，不豁免任何题号）")
+          print(f"- 裁判 `{d.get('judge_ver') or 'pre-2026-09-10'}` · 考生 `{d.get('supplier') or '?'}`"
+                "（换了裁判版本或考生，分数不可与上周比）")
+          try:
+              extra = open("daily_alert.md", encoding="utf-8").read().strip()
+              if extra:
+                  print("\n" + extra)
+          except Exception:
+              pass
           print("\n### 按类别\n")
           print("| 类别 | 分 |")
           print("|---|---|")
@@ -117,3 +161,12 @@ jobs:
             gh issue create -R "$GITHUB_REPOSITORY" --title "$TITLE · $(date -u +%Y-%m-%d)" \
               --label goldset --body-file body.md
           fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: goldset-full
+          path: |
+            goldset_full.json
+            body.md
+          retention-days: 90
+          if-no-files-found: warn
