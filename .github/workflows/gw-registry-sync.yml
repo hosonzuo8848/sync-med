@@ -1,0 +1,118 @@
+name: gw-registry-sync
+
+# Nightly gateway registry watch (2026-09-09).
+# Why: the founder asked whether the gateway admin has every platform's endpoint recorded and said it must
+# update itself instead of waiting to be told. The code registry is mirrored into D1 gw_providers on every
+# deploy (src=code). This job compares that mirror against the OmniRoute free-tier catalog (352 providers)
+# and writes providers we do not have yet as candidates (src=catalog, enabled=0). Candidates never enter
+# routing; wiring one still means applying a key and adding it to the code registry by hand.
+# Who sees it where: the admin gateway page lists candidates; an Issue is opened only when something new appears.
+# Founder red lines: Cloudflare Workers AI and GitHub Models are never registered, not even as candidates.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 20 * * *"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: gw-registry-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q requests
+      - name: catalog vs D1 mirror
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          D1_ID: ${{ secrets.D1_DATABASE_ID }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os, re, json, sys, time, subprocess, requests
+          from urllib.parse import urlparse
+          acct, d1t, d1id = os.environ["CF_ACCOUNT_ID"], os.environ["D1_TOKEN"], os.environ["D1_ID"]
+          RAW = "https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/"
+          ALIAS = {"glm-cn": "glm/cn", "opencode-zen": "opencode"}
+          FORBIDDEN = {"api.cloudflare.com", "models.github.ai", "models.inference.ai.azure.com"}
+          today = time.strftime("%Y-%m-%d")
+          d1 = f"https://api.cloudflare.com/client/v4/accounts/{acct}/d1/database/{d1id}/query"
+          def q(sql, params=None):
+              r = requests.post(d1, json={"sql": sql, "params": params or []}, headers={"Authorization": f"Bearer {d1t}"}, timeout=60).json()
+              if not r.get("success"): sys.exit("D1 failed: " + json.dumps(r.get("errors"))[:300])
+              return r["result"][0]
+          def get(url):
+              try:
+                  r = requests.get(url, timeout=30)
+                  return r.text if r.status_code == 200 else None
+              except Exception:
+                  return None
+          md = get(RAW + "docs/reference/FREE_TIERS.md") or sys.exit("catalog fetch failed")
+          sec = md.split("## Per-provider free-tier", 1)[1].split("\n## ", 1)[0]
+          rows = []
+          for line in sec.splitlines():
+              m = re.match(r"^\|\s*`([^`]+)`\s*\|(.*)\|\s*$", line)
+              if not m: continue
+              cells = [c.strip() for c in m.group(2).split("|")]
+              if len(cells) < 5: continue
+              rows.append({"id": m.group(1), "free_type": cells[0], "steady": cells[1], "credit": cells[2], "tos": cells[3], "models": cells[4]})
+          if len(rows) < 30: sys.exit(f"catalog table looks broken: {len(rows)} rows")
+          for r in rows:
+              ts = get(RAW + f"open-sse/config/providers/registry/{ALIAS.get(r['id'], r['id'])}/index.ts")
+              m = ts and (re.search(r'baseUrl:\s*"([^"]+)"', ts) or re.search(r'"(https://[^"\s]+)"', ts))
+              base = m.group(1) if m else None
+              if base:
+                  base = re.sub(r"/(chat/)?completions/?$", "", base).rstrip("/")
+              r["base"] = base
+              r["host"] = urlparse(base).netloc.lower() if base else None
+          mine = q("SELECT id, base, enabled, note FROM gw_providers")["results"]
+          our_hosts, existing = set(), {}
+          for r in mine:
+              try: n = json.loads(r.get("note") or "{}")
+              except Exception: n = {}
+              if n.get("src") == "code" and r.get("base"):
+                  our_hosts.add(urlparse(r["base"]).netloc.lower())
+              elif n.get("src") == "catalog":
+                  existing[r["id"]] = n
+          new, updated, already, forbidden = [], 0, 0, 0
+          for r in rows:
+              if r["host"] in FORBIDDEN or r["id"] in ("cloudflare-ai", "github"):
+                  forbidden += 1; continue
+              if r["host"] and r["host"] in our_hosts:
+                  already += 1; continue
+              cid = "cand:" + r["id"]
+              old = existing.get(cid)
+              note = {"src": "catalog", "catalog": "omniroute", "tos": r["tos"], "free_type": r["free_type"], "steady": r["steady"],
+                      "credit": r["credit"], "models": r["models"], "first_seen": (old or {}).get("first_seen") or today, "last_seen": today}
+              now = int(time.time() * 1000)
+              if old:
+                  q("UPDATE gw_providers SET base=COALESCE(?, base), note=?, updated_at=? WHERE id=?", [r["base"], json.dumps(note, ensure_ascii=False), now, cid]); updated += 1
+              else:
+                  q("INSERT INTO gw_providers (id,name,base,model,auth_type,format,is_free,enabled,note,updated_at) VALUES (?,?,?,?,?,?,1,0,?,?)",
+                    [cid, r["id"], r["base"] or "", "", "bearer", "openai", json.dumps(note, ensure_ascii=False), now]); new.append(r)
+          dead = q("SELECT provider, ROUND(AVG(success),3) AS s, COUNT(*) AS n FROM ai_call_logs WHERE ts >= datetime('now','-7 days') GROUP BY provider HAVING n >= 50 AND s < 0.2")["results"]
+          dead_ids = [d["provider"] for d in dead]
+          line = (f"gw-registry-sync {today}: catalog {len(rows)} · already wired {already} · red-line skipped {forbidden} · "
+                  f"candidates new {len(new)} / refreshed {updated} · wired providers with 7d success <20%: {len(dead_ids)}")
+          open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8").write(line + "\n"); print(line)
+          if new:
+              body = ["夜巡对照 OmniRoute 免费目录,发现我们还没接入的平台(已写进后台「候选平台」区,enabled=0,不进路由):", "",
+                      "| 平台 | 接入地址 | 条款 | 免费类型 | 月额 / 赠额 | 模型数 |", "|---|---|---|---|---|---|"]
+              for r in new:
+                  body.append(f"| `{r['id']}` | `{r['base'] or '(目录未给)'}` | {r['tos']} | {r['free_type']} | {r['steady']} / {r['credit']} | {r['models']} |")
+              body += ["", f"目录 {len(rows)} 家 · 已在池 {already} 家 · 红线跳过 {forbidden} 家 · 候选累计 {len(existing) + len(new)} 家。",
+                       f"另:挂在链上但近 7 天成功率低于 20% 的供应商 {len(dead_ids)} 家,名单看后台 /worker/gateway 每张卡片的调用/成功数。",
+                       "接入 = 申请 key + 进代码注册表,由 CTO 决定;条款只是信息字段,路由按真实成功率走。"]
+              open("issue.md", "w", encoding="utf-8").write("\n".join(body))
+              subprocess.run(["gh", "issue", "create", "-R", os.environ["GITHUB_REPOSITORY"], "-t", f"gw-registry {today}: {len(new)} new candidate providers", "-F", "issue.md"], check=True)
+          PY
