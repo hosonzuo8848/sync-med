@@ -102,17 +102,55 @@ jobs:
                     [cid, r["id"], r["base"] or "", "", "bearer", "openai", json.dumps(note, ensure_ascii=False), now]); new.append(r)
           dead = q("SELECT provider, ROUND(AVG(success),3) AS s, COUNT(*) AS n FROM ai_call_logs WHERE ts >= datetime('now','-7 days') GROUP BY provider HAVING n >= 50 AND s < 0.2")["results"]
           dead_ids = [d["provider"] for d in dead]
+          # Registry health. model_registry drives the live fallback chains (fallbackOrder reads champion/contender rows),
+          # so a stale row keeps a dead provider at the head of a chain. Rules, all from ai_call_logs over 7 days:
+          #   demote  : enabled row, n>=50 and success<20%      -> enabled=0 (rows whose notes start with "manual" are never touched)
+          #   restore : auto-demoted row, n>=20 and success>=60% -> enabled=1
+          #   champion: per task, if the champion is <50% (n>=50) or missing, the best enabled contender >=70% (n>=50) takes over
+          stats = {r["provider"]: r for r in q("SELECT provider, ROUND(AVG(success),3) AS s, COUNT(*) AS n FROM ai_call_logs WHERE ts >= datetime('now','-7 days') GROUP BY provider")["results"]}
+          demoted, restored, swapped = [], [], []
+          for r in q("SELECT model_key, provider, enabled, notes FROM model_registry")["results"]:
+              st = stats.get(r["provider"]); notes = r.get("notes") or ""
+              if not st or notes.startswith("manual"): continue
+              now = int(time.time() * 1000)
+              if r["enabled"] == 1 and st["n"] >= 50 and st["s"] < 0.2:
+                  q("UPDATE model_registry SET enabled=0, notes=?, updated_at=? WHERE model_key=?", [f"auto-demoted {today}: 7d {st['s']*100:.1f}%/{st['n']}", now, r["model_key"]]); demoted.append(r["provider"])
+              elif r["enabled"] == 0 and notes.startswith("auto-demoted") and st["n"] >= 20 and st["s"] >= 0.6:
+                  q("UPDATE model_registry SET enabled=1, notes=?, updated_at=? WHERE model_key=?", [f"auto-restored {today}: 7d {st['s']*100:.1f}%/{st['n']}", now, r["model_key"]]); restored.append(r["provider"])
+          by_task = {}
+          for r in q("SELECT model_key, provider, role, task FROM model_registry WHERE enabled=1 AND is_free=1 AND role IN ('champion','contender')")["results"]:
+              by_task.setdefault(r["task"], []).append(r)
+          for task, rs in by_task.items():
+              champ = next((r for r in rs if r["role"] == "champion"), None)
+              cs = stats.get(champ["provider"]) if champ else None
+              if champ and cs and cs["n"] >= 50 and cs["s"] >= 0.5: continue
+              cands = [r for r in rs if r["role"] == "contender" and stats.get(r["provider"], {}).get("n", 0) >= 50]
+              best = max(cands, key=lambda r: stats[r["provider"]]["s"], default=None)
+              if not best or stats[best["provider"]]["s"] < 0.7: continue
+              now = int(time.time() * 1000)
+              if champ:
+                  q("UPDATE model_registry SET role='contender', notes=?, updated_at=? WHERE model_key=?", [f"auto-swapped {today}: was champion, 7d {(cs or {}).get('s', 0)*100:.1f}%/{(cs or {}).get('n', 0)}", now, champ["model_key"]])
+              q("UPDATE model_registry SET role='champion', notes=?, updated_at=? WHERE model_key=?", [f"auto-champion {today}: 7d {stats[best['provider']]['s']*100:.1f}%/{stats[best['provider']]['n']}", now, best["model_key"]])
+              swapped.append(f"{task}:{(champ or {}).get('provider', '-')}->{best['provider']}")
           line = (f"gw-registry-sync {today}: catalog {len(rows)} · already wired {already} · red-line skipped {forbidden} · "
-                  f"candidates new {len(new)} / refreshed {updated} · wired providers with 7d success <20%: {len(dead_ids)}")
+                  f"candidates new {len(new)} / refreshed {updated} · wired providers with 7d success <20%: {len(dead_ids)} · "
+                  f"registry demoted {len(demoted)} restored {len(restored)} champion swaps {len(swapped)}")
           open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8").write(line + "\n"); print(line)
-          if new:
-              body = ["夜巡对照 OmniRoute 免费目录,发现我们还没接入的平台(已写进后台「候选平台」区,enabled=0,不进路由):", "",
+          if new or demoted or restored or swapped:
+              body = []
+              if demoted or restored or swapped:
+                  body += ["**链序注册表按近 7 天真实成功率自动调整**(model_registry 是网关容错链的来源):", ""]
+                  body += [f"- 摘下(7 天成功率 <20%,≥50 次):{', '.join(sorted(set(demoted))) or '无'}",
+                           f"- 恢复(曾自动摘下,7 天 ≥60%):{', '.join(sorted(set(restored))) or '无'}",
+                           f"- 换冠军:{', '.join(swapped) or '无'}", ""]
+              body += ["夜巡对照 OmniRoute 免费目录,发现我们还没接入的平台(已写进后台「候选平台」区,enabled=0,不进路由):" if new else "目录里没有新家。", "",
                       "| 平台 | 接入地址 | 条款 | 免费类型 | 月额 / 赠额 | 模型数 |", "|---|---|---|---|---|---|"]
               for r in new:
                   body.append(f"| `{r['id']}` | `{r['base'] or '(目录未给)'}` | {r['tos']} | {r['free_type']} | {r['steady']} / {r['credit']} | {r['models']} |")
+              if not new: body = body[:-2]
               body += ["", f"目录 {len(rows)} 家 · 已在池 {already} 家 · 红线跳过 {forbidden} 家 · 候选累计 {len(existing) + len(new)} 家。",
                        f"另:挂在链上但近 7 天成功率低于 20% 的供应商 {len(dead_ids)} 家,名单看后台 /worker/gateway 每张卡片的调用/成功数。",
                        "接入 = 申请 key + 进代码注册表,由 CTO 决定;条款只是信息字段,路由按真实成功率走。"]
               open("issue.md", "w", encoding="utf-8").write("\n".join(body))
-              subprocess.run(["gh", "issue", "create", "-R", os.environ["GITHUB_REPOSITORY"], "-t", f"gw-registry {today}: {len(new)} new candidate providers", "-F", "issue.md"], check=True)
+              subprocess.run(["gh", "issue", "create", "-R", os.environ["GITHUB_REPOSITORY"], "-t", f"gw-registry {today}: {len(new)} new candidates · registry -{len(demoted)} +{len(restored)} swap {len(swapped)}", "-F", "issue.md"], check=True)
           PY
