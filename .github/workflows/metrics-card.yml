@@ -1,0 +1,119 @@
+name: metrics-card
+
+# Nightly "numbers card" (2026-09-10). Every headline number the platform is judged by, computed by a job and
+# stored in KV metrics:card with its source and timestamp, so the admin dashboard and the daily report read
+# the same values instead of retyping them from run logs. Public repo: the step summary prints only counts.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "40 20 * * *"
+
+permissions:
+  contents: read
+  issues: read
+  actions: read
+
+concurrency:
+  group: metrics-card
+  cancel-in-progress: false
+
+jobs:
+  card:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q requests
+      - name: compute and store
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          D1_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          D1_ID: ${{ secrets.D1_DATABASE_ID }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os, re, json, sys, time, subprocess, requests
+          acct, cft, d1t, d1id = os.environ["CF_ACCOUNT_ID"], os.environ["CF_TOKEN"], os.environ["D1_TOKEN"], os.environ["D1_ID"]
+          KV_NS = "f7316f9f43744edfaa6d288fbc3c935b"
+          REPO = os.environ.get("GITHUB_REPOSITORY", "hosonzuo8848/sync-med")
+          now_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+          d1 = f"https://api.cloudflare.com/client/v4/accounts/{acct}/d1/database/{d1id}/query"
+          items = {}
+          def put(key, v, label, src, ts=None):
+              items[key] = {"v": v, "label": label, "src": src, "ts": ts or now_iso}
+          def q(sql):
+              try:
+                  r = requests.post(d1, json={"sql": sql}, headers={"Authorization": f"Bearer {d1t}"}, timeout=60).json()
+                  return r["result"][0]["results"] if r.get("success") else []
+              except Exception:
+                  return []
+          def one(sql, col):
+              rs = q(sql); return rs[0].get(col) if rs else None
+          def sh(*cmd):
+              try: return subprocess.run(cmd, capture_output=True, text=True, timeout=120).stdout
+              except Exception: return ""
+          # corpus
+          r = q("SELECT COUNT(*) AS n, SUM(frontend_visible=1) AS vis, SUM(rights_status='unverified') AS unv FROM books_text")
+          if r: put("text_books", r[0]["n"], "文字版古籍(本)", "D1 books_text"); put("text_visible", r[0]["vis"], "文字版前台可见(本)", "D1 books_text"); put("text_unverified", r[0]["unv"], "版权未核实(本)", "D1 books_text")
+          put("image_books_visible", one("SELECT COUNT(*) AS n FROM books WHERE frontend_visible=1", "n"), "影像书前台可见(本)", "D1 books")
+          put("text_image_links", one("SELECT COUNT(*) AS n FROM books_text_image_map", "n"), "右栏原文对照(本影像书)", "D1 books_text_image_map")
+          put("classic_articles", one("SELECT COUNT(*) AS n FROM classic_articles", "n"), "条文(伤寒/金匮/温病)", "D1 classic_articles")
+          put("fangji", one("SELECT COUNT(*) AS n FROM fangji", "n"), "方剂(首)", "D1 fangji")
+          put("medical_cases", one("SELECT COUNT(*) AS n FROM medical_cases", "n"), "医案(条)", "D1 medical_cases")
+          r = q("SELECT COUNT(*) AS n, SUM(processing_status<>'chunked') AS done FROM books_text_chunks")
+          if r: put("chunks", r[0]["n"], "文字段落(段)", "D1 books_text_chunks"); put("chunks_processed", r[0]["done"] or 0, "段落已抽实体(段)", "D1 books_text_chunks")
+          put("fts_v2_rows", one("SELECT COUNT(*) AS n FROM books_fts_v2_src", "n"), "全文索引段(行)", "D1 books_fts_v2_src")
+          put("graph_nodes", one("SELECT COUNT(*) AS n FROM sue_graph_nodes", "n"), "图谱节点", "D1 sue_graph_nodes")
+          put("graph_edges", one("SELECT COUNT(*) AS n FROM sue_graph_edges", "n"), "图谱边", "D1 sue_graph_edges")
+          # gateway (7d): all calls vs real traffic (rows with a source that is not a probe)
+          r = q("SELECT ROUND(AVG(success),3) AS s, COUNT(*) AS n FROM ai_call_logs WHERE ts >= datetime('now','-7 days')")
+          if r: put("gw_success_7d_all", r[0]["s"], "网关 7 天成功率(含探针)", "D1 ai_call_logs"); put("gw_calls_7d", r[0]["n"], "网关 7 天调用(次)", "D1 ai_call_logs")
+          r = q("SELECT ROUND(AVG(success),3) AS s, COUNT(*) AS n FROM ai_call_logs WHERE ts >= datetime('now','-7 days') AND source IS NOT NULL AND source NOT LIKE '%probe%' AND source NOT LIKE '%sentry%'")
+          if r: put("gw_success_7d_real", r[0]["s"], "网关 7 天成功率(真流量)", "D1 ai_call_logs"); put("gw_real_calls_7d", r[0]["n"], "真流量调用(次)", "D1 ai_call_logs")
+          r = q("SELECT COUNT(*) AS n, ROUND(AVG(success),3) AS s FROM ai_call_logs WHERE ts >= datetime('now','-7 days') AND source LIKE 'xunmai%'")
+          if r: put("xunmai_calls_7d", r[0]["n"], "寻脉 7 天调用(次)", "D1 ai_call_logs"); put("xunmai_success_7d", r[0]["s"], "寻脉 7 天成功率", "D1 ai_call_logs")
+          # users / funnel
+          r = q("SELECT COUNT(*) AS n, SUM(created_at >= strftime('%s','now','-7 days')*1000 OR created_at >= datetime('now','-7 days')) AS w FROM users")
+          if r: put("users", r[0]["n"], "注册用户", "D1 users"); put("users_7d", r[0]["w"], "近 7 天新注册", "D1 users")
+          put("events_total", one("SELECT COUNT(*) AS n FROM events", "n"), "漏斗埋点(行)", "D1 events")
+          # gold set score: latest successful goldset-full run log
+          rid = sh("gh", "run", "list", "-R", REPO, "--workflow", "goldset-full.yml", "--status", "success", "--limit", "1", "--json", "databaseId,createdAt", "-q", ".[0].databaseId").strip()
+          if rid:
+              log = sh("gh", "run", "view", rid, "-R", REPO, "--log")
+              m = re.search(r"加权总分\s*\**\s*([\d.]+)", log)
+              ts = sh("gh", "run", "view", rid, "-R", REPO, "--json", "createdAt", "-q", ".createdAt").strip()
+              if m: put("goldset_score", float(m.group(1)), "寻脉金标准(加权/100)", f"goldset-full run {rid}", ts)
+          # frontend sentinel: latest report file committed by the sentinel
+          f = sh("git", "log", "-1", "--name-only", "--pretty=format:", "--grep", "frontend-sentinel report").strip().splitlines()
+          f = [x for x in f if x.endswith(".md")]
+          if f:
+              try:
+                  body = open(f[-1], encoding="utf-8").read()
+                  m = re.search(r"真书影\s*(\d+)/(\d+)", body)
+                  if m: put("cover_real_rate", round(int(m.group(1))/max(1,int(m.group(2))), 3), "封面真书影率", f"frontend-sentinel {f[-1]}")
+                  m = re.search(r"首页[^\n]*?中位\s*(\d+)ms", body)
+                  if m: put("home_p50_ms", int(m.group(1)), "首页中位响应(ms)", f"frontend-sentinel {f[-1]}")
+              except Exception: pass
+          # guji health: latest issue with 出图 numbers
+          out = sh("gh", "issue", "list", "-R", REPO, "--search", "guji-health in:title", "--state", "all", "--limit", "1", "--json", "body,createdAt")
+          try:
+              js = json.loads(out or "[]")
+              if js:
+                  m = re.search(r"出图[^\d]{0,12}(\d+)\s*/\s*(\d+)", js[0]["body"])
+                  if m: put("guji_image_rate", round(int(m.group(1))/max(1,int(m.group(2))), 3), "古籍出图率(抽样)", "guji-health issue", js[0]["createdAt"])
+          except Exception: pass
+          card = {"at": now_iso, "items": items}
+          kv = f"https://api.cloudflare.com/client/v4/accounts/{acct}/storage/kv/namespaces/{KV_NS}/values/metrics:card"
+          r = requests.put(kv, data=json.dumps(card, ensure_ascii=False).encode(), headers={"Authorization": f"Bearer {cft}", "Content-Type": "application/json"}, timeout=60)
+          ok = r.status_code == 200 and r.json().get("success")
+          line = f"metrics-card {now_iso}: {len(items)} items · KV {'OK' if ok else 'FAIL ' + str(r.status_code)}"
+          open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8").write(line + "\n"); print(line)
+          if not ok: sys.exit(1)
+          PY
