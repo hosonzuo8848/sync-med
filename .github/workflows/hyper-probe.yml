@@ -74,6 +74,10 @@ jobs:
               with lock: n = len(calls); ok = sum(1 for c in calls if c[0])
               print(f"[{int((time.time() - (deadline - minutes*60))/60)} min] calls={n} ok={ok}", flush=True)
           n = len(calls); ok = sum(1 for c in calls if c[0]); lat = sorted(c[2] for c in calls if c[0])
+          # status split: a wall of 401/429 means the call never reached a provider -- that is a key/limiter
+          # problem, not pool throughput (2026-09-10: 18k x 401 after a key rotation read as "pool too slow").
+          from collections import Counter
+          st = Counter(c[1] for c in calls); st_txt = " ".join(f"{k}x{v}" for k, v in st.most_common(6))
           p50 = lat[len(lat)//2] if lat else 0; p95 = lat[int(len(lat)*0.95)] if lat else 0
           per_hour = ok * 60 / minutes
           # per-provider split from D1 (the gateway logs every attempt with source=hyper_probe)
@@ -84,7 +88,8 @@ jobs:
               rows = r["result"][0]["results"] if r.get("success") else []
           except Exception as e:
               rows = []; print("D1 split failed:", e)
-          lines = [f"hyper-probe: threads={threads} minutes={minutes} calls={n} ok={ok} rate={ok/max(1,n):.3f} p50={p50:.1f}s p95={p95:.1f}s -> {per_hour:.0f} ok/hour, {per_hour*10:.0f} ok per 10h night"]
+          lines = [f"hyper-probe: threads={threads} minutes={minutes} calls={n} ok={ok} rate={ok/max(1,n):.3f} p50={p50:.1f}s p95={p95:.1f}s -> {per_hour:.0f} ok/hour, {per_hour*10:.0f} ok per 10h night",
+                   f"  http status: {st_txt}"]
           for x in rows: lines.append(f"  {x['provider']}: n={x['n']} success={x['s']} avg_ms={x['ms']}")
           txt = "\n".join(lines); print(txt)
           open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8").write("```\n" + txt + "\n```\n")
