@@ -62,10 +62,10 @@ jobs:
           # corpus
           r = q("SELECT COUNT(*) AS n, SUM(frontend_visible=1) AS vis, SUM(rights_status='unverified') AS unv FROM books_text")
           if r: put("text_books", r[0]["n"], "文字版古籍(本)", "D1 books_text"); put("text_visible", r[0]["vis"], "文字版前台可见(本)", "D1 books_text"); put("text_unverified", r[0]["unv"], "版权未核实(本)", "D1 books_text")
-          put("image_books_visible", one("SELECT COUNT(*) AS n FROM books WHERE frontend_visible=1", "n"), "影像书前台可见(本)", "D1 books")
+          put("image_books", one("SELECT COUNT(*) AS n FROM books", "n"), "影像书(本)", "D1 books")
           put("text_image_links", one("SELECT COUNT(*) AS n FROM books_text_image_map", "n"), "右栏原文对照(本影像书)", "D1 books_text_image_map")
           put("classic_articles", one("SELECT COUNT(*) AS n FROM classic_articles", "n"), "条文(伤寒/金匮/温病)", "D1 classic_articles")
-          put("fangji", one("SELECT COUNT(*) AS n FROM fangji", "n"), "方剂(首)", "D1 fangji")
+          put("formulas", one("SELECT COUNT(*) AS n FROM kb_formulas", "n"), "方剂(首)", "D1 kb_formulas")
           put("medical_cases", one("SELECT COUNT(*) AS n FROM medical_cases", "n"), "医案(条)", "D1 medical_cases")
           r = q("SELECT COUNT(*) AS n, SUM(processing_status<>'chunked') AS done FROM books_text_chunks")
           if r: put("chunks", r[0]["n"], "文字段落(段)", "D1 books_text_chunks"); put("chunks_processed", r[0]["done"] or 0, "段落已抽实体(段)", "D1 books_text_chunks")
