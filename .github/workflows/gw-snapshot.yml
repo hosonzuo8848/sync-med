@@ -47,7 +47,7 @@ jobs:
           # ts 是 UTC 文本(datetime('now')),必须用 datetime 比较 —— 用 strftime('%s')*1000 比数字恒不成立,聚合永远空。
           WIN = "-30 minutes"
           a = q(f"SELECT provider, AVG(success) AS succ_rate_5m, COUNT(*) AS samples_5m FROM ai_call_logs WHERE ts >= datetime('now','{WIN}') GROUP BY provider")
-          b = q(f"SELECT provider, MIN(cost_ms) AS p95_latency_5m FROM (SELECT provider, cost_ms, ROW_NUMBER() OVER (PARTITION BY provider ORDER BY cost_ms) AS rn, COUNT(*) OVER (PARTITION BY provider) AS n FROM ai_call_logs WHERE ts >= datetime('now','{WIN}') AND cost_ms IS NOT NULL) WHERE rn >= 0.95 * n GROUP BY provider")
+          b = q(f"SELECT provider, MIN(cost_ms) AS p95_latency_5m FROM (SELECT provider, cost_ms, ROW_NUMBER() OVER (PARTITION BY provider ORDER BY cost_ms) AS rn, COUNT(*) OVER (PARTITION BY provider) AS n FROM ai_call_logs WHERE ts >= datetime('now','{WIN}') AND cost_ms IS NOT NULL AND success = 1) WHERE rn >= 0.95 * n GROUP BY provider")
           p95 = {x["provider"]: x["p95_latency_5m"] for x in b}
           health = {x["provider"]: {"succ_rate_5m": round(float(x["succ_rate_5m"] or 0), 4), "samples_5m": int(x["samples_5m"] or 0), "p95_latency_5m": p95.get(x["provider"])} for x in a if x.get("provider")}
           snap = {"agg_at": int(time.time() * 1000), "window": WIN, "health": health}
