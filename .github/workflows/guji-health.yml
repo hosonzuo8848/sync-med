@@ -1,0 +1,78 @@
+name: guji-health
+
+# 古籍专区(guji-db · 123 取图)出图率哨兵。
+# 立此因(2026-09-09 全站健康扫描):抽 50 本第 1 页 23 本 404;创始人给人演示时才发现"大量书籍无法正常显示"。
+# 修完(v1 直跳定位 + 预算 9s)当晚慢速复测 30 本仍 6 本 404、首字节中位 7s。这条线的病是慢性的、会反复
+# (123 限流/断路器/目录变动),只有每天真打一遍、把数字写进 Issue,才不会又是演示时才发现。
+#
+# 只打公开接口 /api/guji/...,不需要任何密钥;3s 一本,40 本约 2 分钟,对生产库零压力。
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 20 * * *"     # 每天 04:20 北京(低峰),避开白天用户
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: guji-health
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q requests
+      - name: 抽样打第 1 页
+        id: probe
+        run: |
+          python - <<'PY'
+          import requests, random, time, statistics, json, os
+          B = "https://gufangai.com"
+          d = requests.get(B + "/api/guji/list?type=books&limit=400", timeout=90).json()
+          d = d.get("data") if isinstance(d, dict) and "data" in d else d
+          ids = [it["book_id"] for it in (d.get("items") or []) if it.get("book_id")]
+          random.seed(int(time.time() // 86400))       # 每天换一批,一周下来覆盖面更广
+          sample = random.sample(ids, min(40, len(ids)))
+          ok = 0; lat = []; fails = []
+          for bid in sample:
+              t0 = time.time()
+              try:
+                  r = requests.get(f"{B}/api/guji/{bid}/page?p=1", timeout=60, stream=True)
+                  good = r.status_code == 200 and r.headers.get("content-type", "").startswith("image/")
+                  next(r.iter_content(1024), b""); r.close()
+                  ms = round((time.time() - t0) * 1000)
+                  if good: ok += 1; lat.append(ms)
+                  else: fails.append(f"{bid} {r.status_code} {ms}ms")
+              except Exception as e:
+                  fails.append(f"{bid} EXC {type(e).__name__}")
+              time.sleep(3)
+          n = len(sample); rate = round(100 * (n - ok) / n, 1)
+          med = statistics.median(lat) if lat else -1
+          summary = (f"古籍专区出图哨兵 · 抽 {n} 本第 1 页:能出图 {ok} · 失败 {n-ok}(**{rate}%**)"
+                     f" · 成功首字节中位 {med}ms · 最慢 {max(lat) if lat else -1}ms\n\n"
+                     + ("失败清单:\n" + "\n".join("- " + f for f in fails) if fails else "无失败"))
+          open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8").write(summary + "\n")
+          open("summary.md", "w", encoding="utf-8").write(summary)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"rate={rate}\nmed={med}\n")
+          print(summary)
+          PY
+      - name: 失败率 >15% 或中位 >8s → 写 Issue(谁会在哪里看见:这里)
+        if: ${{ steps.probe.outputs.rate > 15 || steps.probe.outputs.med > 8000 }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="📕 古籍专区出图哨兵告警 · 失败率 ${{ steps.probe.outputs.rate }}% · 中位 ${{ steps.probe.outputs.med }}ms"
+          BODY="$(cat summary.md)
+          
+          阈值:失败率 >15% 或成功首字节中位 >8s。取图链路 = guji-db → 123 open API(v1 file/list 直跳 → download_info → CDN)。
+          先查:123 是否限流(断路器 45s 冷却)、目录里 page_0001 是否存在、pan123.js BUDGET。"
+          gh issue create -R "$GITHUB_REPOSITORY" --title "$TITLE" --body "$BODY" --label "sentinel" 2>/dev/null \
+            || gh issue create -R "$GITHUB_REPOSITORY" --title "$TITLE" --body "$BODY"
