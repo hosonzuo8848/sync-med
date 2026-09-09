@@ -7,7 +7,7 @@ call goes through the internal free-pool gateway (no provider/model pinned). Out
 
 Env: CF_ACCOUNT_ID D1_DATABASE_ID D1_API_TOKEN GW_KEY  LIMIT=500 THREADS=3 SEED=42  TEXT_MAX=1500 OUT_DIR=.
 Chunk source: books_fts_v2_src(rowid, chunk_id, part_no, text_id, vol_no, body_raw); parts of one chunk sit on
-consecutive rowids (fts_v2_load.mjs), so extra parts are fetched by rowid+1..+3, never by an unindexed column.
+rowids are sparse (start near 2^48), so chunks are sampled by a seeded SQL ordering and parts fetched by chunk_id.
 """
 import datetime
 import io
@@ -126,45 +126,32 @@ def load_known():
 
 
 def sample_chunks(rng):
-    """Seeded sample of LIMIT chunks (part_no 0, public-domain + visible book, >= MIN_CHARS) by random rowid
-    lookups on books_fts_v2_src, then parts 1..3 by rowid+k. Returns list of dicts in sampled order."""
+    """Seeded, reproducible sample of LIMIT chunks straight from books_fts_v2_src.
+    06:19 first cloud run: 240/240 random rowids fell into gaps (rowids start near 2^48 and are sparse), so
+    random-rowid lookups return nothing. Now the ORDER BY is a deterministic pseudo-random key of (rowid, SEED)
+    computed in SQL (same SEED + same table => same chunks), filtered to public-domain visible books and
+    part_no 0; extra parts are fetched by chunk_id (UNIQUE(chunk_id, part_no) is indexed)."""
     need("books_fts_v2_src", ["chunk_id", "part_no", "text_id", "vol_no", "body_raw"])
     need("books_text", ["text_id", "rights_status", "frontend_visible"])
-    pd = {r["text_id"] for r in d1("SELECT text_id FROM books_text WHERE rights_status='public_domain' AND frontend_visible=1 LIMIT 100000")}
-    top = int(d1("SELECT COALESCE(MAX(rowid),0) AS m FROM books_fts_v2_src LIMIT 1")[0]["m"])
-    print("pd books=%d  src max rowid=%d" % (len(pd), top), flush=True)
-    if not pd or top < 1:
-        raise RuntimeError("nothing to sample")
     stats = Counter()
+    rows = d1("SELECT rowid, chunk_id, part_no, text_id, vol_no, body_raw FROM books_fts_v2_src "
+              "WHERE part_no=0 AND length(body_raw) >= %d "
+              "AND text_id IN (SELECT text_id FROM books_text WHERE rights_status='public_domain' AND frontend_visible=1) "
+              "ORDER BY ((rowid %% 1000003) * 7919 + %d) %% 999983, rowid LIMIT %d"
+              % (MIN_CHARS, int(SEED), LIMIT * 2))
+    stats["candidates"] = len(rows)
     picked, seen_ids = [], set()
-    pool_size = min(top, LIMIT * 3)
-    for rnd in range(4):                       # ponytail: 4 rounds x 3x oversample; raise if pd share is tiny
-        pool = rng.sample(range(1, top + 1), pool_size)
-        for i in range(0, len(pool), 200):
-            ids = pool[i:i + 200]
-            rows = d1("SELECT rowid, chunk_id, part_no, text_id, vol_no, body_raw FROM books_fts_v2_src WHERE rowid IN (%s) LIMIT 200"
-                      % ",".join(str(x) for x in ids))
-            by = {r["rowid"]: r for r in rows}
-            for rid in ids:                    # keep sampled order => reproducible for a given SEED
-                r = by.get(rid)
-                if r is None: stats["gap"] += 1; continue
-                if r["part_no"] != 0: stats["not_part0"] += 1; continue
-                if r["text_id"] not in pd: stats["not_pd"] += 1; continue
-                if r["chunk_id"] in seen_ids: stats["dup"] += 1; continue
-                if len(r["body_raw"] or "") < MIN_CHARS: stats["short"] += 1; continue
-                seen_ids.add(r["chunk_id"]); picked.append(r)
-                if len(picked) >= LIMIT: break
-            time.sleep(0.5)
-            if len(picked) >= LIMIT: break
+    for r in rows:
+        if r["chunk_id"] in seen_ids: stats["dup"] += 1; continue
+        seen_ids.add(r["chunk_id"]); picked.append(r)
         if len(picked) >= LIMIT: break
     print("sampled %d chunks after filters %s" % (len(picked), dict(stats)), flush=True)
-    # extra parts: rowid+1..+EXTRA_PARTS, same chunk_id, part_no >= 1
-    want = [r["rowid"] + k for r in picked for k in range(1, EXTRA_PARTS + 1)]
     extra = {}
-    for i in range(0, len(want), 300):
-        ids = want[i:i + 300]
-        for r in d1("SELECT rowid, chunk_id, part_no, body_raw FROM books_fts_v2_src WHERE rowid IN (%s) AND part_no>0 LIMIT 300"
-                    % ",".join(str(x) for x in ids)):
+    ids = [r["chunk_id"] for r in picked]
+    for i in range(0, len(ids), 100):
+        q = ",".join("'" + x.replace("'", "''") + "'" for x in ids[i:i + 100])
+        for r in d1("SELECT chunk_id, part_no, body_raw FROM books_fts_v2_src WHERE chunk_id IN (%s) AND part_no>0 "
+                    "AND part_no<=%d LIMIT 400" % (q, EXTRA_PARTS)):
             extra.setdefault(r["chunk_id"], []).append((r["part_no"], r["body_raw"] or ""))
         time.sleep(0.5)
     out = []
