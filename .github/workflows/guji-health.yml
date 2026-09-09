@@ -35,9 +35,18 @@ jobs:
           python - <<'PY'
           import requests, random, time, statistics, json, os
           B = "https://gufangai.com"
-          d = requests.get(B + "/api/guji/list?type=books&limit=400", timeout=90).json()
+          resp = requests.get(B + "/api/guji/list?type=books&limit=400", timeout=90,
+                              headers={"User-Agent": "guji-health-sentinel/1 (+github actions)"})
+          try:
+              d = resp.json()
+          except Exception:
+              d = {}
           d = d.get("data") if isinstance(d, dict) and "data" in d else d
-          ids = [it["book_id"] for it in (d.get("items") or []) if it.get("book_id")]
+          ids = [it.get("book_id") for it in ((d or {}).get("items") or []) if isinstance(it, dict) and it.get("book_id")]
+          if not ids:
+              # 首跑就在这里 ZeroDivisionError:书目接口没给 items。把状态码和正文头打出来,别让哨兵自己死得不明不白。
+              print(f"书目接口 HTTP {resp.status_code} · 正文头: {resp.text[:300]!r}")
+              raise SystemExit("书目接口返回空 items,哨兵无法抽样(看上面正文头判断是 WAF 挡了 runner 还是接口坏了)")
           random.seed(int(time.time() // 86400))       # 每天换一批,一周下来覆盖面更广
           sample = random.sample(ids, min(40, len(ids)))
           ok = 0; lat = []; fails = []
