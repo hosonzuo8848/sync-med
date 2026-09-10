@@ -30,7 +30,7 @@ concurrency:
 jobs:
   extract:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 170   # 2026-09-10: 350 chunks x ~40s / 3 threads + p95 tails hit the 90-minute cap (run 34427566366 cancelled at 90m, nothing written)
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
