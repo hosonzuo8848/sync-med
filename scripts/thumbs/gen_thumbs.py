@@ -68,9 +68,19 @@ def main():
         key = "thumbs/%s.webp" % bid
         if r2_has(key): done.add(bid); skip += 1; continue
         try:
-            ctype, src, data = fetch_cover(bid)
-            if not ctype.startswith("image/") or ctype.startswith("image/svg"):
-                svg += 1; time.sleep(1.5); continue          # placeholder today; retry next run
+            # the cover endpoint gives up after ~6 s and answers a placeholder SVG when 123 is slow; pilot run:
+            # 42/100 placeholders, 2/100 HTTP 500. Retry up to 3 times with growing gaps before giving up on a book.
+            data = None
+            for attempt in range(3):
+                try:
+                    ctype, src, data = fetch_cover(bid)
+                except urllib.error.HTTPError as he:
+                    if he.code >= 500 and attempt < 2: time.sleep(6 * (attempt + 1)); continue
+                    raise
+                if ctype.startswith("image/") and not ctype.startswith("image/svg"): break
+                data = None; time.sleep(6 * (attempt + 1))
+            if data is None:
+                svg += 1; continue                            # still a placeholder; next run retries
             thumb = to_thumb(data) if len(data) > 60 * 1024 else data
             s3.put_object(Bucket=BUCKET, Key=key, Body=thumb, ContentType="image/webp")
             done.add(bid); made += 1
