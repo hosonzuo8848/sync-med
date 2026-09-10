@@ -10,6 +10,10 @@ Chunk source: books_fts_v2_src(rowid, chunk_id, part_no, text_id, vol_no, body_r
 rowids are sparse (start near 2^48), so chunks are sampled by a seeded SQL ordering and parts fetched by chunk_id.
 """
 import datetime
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'content_factory'))
+from _ai import d1, GATEWAY   # single D1 transport (guard_single_source: no hardcoded endpoint copies)
+
 import io
 import json
 import os
@@ -24,7 +28,7 @@ from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
-GW = "https://gufangai.com/api/gateway/chat"
+GW = GATEWAY   # from _ai (single source of the gateway URL)
 UA = "sync-med-hyper-s3/1.0 (GitHub Actions; +https://github.com/hosonzuo8848/sync-med)"
 ACC = os.environ["CF_ACCOUNT_ID"]; DB = os.environ["D1_DATABASE_ID"]; TOK = os.environ["D1_API_TOKEN"]
 KEY = os.environ.get("GW_KEY", "")
@@ -78,14 +82,6 @@ SAMPLE_HEAD = ("# S3 \u88c1\u5224\u6837\u672c 30 \u6761(seed={seed},\u4ece {tota
 LOCK = threading.Lock()
 
 
-def d1(sql):
-    url = "https://api.cloudflare.com/client/v4/accounts/%s/d1/database/%s/query" % (ACC, DB)
-    req = urllib.request.Request(url, data=json.dumps({"sql": sql}).encode(), method="POST",
-                                 headers={"Authorization": "Bearer " + TOK, "Content-Type": "application/json"})
-    j = json.loads(urllib.request.urlopen(req, timeout=60).read())
-    if not j.get("success"):
-        raise RuntimeError(str(j.get("errors"))[:200])
-    return j["result"][0]["results"]
 
 
 def cols(table):
@@ -177,7 +173,7 @@ def gw_call(body):
     return json.loads(urllib.request.urlopen(req, timeout=120).read())
 
 
-def ask(chunk):
+def call_gateway(chunk):
     """Up to 3 attempts (2 retries) for transport / ok:false / non-JSON. Returns (obj|None, meta)."""
     text = chunk["text"]
     truncated = len(text) > TEXT_MAX
@@ -320,7 +316,7 @@ def norm_edges(obj, chunk, known):
 
 
 def process(chunk, known):
-    obj, meta = ask(chunk)
+    obj, meta = call_gateway(chunk)
     rec = {"chunk_id": chunk["chunk_id"], "text_id": chunk["text_id"], "vol_no": chunk["vol_no"],
            "n_chars": chunk["n_chars"], "n_parts": chunk["n_parts"], "hyperedges": [], "overflow": False}
     if obj is not None:
