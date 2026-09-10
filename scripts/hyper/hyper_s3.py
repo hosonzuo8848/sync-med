@@ -266,9 +266,17 @@ def norm_edges(obj, chunk, known):
                 DROPPED["F_head_too_long"] += 1; continue
             # third filter set (2026-09-10 12:3x, Issue #584 judging): a formula whose members are not written in the
             # chunk was filled in from model knowledge (name-only mentions) -- drop it.
-            in_txt = sum(1 for m in members if m["label"] and (m["label"] in chunk["text"] or _squash(m["label"]) in text_sq))
+            # fourth filter set (Issue #586): check members inside a +-160 char window around the head mention,
+            # not the whole chunk -- a name-only mention of formula X passed because X's herbs occur in other
+            # formulas of the same chunk (bu-zhong-yi-qi / ge-gen-qiang-huo cases).
+            hp = chunk["text"].find(head)
+            win = chunk["text"][max(0, hp - 160): hp + 160 + len(head)] if hp >= 0 else chunk["text"]
+            win_sq = _squash(win)
+            in_txt = sum(1 for m in members if m["label"] and (m["label"] in win or _squash(m["label"]) in win_sq))
             if in_txt < 2 and not (len(members) == 1 and members[0].get("dose")):
                 DROPPED["F_members_not_in_text"] += 1; continue
+            if not (e.get("source_quote") or "").strip() and head not in formulas:
+                DROPPED["F_no_quote_unknown_head"] += 1; continue
         try:
             conf = float(e.get("confidence")) if e.get("confidence") is not None else None
         except (TypeError, ValueError):
