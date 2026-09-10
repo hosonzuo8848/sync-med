@@ -1,0 +1,64 @@
+name: hyper-s4
+
+# S4 = nightly staging extraction of formula hyperedges (2026-09-10, gate passed on S3 round 9 / Issue #591:
+# tier A sample 17/17 correct after seven filter sets). Same script and filters as hyper-s3.py, but:
+#   * TIER_A_ONLY=1 -- only edges whose quote is verbatim in the chunk AND whose head is a known formula name;
+#   * writes NOTHING to production graph tables; the artifact jsonl is loaded by the CTO into
+#     sue_graph_hyperedges with status='staged' (dose kept as dose_raw, never used as edge weight);
+#   * one serial job per night, 3 threads x 400 chunks (~1.5 h at max_tokens 1500), inside the 170-min cap;
+#   * SEED = run number so consecutive nights sample different public-domain chunks; a coverage ledger is
+#     the union of the artifacts, not a D1 table.
+# Who sees it when it breaks: the Issue title carries ok_pct / dropped / tier counts; hyper-s4 is on the
+# fleet-watch list (added the same day).
+
+on:
+  schedule:
+    - cron: '0 18 * * *'      # 18:00 UTC = 02:00 Beijing; finishes before goldset-full (04:30 UTC)
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "chunks per night"
+        default: "400"
+      threads:
+        description: "concurrent gateway calls"
+        default: "3"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: hyper-s4
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: extract (tier A only, staging artifact)
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+          D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          GW_KEY: ${{ secrets.GW_KEY }}
+          GH_TOKEN: ${{ github.token }}
+          LIMIT: ${{ github.event.inputs.limit || '400' }}
+          THREADS: ${{ github.event.inputs.threads || '3' }}
+          SEED: ${{ github.run_number }}
+          SAMPLE_N: "60"
+          TIER_A_ONLY: "1"
+        run: python scripts/hyper/hyper_s3.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hyper_s4_${{ github.run_number }}
+          path: |
+            hyper_s3.jsonl
+            hyper_s3_partial.jsonl
+            hyper_s3_summary.json
+            issue.md
