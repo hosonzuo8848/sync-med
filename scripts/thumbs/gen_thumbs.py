@@ -60,8 +60,14 @@ def main():
     # natural backfill and warm_thumbs (counts every "dlink" hit as ineligible) never filled it, so those 34K
     # books still pay a 123 round trip on every cover request. Books already in R2 cost one head_object each
     # (recorded in the ledger, so once per lifetime); books with a 123 thumb come back small and fast via dlink.
-    rows = d1("SELECT book_id FROM books_assets_v2 WHERE frontend_visible=1 "
+    # POP: 'nothumb' = books with no 123 thumbnail (slow: full page fetch ~9 s), 'hasthumb' = books whose 123 thumb
+    # exists (fast: small dlink fetch ~2 s), 'all' = both. Two lanes run as two workflows so the fast population is
+    # not stuck behind the slow one (2026-09-11 01:3x, founder: all 46K books, not 10 pages).
+    pop = os.environ.get("POP") or "all"
+    cond = {"nothumb": "AND thumb_done_at IS NULL ", "hasthumb": "AND thumb_done_at IS NOT NULL "}.get(pop, "")
+    rows = d1("SELECT book_id FROM books_assets_v2 WHERE frontend_visible=1 " + cond +
               "AND collection IN ('overseas','overseas_guji') ORDER BY created_at DESC")
+    print("population", pop, flush=True)
     # created_at DESC = the default order of the public shelves (agg=1 pages), so the books people actually see
     # on page 1..N get their thumbnails first (2026-09-10 22:5x, founder: front page still had placeholders).
     ids = [r["book_id"] for r in rows][SHARD::SHARDS]
