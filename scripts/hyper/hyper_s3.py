@@ -121,8 +121,12 @@ def load_known():
     if need("search_terms", ["term", "kind"], required=False):
         for r in d1("SELECT term FROM search_terms WHERE kind='%s' LIMIT 20000" % KIND_SYNDROME):
             if r.get("term"): syndromes.add(r["term"].strip())
-    print("known: formulas=%d herbs=%d syndromes=%d" % (len(formulas), len(herbs), len(syndromes)), flush=True)
-    return formulas, herbs, syndromes
+    herb_heads = set(herbs)
+    if need("search_terms", ["term", "kind"], required=False):
+        for r in d1("SELECT term FROM search_terms WHERE kind='%s' LIMIT 60000" % "\u672c\u8349"):
+            if r.get("term"): herb_heads.add(r["term"].strip())
+    print("known: formulas=%d herbs=%d syndromes=%d herb_heads=%d" % (len(formulas), len(herbs), len(syndromes), len(herb_heads)), flush=True)
+    return formulas, herbs, syndromes, herb_heads
 
 
 def sample_chunks(rng):
@@ -217,7 +221,8 @@ def norm_edges(obj, chunk, known):
     """Validate the model object against the schema; never invents, only drops/flags. Returns (edges, overflow).
     Post-filters (2026-09-10 08:4x, from judging Issue #581 sample): an R edge needs a formula member; an F edge
     with <2 members and no verbatim quote is noise; quote match falls back to a punctuation-free comparison."""
-    formulas, herbs, syndromes = known
+    formulas, herbs, syndromes = known[0], known[1], known[2]
+    herb_heads = known[3] if len(known) > 3 else herbs
     text_sq = _squash(chunk["text"])
     raw = obj.get("hyperedges")
     if not isinstance(raw, list):
@@ -260,8 +265,11 @@ def norm_edges(obj, chunk, known):
             addsub = sum(1 for m in members if any(ch in ((m.get("dose") or "") + m["label"][:1]) for ch in "\u52a0\u51cf"))
             if addsub * 2 >= len(members):
                 DROPPED["F_addsub"] += 1; continue
-            if head in herbs:
+            if head in herbs or head in herb_heads:
                 DROPPED["F_head_is_herb"] += 1; continue
+            # sixth filter set (Issue #589)
+            if any(m["label"] and m["label"][-1] in "\u6c64\u6563\u4e38\u4e39\u818f\u996e\u714e\u6e6f\u98f2" and len(m["label"]) >= 3 for m in members):
+                DROPPED["F_member_is_formula"] += 1; continue
             if len(head) > 20:
                 DROPPED["F_head_too_long"] += 1; continue
             # third filter set (2026-09-10 12:3x, Issue #584 judging): a formula whose members are not written in the
@@ -275,6 +283,11 @@ def norm_edges(obj, chunk, known):
             in_txt = sum(1 for m in members if m["label"] and (m["label"] in win or _squash(m["label"]) in win_sq))
             if in_txt < 2 and not (len(members) == 1 and members[0].get("dose")):
                 DROPPED["F_members_not_in_text"] += 1; continue
+            if hp >= 0 and members:
+                after = chunk["text"][hp + len(head): hp + len(head) + 120]
+                first = members[0]["label"]
+                if first and first not in after and _squash(first) not in _squash(after):
+                    DROPPED["F_members_far"] += 1; continue
             if not (e.get("source_quote") or "").strip() and head not in formulas:
                 DROPPED["F_no_quote_unknown_head"] += 1; continue
             # fifth filter set (Issue #587): "X jia Y, Z" (add Y and Z to formula X) written right after the head with
