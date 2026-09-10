@@ -55,7 +55,12 @@ def to_thumb(data):
 
 def main():
     t0 = time.time()
-    rows = d1("SELECT book_id FROM books_assets_v2 WHERE frontend_visible=1 AND thumb_done_at IS NULL "
+    # 2026-09-11 00:4x: candidates = EVERY visible book, not only the ones without a 123 thumbnail. Random
+    # sample of 40 books that DO have a 123 thumb: only 3 were in the R2 hot layer (7.5%) -- the cover endpoint's
+    # natural backfill and warm_thumbs (counts every "dlink" hit as ineligible) never filled it, so those 34K
+    # books still pay a 123 round trip on every cover request. Books already in R2 cost one head_object each
+    # (recorded in the ledger, so once per lifetime); books with a 123 thumb come back small and fast via dlink.
+    rows = d1("SELECT book_id FROM books_assets_v2 WHERE frontend_visible=1 "
               "AND collection IN ('overseas','overseas_guji') ORDER BY created_at DESC")
     # created_at DESC = the default order of the public shelves (agg=1 pages), so the books people actually see
     # on page 1..N get their thumbnails first (2026-09-10 22:5x, founder: front page still had placeholders).
