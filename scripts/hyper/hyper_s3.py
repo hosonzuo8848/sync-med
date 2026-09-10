@@ -430,7 +430,7 @@ def main():
     smd = sample_md(recs)
     open(os.path.join(OUT_DIR, "sample30.md"), "w", encoding="utf-8").write(smd)
     day = datetime.date.today().isoformat()
-    title = ISSUE_TITLE.format(day=day, n=summ["n_chunks"], e=summ["n_edges"], ok=summ["ok_pct"], hit=summ["known_hit_pct"])
+    title = ("[S4 tier-A staging] " if TIER_A_ONLY else "") + ISSUE_TITLE.format(day=day, n=summ["n_chunks"], e=summ["n_edges"], ok=summ["ok_pct"], hit=summ["known_hit_pct"])
     body = ISSUE_HEAD + "\n\n```json\n" + json.dumps(summ, ensure_ascii=False, indent=1) + "\n```\n\n" + smd
     open(os.path.join(OUT_DIR, "issue.md"), "w", encoding="utf-8").write(body)
     print(title); print(json.dumps(summ, ensure_ascii=False))
