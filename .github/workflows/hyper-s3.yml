@@ -53,6 +53,7 @@ jobs:
           name: hyper_s3
           path: |
             hyper_s3.jsonl
+            hyper_s3_partial.jsonl
             hyper_s3_summary.json
             sample30.md
             issue.md
