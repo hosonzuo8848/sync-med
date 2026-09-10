@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "PDF转换准确率",
+ "how": "集成到现有PDF处理流程中",
+ "effort": "中",
+ "current": "当前使用通用PDF处理库",
+ "beats": "在PDF到Markdown和JSON的转换准确率上",
+ "why": "可能提升转换质量，减少人工校对需求"
+}

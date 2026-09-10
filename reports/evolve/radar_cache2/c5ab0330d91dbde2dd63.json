@@ -1,0 +1,10 @@
+{
+ "module": "视频拼接",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "我们目前使用自研的视频拼接技术",
+ "beats": "",
+ "why": "功能已被现有组件覆盖"
+}

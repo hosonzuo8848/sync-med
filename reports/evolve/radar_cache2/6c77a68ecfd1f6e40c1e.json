@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "超出 Serverless 运行时约束:无原生 TCP 监听"
+}

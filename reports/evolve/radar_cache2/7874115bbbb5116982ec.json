@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "自有图数据 (`sue_graph_nodes/edges`, 6.9万节点)，配 2D/3D 力导向可视化。",
+ "beats": "",
+ "why": "Graphify-Labs/graphify 是一个纯库，不需要服务器，而我们的平台需要与现有技术栈集成。"
+}

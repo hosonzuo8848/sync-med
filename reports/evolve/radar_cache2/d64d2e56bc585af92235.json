@@ -1,0 +1,10 @@
+{
+ "module": "检索路由",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "当前无专用方案，采用通用搜索引擎",
+ "beats": "",
+ "why": "Elasticsearch 是数据库服务器，需要长期常驻主机"
+}

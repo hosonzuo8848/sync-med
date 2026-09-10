@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "常驻型拦截,需长期监听端口/维持连接/守护进程"
+}

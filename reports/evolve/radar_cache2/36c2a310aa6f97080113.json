@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "watch",
+ "metric": "知识图谱构建效率",
+ "how": "使用Graphify-Labs库构建知识图谱",
+ "effort": "中",
+ "current": "自研模块，基于图数据库和NLP技术",
+ "beats": "构建速度和灵活性",
+ "why": "Graphify-Labs提供纯库形式，可能提高构建效率"
+}

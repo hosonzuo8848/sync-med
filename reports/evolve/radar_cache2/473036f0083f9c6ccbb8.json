@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "当前无专用方案，采用通用数据库",
+ "beats": "",
+ "why": "Redis是内存数据库，不适合作为OCR产线的数据存储"
+}

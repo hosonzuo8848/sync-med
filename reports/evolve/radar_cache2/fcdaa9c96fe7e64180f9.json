@@ -1,0 +1,10 @@
+{
+ "module": "视频编辑模块",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "超出 Serverless 运行时约束:无原生 TCP 监听、单次 CPU ≤ 30s(Unbound)/10ms(Bundled)、内存 128MB、体积 ≤ 10MB(Worker)/25MB(Pages)、需 WASM/JS 兼容或 Actions 产物上传 R2/D1/Vectorize"
+}

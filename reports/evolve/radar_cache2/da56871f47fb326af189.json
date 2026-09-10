@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "基于 RAG grounding 生成结构化辨证报告",
+ "beats": "",
+ "why": "功能重叠，我们已有减少代码生成的插件"
+}

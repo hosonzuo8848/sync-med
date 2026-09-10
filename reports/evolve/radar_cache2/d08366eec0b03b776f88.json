@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "字符识别准确率",
+ "how": "集成到现有流程中，替代现有OCR工具",
+ "effort": "中",
+ "current": "当前使用通用OCR库，如Tesseract",
+ "beats": "在字符识别准确率上可能胜过现有工具",
+ "why": "RapidOCR基于ONNXRuntime，可能提供更优的性能"
+}

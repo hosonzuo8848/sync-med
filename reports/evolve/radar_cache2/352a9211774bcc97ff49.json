@@ -1,0 +1,10 @@
+{
+ "module": "检索路由",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "暂无",
+ "beats": "",
+ "why": "Redis 是一个内存数据库，而我们的检索路由需要的是一个统一入口，按意图分派的服务，Redis 不符合这一需求。"
+}

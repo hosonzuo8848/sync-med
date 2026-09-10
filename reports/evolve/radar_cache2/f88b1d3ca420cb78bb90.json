@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "我们目前使用的是 OCRopus 和 Tesseract OCR 工具进行 PDF 到 Markdown 的转换。",
+ "beats": "",
+ "why": "MinerU 主要针对 PDF 到 Markdown 和 JSON 的转换，而我们的 OCR产线已经能够处理 PDF 文件，并且我们的技术栈中已经包含了 PDF 到 Markdown 的转换功能。MinerU 的主要优势在于布局检测、公式识别和表格提取，但这些功能在我们的现有技术栈中已有实现，因此没有明确的增量。"
+}

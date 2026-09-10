@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "当前无专用方案，采用通用Web服务器",
+ "beats": "",
+ "why": "已在家底：通用Web服务器如Nginx已满足需求"
+}

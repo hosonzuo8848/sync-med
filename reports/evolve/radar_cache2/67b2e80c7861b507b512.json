@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "字符错误率",
+ "how": "集成到现有流程中，替代或辅助现有OCR工具",
+ "effort": "中",
+ "current": "可能使用Tesseract或其他OCR库",
+ "beats": "可能提供更准确的识别结果",
+ "why": "开源且广泛使用，可能优于现有方案"
+}

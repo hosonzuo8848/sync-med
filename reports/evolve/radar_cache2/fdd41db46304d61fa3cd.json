@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "我们目前使用自研的爬虫和抓取工具",
+ "beats": "",
+ "why": "功能已被现有组件覆盖"
+}

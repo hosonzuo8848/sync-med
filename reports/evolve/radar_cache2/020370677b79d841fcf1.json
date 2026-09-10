@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "OCR产线使用的是基于Tesseract的定制化版本，但已在GitHub Actions中集成",
+ "beats": "",
+ "why": "已在家底：OCR产线使用的是基于Tesseract的定制化版本，功能上已满足需求"
+}

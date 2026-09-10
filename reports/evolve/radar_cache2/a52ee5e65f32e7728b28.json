@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "目前使用基于 RAG grounding 的方法生成结构化辨证报告",
+ "beats": "",
+ "why": "功能与现有技术栈中的AI寻脉模块重叠，未提供独特优势"
+}
