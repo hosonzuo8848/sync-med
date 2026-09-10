@@ -1,0 +1,68 @@
+name: gen-thumbs-fast
+
+# Cover thumbnails for visible books that have no thumb anywhere (2026-09-10, founder: front page covers
+# still missing). Serial per shard, direct-link path through our own cover endpoint (no 123 API quota),
+# resize to 360 px WebP, put into the R2 hot layer thumbs/{book_id}.webp. Ledger per shard in actions/cache
+# so re-runs never redo a book; head_object at most once per book. Who sees it when it breaks: step summary
+# carries made/skip/svg/fail per shard; frontend_sentinel measures the real cover rate every day.
+# 2026-09-10 23:5x: 5 -> 10 shards and every 2 h: random-30 sentinel still 40% real covers site-wide; 12,285
+# books with no thumbnail at ~2,500 per run needed 15 h, now ~5 h.
+# 2026-09-11 01:3x: soft deadline 105 -> 330 min (job cap 350) and this lane takes POP=nothumb only; the books
+# that already have a 123 thumbnail run in gen-thumbs-fast.yml (same script, POP=hasthumb, small fast fetches).
+
+on:
+  workflow_dispatch:
+    inputs:
+      shards:
+        description: "parallel shards (direct-link path, no 123 API quota; matrix is fixed at 10)"
+        default: "5"
+      cap:
+        description: "max books attempted per shard this run (empty = unlimited, gated by the 105 min soft deadline)"
+        default: ""
+  schedule:
+    - cron: "10 */3 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gen-thumbs-fast
+  cancel-in-progress: false
+
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      max-parallel: 10
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q boto3 pillow
+      - name: restore ledger
+        uses: actions/cache@v4
+        with:
+          path: ledger_${{ matrix.shard }}.json
+          key: gen-thumbs-fast-ledger-s${{ matrix.shard }}-${{ github.run_id }}
+          restore-keys: |
+            gen-thumbs-fast-ledger-s${{ matrix.shard }}-
+      - name: generate shard
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+          D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          S_EP: ${{ secrets.S_EP }}
+          S_AK: ${{ secrets.S_AK }}
+          S_SK: ${{ secrets.S_SK }}
+          R2_BUCKET: guyaofang-assets
+          SHARD: ${{ matrix.shard }}
+          SHARDS: "10"
+          SOFT_MIN: "330"
+          POP: hasthumb
+          CAP: ${{ github.event.inputs.cap }}
+        run: python scripts/thumbs/gen_thumbs.py
