@@ -366,6 +366,13 @@ def main():
                        "err": "internal: " + type(e).__name__ + ": " + str(e)[:80], "attempts": 0, "truncated": False}
         with LOCK:
             done[0] += 1
+            # incremental flush: a job killed at the timeout cap still leaves a usable partial artifact
+            try:
+                os.makedirs(OUT_DIR, exist_ok=True)
+                with open(os.path.join(OUT_DIR, "hyper_s3_partial.jsonl"), "a", encoding="utf-8") as pf:
+                    pf.write(json.dumps(recs[i], ensure_ascii=False) + chr(10))
+            except Exception:                                    # noqa: BLE001
+                pass
             if done[0] % 25 == 0 or done[0] == len(chunks):
                 nf = sum(1 for r in recs if r and r["err"])
                 print("  %d/%d failed=%d elapsed=%ds" % (done[0], len(chunks), nf, time.time() - t_start), flush=True)
