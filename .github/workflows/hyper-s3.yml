@@ -46,6 +46,7 @@ jobs:
           LIMIT: ${{ github.event.inputs.limit }}
           THREADS: ${{ github.event.inputs.threads }}
           SEED: ${{ github.event.inputs.seed }}
+          SAMPLE_N: "60"            # 2026-09-10: 30 gave only 3-7 tier-A items per judging; 60 keeps the S4 gate measurable
         run: python scripts/hyper/hyper_s3.py
       - uses: actions/upload-artifact@v4
         if: always()
