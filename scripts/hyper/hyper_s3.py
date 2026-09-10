@@ -277,6 +277,13 @@ def norm_edges(obj, chunk, known):
                 DROPPED["F_members_not_in_text"] += 1; continue
             if not (e.get("source_quote") or "").strip() and head not in formulas:
                 DROPPED["F_no_quote_unknown_head"] += 1; continue
+            # fifth filter set (Issue #587): "X jia Y, Z" (add Y and Z to formula X) written right after the head with
+            # dose-less members is an addition to X, not X's composition (liu-wei-wan + mai-dong/wu-wei case).
+            if hp >= 0:
+                tail = chunk["text"][hp + len(head): hp + len(head) + 12]
+                nodose = sum(1 for m in members if not (m.get("dose") or "").strip())
+                if any(k in tail for k in ("\u52a0", "\u51cf")) and nodose * 2 >= len(members):
+                    DROPPED["F_addsub_text"] += 1; continue
         try:
             conf = float(e.get("confidence")) if e.get("confidence") is not None else None
         except (TypeError, ValueError):
