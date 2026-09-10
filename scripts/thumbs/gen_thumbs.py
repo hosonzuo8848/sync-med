@@ -56,7 +56,9 @@ def to_thumb(data):
 def main():
     t0 = time.time()
     rows = d1("SELECT book_id FROM books_assets_v2 WHERE frontend_visible=1 AND thumb_done_at IS NULL "
-              "AND collection IN ('overseas','overseas_guji') ORDER BY collection, book_id")
+              "AND collection IN ('overseas','overseas_guji') ORDER BY created_at DESC")
+    # created_at DESC = the default order of the public shelves (agg=1 pages), so the books people actually see
+    # on page 1..N get their thumbnails first (2026-09-10 22:5x, founder: front page still had placeholders).
     ids = [r["book_id"] for r in rows][SHARD::SHARDS]
     print("shard %d/%d candidates=%d ledger=%d" % (SHARD, SHARDS, len(ids), len(done)), flush=True)
     n = made = skip = fail = svg = 0
