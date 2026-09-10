@@ -181,14 +181,15 @@ SCALARS = [
      "SELECT COUNT(DISTINCT text_id) AS n FROM sue_formulas"),
     # 2026-09-11 P1.1 of the formulas v2 switch (blueprint s3.5): the v1 snapshot in sue_formulas_pub must not drift
     # from the old table; non-zero drift = someone wrote the old table after the snapshot -> re-sync before P2.5.
+    # (02:1x) pub holds only LIVE rows: a switched book has no v1 rows in pub, so the old-table side excludes those books.
     ("pub_v1_rows", "发布表 v1 快照行数 (sue_formulas_pub src=v1)", "main",
      "SELECT COUNT(*) AS n FROM sue_formulas_pub WHERE src='v1'"),
     ("pub_v2_gate", "发布表 v2 闸后行数 (src=v2 AND is_formula=1)", "main",
      "SELECT COUNT(*) AS n FROM sue_formulas_pub WHERE src='v2' AND is_formula=1"),
     ("pub_drift_rows", "旧表 vs v1 快照行数差（非 0 = 漂移）", "main",
-     "SELECT (SELECT COUNT(*) FROM sue_formulas) - (SELECT COUNT(*) FROM sue_formulas_pub WHERE src='v1') AS n"),
+     "SELECT (SELECT COUNT(*) FROM sue_formulas WHERE COALESCE(book_s,'') NOT IN (SELECT DISTINCT book_s FROM sue_formulas_pub WHERE src='v2')) - (SELECT COUNT(*) FROM sue_formulas_pub WHERE src='v1') AS n"),
     ("pub_drift_ai_ok", "旧表 vs v1 快照 ai_ok=1 差（非 0 = 漂移）", "main",
-     "SELECT (SELECT COUNT(*) FROM sue_formulas WHERE ai_ok=1) - (SELECT COUNT(*) FROM sue_formulas_pub WHERE src='v1' AND ai_ok=1) AS n"),
+     "SELECT (SELECT COUNT(*) FROM sue_formulas WHERE ai_ok=1 AND COALESCE(book_s,'') NOT IN (SELECT DISTINCT book_s FROM sue_formulas_pub WHERE src='v2')) - (SELECT COUNT(*) FROM sue_formulas_pub WHERE src='v1' AND ai_ok=1) AS n"),
     ("cand_pending", "候选关系待审积压 (pending)", "main",
      "SELECT COUNT(*) AS n FROM sue_graph_candidates WHERE review_status='pending'"),
 ]
