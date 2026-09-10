@@ -206,9 +206,19 @@ def ask(chunk):
     return None, meta
 
 
+DROPPED = Counter()          # post-filter drop reasons (summary.n_dropped)
+_PUNCT = re.compile(r"[\s\u3000-\u303f\uff00-\uffef\u2000-\u206f!-/:-@\[-`{-~]+")
+
+def _squash(t):
+    """Whitespace + CJK/ASCII punctuation removed: quotes copied by the model often differ only there."""
+    return _PUNCT.sub("", t or "")
+
 def norm_edges(obj, chunk, known):
-    """Validate the model object against the schema; never invents, only drops/flags. Returns (edges, overflow)."""
+    """Validate the model object against the schema; never invents, only drops/flags. Returns (edges, overflow).
+    Post-filters (2026-09-10 08:4x, from judging Issue #581 sample): an R edge needs a formula member; an F edge
+    with <2 members and no verbatim quote is noise; quote match falls back to a punctuation-free comparison."""
     formulas, herbs, syndromes = known
+    text_sq = _squash(chunk["text"])
     raw = obj.get("hyperedges")
     if not isinstance(raw, list):
         return [], False
@@ -238,14 +248,21 @@ def norm_edges(obj, chunk, known):
             members.append(mm)
         if not members: continue
         q = str(e.get("source_quote") or "").strip()[:60]
+        in_text = bool(q) and (q in chunk["text"] or (len(_squash(q)) >= 6 and _squash(q) in text_sq))
+        if typ == "R" and not any(m["role"] == "formula" for m in members):
+            DROPPED["R_no_formula"] += 1; continue
+        if typ == "F" and len(members) < 2 and not in_text:
+            DROPPED["F_thin"] += 1; continue
         try:
             conf = float(e.get("confidence")) if e.get("confidence") is not None else None
         except (TypeError, ValueError):
             conf = None
         edges.append({"type": typ, "head": head,
                       "head_known": (head in formulas) if typ == "F" else (head in syndromes),
-                      "members": members, "source_quote": q, "quote_in_text": bool(q) and q in chunk["text"],
+                      "members": members, "source_quote": q, "quote_in_text": in_text,
                       "confidence": conf})
+        hk = edges[-1]["head_known"]
+        edges[-1]["tier"] = "A" if (in_text and hk) else "B" if in_text else "C"
     return edges, overflow
 
 
@@ -285,6 +302,8 @@ def summarize(recs, sample_stats, known):
         "n_chunks": len(recs), "n_ok": len(ok), "n_fail": len(recs) - len(ok), "ok_pct": pct(len(ok), len(recs)),
         "err_kinds": dict(err_kinds), "n_truncated": sum(1 for r in recs if r.get("truncated")),
         "n_overflow": sum(1 for r in ok if r["overflow"]),
+        "n_dropped": dict(DROPPED),
+        "tiers": dict(Counter(e.get("tier") for e in edges)),
         "n_edges": len(edges), "n_F": len(f), "n_R": len(rr),
         "chunks_with_edges": sum(1 for r in ok if r["hyperedges"]),
         "edges_per_ok_chunk": round(len(edges) / len(ok), 2) if ok else 0,
