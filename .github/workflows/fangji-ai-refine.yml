@@ -43,8 +43,11 @@ on:
       workers:
         description: concurrency per shard
         default: '5'
-  schedule:
-    - cron: '20 */6 * * *'   # keeps up with newly mined formulas; script is idempotent
+  # 2026-09-11 P0.5 of the formulas v2 switch: cron paused. It rewrites ai_ok/ai_herbs on the OLD table only,
+  # never reaches sue_formulas_pub, the last three runs were cancelled after 5-7 h, and every write drifts the v1
+  # snapshot. Re-enable by restoring the two lines below once refine targets v2 (blueprint 2026-09-10 s3.5).
+  # schedule:
+  #   - cron: '20 */6 * * *'
 
 concurrency:
   group: fangji-ai-refine
