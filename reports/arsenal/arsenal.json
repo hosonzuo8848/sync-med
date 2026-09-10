@@ -1176,6 +1176,45 @@
    }
   },
   {
+   "repo": "CyC2018/CS-Notes",
+   "url": "https://github.com/CyC2018/CS-Notes",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 185972,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2024-08-21",
+   "created_at": "2018-02-13",
+   "stars_per_day_lifetime": 59.4,
+   "capability": "提供技术面试必备基础知识、Leetcode 和计算机科学相关资料",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "algorithm",
+    "computer-science",
+    "cpp",
+    "interview",
+    "java",
+    "leetcode",
+    "python",
+    "system-design"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "stars:>150000",
+    "sort": "stars",
+    "query_breadth": 57,
+    "position": 37
+   }
+  },
+  {
    "repo": "Significant-Gravitas/AutoGPT",
    "url": "https://github.com/Significant-Gravitas/AutoGPT",
    "first_seen": "2026-07-31",
@@ -1244,6 +1283,49 @@
     "sort": "updated",
     "query_breadth": 99,
     "position": 84
+   }
+  },
+  {
+   "repo": "getify/You-Dont-Know-JS",
+   "url": "https://github.com/getify/You-Dont-Know-JS",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 184849,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "pushed_at": "2026-02-15",
+   "created_at": "2013-11-16",
+   "stars_per_day_lifetime": 39.49,
+   "capability": "JavaScript 语言书籍系列，包括异步、闭包、原型等主题",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "async",
+    "book",
+    "book-series",
+    "closures",
+    "education",
+    "es2015",
+    "es6",
+    "javascript",
+    "learn-to-code",
+    "programming",
+    "prototypes",
+    "training-materials"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "stars:>150000",
+    "sort": "stars",
+    "query_breadth": 57,
+    "position": 38
    }
   },
   {
@@ -1594,6 +1676,49 @@
    }
   },
   {
+   "repo": "AUTOMATIC1111/stable-diffusion-webui",
+   "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 164882,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Python",
+   "pushed_at": "2026-03-02",
+   "created_at": "2022-08-22",
+   "stars_per_day_lifetime": 111.41,
+   "capability": "Stable Diffusion 的网页用户界面，用于图像生成和文本到图像",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "topics": [
+    "ai",
+    "ai-art",
+    "deep-learning",
+    "diffusion",
+    "gradio",
+    "image-generation",
+    "image2image",
+    "img2img",
+    "pytorch",
+    "stable-diffusion",
+    "text2image",
+    "torch"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "stars:>150000",
+    "sort": "stars",
+    "query_breadth": 57,
+    "position": 50
+   }
+  },
+  {
    "repo": "huggingface/transformers",
    "url": "https://github.com/huggingface/transformers",
    "first_seen": "2026-07-27",
@@ -1633,6 +1758,43 @@
     "sort": "updated",
     "query_breadth": 94,
     "position": 7
+   }
+  },
+  {
+   "repo": "jlevy/the-art-of-command-line",
+   "url": "https://github.com/jlevy/the-art-of-command-line",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 162328,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2024-06-25",
+   "created_at": "2015-05-20",
+   "stars_per_day_lifetime": 39.3,
+   "capability": "提供命令行操作的指南和技巧",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "bash",
+    "documentation",
+    "linux",
+    "macos",
+    "unix",
+    "windows"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "stars:>150000",
+    "sort": "stars",
+    "query_breadth": 57,
+    "position": 51
    }
   },
   {
@@ -4638,6 +4800,49 @@
    }
   },
   {
+   "repo": "microsoft/ai-agents-for-beginners",
+   "url": "https://github.com/microsoft/ai-agents-for-beginners",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 74307,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Jupyter Notebook",
+   "pushed_at": "2026-09-10",
+   "created_at": "2024-11-28",
+   "stars_per_day_lifetime": 114.14,
+   "capability": "提供构建 AI 代理的 Jupyter Notebook 教程和框架",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "agentic-framework",
+    "agentic-rag",
+    "ai-agents",
+    "ai-agents-framework",
+    "autogen",
+    "foundry",
+    "foundry-local",
+    "generative-ai",
+    "microsoft-foundry",
+    "semantic-kernel"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 65,
+    "position": 9
+   }
+  },
+  {
    "repo": "koala73/worldmonitor",
    "url": "https://github.com/koala73/worldmonitor",
    "first_seen": "2026-07-26",
@@ -5111,6 +5316,94 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 17
+   }
+  },
+  {
+   "repo": "Mintplex-Labs/anything-llm",
+   "url": "https://github.com/Mintplex-Labs/anything-llm",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 65856,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2023-06-04",
+   "stars_per_day_lifetime": 55.16,
+   "capability": "提供本地 AI 代理体验的 JavaScript 库",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-computer",
+    "agent-harness",
+    "agent-orchestration",
+    "agentic-ai",
+    "ai-agents",
+    "computer-use",
+    "hermes-agent",
+    "llm",
+    "local-ai",
+    "localai",
+    "multimodal",
+    "no-code"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 65,
+    "position": 22
+   }
+  },
+  {
+   "repo": "shanraisshan/claude-code-best-practice",
+   "url": "https://github.com/shanraisshan/claude-code-best-practice",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 65804,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-10-31",
+   "stars_per_day_lifetime": 209.57,
+   "capability": "Claude 代码最佳实践，从 vibe coding 到 agentic engineering",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "agentic-coding",
+    "agentic-engineering",
+    "agentic-workflow",
+    "ai",
+    "ai-agents",
+    "anthropic",
+    "best-practices",
+    "boris",
+    "claude",
+    "claude-ai",
+    "claude-code"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 65,
+    "position": 3
    }
   },
   {
@@ -5642,6 +5935,47 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 36
+   }
+  },
+  {
+   "repo": "run-llama/llama_index",
+   "url": "https://github.com/run-llama/llama_index",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 52106,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2022-11-02",
+   "stars_per_day_lifetime": 37.01,
+   "capability": "文档代理和OCR平台",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agents",
+    "application",
+    "data",
+    "fine-tuning",
+    "framework",
+    "llamaindex",
+    "llm",
+    "multi-agents",
+    "rag",
+    "vector-database"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 9
    }
   },
   {
@@ -6275,6 +6609,49 @@
    }
   },
   {
+   "repo": "paperless-ngx/paperless-ngx",
+   "url": "https://github.com/paperless-ngx/paperless-ngx",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 44970,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2022-02-12",
+   "stars_per_day_lifetime": 26.91,
+   "capability": "提供文档管理系统，支持扫描、索引和存档文档",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "ocr"
+   ],
+   "topics": [
+    "ai",
+    "angular",
+    "archiving",
+    "django",
+    "dms",
+    "document-management",
+    "document-management-system",
+    "llm",
+    "machine-learning",
+    "ocr",
+    "optical-character-recognition",
+    "pdf"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-12",
+    "sort": "updated",
+    "query_breadth": 76,
+    "position": 0
+   }
+  },
+  {
    "repo": "sickn33/agentic-awesome-skills",
    "url": "https://github.com/sickn33/agentic-awesome-skills",
    "first_seen": "2026-08-01",
@@ -6845,6 +7222,49 @@
     "sort": "updated",
     "query_breadth": 52,
     "position": 7
+   }
+  },
+  {
+   "repo": "ShareX/ShareX",
+   "url": "https://github.com/ShareX/ShareX",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 39508,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "lang": "C#",
+   "pushed_at": "2026-09-10",
+   "created_at": "2013-10-08",
+   "stars_per_day_lifetime": 8.37,
+   "capability": "屏幕区域捕获和文件上传工具",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "avalonia",
+    "capture",
+    "color-picker",
+    "csharp",
+    "dropbox",
+    "file-sharing",
+    "file-upload",
+    "ftp",
+    "gif",
+    "gif-recorder",
+    "image-annotation",
+    "ocr"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-12",
+    "sort": "updated",
+    "query_breadth": 76,
+    "position": 10
    }
   },
   {
@@ -7875,6 +8295,51 @@
    }
   },
   {
+   "repo": "onyx-dot-app/onyx",
+   "url": "https://github.com/onyx-dot-app/onyx",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 32006,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2023-04-27",
+   "stars_per_day_lifetime": 25.98,
+   "capability": "提供具有高级功能的AI聊天平台",
+   "transfer_forms": [
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "rag",
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-chat",
+    "chatgpt",
+    "chatui",
+    "enterprise-search",
+    "gen-ai",
+    "information-retrieval",
+    "llm",
+    "llm-ui",
+    "nextjs",
+    "python",
+    "rag"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 15
+   }
+  },
+  {
    "repo": "github/github-mcp-server",
    "url": "https://github.com/github/github-mcp-server",
    "first_seen": "2026-07-26",
@@ -8191,6 +8656,51 @@
    }
   },
   {
+   "repo": "feder-cr/AIHawk",
+   "url": "https://github.com/feder-cr/AIHawk",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 30334,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2024-08-04",
+   "stars_per_day_lifetime": 39.55,
+   "capability": "开源 AI 浏览器代理，用于网页自动化和计算机使用",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agentic-ai",
+    "ai-agent",
+    "ai-automation",
+    "autonomous-agent",
+    "autonomous-agents",
+    "browser",
+    "browser-agent",
+    "computer-use",
+    "job-hunting",
+    "job-search",
+    "lead-generation",
+    "llm-agent"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 65,
+    "position": 21
+   }
+  },
+  {
    "repo": "googleworkspace/cli",
    "url": "https://github.com/googleworkspace/cli",
    "first_seen": "2026-08-02",
@@ -8314,6 +8824,49 @@
    }
   },
   {
+   "repo": "simstudioai/sim",
+   "url": "https://github.com/simstudioai/sim",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 29590,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-01-05",
+   "stars_per_day_lifetime": 48.27,
+   "capability": "构建、部署和监控AI代理和流程的工作空间",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-workflow",
+    "agentic-workflow",
+    "agents",
+    "ai",
+    "aiagents",
+    "anthropic",
+    "artificial-intelligence",
+    "automation",
+    "chatbot",
+    "deepseek",
+    "gemini",
+    "low-code"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 2
+   }
+  },
+  {
    "repo": "e2b-dev/awesome-ai-agents",
    "url": "https://github.com/e2b-dev/awesome-ai-agents",
    "first_seen": "2026-08-20",
@@ -8424,6 +8977,45 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 14
+   }
+  },
+  {
+   "repo": "JunkFood02/Seal",
+   "url": "https://github.com/JunkFood02/Seal",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 28855,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Kotlin",
+   "pushed_at": "2026-08-25",
+   "created_at": "2022-04-15",
+   "stars_per_day_lifetime": 17.93,
+   "capability": "提供Android视频/音频下载器，基于yt-dlp",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "android",
+    "f-droid",
+    "jetpack-compose",
+    "kotlin",
+    "material-design",
+    "youtube-dl",
+    "youtube-downloader",
+    "yt-dlp"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 19
    }
   },
   {
@@ -9111,6 +9703,44 @@
    }
   },
   {
+   "repo": "NickeManarin/ScreenToGif",
+   "url": "https://github.com/NickeManarin/ScreenToGif",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 27613,
+   "license": "MS-PL",
+   "license_family": "unknown",
+   "lang": "C#",
+   "pushed_at": "2026-07-28",
+   "created_at": "2016-08-02",
+   "stars_per_day_lifetime": 7.48,
+   "capability": "提供屏幕录制和编辑工具，支持保存为gif或视频",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "editor",
+    "gif",
+    "recorder",
+    "sketchboard",
+    "video",
+    "webcam",
+    "wpf"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 22
+   }
+  },
+  {
    "repo": "kdeldycke/awesome-falsehood",
    "url": "https://github.com/kdeldycke/awesome-falsehood",
    "first_seen": "2026-08-15",
@@ -9199,6 +9829,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 35
+   }
+  },
+  {
+   "repo": "Asabeneh/30-Days-Of-React",
+   "url": "https://github.com/Asabeneh/30-Days-Of-React",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 27490,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "JavaScript",
+   "pushed_at": "2026-08-27",
+   "created_at": "2020-09-29",
+   "stars_per_day_lifetime": 12.66,
+   "capability": "提供30天React挑战，逐步指导学习React",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "30dayofjavascript",
+    "challenge",
+    "css",
+    "html",
+    "html5",
+    "javascript",
+    "js",
+    "programming",
+    "react",
+    "react-router-dom",
+    "reactjs",
+    "redux"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 23
    }
   },
   {
@@ -9489,6 +10162,80 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 17
+   }
+  },
+  {
+   "repo": "webadderallorg/Recordly",
+   "url": "https://github.com/webadderallorg/Recordly",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 26521,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-09",
+   "created_at": "2026-03-12",
+   "stars_per_day_lifetime": 145.72,
+   "capability": "创建无需编辑技能的演示视频",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "electron",
+    "free",
+    "linux",
+    "macos",
+    "open-source",
+    "screen-recorder",
+    "screen-studio",
+    "windows"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 24
+   }
+  },
+  {
+   "repo": "OpenBMB/MiniCPM-V",
+   "url": "https://github.com/OpenBMB/MiniCPM-V",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 26333,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-08",
+   "created_at": "2024-01-29",
+   "stars_per_day_lifetime": 27.57,
+   "capability": "在手机上实现高效的图像和视频理解",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "minicpm",
+    "minicpm-o",
+    "minicpm-v",
+    "multi-modal"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 25
    }
   },
   {
@@ -9794,6 +10541,50 @@
    }
   },
   {
+   "repo": "promptfoo/promptfoo",
+   "url": "https://github.com/promptfoo/promptfoo",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 24982,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2023-04-28",
+   "stars_per_day_lifetime": 20.29,
+   "capability": "测试和评估AI的提示词、代理和RAG",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ci",
+    "ci-cd",
+    "cicd",
+    "evaluation",
+    "evaluation-framework",
+    "llm",
+    "llm-eval",
+    "llm-evaluation",
+    "llm-evaluation-framework",
+    "llmops",
+    "pentesting",
+    "prompt-engineering"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 17
+   }
+  },
+  {
    "repo": "flipped-aurora/gin-vue-admin",
    "url": "https://github.com/flipped-aurora/gin-vue-admin",
    "first_seen": "2026-07-31",
@@ -9951,6 +10742,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 24
+   }
+  },
+  {
+   "repo": "browser-use/video-use",
+   "url": "https://github.com/browser-use/video-use",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 24542,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-08-30",
+   "created_at": "2026-04-12",
+   "stars_per_day_lifetime": 162.53,
+   "capability": "使用编码代理编辑视频",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 26
    }
   },
   {
@@ -10481,6 +11301,42 @@
    }
   },
   {
+   "repo": "vectorize-io/hindsight",
+   "url": "https://github.com/vectorize-io/hindsight",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 23350,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-10-30",
+   "stars_per_day_lifetime": 74.13,
+   "capability": "代理记忆服务，用于学习代理记忆",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "agents",
+    "ai-memory",
+    "memory"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 65,
+    "position": 6
+   }
+  },
+  {
    "repo": "op7418/guizang-ppt-skill",
    "url": "https://github.com/op7418/guizang-ppt-skill",
    "first_seen": "2026-08-04",
@@ -10702,6 +11558,92 @@
    }
   },
   {
+   "repo": "Tencent/WeKnora",
+   "url": "https://github.com/Tencent/WeKnora",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 21969,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Go",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-07-22",
+   "stars_per_day_lifetime": 52.94,
+   "capability": "开源的LLM知识平台，将原始文档转换为可查询的RAG、自主推理代理和自维护Wiki",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent",
+    "agentic",
+    "ai",
+    "chatbot",
+    "dsh-plugin",
+    "embeddings",
+    "evaluation",
+    "generative-ai",
+    "golang",
+    "knowledge-base",
+    "llm",
+    "multi-tenant"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 5
+   }
+  },
+  {
+   "repo": "debpalash/VoiceStudio",
+   "url": "https://github.com/debpalash/VoiceStudio",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 21930,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-04-09",
+   "stars_per_day_lifetime": 142.4,
+   "capability": "提供语音克隆、配音、视频配音等功能",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai",
+    "audiobook",
+    "cuda",
+    "dubbing",
+    "elevenlabs-alternative",
+    "huggingface",
+    "local-first",
+    "mlx",
+    "omnivoice-studio",
+    "speech-to-text",
+    "tauri",
+    "text-to-speech"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 27
+   }
+  },
+  {
    "repo": "anderspitman/awesome-tunneling",
    "url": "https://github.com/anderspitman/awesome-tunneling",
    "first_seen": "2026-08-10",
@@ -10810,6 +11752,47 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 19
+   }
+  },
+  {
+   "repo": "CarGuo/GSYVideoPlayer",
+   "url": "https://github.com/CarGuo/GSYVideoPlayer",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 21490,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Java",
+   "pushed_at": "2026-09-01",
+   "created_at": "2016-11-13",
+   "stars_per_day_lifetime": 5.99,
+   "capability": "提供视频播放器、支持16k页面大小、弹幕等",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "16k",
+    "android",
+    "exoplayer",
+    "ffmpeg",
+    "gsy",
+    "ijkplayer",
+    "player",
+    "ssl",
+    "video",
+    "videocache"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 31,
+    "position": 28
    }
   },
   {
@@ -11589,6 +12572,49 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 17
+   }
+  },
+  {
+   "repo": "elizaOS/eliza",
+   "url": "https://github.com/elizaOS/eliza",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 19312,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2024-07-09",
+   "stars_per_day_lifetime": 24.35,
+   "capability": "开源的自主操作系统框架",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent",
+    "agentic",
+    "ai",
+    "autonomous",
+    "chatbot",
+    "crypto",
+    "discord",
+    "eliza",
+    "elizaos",
+    "framework",
+    "plugins",
+    "rag"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 0
    }
   },
   {
@@ -12668,6 +13694,43 @@
    }
   },
   {
+   "repo": "GLips/Figma-Context-MCP",
+   "url": "https://github.com/GLips/Figma-Context-MCP",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 15817,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-02-13",
+   "stars_per_day_lifetime": 27.56,
+   "capability": "为Figma布局信息提供MCP服务器",
+   "transfer_forms": [
+    "mcp",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai",
+    "cursor",
+    "figma",
+    "mcp",
+    "typescript"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 12
+   }
+  },
+  {
    "repo": "owainlewis/awesome-artificial-intelligence",
    "url": "https://github.com/owainlewis/awesome-artificial-intelligence",
    "first_seen": "2026-08-16",
@@ -12867,6 +13930,50 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 30
+   }
+  },
+  {
+   "repo": "Unstructured-IO/unstructured",
+   "url": "https://github.com/Unstructured-IO/unstructured",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 15412,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-09-10",
+   "created_at": "2022-09-26",
+   "stars_per_day_lifetime": 10.67,
+   "capability": "将文档转换为结构化数据的 HTML 库",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "data-pipelines",
+    "deep-learning",
+    "document-image-analysis",
+    "document-image-processing",
+    "document-parser",
+    "document-parsing",
+    "docx",
+    "donut",
+    "information-retrieval",
+    "langchain",
+    "llm",
+    "machine-learning"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-12",
+    "sort": "updated",
+    "query_breadth": 76,
+    "position": 1
    }
   },
   {
@@ -14273,6 +15380,49 @@
    }
   },
   {
+   "repo": "semantica-agi/semantica",
+   "url": "https://github.com/semantica-agi/semantica",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 12538,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-06-25",
+   "stars_per_day_lifetime": 28.37,
+   "capability": "提供图原生基础设施以构建可解释的AI系统",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "topics": [
+    "agent-memory",
+    "ai",
+    "ai-governance",
+    "ai-infrastructure",
+    "artificial-intelligence",
+    "context-engineering",
+    "context-graphs",
+    "data-engineering",
+    "decision-intelligence",
+    "developer-tools",
+    "explainable-ai",
+    "generative-ai"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 52,
+    "position": 3
+   }
+  },
+  {
    "repo": "Tencent-Hunyuan/HunyuanVideo",
    "url": "https://github.com/Tencent-Hunyuan/HunyuanVideo",
    "first_seen": "2026-09-09",
@@ -15027,6 +16177,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 20
+   }
+  },
+  {
+   "repo": "cocoindex-io/cocoindex",
+   "url": "https://github.com/cocoindex-io/cocoindex",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 11517,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-03-03",
+   "stars_per_day_lifetime": 20.71,
+   "capability": "为长期代理提供增量引擎",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agentic-data-framework",
+    "ai",
+    "ai-agents",
+    "change-data-capture",
+    "codebase-intelligence",
+    "context-engineering",
+    "data-engineering",
+    "data-indexing",
+    "data-processing",
+    "etl",
+    "help-wanted",
+    "indexing"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 52,
+    "position": 1
    }
   },
   {
@@ -18385,6 +19578,47 @@
    }
   },
   {
+   "repo": "ValueCell-ai/ClawX",
+   "url": "https://github.com/ValueCell-ai/ClawX",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 7617,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-02-05",
+   "stars_per_day_lifetime": 35.1,
+   "capability": "提供桌面应用程序，用于管理 OpenClaw AI 代理",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent",
+    "agentic-ai",
+    "agents",
+    "ai",
+    "clawdbot",
+    "moltbot",
+    "openclaw",
+    "skill"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 65,
+    "position": 16
+   }
+  },
+  {
    "repo": "0xInfection/Awesome-WAF",
    "url": "https://github.com/0xInfection/Awesome-WAF",
    "first_seen": "2026-08-27",
@@ -18816,6 +20050,50 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 35
+   }
+  },
+  {
+   "repo": "kyegomez/swarms",
+   "url": "https://github.com/kyegomez/swarms",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 7161,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-09",
+   "created_at": "2023-05-11",
+   "stars_per_day_lifetime": 5.88,
+   "capability": "提供企业级多代理编排框架的 Python 库",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "agentic-workflow",
+    "agents",
+    "ai",
+    "artificial-intelligence",
+    "chatgpt",
+    "claude-code",
+    "gpt4all",
+    "huggingface",
+    "langchain",
+    "langchain-python",
+    "machine-learning"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 65,
+    "position": 27
    }
   },
   {
@@ -19641,6 +20919,50 @@
    }
   },
   {
+   "repo": "Gentleman-Programming/gentle-ai",
+   "url": "https://github.com/Gentleman-Programming/gentle-ai",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 6571,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Go",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-02-27",
+   "stars_per_day_lifetime": 33.7,
+   "capability": "配置和集成多种AI编码代理",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "ai-coding",
+    "claude-code",
+    "code-review",
+    "codex",
+    "coding-agents",
+    "copilot",
+    "cursor",
+    "developer-tools",
+    "golang",
+    "llm"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 11
+   }
+  },
+  {
    "repo": "zhongyang219/MusicPlayer2",
    "url": "https://github.com/zhongyang219/MusicPlayer2",
    "first_seen": "2026-08-06",
@@ -19866,6 +21188,49 @@
    }
   },
   {
+   "repo": "deeplethe/utopia",
+   "url": "https://github.com/deeplethe/utopia",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 6435,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-08-07",
+   "stars_per_day_lifetime": 189.26,
+   "capability": "构建企业级世界模型",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "topics": [
+    "agent-memory",
+    "bitemporal",
+    "graphrag",
+    "knowledge-base",
+    "knowledge-graph",
+    "llm",
+    "ontology",
+    "pgvector",
+    "postgresql",
+    "rag",
+    "rust",
+    "self-hosted"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 52,
+    "position": 0
+   }
+  },
+  {
    "repo": "outsourc-e/hermes-workspace",
    "url": "https://github.com/outsourc-e/hermes-workspace",
    "first_seen": "2026-08-14",
@@ -20053,6 +21418,51 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 30
+   }
+  },
+  {
+   "repo": "Osmantic/ODS",
+   "url": "https://github.com/Osmantic/ODS",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 6347,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-02-09",
+   "stars_per_day_lifetime": 29.8,
+   "capability": "将个人电脑转变为AI服务器，提供LLM推理和聊天UI",
+   "transfer_forms": [
+    "mcp",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai-agents",
+    "amd",
+    "comfyui",
+    "docker",
+    "llama-cpp",
+    "llm",
+    "local-ai",
+    "n8n",
+    "nvidia",
+    "open-webui",
+    "rag",
+    "self-hosted"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 11
    }
   },
   {
@@ -21567,6 +22977,48 @@
    }
   },
   {
+   "repo": "LaoFeng-mouse/flyingmouse-format",
+   "url": "https://github.com/LaoFeng-mouse/flyingmouse-format",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 5674,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-08-06",
+   "stars_per_day_lifetime": 162.11,
+   "capability": "提供 Windows 文件格式转换工具，支持 OCR 和批量转换",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "image",
+    "ocr"
+   ],
+   "topics": [
+    "desktop-app",
+    "electron",
+    "ffmpeg",
+    "file-converter",
+    "format-converter",
+    "libreoffice",
+    "ocr",
+    "pdf",
+    "windows",
+    "wps"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-12",
+    "sort": "updated",
+    "query_breadth": 76,
+    "position": 3
+   }
+  },
+  {
    "repo": "OpenBMB/UltraRAG",
    "url": "https://github.com/OpenBMB/UltraRAG",
    "first_seen": "2026-07-30",
@@ -21926,6 +23378,47 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 0
+   }
+  },
+  {
+   "repo": "agentscope-ai/agentscope-java",
+   "url": "https://github.com/agentscope-ai/agentscope-java",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 5530,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Java",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-09-23",
+   "stars_per_day_lifetime": 15.71,
+   "capability": "构建分布式、生产级、长期运行的代理",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "adk",
+    "agent",
+    "agent-framework",
+    "agentic",
+    "agentic-ai",
+    "agentscope",
+    "ai",
+    "harness",
+    "llm"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 65,
+    "position": 2
    }
   },
   {
@@ -23384,6 +24877,43 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 43
+   }
+  },
+  {
+   "repo": "mg-chao/snow-apps",
+   "url": "https://github.com/mg-chao/snow-apps",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 4982,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "C++",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-02-26",
+   "stars_per_day_lifetime": 8.88,
+   "capability": "提供图像查看器、OCR 和屏幕录制工具的 C++ 代码库",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "image",
+    "ocr"
+   ],
+   "topics": [
+    "image-viewer",
+    "ocr",
+    "screen-recorder",
+    "screenshot",
+    "tools"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-12",
+    "sort": "updated",
+    "query_breadth": 76,
+    "position": 5
    }
   },
   {
@@ -24986,6 +26516,92 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 85
+   }
+  },
+  {
+   "repo": "cyanfish/naps2",
+   "url": "https://github.com/cyanfish/naps2",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 4502,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "C#",
+   "pushed_at": "2026-09-09",
+   "created_at": "2015-07-19",
+   "stars_per_day_lifetime": 1.11,
+   "capability": "扫描文档到PDF等格式",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "csharp",
+    "dotnet",
+    "escl",
+    "linux",
+    "macos",
+    "ocr",
+    "pdf",
+    "sane",
+    "scanner",
+    "twain",
+    "wia",
+    "windows"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-12",
+    "sort": "updated",
+    "query_breadth": 76,
+    "position": 11
+   }
+  },
+  {
+   "repo": "ruvnet/RuVector",
+   "url": "https://github.com/ruvnet/RuVector",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 4487,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-11-19",
+   "stars_per_day_lifetime": 15.21,
+   "capability": "高性能实时自学习AI，向量GNN，内存数据库",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-ocr",
+    "attention-mechanism",
+    "gnn",
+    "gnn-model",
+    "gnns",
+    "graph",
+    "graph-neural-networks",
+    "llm-inference",
+    "low-latency",
+    "mincut",
+    "neo4j"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-12",
+    "sort": "updated",
+    "query_breadth": 76,
+    "position": 9
    }
   },
   {
@@ -27907,6 +29523,50 @@
    }
   },
   {
+   "repo": "pipeshub-ai/pipeshub-ai",
+   "url": "https://github.com/pipeshub-ai/pipeshub-ai",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 3735,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-09",
+   "created_at": "2025-03-06",
+   "stars_per_day_lifetime": 6.75,
+   "capability": "连接企业知识到 AI 的开源平台，提供权限感知搜索和知识图谱",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent",
+    "agents",
+    "ai",
+    "drive",
+    "glean",
+    "gmail",
+    "knowledge-graph",
+    "langchain",
+    "langgraph",
+    "llamaparse",
+    "notion",
+    "ollama"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 52,
+    "position": 18
+   }
+  },
+  {
    "repo": "mumuy/relationship",
    "url": "https://github.com/mumuy/relationship",
    "first_seen": "2026-08-17",
@@ -29673,6 +31333,42 @@
    }
   },
   {
+   "repo": "modelscope/evalscope",
+   "url": "https://github.com/modelscope/evalscope",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 3401,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2023-12-07",
+   "stars_per_day_lifetime": 3.37,
+   "capability": "用于高效评估大型模型（LLM、VLM、AIGC）的框架",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "evaluation",
+    "llm",
+    "performance",
+    "rag",
+    "vlm"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 18
+   }
+  },
+  {
    "repo": "geekjourneyx/md2wechat-skill",
    "url": "https://github.com/geekjourneyx/md2wechat-skill",
    "first_seen": "2026-08-02",
@@ -29838,6 +31534,47 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 39
+   }
+  },
+  {
+   "repo": "aviaryan/awesome-no-login-web-apps",
+   "url": "https://github.com/aviaryan/awesome-no-login-web-apps",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 3355,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Shell",
+   "pushed_at": "2026-09-10",
+   "created_at": "2016-12-06",
+   "stars_per_day_lifetime": 0.94,
+   "capability": "无需登录的免费网络应用列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "application",
+    "applications",
+    "awesome",
+    "awesome-list",
+    "awesomeness",
+    "list",
+    "no-login",
+    "no-login-web-apps",
+    "portableapps",
+    "web-app"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 1
    }
   },
   {
@@ -30070,6 +31807,50 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 1
+   }
+  },
+  {
+   "repo": "zvec-ai/zvec-grep",
+   "url": "https://github.com/zvec-ai/zvec-grep",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 3324,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-07-10",
+   "stars_per_day_lifetime": 53.61,
+   "capability": "提供本地优先的搜索工具，适用于人类和AI代理",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai-agents",
+    "bm25",
+    "cli",
+    "code-search",
+    "full-text-search",
+    "local-first",
+    "mcp",
+    "ripgrep",
+    "semantic-search",
+    "vector-search"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 62
    }
   },
   {
@@ -35701,6 +37482,51 @@
    }
   },
   {
+   "repo": "CrossPaste/crosspaste-desktop",
+   "url": "https://github.com/CrossPaste/crosspaste-desktop",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 2547,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Kotlin",
+   "pushed_at": "2026-09-10",
+   "created_at": "2023-11-16",
+   "stars_per_day_lifetime": 2.48,
+   "capability": "提供跨设备剪贴板同步的 Kotlin 应用程序，内置 OCR 和 CLI 服务器",
+   "transfer_forms": [
+    "deploy",
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "cli",
+    "clipboard",
+    "clipboard-history",
+    "clipboard-manager",
+    "clips",
+    "compose-desktop",
+    "copy-paste",
+    "cross-platform",
+    "desktop-application",
+    "end-to-end-encryption",
+    "kotlin-multiplatform",
+    "local-first"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-12",
+    "sort": "updated",
+    "query_breadth": 76,
+    "position": 4
+   }
+  },
+  {
    "repo": "tmcw/awesome-geojson",
    "url": "https://github.com/tmcw/awesome-geojson",
    "first_seen": "2026-09-02",
@@ -36655,6 +38481,48 @@
    }
   },
   {
+   "repo": "ningzimu/image-to-editable-ppt-skill",
+   "url": "https://github.com/ningzimu/image-to-editable-ppt-skill",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 2429,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-05-21",
+   "stars_per_day_lifetime": 21.69,
+   "capability": "将图像、PDF转换为可编辑的PPT演示文稿",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "image",
+    "video"
+   ],
+   "topics": [
+    "codex",
+    "codex-skill",
+    "editable-ppt",
+    "image-to-ppt",
+    "imagegen",
+    "multi-agent",
+    "pdf-to-pptx",
+    "powerpoint",
+    "pptx",
+    "presentation"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 10
+   }
+  },
+  {
    "repo": "Bitterbot-AI/bitterbot-desktop",
    "url": "https://github.com/Bitterbot-AI/bitterbot-desktop",
    "first_seen": "2026-07-26",
@@ -37479,6 +39347,41 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 13
+   }
+  },
+  {
+   "repo": "wenhwu/awesome-remote-sensing-change-detection",
+   "url": "https://github.com/wenhwu/awesome-remote-sensing-change-detection",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 2325,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-09",
+   "created_at": "2018-11-03",
+   "stars_per_day_lifetime": 0.81,
+   "capability": "收集远程传感变化检测的数据集和工具",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "change-detection",
+    "dataset",
+    "deep-learning",
+    "remote-sensing"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 37
    }
   },
   {
@@ -39856,6 +41759,41 @@
    }
   },
   {
+   "repo": "raphaelmansuy/edgequake",
+   "url": "https://github.com/raphaelmansuy/edgequake",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 2092,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-09-10",
+   "created_at": "2025-12-21",
+   "stars_per_day_lifetime": 7.95,
+   "capability": "将文档转换为智能知识图谱",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "graphrag",
+    "knowledge-graph",
+    "lightrag",
+    "rag"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 52,
+    "position": 10
+   }
+  },
+  {
    "repo": "study8677/awesome-architecture",
    "url": "https://github.com/study8677/awesome-architecture",
    "first_seen": "2026-08-13",
@@ -41633,6 +43571,51 @@
    }
   },
   {
+   "repo": "doobidoo/mcp-memory-service",
+   "url": "https://github.com/doobidoo/mcp-memory-service",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 1933,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-09",
+   "created_at": "2024-12-26",
+   "stars_per_day_lifetime": 3.1,
+   "capability": "为 AI 代理管道提供持久化内存服务，包括知识图谱和自主合并",
+   "transfer_forms": [
+    "mcp",
+    "deploy",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-memory",
+    "agentic-ai",
+    "ai-agents",
+    "autogen",
+    "claude",
+    "crewai",
+    "knowledge-graph",
+    "langgraph",
+    "long-term-memory",
+    "mcp",
+    "mcp-server",
+    "memory"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 52,
+    "position": 20
+   }
+  },
+  {
    "repo": "ZeroLu/awesome-gpt-image",
    "url": "https://github.com/ZeroLu/awesome-gpt-image",
    "first_seen": "2026-07-26",
@@ -42106,6 +44089,49 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 34
+   }
+  },
+  {
+   "repo": "redhat-et/ripwire",
+   "url": "https://github.com/redhat-et/ripwire",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 1841,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "C++",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-07-29",
+   "stars_per_day_lifetime": 42.81,
+   "capability": "AI代理的ripgrep工具，提供代码导航和MCP服务器",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agents",
+    "call-graph",
+    "claude",
+    "claude-code",
+    "cli",
+    "code-navigation",
+    "codex",
+    "coding-agents",
+    "context-engineering",
+    "cpp",
+    "developer-tools",
+    "llm"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
    }
   },
   {
@@ -46007,6 +48033,50 @@
    }
   },
   {
+   "repo": "najmuzzaman-mohammad/gawkbot",
+   "url": "https://github.com/najmuzzaman-mohammad/gawkbot",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 1287,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Go",
+   "pushed_at": "2026-09-09",
+   "created_at": "2026-03-25",
+   "stars_per_day_lifetime": 7.62,
+   "capability": "开源的 grok bot，通过 AI 模型自动化工作并构建微应用",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agents",
+    "ai-agents",
+    "ai-teammates",
+    "autonomous-agents",
+    "claude-code",
+    "codex",
+    "grok-bot",
+    "grok-bot-alternative",
+    "grokbot",
+    "knowledge-graph",
+    "local-llm",
+    "microapps"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 52,
+    "position": 19
+   }
+  },
+  {
    "repo": "alchaincyf/huashu-skills",
    "url": "https://github.com/alchaincyf/huashu-skills",
    "first_seen": "2026-08-02",
@@ -48140,6 +50210,48 @@
    }
   },
   {
+   "repo": "heathersherry/Knowledge-Graph-Tutorials-and-Papers",
+   "url": "https://github.com/heathersherry/Knowledge-Graph-Tutorials-and-Papers",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 1071,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-09-10",
+   "created_at": "2019-03-10",
+   "stars_per_day_lifetime": 0.39,
+   "capability": "提供关于知识图谱的教程和论文",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-kg",
+    "awesome-list",
+    "data-integration",
+    "entity-linking",
+    "information-extration",
+    "kg",
+    "kgqa",
+    "knowledge-base",
+    "knowledge-graph",
+    "knowledge-graph-completion",
+    "knowledge-graph-construction"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 52,
+    "position": 7
+   }
+  },
+  {
    "repo": "MayDay-wpf/snow-cli",
    "url": "https://github.com/MayDay-wpf/snow-cli",
    "first_seen": "2026-08-16",
@@ -48593,6 +50705,49 @@
     "sort": "updated",
     "query_breadth": 63,
     "position": 10
+   }
+  },
+  {
+   "repo": "zhitongblog/solomd",
+   "url": "https://github.com/zhitongblog/solomd",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 1024,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-10",
+   "created_at": "2026-04-08",
+   "stars_per_day_lifetime": 6.61,
+   "capability": "Markdown编辑器，连接LLM的桥梁，包含MCP服务器",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "android",
+    "autogit",
+    "byok",
+    "cross-platform",
+    "ios",
+    "knowledge-base",
+    "local-first",
+    "markdown",
+    "markdown-editor",
+    "mcp",
+    "mcp-server"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 9
    }
   },
   {
@@ -49810,6 +51965,35 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 57
+   }
+  },
+  {
+   "repo": "kajisho5/ffmpeg-skill",
+   "url": "https://github.com/kajisho5/ffmpeg-skill",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 896,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-09",
+   "created_at": "2026-09-03",
+   "stars_per_day_lifetime": 128.0,
+   "capability": "使用ffmpeg进行视频处理的技能",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 26
    }
   },
   {
@@ -53558,6 +55742,48 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 2
+   }
+  },
+  {
+   "repo": "cometcanaryview7/canva-pro",
+   "url": "https://github.com/cometcanaryview7/canva-pro",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 619,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-09",
+   "created_at": "2026-08-04",
+   "stars_per_day_lifetime": 16.73,
+   "capability": "提供Canva Pro的高级图形设计工具和团队协作工作流程",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "canva",
+    "canva-bulk-create",
+    "canva-editor-tools",
+    "canva-export-tools",
+    "canva-free",
+    "canva-full",
+    "canva-hack",
+    "canva-pro",
+    "canva-pro-for-life-time",
+    "canva-pro-team-2026",
+    "figma-alternative",
+    "figma-design"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "content automation in:name,description stars:>500 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 5,
+    "position": 3
    }
   },
   {
@@ -59514,6 +61740,48 @@
    }
   },
   {
+   "repo": "dickwu/apple-design-skill",
+   "url": "https://github.com/dickwu/apple-design-skill",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 390,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-09",
+   "created_at": "2026-02-27",
+   "stars_per_day_lifetime": 2.0,
+   "capability": "基于Apple HIG的跨平台UI/UX设计审查器",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "apple-hig",
+    "claude-code",
+    "codex",
+    "cursor",
+    "design-system",
+    "electron",
+    "flutter",
+    "liquid-glass",
+    "tauri",
+    "ui-ux"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-11",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 32
+   }
+  },
+  {
    "repo": "for-the-zero/Free-LLM-Collection",
    "url": "https://github.com/for-the-zero/Free-LLM-Collection",
    "first_seen": "2026-07-26",
@@ -60547,6 +62815,44 @@
    }
   },
   {
+   "repo": "jw9730/tokengt",
+   "url": "https://github.com/jw9730/tokengt",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 351,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2023-04-11",
+   "created_at": "2022-06-29",
+   "stars_per_day_lifetime": 0.23,
+   "capability": "提供基于PyTorch的Tokenized Graph Transformer模型",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "equivariance",
+    "gnn",
+    "graph",
+    "hypergraph",
+    "pytorch",
+    "self-attention",
+    "transformer"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:hypergraph stars:>300",
+    "sort": "stars",
+    "query_breadth": 12,
+    "position": 9
+   }
+  },
+  {
    "repo": "jamditis/claude-skills-journalism",
    "url": "https://github.com/jamditis/claude-skills-journalism",
    "first_seen": "2026-08-02",
@@ -60984,6 +63290,43 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 17
+   }
+  },
+  {
+   "repo": "gzcsudo/Awesome-Hypergraph-Network",
+   "url": "https://github.com/gzcsudo/Awesome-Hypergraph-Network",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 336,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2025-02-03",
+   "created_at": "2022-01-12",
+   "stars_per_day_lifetime": 0.2,
+   "capability": "提供超图学习、超图理论、超图数据集和超图工具的精选列表",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome-list",
+    "graph",
+    "graph-neural-network",
+    "higher-order-graph",
+    "hypergraph",
+    "hypergraph-neural-network",
+    "hypergraph-theory"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:hypergraph stars:>300",
+    "sort": "stars",
+    "query_breadth": 12,
+    "position": 10
    }
   },
   {
@@ -61466,6 +63809,41 @@
    }
   },
   {
+   "repo": "zibo-chen/ocr-rs",
+   "url": "https://github.com/zibo-chen/ocr-rs",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 326,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-09-09",
+   "created_at": "2025-04-12",
+   "stars_per_day_lifetime": 0.63,
+   "capability": "提供高性能OCR识别库，支持多种语言和调用方式",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "ocr"
+   ],
+   "topics": [
+    "ocr",
+    "ocr-rs",
+    "paddleocr",
+    "tesseract-ocr"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "OCR 识别 in:name,description stars:>100 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 20,
+    "position": 11
+   }
+  },
+  {
    "repo": "alchaincyf/munger-skill",
    "url": "https://github.com/alchaincyf/munger-skill",
    "first_seen": "2026-07-26",
@@ -61668,6 +64046,41 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 7
+   }
+  },
+  {
+   "repo": "iMoonLab/Hyper-RAG",
+   "url": "https://github.com/iMoonLab/Hyper-RAG",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 319,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-06-27",
+   "created_at": "2025-04-03",
+   "stars_per_day_lifetime": 0.61,
+   "capability": "提供使用超图驱动的检索增强生成来对抗LLM幻觉的Hyper-RAG工具",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "topics": [
+    "graph-rag",
+    "hypergraph",
+    "llms",
+    "rag"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:hypergraph stars:>300",
+    "sort": "stars",
+    "query_breadth": 12,
+    "position": 11
    }
   },
   {
@@ -72161,6 +74574,46 @@
    }
   },
   {
+   "repo": "CYBIRD-D/FREE-LLM-API-Provider",
+   "url": "https://github.com/CYBIRD-D/FREE-LLM-API-Provider",
+   "first_seen": "2026-09-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-10",
+   "stars": 101,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-07",
+   "created_at": "2025-11-03",
+   "stars_per_day_lifetime": 0.32,
+   "capability": "提供免费LLM API资源列表，包括cn平台",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "api",
+    "free",
+    "freetier",
+    "gemini-api",
+    "groq",
+    "llm",
+    "llm-interface",
+    "nvidia",
+    "ollama",
+    "openrouter"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-06-12",
+    "sort": "stars",
+    "query_breadth": 36,
+    "position": 35
+   }
+  },
+  {
    "repo": "JinLingxi/MathCyclus---Lingxi-Question-Bank-Assistant",
    "url": "https://github.com/JinLingxi/MathCyclus---Lingxi-Question-Bank-Assistant",
    "first_seen": "2026-08-16",
@@ -74679,7 +77132,7 @@
    }
   }
  ],
- "updated": "2026-09-09",
+ "updated": "2026-09-10",
  "status_enum": [
   "pending",
   "debated",
