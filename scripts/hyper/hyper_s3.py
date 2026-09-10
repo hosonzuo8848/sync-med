@@ -264,6 +264,11 @@ def norm_edges(obj, chunk, known):
                 DROPPED["F_head_is_herb"] += 1; continue
             if len(head) > 20:
                 DROPPED["F_head_too_long"] += 1; continue
+            # third filter set (2026-09-10 12:3x, Issue #584 judging): a formula whose members are not written in the
+            # chunk was filled in from model knowledge (name-only mentions) -- drop it.
+            in_txt = sum(1 for m in members if m["label"] and (m["label"] in chunk["text"] or _squash(m["label"]) in text_sq))
+            if in_txt < 2 and not (len(members) == 1 and members[0].get("dose")):
+                DROPPED["F_members_not_in_text"] += 1; continue
         try:
             conf = float(e.get("confidence")) if e.get("confidence") is not None else None
         except (TypeError, ValueError):
