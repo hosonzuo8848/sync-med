@@ -29,6 +29,8 @@ UA = "sync-med-hyper-s3/1.0 (GitHub Actions; +https://github.com/hosonzuo8848/sy
 ACC = os.environ["CF_ACCOUNT_ID"]; DB = os.environ["D1_DATABASE_ID"]; TOK = os.environ["D1_API_TOKEN"]
 KEY = os.environ.get("GW_KEY", "")
 LIMIT = int(os.environ.get("LIMIT") or "500")
+TIER_A_ONLY = os.environ.get("TIER_A_ONLY", "").strip() in ("1", "true", "yes")
+SAMPLE_N = int(os.environ.get("SAMPLE_N") or "30")
 THREADS = int(os.environ.get("THREADS") or "3")
 SEED = int(os.environ.get("SEED") or "42")
 TEXT_MAX = int(os.environ.get("TEXT_MAX") or "1500")   # chars sent to the model; longer chunks are cut + flagged
@@ -283,6 +285,11 @@ def norm_edges(obj, chunk, known):
             in_txt = sum(1 for m in members if m["label"] and (m["label"] in win or _squash(m["label"]) in win_sq))
             if in_txt < 2 and not (len(members) == 1 and members[0].get("dose")):
                 DROPPED["F_members_not_in_text"] += 1; continue
+            # seventh filter set (Issue #590): symptom lists typed as F members; members that are just pieces of the head
+            if len(members) >= 2 and not any(m["label"] in herb_heads or m["label"] in herbs for m in members):
+                DROPPED["F_no_known_herb"] += 1; continue
+            if members and all(m["label"] and m["label"] in head for m in members):
+                DROPPED["F_members_from_head"] += 1; continue
             if hp >= 0 and members:
                 after = chunk["text"][hp + len(head): hp + len(head) + 120]
                 first = members[0]["label"]
@@ -318,6 +325,8 @@ def process(chunk, known):
            "n_chars": chunk["n_chars"], "n_parts": chunk["n_parts"], "hyperedges": [], "overflow": False}
     if obj is not None:
         rec["hyperedges"], rec["overflow"] = norm_edges(obj, chunk, known)
+        if TIER_A_ONLY:                                          # S4 mode: staging takes tier A only
+            rec["hyperedges"] = [e for e in rec["hyperedges"] if e.get("tier") == "A"]
     rec.update(meta)
     time.sleep(SLEEP_BETWEEN)
     return rec
@@ -365,7 +374,7 @@ def summarize(recs, sample_stats, known):
     }
 
 
-def sample_md(recs, n=30):
+def sample_md(recs, n=SAMPLE_N):
     flat = [(r, e) for r in recs if not r["err"] for e in r["hyperedges"]]
     pick = random.Random(SEED).sample(flat, min(n, len(flat)))
     lines = [SAMPLE_HEAD.format(seed=SEED, total=len(flat))]
