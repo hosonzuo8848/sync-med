@@ -31,6 +31,7 @@ WORKFLOWS = {
     # (cloud shift diagnosis, commit could not be pushed from the sandbox: Claude GitHub App not installed).
     "clean-embed.yml": {"name": 'clean-embed(clean\u7d22\u5f15\u704c\u5e93)', "alert_hours": 10},
     "council.yml":     {"name": 'council(SueAI议事会)', "alert_hours": 30},
+    "hyper-s4.yml":    {"name": "hyper-s4(\u8d85\u8fb9 tier-A \u591c\u8dd1 staging)", "alert_hours": 30},
 }
 
 
