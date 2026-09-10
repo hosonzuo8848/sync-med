@@ -4,19 +4,21 @@ name: gen-thumbs
 # still missing). Serial per shard, direct-link path through our own cover endpoint (no 123 API quota),
 # resize to 360 px WebP, put into the R2 hot layer thumbs/{book_id}.webp. Ledger per shard in actions/cache
 # so re-runs never redo a book; head_object at most once per book. Who sees it when it breaks: step summary
-# carries made/skip/svg/fail per shard; guji-health sentinel measures the real cover rate every day.
+# carries made/skip/svg/fail per shard; frontend_sentinel measures the real cover rate every day.
+# 2026-09-10 23:5x: 5 -> 10 shards and every 2 h: random-30 sentinel still 40% real covers site-wide; 12,285
+# books with no thumbnail at ~2,500 per run needed 15 h, now ~5 h.
 
 on:
   workflow_dispatch:
     inputs:
       shards:
-        description: "parallel shards (direct-link path, no 123 API quota; keep <= 6)"
+        description: "parallel shards (direct-link path, no 123 API quota; matrix is fixed at 10)"
         default: "5"
       cap:
         description: "max books attempted per shard this run (empty = unlimited, gated by the 105 min soft deadline)"
         default: ""
   schedule:
-    - cron: "40 */3 * * *"
+    - cron: "40 */2 * * *"
 
 permissions:
   contents: read
@@ -30,10 +32,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 115
     strategy:
-      max-parallel: 6
+      max-parallel: 10
       fail-fast: false
       matrix:
-        shard: [0, 1, 2, 3, 4]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -57,6 +59,6 @@ jobs:
           S_SK: ${{ secrets.S_SK }}
           R2_BUCKET: guyaofang-assets
           SHARD: ${{ matrix.shard }}
-          SHARDS: "5"
+          SHARDS: "10"
           CAP: ${{ github.event.inputs.cap }}
         run: python scripts/thumbs/gen_thumbs.py
