@@ -10,6 +10,9 @@ the Issue is red below TARGET and green at/above it; fleet-watch does not need t
 """
 import io, json, os, sys, time, urllib.request, random
 import boto3
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'content_factory'))
+from _ai import d1   # single D1 transport (guard_single_source: no hardcoded endpoint copies)
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 ACC = os.environ["CF_ACCOUNT_ID"]; DB = os.environ["D1_DATABASE_ID"]; TOK = os.environ["D1_API_TOKEN"]
@@ -20,13 +23,6 @@ s3 = boto3.client("s3", endpoint_url=os.environ["S_EP"], aws_access_key_id=os.en
                   aws_secret_access_key=os.environ["S_SK"], region_name="auto")
 TITLE = "\U0001f5bc\ufe0f \u5c01\u9762\u70ed\u5c42\u8986\u76d6\u7387\u54e8\u5175"   # cover hot-layer coverage sentinel
 
-def d1(sql):
-    url = "https://api.cloudflare.com/client/v4/accounts/%s/d1/database/%s/query" % (ACC, DB)
-    req = urllib.request.Request(url, data=json.dumps({"sql": sql}).encode(), method="POST",
-                                 headers={"Authorization": "Bearer " + TOK, "Content-Type": "application/json"})
-    j = json.loads(urllib.request.urlopen(req, timeout=60).read())
-    if not j.get("success"): raise RuntimeError(str(j.get("errors"))[:200])
-    return j["result"][0]["results"]
 
 def r2_has(bid):
     try: s3.head_object(Bucket=BUCKET, Key="thumbs/%s.webp" % bid); return True
