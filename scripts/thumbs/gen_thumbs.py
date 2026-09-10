@@ -13,6 +13,9 @@ book per lifetime via a ledger file), never LIST, never touch D1 rows, never del
 """
 import io, json, os, sys, time, urllib.request
 import boto3
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'content_factory'))
+from _ai import d1   # single D1 transport (guard_single_source: no hardcoded endpoint copies)
 from PIL import Image
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
@@ -29,13 +32,6 @@ LEDGER = "ledger_%d.json" % SHARD
 try: done = set(json.load(open(LEDGER)))
 except Exception: done = set()
 
-def d1(sql):
-    url = "https://api.cloudflare.com/client/v4/accounts/%s/d1/database/%s/query" % (ACC, DB)
-    req = urllib.request.Request(url, data=json.dumps({"sql": sql}).encode(), method="POST",
-                                 headers={"Authorization": "Bearer " + TOK, "Content-Type": "application/json"})
-    j = json.loads(urllib.request.urlopen(req, timeout=60).read())
-    if not j.get("success"): raise RuntimeError(str(j.get("errors"))[:200])
-    return j["result"][0]["results"]
 
 def r2_has(key):
     try: s3.head_object(Bucket=BUCKET, Key=key); return True
