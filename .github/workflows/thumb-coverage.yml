@@ -1,0 +1,50 @@
+name: thumb-coverage
+
+# Sentinel for the cover hot layer (2026-09-11 01:3x, founder: all 46K books must be done, and a job -- not the
+# CTO's chat context -- should do the checking). Random sample per population from D1, head_object in R2
+# (zero LIST), one living Issue with the numbers, red below TARGET_PCT. Runs every 3 h, offset from the two
+# gen-thumbs lanes so it measures after they have written.
+
+on:
+  workflow_dispatch:
+    inputs:
+      sample_n:
+        description: "books sampled per population"
+        default: "200"
+      target_pct:
+        description: "green at or above this site-wide coverage"
+        default: "90"
+  schedule:
+    - cron: "50 */3 * * *"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: thumb-coverage
+  cancel-in-progress: false
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q boto3
+      - name: sample and report
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+          D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          S_EP: ${{ secrets.S_EP }}
+          S_AK: ${{ secrets.S_AK }}
+          S_SK: ${{ secrets.S_SK }}
+          R2_BUCKET: guyaofang-assets
+          GH_TOKEN: ${{ github.token }}
+          SAMPLE_N: ${{ github.event.inputs.sample_n || '200' }}
+          TARGET_PCT: ${{ github.event.inputs.target_pct || '90' }}
+        run: python scripts/thumbs/thumb_coverage.py
