@@ -7,6 +7,8 @@ name: gen-thumbs
 # carries made/skip/svg/fail per shard; frontend_sentinel measures the real cover rate every day.
 # 2026-09-10 23:5x: 5 -> 10 shards and every 2 h: random-30 sentinel still 40% real covers site-wide; 12,285
 # books with no thumbnail at ~2,500 per run needed 15 h, now ~5 h.
+# 2026-09-11 01:3x: soft deadline 105 -> 330 min (job cap 350) and this lane takes POP=nothumb only; the books
+# that already have a 123 thumbnail run in gen-thumbs-fast.yml (same script, POP=hasthumb, small fast fetches).
 
 on:
   workflow_dispatch:
@@ -30,7 +32,7 @@ concurrency:
 jobs:
   gen:
     runs-on: ubuntu-latest
-    timeout-minutes: 115
+    timeout-minutes: 350
     strategy:
       max-parallel: 10
       fail-fast: false
@@ -60,5 +62,7 @@ jobs:
           R2_BUCKET: guyaofang-assets
           SHARD: ${{ matrix.shard }}
           SHARDS: "10"
+          SOFT_MIN: "330"
+          POP: nothumb
           CAP: ${{ github.event.inputs.cap }}
         run: python scripts/thumbs/gen_thumbs.py
