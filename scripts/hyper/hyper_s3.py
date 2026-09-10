@@ -253,6 +253,17 @@ def norm_edges(obj, chunk, known):
             DROPPED["R_no_formula"] += 1; continue
         if typ == "F" and len(members) < 2 and not in_text:
             DROPPED["F_thin"] += 1; continue
+        # second filter set (2026-09-10 09:5x, from judging Issue #582: all 9 W were machine-catchable)
+        if typ == "R" and not any(m["role"] == "formula" and m["label"] in formulas for m in members):
+            DROPPED["R_formula_unknown"] += 1; continue
+        if typ == "F":
+            addsub = sum(1 for m in members if any(ch in ((m.get("dose") or "") + m["label"][:1]) for ch in "\u52a0\u51cf"))
+            if addsub * 2 >= len(members):
+                DROPPED["F_addsub"] += 1; continue
+            if head in herbs:
+                DROPPED["F_head_is_herb"] += 1; continue
+            if len(head) > 20:
+                DROPPED["F_head_too_long"] += 1; continue
         try:
             conf = float(e.get("confidence")) if e.get("confidence") is not None else None
         except (TypeError, ValueError):
@@ -263,6 +274,8 @@ def norm_edges(obj, chunk, known):
                       "confidence": conf})
         hk = edges[-1]["head_known"]
         edges[-1]["tier"] = "A" if (in_text and hk) else "B" if in_text else "C"
+        if typ == "F" and not hk and not head.endswith(tuple("\u6c64\u6563\u4e38\u4e39\u818f\u9152\u714e\u996e\u65b9\u5242\u997c\u952d\u9732\u7ca5\u6c41\u4e39\u818f\u6cb9\u6d74\u6d17\u5242\u6761\u7ebf\u6813")):
+            edges[-1]["head_is_indication"] = True     # unnamed formula: head is the indication sentence (kept, flagged)
     return edges, overflow
 
 
