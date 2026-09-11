@@ -14,6 +14,10 @@ Runs from GitHub Actions (sync-med) or locally; all Chinese text is escaped in t
 import os, sys, io, json, time, hashlib, re, urllib.request, urllib.error
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'content_factory'))
 from _ai import d1, GATEWAY   # single D1 transport + gateway URL (guard_single_source)
+try:
+    from zhconv import convert as _zh; simp = lambda t: _zh(t or "", "zh-cn")
+except Exception:
+    simp = lambda t: t or ""
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 MODE = os.environ.get("MODE") or "facts"; KIND = os.environ.get("KIND") or "formula"
@@ -200,7 +204,7 @@ def render_summary(sents):
 
 def gate_summary(sents, f):
     if not isinstance(sents, list) or not (1 <= len(sents) <= 8): return "shape:%s" % (len(sents) if isinstance(sents, list) else type(sents).__name__)
-    ids = {v["id"] for v in f["versions"]}; books = set(f["books"]); title = f.get("title", "")
+    ids = {v["id"] for v in f["versions"]}; books = {simp(b) for b in f["books"]}; title = f.get("title", "")
     for x in sents:
         if not isinstance(x, dict) or not str(x.get("text", "")).strip(): return "empty-sentence"
         try: tier = int(x.get("tier"))
@@ -212,8 +216,9 @@ def gate_summary(sents, f):
             x["tier"] = 2; x["refs"] = []; x["downgraded"] = 1
         if re.search(r"[\u2460\u2461\u2462]", str(x.get("text"))): return "glyph-in-text"
         for b in re.findall(r"\u300a([^\u300b]{2,12})\u300b", str(x.get("text"))):
-            if b == title or b == f.get("name_s"): continue
-            if b not in books and not any(b in bb or bb in b for bb in books): return "book-not-in-facts:" + b
+            bs = simp(b)
+            if bs == simp(title) or bs == f.get("name_s"): continue
+            if bs not in books and not any(bs in bb or bb in bs for bb in books): return "book-not-in-facts:" + b
     total = sum(len(str(x.get("text", ""))) for x in sents)
     if total < 60: return "too-short"
     return ""
