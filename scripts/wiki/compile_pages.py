@@ -19,7 +19,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 MODE = os.environ.get("MODE") or "facts"; KIND = os.environ.get("KIND") or "formula"
 BOOK = os.environ.get("BOOK") or ""; LIMIT = int(os.environ.get("LIMIT") or "400")
 FORCE = os.environ.get("FORCE") == "1"; KEY = os.environ.get("GW_KEY", "")
-PROMPT_VER = "wiki_summary_v1"; MAX_VERSIONS = 40; SUMMARY_VERSIONS = 12
+PROMPT_VER = "wiki_summary_v2"; MAX_VERSIONS = 40; SUMMARY_VERSIONS = 12
 qs = lambda v: "'" + str(v).replace("\x00", "").replace("'", "''") + "'"
 now = lambda: int(time.time())
 
@@ -173,9 +173,10 @@ def mode_facts():
 
 # ---------- llm summary ----------
 SYS = ("\u4f60\u662f\u53e4\u7c4d\u65b9\u5242\u7f16\u7e82\u5458\u3002\u53ea\u51c6\u6839\u636e\u7ed9\u5b9a\u4e8b\u5b9e\u5199\u4e00\u6bb5 120-220 \u5b57\u7684\u7efc\u8ff0\uff1a"
-       "\u5404\u4e66\u7248\u672c\u5f02\u540c\u3001\u7ec4\u6210\u5171\u6027\u4e0e\u5dee\u5f02\u3001\u4e3b\u6cbb\u8303\u56f4\u3002\u6bcf\u53e5\u672b\u5c3e\u5fc5\u987b\u6807 \u2460(\u6709\u51fa\u5904\uff0c\u5e76\u9644 [v:\u65b9\u53f7]) "
-       "\u6216 \u2461(\u6cd5\u5ea6\u63a8\u6f14) \u6216 \u2462(\u5b58\u7591)\u3002\u4e0d\u5199\u8bca\u7597\u5efa\u8bae\uff0c\u4e0d\u5f15\u7528\u4e8b\u5b9e\u4e4b\u5916\u7684\u836f\u540d\u4e0e\u4e66\u540d\u3002"
-       "\u53ea\u8f93\u51fa JSON: {\"summary\": \"...\"}")
+       "\u5404\u4e66\u7248\u672c\u5f02\u540c\u3001\u7ec4\u6210\u5171\u6027\u4e0e\u5dee\u5f02\u3001\u4e3b\u6cbb\u8303\u56f4\u3002"
+       "\u683c\u5f0f\u786c\u89c4\u5b9a\uff1a\u6bcf\u4e00\u53e5\u7684\u53e5\u53f7\u524d\u5fc5\u987b\u5199\u6863\u4f4d\u7b26\u53f7\uff1a\u2460 = \u6709\u51fa\u5904\uff08\u540e\u9762\u7d27\u8ddf [v:\u65b9\u53f7]\uff0c\u65b9\u53f7\u53ea\u80fd\u662f\u4e8b\u5b9e\u91cc\u7684 id\uff09\uff1b\u2461 = \u6cd5\u5ea6\u63a8\u6f14\uff1b\u2462 = \u5b58\u7591\u3002"
+       "\u793a\u4f8b\uff1a\u300a\u5723\u6d4e\u603b\u5f55\u300b\u672c\u65b9\u7531\u8305\u82d3\u3001\u828d\u836f\u3001\u767d\u672f\u3001\u751f\u59dc\u3001\u9644\u5b50\u7ec4\u6210\u2460[v:SJ4_00123]\u3002\u5404\u4e66\u5242\u91cf\u4e92\u6709\u51fa\u5165\u2461\u3002\u662f\u5426\u540c\u6e90\u5c1a\u5f85\u8003\u8bc1\u2462\u3002"
+       "\u4e0d\u5199\u8bca\u7597\u5efa\u8bae\uff0c\u4e0d\u5f15\u7528\u4e8b\u5b9e\u4e4b\u5916\u7684\u836f\u540d\u4e0e\u4e66\u540d\u3002\u53ea\u8f93\u51fa JSON: {\"summary\": \"...\"}")
 
 def call_gateway(user):
     body = {"messages": [{"role": "system", "content": SYS}, {"role": "user", "content": user}],
@@ -188,19 +189,25 @@ def call_gateway(user):
     m = re.search(r"\{.*\}", txt, re.S)
     return (json.loads(m.group(0)).get("summary") if m else ""), model
 
+TAG_RE = re.compile(r"(?:[\u2460\u2461\u2462]\s*(?:\[v:[^\]]+\]\s*)*|(?:\[v:[^\]]+\]\s*)+[\u2460\u2461\u2462])\s*$")
+def normalize_tags(s):
+    """move a tag written after the terminal punctuation back in front of it: X. (1)[v:id] -> X(1)[v:id]."""
+    pat = "([" + chr(0x3002) + chr(0xff01) + chr(0xff1f) + "])" + chr(92) + "s*([" + chr(0x2460) + chr(0x2461) + chr(0x2462) + "](?:" + chr(92) + "s*" + chr(92) + "[v:[^" + chr(92) + "]]+" + chr(92) + "])*)"
+    return re.sub(pat, lambda m: m.group(2) + m.group(1), s or "")
+
 def gate_summary(s, f):
+    s = normalize_tags(s)
     if not s or len(s) < 40: return "empty"
-    herbs = set(); books = set(f["books"]); ids = {v["id"] for v in f["versions"]}
-    for v in f["versions"]: herbs |= {herb_name(h) for h in v["herbs"]}
-    sents = [x for x in re.split(r"(?<=[\u3002\uff01\uff1f])", s) if x.strip()]
+    books = set(f["books"]); ids = {v["id"] for v in f["versions"]}
+    sents = [x.strip() for x in re.split(r"(?<=[\u3002\uff01\uff1f])", s) if x.strip()]
     for x in sents:
-        if not re.search(r"[\u2460\u2461\u2462]\s*(\[v:[^\]]+\])?\s*$", x.strip()): return "untagged:" + x[:20]
-        if TAG1 in x:
-            m = re.findall(r"\[v:([^\]]+)\]", x)
-            if not m or any(i not in ids for i in m): return "tag1-no-ref:" + x[:20]
+        core = re.sub(r"[\u3002\uff01\uff1f\s]+$", "", x)
+        if not TAG_RE.search(core): return "untagged:" + x[:24]
+        if TAG1 in core:
+            m = re.findall(r"\[v:([^\]]+)\]", core)
+            if not m or any(i not in ids for i in m): return "tag1-no-ref:" + x[:24]
     for b in re.findall(r"\u300a([^\u300b]{2,12})\u300b", s):
         if b not in books and not any(b in bb or bb in b for bb in books): return "book-not-in-facts:" + b
-    # herb check: any 2-4 char token followed by a dose-ish or listed as herb? keep simple: known herbs mentioned must be in facts
     return ""
 
 def mode_llm():
@@ -212,11 +219,14 @@ def mode_llm():
         f = json.loads(r["facts_json"])
         brief = {"title": f["title"], "books": f["books"], "versions": [{"id": v["id"], "book": v["book"], "herbs": v["herbs"][:20], "indication": v["indication"][:120]} for v in f["versions"][:SUMMARY_VERSIONS]]}
         try:
-            s, model = call_gateway(json.dumps(brief, ensure_ascii=False))
+            s, model = call_gateway(json.dumps(brief, ensure_ascii=False)); s = normalize_tags(s)
         except Exception as e:                                       # noqa: BLE001
             failed += 1; print("  gw fail", r["page_id"], str(e)[:100], flush=True); time.sleep(3); continue
         why = gate_summary(s, f)
-        if why: gated += 1; print("  gated", r["page_id"], why, flush=True); continue
+        if why:
+            gated += 1; print("  gated", r["page_id"], why, flush=True)
+            if gated <= 3: print("    raw:", s[:300].replace(chr(10), " "), flush=True)
+            continue
         body = d1("SELECT body_md FROM wiki_pages WHERE page_id=%s" % qs(r["page_id"]))[0]["body_md"]
         body2 = body.rstrip("\n") + "\n\n## " + H_SUM + "\n\n" + s + "\n"
         d1("UPDATE wiki_pages SET summary_md=%s, body_md=%s, status='published', prompt_ver=%s, model=%s, summarized_at=%d WHERE page_id=%s"
