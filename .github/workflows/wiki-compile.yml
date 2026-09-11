@@ -44,6 +44,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: pip install -q zhconv
       - name: pick mode (cron 19:30 = facts, cron 21:00 = llm)
         id: pick
         run: |
