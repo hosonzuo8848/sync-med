@@ -190,6 +190,11 @@ SCALARS = [
      "SELECT (SELECT COUNT(*) FROM sue_formulas WHERE COALESCE(book_s,'') NOT IN (SELECT DISTINCT book_s FROM sue_formulas_pub WHERE src='v2')) - (SELECT COUNT(*) FROM sue_formulas_pub WHERE src='v1') AS n"),
     ("pub_drift_ai_ok", "旧表 vs v1 快照 ai_ok=1 差（非 0 = 漂移）", "main",
      "SELECT (SELECT COUNT(*) FROM sue_formulas WHERE ai_ok=1 AND COALESCE(book_s,'') NOT IN (SELECT DISTINCT book_s FROM sue_formulas_pub WHERE src='v2')) - (SELECT COUNT(*) FROM sue_formulas_pub WHERE src='v1' AND ai_ok=1) AS n"),
+    # 2026-09-11 compiled-wiki layer (wiki-compile.yml): pages with facts only vs pages whose summary passed the gates.
+    ("wiki_pages_facts", "编纂页总数 (wiki_pages)", "main",
+     "SELECT COUNT(*) AS n FROM wiki_pages"),
+    ("wiki_pages_published", "编纂页已有综述 (status=published)", "main",
+     "SELECT COUNT(*) AS n FROM wiki_pages WHERE status='published'"),
     ("cand_pending", "候选关系待审积压 (pending)", "main",
      "SELECT COUNT(*) AS n FROM sue_graph_candidates WHERE review_status='pending'"),
 ]
