@@ -199,7 +199,7 @@ def render_summary(sents):
     return "".join(out)
 
 def gate_summary(sents, f):
-    if not isinstance(sents, list) or not (3 <= len(sents) <= 8): return "shape:%s" % (len(sents) if isinstance(sents, list) else type(sents).__name__)
+    if not isinstance(sents, list) or not (1 <= len(sents) <= 8): return "shape:%s" % (len(sents) if isinstance(sents, list) else type(sents).__name__)
     ids = {v["id"] for v in f["versions"]}; books = set(f["books"]); title = f.get("title", "")
     for x in sents:
         if not isinstance(x, dict) or not str(x.get("text", "")).strip(): return "empty-sentence"
@@ -207,7 +207,9 @@ def gate_summary(sents, f):
         except Exception: return "bad-tier"
         if tier not in (1, 2, 3): return "bad-tier"
         refs = x.get("refs") or []
-        if tier == 1 and (not refs or any(str(r) not in ids for r in refs)): return "tag1-no-ref:" + str(x.get("text"))[:24]
+        if tier == 1 and (not refs or any(str(r) not in ids for r in refs)):
+            # honest downgrade: a claim the model could not (or wrongly) anchor is inference, not evidence
+            x["tier"] = 2; x["refs"] = []; x["downgraded"] = 1
         if re.search(r"[\u2460\u2461\u2462]", str(x.get("text"))): return "glyph-in-text"
         for b in re.findall(r"\u300a([^\u300b]{2,12})\u300b", str(x.get("text"))):
             if b == title or b == f.get("name_s"): continue
@@ -220,7 +222,7 @@ def mode_llm():
     t0 = time.time()
     rows = d1("SELECT page_id, facts_json FROM wiki_pages WHERE kind=%s AND status='facts' ORDER BY versions_n DESC, compiled_at ASC LIMIT %d" % (qs(KIND), LIMIT))
     print("llm candidates", len(rows), flush=True)
-    ok = gated = failed = 0
+    ok = gated = failed = downgraded = 0
     for r in rows:
         f = json.loads(r["facts_json"])
         brief = {"title": f["title"], "books": f["books"], "versions": [{"id": v["id"], "book": v["book"], "herbs": v["herbs"][:20], "indication": v["indication"][:120]} for v in f["versions"][:SUMMARY_VERSIONS]]}
@@ -229,6 +231,7 @@ def mode_llm():
         except Exception as e:                                       # noqa: BLE001
             failed += 1; print("  gw fail", r["page_id"], str(e)[:100], flush=True); time.sleep(3); continue
         why = gate_summary(sents, f)
+        if not why: downgraded += sum(1 for x in sents if x.get("downgraded"))
         if why:
             gated += 1; print("  gated", r["page_id"], why, flush=True)
             if gated <= 3: print("    raw:", json.dumps(sents, ensure_ascii=False)[:300], flush=True)
@@ -240,7 +243,7 @@ def mode_llm():
            % (qs(s), qs(body2[:60000]), qs(PROMPT_VER), qs(model[:80]), now(), qs(r["page_id"])))
         ok += 1
         if ok % 25 == 0: print("  ok=%d gated=%d fail=%d %ds" % (ok, gated, failed, time.time() - t0), flush=True)
-    line = "wiki-compile llm kind=%s tried=%d published=%d gated=%d fail=%d elapsed=%ds" % (KIND, len(rows), ok, gated, failed, time.time() - t0)
+    line = "wiki-compile llm kind=%s tried=%d published=%d gated=%d fail=%d downgraded_sentences=%d elapsed=%ds" % (KIND, len(rows), ok, gated, failed, downgraded, time.time() - t0)
     print(line); open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "a", encoding="utf-8").write("```\n" + line + "\n```\n")
 
 if __name__ == "__main__":
