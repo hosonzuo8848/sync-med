@@ -1,0 +1,66 @@
+name: wiki-compile
+
+# Compiled-wiki layer (2026-09-11): one page per entity (kind + name_s). MODE=facts assembles facts_json / body_md /
+# refs from D1 tables with zero AI and recompiles only pages whose source hash changed; MODE=llm asks the internal
+# free-pool gateway for a grounded summary on <= LIMIT pages a night and lands it only if three gates pass
+# (books / herbs in facts, every sentence tagged, tag-1 sentences cite [v:id]). Who sees it when it breaks: the step
+# summary line per run, and platform_report picks up wiki_pages counts.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "facts | llm"
+        default: "facts"
+      kind:
+        description: "formula | herb | syndrome"
+        default: "formula"
+      book:
+        description: "restrict facts candidates to one book_s (empty = all live rows)"
+        default: ""
+      limit:
+        description: "llm mode: pages per run"
+        default: "400"
+      force:
+        description: "facts mode: 1 = recompile even if the source hash is unchanged"
+        default: "0"
+  schedule:
+    - cron: "30 19 * * *"    # 03:30 Beijing: facts (incremental, cheap)
+    - cron: "0 21 * * *"     # 05:00 Beijing: llm summaries, <= 400 pages
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wiki-compile
+  cancel-in-progress: false
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: pick mode (cron 19:30 = facts, cron 21:00 = llm)
+        id: pick
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "30 19 * * *" ]; then echo "mode=facts" >> "$GITHUB_OUTPUT"; else echo "mode=llm" >> "$GITHUB_OUTPUT"; fi
+          else
+            echo "mode=${{ github.event.inputs.mode || 'facts' }}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: compile
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+          D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          GW_KEY: ${{ secrets.GW_KEY }}
+          MODE: ${{ steps.pick.outputs.mode }}
+          KIND: ${{ github.event.inputs.kind || 'formula' }}
+          BOOK: ${{ github.event.inputs.book || '' }}
+          LIMIT: ${{ github.event.inputs.limit || '400' }}
+          FORCE: ${{ github.event.inputs.force || '0' }}
+        run: python scripts/wiki/compile_pages.py
