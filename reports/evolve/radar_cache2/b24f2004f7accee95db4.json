@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "adopt",
+ "metric": "调试效率和流程规划",
+ "how": "集成obra/superpowers的hooks和skills",
+ "effort": "中",
+ "current": "自研调试工具和流程规划机制",
+ "beats": "调试效率提升20%，流程规划准确性提高15%",
+ "why": "提高调试效率和流程规划准确性"
+}

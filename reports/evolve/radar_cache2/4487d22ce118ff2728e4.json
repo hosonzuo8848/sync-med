@@ -1,0 +1,10 @@
+{
+ "module": "检索路由",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "暂无具体实现",
+ "beats": "",
+ "why": "常驻主机型，不符合Serverless要求"
+}

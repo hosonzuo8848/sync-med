@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "watch",
+ "metric": "用户体验",
+ "how": "集成freeCodeCamp的代码示例和教程",
+ "effort": "小",
+ "current": "自研代码示例和教程",
+ "beats": "提供更多实践学习资源",
+ "why": "丰富学习资源，提升学习体验"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "OCR字符错误率",
+ "how": "",
+ "effort": "小",
+ "current": "Tesseract OCR引擎",
+ "beats": "",
+ "why": "Redis为内存数据库，与OCR产线无关"
+}

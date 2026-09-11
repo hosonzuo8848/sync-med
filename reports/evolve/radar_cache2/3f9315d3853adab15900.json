@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "Redis 是内存数据库，不适合用于采集下载线模块，该模块需要持久化存储和高效的数据检索能力，而 Redis 更适合作为缓存使用。"
+}

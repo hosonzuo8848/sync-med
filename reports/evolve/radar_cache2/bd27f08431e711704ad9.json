@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "OCR字符错误率",
+ "how": "集成MinerU进行PDF转文本",
+ "effort": "小",
+ "current": "Tesseract OCR",
+ "beats": "识别准确率",
+ "why": "提高古籍扫描件转文字的准确性"
+}

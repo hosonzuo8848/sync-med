@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "该项目与AI寻脉模块无关，主要针对Claude Code agents的技能和工作流程管理。"
+}

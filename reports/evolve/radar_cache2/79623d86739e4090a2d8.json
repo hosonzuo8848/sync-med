@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "watch",
+ "metric": "网页抓取效率",
+ "how": "集成unclecode/crawl4ai进行高效网页抓取",
+ "effort": "小",
+ "current": "现有爬虫框架",
+ "beats": "抓取速度和效率",
+ "why": "提升网页抓取速度和准确性"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "adopt",
+ "metric": "检索速度和效果",
+ "how": "集成 LightRAG SDK 到现有 RAG 模块中，利用其双级检索和知识图谱增强功能",
+ "effort": "中",
+ "current": "当前使用的 RAG 模块（具体名称未知）",
+ "beats": "检索速度更快，效果更优，特别是对于需要知识图谱增强的场景",
+ "why": "LightRAG 是一个纯 Python SDK，无需服务器，符合 Serverless 平台要求，且在 GitHub 上有较高的评价和活跃度"
+}

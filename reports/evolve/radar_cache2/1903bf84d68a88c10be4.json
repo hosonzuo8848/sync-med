@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "tesseract.js + pdf2pic",
+ "beats": "",
+ "why": "已在家底:workflows/ocr.yml 用 tesseract.js"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "检索路由",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "tcm-rag-768",
+ "beats": "无",
+ "why": "Elasticsearch需要常驻环境，不符合我们的无服务器架构"
+}

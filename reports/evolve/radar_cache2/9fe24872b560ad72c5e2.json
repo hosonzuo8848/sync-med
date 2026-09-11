@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "前台阅读器目前使用的是自研的静态文件服务器和HTTPS配置",
+ "beats": "",
+ "why": "Caddy主要用于Web服务器和HTTPS配置，与前台阅读器的核心功能不直接相关"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "watch",
+ "metric": "用户体验",
+ "how": "集成browser-use实现网页自动化",
+ "effort": "小",
+ "current": "使用原生JavaScript进行页面交互",
+ "beats": "自动化复杂网页操作，提升用户体验",
+ "why": "提升AI代理的网页交互能力"
+}

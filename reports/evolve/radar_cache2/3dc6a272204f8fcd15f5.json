@@ -1,0 +1,10 @@
+{
+ "module": "视频拼接模块",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "OpenMontage 是基于 ffmpeg 的视频拼接工具，虽然功能强大，但不符合 Serverless 架构要求，且不是领域公认头牌。"
+}

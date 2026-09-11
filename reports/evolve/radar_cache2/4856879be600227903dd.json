@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "adopt",
+ "metric": "Web服务器性能",
+ "how": "替换现有Web服务器",
+ "effort": "中",
+ "current": "Nginx",
+ "beats": "性能提升、自动HTTPS配置",
+ "why": "Caddy提供更优性能和自动HTTPS，提升用户体验"
+}

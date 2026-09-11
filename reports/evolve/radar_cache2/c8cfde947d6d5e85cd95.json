@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "watch",
+ "metric": "生成代码长度",
+ "how": "集成ponytail插件限制代码生成",
+ "effort": "小",
+ "current": "RAG grounding + 多段结构化输出",
+ "beats": "平均代码长度减少",
+ "why": "减少冗余代码，提升效率"
+}

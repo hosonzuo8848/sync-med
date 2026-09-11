@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "OCR字符错误率",
+ "how": "替换现有OCR引擎",
+ "effort": "中",
+ "current": "Tesseract OCR 4.00",
+ "beats": "字符识别准确率",
+ "why": "可能存在更优版本"
+}
