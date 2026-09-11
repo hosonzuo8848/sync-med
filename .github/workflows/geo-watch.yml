@@ -1,0 +1,35 @@
+name: geo-watch
+
+# Weekly "cited by AI" report (2026-09-11): counts AI answer-time fetches (ChatGPT-User / OAI-SearchBot /
+# Claude-SearchBot / Perplexity), AI training crawls, and AI referrals from page_view_log's coarse classes
+# (no raw UA / referer stored), plus the top cited pages. One living Issue; who sees it: the founder's Issue feed.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * 1"    # Monday 09:00 Beijing
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: geo-watch
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: report
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+          D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/geo/geo_watch.py
