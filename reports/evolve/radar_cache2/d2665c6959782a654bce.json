@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "Neo4j",
+ "beats": "无",
+ "why": "Neo4j 已在我们的知识图谱星图中使用，无需替换。"
+}

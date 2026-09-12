@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "我们该模块现在用的是什么",
+ "beats": "无",
+ "why": "该项目为学习平台，非阅读器工具"
+}

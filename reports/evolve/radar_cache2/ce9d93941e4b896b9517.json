@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "我们该模块现在用的是什么",
+ "beats": "无",
+ "why": "Caddy 是一个 HTTP/1-2-3 服务器，与前台阅读器模块无关"
+}

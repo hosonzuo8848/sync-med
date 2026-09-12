@@ -1,0 +1,10 @@
+{
+ "module": "检索路由 —— /api/retrieve",
+ "verdict": "watch",
+ "metric": "检索速度和准确性",
+ "how": "集成Elasticsearch作为后端搜索引擎",
+ "effort": "中",
+ "current": "目前使用的是自研搜索引擎",
+ "beats": "在检索速度和准确性上可能胜过自研搜索引擎",
+ "why": "Elasticsearch是一个成熟的开源搜索引擎，在处理大规模数据集和提供高可用性方面表现良好"
+}

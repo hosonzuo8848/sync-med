@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "watch",
+ "metric": "知识图谱构建效率",
+ "how": "使用 graphify 库构建知识图谱",
+ "effort": "中",
+ "current": "目前使用自研知识图谱构建工具",
+ "beats": "构建速度和效率可能更高",
+ "why": "Graphify-Labs 项目在 GitHub 上有较高的评价，且为纯库形式，无需服务器，适合我们的无服务器架构。"
+}
