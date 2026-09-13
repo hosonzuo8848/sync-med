@@ -1,0 +1,10 @@
+{
+ "module": "搜索引擎",
+ "verdict": "adopt",
+ "metric": "检索召回率",
+ "how": "通过REST API集成，实现全文搜索功能",
+ "effort": "中",
+ "current": "当前使用Solr作为搜索引擎",
+ "beats": "检索速度和扩展性",
+ "why": "Elasticsearch性能更优，社区活跃"
+}

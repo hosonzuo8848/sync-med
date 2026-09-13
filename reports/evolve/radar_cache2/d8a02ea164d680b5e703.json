@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "古籍辨证参阅报告使用 RAG grounding + 多段结构化输出",
+ "beats": "",
+ "why": "已在家底：RAG grounding 和结构化输出是核心功能"
+}

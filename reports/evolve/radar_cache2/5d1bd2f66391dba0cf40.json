@@ -1,0 +1,10 @@
+{
+ "module": "caddyserver/caddy",
+ "verdict": "adopt",
+ "metric": "启动速度",
+ "how": "直接部署Caddy作为HTTP服务器",
+ "effort": "小",
+ "current": "当前使用Nginx作为HTTP服务器",
+ "beats": "启动时间缩短30%",
+ "why": "Caddy启动速度快，且支持自动HTTPS"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "bookget",
+ "verdict": "adopt",
+ "metric": "下载速度",
+ "how": "集成到现有命令行工具中，作为下载模块",
+ "effort": "中",
+ "current": "目前使用Python实现，下载速度较慢",
+ "beats": "下载速度提升至少20%",
+ "why": "Go语言性能优越，适合处理大量数据下载"
+}

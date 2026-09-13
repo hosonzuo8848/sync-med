@@ -1,0 +1,10 @@
+{
+ "module": "sindresorhus/awesome",
+ "verdict": "watch",
+ "metric": "项目活跃度和社区影响力",
+ "how": "定期关注更新，参与社区讨论",
+ "effort": "小",
+ "current": "目前无特定技术方案集成",
+ "beats": "项目活跃度和社区参与度",
+ "why": "项目具有广泛影响力，值得持续关注"
+}

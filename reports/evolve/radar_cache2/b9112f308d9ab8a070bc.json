@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "sue_graph_nodes/edges 6.9 万节点,2D/3D 力导向可视化",
+ "beats": "",
+ "why": "Graphify-Labs/graphify 是一个纯库，不需要长期常驻主机，但它的功能和我们的知识图谱星图模块不完全匹配，且没有提供具体的量化指标来证明其改进效果。"
+}

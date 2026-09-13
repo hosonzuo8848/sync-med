@@ -1,0 +1,10 @@
+{
+ "module": "obra/superpowers",
+ "verdict": "adopt",
+ "metric": "代码质量",
+ "how": "集成到开发工作流中，作为测试和调试工具",
+ "effort": "中",
+ "current": "当前使用手动测试和代码审查",
+ "beats": "代码覆盖率、测试用例数量",
+ "why": "提高代码质量和开发效率"
+}

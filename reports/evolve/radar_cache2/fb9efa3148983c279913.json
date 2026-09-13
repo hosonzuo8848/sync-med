@@ -1,0 +1,10 @@
+{
+ "module": "unclecode/crawl4ai",
+ "verdict": "adopt",
+ "metric": "爬虫效率",
+ "how": "集成到现有爬虫框架中，替换部分核心模块",
+ "effort": "中",
+ "current": "当前使用基于Scrapy的爬虫框架",
+ "beats": "爬取速度提升20%",
+ "why": "开源且性能优越"
+}

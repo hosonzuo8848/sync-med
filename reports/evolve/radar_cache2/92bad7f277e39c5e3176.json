@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "古籍扫描件转文字",
+ "beats": "",
+ "why": "需常驻主机"
+}

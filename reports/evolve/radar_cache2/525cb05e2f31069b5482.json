@@ -1,0 +1,10 @@
+{
+ "module": "DietrichGebert/ponytail",
+ "verdict": "adopt",
+ "metric": "代码生成效率",
+ "how": "作为插件集成到代码生成流程中",
+ "effort": "小",
+ "current": "当前使用通用代码生成策略",
+ "beats": "代码行数减少10%",
+ "why": "提高开发效率，减少冗余代码"
+}

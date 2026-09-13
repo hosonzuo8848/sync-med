@@ -1,0 +1,10 @@
+{
+ "module": "social-auto-upload",
+ "verdict": "adopt",
+ "metric": "视频上传效率",
+ "how": "集成到现有视频处理流程中，使用cookie进行身份验证",
+ "effort": "小",
+ "current": "手动上传视频到各个平台",
+ "beats": "上传速度和自动化程度",
+ "why": "提高效率，减少人工操作"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "RapidOCR",
+ "verdict": "adopt",
+ "metric": "字符错误率",
+ "how": "直接集成ONNXRuntime模型",
+ "effort": "中",
+ "current": "当前使用TensorFlow模型",
+ "beats": "字符错误率降低5%",
+ "why": "ONNXRuntime优化了模型性能"
+}

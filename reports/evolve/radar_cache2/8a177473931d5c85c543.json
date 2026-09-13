@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "我们前台阅读器使用的是自研的Web服务器和反向代理解决方案",
+ "beats": "无",
+ "why": "Caddy是一个Web服务器，但我们的前台阅读器已经使用自研的解决方案，且Caddy需要长期常驻主机"
+}

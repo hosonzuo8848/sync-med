@@ -1,0 +1,10 @@
+{
+ "module": "PaddlePaddle/PaddleOCR",
+ "verdict": "adopt",
+ "metric": "字符识别准确率",
+ "how": "直接集成到现有项目中，调用API进行图像识别",
+ "effort": "小",
+ "current": "当前使用Tesseract OCR",
+ "beats": "在中文识别准确率上",
+ "why": "PaddleOCR在中文识别上表现更优"
+}

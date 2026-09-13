@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "目前前台阅读器主要功能为沉浸式阅读、分页、字号调整和会员门禁",
+ "beats": "",
+ "why": "OpenMontage 是视频拼接工具，与前台阅读器功能不相关"
+}

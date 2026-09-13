@@ -1,0 +1,10 @@
+{
+ "module": "HKUDS/LightRAG",
+ "verdict": "adopt",
+ "metric": "检索召回率",
+ "how": "集成知识图谱增强的双层检索机制",
+ "effort": "中",
+ "current": "当前使用基于TF-IDF的简单检索方法",
+ "beats": "检索召回率提升5%",
+ "why": "提升检索效果，增强生成质量"
+}

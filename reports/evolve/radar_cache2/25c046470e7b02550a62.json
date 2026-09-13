@@ -1,0 +1,10 @@
+{
+ "module": "Graphify-Labs/graphify",
+ "verdict": "adopt",
+ "metric": "知识图谱构建效率",
+ "how": "直接集成到现有代码库中，使用其API进行知识图谱构建",
+ "effort": "中",
+ "current": "当前使用基于规则的方法构建知识图谱",
+ "beats": "知识图谱构建速度和准确性",
+ "why": "提高知识图谱构建效率，减少人工干预"
+}

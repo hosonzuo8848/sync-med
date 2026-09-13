@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "字符识别准确率",
+ "how": "集成到 Actions 流程中",
+ "effort": "小",
+ "current": "OCR产线使用 Tesseract.js 在 Actions 中运行",
+ "beats": "中文古籍字符识别准确率",
+ "why": "可能提升识别准确率"
+}

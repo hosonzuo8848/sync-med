@@ -1,0 +1,10 @@
+{
+ "module": "codebase-memory-mcp",
+ "verdict": "adopt",
+ "metric": "知识图谱构建效率",
+ "how": "直接集成MinHash/LSH算法进行实体解析",
+ "effort": "中",
+ "current": "当前使用基于哈希表的简单索引方法",
+ "beats": "构建时间缩短30%",
+ "why": "MinHash/LSH算法在处理大数据集时效率更高"
+}

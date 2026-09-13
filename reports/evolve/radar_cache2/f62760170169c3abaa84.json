@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "古籍扫描件转文字，使用Tesseract OCR引擎",
+ "beats": "",
+ "why": "该项目专注于PDF转Markdown和JSON，而非古籍扫描件OCR，与现有OCR产线功能不符"
+}
