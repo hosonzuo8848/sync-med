@@ -41,6 +41,7 @@ jobs:
         run: python tools/roundtable/roundtable.py --count ${{ github.event.inputs.count || 1 }}
         env:
           CF_D1_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}   # 2026-09-15: opsec commit 5eb1f75 moved the account id to env but never passed it here -> D1 URL 404, 0 posts since 08-30
           GW_KEY: ${{ secrets.GW_KEY }}
       - name: 失败上报 Issue(哨兵)
         if: failure()
