@@ -339,6 +339,10 @@ def main():
             ok += 1
         time.sleep(1)
     print(f"\n=== 完成 {ok}/{args.count} 篇 ===")
+    # 2026-09-15: zero published must fail the job, otherwise the run stays green while every debate is thrown away
+    # (08-30 -> 09-14: ~180 runs "success", 0 rows written, D1 URL was 404 because CF_ACCOUNT_ID was never passed).
+    if not args.dry and ok == 0 and args.count > 0:
+        print("ZERO PUBLISHED -> failing the job so the sentinel step fires"); sys.exit(1)
 
 if __name__ == "__main__":
     main()
