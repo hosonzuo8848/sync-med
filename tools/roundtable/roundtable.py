@@ -237,7 +237,7 @@ def sql_escape(s):
 
 def insert_post(topic, md, signs):
     title = f"百家论道 · {topic}"
-    view, like = random.randint(41, 96), random.randint(3, 12)  # 冷启动种子(CTO 已验收 → published)
+    view, like = 0, 0   # 2026-09-15: no fabricated counters (08-28 audit: fake 34,360 reads vs 9 real); counts grow from real traffic only  # 冷启动种子(CTO 已验收 → published)
     cols = ("(author_id, author_name, category, title, content_md, status, "
             "view_count, like_count, comment_count, created_at, updated_at)")
     token = os.environ.get("CF_D1_TOKEN")
