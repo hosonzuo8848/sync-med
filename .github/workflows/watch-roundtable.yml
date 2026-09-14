@@ -38,6 +38,7 @@ jobs:
         run: python tools/roundtable/watch.py
         env:
           CF_D1_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}   # 2026-09-15: opsec commit 5eb1f75 moved the account id to env but never passed it here -> D1 URL 404, 0 posts since 08-30
       - name: 停滞则写 Issue
         if: steps.check.outputs.stalled == 'true'
         uses: actions/github-script@v7
