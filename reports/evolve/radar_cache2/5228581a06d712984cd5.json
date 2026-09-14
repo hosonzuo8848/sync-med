@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": null,
+ "how": null,
+ "effort": null,
+ "current": "Tesseract OCR",
+ "beats": null,
+ "why": "PaddleOCR 已在我们的 requirements.txt 中使用，属于家底。"
+}

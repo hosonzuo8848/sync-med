@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "使用自定义的JavaScript库进行页面交互和自动化",
+ "beats": "",
+ "why": "该项目专注于网站可访问性和AI代理自动化，与前台阅读器模块的功能和需求不匹配"
+}

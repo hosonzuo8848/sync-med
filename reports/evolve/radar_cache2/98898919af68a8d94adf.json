@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "tcm-rag-768",
+ "beats": "",
+ "why": "Elasticsearch 是搜索集群，需要常驻主机，不符合零常驻主机的运行形态。"
+}

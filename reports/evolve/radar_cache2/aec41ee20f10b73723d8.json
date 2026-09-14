@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Tesseract OCR",
+ "beats": "",
+ "why": "RapidOCR是Python库，但我们的OCR产线已使用Tesseract OCR，且Tesseract OCR是公认的高效OCR工具。"
+}

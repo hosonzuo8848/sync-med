@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "古籍扫描件转文字，使用Tesseract OCR引擎",
+ "beats": "",
+ "why": "项目是数字图书馆书籍下载器，与OCR产线功能不相关"
+}

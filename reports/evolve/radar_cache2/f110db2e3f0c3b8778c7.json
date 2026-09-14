@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Tesseract OCR + 自研PDF解析器",
+ "beats": "",
+ "why": "MinerU是PDF转Markdown和JSON的工具，与OCR产线功能不直接相关"
+}
