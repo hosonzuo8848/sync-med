@@ -97,14 +97,13 @@ def candidates():
     return rows
 
 def arxiv_abstract(url):
-    m = re.search(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})", url or "")
+    m = re.search(r"arxiv" + chr(92) + ".org/(?:abs|pdf)/(" + chr(92) + "d{4}" + chr(92) + "." + chr(92) + "d{4,5})", url or "")
     if not m: return ""
     try:
         x = http_get("http://export.arxiv.org/api/query?id_list=" + m.group(1), timeout=30).decode("utf-8", "replace")
         t = re.search(r"<title>(.*?)</title>.*?<summary>(.*?)</summary>", x, re.S)
-        return ("Title: %s
-
-%s" % (t.group(1).strip(), re.sub(r"\s+", " ", t.group(2)).strip())) if t else ""
+        if not t: return ""
+        return "Title: " + t.group(1).strip() + chr(10) + chr(10) + re.sub(r"[ " + chr(9) + chr(10) + chr(13) + "]+", " ", t.group(2)).strip()
     except Exception: return ""
 
 def build_facts(it):
