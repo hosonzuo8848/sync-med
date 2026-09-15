@@ -1,0 +1,70 @@
+name: intel-compile
+
+# Eagle-eye knowledge base (2026-09-16): compile every high-relevance intel item into one fixed-template page
+# (wiki_pages kind=intel): full text via r.jina.ai (free), GitHub metadata, six-section grounded summary via the
+# internal free-pool gateway (tier-1 sentences must carry a verbatim quote), then a daily 3-item digest Issue.
+# Runs after intel-radar (00:30Z). Who sees it when it breaks: the step summary lines + the daily digest Issue
+# (missing digest = pipeline stalled) + platform_report wiki_pages counts.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "facts | llm | digest | all"
+        default: "all"
+      days:
+        description: "facts: look back N days of intel_items"
+        default: "1"
+      limit:
+        description: "facts/llm: max pages per run"
+        default: "40"
+      force:
+        description: "facts: 1 = recompile even if unchanged"
+        default: "0"
+  schedule:
+    - cron: "0 2 * * *"      # 10:00 Beijing: facts + llm
+    - cron: "30 2 * * *"     # 10:30 Beijing: digest Issue
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: intel-compile
+  cancel-in-progress: false
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+      D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+      GW_KEY: ${{ secrets.GW_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      DAYS: ${{ github.event.inputs.days || '1' }}
+      LIMIT: ${{ github.event.inputs.limit || '40' }}
+      FORCE: ${{ github.event.inputs.force || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: pick mode (cron 02:00 = facts+llm, cron 02:30 = digest)
+        id: pick
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "0 2 * * *" ]; then echo "mode=factsllm" >> "$GITHUB_OUTPUT"; else echo "mode=digest" >> "$GITHUB_OUTPUT"; fi
+          else
+            echo "mode=${{ github.event.inputs.mode || 'all' }}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: facts
+        if: contains(fromJSON('["facts","factsllm","all"]'), steps.pick.outputs.mode)
+        run: MODE=facts python scripts/intel_radar/intel_compile.py
+      - name: llm summaries
+        if: contains(fromJSON('["llm","factsllm","all"]'), steps.pick.outputs.mode)
+        run: MODE=llm python scripts/intel_radar/intel_compile.py
+      - name: digest issue
+        if: contains(fromJSON('["digest","all"]'), steps.pick.outputs.mode)
+        run: MODE=digest python scripts/intel_radar/intel_compile.py
