@@ -1,0 +1,10 @@
+{
+ "module": "PaddleOCR",
+ "verdict": "watch",
+ "metric": "OCR字符错误率",
+ "how": "结合PaddlePaddle深度学习框架进行字符识别",
+ "effort": "中",
+ "current": "基于PaddlePaddle的OCR模型",
+ "beats": "在字符识别准确率上",
+ "why": "社区活跃，更新频繁，支持多语言"
+}

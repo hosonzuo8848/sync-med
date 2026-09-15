@@ -1,0 +1,10 @@
+{
+ "module": "Web Crawler & Scraper",
+ "verdict": "adopt",
+ "metric": "网页抓取效率",
+ "how": "使用Python进行高效爬取",
+ "effort": "中",
+ "current": "当前使用的基础爬虫技术",
+ "beats": "抓取速度和准确性",
+ "why": "项目星数高，社区活跃，支持LLM，有助于提升爬取效率和准确性"
+}

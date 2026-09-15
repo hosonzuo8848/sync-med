@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "古籍文本识别准确率",
+ "how": "N/A",
+ "effort": "小",
+ "current": "Tesseract（及各种封装库）",
+ "beats": "N/A",
+ "why": "我们已在使用Tesseract，无显著改进"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "redis/redis",
+ "verdict": "watch",
+ "metric": "性能",
+ "how": "监控性能指标，如内存使用率和响应时间",
+ "effort": "小",
+ "current": "使用C语言编写的内存数据库",
+ "beats": "内存使用效率",
+ "why": "社区活跃，持续更新，性能优化"
+}

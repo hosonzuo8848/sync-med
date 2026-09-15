@@ -1,0 +1,10 @@
+{
+ "module": "browser-use",
+ "verdict": "adopt",
+ "metric": "自动化任务执行效率",
+ "how": "使用Playwright进行网页自动化，提高AI代理的在线任务执行能力",
+ "effort": "中",
+ "current": "目前可能使用的是自定义的自动化脚本或简单的浏览器驱动",
+ "beats": "执行速度和稳定性",
+ "why": "Playwright提供了强大的自动化功能，能够显著提升AI代理的在线任务执行效率"
+}

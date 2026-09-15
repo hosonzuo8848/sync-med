@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "PDF.js",
+ "beats": "",
+ "why": "无需常驻服务，但功能与现有PDF处理库重叠"
+}

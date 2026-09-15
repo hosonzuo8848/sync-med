@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "D1 存 6.9 万节点/边，前端 3d-force-graph 渲染",
+ "beats": "",
+ "why": "已在家底:Neo4j 已用作为图数据库"
+}

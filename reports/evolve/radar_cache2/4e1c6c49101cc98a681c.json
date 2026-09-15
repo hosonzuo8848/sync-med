@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "OCR文本识别准确率",
+ "how": "N/A",
+ "effort": "小",
+ "current": "Tesseract",
+ "beats": "N/A",
+ "why": "RapidOCR需要持续运行，不符合无常驻主机要求"
+}

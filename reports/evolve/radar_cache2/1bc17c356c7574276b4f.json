@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Neo4j",
+ "beats": "",
+ "why": "需要持续运行的服务，形态不符"
+}

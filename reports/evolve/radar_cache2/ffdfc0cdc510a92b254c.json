@@ -1,0 +1,10 @@
+{
+ "module": "social-auto-upload",
+ "verdict": "watch",
+ "metric": "自动化上传效率",
+ "how": "监控上传速度和成功率",
+ "effort": "小",
+ "current": "手动上传",
+ "beats": "上传速度和成功率",
+ "why": "项目已获得较高星数，有潜在改进空间"
+}

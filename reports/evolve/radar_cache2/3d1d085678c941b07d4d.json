@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "OCR识别准确率、处理速度",
+ "how": "集成RapidOCR提高OCR识别效率",
+ "effort": "中",
+ "current": "GitHub Actions批量跑`surya`/`paddleocr`/`marker`等CLI",
+ "beats": "RapidOCR在ONNXRuntime上优化，可能提升识别准确率和速度",
+ "why": "RapidOCR基于ONNXRuntime，可能与我们现有方案有架构位移"
+}

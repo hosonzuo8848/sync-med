@@ -1,0 +1,10 @@
+{
+ "module": "PDF to Markdown and JSON Converter",
+ "verdict": "adopt",
+ "metric": "Conversion accuracy and layout preservation",
+ "how": "Implement the tool for automated conversion tasks",
+ "effort": "中",
+ "current": "Manual conversion using various tools",
+ "beats": "Conversion speed and accuracy",
+ "why": "Automates the process, improves efficiency and reduces human error"
+}

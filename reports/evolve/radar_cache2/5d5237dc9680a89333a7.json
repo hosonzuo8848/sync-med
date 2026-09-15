@@ -1,0 +1,10 @@
+{
+ "module": "codebase-memory-mcp",
+ "verdict": "watch",
+ "metric": "检索召回率",
+ "how": "使用MinHash/LSH进行实体解析",
+ "effort": "中",
+ "current": "当前使用未指定",
+ "beats": "在检索召回率上可能胜出",
+ "why": "项目星数高，语言为TypeScript，涉及知识图谱构建，值得持续关注"
+}

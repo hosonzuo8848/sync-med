@@ -1,0 +1,10 @@
+{
+ "module": "freeCodeCamp",
+ "verdict": "watch",
+ "metric": "社区活跃度",
+ "how": "关注GitHub仓库的更新和社区讨论",
+ "effort": "小",
+ "current": "开源代码库和免费编程课程",
+ "beats": "用户参与度和项目更新频率",
+ "why": "项目活跃，有大量用户参与，持续更新"
+}

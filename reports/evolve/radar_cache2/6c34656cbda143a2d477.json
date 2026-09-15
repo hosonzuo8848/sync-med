@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "watch",
+ "metric": "视频剪辑效率",
+ "how": "自动视频剪辑，无需GPU",
+ "effort": "小",
+ "current": "手动剪辑或使用现有工具",
+ "beats": "提高剪辑速度，降低对GPU的依赖",
+ "why": "现有方案可能效率低，对GPU要求高"
+}

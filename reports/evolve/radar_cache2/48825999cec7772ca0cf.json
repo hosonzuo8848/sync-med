@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "OCR产线使用的是`surya`、`paddleocr`、`marker`等CLI工具，无常驻服务。",
+ "beats": "",
+ "why": "已在家底:OCR产线已用CLI工具，Redis作为数据库不在OCR产线使用范围内。"
+}

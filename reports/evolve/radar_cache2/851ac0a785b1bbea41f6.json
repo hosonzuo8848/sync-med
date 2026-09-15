@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "watch",
+ "metric": "爬取效率和准确性",
+ "how": "利用LLM优化爬取逻辑",
+ "effort": "中",
+ "current": "Actions + `playwright`/`httpx` 脚本",
+ "beats": "潜在提升爬取速度和准确性",
+ "why": "LLM可增强爬取策略，但需评估与现有方案的兼容性"
+}

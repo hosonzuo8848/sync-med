@@ -1,0 +1,10 @@
+{
+ "module": "视频拼接模块",
+ "verdict": "adopt",
+ "metric": "视频拼接质量",
+ "how": "使用ffmpeg进行xfade过渡和节拍同步剪辑",
+ "effort": "小",
+ "current": "自定义视频拼接脚本或工具",
+ "beats": "拼接质量和效率",
+ "why": "无需GPU，支持多种过渡效果，易于集成"
+}

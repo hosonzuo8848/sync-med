@@ -1,0 +1,10 @@
+{
+ "module": "HKUDS/LightRAG",
+ "verdict": "adopt",
+ "metric": "检索召回率",
+ "how": "使用纯Python SDK进行检索增强生成",
+ "effort": "小",
+ "current": "当前使用的检索增强生成方案",
+ "beats": "检索召回率",
+ "why": "纯Python实现，无需服务器，简单快速"
+}

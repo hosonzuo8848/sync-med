@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Actions + `playwright`/`httpx` 脚本",
+ "beats": "",
+ "why": "已在家底:自研脚本已满足需求"
+}

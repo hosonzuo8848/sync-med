@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Neo4j",
+ "beats": "",
+ "why": "我们已有Neo4j，且项目需常驻主机"
+}

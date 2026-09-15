@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "暂无",
+ "beats": "",
+ "why": "需要将PDF转换为Markdown和JSON，但前台阅读器模块主要处理古籍文本的展示和阅读，不涉及PDF转换功能。"
+}

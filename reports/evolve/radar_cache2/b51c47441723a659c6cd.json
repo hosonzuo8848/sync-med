@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "watch",
+ "metric": "PDF转换质量与效率",
+ "how": "提升PDF到Markdown和JSON的转换能力",
+ "effort": "小",
+ "current": "当前使用 `surya`/`paddleocr`/`marker` 等CLI进行PDF转换",
+ "beats": "更高质量的转换结果，可能提高转换效率",
+ "why": "可能提供更优的PDF到Markdown和JSON的转换功能"
+}

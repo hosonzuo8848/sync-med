@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Faiss",
+ "beats": "",
+ "why": "需要服务器，不符合无常驻主机要求"
+}

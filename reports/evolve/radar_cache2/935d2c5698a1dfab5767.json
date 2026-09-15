@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "adopt",
+ "metric": "识别准确率、处理速度",
+ "how": "集成PaddleOCR提高OCR任务性能",
+ "effort": "中",
+ "current": "GitHub Actions 批量跑 `surya`/`paddleocr`/`marker` 等 CLI",
+ "beats": "PaddleOCR在准确率和速度上可能优于现有CLI工具",
+ "why": "PaddlePaddle是知名深度学习框架，PaddleOCR性能优越"
+}

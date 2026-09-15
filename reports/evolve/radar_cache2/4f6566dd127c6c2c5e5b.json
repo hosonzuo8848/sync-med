@@ -1,0 +1,10 @@
+{
+ "module": "检索路由",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Worker 内路由分发逻辑",
+ "beats": "",
+ "why": "已在家底: 使用自研路由分发逻辑"
+}

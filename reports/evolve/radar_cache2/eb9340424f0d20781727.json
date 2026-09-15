@@ -1,0 +1,10 @@
+{
+ "module": "sindresorhus/awesome",
+ "verdict": "watch",
+ "metric": "社区活跃度",
+ "how": "定期检查更新和星数变化",
+ "effort": "小",
+ "current": "社区维护的列表",
+ "beats": "星数达到340000",
+ "why": "高星数表明社区认可度高，可能值得进一步关注"
+}

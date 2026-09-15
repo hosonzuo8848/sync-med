@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "GitHub Actions 批量跑 `surya`/`paddleocr`/`marker` 等 CLI",
+ "beats": "",
+ "why": "已在家底:OCR产线已用`surya`/`paddleocr`/`marker`等CLI"
+}

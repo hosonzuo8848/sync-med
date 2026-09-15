@@ -1,0 +1,10 @@
+{
+ "module": "caddyserver/caddy",
+ "verdict": "watch",
+ "metric": "性能和可扩展性",
+ "how": "监控性能指标和社区反馈",
+ "effort": "小",
+ "current": "目前使用的是Nginx或自研的HTTP服务器",
+ "beats": "在性能和自动HTTPS配置上",
+ "why": "Caddy提供自动HTTPS和良好的性能，值得持续关注"
+}

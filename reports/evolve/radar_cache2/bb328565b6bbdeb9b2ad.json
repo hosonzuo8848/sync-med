@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Neo4j",
+ "beats": "",
+ "why": "Graphify-Labs 项目无需服务器，但无法直接在 Cloudflare Serverless 环境中运行"
+}

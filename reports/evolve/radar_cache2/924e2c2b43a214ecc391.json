@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "adopt",
+ "metric": "下载效率和兼容性",
+ "how": "集成Go语言工具，提高下载速度和图书馆兼容性",
+ "effort": "中",
+ "current": "Actions + `playwright`/`httpx` 脚本",
+ "beats": "Go语言执行效率高，兼容更多图书馆",
+ "why": "Go语言工具可提升下载性能，扩展图书馆支持范围"
+}

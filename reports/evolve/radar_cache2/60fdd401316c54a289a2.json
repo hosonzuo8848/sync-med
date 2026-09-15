@@ -1,0 +1,10 @@
+{
+ "module": "tesseract-ocr/tesseract",
+ "verdict": "watch",
+ "metric": "OCR字符错误率",
+ "how": "持续关注其性能改进和社区反馈",
+ "effort": "小",
+ "current": "基于Tesseract 4.x版本",
+ "beats": "社区反馈的准确性和速度",
+ "why": "社区活跃，持续更新，可能带来性能提升"
+}

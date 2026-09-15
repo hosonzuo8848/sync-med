@@ -1,0 +1,10 @@
+{
+ "module": "neo4j/neo4j",
+ "verdict": "watch",
+ "metric": "性能和可扩展性",
+ "how": "持续关注性能优化和社区反馈",
+ "effort": "中",
+ "current": "目前使用的是Apache TinkerPop兼容的图数据库",
+ "beats": "在社区支持和生态系统中胜过current",
+ "why": "高星数和广泛使用表明其在社区和生态系统中的优势"
+}

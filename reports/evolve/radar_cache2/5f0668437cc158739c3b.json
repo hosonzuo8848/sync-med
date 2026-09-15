@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "watch",
+ "metric": "调试效率和流程规划",
+ "how": "提供TDD执行和调试工作流工具",
+ "effort": "小",
+ "current": "RAG grounding + 结构化 JSON 输出",
+ "beats": "提升调试效率和流程规划能力",
+ "why": "现有方案缺乏专门的调试和规划工具"
+}
