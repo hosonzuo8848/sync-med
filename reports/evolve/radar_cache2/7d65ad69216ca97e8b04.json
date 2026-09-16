@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "暂无",
+ "beats": "",
+ "why": "已在家底：OCR产线使用的是云端 Actions 批量跑，Redis 作为内存数据库不适合 OCR 文字转换任务"
+}

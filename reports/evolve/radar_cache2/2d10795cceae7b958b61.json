@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": null,
+ "how": null,
+ "effort": null,
+ "current": "暂无具体工具名或服务名",
+ "beats": null,
+ "why": "已在家底：OCR 引擎"
+}

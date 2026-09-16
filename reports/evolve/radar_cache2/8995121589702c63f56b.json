@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "暂无",
+ "beats": "",
+ "why": "已在家底：古方 AI 星图平台的 AI 寻脉模块目前是自研的，专注于古籍辨证参阅报告的生成。obra/superpowers 提供的技能、钩子和工作流程纪律与我们的模块功能不完全对应。"
+}
