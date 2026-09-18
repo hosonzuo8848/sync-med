@@ -246,7 +246,15 @@ def gh_api(method, path, body=None):
     return json.loads(urllib.request.urlopen(req, timeout=60).read() or b"null")
 
 def mode_digest():
-    rows = d1("SELECT page_id, name_s, title, summary_md, facts_json FROM wiki_pages WHERE kind='intel' AND status='published' AND summarized_at >= %d ORDER BY versions_n DESC, summarized_at DESC LIMIT 3" % (now() - 36 * 3600))
+    cand = d1("SELECT p.page_id, p.name_s, p.title, p.summary_md, p.facts_json, p.summarized_at, i.source AS src FROM wiki_pages p LEFT JOIN intel_items i ON i.intel_id = p.name_s WHERE p.kind='intel' AND p.status='published' AND p.summarized_at >= %d ORDER BY p.summarized_at DESC LIMIT 12" % (now() - 36 * 3600))
+    # rank: pages tagged only 'other' go last; founder favorites first; then freshest
+    def _rank(r):
+        try: tags = json.loads(r.get("facts_json") or "{}").get("tags") or []
+        except Exception: tags = []
+        only_other = 1 if (not tags or tags == ["other"]) else 0
+        fav = 0 if str(r.get("src") or "").startswith("founder_fav") else 1
+        return (only_other, fav, -(r.get("summarized_at") or 0))
+    rows = sorted(cand, key=_rank)[:3]
     day = time.strftime("%Y-%m-%d", time.gmtime(now() + 8 * 3600))
     title = "\U0001f985\u9e70\u773c\u65e5\u62a5 %s" % day
     if not rows:
