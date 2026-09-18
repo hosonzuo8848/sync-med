@@ -19,7 +19,7 @@ from _ai import d1, GATEWAY
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 MODE = os.environ.get("MODE") or "facts"; DAYS = int(os.environ.get("DAYS") or "1"); LIMIT = int(os.environ.get("LIMIT") or "40")
-FORCE = os.environ.get("FORCE") == "1"; KEY = os.environ.get("GW_KEY", ""); GH = os.environ.get("GH_TOKEN", ""); REPO = os.environ.get("GITHUB_REPOSITORY", "")
+FORCE = os.environ.get("FORCE") == "1"; KEY = os.environ.get("GW_KEY", ""); GH = os.environ.get("GH_TOKEN", ""); SC_KEY = os.environ.get("SERVERCHAN_KEY", ""); REPO = os.environ.get("GITHUB_REPOSITORY", "")
 PROMPT_VER = "intel_v1"; KIND = "intel"; TEXT_MAX = 12000
 qs = lambda v: "'" + str(v).replace("\x00", "").replace("'", "''") + "'"
 now = lambda: int(time.time())
@@ -268,6 +268,15 @@ def mode_digest():
         found = [i for i in gh_api("GET", "/repos/%s/issues?state=open&per_page=50" % REPO) if i.get("title") == title]
         if found: gh_api("PATCH", "/repos/%s/issues/%d" % (REPO, found[0]["number"]), {"body": body})
         else: gh_api("POST", "/repos/%s/issues" % REPO, {"title": title, "body": body, "labels": ["intel"]})
+    if SC_KEY:
+        # WeChat push via ServerChan (founder's own channel; Issue alone is a silent channel nobody opens)
+        try:
+            data = urllib.parse.urlencode({"title": title, "desp": body}).encode("utf-8")
+            rq = urllib.request.Request("https://sctapi.ftqq.com/%s.send" % SC_KEY, data=data, method="POST")
+            rs = json.loads(urllib.request.urlopen(rq, timeout=30).read().decode("utf-8", "replace"))
+            print("serverchan push:", rs.get("code"), rs.get("message"))
+        except Exception as e:
+            print("serverchan push failed:", str(e)[:120])
     print("digest posted:", title, "items", len(rows))
 
 if __name__ == "__main__":
