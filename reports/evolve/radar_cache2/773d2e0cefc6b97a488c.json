@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "我们该模块现在用的是什么",
+ "beats": "在哪个可量化指标上胜过它",
+ "why": "已在家底:我们已经在使用Elasticsearch进行全文搜索和索引管理"
+}

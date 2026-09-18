@@ -1,0 +1,10 @@
+{
+ "module": "Caddy",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "Web 服务器，常驻型，不符合零常驻主机约束"
+}

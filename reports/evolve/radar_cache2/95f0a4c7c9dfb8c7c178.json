@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "adopt",
+ "metric": "OCR识别准确率",
+ "how": "集成PaddleOCR作为后端识别引擎",
+ "effort": "中",
+ "current": "目前使用的OCR库",
+ "beats": "识别准确率提升",
+ "why": "PaddleOCR性能优越，支持多语言"
+}

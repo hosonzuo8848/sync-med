@@ -1,0 +1,10 @@
+{
+ "module": "DietrichGebert/ponytail",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "纯库，无需常驻主机，但与我们的模块清单不匹配"
+}

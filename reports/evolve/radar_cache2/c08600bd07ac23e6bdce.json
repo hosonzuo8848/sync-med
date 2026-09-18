@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "adopt",
+ "metric": "检索准确率和速度",
+ "how": "集成LightRAG作为检索增强生成模型",
+ "effort": "中",
+ "current": "目前使用的RAG向量检索模型",
+ "beats": "检索速度和准确率提升",
+ "why": "LightRAG提供双级检索和知识图谱增强，纯Python SDK，无需服务器"
+}

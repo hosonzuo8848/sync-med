@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "我们前台阅读器模块目前使用的是自研技术栈",
+ "beats": "",
+ "why": "freeCodeCamp 是一个学习编程的平台，与我们的前台阅读器模块功能不匹配"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "adopt",
+ "metric": "Web服务器性能和安全性",
+ "how": "替换现有Web服务器，利用Caddy的自动HTTPS功能提高安全性",
+ "effort": "小",
+ "current": "Nginx",
+ "beats": "自动HTTPS，更快的性能",
+ "why": "Caddy提供自动HTTPS和快速性能，提升用户体验"
+}

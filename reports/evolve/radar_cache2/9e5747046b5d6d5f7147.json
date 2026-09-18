@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "adopt",
+ "metric": "OCR识别准确率",
+ "how": "集成tesseract-ocr作为OCR引擎",
+ "effort": "中",
+ "current": "当前使用未知OCR引擎",
+ "beats": "识别准确率提升",
+ "why": "tesseract-ocr是开源且成熟的OCR引擎，社区支持良好"
+}

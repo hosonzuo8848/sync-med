@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "adopt",
+ "metric": "转换准确率、处理速度",
+ "how": "集成到现有OCR产线中，作为PDF转文本的预处理工具",
+ "effort": "中",
+ "current": "目前使用Tesseract OCR进行PDF转文本",
+ "beats": "在PDF布局检测、公式识别和表格提取方面表现更优",
+ "why": "提高PDF转文本的准确性和效率"
+}

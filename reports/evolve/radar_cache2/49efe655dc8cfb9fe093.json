@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "PDF转Markdown和JSON的准确性和效率",
+ "how": "集成MinerU进行PDF内容解析",
+ "effort": "小",
+ "current": "目前使用PDF转Markdown和JSON的工具",
+ "beats": "未知",
+ "why": "MinerU是否已在用未知，且缺乏量化胜出点"
+}
