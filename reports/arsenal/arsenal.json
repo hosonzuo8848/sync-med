@@ -11782,6 +11782,49 @@
    }
   },
   {
+   "repo": "AccumulateMore/CV",
+   "url": "https://github.com/AccumulateMore/CV",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 23767,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Jupyter Notebook",
+   "pushed_at": "2026-09-20",
+   "created_at": "2022-03-31",
+   "stars_per_day_lifetime": 14.55,
+   "capability": "提供深度学习笔记资源集合",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent",
+    "agents",
+    "book",
+    "chinese",
+    "computer-vision",
+    "cv",
+    "deep-learning",
+    "jupyter-notebook",
+    "llm",
+    "llms",
+    "machine-learning",
+    "natural-language-processing"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "大模型 in:name,description stars:>1000 pushed:>2026-08-21",
+    "sort": "stars",
+    "query_breadth": 56,
+    "position": 5
+   }
+  },
+  {
    "repo": "alirezarezvani/claude-skills",
    "url": "https://github.com/alirezarezvani/claude-skills",
    "first_seen": "2026-08-04",
@@ -13358,6 +13401,52 @@
     "sort": "updated",
     "query_breadth": 61,
     "position": 1
+   }
+  },
+  {
+   "repo": "pot-app/pot-desktop",
+   "url": "https://github.com/pot-app/pot-desktop",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 19425,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "lang": "JavaScript",
+   "pushed_at": "2026-07-04",
+   "created_at": "2023-02-26",
+   "stars_per_day_lifetime": 14.92,
+   "capability": "提供跨平台的划词翻译和OCR软件",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "image",
+    "modelpool",
+    "video"
+   ],
+   "topics": [
+    "linux",
+    "macos",
+    "ocr",
+    "pot",
+    "pot-app",
+    "recognize",
+    "tauri",
+    "translate",
+    "translation",
+    "tts",
+    "windows"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-22",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 77
    }
   },
   {
@@ -23407,6 +23496,38 @@
    }
   },
   {
+   "repo": "pditommaso/awesome-pipeline",
+   "url": "https://github.com/pditommaso/awesome-pipeline",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 6626,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-19",
+   "created_at": "2014-07-19",
+   "stars_per_day_lifetime": 1.49,
+   "capability": "提供一系列优秀的管道工具列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome-list",
+    "workflow"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 31
+   }
+  },
+  {
    "repo": "shuaibiyy/awesome-tf",
    "url": "https://github.com/shuaibiyy/awesome-tf",
    "first_seen": "2026-08-25",
@@ -24310,6 +24431,49 @@
     "sort": "stars",
     "query_breadth": 12,
     "position": 1
+   }
+  },
+  {
+   "repo": "PaddlePaddle/PaddleX",
+   "url": "https://github.com/PaddlePaddle/PaddleX",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 6267,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-06-25",
+   "created_at": "2020-03-11",
+   "stars_per_day_lifetime": 2.63,
+   "capability": "基于PaddlePaddle的AI开发工具，支持多种任务",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-pipelines",
+    "classification",
+    "deployment",
+    "formula-recognition",
+    "layout-detection",
+    "object-detection",
+    "ocr",
+    "pdf2markdown",
+    "pp-chatocr",
+    "segmentation",
+    "speech-recognition",
+    "time-series"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-22",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 80
    }
   },
   {
@@ -25432,6 +25596,43 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 89
+   }
+  },
+  {
+   "repo": "ramjke/Translumo",
+   "url": "https://github.com/ramjke/Translumo",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 5771,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "C#",
+   "pushed_at": "2026-09-19",
+   "created_at": "2023-06-16",
+   "stars_per_day_lifetime": 4.84,
+   "capability": "提供游戏、视频、静态文本的实时屏幕翻译功能",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "autotranslate",
+    "easyocr",
+    "game-translation",
+    "mlnet",
+    "ocr",
+    "translation"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-22",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 17
    }
   },
   {
@@ -33325,6 +33526,40 @@
    }
   },
   {
+   "repo": "dexhunter/seedance2-skill",
+   "url": "https://github.com/dexhunter/seedance2-skill",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 3812,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-09-19",
+   "created_at": "2026-02-11",
+   "stars_per_day_lifetime": 17.25,
+   "capability": "生成视频生成最佳提示词的技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "prompt",
+    "seedance",
+    "seedance-2",
+    "video-prompt"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 39
+   }
+  },
+  {
    "repo": "cporter202/scraping-apis-for-devs",
    "url": "https://github.com/cporter202/scraping-apis-for-devs",
    "first_seen": "2026-07-26",
@@ -38563,6 +38798,49 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 18
+   }
+  },
+  {
+   "repo": "swirlai/swirl-search",
+   "url": "https://github.com/swirlai/swirl-search",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 3045,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-17",
+   "created_at": "2022-04-08",
+   "stars_per_day_lifetime": 1.87,
+   "capability": "提供 AI 搜索和 RAG 功能",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "topics": [
+    "ai-search",
+    "bigquery",
+    "django",
+    "federated-query",
+    "federated-search",
+    "gpt",
+    "large-language-models",
+    "metasearch",
+    "python",
+    "rag",
+    "relevancy",
+    "retrieval-augmented-generation"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 78
    }
   },
   {
@@ -45968,6 +46246,45 @@
    }
   },
   {
+   "repo": "jubalh/awesome-os",
+   "url": "https://github.com/jubalh/awesome-os",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 2278,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-19",
+   "created_at": "2017-02-18",
+   "stars_per_day_lifetime": 0.65,
+   "capability": "列出操作系统及相关资源",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "kernel",
+    "linux",
+    "linux-kernel",
+    "operating-system",
+    "os",
+    "os-dev",
+    "osdev"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 43
+   }
+  },
+  {
    "repo": "wxyhgk/retain-pdf",
    "url": "https://github.com/wxyhgk/retain-pdf",
    "first_seen": "2026-09-15",
@@ -47241,6 +47558,43 @@
    }
   },
   {
+   "repo": "githubharald/SimpleHTR",
+   "url": "https://github.com/githubharald/SimpleHTR",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 2184,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-06-25",
+   "created_at": "2018-06-13",
+   "stars_per_day_lifetime": 0.72,
+   "capability": "使用TensorFlow实现手写文本识别系统",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "ocr"
+   ],
+   "topics": [
+    "deep-learning",
+    "handwritten-text-recognition",
+    "machine-learning",
+    "ocr",
+    "recurrent-neural-networks",
+    "tensorflow"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-22",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 79
+   }
+  },
+  {
    "repo": "jiawanlong/Cesium-Examples",
    "url": "https://github.com/jiawanlong/Cesium-Examples",
    "first_seen": "2026-08-12",
@@ -47375,6 +47729,50 @@
     "sort": "stars",
     "query_breadth": 46,
     "position": 11
+   }
+  },
+  {
+   "repo": "HUANGCHIHHUNGLeo/claude-real-video",
+   "url": "https://github.com/HUANGCHIHHUNGLeo/claude-real-video",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 2163,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-19",
+   "created_at": "2026-06-30",
+   "stars_per_day_lifetime": 26.38,
+   "capability": "允许LLM观看视频，提取场景感知帧和转录本",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video",
+    "ocr"
+   ],
+   "topics": [
+    "claude",
+    "claude-code",
+    "cli",
+    "codex",
+    "codex-cli",
+    "ffmpeg",
+    "keyframe-extraction",
+    "llm",
+    "multimodal",
+    "ocr",
+    "openai-codex",
+    "python"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-22",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 18
    }
   },
   {
@@ -55455,6 +55853,40 @@
    }
   },
   {
+   "repo": "caol64/wenyan-mcp",
+   "url": "https://github.com/caol64/wenyan-mcp",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 1316,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-20",
+   "created_at": "2025-06-02",
+   "stars_per_day_lifetime": 2.77,
+   "capability": "提供Markdown文章排版后发布至微信公众号的功能",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "mcp-server",
+    "wechat",
+    "wenyan"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-06-22",
+    "sort": "stars",
+    "query_breadth": 28,
+    "position": 8
+   }
+  },
+  {
    "repo": "apecloud/ApeRAG",
    "url": "https://github.com/apecloud/ApeRAG",
    "first_seen": "2026-09-14",
@@ -56465,6 +56897,45 @@
     "sort": "updated",
     "query_breadth": 56,
     "position": 55
+   }
+  },
+  {
+   "repo": "frotms/PaddleOCR2Pytorch",
+   "url": "https://github.com/frotms/PaddleOCR2Pytorch",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 1210,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-07-10",
+   "created_at": "2020-12-30",
+   "stars_per_day_lifetime": 0.58,
+   "capability": "将PaddleOCR推理转换为PyTorch版本",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "ocr"
+   ],
+   "topics": [
+    "crnn",
+    "db",
+    "multilingual-models",
+    "ocr",
+    "paddleocr",
+    "paddlepaddle",
+    "pytorch",
+    "pytorchocr"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-22",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 76
    }
   },
   {
@@ -58606,6 +59077,43 @@
    }
   },
   {
+   "repo": "Kappaemme-git/codex-first-customer-finder-skill",
+   "url": "https://github.com/Kappaemme-git/codex-first-customer-finder-skill",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 1048,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-19",
+   "created_at": "2026-07-12",
+   "stars_per_day_lifetime": 14.97,
+   "capability": "寻找潜在的首批客户",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "codex",
+    "codex-skill",
+    "customer-discovery",
+    "early-adopters",
+    "prospecting",
+    "startup"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 61
+   }
+  },
+  {
    "repo": "mrsanshui/WeChatPYAPI",
    "url": "https://github.com/mrsanshui/WeChatPYAPI",
    "first_seen": "2026-08-19",
@@ -59613,6 +60121,49 @@
     "sort": "updated",
     "query_breadth": 20,
     "position": 13
+   }
+  },
+  {
+   "repo": "jipraks/yt-short-clipper",
+   "url": "https://github.com/jipraks/yt-short-clipper",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 1001,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-08-21",
+   "created_at": "2026-01-15",
+   "stars_per_day_lifetime": 4.04,
+   "capability": "将长视频转换为短视频剪辑，具有AI高光检测、人脸追踪和字幕功能",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai-video",
+    "content-creation",
+    "ffmpeg",
+    "instagram-reels",
+    "llm",
+    "mediapipe",
+    "python",
+    "react",
+    "rust",
+    "short-form-video",
+    "tauri",
+    "tauri-app"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:content-creation stars:>1000 pushed:>2026-06-22",
+    "sort": "stars",
+    "query_breadth": 20,
+    "position": 19
    }
   },
   {
@@ -61267,6 +61818,44 @@
    }
   },
   {
+   "repo": "uhub/awesome-llm",
+   "url": "https://github.com/uhub/awesome-llm",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 831,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-19",
+   "created_at": "2023-03-31",
+   "stars_per_day_lifetime": 0.65,
+   "capability": "提供大型语言模型框架、库和软件的精选列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "awesome",
+    "awesome-list",
+    "curated-list",
+    "large-language-models",
+    "list",
+    "llm",
+    "resources"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 34,
+    "position": 20
+   }
+  },
+  {
    "repo": "wenyuanw/quick-prompt",
    "url": "https://github.com/wenyuanw/quick-prompt",
    "first_seen": "2026-08-07",
@@ -62527,6 +63116,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 15
+   }
+  },
+  {
+   "repo": "yunshu0909/yunshu_skillshub",
+   "url": "https://github.com/yunshu0909/yunshu_skillshub",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 760,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-09-19",
+   "created_at": "2026-01-19",
+   "stars_per_day_lifetime": 3.11,
+   "capability": "提供 Claude Code Skills 集合",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 48
    }
   },
   {
@@ -67269,6 +67887,47 @@
    }
   },
   {
+   "repo": "jingyunstudio/jingyun-dsh",
+   "url": "https://github.com/jingyunstudio/jingyun-dsh",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 503,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-08-27",
+   "stars_per_day_lifetime": 20.96,
+   "capability": "AI商业化桌面客户端，将AI智能体转化为商业产品",
+   "transfer_forms": [
+    "mcp",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "deepseekharness",
+    "dsh",
+    "dsh-bundle",
+    "dsh-plugin",
+    "dsh-plugin-desktop",
+    "dsh-plugin-market",
+    "dsh-plugin-verify",
+    "dsh-plugins",
+    "dsh-skill"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "智能体 in:name,description stars:>200",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 97
+   }
+  },
+  {
    "repo": "ai-evals-course/evals-skills",
    "url": "https://github.com/ai-evals-course/evals-skills",
    "first_seen": "2026-09-01",
@@ -68949,6 +69608,53 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 11
+   }
+  },
+  {
+   "repo": "yuxino/kiri",
+   "url": "https://github.com/yuxino/kiri",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 454,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-09-19",
+   "created_at": "2026-07-29",
+   "stars_per_day_lifetime": 8.57,
+   "capability": "提供本地化截图、标注、OCR、录屏和视频剪辑功能",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "image",
+    "modelpool",
+    "video"
+   ],
+   "topics": [
+    "annotation",
+    "desktop-app",
+    "image-annotation",
+    "local-first",
+    "macos",
+    "ocr",
+    "screen-capture",
+    "screen-recorder",
+    "screenshot",
+    "tauri",
+    "text-recognition",
+    "video-editing"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "OCR 识别 in:name,description stars:>100 pushed:>2026-06-22",
+    "sort": "stars",
+    "query_breadth": 22,
+    "position": 6
    }
   },
   {
@@ -72598,6 +73304,47 @@
     "sort": "stars",
     "query_breadth": 28,
     "position": 13
+   }
+  },
+  {
+   "repo": "HRuiCcc/RuiC-card-skill",
+   "url": "https://github.com/HRuiCcc/RuiC-card-skill",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 342,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-09-07",
+   "stars_per_day_lifetime": 26.31,
+   "capability": "生成3D全息闪卡网页的Agent Skill",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "image",
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skill",
+    "agent-skills",
+    "blender",
+    "collectible-card",
+    "holographic",
+    "multimodal",
+    "skills",
+    "threejs",
+    "webgl"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 10
    }
   },
   {
@@ -76859,6 +77606,35 @@
    }
   },
   {
+   "repo": "agent-ecosystem/skill-validator",
+   "url": "https://github.com/agent-ecosystem/skill-validator",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 244,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Go",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-02-13",
+   "stars_per_day_lifetime": 1.11,
+   "capability": "验证Agent Skill内容的工具",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 20
+   }
+  },
+  {
    "repo": "databricks/databricks-agent-skills",
    "url": "https://github.com/databricks/databricks-agent-skills",
    "first_seen": "2026-08-06",
@@ -77451,6 +78227,35 @@
     "sort": "stars",
     "query_breadth": 18,
     "position": 12
+   }
+  },
+  {
+   "repo": "manyuegong33/r0crawl_skills",
+   "url": "https://github.com/manyuegong33/r0crawl_skills",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 232,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "HTML",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-08-06",
+   "stars_per_day_lifetime": 5.16,
+   "capability": "提供逆向工程技能工具集",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 15
    }
   },
   {
@@ -78437,6 +79242,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 28
+   }
+  },
+  {
+   "repo": "spences10/svelte-claude-skills",
+   "url": "https://github.com/spences10/svelte-claude-skills",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 218,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-19",
+   "created_at": "2025-11-11",
+   "stars_per_day_lifetime": 0.7,
+   "capability": "提供 Svelte Claude 技能",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-21",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 73
    }
   },
   {
@@ -80475,6 +81309,36 @@
    }
   },
   {
+   "repo": "renmu2017/Hell-Grind-AIGC-Skill",
+   "url": "https://github.com/renmu2017/Hell-Grind-AIGC-Skill",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 201,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-08-07",
+   "created_at": "2026-08-05",
+   "stars_per_day_lifetime": 4.37,
+   "capability": "AI故事片《Hell Grind》的AIGC视频生产工作流Skill",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video",
+    "modelpool"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-22",
+    "sort": "stars",
+    "query_breadth": 65,
+    "position": 64
+   }
+  },
+  {
    "repo": "rfhdw0102/YouDaoNoteLM",
    "url": "https://github.com/rfhdw0102/YouDaoNoteLM",
    "first_seen": "2026-09-09",
@@ -80543,6 +81407,41 @@
     "sort": "stars",
     "query_breadth": 43,
     "position": 42
+   }
+  },
+  {
+   "repo": "t1804330987/DD_Rag",
+   "url": "https://github.com/t1804330987/DD_Rag",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 201,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Java",
+   "pushed_at": "2026-07-15",
+   "created_at": "2026-04-23",
+   "stars_per_day_lifetime": 1.34,
+   "capability": "提供基于SpringAI的RAG Agent开发项目，涵盖权限隔离、文档入库等",
+   "transfer_forms": [
+    "architecture",
+    "deploy"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "topics": [
+    "rag",
+    "springai",
+    "springai-alibaba"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "RAG 知识库 in:name,description stars:>200",
+    "sort": "stars",
+    "query_breadth": 25,
+    "position": 24
    }
   },
   {
@@ -83136,6 +84035,49 @@
    }
   },
   {
+   "repo": "liyupi/ai-model-world",
+   "url": "https://github.com/liyupi/ai-model-world",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 123,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-09-17",
+   "stars_per_day_lifetime": 41.0,
+   "capability": "展示556个AI大模型的排行榜和可视化信息",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-models",
+    "benchmark",
+    "chinese",
+    "data-visualization",
+    "deepseek",
+    "large-language-models",
+    "leaderboard",
+    "llm",
+    "llm-benchmarks",
+    "llm-leaderboard",
+    "model-comparison"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-06-22",
+    "sort": "stars",
+    "query_breadth": 28,
+    "position": 27
+   }
+  },
+  {
    "repo": "xmchengyuxin/lekshop",
    "url": "https://github.com/xmchengyuxin/lekshop",
    "first_seen": "2026-08-07",
@@ -84049,6 +84991,40 @@
     "sort": "stars",
     "query_breadth": 21,
     "position": 20
+   }
+  },
+  {
+   "repo": "lets-mica/mica-ppocr",
+   "url": "https://github.com/lets-mica/mica-ppocr",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 108,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Java",
+   "pushed_at": "2026-09-18",
+   "created_at": "2026-07-29",
+   "stars_per_day_lifetime": 2.04,
+   "capability": "提供PP-OCRv6纯Java图片OCR功能，支持行驶证、身份证等识别",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "ocr"
+   ],
+   "topics": [
+    "java",
+    "ocr",
+    "ppocrv6"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "OCR 识别 in:name,description stars:>100 pushed:>2026-06-22",
+    "sort": "stars",
+    "query_breadth": 22,
+    "position": 21
    }
   },
   {
@@ -85728,6 +86704,45 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 80
+   }
+  },
+  {
+   "repo": "tianxing-ovo/AutoSlide",
+   "url": "https://github.com/tianxing-ovo/AutoSlide",
+   "first_seen": "2026-09-20",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-20",
+   "stars": 101,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Kotlin",
+   "pushed_at": "2026-08-25",
+   "created_at": "2025-03-27",
+   "stars_per_day_lifetime": 0.19,
+   "capability": "提供安卓自动滑动功能的应用",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "accessibility-service",
+    "android",
+    "auto-scroller",
+    "auto-slide",
+    "automation",
+    "douyin",
+    "kotlin",
+    "kuaishou"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-06-22",
+    "sort": "stars",
+    "query_breadth": 52,
+    "position": 51
    }
   },
   {
@@ -88022,7 +89037,7 @@
    }
   }
  ],
- "updated": "2026-09-19",
+ "updated": "2026-09-20",
  "status_enum": [
   "pending",
   "debated",
