@@ -9546,6 +9546,49 @@
    }
   },
   {
+   "repo": "ahujasid/mcp-for-blender",
+   "url": "https://github.com/ahujasid/mcp-for-blender",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 29099,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-21",
+   "created_at": "2025-03-07",
+   "stars_per_day_lifetime": 51.69,
+   "capability": "Blender 3D 插件，用于控制 Blender 与 LLM 交互",
+   "transfer_forms": [
+    "mcp",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "3d-modeling",
+    "ai",
+    "blender",
+    "blender-addon",
+    "blender-mcp",
+    "claude",
+    "generative-ai",
+    "llm",
+    "mcp",
+    "model-context-protocol",
+    "python"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 0
+   }
+  },
+  {
    "repo": "JunkFood02/Seal",
    "url": "https://github.com/JunkFood02/Seal",
    "first_seen": "2026-09-10",
@@ -32597,6 +32640,52 @@
    }
   },
   {
+   "repo": "bostrot/wslmanager",
+   "url": "https://github.com/bostrot/wslmanager",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 4005,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Dart",
+   "pushed_at": "2026-09-20",
+   "created_at": "2021-09-17",
+   "stars_per_day_lifetime": 2.19,
+   "capability": "Windows Subsystem for Linux的GUI管理工具，支持AI助手和MCP服务器",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "developer-tools",
+    "docker",
+    "flutter",
+    "gui",
+    "llm",
+    "macos",
+    "mcp",
+    "model-context-protocol",
+    "rootfs",
+    "turnkey",
+    "virtual-machine"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 27
+   }
+  },
+  {
    "repo": "W00t3k/Awesome-Cellular-Hacking",
    "url": "https://github.com/W00t3k/Awesome-Cellular-Hacking",
    "first_seen": "2026-08-29",
@@ -39156,6 +39245,49 @@
    }
   },
   {
+   "repo": "FB208/OpenBidKit_Yibiao",
+   "url": "https://github.com/FB208/OpenBidKit_Yibiao",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 3009,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-21",
+   "created_at": "2025-08-04",
+   "stars_per_day_lifetime": 7.29,
+   "capability": "AI 标书编写工具，包含知识库和标书查重功能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-writing",
+    "bid",
+    "bidding",
+    "document-ai",
+    "electron",
+    "llm",
+    "office-automation",
+    "proposal-generator",
+    "proposal-writing",
+    "rag",
+    "react"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 18
+   }
+  },
+  {
    "repo": "Tiger3807861189/J-Space-Cognition-Suite",
    "url": "https://github.com/Tiger3807861189/J-Space-Cognition-Suite",
    "first_seen": "2026-09-14",
@@ -40297,6 +40429,45 @@
    }
   },
   {
+   "repo": "Player-YN/BrowserKitten",
+   "url": "https://github.com/Player-YN/BrowserKitten",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 2890,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-18",
+   "created_at": "2026-08-28",
+   "stars_per_day_lifetime": 120.42,
+   "capability": "Chrome 扩展，选择网页内容生成可编辑的办公文件",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "browser-agent",
+    "byok",
+    "chrome-extension",
+    "llm",
+    "pptx",
+    "tldraw",
+    "univer"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 88
+   }
+  },
+  {
    "repo": "microsoft/flint-chart",
    "url": "https://github.com/microsoft/flint-chart",
    "first_seen": "2026-08-02",
@@ -40645,6 +40816,37 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 21
+   }
+  },
+  {
+   "repo": "NarHakobyan/awesome-nest-boilerplate",
+   "url": "https://github.com/NarHakobyan/awesome-nest-boilerplate",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 2828,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-20",
+   "created_at": "2019-02-27",
+   "stars_per_day_lifetime": 1.02,
+   "capability": "NestJS的Boilerplate模板",
+   "transfer_forms": [
+    "architecture",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 59
    }
   },
   {
@@ -47246,6 +47448,42 @@
    }
   },
   {
+   "repo": "sudhakar3697/awesome-electron-alternatives",
+   "url": "https://github.com/sudhakar3697/awesome-electron-alternatives",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 2201,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-09-20",
+   "created_at": "2019-08-27",
+   "stars_per_day_lifetime": 0.85,
+   "capability": "Electron替代品列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "topics": [
+    "awesome-list",
+    "cross-platform-desktop-app-dev",
+    "electron",
+    "electron-alternatives",
+    "pwa"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 43
+   }
+  },
+  {
    "repo": "ForceInjection/AI-fundamentals",
    "url": "https://github.com/ForceInjection/AI-fundamentals",
    "first_seen": "2026-08-12",
@@ -47659,6 +47897,52 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 16
+   }
+  },
+  {
+   "repo": "Stack-Cairn/LiveAgent",
+   "url": "https://github.com/Stack-Cairn/LiveAgent",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 2176,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-21",
+   "created_at": "2026-05-24",
+   "stars_per_day_lifetime": 18.13,
+   "capability": "AI Agent 桌面客户端，支持 Webui 访问和定制",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai-agents",
+    "ai-tools",
+    "claude-code",
+    "claude-desktop",
+    "codex",
+    "codex-app",
+    "desktop-app",
+    "fable",
+    "hermes",
+    "hermes-agent",
+    "mcp",
+    "oepnclaw"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 69
    }
   },
   {
@@ -48682,6 +48966,46 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 31
+   }
+  },
+  {
+   "repo": "blackholll/loonflow",
+   "url": "https://github.com/blackholll/loonflow",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 2090,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-20",
+   "created_at": "2018-02-08",
+   "stars_per_day_lifetime": 0.66,
+   "capability": "智能流程自动化系统，支持工单、工作流、MCP服务",
+   "transfer_forms": [
+    "mcp",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "topics": [
+    "devops",
+    "django",
+    "mcp",
+    "python",
+    "ticket",
+    "workflow",
+    "workflow-engine"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 89
    }
   },
   {
@@ -52114,6 +52438,35 @@
     "sort": "stars",
     "query_breadth": 27,
     "position": 7
+   }
+  },
+  {
+   "repo": "huang-sir1/radiology-skills",
+   "url": "https://github.com/huang-sir1/radiology-skills",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 1754,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-21",
+   "created_at": "2026-06-18",
+   "stars_per_day_lifetime": 18.46,
+   "capability": "未知",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 6
    }
   },
   {
@@ -75553,6 +75906,37 @@
    }
   },
   {
+   "repo": "kerpopule/hermes-jev-skills",
+   "url": "https://github.com/kerpopule/hermes-jev-skills",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 298,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-09-18",
+   "stars_per_day_lifetime": 99.33,
+   "capability": "Jev驱动的模型路由、内存、压缩、技能选择等技能",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 58
+   }
+  },
+  {
    "repo": "MemTensor/skills-vote",
    "url": "https://github.com/MemTensor/skills-vote",
    "first_seen": "2026-08-05",
@@ -75960,6 +76344,37 @@
     "sort": "stars",
     "query_breadth": 18,
     "position": 11
+   }
+  },
+  {
+   "repo": "firefly-hefeng/VESTI-SKILLS",
+   "url": "https://github.com/firefly-hefeng/VESTI-SKILLS",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 288,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-07-19",
+   "stars_per_day_lifetime": 4.5,
+   "capability": "VESTI提供的开放代理技能",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 63
    }
   },
   {
@@ -77036,6 +77451,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 29
+   }
+  },
+  {
+   "repo": "voidforall/fengshui.skill",
+   "url": "https://github.com/voidforall/fengshui.skill",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 255,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-04-11",
+   "stars_per_day_lifetime": 1.56,
+   "capability": "传统风水顾问Claude Code Skill，提供风水咨询",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 52
    }
   },
   {
@@ -78794,6 +79238,43 @@
    }
   },
   {
+   "repo": "minorun365/minorun-marp-skill",
+   "url": "https://github.com/minorun365/minorun-marp-skill",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 224,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-09-20",
+   "stars_per_day_lifetime": 224.0,
+   "capability": "Marp中制作演讲幻灯片的技能集",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "claude-code",
+    "marp",
+    "presentation"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 62
+   }
+  },
+  {
    "repo": "msmps/opentui-skill",
    "url": "https://github.com/msmps/opentui-skill",
    "first_seen": "2026-08-28",
@@ -78861,6 +79342,34 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 78
+   }
+  },
+  {
+   "repo": "huangbai-AI/post-production-skill",
+   "url": "https://github.com/huangbai-AI/post-production-skill",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 223,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-19",
+   "created_at": "2026-09-19",
+   "stars_per_day_lifetime": 111.5,
+   "capability": "AI 视频后期特效创作 Skill，生成电影级 VFX 和创意转场",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-23",
+    "sort": "stars",
+    "query_breadth": 67,
+    "position": 59
    }
   },
   {
@@ -79342,6 +79851,37 @@
     "sort": "stars",
     "query_breadth": 19,
     "position": 13
+   }
+  },
+  {
+   "repo": "cathrynlavery/codex-skill",
+   "url": "https://github.com/cathrynlavery/codex-skill",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 217,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-01-21",
+   "stars_per_day_lifetime": 0.89,
+   "capability": "使用OpenAI Codex对Claude Code进行二次审查的技能",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 57
    }
   },
   {
@@ -80286,6 +80826,35 @@
    }
   },
   {
+   "repo": "newljs/Layerive",
+   "url": "https://github.com/newljs/Layerive",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 208,
+   "license": "LGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-21",
+   "created_at": "2026-08-30",
+   "stars_per_day_lifetime": 9.45,
+   "capability": "本地 AI 图片创作工作台，支持文生图、提示词改图等",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-23",
+    "sort": "stars",
+    "query_breadth": 67,
+    "position": 64
+   }
+  },
+  {
    "repo": "xiao24bei/xiaobei-skill",
    "url": "https://github.com/xiao24bei/xiaobei-skill",
    "first_seen": "2026-08-28",
@@ -80519,6 +81088,37 @@
     "sort": "stars",
     "query_breadth": 9,
     "position": 8
+   }
+  },
+  {
+   "repo": "wuyoscar/jev-skill",
+   "url": "https://github.com/wuyoscar/jev-skill",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 206,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-20",
+   "created_at": "2026-09-20",
+   "stars_per_day_lifetime": 206.0,
+   "capability": "收集Jev用例、工作流和代理技能",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 36
    }
   },
   {
@@ -81215,6 +81815,40 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 39
+   }
+  },
+  {
+   "repo": "VDERR/echocat-skill-panel",
+   "url": "https://github.com/VDERR/echocat-skill-panel",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 201,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-21",
+   "created_at": "2026-09-18",
+   "stars_per_day_lifetime": 67.0,
+   "capability": "DSH 技能调用审计和 skill 管理器",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "cordis",
+    "deepseek-harness",
+    "dsh-plugin"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-22",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 0
    }
   },
   {
@@ -86832,6 +87466,49 @@
    }
   },
   {
+   "repo": "ybh-ybh/know-where",
+   "url": "https://github.com/ybh-ybh/know-where",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 101,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-21",
+   "created_at": "2026-08-28",
+   "stars_per_day_lifetime": 4.21,
+   "capability": "自动提取和总结内容链接，存入飞书表格",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai-summarization",
+    "bilibili",
+    "content-archive",
+    "douyin",
+    "feishu",
+    "feishu-bot",
+    "knowledge-base",
+    "knowledge-management",
+    "lark",
+    "llm",
+    "rss",
+    "rsshub"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 63,
+    "position": 62
+   }
+  },
+  {
    "repo": "jangviktor-web/likeskill",
    "url": "https://github.com/jangviktor-web/likeskill",
    "first_seen": "2026-08-18",
@@ -88080,6 +88757,35 @@
    }
   },
   {
+   "repo": "dhicoc/chinese-traditional-wisdom-skill",
+   "url": "https://github.com/dhicoc/chinese-traditional-wisdom-skill",
+   "first_seen": "2026-09-21",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-21",
+   "stars": 21,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-08-27",
+   "created_at": "2026-06-28",
+   "stars_per_day_lifetime": 0.25,
+   "capability": "提供中国传统文化智慧 AI 技能包，包含古籍知识库和可视化 Dashboard",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "古籍 in:name,description stars:>20",
+    "sort": "stars",
+    "query_breadth": 44,
+    "position": 43
+   }
+  },
+  {
    "repo": "zhaoyanh/taohongjing",
    "url": "https://github.com/zhaoyanh/taohongjing",
    "first_seen": "2026-08-02",
@@ -89037,7 +89743,7 @@
    }
   }
  ],
- "updated": "2026-09-20",
+ "updated": "2026-09-21",
  "status_enum": [
   "pending",
   "debated",
