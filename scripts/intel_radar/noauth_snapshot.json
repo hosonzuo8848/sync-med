@@ -11,12 +11,6 @@
   "note": "Local passthrough — runs the Augment CLI (`auggie`) on this machine. Auth is handled by `auggie login`, not OmniRoute.",
   "website": "https://augmentcode.com"
  },
- "chipotle": {
-  "hasFree": true,
-  "noAuth": true,
-  "note": "Free — Chipotle's Pepper AI (IPsoft Amelia). Anonymous sessions, no API key. Rate-limited.",
-  "website": "https://amelia.chipotle.com"
- },
  "cloudflare-playground": {
   "hasFree": true,
   "noAuth": true,
