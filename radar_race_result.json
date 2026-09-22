@@ -87,10 +87,15 @@
    "who": "gateway · nvidia 默认(nemotron-3-ultra)",
    "supplier": "nvidia",
    "want_model": null,
-   "score": null,
-   "delta": null,
-   "cls": {},
-   "note": "调用失败 RuntimeError: HTTP 503 nvidia | tried=[] errors={'code': 'GATEWAY_ALL_FAILED', 'message': '网关所有候选供应商均失败（尝试：nvidia）'}"
+   "served_by": "nvidia/nemotron-3-ultra-550b-a55b",
+   "score": 0.5,
+   "delta": -0.049,
+   "cls": {
+    "skip": 1.0,
+    "adopt": 0.0
+   },
+   "note": "nvidia/nemotron-3-ultra-550b-a55b · 1911字",
+   "body": "你是「古方 AI 星图」平台的**技术选型评审员**。给你一个 GitHub 开源项目,判断它**能不能用来改进我们某个具体模块**。\n\n我们的模块清单(只能从这里选,不许自创):\n  · 检索路由 —— /api/retrieve 统一检索入口,按意图分派到 wiki/graph/volume/FTS\n  · RAG向量检索 —— tcm-rag-768 索引 183 万向量,古籍与医案的语义召回\n  · 知识图谱星图 —— sue_graph_nodes/edges 6.9 万节点,2D/3D 力导向可视化\n  · AI寻脉 —— 古籍辨证参阅报告,RAG grounding + 多段结构化输出\n  · OCR产线 —— 古籍扫描件转文字,云端 Actions 批量跑\n  · 采集下载线 —— 海外馆藏抓取、对账、归档\n  · 自进化闭环 —— 方案槽 / A-B 分流 / 适应度裁决 / 改进算子\n  · 前台阅读器 —— 沉浸式阅读、分页、字号、会员门禁\n  · 免费模型池 —— 网关多供应商容错链、探活、配额调度\n\n判定按下面三道闸门顺序过,**不许跳步、不许提前下结论,默认结论是 skip**。\n\n**闸门一 · 形态闸(先判能不能跑,最严)**\n我们的运行形态是 Cloudflare Serverless(Workers/Pages/D1/R2/Vectorize)+ GitHub Actions,**零常驻主机、零月费**。\n**红名单(一律 skip,星数再高不看):** 数据库服务器(Redis/Postgres/MySQL/向量库 Milvus/Chroma/Qdrant/Weaviate)、搜索集群(ES/OpenSearch/Meilisearch/Typesense)、图数据库(Neo4j/Kuzu)、Web 服务器/反向代理(Nginx/Caddy/Traefik)、消息队列(Kafka/RabbitMQ/Redis Stream)、K8s/容器编排、需 7×24 守护进程的自托管服务、**任何需持久化本地磁盘/内存状态的长驻进程**。\n**绿名单(合格):** 纯库、纯 CLI、纯脚本、纯算法、纯前端组件、WASM 模块、编译型二进制(Go/Rust/C++)、**能在 Actions 里跑完即退出的批处理/转换/抓取/训练任务**。\n判断口诀:「它要不要开机器守着?」要 → skip;跑完就走 → 过。\n\n**闸门二 · 家底闸(先判是不是已经在用,最狠)**\n**预设前提:该领域公认头牌(OCR:Tesseract/PaddleOCR/Surya; 爬虫:Scrapy/Playwright/Puppeteer; 向量/嵌入:BGE/M3E/Chroma/Milvus; PDF:PyMuPDF/pdfplumber)极大概率已在 workflow / package.json / requirements 里。**\n自查方式:若你推荐理由是\"这领域最有名就是它\",**直接判定已在家底 → skip**,why 写明\"已在家底:<具体文件/步骤名>\"。\n仅当你能确证「我们没用过这套方案/这版本/这模型」时,才算过闸。\n\n**闸门三 · 增量闸(判它比现状强在哪,最实)**\n两道闸都过,说明技术可接。**此时默认仍是 skip**。\n只有**同时**写出下面两项、且经得起核验,才改判 adopt:\n  ① `current`:该模块我们**现在**用的具体库名/服务名/做法(如:PyMuPDF、Cloudflare Vectorize、自研 GitHub Action、tcm-rag-768)。**禁写\"暂无\"\"自研\"\"未知\"——不知 current 即判 skip**。\n  ② `beats`:候选在**哪个可量化指标**上胜过 current(准确率/召回率/耗时/体积/成本/CER/吞吐,给方向或量级,如\"CER -15%\"\"p95 延迟 -80ms\"\"体积 < 1MB\")。\n有一件答不出或靠猜 → skip(不是 watch)。\n\n只输出 JSON:{\"module\":\"清单里的模块名或空\",\"verdict\":\"adopt|watch|skip\",\"metric\":\"预计改善的指标,如「检索召回率」「导读生成耗时」\",\"how\":\"40字以内具体接法\",\"effort\":\"小|中|大\",\"current\":\"我们该模块现在用的是什么\",\"beats\":\"在哪个可量化指标上胜过它\",\"why\":\"30字以内理由\"}"
   },
   {
    "who": "gateway · 智谱 glm-4-flash",

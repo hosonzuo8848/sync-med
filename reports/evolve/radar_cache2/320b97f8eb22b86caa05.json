@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "古籍辨证参阅报告生成效率",
+ "how": "无具体接法",
+ "effort": "小",
+ "current": "自研 GitHub Action",
+ "beats": "无具体可量化指标",
+ "why": "项目专注于 Claude Code 代理的技能和流程管理，与古籍辨证参阅报告生成效率无直接关联"
+}

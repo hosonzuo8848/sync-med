@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "OCR转换准确率",
+ "how": "使用MinerU进行PDF转文字",
+ "effort": "小",
+ "current": "PyMuPDF",
+ "beats": "表格识别和公式识别能力",
+ "why": "MinerU在PDF转换方面具有更强的布局检测和识别能力"
+}

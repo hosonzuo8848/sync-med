@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "暂无",
+ "beats": "无",
+ "why": "该项目为视频上传工具，与OCR产线模块无关"
+}

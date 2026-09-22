@@ -1,0 +1,10 @@
+{
+ "module": "检索路由 —— /api/retrieve 统一检索入口,按意图分派到 wiki/graph/volume/FTS",
+ "verdict": "skip",
+ "metric": "检索速度、准确性",
+ "how": "集成 Elasticsearch 作为后端搜索引擎",
+ "effort": "中",
+ "current": "暂无",
+ "beats": "Elasticsearch 在检索速度和准确性上通常优于其他搜索引擎",
+ "why": "Elasticsearch 是一个高性能的分布式搜索引擎，广泛用于各种搜索场景"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "图谱构建效率",
+ "how": "使用 Neo4j 替换当前图数据库",
+ "effort": "中",
+ "current": "sue_graph_nodes/edges",
+ "beats": "性能和可扩展性",
+ "why": "Neo4j 是图数据库领域的领先者"
+}

@@ -1,0 +1,10 @@
+{
+ "module": "免费模型池",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "无",
+ "beats": "无",
+ "why": "该插件为 Claude Code 的代码生成工具，与我们的免费模型池模块无关"
+}

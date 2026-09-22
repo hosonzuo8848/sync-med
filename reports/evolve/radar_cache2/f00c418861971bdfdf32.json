@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "OCR识别准确率",
+ "how": "替换当前使用的OCR库",
+ "effort": "中",
+ "current": "PyMuPDF",
+ "beats": "准确率更高",
+ "why": "Tesseract在OCR领域有很高的评价"
+}

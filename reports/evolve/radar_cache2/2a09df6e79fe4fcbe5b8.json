@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "知识图谱构建效率",
+ "how": "纯库形式，无需服务器，但需评估与现有星图节点的兼容性",
+ "effort": "小",
+ "current": "sue_graph_nodes/edges",
+ "beats": "构建效率可能更高",
+ "why": "Graphify-Labs社区活跃，功能丰富"
+}

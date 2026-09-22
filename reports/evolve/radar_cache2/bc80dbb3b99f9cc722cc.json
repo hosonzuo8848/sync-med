@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "知识图谱构建效率",
+ "how": "无具体接法",
+ "effort": "中",
+ "current": "sue_graph_nodes/edges",
+ "beats": "无具体指标",
+ "why": "项目专注于代码库索引，而非现有知识图谱构建"
+}
