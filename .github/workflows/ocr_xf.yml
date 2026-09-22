@@ -59,6 +59,7 @@ jobs:
           PAN_CLIENT_ID: ${{ secrets.PAN_CLIENT_ID }}
           PAN_CLIENT_SECRET: ${{ secrets.PAN_CLIENT_SECRET }}
           XF_KEYS: ${{ secrets.XF_KEYS }}
+          XF_MODEL: xoppaddleocrv16   # 2026-09-23 six-engine race: same output as hunyuanocr, 3.0s vs 10.2s
           SHARD: ${{ matrix.shard }}
           TOTAL: ${{ github.event.inputs.total || '14' }}
           PILOT: ${{ github.event.inputs.pilot }}
