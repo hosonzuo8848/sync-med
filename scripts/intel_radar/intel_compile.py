@@ -15,7 +15,7 @@ Public repo: all Chinese in this file is escaped.
 """
 import os, sys, io, json, time, hashlib, re, urllib.request, urllib.error, urllib.parse
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'content_factory'))
-from _ai import d1, GATEWAY
+from _ai import d1, GATEWAY, jev, JEV_STATS
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 MODE = os.environ.get("MODE") or "facts"; DAYS = int(os.environ.get("DAYS") or "1"); LIMIT = int(os.environ.get("LIMIT") or "40")
@@ -206,6 +206,33 @@ def gate(sections, f):
     f["_downgraded"] = downgraded
     return ""
 
+def jev_support_check(sections, f):
+    """Tier-2 sentences: ask Jev whether the source text supports/implies each one.
+    noul < 0.30 -> demote to tier 3 (uncertain); tier-3 with noul < 0.15 -> drop. No key -> no-op."""
+    body = (f.get("text") or "")[:12000]
+    if not body: return (0, 0)
+    qs = {}; refs = []
+    for s in sections:
+        for x in s.get("sentences") or []:
+            try: tier = int(x.get("tier"))
+            except Exception: continue
+            if tier in (2, 3) and len(qs) < 40:
+                k = "s%d" % len(qs); qs[k] = {"type": "noul", "instructions": "\u6750\u6599\u662f\u5426\u652f\u6301\u6216\u53ef\u5408\u7406\u63a8\u51fa\u8fd9\u53e5\u8bdd\uff1a" + str(x.get("text"))[:300]}
+                refs.append((k, x, tier))
+    if not qs: return (0, 0)
+    ans = jev(body, qs)
+    if not ans: return (0, 0)
+    demoted = dropped = 0
+    for k, x, tier in refs:
+        p = (ans.get(k) or {}).get("noul")
+        if p is None: continue
+        x["jev_support"] = round(float(p), 3)
+        if tier == 2 and p < 0.30: x["tier"] = 3; demoted += 1
+        elif tier == 3 and p < 0.15: x["_drop"] = 1; dropped += 1
+    for s in sections:
+        if isinstance(s.get("sentences"), list): s["sentences"] = [x for x in s["sentences"] if not x.get("_drop")]
+    return (demoted, dropped)
+
 def render_summary(sections):
     out = []; by = {s.get("key"): s for s in sections if isinstance(s, dict)}
     for k, h in SEC:
@@ -222,7 +249,7 @@ def render_summary(sections):
 def mode_llm():
     t0 = time.time()
     rows = d1("SELECT page_id, facts_json, body_md FROM wiki_pages WHERE kind='intel' AND status='facts' AND books_n=1 ORDER BY compiled_at DESC LIMIT %d" % LIMIT)
-    print("llm candidates", len(rows), flush=True); ok = gated = failed = 0; down = 0
+    print("llm candidates", len(rows), flush=True); ok = gated = failed = 0; down = 0; jev_demoted = jev_dropped = 0
     for r in rows:
         f = json.loads(r["facts_json"])
         user = json.dumps({"title": f["title"], "url": f["url"], "source": f["source"], "github": f.get("github"), "text": (f.get("text") or "")[:7000]}, ensure_ascii=False)
@@ -232,11 +259,12 @@ def mode_llm():
         why = gate(sections, f)
         if why: gated += 1; print("  gated", r["page_id"], why, flush=True); continue
         down += f.get("_downgraded", 0)
+        jd, jx = jev_support_check(sections, f); jev_demoted += jd; jev_dropped += jx
         s = render_summary(sections); body2 = r["body_md"].rstrip("\n") + "\n\n## " + H_SUM + "\n\n" + s + "\n"
         d1("UPDATE wiki_pages SET summary_md=%s, body_md=%s, status='published', prompt_ver=%s, model=%s, summarized_at=%d WHERE page_id=%s"
            % (qs(s), qs(body2[:60000]), qs(PROMPT_VER), qs(model[:80]), now(), qs(r["page_id"])))
         ok += 1; time.sleep(0.5)
-    line = "intel-compile llm tried=%d published=%d gated=%d fail=%d downgraded_sentences=%d elapsed=%ds" % (len(rows), ok, gated, failed, down, time.time() - t0)
+    line = "intel-compile llm tried=%d published=%d gated=%d fail=%d downgraded_sentences=%d jev_demoted=%d jev_dropped=%d jev_calls=%d/%d jev_tokens=%d elapsed=%ds" % (len(rows), ok, gated, failed, down, jev_demoted, jev_dropped, JEV_STATS["ok"], JEV_STATS["calls"], JEV_STATS["input_tokens"], time.time() - t0)
     print(line); open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "a", encoding="utf-8").write("```\n" + line + "\n```\n")
 
 # ---------- digest ----------
