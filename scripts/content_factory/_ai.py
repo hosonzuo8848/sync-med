@@ -261,3 +261,31 @@ def parse_json_array(t, quiet=False):
     if out and not quiet:
         print(f"  [解析] 数组不完整,逐项抢救出 {len(out)} 条", flush=True)
     return out
+
+# ---------- Jev (TypeSafe AI System One): typed decisions with calibrated probabilities ----------
+# Paid source (input $0.042/MTok, output free) -> only active when JEV_API_KEY is set (founder-approved budget).
+# questions: {name: {"type": "noul"|"choice"|"score", "instructions": str, "criteria": dict|list}}
+# returns {name: {...}} like the API, or None when disabled / failed (callers must treat None as "no opinion").
+JEV_URL = "https://api.typesafe.ai/v1/systemone"
+JEV_MODEL = os.environ.get("JEV_MODEL", "jev-1.13.0")
+JEV_KEY = os.environ.get("JEV_API_KEY", "")
+JEV_STATS = {"calls": 0, "ok": 0, "input_tokens": 0}
+
+
+def jev(state, questions, timeout=20):
+    if not JEV_KEY or not questions:
+        return None
+    body = {"model": JEV_MODEL, "state": state if isinstance(state, str) else json.dumps(state, ensure_ascii=False), "questions": questions}
+    req = urllib.request.Request(JEV_URL, data=json.dumps(body, ensure_ascii=False).encode("utf-8"), method="POST",
+                                 headers={"Authorization": "Bearer " + JEV_KEY, "Content-Type": "application/json", "User-Agent": UA})
+    JEV_STATS["calls"] += 1
+    try:
+        j = json.loads(urllib.request.urlopen(req, timeout=timeout).read().decode("utf-8", "replace"))
+    except urllib.error.HTTPError as e:
+        print("[jev] HTTP", e.code, e.read().decode("utf-8", "replace")[:120], flush=True); return None
+    except Exception as e:  # noqa: BLE001
+        print("[jev] error", str(e)[:120], flush=True); return None
+    JEV_STATS["ok"] += 1
+    JEV_STATS["input_tokens"] += int((j.get("usage") or {}).get("input_tokens") or 0)
+    return j.get("answers") or None
+
