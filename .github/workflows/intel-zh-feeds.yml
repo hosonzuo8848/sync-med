@@ -1,0 +1,73 @@
+name: intel-zh-feeds
+
+# Eagle-eye Chinese sources (execution order #18) + keyword-gate measurement for #17.
+# RSSHub runs inside the job (docker, AGPL, used read-only, not modified or redistributed).
+# Config: scripts/intel_radar/zh_feeds.json. Script: scripts/intel_radar/zh_feeds.py.
+# D1 writes happen ONLY when repo variable ZH_FEEDS_WRITE == '1' (CTO decision); otherwise dry-run.
+# Scheduled runs are skipped until that variable is set.
+# Who sees it when it breaks: step summary; a red run (fewer than half the routes return data)
+# is picked up by workflow_sentry.py.
+
+on:
+  workflow_dispatch:
+    inputs:
+      probe:
+        description: "1 = try every candidate route on local RSSHub and rsshub.app"
+        default: "0"
+      replay:
+        description: "1 = replay the gate over historical HN rows in intel_items (read-only)"
+        default: "0"
+  schedule:
+    - cron: "15 */3 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: intel-zh-feeds
+  cancel-in-progress: false
+
+jobs:
+  feeds:
+    if: github.event_name == 'workflow_dispatch' || vars.ZH_FEEDS_WRITE == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: start RSSHub (local, in-job)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          docker run -d --name rsshub -p 1200:1200 -e NODE_ENV=production -e CACHE_EXPIRE=600 \
+            -e GITHUB_ACCESS_TOKEN="$GH_TOKEN" diygod/rsshub:latest
+          for i in $(seq 1 60); do
+            if curl -sf -o /dev/null http://localhost:1200/; then echo "rsshub up after ${i}x2s"; exit 0; fi
+            sleep 2
+          done
+          docker logs rsshub | tail -40
+          echo "::error::RSSHub did not come up"; exit 1
+      - name: collect (dry-run unless ZH_FEEDS_WRITE=1)
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+          D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+          WRITE: ${{ vars.ZH_FEEDS_WRITE }}
+          RSSHUB_BASES: ${{ github.event.inputs.probe == '1' && 'http://localhost:1200,https://rsshub.app' || 'http://localhost:1200' }}
+        run: |
+          python scripts/intel_radar/zh_feeds.py --selftest
+          ARGS=""
+          [ "${{ github.event.inputs.probe }}" = "1" ] && ARGS="$ARGS --probe"
+          [ "${{ github.event.inputs.replay }}" = "1" ] && ARGS="$ARGS --replay"
+          python scripts/intel_radar/zh_feeds.py $ARGS
+      - name: rsshub log tail
+        if: always()
+        run: docker logs rsshub 2>&1 | tail -60 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: zh-feeds-${{ github.run_id }}
+          path: scripts/intel_radar/reports/zh_feeds_report.json
+          retention-days: 14
