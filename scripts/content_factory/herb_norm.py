@@ -239,7 +239,7 @@ SYS = (
     "(if unsure, repeat the input without dose/processing words); empty string when is_herb is false;\n"
     '  "processing": processing words such as \u7099, \u7092, \u9152\u5236, \u53bb\u5fc3; empty string if none;\n'
     '  "ambiguous": true if, in Chinese materia medica, this name can refer to two or more different drugs '
-    "(e.g. \u6842 can mean \u6842\u679d or \u8089\u6842); otherwise false;\n"
+    "(e.g. \u6728\u901a can mean \u5ddd\u6728\u901a or \u5173\u6728\u901a); otherwise false;\n"
     '  "note": one short reason in Chinese, at most 20 characters.\n'
     "Never merge different drugs: \u767d\u672f vs \u82cd\u672f, \u5ddd\u8d1d\u6bcd vs \u6d59\u8d1d\u6bcd, \u8d64\u828d vs \u767d\u828d are different drugs. "
     "When ambiguous is true, canonical must be the input's own name without dose/processing words; "
@@ -355,12 +355,14 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
           % (len(pick), sum(1 for k in done if k[0] == "A"), sum(1 for k in done if k[0] == "B")), flush=True)
     sys_msg = SYS + "\u3001".join(anchors)
 
-    def call(supplier, batch):
+    def call(spec, batch):
+        supplier, _, mdl = spec.partition("@")      # "zhipu@glm-4.7-flash" -> supplier zhipu, model override
         t = time.time()
         err, got, model, txt = "", {}, "", ""
         try:
             txt, model = ask(sys_msg, "Inputs (JSON array):\n" + json.dumps(batch, ensure_ascii=False),
-                             timeout=150, max_tokens=max_tokens, supplier=supplier, source="herb_norm",
+                             timeout=150, max_tokens=max_tokens, supplier=supplier, model=mdl or None,
+                             source="herb_norm",
                              json_mode=True, temperature=0, no_fallback=True, gw_timeout_ms=90000)
             got = {nm: apply_gates(j, nm, clean.get(nm, ""))
                    for nm, j in norm_items(parse_json_array(txt, quiet=True), batch).items()}
@@ -415,7 +417,7 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
             time.sleep(fail_pause)     # back-off after a failure (>= gap, so it also covers the gap)
 
     # ---- judge A chosen by measurement: same probe batch to B and to every candidate ----
-    fprobe = os.path.join(out, "probe.json")
+    fprobe = os.path.join(out, "probe_%s.json" % re.sub(r"[^A-Za-z0-9.@-]+", "_", ",".join(probe)))
     if sup["A"] == "auto":
         if os.path.exists(fprobe):
             sup["A"] = json.load(open(fprobe, encoding="utf-8"))["chosen"]
@@ -435,20 +437,29 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                 print("[probe] %s returned=%d/%d agree_with_B=%d %.1fs%s" % (
                     cand, len(got), len(pnames), agr, dt,
                     (" ERR " + err[:90].encode("ascii", "replace").decode()) if err else ""), flush=True)
+                if len(got) >= 0.8 * len(pnames):
+                    break                   # candidates are listed strongest first: stop at the first that works
             ok = [x for x in res if x["returned"] >= 0.8 * len(pnames)]
             if not ok:
                 json.dump({"chosen": None, "candidates": [{k: v for k, v in x.items() if k != "_got"} for x in res]},
                           open(fprobe + ".failed", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
                 sys.exit("no judge-A candidate returned >= 80% of the probe batch")
-            best = max(ok, key=lambda x: (x["agree_with_B"], -x["sec"]))
+            best = ok[0]
             sup["A"] = best["supplier"]
             stats["A"]["supplier"] = sup["A"]
             sink("A", pnames, "probe", best["_got"], best["model"], best["err"], "", best["sec"])   # no wasted call
-            json.dump({"chosen": sup["A"], "rule": "returned>=80% then max agree_with_B then fastest",
+            json.dump({"chosen": sup["A"], "rule": "candidates in the given order; first returning >= 80% wins",
                        "probe_names": len(pnames), "candidates": [{k: v for k, v in x.items() if k != "_got"} for x in res]},
                       open(fprobe, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         stats["A"]["supplier"] = sup["A"]
         print("[probe] judge A = %s" % sup["A"], flush=True)
+    for w in ("A", "B"):              # one judge = one model: judgments by another spec are judged again
+        drop = [k for k, x in done.items() if k[0] == w and x.get("supplier") != sup[w]]
+        for k in drop:
+            del done[k]
+        if drop:
+            print("[S2] %s: %d judgments from another model dropped, re-judging with %s" % (w, len(drop), sup[w]),
+                  flush=True)
 
     for p in (1, 2):   # pass 2 = one retry for names a model dropped or failed on
         per = {}
