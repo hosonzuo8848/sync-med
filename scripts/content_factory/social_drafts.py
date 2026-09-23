@@ -9,9 +9,10 @@ Source: the public cross-book formula API (/api/formulas/detail) behind /fangji/
   Zero R2, zero D1 writes. The same formula name appears in many classical books with
   different compositions; that side-by-side comparison is the article angle.
 Model: internal free-pool gateway only, pinned to one supplier with fallback OFF. Run 1 showed
-  supplier=zhipu + fallback lands on agnes (rate-limited, not to be used) and glm-4-flash writes
-  too short; zhipu_free47 = glm-4.7-flash, Zhipu official free text model, thinking off.
-  It is shared with herb-norm S3 (paced 1 worker / 30 s gap): keep this job sequential + gapped.
+  supplier=zhipu + fallback lands on agnes (rate-limited, not to be used). Run 2: zhipu_free47
+  (shared with herb-norm S3) was already in gateway cooldown -> 503 tried=[]; do not default to it.
+  Default zhipu (glm-4-flash); rules are written in Chinese and the body is sectioned with
+  per-section lengths because glm-4-flash ignored an English total-length target.
 Compliance gate, fail closed:
   1. regex: no dose numerals, no efficacy-promise words (cheap, deterministic)
   2. Jev (founder-approved): diagnosis / prescribing / dosage / efficacy claim /
@@ -39,43 +40,43 @@ FOOTER = ("\n\n---\n\u672c\u6587\u4f9d\u636e\u53e4\u7c4d\u6587\u732e\u6574\u7406
           "\u4e0d\u6784\u6210\u8bca\u65ad\u3001\u5904\u65b9\u6216\u7528\u836f\u5efa\u8bae\uff1b\u5177\u4f53\u8bca\u6cbb\u8bf7\u4ee5\u6267\u4e1a\u533b\u5e08\u9762\u8bca\u4e3a\u51c6\u3002\n"
           "\u300c{name}\u300d\u5728 {books} \u90e8\u53e4\u7c4d\u4e2d\u7684 {total} \u6761\u539f\u6587\u8bb0\u8f7d\u5e76\u6392\u5bf9\u7167\uff1a{url}\n")
 
-SYSTEM = """You write Simplified-Chinese popular-reading articles for "Gufang AI Starmap" (gufangai.com),
-a research-reference platform for classical Chinese medical LITERATURE. It is not a clinic and
-gives no medical advice.
+SYSTEM = """\u4f60\u662f\u300c\u53e4\u65b9AI\u661f\u56fe\u300d\uff08gufangai.com\uff09\u7684\u53e4\u7c4d\u6587\u732e\u79d1\u666e\u5199\u624b\u3002\u672c\u5e73\u53f0\u662f\u4e2d\u533b\u53e4\u7c4d\u6587\u732e\u7814\u7a76\u53c2\u8003\u5e73\u53f0\uff0c\u4e0d\u662f\u8bca\u7597\u5e73\u53f0\uff0c\u4e0d\u63d0\u4f9b\u4efb\u4f55\u533b\u7597\u5efa\u8bae\u3002
 
-HARD RULES - any violation and the article is discarded:
-1. Literature is the subject of every factual statement: write "the book X records ...",
-   "according to X ...". Never state in your own voice that a formula treats or cures anything.
-2. No diagnosis: never tell readers what condition they have or how to identify their own illness.
-3. No prescribing: never suggest the reader take, try, buy or combine any formula or herb;
-   no preparation or usage instructions (decocting, timing, frequency).
-4. No doses: no amounts, weights or counts of any drug (no liang / qian / grams / pieces),
-   not even inside quotations.
-5. No efficacy promises: no "cures", "guaranteed", "effective rate", "miracle", "secret recipe",
-   no patient stories or testimonials.
-6. Use only facts present in the MATERIAL. Do not invent books, quotes, authors or dynasties.
-   Put book titles in Chinese title marks. If unsure, leave it out.
-7. Title: attractive but honest. No exaggeration, no clickbait words (shocking, divine formula,
-   secret recipe, must-read), no efficacy claim in the title.
-8. Plain text in Simplified Chinese. You may use a few short subheadings starting with "## ".
-   No links, no hashtags, no emojis - the page link is appended automatically.
+\u3010\u786c\u6027\u7ea2\u7ebf\uff0c\u8fdd\u53cd\u4efb\u4f55\u4e00\u6761\u6574\u7bc7\u4f5c\u5e9f\u3011
+1. \u6587\u732e\u662f\u4e00\u5207\u9648\u8ff0\u7684\u4e3b\u8bed\uff1a\u5199\u300c\u300a\u67d0\u4e66\u300b\u8bb0\u8f7d\u2026\u2026\u300d\u300c\u636e\u300a\u67d0\u4e66\u300b\u2026\u2026\u300d\u3002\u4e0d\u5f97\u7528\u81ea\u5df1\u7684\u53e3\u543b\u65ad\u8a00\u67d0\u65b9\u80fd\u6cbb\u4ec0\u4e48\u75c5\u3001\u6709\u4ec0\u4e48\u529f\u6548\u3002
+2. \u4e0d\u8bca\u65ad\uff1a\u4e0d\u544a\u8bc9\u8bfb\u8005\u5f97\u4e86\u4ec0\u4e48\u75c5\uff0c\u4e0d\u6559\u8bfb\u8005\u81ea\u6211\u5224\u65ad\u75c5\u60c5\u3002
+3. \u4e0d\u5f00\u65b9\uff1a\u4e0d\u5efa\u8bae\u8bfb\u8005\u670d\u7528\u3001\u8bd5\u7528\u3001\u8d2d\u4e70\u3001\u642d\u914d\u4efb\u4f55\u65b9\u5242\u6216\u836f\u6750\uff1b\u4e0d\u5199\u714e\u6cd5\u3001\u670d\u6cd5\u3001\u670d\u7528\u65f6\u95f4\u4e0e\u6b21\u6570\u3002
+4. \u4e0d\u5199\u5242\u91cf\uff1a\u4efb\u4f55\u836f\u7269\u7684\u6570\u91cf\u3001\u91cd\u91cf\u3001\u679a\u6570\u4e00\u5f8b\u4e0d\u5199\uff08\u4e0d\u51fa\u73b0\u4e24\u3001\u94b1\u3001\u514b\u3001\u679a\u3001\u5206\u7b49\u5242\u91cf\uff09\uff0c\u5f15\u7528\u539f\u6587\u65f6\u4e5f\u7565\u53bb\u5242\u91cf\u3002
+5. \u4e0d\u627f\u8bfa\u7597\u6548\uff1a\u4e0d\u5199\u300c\u6cbb\u6108\u300d\u300c\u6839\u6cbb\u300d\u300c\u6709\u6548\u7387\u300d\u300c\u795e\u6548\u300d\u300c\u79d8\u65b9\u300d\uff0c\u4e0d\u5199\u75c5\u4f8b\u6545\u4e8b\u548c\u60a3\u8005\u89c1\u8bc1\u3002
+6. \u53ea\u7528\u3010\u7d20\u6750\u3011\u91cc\u7684\u4e8b\u5b9e\uff1a\u4e0d\u5f97\u7f16\u9020\u4e66\u540d\u3001\u5f15\u6587\u3001\u4f5c\u8005\u3001\u671d\u4ee3\uff1b\u7d20\u6750\u91cc\u6ca1\u6709\u7684\u4e00\u5f8b\u4e0d\u5199\uff0c\u4e5f\u4e0d\u8981\u51ed\u8bb0\u5fc6\u8865\u5145\u7ec4\u6210\u6216\u5242\u91cf\u3002
+7. \u6807\u9898\u5438\u5f15\u4eba\u4f46\u4e0d\u5938\u5927\uff1a\u4e0d\u7528\u300c\u9707\u60ca\u300d\u300c\u795e\u65b9\u300d\u300c\u79d8\u65b9\u300d\u300c\u5fc5\u770b\u300d\u7b49\u8bcd\uff0c\u6807\u9898\u4e0d\u51fa\u73b0\u7597\u6548\u3002
+8. \u5168\u6587\u7528\u7b80\u4f53\u4e2d\u6587\uff08\u76f4\u63a5\u5f15\u7528\u539f\u6587\u65f6\u53ef\u4fdd\u7559\u539f\u5b57\uff09\uff1b\u7eaf\u6587\u672c\uff0c\u53ef\u7528\u300c## \u300d\u5c0f\u6807\u9898\uff1b\u4e0d\u5199\u94fe\u63a5\u3001\u8bdd\u9898\u6807\u7b7e\u3001\u8868\u60c5\u7b26\u53f7\u2014\u2014\u9875\u9762\u94fe\u63a5\u4f1a\u81ea\u52a8\u9644\u5728\u6587\u672b\u3002
 
-The angle: the same formula name appears in many classical books with different ingredient
-lists. Our platform lays every version side by side instead of synthesizing one "standard
-formula". Help readers see how the texts differ and why comparing editions matters when
-studying classical literature. End by inviting readers to compare the original texts themselves."""
+\u3010\u5199\u4f5c\u89d2\u5ea6\u3011\u540c\u4e00\u4e2a\u65b9\u540d\u5728\u591a\u90e8\u53e4\u7c4d\u91cc\u7ec4\u6210\u5404\u4e0d\u76f8\u540c\u3002\u672c\u5e73\u53f0\u628a\u5404\u7248\u672c\u539f\u6587\u5e76\u6392\u9648\u5217\uff0c\u800c\u4e0d\u66ff\u8bfb\u8005\u5408\u6210\u4e00\u4e2a\u300c\u6807\u51c6\u65b9\u300d\u3002\u5e2e\u8bfb\u8005\u770b\u5230\u6587\u732e\u4e4b\u95f4\u7684\u5dee\u5f02\uff0c\u7406\u89e3\u6bd4\u8f83\u7248\u672c\u5bf9\u7814\u8bfb\u53e4\u7c4d\u7684\u610f\u4e49\uff1b\u7ed3\u5c3e\u9080\u8bf7\u8bfb\u8005\u53bb\u67e5\u770b\u539f\u6587\u5bf9\u7167\u3002"""
 
 PLATFORM = {
-    "toutiao": ("Platform: Toutiao news feed. Output format: line 1 = the title only (at most 30 "
-                "Chinese characters). Then one blank line, then the body. Body length: 900-1300 Chinese "
-                "characters (hard limits 800-1500). Accessible storytelling for general readers interested "
-                "in traditional culture; short paragraphs.", (800, 1500), 30),
-    "zhihu": ("Platform: Zhihu. Write an answer to a natural Zhihu-style question. Output format: "
-              "line 1 = the question only (at most 40 Chinese characters). Then one blank line, then the "
-              "answer. Answer length: 800-1600 Chinese characters. Calm, knowledgeable tone; the first "
-              "sentence answers directly; back each point with a named source from the MATERIAL; close "
-              "with one short paragraph on the limits of what these texts can tell us.", (700, 1800), 45),
+    "toutiao": ("\u5e73\u53f0\uff1a\u4eca\u65e5\u5934\u6761\u3002\u8f93\u51fa\u683c\u5f0f\uff1a\u7b2c\u4e00\u884c\u53ea\u5199\u6807\u9898\uff08\u4e0d\u8d85\u8fc730\u5b57\uff09\uff0c\u7a7a\u4e00\u884c\u540e\u5199\u6b63\u6587\u3002"
+                "\u6b63\u6587\u5fc5\u987b\u52065\u4e2a\u90e8\u5206\uff0c\u6bcf\u90e8\u5206\u4ee5\u300c## \u300d\u5c0f\u6807\u9898\u5f00\u5934\uff0c\u6bcf\u90e8\u5206\u5199200\u5230280\u5b57\uff1a"
+                "\u2460\u5f15\u5b50\uff1a\u8fd9\u4e2a\u65b9\u540d\u51fa\u73b0\u5728\u591a\u5c11\u90e8\u53e4\u7c4d\u3001\u591a\u5c11\u6761\u8bb0\u8f7d\u91cc\uff1b\u2461\u7b2c\u4e00\u4e2a\u7248\u672c\uff1a\u51fa\u81ea\u54ea\u672c\u4e66\u3001\u7531\u54ea\u4e9b\u836f\u7ec4\u6210\uff1b"
+                "\u2462\u5176\u4ed6\u7248\u672c\u5bf9\u6bd4\uff1a\u53e6\u5916\u4e24\u4e09\u672c\u4e66\u7684\u7ec4\u6210\u6709\u4f55\u4e0d\u540c\uff1b\u2463\u4e3a\u4ec0\u4e48\u4f1a\u540c\u540d\u5f02\u65b9\uff08\u53ea\u4ece\u6587\u732e\u6d41\u4f20\u3001\u4f20\u6284\u3001\u5404\u4e66\u4f53\u4f8b\u7684\u89d2\u5ea6\u8bb2\uff09\uff1b"
+                "\u2464\u600e\u6837\u67e5\u770b\u539f\u6587\u5bf9\u7167\u3002\u6b63\u6587\u5408\u8ba1900\u52301300\u5b57\uff08\u786c\u6027\u8303\u56f4800\u52301500\u5b57\uff09\u3002\u8bed\u8a00\u901a\u4fd7\uff0c\u6bb5\u843d\u77ed\u3002", (800, 1500), 30),
+    "zhihu": ("\u5e73\u53f0\uff1a\u77e5\u4e4e\u3002\u7528\u56de\u7b54\u4e00\u4e2a\u77e5\u4e4e\u5f0f\u95ee\u9898\u7684\u53e3\u543b\u5199\u3002\u8f93\u51fa\u683c\u5f0f\uff1a\u7b2c\u4e00\u884c\u53ea\u5199\u95ee\u9898\uff08\u4e0d\u8d85\u8fc740\u5b57\uff09\uff0c\u7a7a\u4e00\u884c\u540e\u5199\u56de\u7b54\u3002"
+              "\u56de\u7b54\u52064\u52305\u4e2a\u90e8\u5206\uff0c\u6bcf\u90e8\u5206\u4ee5\u300c## \u300d\u5c0f\u6807\u9898\u5f00\u5934\uff0c\u6bcf\u90e8\u5206\u5199200\u5230300\u5b57\uff0c\u5408\u8ba1900\u52301400\u5b57\uff08\u786c\u6027\u8303\u56f4700\u52301800\u5b57\uff09\u3002"
+              "\u8bed\u6c14\u51b7\u9759\u3001\u6709\u89c1\u8bc6\uff1b\u7b2c\u4e00\u53e5\u76f4\u63a5\u56de\u7b54\uff1b\u6bcf\u4e2a\u89c2\u70b9\u90fd\u7528\u3010\u7d20\u6750\u3011\u4e2d\u7684\u5177\u4f53\u4e66\u540d\u652f\u6491\uff1b"
+              "\u6700\u540e\u7528\u4e00\u5c0f\u6bb5\u8bf4\u660e\u8fd9\u4e9b\u6587\u732e\u80fd\u8bf4\u660e\u4ec0\u4e48\u3001\u4e0d\u80fd\u8bf4\u660e\u4ec0\u4e48\u3002", (700, 1800), 45),
 }
+
+HINT = {
+    "diagnosis": "\u51fa\u73b0\u4e86\u8bca\u65ad\u6216\u6559\u8bfb\u8005\u5224\u65ad\u75c5\u60c5\u7684\u5185\u5bb9",
+    "prescribing": "\u51fa\u73b0\u4e86\u5efa\u8bae\u670d\u7528\u3001\u642d\u914d\u6216\u670d\u6cd5\u714e\u6cd5",
+    "dosage": "\u51fa\u73b0\u4e86\u5242\u91cf\u6216\u6570\u91cf",
+    "efficacy_claim": "\u7528\u81ea\u5df1\u7684\u53e3\u543b\u65ad\u8a00\u4e86\u7597\u6548\u6216\u4e3b\u6cbb\uff08\u5fc5\u987b\u6539\u6210\u300c\u300a\u67d0\u4e66\u300b\u8bb0\u8f7d\u2026\u2026\u300d\u7684\u6587\u732e\u8f6c\u8ff0\uff09",
+    "literature_subject too low": "\u9648\u8ff0\u6ca1\u6709\u843d\u5230\u5177\u4f53\u4e66\u540d\u4e0a",
+}
+FEEDBACK = "\n\n\u3010\u4e0a\u4e00\u7a3f\u672a\u901a\u8fc7\u3011{why}\u3002\u8bf7\u91cd\u5199\u4e00\u7bc7\uff0c\u9010\u6761\u4fee\u6b63\uff0c\u540c\u65f6\u9075\u5b88\u5168\u90e8\u7ea2\u7ebf\u3002"
+LEN_HINT = "\u6b63\u6587{n}\u5b57\uff0c\u4e0d\u5728{lo}\u5230{hi}\u5b57\u8303\u56f4\u5185\uff08\u504f\u77ed\u5c31\u628a\u6bcf\u4e2a\u90e8\u5206\u90fd\u5199\u8db3250\u5b57\u4ee5\u4e0a\uff0c\u504f\u957f\u5c31\u538b\u7f29\uff09"
+MAT_NOTE = "\u5f15\u6587\u4e2d\u7684\u5242\u91cf\u5df2\u523b\u610f\u5220\u53bb\uff0c\u4e0d\u8981\u8865\u5199\u3002"
+MAT_HEAD = "\n\n\u3010\u7d20\u6750\u3011\uff08JSON\uff09\uff1a\n"
 
 JEV_Q = {
     "diagnosis": "The article diagnoses the reader, or tells readers how to work out which illness they themselves have.",
@@ -88,8 +89,8 @@ JEV_Q = {
 # are kept in manifest.json so they can be recalibrated once reviewed drafts accumulate.
 JEV_MAX_VIOLATION = 0.3
 JEV_MIN_LITERATURE = 0.5
-SUPPLIER = os.environ.get("SOCIAL_SUPPLIER", "zhipu_free47")
-CALL_GAP_S = 15
+SUPPLIER = os.environ.get("SOCIAL_SUPPLIER") or "zhipu"
+CALL_GAP_S = 5
 
 
 def get(url, timeout=40):
@@ -136,7 +137,7 @@ def material(nm, d, max_versions=6):
             "herbs_shared_by_most_versions": d.get("core_keys") or [],
             "most_frequent_herbs": [h.get("t") for h in (d.get("herb_freq") or [])[:12]],
             "sample_versions": vers,
-            "note": "Dose amounts were removed from quotes on purpose; do not add any."}
+            "note": MAT_NOTE}
 
 
 def split_title(txt):
@@ -169,6 +170,12 @@ def cheap_gate(title, body, lim, tmax=45):
     return why
 
 
+def hint(w, lim):
+    if w.startswith("body length"):
+        return LEN_HINT.format(n=w.split()[2], lo=lim[0], hi=lim[1])
+    return HINT.get(w, w)
+
+
 def jev_gate(title, body):
     state = ("Draft article for a Chinese social-media platform, written by a classical-literature research "
              "site that is not a clinic and must not give medical advice. Title and text follow.\n\n"
@@ -190,7 +197,7 @@ def jev_gate(title, body):
 
 def draft(nm, d, platform, attempts=3):
     spec, lim, tmax = PLATFORM[platform]
-    user = spec + "\n\nMATERIAL (JSON):\n" + json.dumps(material(nm, d), ensure_ascii=False, indent=1)
+    user = spec + MAT_HEAD + json.dumps(material(nm, d), ensure_ascii=False, indent=1)
     rec = {"platform": platform, "attempts": 0, "models": [], "passed": False}
     feedback = ""
     for a in range(attempts):
@@ -213,8 +220,7 @@ def draft(nm, d, platform, attempts=3):
             rec.update({"passed": True, "title": title, "body": body, "model": model})
             return rec
         print("  [%s] attempt %d rejected: %s" % (platform, a + 1, "; ".join(why)[:200]), flush=True)
-        feedback = ("\n\nYOUR PREVIOUS DRAFT WAS REJECTED FOR: " + "; ".join(why)
-                    + ". Write a new draft that fixes this and still follows every hard rule.")
+        feedback = FEEDBACK.format(why="; ".join(hint(w, lim) for w in why))
     return rec
 
 
@@ -225,6 +231,7 @@ def selftest():
     assert PROMISE_GATE.search("\u6b64\u65b9\u53ef\u6839\u6cbb") and not PROMISE_GATE.search("\u300a\u5343\u91d1\u65b9\u300b\u8bb0\u8f7d")
     assert split_title("# \u6807\u9898\uff1a\u4e94\u82d3\u6563\n\n\u6b63\u6587")[0] == "\u4e94\u82d3\u6563"
     assert cheap_gate("t", "x" * 900, (800, 1500)) == [] and cheap_gate("t", "x" * 10, (800, 1500))
+    assert "639" in hint("body length 639 outside 800-1500 Chinese characters", (800, 1500))
     print("selftest ok")
 
 

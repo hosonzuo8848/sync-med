@@ -20,6 +20,10 @@ on:
         description: 'shuffle seed for picking formulas (empty = time based)'
         required: false
         default: ''
+      supplier:
+        description: 'free-pool gateway supplier, fallback off (empty = zhipu). Never a paid supplier.'
+        required: false
+        default: ''
 
 concurrency:
   group: social-drafts
@@ -43,6 +47,7 @@ jobs:
         env:
           GW_KEY: ${{ secrets.GW_KEY }}
           JEV_API_KEY: ${{ secrets.JEV_API_KEY }}
+          SOCIAL_SUPPLIER: ${{ github.event.inputs.supplier }}
           PYTHONIOENCODING: utf-8
         run: python scripts/content_factory/social_drafts.py --count "${{ github.event.inputs.count || '5' }}" --seed "${{ github.event.inputs.seed }}" --out out
       - uses: actions/upload-artifact@v4
