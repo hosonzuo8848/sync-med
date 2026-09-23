@@ -463,6 +463,7 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
             if lead + new <= b_lead:
                 break
             if over():
+                lead_wait[0] += time.time() - t0      # waited until the budget ran out: count it too
                 return False
             time.sleep(20)
         lead_wait[0] += time.time() - t0
