@@ -210,6 +210,7 @@ if __name__ == "__main__":
         assert gate("Drag and drop storage garage") is None          # the HN\u00b7RAG noise class
         assert gate("Fine-tuning Qwen for OCR") == "ai_model"
         assert gate("Bitcoin LLM trading bot") is None               # exclude wins
+        assert gate("Human task board for my agents") == "ai_model"  # 40 of 48 dropped high HN rows were agent posts
         assert gate("\u4e2d\u533b\u53e4\u7c4d\u6570\u5b57\u5316") == "tcm_digital"
         assert gate("\u67d0\u516c\u53f8\u53d1\u5e03\u65b0\u6b3e\u624b\u673a") is None
         print("selftest ok")
