@@ -187,7 +187,9 @@ def main():
             hi = sum(1 for r in rs if r["importance"] in ("high", "critical"))
             phi = sum(1 for r in p if r["importance"] in ("high", "critical"))
             report["replay"].append({"name": n, "rows": len(rs), "passed": len(p), "rows_high": hi, "pass_high": phi,
-                                     "sample_drop": [r["title"] for r in rs if r not in p][:15]})
+                                     "sample_drop": [r["title"] for r in rs if r not in p][:15],
+                                     "sample_drop_high": [r["title"] for r in rs if r not in p
+                                                          and r["importance"] in ("high", "critical")][:40]})
             S.append("| %s | %d | %d | %d | %d |" % (n, len(rs), len(p), phi, hi))
 
     out = os.path.join(HERE, "reports")

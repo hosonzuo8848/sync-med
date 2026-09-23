@@ -51,6 +51,17 @@
     "ai agent*",
     "agentic",
     "\u667a\u80fd\u4f53",
+    "ai",
+    "ais",
+    "coding agent*",
+    "agent skill*",
+    "multi-agent",
+    "subagent*",
+    "agent framework*",
+    "agent workflow*",
+    "local model*",
+    "open model*",
+    "moe",
     "prompt engineering",
     "\u63d0\u793a\u8bcd",
     "transformer*",
@@ -141,7 +152,7 @@
     "growth hack*",
     "\u79c1\u57df",
     "\u5c0f\u7ea2\u4e66",
-    "\u516c\u4f17\u53f7",
+    "\u516c\u4f17\u53f7\u8fd0\u8425",
     "\u77ed\u89c6\u9891",
     "\u5f15\u6d41",
     "\u8f6c\u5316\u7387",
@@ -164,11 +175,16 @@
    "gambling",
    "forex",
    "who is hiring",
-   "\u70d2\u80a1",
+   "\u7092\u80a1",
    "\u80a1\u4ef7",
    "\u62db\u8058",
    "\u5f69\u7968",
-   "\u5a31\u4e50\u5708"
+   "\u5a31\u4e50\u5708",
+   "\u6052\u6307",
+   "\u6536\u8dcc",
+   "\u6536\u6da8",
+   "\u6da8\u8d85",
+   "\u8dcc\u8d85"
   ]
  },
  "rsshub": [
@@ -210,7 +226,7 @@
    "gate": true,
    "sector": "T",
    "ev": "S3",
-   "enabled": false
+   "enabled": true
   },
   {
    "name": "\u673a\u5668\u4e4b\u5fc3",
@@ -234,7 +250,7 @@
    "gate": true,
    "sector": "T",
    "ev": "S3",
-   "enabled": false
+   "enabled": true
   },
   {
    "name": "\u91cf\u5b50\u4f4d\u00b7\u5927\u6a21\u578b",
@@ -250,7 +266,7 @@
    "gate": true,
    "sector": "T",
    "ev": "S3",
-   "enabled": false
+   "enabled": true
   },
   {
    "name": "\u77e5\u4e4e\u00b7\u70ed\u699c",
@@ -274,7 +290,7 @@
    "gate": true,
    "sector": "T",
    "ev": "S3",
-   "enabled": false
+   "enabled": true
   },
   {
    "name": "InfoQ\u4e2d\u6587\u00b7\u63a8\u8350",
@@ -290,7 +306,7 @@
    "gate": true,
    "sector": "T",
    "ev": "S3",
-   "enabled": false
+   "enabled": true
   },
   {
    "name": "HelloGitHub",
@@ -306,7 +322,7 @@
    "gate": true,
    "sector": "T",
    "ev": "S3",
-   "enabled": false
+   "enabled": true
   },
   {
    "name": "\u864e\u55c5",
@@ -322,7 +338,7 @@
    "gate": true,
    "sector": "T",
    "ev": "S3",
-   "enabled": false
+   "enabled": true
   },
   {
    "name": "\u9e1f\u54e5\u7b14\u8bb0",
@@ -330,7 +346,7 @@
    "gate": true,
    "sector": "T",
    "ev": "S3",
-   "enabled": false
+   "enabled": true
   },
   {
    "name": "\u5fae\u535a\u00b7\u70ed\u641c",
