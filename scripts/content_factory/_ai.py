@@ -59,7 +59,7 @@ def q(v):
 
 def ask(system, user, timeout=120, max_tokens=2600, supplier=None,
         source="content_factory", json_mode=True, temperature=None, no_fallback=False,
-        model=None):
+        model=None, gw_timeout_ms=None):
     """走内部免费池网关。supplier 可点名某家(失败仍按容错链兜)。
 
     【2026-08-05 实测抓到的大 bug】`json` 此前是**写死 True** 的,而网关看到它就注入
@@ -93,6 +93,9 @@ def ask(system, user, timeout=120, max_tokens=2600, supplier=None,
         # scripts/model_pool_whitelist.json 建成 13 天全仓零引用,根因就在这:
         # **不是没探活,是探活结果没有入口能喂进来。**
         payload["model"] = model
+    if gw_timeout_ms:
+        # gateway chat.js default upstream timeout is 30s; long batch JSON needs up to 90s (clamped there)
+        payload["timeout_ms"] = int(gw_timeout_ms)
     req = urllib.request.Request(
         GATEWAY, method="POST", data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
         headers={"Content-Type": "application/json; charset=utf-8", "User-Agent": UA,

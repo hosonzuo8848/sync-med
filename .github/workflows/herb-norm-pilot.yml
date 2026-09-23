@@ -1,0 +1,81 @@
+name: herb-norm-pilot
+
+# Herb-name normalization S1 + S2 pilot (platform CTO blueprint 2026-09-23, kb_herbs 372 -> 10k).
+# S1: two D1 reads (one GROUP BY over sue_formulas_v2_herbs, one SELECT of kb_herbs), no paging, no retry;
+#     the export lives in the actions cache, so a rerun never touches D1 again (fresh=1 forces a new export).
+# S2: top-N rule-unresolved names, batches of 50, two different vendors via the free-pool gateway
+#     (no_fallback), disagreements arbitrated by Jev. Resume: every answer is appended and cached.
+# Public repo: results go to the run artifact (short retention) and the cache only, never to git or logs.
+# No D1 writes. Manual dispatch only (pilot); S3 adds cron + Issue reporting.
+# Who sees it when it breaks: the dispatcher (CTO) via the step summary + artifact of this run.
+
+on:
+  workflow_dispatch:
+    inputs:
+      n:
+        description: "pilot size (top-N rule-unresolved names by frequency)"
+        default: "500"
+      batch:
+        description: "names per model call"
+        default: "50"
+      a_supplier:
+        description: "gateway supplier for judge A"
+        default: "sn_ds_pro"
+      b_supplier:
+        description: "gateway supplier for judge B (must be another vendor)"
+        default: "modelscope"
+      fresh:
+        description: "1 = ignore cache (re-export from D1 and re-judge everything)"
+        default: "0"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: herb-norm-pilot
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+      D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+      GW_KEY: ${{ secrets.GW_KEY }}
+      JEV_API_KEY: ${{ secrets.JEV_API_KEY }}
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q zhconv "setuptools<81"
+      - name: selftest (pure string rules)
+        run: python scripts/content_factory/herb_norm.py --selftest
+      - name: restore previous state (export + judgments)
+        if: ${{ github.event.inputs.fresh != '1' }}
+        uses: actions/cache/restore@v4
+        with:
+          path: out/herb_norm
+          key: herb-norm-pilot-${{ github.run_id }}
+          restore-keys: herb-norm-pilot-
+      - name: S1 export + rules, S2 pilot
+        run: >
+          python scripts/content_factory/herb_norm.py --out out/herb_norm
+          --n ${{ github.event.inputs.n || '500' }} --batch ${{ github.event.inputs.batch || '50' }}
+          --a ${{ github.event.inputs.a_supplier || 'sn_ds_pro' }} --b ${{ github.event.inputs.b_supplier || 'modelscope' }}
+      - name: save state for resume
+        if: ${{ always() && hashFiles('out/herb_norm/**') != '' }}
+        uses: actions/cache/save@v4
+        with:
+          path: out/herb_norm
+          key: herb-norm-pilot-${{ github.run_id }}
+      - name: upload results
+        if: ${{ always() && hashFiles('out/herb_norm/**') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: herb-norm-pilot-${{ github.run_id }}
+          path: out/herb_norm
+          retention-days: 7
