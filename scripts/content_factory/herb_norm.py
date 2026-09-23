@@ -319,7 +319,7 @@ def _load(path):
     return out
 
 
-def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=()):
+def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), workers=2, gap=0.0, fail_pause=0.0):
     t_start = time.time()
     pick = [r for r in rules if r["kind"] not in ("exact", "rule")][:n]
     freq = {r["name"]: r["n"] for r in pick}
@@ -371,8 +371,27 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=()):
                                                     (" ERR " + err[:90].encode("ascii", "replace").decode()) if err else ""),
               flush=True)
 
+    # client-side pacing (2026-09-23 round 2: agnes answered a single probe call, then 2 concurrent calls were
+    # refused at once and the gateway breaker kept refusing -- suspected vendor rate limit). One vendor's
+    # calls start >= gap seconds apart, a failure pauses that worker, 3 consecutive failures stop the vendor
+    # for this run (no hammering a breaker; the rerun resumes).
+    last, fails = {"A": 0.0, "B": 0.0}, {"A": 0, "B": 0}
+
     def work(who, batch, tag):
-        sink(who, batch, tag, *call(sup[who], batch))
+        if fails[who] >= 3:
+            print("[S2] %s %s skipped: vendor stopped after 3 consecutive failures" % (who, tag), flush=True)
+            return
+        with lock:
+            wait = last[who] + gap - time.time()
+            last[who] = max(time.time(), last[who] + gap)
+        if wait > 0:
+            time.sleep(wait)
+        res = call(sup[who], batch)
+        sink(who, batch, tag, *res)
+        with lock:
+            fails[who] = fails[who] + 1 if res[2] else 0
+        if res[2] and fail_pause:
+            time.sleep(fail_pause)
 
     # ---- judge A chosen by measurement: same probe batch to B and to every candidate ----
     fprobe = os.path.join(out, "probe.json")
@@ -423,7 +442,7 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=()):
             break
         print("[S2] pass %d: %d calls" % (p, len(jobs)), flush=True)
         # 2 concurrent calls per vendor: zhipu also heads the production gateway chain
-        with ThreadPoolExecutor(2 * len({j[0] for j in jobs})) as ex:
+        with ThreadPoolExecutor(workers * len({j[0] for j in jobs})) as ex:
             list(ex.map(lambda j: work(*j), jobs))
     t_models = time.time() - t_start
 
@@ -593,6 +612,9 @@ def main():
     ap.add_argument("--a", default="auto")    # auto = measured pick among --probe; never sensenova (quota)
     ap.add_argument("--probe", default="nv_gemma,agnes")
     ap.add_argument("--tag", default="")      # round subdir; export/rules stay shared at --out
+    ap.add_argument("--workers", type=int, default=2)        # concurrent calls per vendor
+    ap.add_argument("--gap", type=float, default=0.0)        # min seconds between one vendor's call starts
+    ap.add_argument("--fail-pause", type=float, default=0.0)  # seconds a worker waits after a failed call
     ap.add_argument("--b", default="modelscope")
     ap.add_argument("--max-tokens", type=int, default=6000)   # glm-4-flash caps output near 4k
     ap.add_argument("--selftest", action="store_true")
@@ -610,7 +632,7 @@ def main():
     out_r = os.path.join(a.out, a.tag) if a.tag else a.out
     os.makedirs(out_r, exist_ok=True)
     psum = s2_pilot(out_r, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b}, a.max_tokens,
-                    [c.strip() for c in a.probe.split(",")])
+                    [c.strip() for c in a.probe.split(",")], a.workers, a.gap, a.fail_pause)
     total = round(time.time() - t0, 1)
     json.dump({"export": meta, "rules": rsum, "pilot": psum, "sec_total": total},
               open(os.path.join(out_r, "run_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)

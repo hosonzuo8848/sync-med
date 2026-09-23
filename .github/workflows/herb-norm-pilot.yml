@@ -27,6 +27,9 @@ on:
       tag:
         description: "round subdir under out/herb_norm (export is shared, judgments are per round)"
         default: "r2"
+      pacing:
+        description: "--workers N --gap SEC --fail-pause SEC (per vendor; agnes needs serial + gap)"
+        default: "--workers 1 --gap 30 --fail-pause 100"
       b_supplier:
         description: "gateway supplier for judge B (must be another vendor)"
         default: "modelscope"
@@ -77,6 +80,7 @@ jobs:
           --a ${{ github.event.inputs.a_supplier || 'auto' }} --b ${{ github.event.inputs.b_supplier || 'modelscope' }}
           --max-tokens ${{ github.event.inputs.max_tokens || '6000' }}
           --probe ${{ github.event.inputs.probe || 'nv_gemma,agnes' }} --tag ${{ github.event.inputs.tag || 'r2' }}
+          ${{ github.event.inputs.pacing || '--workers 1 --gap 30 --fail-pause 100' }}
       - name: save state for resume
         if: ${{ always() && hashFiles('out/herb_norm/**') != '' }}
         uses: actions/cache/save@v4
