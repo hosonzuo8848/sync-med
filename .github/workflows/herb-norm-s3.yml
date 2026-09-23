@@ -18,7 +18,7 @@ on:
         default: "45"
       pacing:
         description: "per-vendor pacing args"
-        default: "--workers 1 --gap 30 --fail-pause 60 --transient-retries 3 --transient-pause 60"
+        default: "--workers 1 --gap 30 --fail-pause 60 --transient-retries 3 --transient-pause 60 --fail-cooldown 600 --b-lead 100"
 
 permissions:
   contents: read
@@ -71,7 +71,7 @@ jobs:
         run: >
           python scripts/content_factory/herb_norm.py --out out/herb_norm --tag s3 --all --n 1000000
           --batch 25 --a zhipu_free47 --b modelscope --max-tokens 8000
-          ${{ github.event.inputs.pacing || '--workers 1 --gap 30 --fail-pause 60 --transient-retries 3 --transient-pause 60' }}
+          ${{ github.event.inputs.pacing || '--workers 1 --gap 30 --fail-pause 60 --transient-retries 3 --transient-pause 60 --fail-cooldown 600 --b-lead 100' }}
           --deadline-min ${{ github.event.inputs.deadline || '45' }} --issue
       - name: save state for the next shard
         if: ${{ always() && hashFiles('out/herb_norm/s3/**') != '' }}

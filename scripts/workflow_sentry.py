@@ -31,6 +31,10 @@ COVERED_BY_FLEET = {'ocr.yml', 'ocr_ndl.yml', 'sync.yml', 'clean-embed.yml',
 # 哨兵自己不盯自己
 SELF = {'workflow-sentry.yml', 'fleet-watch.yml', 'intake-sentry.yml', 'gateway-sentry.yml'}
 
+# Lines that must keep running: alert when the last SUCCESSFUL run is older than N hours. Unlike the generic
+# stale list below (listed only when something else already opened the Issue), these open the Issue themselves.
+# A finished line disables its own workflow (state != active) and is skipped, so "not DONE" is implied.
+MUST_RUN_HOURS = {'herb-norm-s3.yml': 2}   # CTO 2026-09-23: hourly S3 shards, >2h without success = stalled
 STALE_HOURS = 48   # 有 cron 却 48 小时没跑过 = 触发器可能断了（execution-watchdog 第五条：停摆先查触发）
 
 
@@ -147,13 +151,21 @@ def main():
     wfs = gh(f'/repos/{REPO}/actions/workflows?per_page=100').get('workflows', [])
     now = datetime.datetime.now(datetime.timezone.utc)
 
-    failed, stale = [], []
+    failed, stale, must_stall = [], [], []
     for w in wfs:
         fname = (w.get('path') or '').split('/')[-1]
         if fname in COVERED_BY_FLEET or fname in SELF:
             continue
         if w.get('state') != 'active':
             continue
+
+        if fname in MUST_RUN_HOURS:
+            ok = gh(f"/repos/{REPO}/actions/workflows/{w['id']}/runs"
+                    f"?status=success&per_page=1&exclude_pull_requests=true").get('workflow_runs', [])
+            last_ok = ok[0].get('updated_at') if ok else w.get('created_at')
+            h = (now - datetime.datetime.fromisoformat(last_ok.replace('Z', '+00:00'))).total_seconds() / 3600
+            if h > MUST_RUN_HOURS[fname]:
+                must_stall.append((w['name'], fname, round(h, 1), MUST_RUN_HOURS[fname]))
 
         runs = gh(f"/repos/{REPO}/actions/workflows/{w['id']}/runs"
                   f"?per_page=1&exclude_pull_requests=true").get('workflow_runs', [])
@@ -171,7 +183,7 @@ def main():
 
         if r.get('conclusion') == 'failure':
             failed.append((w['name'], fname, hours, r.get('html_url')))
-        elif hours is not None and hours >= STALE_HOURS and r.get('conclusion') == 'success':
+        elif fname not in MUST_RUN_HOURS and hours is not None and hours >= STALE_HOURS and r.get('conclusion') == 'success':
             # 只有真带 cron 的才算"停摆"——纯手动触发的 workflow 几百小时没跑完全正常。
             #
             # 第一版漏了这道判断，一上线就报了 27 条"疑似停摆"，里面混着大量
@@ -193,11 +205,13 @@ def main():
     for n, f, h, _ in failed:
         print(f'  ❌ {f:28} {n[:30]}  {h}h 前')
 
-    if not failed and not zero_out:
+    for n, f, h, lim in must_stall:
+        print(f'  [stalled] {f:28} {n[:30]}  last success {h}h ago (limit {lim}h)')
+    if not failed and not zero_out and not must_stall:
         print('无失败产线、产出探针全活，不开 Issue')
         return
 
-    title = f'🏭 产线失败/零产出 · 失败 {len(failed)} · 零产出 {len(zero_out)}'
+    title = f'🏭 产线失败/零产出 · 失败 {len(failed)} · 零产出 {len(zero_out)}' + (f' + stalled {len(must_stall)}' if must_stall else '')
     lines = ['> 兜底哨兵：盯的是 fleet-watch 覆盖范围之外、且自身没有告警出口的 workflow。', '',
              '## 🔴 最近一次运行失败', '']
     for n, f, h, url in failed:
@@ -206,6 +220,10 @@ def main():
         lines += ['', '## ⚫ 绿勾零产出（run 在跑/在绿，24 小时产出为 0）', '']
         for name, wf in zero_out:
             lines.append(f'- **{name}** (`{wf}`) · 24h 产出=0 —— 绿勾只证明进程没崩，先查产线自己的日志与下游表')
+    if must_stall:
+        lines += ['', '## must-run lines stalled (no successful run within the limit)', '']
+        for n, f, h, lim in must_stall:
+            lines.append(f'- **{n}** (`{f}`) - last success {h}h ago (limit {lim}h) - check first: not triggered / cancelled?')
     if stale:
         lines += ['', '## 🟡 超出各自 cron 周期未运行（触发器可能断了）', '']
         for n, f, h, lim in stale:

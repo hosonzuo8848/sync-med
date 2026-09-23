@@ -373,7 +373,8 @@ def _load(path):
 
 
 def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), workers=2, gap=0.0, fail_pause=0.0,
-             rejudge=(), t_retries=0, t_pause=60.0, all_names=False, deadline=0.0):
+             rejudge=(), t_retries=0, t_pause=60.0, all_names=False, deadline=0.0, fail_cooldown=0.0,
+             b_lead=None):
     t_start = time.time()
     pick = (rules if all_names else [r for r in rules if r["kind"] not in ("exact", "rule")])[:n]
     last_ok = [""]
@@ -447,6 +448,25 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
     # serial), the next call starts >= gap seconds after the previous one ENDED, a failure pauses fail_pause
     # seconds, 3 consecutive failures stop that vendor for this run (the rerun resumes).
     last, fails = {"A": 0.0, "B": 0.0}, {"A": 0, "B": 0}
+    pauses, lead_wait = {"A": 0, "B": 0}, [0.0]
+
+    def over():
+        return bool(deadline) and time.time() - t_start > deadline
+
+    def b_gate(batch):
+        """CTO S3: B may run at most b_lead names ahead of A (modelscope is production's 3rd fallback)."""
+        t0 = time.time()
+        while True:
+            with lock:
+                lead = sum(1 for (w, nm) in done if w == "B" and ("A", nm) not in done)
+                new = sum(1 for nm in batch if ("A", nm) not in done)
+            if lead + new <= b_lead:
+                break
+            if over():
+                return False
+            time.sleep(20)
+        lead_wait[0] += time.time() - t0
+        return True
 
     # CTO round 4: upstream HTTP 429 / code 1305 ("model busy") is transient -> back off t_pause and retry the
     # same batch up to t_retries times, not counted as a consecutive failure. The gateway answers every failure
@@ -477,7 +497,19 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
         if deadline and time.time() - t_start > deadline:
             return                    # S3 shard: time budget used up, the next scheduled run resumes
         if fails[who] >= 3:
-            print("[S2] %s %s skipped: vendor stopped after 3 consecutive failures" % (who, tag), flush=True)
+            if not fail_cooldown:
+                print("[S2] %s %s skipped: vendor stopped after 3 consecutive failures" % (who, tag), flush=True)
+                return
+            # CTO S3: pause inside the shard instead of giving up; the budget still bounds the shard
+            pauses[who] += 1
+            left = (deadline - (time.time() - t_start)) if deadline else fail_cooldown
+            print("[S2] %s 3 consecutive failures: pause #%d for %ds" % (who, pauses[who], max(0, min(fail_cooldown, left))),
+                  flush=True)
+            time.sleep(max(0, min(fail_cooldown, left)))
+            fails[who] = 0
+            if over():
+                return
+        if who == "B" and b_lead is not None and not b_gate(batch):
             return
         wait = last[who] + gap - time.time()
         if wait > 0:
@@ -550,7 +582,9 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                 f.result()
     t_models = time.time() - t_start
     for w in ("A", "B"):
-        stats[w]["stopped"] = fails[w] >= 3     # this run gave up on the vendor after 3 consecutive failures
+        stats[w]["stopped"] = fails[w] >= 3 and not fail_cooldown   # gave up on the vendor (old stop mode)
+        stats[w]["pauses"] = pauses[w]
+    stats["B"]["lead_wait_sec"] = round(lead_wait[0], 1)
 
     # ---- Jev on disagreements ----
     gated = {r["name"]: cross_gate(done[("A", r["name"])], done[("B", r["name"])], r["name"], clean[r["name"]])
@@ -716,6 +750,8 @@ def write_s3(out, recs, stats, last_ok, sec):
         "transient_retries_this_run": sum(stats[w]["transient_retries"] for w in ("A", "B")),
         "judged_this_run": {w: stats[w]["returned"] for w in ("A", "B")},
         "vendor_stopped": [w for w in ("A", "B") if stats[w].get("stopped")],
+        "vendor_pauses_this_run": {w: stats[w].get("pauses", 0) for w in ("A", "B")},
+        "b_waited_for_a_sec": stats["B"].get("lead_wait_sec", 0),
         "last_success_utc": last_ok or prev.get("last_success_utc", ""),
         "updated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "sec_this_run": round(sec, 1),
         "complete": len(by["incomplete"]) == 0,
@@ -732,7 +768,7 @@ def report_issue(s3, run_url):
     rate = [s3["judged_this_run"][w] for w in ("A", "B")]
     remain = [s3["total"] - s3["judged_A"], s3["total"] - s3["judged_B"]]
     eta = max((r / v) if v else float("inf") for r, v in zip(remain, rate)) if any(remain) else 0
-    stalled = not s3["complete"] and min(rate) == 0
+    stalled = not s3["complete"] and rate[0] == 0 and not (s3.get("vendor_pauses_this_run") or {}).get("A")
     body = "\n".join([
         "Numbers only (public repo). Updated %s UTC by %s" % (s3["updated_utc"], run_url), "",
         "| metric | value |", "|---|---|",
@@ -744,12 +780,17 @@ def report_issue(s3, run_url):
         "| congestion retries this run | %d |" % s3["transient_retries_this_run"],
         "| judged this run A / B | %d / %d |" % tuple(rate),
         "| vendor stopped this run (3 consecutive failures) | %s |" % (",".join(s3.get("vendor_stopped") or []) or "-"),
+        "| pauses this run A / B (10 min after 3 consecutive failures) | %d / %d |" % (
+            (s3.get("vendor_pauses_this_run") or {}).get("A", 0), (s3.get("vendor_pauses_this_run") or {}).get("B", 0)),
+        "| B waited for A this run (lead cap) | %ds |" % s3.get("b_waited_for_a_sec", 0),
         "| last successful batch | %s |" % (s3["last_success_utc"] or "-"),
         "| est. hourly runs left | %s |" % ("done" if s3["complete"] else ("stalled" if eta == float("inf") else "%.0f" % (eta + 0.49))),
         "| complete | %s |" % s3["complete"],
     ])
     stopped = s3.get("vendor_stopped") or []
-    state = "done" if s3["complete"] else ("stalled" if stalled else ("stopped:" + ",".join(stopped) if stopped else "ok"))
+    paused = [w for w, v in (s3.get("vendor_pauses_this_run") or {}).items() if v]
+    state = "done" if s3["complete"] else ("stalled" if stalled else ("stopped:" + ",".join(stopped) if stopped
+                                                                   else ("paused:" + ",".join(paused) if paused else "ok")))
     title = "\u836f\u540d\u5f52\u4e00 S3 \u8fdb\u5ea6"
     return gh_issue.upsert(os.environ.get("GITHUB_REPOSITORY", ""), "herb-norm", title,
                            "%s %d/%d" % (title, s3["judged_both"], s3["total"]), body, state=state)
@@ -812,6 +853,8 @@ def main():
     ap.add_argument("--all", action="store_true")             # S3: every exported name, not only rule-unresolved
     ap.add_argument("--deadline-min", type=float, default=0)  # S3 shard: stop starting batches after N minutes
     ap.add_argument("--issue", action="store_true")           # S3: update the standing progress Issue
+    ap.add_argument("--fail-cooldown", type=float, default=0)  # S3: pause N s after 3 consecutive failures (0 = stop)
+    ap.add_argument("--b-lead", type=int, default=None)       # S3: B at most N names ahead of A
     ap.add_argument("--b", default="modelscope")
     ap.add_argument("--max-tokens", type=int, default=6000)   # glm-4-flash caps output near 4k
     ap.add_argument("--selftest", action="store_true")
@@ -837,7 +880,7 @@ def main():
     psum = s2_pilot(out_r, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b}, a.max_tokens,
                     [c.strip() for c in a.probe.split(",")], a.workers, a.gap, a.fail_pause,
                     [w for w in a.rejudge_ambiguous.split(",") if w in ("A", "B")],
-                    a.transient_retries, a.transient_pause, a.all, a.deadline_min * 60)
+                    a.transient_retries, a.transient_pause, a.all, a.deadline_min * 60, a.fail_cooldown, a.b_lead)
     s3 = psum["s3"]
     if s3["complete"]:
         open(os.path.join(out_r, "DONE"), "w").write(s3["updated_utc"] + "\n")
