@@ -44,7 +44,7 @@ def t2s(s):
 
 
 # ---------------- rules ----------------
-NUMS = "0-9.\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341\u767e\u5343\u4e07\u534a\u4e24\u5eff\u5345\u3007\u96f6\u58f9\u8d30\u53c1\u8086\u4f0d\u9646\u67d2\u634c\u7396\u62fe"
+NUMS = "0-9.\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341\u767e\u5343\u534a\u4e24\u5eff\u5345\u3007\u96f6"   # no financial numerals / wan: shang-lu-gen is not a dose
 UNITS = "\u94b1\u4e24\u5206\u65a4\u514b\u5398\u6beb\u94e2\u5b57\u5319\u64ae\u63e1\u628a\u679a\u4e2a\u7247\u7c92\u6761\u53ea\u5177\u5934\u6839\u5347\u5408\u6597\u76cf\u676f\u7897\u5bf8\u5c3a\u4e38g"
 DOSE_RE = re.compile("\u5404?[%s]+[%s](?:[%s]+[%s]?)*" % (NUMS, UNITS, NUMS, UNITS))
 DOSE_TAIL = ["\u5404\u7b49\u5206", "\u7b49\u5206", "\u5404\u534a", "\u5c11\u8bb8", "\u5c11\u91cf", "\u9002\u91cf", "\u82e5\u5e72", "\u4e0d\u62d8\u591a\u5c11", "\u4e0d\u62d8", "\u968f\u5b9c", "\u5404"]
@@ -138,6 +138,7 @@ def selftest():
         r = rule(name, A)
         assert (r["kind"], r["anchor"]) == (kind, anchor), (name.encode("unicode_escape"), r["kind"])
     assert rule("\u751f\u5730\u9ec4", A)["proc"] == ["\u751f"]
+    assert rule("\u5546\u9646\u6839", A)["clean"] == "\u5546\u9646\u6839"
     assert rule("\u5f53\u5f52\u5404", A)["clean"] == "\u5f53\u5f52"
     a = {"is_herb": True, "canonical": "\u7518\u8349", "processing": ""}
     assert agree(a, dict(a, processing="\u7099")) and not agree(a, dict(a, canonical="\u9ec4\u82aa"))
