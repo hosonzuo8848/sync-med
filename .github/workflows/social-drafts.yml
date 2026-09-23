@@ -1,0 +1,54 @@
+# Social drafts S1 -- Toutiao / Zhihu article drafts from public gufangai.com formula pages.
+#
+# GENERATE ONLY: never logs in, never publishes. Drafts go to the run artifact for the
+# founder to review; publishing is S2 (founder's own logged-in Chrome, per-batch approval).
+# Manual trigger only (founder-scoped task); add a cron once S2 exists to consume the output.
+#
+# Who sees it when it breaks: the person who dispatched it -- the job goes red when zero
+# drafts pass the compliance gate or JEV_API_KEY is missing (the gate fails closed).
+# Public repo: article text is never printed to logs or the step summary, only to the artifact.
+name: Social Drafts (generate only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'formulas this run (each -> one Toutiao + one Zhihu draft)'
+        required: false
+        default: '5'
+      seed:
+        description: 'shuffle seed for picking formulas (empty = time based)'
+        required: false
+        default: ''
+
+concurrency:
+  group: social-drafts
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: selftest
+        run: python scripts/content_factory/social_drafts.py --selftest
+      - name: generate + compliance gate
+        env:
+          GW_KEY: ${{ secrets.GW_KEY }}
+          JEV_API_KEY: ${{ secrets.JEV_API_KEY }}
+          PYTHONIOENCODING: utf-8
+        run: python scripts/content_factory/social_drafts.py --count "${{ github.event.inputs.count || '5' }}" --seed "${{ github.event.inputs.seed }}" --out out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: social-drafts-${{ github.run_id }}
+          path: out/
+          retention-days: 14
+          if-no-files-found: warn
