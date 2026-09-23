@@ -16,11 +16,17 @@ on:
         description: "pilot size (top-N rule-unresolved names by frequency)"
         default: "500"
       batch:
-        description: "names per model call"
-        default: "50"
+        description: "names per model call (25 keeps every call well under the 90s gateway cap)"
+        default: "25"
       a_supplier:
-        description: "gateway supplier for judge A (sn_ds_pro: SenseNova token plan exhausted 2026-09-23)"
-        default: "zhipu"
+        description: "gateway supplier for judge A; auto = measured pick among probe (never sensenova: quota exhausted)"
+        default: "auto"
+      probe:
+        description: "judge-A candidates for auto (active lanes in sueai/lanes.json, vendor != B)"
+        default: "nv_gemma,agnes"
+      tag:
+        description: "round subdir under out/herb_norm (export is shared, judgments are per round)"
+        default: "r2"
       b_supplier:
         description: "gateway supplier for judge B (must be another vendor)"
         default: "modelscope"
@@ -67,9 +73,10 @@ jobs:
       - name: S1 export + rules, S2 pilot
         run: >
           python scripts/content_factory/herb_norm.py --out out/herb_norm
-          --n ${{ github.event.inputs.n || '500' }} --batch ${{ github.event.inputs.batch || '50' }}
-          --a ${{ github.event.inputs.a_supplier || 'zhipu' }} --b ${{ github.event.inputs.b_supplier || 'modelscope' }}
+          --n ${{ github.event.inputs.n || '500' }} --batch ${{ github.event.inputs.batch || '25' }}
+          --a ${{ github.event.inputs.a_supplier || 'auto' }} --b ${{ github.event.inputs.b_supplier || 'modelscope' }}
           --max-tokens ${{ github.event.inputs.max_tokens || '6000' }}
+          --probe ${{ github.event.inputs.probe || 'nv_gemma,agnes' }} --tag ${{ github.event.inputs.tag || 'r2' }}
       - name: save state for resume
         if: ${{ always() && hashFiles('out/herb_norm/**') != '' }}
         uses: actions/cache/save@v4

@@ -144,7 +144,15 @@ def selftest():
     assert agree({"is_herb": False, "canonical": "x"}, {"is_herb": False, "canonical": ""})
     got = norm_items([{"name": "\u7518\u8349", "is_herb": "true", "canonical": "\u7518\u8349"}, {"name": "zz"}], ["\u7518\u8349", "\u9ec4\u82aa"])
     assert got["\u7518\u8349"]["is_herb"] is True and got["\u9ec4\u82aa"]["canonical"] == ""
-    print("selftest ok: %d rule cases" % len(cases))
+    g = lambda c, nm: apply_gates({"is_herb": True, "canonical": c, "processing": ""}, nm, nm)
+    assert g("", "\u9ec4\u8721")["canonical"] == "\u9ec4\u8721" and g("", "\u9ec4\u8721")["gate_fill"]
+    assert g("\u5ddd\u8d1d\u6bcd", "\u8d1d\u6bcd")["canonical"] == "\u8d1d\u6bcd" and g("\u5ddd\u8d1d\u6bcd", "\u8d1d\u6bcd")["gate_generic"] == "\u5ddd\u8d1d\u6bcd"
+    assert g("\u5ddd\u4e4c", "\u4e4c\u5934")["canonical"] == "\u4e4c\u5934" and g("\u5ddd\u4e4c", "\u4e4c\u5934")["gate_generic"]
+    assert g("\u8089\u6842", "\u6842")["canonical"] == "\u6842"
+    assert g("\u767d\u828d", "\u828d\u836f")["canonical"] == "\u767d\u828d" and not g("\u767d\u828d", "\u828d\u836f")["gate_generic"]
+    assert g("\u9ea6\u51ac", "\u9ea6\u95e8\u51ac")["canonical"] == "\u9ea6\u51ac" and not g("\u9ea6\u51ac", "\u9ea6\u95e8\u51ac")["gate_generic"]
+    assert apply_gates({"is_herb": False, "canonical": "", "processing": ""}, "\u4e09\u94b1", "")["canonical"] == ""
+    print("selftest ok: %d rule cases + gates" % len(cases))
 
 
 # ---------------- S1 ----------------
@@ -208,19 +216,60 @@ def s1_rules(out, rows, anchors):
 # ---------------- S2 ----------------
 SYS = (
     "You normalize raw ingredient strings cut out of classical Chinese medicine formula texts. "
-    "They may carry dose, unit or processing words, may be OCR noise, or may not be a drug at all.\n"
+    "They may carry dose, unit or processing words, or may be OCR noise.\n"
+    "DEFINITION of is_herb (scope of the Chinese Pharmacopoeia): is_herb is true for ANY ingredient that enters "
+    "the formula as medicine: plant drugs, animal drugs, mineral drugs, and adjuvants / guiding ingredients "
+    "(juices, honey, wax, wine, vinegar, urine and the like). is_herb is false ONLY for doses, units, "
+    "preparation-method descriptions, administration instructions, pure numbers or item labels, and unreadable noise.\n"
+    "Examples (string -> is_herb): \u8708\u86a3 -> true (animal drug); \u6731\u7802 -> true (mineral drug); "
+    "\u77f3\u818f -> true (mineral drug); \u8702\u871c -> true (adjuvant); \u9152 -> true (adjuvant); \u7ae5\u4fbf -> true (adjuvant); "
+    "\u4e09\u94b1 -> false (dose); \u5404\u7b49\u5206 -> false (dose); \u4e3a\u672b -> false (preparation method); "
+    "\u6c34\u714e\u670d -> false (administration).\n"
     "For EACH input string return one object:\n"
     '  "name": the input string copied exactly;\n'
-    '  "is_herb": true if it names a medicinal substance (plant/animal/mineral drug, possibly with processing '
-    "words); false if it is a dose, unit, preparation or decoction method, instruction, formula name, or noise;\n"
+    '  "is_herb": true / false by the definition above;\n'
     '  "canonical": the standard materia-medica name in simplified Chinese with dose and processing removed; '
-    "use the exact ANCHOR spelling when it is the same drug; empty string when is_herb is false;\n"
+    "use the exact ANCHOR spelling when it is the same drug; NEVER empty when is_herb is true "
+    "(if unsure, repeat the input without dose/processing words); empty string when is_herb is false;\n"
     '  "processing": processing words such as \u7099, \u7092, \u9152\u5236, \u53bb\u5fc3; empty string if none;\n'
     '  "note": one short reason in Chinese, at most 20 characters.\n'
     "Never merge different drugs: \u767d\u672f vs \u82cd\u672f, \u5ddd\u8d1d\u6bcd vs \u6d59\u8d1d\u6bcd, \u8d64\u828d vs \u767d\u828d are different drugs. "
-    "If the identity is uncertain keep the input's own drug name instead of forcing an anchor.\n"
+    "A classical generic name that can mean several species or products (e.g. \u8d1d\u6bcd, \u4e4c\u5934) must keep that "
+    "generic name as canonical; never narrow it to one specific variety or origin.\n"
     'Output JSON only, exactly: {"items": [ one object per input, same order ]}\n'
     "ANCHOR names: ")
+
+# herb_aliases as of guyaofang-web migrations 055 + 056 (14 rows, same count the audit measured in D1).
+# Round 2 must not query D1, so this is a read-only snapshot; the source of truth stays the controlled
+# vocabulary file those migrations were generated from.
+HERB_ALIASES = {"\u51b0\u7247": "\u51b0\u7247", "\u9f99\u8111": "\u51b0\u7247", "\u767d\u828d": "\u767d\u828d", "\u828d\u836f": "\u767d\u828d", "\u6de1\u8c46\u8c49": "\u6de1\u8c46\u8c49",
+                "\u9999\u8c49": "\u6de1\u8c46\u8c49", "\u9648\u76ae": "\u9648\u76ae", "\u6a58\u76ae": "\u9648\u76ae", "\u5927\u8c46\u9ec4\u5377": "\u5927\u8c46\u9ec4\u5377", "\u8c46\u9ec4\u5377": "\u5927\u8c46\u9ec4\u5377",
+                "\u5c71\u836f": "\u5c71\u836f", "\u85af\u84e3": "\u5c71\u836f", "\u719f\u5730\u9ec4": "\u719f\u5730\u9ec4", "\u719f\u5730": "\u719f\u5730\u9ec4"}
+# generic names the CTO listed explicitly (2026-09-23); everything else is caught by the structural rule
+GENERIC = {"\u8d1d\u6bcd", "\u4e4c\u5934", "\u9644\u5b50"}
+
+
+def apply_gates(j, name, clean):
+    """Round-2 rule gates on ONE model judgment (mutates and returns it).
+    gate 1: herb with empty canonical -> rule-cleaned name.
+    gate 2: never narrow a name. A canonical that is a proper superstring of the cleaned name, or any remap
+            of a CTO-listed generic name, falls back to the cleaned name and is flagged for review --
+            unless herb_aliases already holds exactly that mapping.
+    ponytail: gate 2 is string-structural, so abbreviation expansions also land in review; a curated
+    generic-name list from an authoritative dictionary replaces it when one exists."""
+    base = clean or t2s(name)
+    j["gate_fill"], j["gate_generic"] = False, ""
+    if not j["is_herb"]:
+        return j
+    if not j["canonical"]:
+        j["canonical"], j["gate_fill"] = base, True
+        return j
+    c, b = canon(j["canonical"]), canon(base)
+    if c == b or HERB_ALIASES.get(b) == c or HERB_ALIASES.get(canon(name)) == c:
+        return j
+    if b in GENERIC or (b and b in c and len(c) > len(b)):
+        j["gate_generic"], j["canonical"] = j["canonical"], base
+    return j
 
 
 def _bool(v):
@@ -270,10 +319,11 @@ def _load(path):
     return out
 
 
-def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000):
+def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=()):
     t_start = time.time()
     pick = [r for r in rules if r["kind"] not in ("exact", "rule")][:n]
     freq = {r["name"]: r["n"] for r in pick}
+    clean = {r["name"]: r["clean"] for r in pick}
     fj, fjev, ffail = (os.path.join(out, x) for x in ("judgments.jsonl", "jev.jsonl", "failures.jsonl"))
     lock = threading.Lock()
     done = {(x["who"], x["name"]): x for x in _load(fj)}
@@ -283,19 +333,22 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000):
           % (len(pick), sum(1 for k in done if k[0] == "A"), sum(1 for k in done if k[0] == "B")), flush=True)
     sys_msg = SYS + "\u3001".join(anchors)
 
-    def work(who, batch, tag):
+    def call(supplier, batch):
         t = time.time()
-        err, got, model = "", {}, ""
+        err, got, model, txt = "", {}, "", ""
         try:
             txt, model = ask(sys_msg, "Inputs (JSON array):\n" + json.dumps(batch, ensure_ascii=False),
-                             timeout=150, max_tokens=max_tokens, supplier=sup[who], source="herb_norm",
+                             timeout=150, max_tokens=max_tokens, supplier=supplier, source="herb_norm",
                              json_mode=True, temperature=0, no_fallback=True, gw_timeout_ms=90000)
-            got = norm_items(parse_json_array(txt, quiet=True), batch)
+            got = {nm: apply_gates(j, nm, clean.get(nm, ""))
+                   for nm, j in norm_items(parse_json_array(txt, quiet=True), batch).items()}
             if not got:
                 err = "parse: 0 items"
         except Exception as e:  # noqa: BLE001
-            txt, err = "", str(e)[:300]
-        dt = time.time() - t
+            err = str(e)[:300]
+        return got, model, err, txt, time.time() - t
+
+    def sink(who, batch, tag, got, model, err, txt, dt):
         with lock:
             s = stats[who]
             s["calls"] += 1
@@ -317,6 +370,46 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000):
         print("[S2] %s %s asked=%d got=%d %.1fs%s" % (who, tag, len(batch), len(got), dt,
                                                     (" ERR " + err[:90].encode("ascii", "replace").decode()) if err else ""),
               flush=True)
+
+    def work(who, batch, tag):
+        sink(who, batch, tag, *call(sup[who], batch))
+
+    # ---- judge A chosen by measurement: same probe batch to B and to every candidate ----
+    fprobe = os.path.join(out, "probe.json")
+    if sup["A"] == "auto":
+        if os.path.exists(fprobe):
+            sup["A"] = json.load(open(fprobe, encoding="utf-8"))["chosen"]
+        else:
+            pnames = [r["name"] for r in pick[:bsz]]
+            todo = [x for x in pnames if ("B", x) not in done]
+            if todo:
+                work("B", todo, "probe")
+            res = []
+            for cand in [c for c in probe if c and c != sup["B"]]:
+                got, model, err, txt, dt = call(cand, pnames)
+                agr = sum(1 for x, j in got.items() if ("B", x) in done and agree(j, done[("B", x)]))
+                res.append({"supplier": cand, "model": model, "asked": len(pnames), "returned": len(got),
+                            "agree_with_B": agr, "sec": round(dt, 1), "err": err[:200],
+                            "gate_fill": sum(1 for j in got.values() if j["gate_fill"]),
+                            "gate_generic": sum(1 for j in got.values() if j["gate_generic"]),
+                            "_got": got, "_raw": (txt or "")[:400]})
+                print("[probe] %s returned=%d/%d agree_with_B=%d %.1fs%s" % (
+                    cand, len(got), len(pnames), agr, dt,
+                    (" ERR " + err[:90].encode("ascii", "replace").decode()) if err else ""), flush=True)
+            ok = [x for x in res if x["returned"] >= 0.8 * len(pnames)]
+            if not ok:
+                json.dump({"chosen": None, "candidates": [{k: v for k, v in x.items() if k != "_got"} for x in res]},
+                          open(fprobe + ".failed", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+                sys.exit("no judge-A candidate returned >= 80% of the probe batch")
+            best = max(ok, key=lambda x: (x["agree_with_B"], -x["sec"]))
+            sup["A"] = best["supplier"]
+            stats["A"]["supplier"] = sup["A"]
+            sink("A", pnames, "probe", best["_got"], best["model"], best["err"], "", best["sec"])   # no wasted call
+            json.dump({"chosen": sup["A"], "rule": "returned>=80% then max agree_with_B then fastest",
+                       "probe_names": len(pnames), "candidates": [{k: v for k, v in x.items() if k != "_got"} for x in res]},
+                      open(fprobe, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        stats["A"]["supplier"] = sup["A"]
+        print("[probe] judge A = %s" % sup["A"], flush=True)
 
     for p in (1, 2):   # pass 2 = one retry for names a model dropped or failed on
         per = {}
@@ -377,7 +470,8 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000):
         nm = r["name"]
         a, b = done.get(("A", nm)), done.get(("B", nm))
         rec = {"name": nm, "n": r["n"], "rule_kind": r["kind"], "rule_clean": r["clean"], "A": a, "B": b,
-               "jev": None, "status": "", "final": None, "needs_review": False}
+               "jev": None, "status": "", "final": None, "needs_review": False,
+               "gate_generic": bool((a and a.get("gate_generic")) or (b and b.get("gate_generic")))}
         if not (a and b):
             rec["status"] = "incomplete"
             rec["needs_review"] = True
@@ -400,6 +494,8 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000):
                 rec["final"] = {"is_herb": x["is_herb"], "canonical": x["canonical"], "processing": x["processing"],
                                 "source": "jev:" + w}
                 rec["needs_review"] = conf < JEV_REVIEW
+        if rec["gate_generic"]:
+            rec["needs_review"] = True        # CTO gate 2: a narrowed generic name always goes to a human
         recs.append(rec)
     with open(os.path.join(out, "pilot.jsonl"), "w", encoding="utf-8") as f:
         for x in recs:
@@ -431,6 +527,16 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000):
         "canonical_in_anchor": sum(1 for x in recs if x["final"] and x["final"]["is_herb"]
                                    and canon(x["final"]["canonical"]) in aset),
         "models": stats, "sec_models": round(t_models, 1), "sec_jev": round(t_jev, 1),
+        "gate_fill": {w: sum(1 for x in recs if x[w] and x[w].get("gate_fill")) for w in ("A", "B")},
+        "gate_generic": {w: sum(1 for x in recs if x[w] and x[w].get("gate_generic")) for w in ("A", "B")},
+        "gate_generic_names": sum(1 for x in recs if x["gate_generic"]),
+        "needs_review_why": {
+            "incomplete": sum(1 for x in recs if x["status"] == "incomplete"),
+            "jev_low_or_missing": sum(1 for x in recs if x["status"] == "jev" and (
+                not x["jev"] or x["jev"]["conf"] is None or x["jev"]["conf"] < JEV_REVIEW)),
+            "generic_gate_only": sum(1 for x in recs if x["gate_generic"] and not (x["status"] == "jev" and (
+                not x["jev"] or x["jev"]["conf"] is None or x["jev"]["conf"] < JEV_REVIEW)))},
+        "judge_A": sup["A"], "judge_B": sup["B"],
     }
     json.dump(summ, open(os.path.join(out, "pilot_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     write_sample(out, recs)
@@ -484,7 +590,9 @@ def main():
     ap.add_argument("--out", default="out/herb_norm")
     ap.add_argument("--n", type=int, default=500)
     ap.add_argument("--batch", type=int, default=50)
-    ap.add_argument("--a", default="zhipu")   # sn_ds_pro: SenseNova token plan exhausted 2026-09-22/23
+    ap.add_argument("--a", default="auto")    # auto = measured pick among --probe; never sensenova (quota)
+    ap.add_argument("--probe", default="nv_gemma,agnes")
+    ap.add_argument("--tag", default="")      # round subdir; export/rules stay shared at --out
     ap.add_argument("--b", default="modelscope")
     ap.add_argument("--max-tokens", type=int, default=6000)   # glm-4-flash caps output near 4k
     ap.add_argument("--selftest", action="store_true")
@@ -499,10 +607,13 @@ def main():
     t0 = time.time()
     rows, anchors, meta = s1_export(a.out)
     rules, rsum = s1_rules(a.out, rows, anchors)
-    psum = s2_pilot(a.out, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b}, a.max_tokens)
+    out_r = os.path.join(a.out, a.tag) if a.tag else a.out
+    os.makedirs(out_r, exist_ok=True)
+    psum = s2_pilot(out_r, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b}, a.max_tokens,
+                    [c.strip() for c in a.probe.split(",")])
     total = round(time.time() - t0, 1)
     json.dump({"export": meta, "rules": rsum, "pilot": psum, "sec_total": total},
-              open(os.path.join(a.out, "run_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+              open(os.path.join(out_r, "run_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     sm = os.environ.get("GITHUB_STEP_SUMMARY")
     if sm:
         with open(sm, "a", encoding="utf-8") as f:
