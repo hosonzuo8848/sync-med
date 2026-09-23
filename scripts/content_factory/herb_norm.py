@@ -270,7 +270,7 @@ def _load(path):
     return out
 
 
-def s2_pilot(out, rules, anchors, n, bsz, sup):
+def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000):
     t_start = time.time()
     pick = [r for r in rules if r["kind"] not in ("exact", "rule")][:n]
     freq = {r["name"]: r["n"] for r in pick}
@@ -288,7 +288,7 @@ def s2_pilot(out, rules, anchors, n, bsz, sup):
         err, got, model = "", {}, ""
         try:
             txt, model = ask(sys_msg, "Inputs (JSON array):\n" + json.dumps(batch, ensure_ascii=False),
-                             timeout=150, max_tokens=6000, supplier=sup[who], source="herb_norm",
+                             timeout=150, max_tokens=max_tokens, supplier=sup[who], source="herb_norm",
                              json_mode=True, temperature=0, no_fallback=True, gw_timeout_ms=90000)
             got = norm_items(parse_json_array(txt, quiet=True), batch)
             if not got:
@@ -324,12 +324,13 @@ def s2_pilot(out, rules, anchors, n, bsz, sup):
             todo = [r["name"] for r in pick if (who, r["name"]) not in done]
             size = bsz if p == 1 else max(10, bsz // 2)
             per[who] = [(who, todo[i:i + size], "p%d-b%d" % (p, i // size + 1)) for i in range(0, len(todo), size)]
-        # interleave A/B so the 4 workers hit each vendor with ~2 concurrent calls, not 4
+        # interleave A/B so each vendor sees ~2 concurrent calls
         jobs = [j for pair in zip_longest(per["A"], per["B"]) for j in pair if j]
         if not jobs:
             break
         print("[S2] pass %d: %d calls" % (p, len(jobs)), flush=True)
-        with ThreadPoolExecutor(4) as ex:
+        # 2 concurrent calls per vendor: zhipu also heads the production gateway chain
+        with ThreadPoolExecutor(2 * len({j[0] for j in jobs})) as ex:
             list(ex.map(lambda j: work(*j), jobs))
     t_models = time.time() - t_start
 
@@ -483,8 +484,9 @@ def main():
     ap.add_argument("--out", default="out/herb_norm")
     ap.add_argument("--n", type=int, default=500)
     ap.add_argument("--batch", type=int, default=50)
-    ap.add_argument("--a", default="sn_ds_pro")
+    ap.add_argument("--a", default="zhipu")   # sn_ds_pro: SenseNova token plan exhausted 2026-09-22/23
     ap.add_argument("--b", default="modelscope")
+    ap.add_argument("--max-tokens", type=int, default=6000)   # glm-4-flash caps output near 4k
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
@@ -497,7 +499,7 @@ def main():
     t0 = time.time()
     rows, anchors, meta = s1_export(a.out)
     rules, rsum = s1_rules(a.out, rows, anchors)
-    psum = s2_pilot(a.out, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b})
+    psum = s2_pilot(a.out, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b}, a.max_tokens)
     total = round(time.time() - t0, 1)
     json.dump({"export": meta, "rules": rsum, "pilot": psum, "sec_total": total},
               open(os.path.join(a.out, "run_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
