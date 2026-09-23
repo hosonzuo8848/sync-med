@@ -28,8 +28,8 @@ on:
         description: "round subdir under out/herb_norm (export is shared, judgments are per round)"
         default: "r2"
       pacing:
-        description: "--workers N --gap SEC --fail-pause SEC (per vendor; agnes needs serial + gap)"
-        default: "--workers 1 --gap 30 --fail-pause 100"
+        description: "extra args: --workers N --gap SEC --fail-pause SEC [--rejudge-ambiguous B] (per vendor; CTO round 3: 1/120/300)"
+        default: "--workers 1 --gap 120 --fail-pause 300"
       b_supplier:
         description: "gateway supplier for judge B (must be another vendor)"
         default: "modelscope"
@@ -50,7 +50,7 @@ concurrency:
 jobs:
   pilot:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 150     # serial vendors with 120s gaps: ~50 min for 500 names, more with back-offs
     env:
       CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
       D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
@@ -80,7 +80,7 @@ jobs:
           --a ${{ github.event.inputs.a_supplier || 'auto' }} --b ${{ github.event.inputs.b_supplier || 'modelscope' }}
           --max-tokens ${{ github.event.inputs.max_tokens || '6000' }}
           --probe ${{ github.event.inputs.probe || 'nv_gemma,agnes' }} --tag ${{ github.event.inputs.tag || 'r2' }}
-          ${{ github.event.inputs.pacing || '--workers 1 --gap 30 --fail-pause 100' }}
+          ${{ github.event.inputs.pacing || '--workers 1 --gap 120 --fail-pause 300' }}
       - name: save state for resume
         if: ${{ always() && hashFiles('out/herb_norm/**') != '' }}
         uses: actions/cache/save@v4

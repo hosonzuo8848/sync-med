@@ -20,7 +20,6 @@ No D1 writes of any kind.
 """
 import argparse, json, os, random, re, sys, threading, time, unicodedata
 from concurrent.futures import ThreadPoolExecutor
-from itertools import zip_longest
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _ai import d1, ask, parse_json_array, jev, JEV_STATS  # noqa: E402  shared base, no copies
@@ -147,12 +146,18 @@ def selftest():
     assert got["\u7518\u8349"]["is_herb"] is True and got["\u9ec4\u82aa"]["canonical"] == ""
     g = lambda c, nm: apply_gates({"is_herb": True, "canonical": c, "processing": ""}, nm, nm)
     assert g("", "\u9ec4\u8721")["canonical"] == "\u9ec4\u8721" and g("", "\u9ec4\u8721")["gate_fill"]
-    assert g("\u5ddd\u8d1d\u6bcd", "\u8d1d\u6bcd")["canonical"] == "\u8d1d\u6bcd" and g("\u5ddd\u8d1d\u6bcd", "\u8d1d\u6bcd")["gate_generic"] == "\u5ddd\u8d1d\u6bcd"
-    assert g("\u5ddd\u4e4c", "\u4e4c\u5934")["canonical"] == "\u4e4c\u5934" and g("\u5ddd\u4e4c", "\u4e4c\u5934")["gate_generic"]
-    assert g("\u8089\u6842", "\u6842")["canonical"] == "\u6842"
-    assert g("\u767d\u828d", "\u828d\u836f")["canonical"] == "\u767d\u828d" and not g("\u767d\u828d", "\u828d\u836f")["gate_generic"]
-    assert g("\u9ea6\u51ac", "\u9ea6\u95e8\u51ac")["canonical"] == "\u9ea6\u51ac" and not g("\u9ea6\u51ac", "\u9ea6\u95e8\u51ac")["gate_generic"]
+    assert g("\u5ddd\u8d1d\u6bcd", "\u8d1d\u6bcd")["canonical"] == "\u5ddd\u8d1d\u6bcd"          # no structural narrowing gate any more
     assert apply_gates({"is_herb": False, "canonical": "", "processing": ""}, "\u4e09\u94b1", "")["canonical"] == ""
+    J = lambda c, amb: {"is_herb": True, "canonical": c, "processing": "", "ambiguous": amb}
+    a, b, amb = cross_gate(J("\u6842\u679d", True), J("\u8089\u6842", False), "\u6842", "\u6842")
+    assert amb and a["canonical"] == b["canonical"] == "\u6842" and a["gate_generic"] == "\u6842\u679d"
+    a, b, amb = cross_gate(J("\u767d\u828d", True), J("\u767d\u828d", None), "\u828d\u836f", "\u828d\u836f")
+    assert amb and a["canonical"] == "\u767d\u828d" and not a["gate_generic"]          # herb_aliases mapping passes
+    a, b, amb = cross_gate(J("\u9ea6\u51ac", False), J("\u9ea6\u51ac", None), "\u9ea6\u95e8\u51ac", "\u9ea6\u95e8\u51ac")
+    assert not amb and a["canonical"] == "\u9ea6\u51ac"
+    raw = J("\u6842\u679d", True)
+    cross_gate(raw, J("\u8089\u6842", False), "\u6842", "\u6842")
+    assert raw["canonical"] == "\u6842\u679d"                                           # works on copies
     print("selftest ok: %d rule cases + gates" % len(cases))
 
 
@@ -233,10 +238,12 @@ SYS = (
     "use the exact ANCHOR spelling when it is the same drug; NEVER empty when is_herb is true "
     "(if unsure, repeat the input without dose/processing words); empty string when is_herb is false;\n"
     '  "processing": processing words such as \u7099, \u7092, \u9152\u5236, \u53bb\u5fc3; empty string if none;\n'
+    '  "ambiguous": true if, in Chinese materia medica, this name can refer to two or more different drugs '
+    "(e.g. \u6842 can mean \u6842\u679d or \u8089\u6842); otherwise false;\n"
     '  "note": one short reason in Chinese, at most 20 characters.\n'
     "Never merge different drugs: \u767d\u672f vs \u82cd\u672f, \u5ddd\u8d1d\u6bcd vs \u6d59\u8d1d\u6bcd, \u8d64\u828d vs \u767d\u828d are different drugs. "
-    "A classical generic name that can mean several species or products (e.g. \u8d1d\u6bcd, \u4e4c\u5934) must keep that "
-    "generic name as canonical; never narrow it to one specific variety or origin.\n"
+    "When ambiguous is true, canonical must be the input's own name without dose/processing words; "
+    "never narrow it to one specific drug.\n"
     'Output JSON only, exactly: {"items": [ one object per input, same order ]}\n'
     "ANCHOR names: ")
 
@@ -246,31 +253,31 @@ SYS = (
 HERB_ALIASES = {"\u51b0\u7247": "\u51b0\u7247", "\u9f99\u8111": "\u51b0\u7247", "\u767d\u828d": "\u767d\u828d", "\u828d\u836f": "\u767d\u828d", "\u6de1\u8c46\u8c49": "\u6de1\u8c46\u8c49",
                 "\u9999\u8c49": "\u6de1\u8c46\u8c49", "\u9648\u76ae": "\u9648\u76ae", "\u6a58\u76ae": "\u9648\u76ae", "\u5927\u8c46\u9ec4\u5377": "\u5927\u8c46\u9ec4\u5377", "\u8c46\u9ec4\u5377": "\u5927\u8c46\u9ec4\u5377",
                 "\u5c71\u836f": "\u5c71\u836f", "\u85af\u84e3": "\u5c71\u836f", "\u719f\u5730\u9ec4": "\u719f\u5730\u9ec4", "\u719f\u5730": "\u719f\u5730\u9ec4"}
-# generic names the CTO listed explicitly (2026-09-23); everything else is caught by the structural rule
-GENERIC = {"\u8d1d\u6bcd", "\u4e4c\u5934", "\u9644\u5b50"}
+def alias_ok(base, name, canonical):
+    c = canon(canonical)
+    return HERB_ALIASES.get(canon(base)) == c or HERB_ALIASES.get(canon(name)) == c
 
 
 def apply_gates(j, name, clean):
-    """Round-2 rule gates on ONE model judgment (mutates and returns it).
-    gate 1: herb with empty canonical -> rule-cleaned name.
-    gate 2: never narrow a name. A canonical that is a proper superstring of the cleaned name, or any remap
-            of a CTO-listed generic name, falls back to the cleaned name and is flagged for review --
-            unless herb_aliases already holds exactly that mapping.
-    ponytail: gate 2 is string-structural, so abbreviation expansions also land in review; a curated
-    generic-name list from an authoritative dictionary replaces it when one exists."""
-    base = clean or t2s(name)
-    j["gate_fill"], j["gate_generic"] = False, ""
-    if not j["is_herb"]:
-        return j
-    if not j["canonical"]:
-        j["canonical"], j["gate_fill"] = base, True
-        return j
-    c, b = canon(j["canonical"]), canon(base)
-    if c == b or HERB_ALIASES.get(b) == c or HERB_ALIASES.get(canon(name)) == c:
-        return j
-    if b in GENERIC or (b and b in c and len(c) > len(b)):
-        j["gate_generic"], j["canonical"] = j["canonical"], base
+    """gate 1 (per judgment): herb with empty canonical -> rule-cleaned name."""
+    j["gate_fill"] = False
+    if j["is_herb"] and not j["canonical"]:
+        j["canonical"], j["gate_fill"] = clean or t2s(name), True
     return j
+
+
+def cross_gate(a, b, name, clean):
+    """gate 2 (CTO round 3): A or B says the name can mean >= 2 different drugs -> both judgments keep the
+    rule-cleaned name (unless herb_aliases already maps it) and the record goes to review.
+    Works on copies; the raw model canonical is kept in gate_generic. Returns (a, b, ambiguous)."""
+    a, b = dict(a), dict(b)
+    amb = bool(a.get("ambiguous")) or bool(b.get("ambiguous"))
+    base = clean or t2s(name)
+    for j in (a, b):
+        j["gate_generic"] = ""
+        if amb and j["is_herb"] and canon(j["canonical"]) != canon(base) and not alias_ok(base, name, j["canonical"]):
+            j["gate_generic"], j["canonical"] = j["canonical"], base
+    return a, b, amb
 
 
 def _bool(v):
@@ -294,7 +301,8 @@ def norm_items(items, batch):
     for nm, x in by.items():
         ih = _bool(x.get("is_herb"))
         out[nm] = {"is_herb": ih, "canonical": str(x.get("canonical") or "").strip() if ih else "",
-                   "processing": str(x.get("processing") or "").strip(), "note": str(x.get("note") or "").strip()[:60]}
+                   "processing": str(x.get("processing") or "").strip(), "note": str(x.get("note") or "").strip()[:60],
+                   "ambiguous": _bool(x["ambiguous"]) if "ambiguous" in x else None}
     return out
 
 
@@ -320,14 +328,27 @@ def _load(path):
     return out
 
 
-def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), workers=2, gap=0.0, fail_pause=0.0):
+def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), workers=2, gap=0.0, fail_pause=0.0,
+             rejudge=()):
     t_start = time.time()
     pick = [r for r in rules if r["kind"] not in ("exact", "rule")][:n]
     freq = {r["name"]: r["n"] for r in pick}
     clean = {r["name"]: r["clean"] for r in pick}
     fj, fjev, ffail = (os.path.join(out, x) for x in ("judgments.jsonl", "jev.jsonl", "failures.jsonl"))
     lock = threading.Lock()
-    done = {(x["who"], x["name"]): x for x in _load(fj)}
+    done = {(x["who"], x["name"]): x for x in _load(fj)}      # later lines override earlier ones
+    for x in done.values():
+        if x.get("gate_generic"):     # round-2 structural gate withdrawn: restore the model's own canonical
+            x["canonical"], x["gate_generic"] = x["gate_generic"], ""
+    for w in rejudge:                 # CTO round 3: judgments without the ambiguous field are judged again once
+        drop = [k for k, x in done.items() if k[0] == w and x.get("ambiguous") is None]
+        for k in drop:
+            del done[k]
+        print("[S2] rejudge %s: %d judgments lack ambiguous" % (w, len(drop)), flush=True)
+    prev = os.path.join(out, "pilot.jsonl")
+    if os.path.exists(prev):
+        old = {json.loads(l)["name"] for l in open(prev, encoding="utf-8")}
+        print("[S2] pick overlap with previous round: %d/%d" % (len({r["name"] for r in pick} & old), len(pick)), flush=True)
     stats = {w: {"supplier": sup[w], "calls": 0, "failed_calls": 0, "asked": 0, "returned": 0,
                  "models": {}, "sec": 0.0} for w in ("A", "B")}
     print("[S2] pick=%d resume: A=%d B=%d already judged"
@@ -372,27 +393,26 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                                                     (" ERR " + err[:90].encode("ascii", "replace").decode()) if err else ""),
               flush=True)
 
-    # client-side pacing (2026-09-23 round 2: agnes answered a single probe call, then 2 concurrent calls were
-    # refused at once and the gateway breaker kept refusing -- suspected vendor rate limit). One vendor's
-    # calls start >= gap seconds apart, a failure pauses that worker, 3 consecutive failures stop the vendor
-    # for this run (no hammering a breaker; the rerun resumes).
+    # client-side pacing. Round 2 (2026-09-23): agnes answered one call, then concurrent calls were refused and
+    # the gateway breaker kept refusing. Each vendor runs in its own pool of `workers` threads (1 = strictly
+    # serial), the next call starts >= gap seconds after the previous one ENDED, a failure pauses fail_pause
+    # seconds, 3 consecutive failures stop that vendor for this run (the rerun resumes).
     last, fails = {"A": 0.0, "B": 0.0}, {"A": 0, "B": 0}
 
     def work(who, batch, tag):
         if fails[who] >= 3:
             print("[S2] %s %s skipped: vendor stopped after 3 consecutive failures" % (who, tag), flush=True)
             return
-        with lock:
-            wait = last[who] + gap - time.time()
-            last[who] = max(time.time(), last[who] + gap)
+        wait = last[who] + gap - time.time()
         if wait > 0:
             time.sleep(wait)
         res = call(sup[who], batch)
+        last[who] = time.time()
         sink(who, batch, tag, *res)
         with lock:
             fails[who] = fails[who] + 1 if res[2] else 0
         if res[2] and fail_pause:
-            time.sleep(fail_pause)
+            time.sleep(fail_pause)     # back-off after a failure (>= gap, so it also covers the gap)
 
     # ---- judge A chosen by measurement: same probe batch to B and to every candidate ----
     fprobe = os.path.join(out, "probe.json")
@@ -411,7 +431,6 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                 res.append({"supplier": cand, "model": model, "asked": len(pnames), "returned": len(got),
                             "agree_with_B": agr, "sec": round(dt, 1), "err": err[:200],
                             "gate_fill": sum(1 for j in got.values() if j["gate_fill"]),
-                            "gate_generic": sum(1 for j in got.values() if j["gate_generic"]),
                             "_got": got, "_raw": (txt or "")[:400]})
                 print("[probe] %s returned=%d/%d agree_with_B=%d %.1fs%s" % (
                     cand, len(got), len(pnames), agr, dt,
@@ -437,27 +456,31 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
             todo = [r["name"] for r in pick if (who, r["name"]) not in done]
             size = bsz if p == 1 else max(10, bsz // 2)
             per[who] = [(who, todo[i:i + size], "p%d-b%d" % (p, i // size + 1)) for i in range(0, len(todo), size)]
-        # interleave A/B so each vendor sees ~2 concurrent calls
-        jobs = [j for pair in zip_longest(per["A"], per["B"]) for j in pair if j]
-        if not jobs:
+        if not (per["A"] or per["B"]):
             break
-        print("[S2] pass %d: %d calls" % (p, len(jobs)), flush=True)
-        # 2 concurrent calls per vendor: zhipu also heads the production gateway chain
-        with ThreadPoolExecutor(workers * len({j[0] for j in jobs})) as ex:
-            list(ex.map(lambda j: work(*j), jobs))
+        print("[S2] pass %d: A %d calls, B %d calls" % (p, len(per["A"]), len(per["B"])), flush=True)
+        with ThreadPoolExecutor(workers) as ea, ThreadPoolExecutor(workers) as eb:     # one pool per vendor
+            futs = [ea.submit(work, *j) for j in per["A"]] + [eb.submit(work, *j) for j in per["B"]]
+            for f in futs:
+                f.result()
     t_models = time.time() - t_start
 
     # ---- Jev on disagreements ----
-    jdone = {x["name"]: x for x in _load(fjev) if x.get("p_a") is not None}   # failed Jev calls get retried
-    need = [r["name"] for r in pick if ("A", r["name"]) in done and ("B", r["name"]) in done
-            and not agree(done[("A", r["name"])], done[("B", r["name"])]) and r["name"] not in jdone]
+    gated = {r["name"]: cross_gate(done[("A", r["name"])], done[("B", r["name"])], r["name"], clean[r["name"]])
+             for r in pick if ("A", r["name"]) in done and ("B", r["name"]) in done}
 
     def desc(x):
         return "is_herb=%s; canonical=%s; processing=%s" % (
             "true" if x["is_herb"] else "false", x["canonical"] or "-", x["processing"] or "-")
 
+    sig = lambda nm: desc(gated[nm][0]) + " || " + desc(gated[nm][1])
+    # a cached Jev answer only counts for the exact pair it judged; failed Jev calls get retried
+    jdone = {x["name"]: x for x in _load(fjev) if x.get("p_a") is not None}
+    jdone = {k: v for k, v in jdone.items() if k in gated and v.get("sig") == sig(k)}
+    need = [nm for nm, (a, b, _) in gated.items() if not agree(a, b) and nm not in jdone]
+
     def judge(nm):
-        a, b = done[("A", nm)], done[("B", nm)]
+        a, b = gated[nm][0], gated[nm][1]
         state = ("Raw ingredient string cut out of classical Chinese medicine formula texts: %s "
                  "(appears %d times). Task: decide whether it names a medicinal substance and, if it does, "
                  "its standard materia-medica name in simplified Chinese with dose and processing words removed. "
@@ -471,7 +494,7 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                 pb = float((ans.get("b") or {}).get("noul"))
             except (TypeError, ValueError):
                 pa = pb = None
-        rec = {"name": nm, "p_a": pa, "p_b": pb}
+        rec = {"name": nm, "p_a": pa, "p_b": pb, "sig": sig(nm)}
         with lock:
             jdone[nm] = rec
             with open(fjev, "a", encoding="utf-8") as f:
@@ -488,9 +511,9 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
     recs = []
     for r in pick:
         nm = r["name"]
-        a, b = done.get(("A", nm)), done.get(("B", nm))
+        a, b, amb = gated.get(nm) or (done.get(("A", nm)), done.get(("B", nm)), False)
         rec = {"name": nm, "n": r["n"], "rule_kind": r["kind"], "rule_clean": r["clean"], "A": a, "B": b,
-               "jev": None, "status": "", "final": None, "needs_review": False,
+               "jev": None, "status": "", "final": None, "needs_review": False, "ambiguous": amb,
                "gate_generic": bool((a and a.get("gate_generic")) or (b and b.get("gate_generic")))}
         if not (a and b):
             rec["status"] = "incomplete"
@@ -514,8 +537,8 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                 rec["final"] = {"is_herb": x["is_herb"], "canonical": x["canonical"], "processing": x["processing"],
                                 "source": "jev:" + w}
                 rec["needs_review"] = conf < JEV_REVIEW
-        if rec["gate_generic"]:
-            rec["needs_review"] = True        # CTO gate 2: a narrowed generic name always goes to a human
+        if amb:
+            rec["needs_review"] = True        # CTO gate 2: a name that can mean >= 2 drugs always goes to a human
         recs.append(rec)
     with open(os.path.join(out, "pilot.jsonl"), "w", encoding="utf-8") as f:
         for x in recs:
@@ -548,13 +571,15 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                                    and canon(x["final"]["canonical"]) in aset),
         "models": stats, "sec_models": round(t_models, 1), "sec_jev": round(t_jev, 1),
         "gate_fill": {w: sum(1 for x in recs if x[w] and x[w].get("gate_fill")) for w in ("A", "B")},
-        "gate_generic": {w: sum(1 for x in recs if x[w] and x[w].get("gate_generic")) for w in ("A", "B")},
-        "gate_generic_names": sum(1 for x in recs if x["gate_generic"]),
+        "ambiguous_true": {w: sum(1 for x in recs if x[w] and x[w].get("ambiguous")) for w in ("A", "B")},
+        "ambiguous_missing": {w: sum(1 for x in recs if x[w] and x[w].get("ambiguous") is None) for w in ("A", "B")},
+        "ambiguous_names": sum(1 for x in recs if x["ambiguous"]),
+        "ambiguous_canonical_reset": sum(1 for x in recs if x["gate_generic"]),
         "needs_review_why": {
             "incomplete": sum(1 for x in recs if x["status"] == "incomplete"),
             "jev_low_or_missing": sum(1 for x in recs if x["status"] == "jev" and (
                 not x["jev"] or x["jev"]["conf"] is None or x["jev"]["conf"] < JEV_REVIEW)),
-            "generic_gate_only": sum(1 for x in recs if x["gate_generic"] and not (x["status"] == "jev" and (
+            "ambiguous_only": sum(1 for x in recs if x["ambiguous"] and not (x["status"] == "jev" and (
                 not x["jev"] or x["jev"]["conf"] is None or x["jev"]["conf"] < JEV_REVIEW)))},
         "judge_A": sup["A"], "judge_B": sup["B"],
     }
@@ -571,7 +596,7 @@ def _cell(x):
         return "(\u65e0)"
     if not x["is_herb"]:
         return "\u975e\u836f"
-    return x["canonical"] + ("\u3014%s\u3015" % x["processing"] if x.get("processing") else "")
+    return x["canonical"] + ("\u3014%s\u3015" % x["processing"] if x.get("processing") else "") + ("(\u591a\u6307)" if x.get("ambiguous") else "")
 
 
 def write_sample(out, recs):
@@ -616,6 +641,7 @@ def main():
     ap.add_argument("--workers", type=int, default=2)        # concurrent calls per vendor
     ap.add_argument("--gap", type=float, default=0.0)        # min seconds between one vendor's call starts
     ap.add_argument("--fail-pause", type=float, default=0.0)  # seconds a worker waits after a failed call
+    ap.add_argument("--rejudge-ambiguous", default="")       # e.g. B: rejudge judgments lacking `ambiguous` once
     ap.add_argument("--b", default="modelscope")
     ap.add_argument("--max-tokens", type=int, default=6000)   # glm-4-flash caps output near 4k
     ap.add_argument("--selftest", action="store_true")
@@ -633,7 +659,8 @@ def main():
     out_r = os.path.join(a.out, a.tag) if a.tag else a.out
     os.makedirs(out_r, exist_ok=True)
     psum = s2_pilot(out_r, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b}, a.max_tokens,
-                    [c.strip() for c in a.probe.split(",")], a.workers, a.gap, a.fail_pause)
+                    [c.strip() for c in a.probe.split(",")], a.workers, a.gap, a.fail_pause,
+                    [w for w in a.rejudge_ambiguous.split(",") if w in ("A", "B")])
     total = round(time.time() - t0, 1)
     json.dump({"export": meta, "rules": rsum, "pilot": psum, "sec_total": total},
               open(os.path.join(out_r, "run_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
