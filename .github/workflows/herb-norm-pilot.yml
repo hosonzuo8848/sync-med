@@ -42,6 +42,7 @@ on:
 
 permissions:
   contents: read
+  issues: write        # herb_norm.py can update the S3 progress Issue (only with --issue)
 
 concurrency:
   group: herb-norm-pilot

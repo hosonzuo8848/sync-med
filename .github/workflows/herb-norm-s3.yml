@@ -1,0 +1,91 @@
+name: herb-norm-s3
+
+# Herb-name normalization S3 (platform CTO blueprint 2026-09-23): all 27,102 exported names, judged by
+# A = zhipu_free47 (glm-4.7-flash, thinking off) and B = modelscope via the free-pool gateway.
+# Sharded self-resume: every hourly run works <= deadline minutes, saves state to the actions cache and exits;
+# the next run resumes from the cache. D1 is never queried (export lives in the cache), never written.
+# Public repo: results only in the cache and the run artifact; the progress Issue carries numbers only.
+# Who sees it when it breaks: the standing Issue (label herb-norm), updated every run, comments on state
+# change (ok -> stalled -> ok -> done). When everything is judged the run writes DONE and disables itself.
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+    inputs:
+      deadline:
+        description: "minutes of judging per shard"
+        default: "45"
+      pacing:
+        description: "per-vendor pacing args"
+        default: "--workers 1 --gap 30 --fail-pause 60 --transient-retries 3 --transient-pause 60"
+
+permissions:
+  contents: read
+  issues: write        # standing progress Issue
+  actions: write       # disable this workflow once DONE
+
+concurrency:
+  group: herb-norm-pilot   # same lineage of state as the pilot: never two writers
+  cancel-in-progress: false
+
+jobs:
+  shard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    env:
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+      D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
+      GW_KEY: ${{ secrets.GW_KEY }}
+      JEV_API_KEY: ${{ secrets.JEV_API_KEY }}
+      GITHUB_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ github.token }}
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q zhconv "setuptools<81"
+      - name: selftest (pure string rules + S3 classes)
+        run: python scripts/content_factory/herb_norm.py --selftest
+      - name: restore state (S3 first, else the pilot lineage for the export + 500 judged names)
+        uses: actions/cache/restore@v4
+        with:
+          path: out/herb_norm
+          key: herb-norm-s3-${{ github.run_id }}
+          restore-keys: |
+            herb-norm-s3-
+            herb-norm-pilot-
+      - name: seed S3 from the pilot round once
+        run: |
+          if [ ! -d out/herb_norm/s3 ] && [ -f out/herb_norm/r2/judgments.jsonl ]; then
+            mkdir -p out/herb_norm/s3
+            cp out/herb_norm/r2/judgments.jsonl out/herb_norm/r2/jev.jsonl out/herb_norm/s3/
+            echo "seeded s3 from r2"
+          fi
+          test -f out/herb_norm/export.jsonl || { echo "export missing from cache -- refusing to query D1"; exit 1; }
+      - name: judge one shard
+        id: run
+        run: >
+          python scripts/content_factory/herb_norm.py --out out/herb_norm --tag s3 --all --n 1000000
+          --batch 25 --a zhipu_free47 --b modelscope --max-tokens 8000
+          ${{ github.event.inputs.pacing || '--workers 1 --gap 30 --fail-pause 60 --transient-retries 3 --transient-pause 60' }}
+          --deadline-min ${{ github.event.inputs.deadline || '45' }} --issue
+      - name: save state for the next shard
+        if: ${{ always() && hashFiles('out/herb_norm/s3/**') != '' }}
+        uses: actions/cache/save@v4
+        with:
+          path: out/herb_norm
+          key: herb-norm-s3-${{ github.run_id }}
+      - name: upload shard results
+        if: ${{ always() && hashFiles('out/herb_norm/s3/**') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: herb-norm-s3-${{ github.run_id }}
+          path: out/herb_norm/s3
+          retention-days: 30
+      - name: stop the schedule once everything is judged
+        if: ${{ steps.run.outputs.done == 'true' }}
+        run: gh workflow disable herb-norm-s3.yml -R "${{ github.repository }}"

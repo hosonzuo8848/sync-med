@@ -18,7 +18,7 @@ Resume: each model answer and each Jev answer is appended to jsonl as soon as it
 Public repo: stdout carries counts only. Names and judgments live in the artifact, never in logs.
 No D1 writes of any kind.
 """
-import argparse, json, os, random, re, sys, threading, time, unicodedata
+import argparse, collections, json, os, random, re, sys, threading, time, unicodedata
 from concurrent.futures import ThreadPoolExecutor
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -158,7 +158,16 @@ def selftest():
     raw = J("\u6842\u679d", True)
     cross_gate(raw, J("\u8089\u6842", False), "\u6842", "\u6842")
     assert raw["canonical"] == "\u6842\u679d"                                           # works on copies
-    print("selftest ok: %d rule cases + gates" % len(cases))
+    assert split_note("\u73cd\u73e0(\u672b)") == ("\u73cd\u73e0", "\u672b") and split_note("\u67f4\u80e1") == ("\u67f4\u80e1", "")
+    assert rule_nonherb("\u9ec4\u25a1", "none") and rule_nonherb("\u4e24\u3015", "none") and rule_nonherb("\u8721", "none")
+    assert rule_nonherb("\u4e09\u94b1", "empty") and rule_nonherb("\u4e3a\u672b\u670d", "none") and rule_nonherb("x2", "none")
+    assert not rule_nonherb("\u767d\u9762", "none") and not rule_nonherb("\u79e6\u8283", "none")
+    rec = lambda st, amb, herb: {"status": st, "ambiguous": amb, "A": {"is_herb": herb}, "name": "\u767d\u9762", "rule_kind": "none"}
+    assert classify(rec("agree", False, True)) == ("auto_pass", "")
+    assert classify(rec("agree", True, True)) == ("review", "ambiguous")
+    assert classify(rec("jev", False, True)) == ("review", "disagree")
+    assert classify(rec("agree", False, False)) == ("review", "model_non_herb")
+    print("selftest ok: %d rule cases + gates + S3 classes" % len(cases))
 
 
 # ---------------- S1 ----------------
@@ -253,6 +262,40 @@ SYS = (
 HERB_ALIASES = {"\u51b0\u7247": "\u51b0\u7247", "\u9f99\u8111": "\u51b0\u7247", "\u767d\u828d": "\u767d\u828d", "\u828d\u836f": "\u767d\u828d", "\u6de1\u8c46\u8c49": "\u6de1\u8c46\u8c49",
                 "\u9999\u8c49": "\u6de1\u8c46\u8c49", "\u9648\u76ae": "\u9648\u76ae", "\u6a58\u76ae": "\u9648\u76ae", "\u5927\u8c46\u9ec4\u5377": "\u5927\u8c46\u9ec4\u5377", "\u8c46\u9ec4\u5377": "\u5927\u8c46\u9ec4\u5377",
                 "\u5c71\u836f": "\u5c71\u836f", "\u85af\u84e3": "\u5c71\u836f", "\u719f\u5730\u9ec4": "\u719f\u5730\u9ec4", "\u719f\u5730": "\u719f\u5730\u9ec4"}
+NOTE_RE = re.compile("[(\\[\u3014\u3010]([^)\\]\u3015\u3011]*)[)\\]\u3015\u3011]")
+NOISE_RE = re.compile("[\u25a1\u25a0?\ufffd]")
+METHOD_WORDS = ("\u4e3a\u672b", "\u7814\u672b", "\u7ec6\u672b", "\u4e3a\u4e38", "\u4e3a\u6563", "\u70bc\u871c", "\u6c34\u714e", "\u714e\u670d", "\u51b2\u670d", "\u6e29\u670d", "\u7a7a\u5fc3", "\u98df\u524d",
+                "\u98df\u540e", "\u6bcf\u670d", "\u540c\u714e", "\u53bb\u6ed3", "\u53f3\u4ef6", "\u4e0a\u4ef6", "\u53f3\u4e3a", "\u4e0a\u4e3a", "\u6363\u7b5b", "\u5165\u836f", "\u6c64\u4e0b", "\u9152\u4e0b", "\u9001\u4e0b")
+
+
+def split_note(canonical):
+    """CTO S3 ruling 2: canonical holds the pure drug name; bracketed notes move to variant_note."""
+    c = unicodedata.normalize("NFKC", canonical or "")
+    notes = [x for x in NOTE_RE.findall(c) if x]
+    return PUNCT_RE.sub("", NOTE_RE.sub("", c)), "; ".join(notes)
+
+
+def rule_nonherb(name, kind):
+    """CTO S3 ruling 3: a model 'not a drug' stands automatically only when the string itself shows it:
+    OCR noise glyph, unbalanced bracket, an arabic digit, whole string is a dose (rule kind empty),
+    a dose / preparation / administration word, or a single character. Everything else goes to review."""
+    t = unicodedata.normalize("NFKC", name or "")
+    unbalanced = sum(t.count(c) for c in "([\u3014\u3010") != sum(t.count(c) for c in ")]\u3015\u3011")
+    return (len(t) <= 1 or bool(NOISE_RE.search(t)) or unbalanced or bool(re.search("[0-9]", t))
+            or kind == "empty" or any(w in t for w in DOSE_TAIL[:-1]) or any(w in t for w in METHOD_WORDS))
+
+
+def classify(x):
+    """S3 classes. Auto pass ONLY when A and B agree and neither says ambiguous; Jev is advice only."""
+    if x["status"] == "incomplete":
+        return "incomplete", ""
+    if x["status"] == "agree" and not x["ambiguous"]:
+        if x["A"]["is_herb"]:
+            return "auto_pass", ""
+        return ("non_herb", "") if rule_nonherb(x["name"], x["rule_kind"]) else ("review", "model_non_herb")
+    return "review", ("ambiguous" if x["ambiguous"] else "disagree")
+
+
 def alias_ok(base, name, canonical):
     c = canon(canonical)
     return HERB_ALIASES.get(canon(base)) == c or HERB_ALIASES.get(canon(name)) == c
@@ -300,7 +343,8 @@ def norm_items(items, batch):
     out = {}
     for nm, x in by.items():
         ih = _bool(x.get("is_herb"))
-        out[nm] = {"is_herb": ih, "canonical": str(x.get("canonical") or "").strip() if ih else "",
+        pure, note = split_note(str(x.get("canonical") or "").strip() if ih else "")
+        out[nm] = {"is_herb": ih, "canonical": pure, "variant_note": note,
                    "processing": str(x.get("processing") or "").strip(), "note": str(x.get("note") or "").strip()[:60],
                    "ambiguous": _bool(x["ambiguous"]) if "ambiguous" in x else None}
     return out
@@ -329,9 +373,10 @@ def _load(path):
 
 
 def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), workers=2, gap=0.0, fail_pause=0.0,
-             rejudge=(), t_retries=0, t_pause=60.0):
+             rejudge=(), t_retries=0, t_pause=60.0, all_names=False, deadline=0.0):
     t_start = time.time()
-    pick = [r for r in rules if r["kind"] not in ("exact", "rule")][:n]
+    pick = (rules if all_names else [r for r in rules if r["kind"] not in ("exact", "rule")])[:n]
+    last_ok = [""]
     freq = {r["name"]: r["n"] for r in pick}
     clean = {r["name"]: r["clean"] for r in pick}
     fj, fjev, ffail = (os.path.join(out, x) for x in ("judgments.jsonl", "jev.jsonl", "failures.jsonl"))
@@ -386,6 +431,8 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                                         "raw": (txt or "")[:800]}, ensure_ascii=False) + "\n")
             if model:
                 s["models"][model] = s["models"].get(model, 0) + 1
+            if got:
+                last_ok[0] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             with open(fj, "a", encoding="utf-8") as f:
                 for nm, j in got.items():
                     rec = dict(who=who, name=nm, supplier=sup[who], model=model, **j)
@@ -427,6 +474,8 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
         return res
 
     def work(who, batch, tag):
+        if deadline and time.time() - t_start > deadline:
+            return                    # S3 shard: time budget used up, the next scheduled run resumes
         if fails[who] >= 3:
             print("[S2] %s %s skipped: vendor stopped after 3 consecutive failures" % (who, tag), flush=True)
             return
@@ -624,7 +673,81 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
     print("[S2] " + json.dumps({k: v for k, v in summ.items() if k != "models"}), flush=True)
     for w in ("A", "B"):
         print("[S2] %s %s" % (w, json.dumps(stats[w])), flush=True)
+    s3 = write_s3(out, recs, stats, last_ok[0], time.time() - t_start)
+    summ["s3"] = s3
     return summ
+
+
+def write_s3(out, recs, stats, last_ok, sec):
+    """S3 deliverables: auto_pass / review_queue (by frequency, desc) / non_herb + summary.json."""
+    for x in recs:
+        x["cls"], x["review_reason"] = classify(x)
+        x["suggestion"] = x["final"] if x["status"] == "jev" else None     # Jev = advice only
+    by = {c: [x for x in recs if x["cls"] == c] for c in ("auto_pass", "review", "non_herb", "incomplete")}
+    with open(os.path.join(out, "auto_pass.jsonl"), "w", encoding="utf-8") as f:
+        for x in by["auto_pass"]:
+            f.write(json.dumps({"name": x["name"], "n": x["n"], "canonical": x["A"]["canonical"],
+                                "processing": x["A"]["processing"] or x["B"]["processing"],
+                                "variant_note": x["A"].get("variant_note") or x["B"].get("variant_note") or "",
+                                "rule_kind": x["rule_kind"], "A": x["A"].get("model"), "B": x["B"].get("model")},
+                               ensure_ascii=False) + "\n")
+    with open(os.path.join(out, "review_queue.jsonl"), "w", encoding="utf-8") as f:
+        for x in sorted(by["review"], key=lambda x: -x["n"]):
+            f.write(json.dumps({k: x[k] for k in ("name", "n", "review_reason", "A", "B", "suggestion", "jev",
+                                                  "rule_kind", "rule_clean")}, ensure_ascii=False) + "\n")
+    with open(os.path.join(out, "non_herb.jsonl"), "w", encoding="utf-8") as f:
+        for x in by["non_herb"]:
+            f.write(json.dumps({"name": x["name"], "n": x["n"], "rule_kind": x["rule_kind"]}, ensure_ascii=False) + "\n")
+    fsum = os.path.join(out, "summary.json")
+    prev = json.load(open(fsum, encoding="utf-8")) if os.path.exists(fsum) else {}
+    fails_total = sum(1 for f in _load(os.path.join(out, "failures.jsonl")) if not f.get("transient_retry"))
+    both = sum(1 for x in recs if x["status"] != "incomplete")
+    agree_n = sum(1 for x in recs if x["status"] == "agree")
+    reasons = collections.Counter(x["review_reason"] for x in by["review"])
+    summ = {
+        "total": len(recs), "judged_A": sum(1 for x in recs if x["A"]), "judged_B": sum(1 for x in recs if x["B"]),
+        "judged_both": both, "agree_rate_pct": round(100.0 * agree_n / max(1, both), 1),
+        "auto_pass": len(by["auto_pass"]), "review": len(by["review"]), "non_herb": len(by["non_herb"]),
+        "incomplete": len(by["incomplete"]), "review_reasons": dict(reasons),
+        "failed_batches_total": fails_total,
+        "failed_batches_this_run": sum(stats[w]["failed_calls"] for w in ("A", "B")),
+        "transient_retries_this_run": sum(stats[w]["transient_retries"] for w in ("A", "B")),
+        "judged_this_run": {w: stats[w]["returned"] for w in ("A", "B")},
+        "last_success_utc": last_ok or prev.get("last_success_utc", ""),
+        "updated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "sec_this_run": round(sec, 1),
+        "complete": len(by["incomplete"]) == 0,
+    }
+    json.dump(summ, open(fsum, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print("[S3] " + json.dumps(summ), flush=True)
+    return summ
+
+
+def report_issue(s3, run_url):
+    """CLAUDE.md rule 8: the progress goes to a standing Issue (numbers only -- public repo, no drug names)."""
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # scripts/gh_issue.py
+    import gh_issue
+    rate = [s3["judged_this_run"][w] for w in ("A", "B")]
+    remain = [s3["total"] - s3["judged_A"], s3["total"] - s3["judged_B"]]
+    eta = max((r / v) if v else float("inf") for r, v in zip(remain, rate)) if any(remain) else 0
+    stalled = not s3["complete"] and min(rate) == 0
+    body = "\n".join([
+        "Numbers only (public repo). Updated %s UTC by %s" % (s3["updated_utc"], run_url), "",
+        "| metric | value |", "|---|---|",
+        "| judged A / B / both | %d / %d / %d of %d |" % (s3["judged_A"], s3["judged_B"], s3["judged_both"], s3["total"]),
+        "| agree rate (both judged) | %.1f%% |" % s3["agree_rate_pct"],
+        "| auto pass / review / non-drug | %d / %d / %d |" % (s3["auto_pass"], s3["review"], s3["non_herb"]),
+        "| review reasons | %s |" % json.dumps(s3["review_reasons"]),
+        "| failed batches (total / this run) | %d / %d |" % (s3["failed_batches_total"], s3["failed_batches_this_run"]),
+        "| congestion retries this run | %d |" % s3["transient_retries_this_run"],
+        "| judged this run A / B | %d / %d |" % tuple(rate),
+        "| last successful batch | %s |" % (s3["last_success_utc"] or "-"),
+        "| est. hourly runs left | %s |" % ("done" if s3["complete"] else ("stalled" if eta == float("inf") else "%.0f" % (eta + 0.49))),
+        "| complete | %s |" % s3["complete"],
+    ])
+    state = "done" if s3["complete"] else ("stalled" if stalled else "ok")
+    title = "\u836f\u540d\u5f52\u4e00 S3 \u8fdb\u5ea6"
+    return gh_issue.upsert(os.environ.get("GITHUB_REPOSITORY", ""), "herb-norm", title,
+                           "%s %d/%d" % (title, s3["judged_both"], s3["total"]), body, state=state)
 
 
 def _cell(x):
@@ -632,7 +755,8 @@ def _cell(x):
         return "(\u65e0)"
     if not x["is_herb"]:
         return "\u975e\u836f"
-    return x["canonical"] + ("\u3014%s\u3015" % x["processing"] if x.get("processing") else "") + ("(\u591a\u6307)" if x.get("ambiguous") else "")
+    return (x["canonical"] + (" \uff5c\u70ae\u5236:%s" % x["processing"] if x.get("processing") else "")
+            + (" \uff5c\u6ce8:%s" % x["variant_note"] if x.get("variant_note") else "") + (" \uff5c\u591a\u6307" if x.get("ambiguous") else ""))
 
 
 def write_sample(out, recs):
@@ -680,6 +804,9 @@ def main():
     ap.add_argument("--rejudge-ambiguous", default="")       # e.g. B: rejudge judgments lacking `ambiguous` once
     ap.add_argument("--transient-retries", type=int, default=0)  # CTO round 4: 3 retries on 429/1305
     ap.add_argument("--transient-pause", type=float, default=60.0)
+    ap.add_argument("--all", action="store_true")             # S3: every exported name, not only rule-unresolved
+    ap.add_argument("--deadline-min", type=float, default=0)  # S3 shard: stop starting batches after N minutes
+    ap.add_argument("--issue", action="store_true")           # S3: update the standing progress Issue
     ap.add_argument("--b", default="modelscope")
     ap.add_argument("--max-tokens", type=int, default=6000)   # glm-4-flash caps output near 4k
     ap.add_argument("--selftest", action="store_true")
@@ -696,10 +823,25 @@ def main():
     rules, rsum = s1_rules(a.out, rows, anchors)
     out_r = os.path.join(a.out, a.tag) if a.tag else a.out
     os.makedirs(out_r, exist_ok=True)
+    gho = os.environ.get("GITHUB_OUTPUT")
+    if os.path.exists(os.path.join(out_r, "DONE")):
+        print("[S3] already complete (DONE marker) -- nothing to do", flush=True)
+        if gho:
+            open(gho, "a").write("done=true\n")
+        return
     psum = s2_pilot(out_r, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b}, a.max_tokens,
                     [c.strip() for c in a.probe.split(",")], a.workers, a.gap, a.fail_pause,
                     [w for w in a.rejudge_ambiguous.split(",") if w in ("A", "B")],
-                    a.transient_retries, a.transient_pause)
+                    a.transient_retries, a.transient_pause, a.all, a.deadline_min * 60)
+    s3 = psum["s3"]
+    if s3["complete"]:
+        open(os.path.join(out_r, "DONE"), "w").write(s3["updated_utc"] + "\n")
+        if gho:
+            open(gho, "a").write("done=true\n")
+    if a.issue:
+        run_url = "%s/%s/actions/runs/%s" % (os.environ.get("GITHUB_SERVER_URL", ""),
+                                            os.environ.get("GITHUB_REPOSITORY", ""), os.environ.get("GITHUB_RUN_ID", ""))
+        print("[S3] issue: %s" % report_issue(s3, run_url), flush=True)
     total = round(time.time() - t0, 1)
     json.dump({"export": meta, "rules": rsum, "pilot": psum, "sec_total": total},
               open(os.path.join(out_r, "run_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
