@@ -329,7 +329,7 @@ def _load(path):
 
 
 def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), workers=2, gap=0.0, fail_pause=0.0,
-             rejudge=()):
+             rejudge=(), t_retries=0, t_pause=60.0):
     t_start = time.time()
     pick = [r for r in rules if r["kind"] not in ("exact", "rule")][:n]
     freq = {r["name"]: r["n"] for r in pick}
@@ -350,7 +350,7 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
         old = {json.loads(l)["name"] for l in open(prev, encoding="utf-8")}
         print("[S2] pick overlap with previous round: %d/%d" % (len({r["name"] for r in pick} & old), len(pick)), flush=True)
     stats = {w: {"supplier": sup[w], "calls": 0, "failed_calls": 0, "asked": 0, "returned": 0,
-                 "models": {}, "sec": 0.0} for w in ("A", "B")}
+                 "models": {}, "sec": 0.0, "transient_retries": 0} for w in ("A", "B")}
     print("[S2] pick=%d resume: A=%d B=%d already judged"
           % (len(pick), sum(1 for k in done if k[0] == "A"), sum(1 for k in done if k[0] == "B")), flush=True)
     sys_msg = SYS + "\u3001".join(anchors)
@@ -401,6 +401,31 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
     # seconds, 3 consecutive failures stop that vendor for this run (the rerun resumes).
     last, fails = {"A": 0.0, "B": 0.0}, {"A": 0, "B": 0}
 
+    # CTO round 4: upstream HTTP 429 / code 1305 ("model busy") is transient -> back off t_pause and retry the
+    # same batch up to t_retries times, not counted as a consecutive failure. The gateway answers every failure
+    # with a bare 503 GATEWAY_ALL_FAILED (chat.js:99 drops the upstream code), so besides the code/text match a
+    # FAST 503 also counts as transient: an upstream timeout takes ~90s, a fast one means the vendor answered
+    # with an error or the provider is cooling.
+    # ponytail: latency heuristic -- a permanent fast error (bad key) costs t_retries extra calls per batch.
+    def transient(err, dt):
+        return bool(re.search("429|1305|\u8bbf\u95ee\u91cf\u8fc7\u5927", err)) or ("503" in err and dt < 15)
+
+    def call_retry(who, spec, batch, tag):
+        for attempt in range(t_retries + 1):
+            res = call(spec, batch)
+            err, dt = res[2], res[4]
+            if not (err and attempt < t_retries and transient(err, dt)):
+                return res
+            with lock:
+                stats[who]["transient_retries"] += 1
+                with open(ffail, "a", encoding="utf-8") as f:
+                    f.write(json.dumps({"who": who, "supplier": spec, "tag": tag, "n": len(batch), "err": err,
+                                        "transient_retry": attempt + 1, "sec": round(dt, 1)}, ensure_ascii=False) + "\n")
+            print("[S2] %s %s transient failure %.1fs, back off %ds, retry %d/%d" % (
+                who, tag, dt, t_pause, attempt + 1, t_retries), flush=True)
+            time.sleep(t_pause)
+        return res
+
     def work(who, batch, tag):
         if fails[who] >= 3:
             print("[S2] %s %s skipped: vendor stopped after 3 consecutive failures" % (who, tag), flush=True)
@@ -408,7 +433,7 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
         wait = last[who] + gap - time.time()
         if wait > 0:
             time.sleep(wait)
-        res = call(sup[who], batch)
+        res = call_retry(who, sup[who], batch, tag)
         last[who] = time.time()
         sink(who, batch, tag, *res)
         with lock:
@@ -428,7 +453,7 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
                 work("B", todo, "probe")
             res = []
             for cand in [c for c in probe if c and c != sup["B"]]:
-                got, model, err, txt, dt = call(cand, pnames)
+                got, model, err, txt, dt = call_retry("A", cand, pnames, "probe")
                 agr = sum(1 for x, j in got.items() if ("B", x) in done and agree(j, done[("B", x)]))
                 res.append({"supplier": cand, "model": model, "asked": len(pnames), "returned": len(got),
                             "agree_with_B": agr, "sec": round(dt, 1), "err": err[:200],
@@ -653,6 +678,8 @@ def main():
     ap.add_argument("--gap", type=float, default=0.0)        # min seconds between one vendor's call starts
     ap.add_argument("--fail-pause", type=float, default=0.0)  # seconds a worker waits after a failed call
     ap.add_argument("--rejudge-ambiguous", default="")       # e.g. B: rejudge judgments lacking `ambiguous` once
+    ap.add_argument("--transient-retries", type=int, default=0)  # CTO round 4: 3 retries on 429/1305
+    ap.add_argument("--transient-pause", type=float, default=60.0)
     ap.add_argument("--b", default="modelscope")
     ap.add_argument("--max-tokens", type=int, default=6000)   # glm-4-flash caps output near 4k
     ap.add_argument("--selftest", action="store_true")
@@ -671,7 +698,8 @@ def main():
     os.makedirs(out_r, exist_ok=True)
     psum = s2_pilot(out_r, rules, anchors, a.n, a.batch, {"A": a.a, "B": a.b}, a.max_tokens,
                     [c.strip() for c in a.probe.split(",")], a.workers, a.gap, a.fail_pause,
-                    [w for w in a.rejudge_ambiguous.split(",") if w in ("A", "B")])
+                    [w for w in a.rejudge_ambiguous.split(",") if w in ("A", "B")],
+                    a.transient_retries, a.transient_pause)
     total = round(time.time() - t0, 1)
     json.dump({"export": meta, "rules": rsum, "pilot": psum, "sec_total": total},
               open(os.path.join(out_r, "run_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
