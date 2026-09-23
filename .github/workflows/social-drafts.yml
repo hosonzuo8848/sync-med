@@ -13,15 +13,19 @@ on:
   workflow_dispatch:
     inputs:
       count:
-        description: 'formulas this run (each -> one Toutiao + one Zhihu draft)'
+        description: 'formulas to draft at most (each formula -> one draft, one platform)'
         required: false
         default: '5'
+      target:
+        description: 'stop once every platform has this many passed drafts (0 = draft all, round robin)'
+        required: false
+        default: '0'
       seed:
         description: 'shuffle seed for picking formulas (empty = time based)'
         required: false
         default: ''
       supplier:
-        description: 'free-pool gateway supplier, fallback off (empty = zhipu). Never a paid supplier.'
+        description: 'free-pool gateway supplier, fallback off (empty = tc_dsflash). Never a paid supplier.'
         required: false
         default: ''
 
@@ -41,6 +45,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: install t2s converter
+        run: pip install --quiet opencc-python-reimplemented==0.1.7
       - name: selftest
         run: python scripts/content_factory/social_drafts.py --selftest
       - name: generate + compliance gate
@@ -49,7 +55,7 @@ jobs:
           JEV_API_KEY: ${{ secrets.JEV_API_KEY }}
           SOCIAL_SUPPLIER: ${{ github.event.inputs.supplier }}
           PYTHONIOENCODING: utf-8
-        run: python scripts/content_factory/social_drafts.py --count "${{ github.event.inputs.count || '5' }}" --seed "${{ github.event.inputs.seed }}" --out out
+        run: python scripts/content_factory/social_drafts.py --count "${{ github.event.inputs.count || '5' }}" --seed "${{ github.event.inputs.seed }}" --target "${{ github.event.inputs.target || '0' }}" --out out
       - uses: actions/upload-artifact@v4
         if: always()
         with:

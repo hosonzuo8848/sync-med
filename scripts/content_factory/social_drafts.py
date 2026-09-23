@@ -11,8 +11,8 @@ Source: the public cross-book formula API (/api/formulas/detail) behind /fangji/
 Model: internal free-pool gateway only, pinned to one supplier with fallback OFF. Run 1 showed
   supplier=zhipu + fallback lands on agnes (rate-limited, not to be used). Run 2: zhipu_free47
   (shared with herb-norm S3) was already in gateway cooldown -> 503 tried=[]; do not default to it.
-  Default zhipu (glm-4-flash); rules are written in Chinese and the body is sectioned with
-  per-section lengths because glm-4-flash ignored an English total-length target.
+  Run 3: zhipu (glm-4-flash) wrote 435-715 chars against the 800 floor in 21/21 Toutiao tries.
+  CTO round 2: default tc_dsflash (Tencent TokenHub free pack), tc_hy3 as the next try.
 Compliance gate, fail closed:
   1. regex: no dose numerals, no efficacy-promise words (cheap, deterministic)
   2. Jev (founder-approved): diagnosis / prescribing / dosage / efficacy claim /
@@ -48,7 +48,7 @@ SYSTEM = """\u4f60\u662f\u300c\u53e4\u65b9AI\u661f\u56fe\u300d\uff08gufangai.com
 3. \u4e0d\u5f00\u65b9\uff1a\u4e0d\u5efa\u8bae\u8bfb\u8005\u670d\u7528\u3001\u8bd5\u7528\u3001\u8d2d\u4e70\u3001\u642d\u914d\u4efb\u4f55\u65b9\u5242\u6216\u836f\u6750\uff1b\u4e0d\u5199\u714e\u6cd5\u3001\u670d\u6cd5\u3001\u670d\u7528\u65f6\u95f4\u4e0e\u6b21\u6570\u3002
 4. \u4e0d\u5199\u5242\u91cf\uff1a\u4efb\u4f55\u836f\u7269\u7684\u6570\u91cf\u3001\u91cd\u91cf\u3001\u679a\u6570\u4e00\u5f8b\u4e0d\u5199\uff08\u4e0d\u51fa\u73b0\u4e24\u3001\u94b1\u3001\u514b\u3001\u679a\u3001\u5206\u7b49\u5242\u91cf\uff09\uff0c\u5f15\u7528\u539f\u6587\u65f6\u4e5f\u7565\u53bb\u5242\u91cf\u3002
 5. \u4e0d\u627f\u8bfa\u7597\u6548\uff1a\u4e0d\u5199\u300c\u6cbb\u6108\u300d\u300c\u6839\u6cbb\u300d\u300c\u6709\u6548\u7387\u300d\u300c\u795e\u6548\u300d\u300c\u79d8\u65b9\u300d\uff0c\u4e0d\u5199\u75c5\u4f8b\u6545\u4e8b\u548c\u60a3\u8005\u89c1\u8bc1\u3002
-6. \u53ea\u7528\u3010\u7d20\u6750\u3011\u91cc\u7684\u4e8b\u5b9e\uff1a\u4e0d\u5f97\u7f16\u9020\u4e66\u540d\u3001\u5f15\u6587\u3001\u4f5c\u8005\u3001\u671d\u4ee3\uff1b\u7d20\u6750\u91cc\u6ca1\u6709\u7684\u4e00\u5f8b\u4e0d\u5199\uff0c\u4e5f\u4e0d\u8981\u51ed\u8bb0\u5fc6\u8865\u5145\u7ec4\u6210\u6216\u5242\u91cf\u3002
+6. \u53ea\u7528\u3010\u7d20\u6750\u3011\u91cc\u7684\u4e8b\u5b9e\uff1a\u4e0d\u5f97\u7f16\u9020\u4e66\u540d\u3001\u5f15\u6587\u3001\u4f5c\u8005\u3001\u671d\u4ee3\uff1b\u7d20\u6750\u91cc\u6ca1\u6709\u7684\u4e00\u5f8b\u4e0d\u5199\uff0c\u4e5f\u4e0d\u8981\u51ed\u8bb0\u5fc6\u8865\u5145\u7ec4\u6210\u6216\u5242\u91cf\u3002\u539f\u6587\u7528\u5b57\u5b58\u7591\uff08\u7591\u4f3c OCR \u8bb9\u5b57\u3001\u751f\u50fb\u602a\u5b57\u3001\u4e0d\u50cf\u836f\u540d\uff09\u65f6\u7701\u7565\u8be5\u836f\u540d\uff0c\u4e0d\u8981\u786c\u5199\u3002
 7. \u6807\u9898\u5438\u5f15\u4eba\u4f46\u4e0d\u5938\u5927\uff1a\u4e0d\u7528\u300c\u9707\u60ca\u300d\u300c\u795e\u65b9\u300d\u300c\u79d8\u65b9\u300d\u300c\u5fc5\u770b\u300d\u7b49\u8bcd\uff0c\u6807\u9898\u4e0d\u51fa\u73b0\u7597\u6548\u3002
 8. \u5168\u6587\u7528\u7b80\u4f53\u4e2d\u6587\uff08\u76f4\u63a5\u5f15\u7528\u539f\u6587\u65f6\u53ef\u4fdd\u7559\u539f\u5b57\uff09\uff1b\u7eaf\u6587\u672c\uff0c\u53ef\u7528\u300c## \u300d\u5c0f\u6807\u9898\uff1b\u4e0d\u5199\u94fe\u63a5\u3001\u8bdd\u9898\u6807\u7b7e\u3001\u8868\u60c5\u7b26\u53f7\u2014\u2014\u9875\u9762\u94fe\u63a5\u4f1a\u81ea\u52a8\u9644\u5728\u6587\u672b\u3002
 
@@ -89,8 +89,22 @@ JEV_Q = {
 # are kept in manifest.json so they can be recalibrated once reviewed drafts accumulate.
 JEV_MAX_VIOLATION = 0.3
 JEV_MIN_LITERATURE = 0.5
-SUPPLIER = os.environ.get("SOCIAL_SUPPLIER") or "zhipu"
+SUPPLIER = os.environ.get("SOCIAL_SUPPLIER") or "tc_dsflash"
 CALL_GAP_S = 5
+BOOK_SUFFIX = re.compile(r"_\d+$")   # file-name residue in book titles, e.g. "..._1"
+_CC = []
+
+
+def clean_book(b):
+    return BOOK_SUFFIX.sub("", (b or "").strip())
+
+
+def t2s(s):
+    """Final drafts are Simplified Chinese; runs before every gate (opencc-python-reimplemented)."""
+    if not _CC:
+        from opencc import OpenCC
+        _CC.append(OpenCC("t2s"))
+    return _CC[0].convert(s or "")
 
 
 def get(url, timeout=40):
@@ -123,11 +137,11 @@ def pick_formulas(n, seed, min_books=3, max_probe=150):
 def material(nm, d, max_versions=6):
     seen, vers = set(), []
     for v in d.get("versions") or []:
-        b = v.get("book_s") or v.get("book") or ""
+        b = clean_book(v.get("book_s") or v.get("book"))
         if b in seen or not v.get("herbs"):
             continue
         seen.add(b)
-        vers.append({"book": v.get("book") or b,
+        vers.append({"book": clean_book(v.get("book")) or b,
                      "herbs": [h.get("t") for h in v["herbs"] if h.get("t")],
                      "quote": DOSE_STRIP.sub("", (v.get("quote") or ""))[:220]})
         if len(vers) >= max_versions:
@@ -211,6 +225,7 @@ def draft(nm, d, platform, attempts=3):
             continue
         rec["models"].append(model)
         title, body = split_title(txt)
+        title, body = t2s(title), t2s(body)
         why = cheap_gate(title, body, lim, tmax)
         p = None
         if not why:
@@ -232,12 +247,19 @@ def selftest():
     assert split_title("# \u6807\u9898\uff1a\u4e94\u82d3\u6563\n\n\u6b63\u6587")[0] == "\u4e94\u82d3\u6563"
     assert cheap_gate("t", "x" * 900, (800, 1500)) == [] and cheap_gate("t", "x" * 10, (800, 1500))
     assert "639" in hint("body length 639 outside 800-1500 Chinese characters", (800, 1500))
+    assert clean_book("\u5916\u81fa\u79d8\u8981_1") == "\u5916\u81fa\u79d8\u8981" and clean_book("\u4f24\u5bd2\u8bba") == "\u4f24\u5bd2\u8bba"
+    try:
+        assert t2s("\u6eab\u4e2d\u6e6f\u300a\u5916\u81fa\u79d8\u8981\u300b") == "\u6e29\u4e2d\u6c64\u300a\u5916\u53f0\u79d8\u8981\u300b"
+    except ImportError:
+        print("opencc not installed here: t2s check skipped (the workflow installs it)")
     print("selftest ok")
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--count", type=int, default=5)
+    ap.add_argument("--count", type=int, default=5)        # formulas to draft at most, one draft each
+    ap.add_argument("--target", type=int, default=0)       # stop once every platform has this many passes (0 = draft all)
+    ap.add_argument("--platforms", default="toutiao,zhihu")
     ap.add_argument("--seed", default="")
     ap.add_argument("--out", default="out")
     ap.add_argument("--selftest", action="store_true")
@@ -249,22 +271,32 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     seed = a.seed or str(int(time.time()))
     picks = pick_formulas(a.count, seed)
-    manifest = {"seed": seed, "requested": a.count, "picked": len(picks), "drafts": []}
+    plats = [x for x in a.platforms.split(",") if x in PLATFORM]
+    need = {p: a.target for p in plats}
+    manifest = {"seed": seed, "supplier": SUPPLIER, "requested": a.count, "target": a.target,
+                "picked": len(picks), "drafts": []}
     for i, (nm, d) in enumerate(picks, 1):
+        if a.target:
+            open_ = [p for p in plats if need[p] > 0]
+            if not open_:
+                break
+            platform = max(open_, key=lambda x: need[x])   # every formula is used once, by one platform
+        else:
+            platform = plats[(i - 1) % len(plats)]
         url = SITE + "/fangji/" + urllib.parse.quote(nm)
-        print("[%d/%d] %s books=%s total=%s" % (i, len(picks), nm, d.get("books"), d.get("total")), flush=True)
-        for platform in PLATFORM:
-            r = draft(nm, d, platform)
-            r.update({"n": i, "formula": nm, "url": url, "books": d.get("books"), "records": d.get("total")})
-            if r["passed"]:
-                fn = "%02d_%s.md" % (i, platform)
-                footer = FOOTER.format(name=nm, books=d.get("books"), total=d.get("total"), url=url)
-                with open(os.path.join(a.out, fn), "w", encoding="utf-8") as f:
-                    f.write("# " + r["title"] + "\n\n" + r.pop("body") + footer)
-                r["file"] = fn
-                assert url in open(os.path.join(a.out, fn), encoding="utf-8").read()
-            print("  [%s] passed=%s chars=%s model=%s" % (platform, r["passed"], r.get("chars"), r.get("model") or r["models"]), flush=True)
-            manifest["drafts"].append(r)
+        print("[%d/%d] %s books=%s total=%s -> %s" % (i, len(picks), nm, d.get("books"), d.get("total"), platform), flush=True)
+        r = draft(nm, d, platform)
+        r.update({"n": i, "formula": nm, "url": url, "books": d.get("books"), "records": d.get("total")})
+        if r["passed"]:
+            fn = "%02d_%s.md" % (i, platform)
+            need[platform] -= 1
+            footer = FOOTER.format(name=t2s(nm), books=d.get("books"), total=d.get("total"), url=url)
+            with open(os.path.join(a.out, fn), "w", encoding="utf-8") as f:
+                f.write("# " + r["title"] + "\n\n" + r.pop("body") + footer)
+            r["file"] = fn
+            assert url in open(os.path.join(a.out, fn), encoding="utf-8").read()
+        print("  [%s] passed=%s chars=%s model=%s" % (platform, r["passed"], r.get("chars"), r.get("model") or r["models"]), flush=True)
+        manifest["drafts"].append(r)
     ok = sum(1 for r in manifest["drafts"] if r["passed"])
     manifest.update({"passed": ok, "rejected": len(manifest["drafts"]) - ok, "jev_api": dict(JEV_STATS)})
     with open(os.path.join(a.out, "manifest.json"), "w", encoding="utf-8") as f:
@@ -277,6 +309,8 @@ def main():
     print("[done] passed %d / %d drafts, jev %s" % (ok, len(manifest["drafts"]), JEV_STATS), flush=True)
     if ok == 0:
         sys.exit("zero drafts passed the compliance gate")
+    if a.target and any(v > 0 for v in need.values()):
+        sys.exit("target not met: still need %s" % need)
 
 
 if __name__ == "__main__":
