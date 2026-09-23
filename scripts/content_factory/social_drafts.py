@@ -8,7 +8,10 @@ GENERATE ONLY. Nothing here logs in anywhere or publishes anything; drafts go to
 Source: the public cross-book formula API (/api/formulas/detail) behind /fangji/<name>.
   Zero R2, zero D1 writes. The same formula name appears in many classical books with
   different compositions; that side-by-side comparison is the article angle.
-Model: internal free-pool gateway only (ask(), supplier=zhipu, gateway fallback chain).
+Model: internal free-pool gateway only, pinned to one supplier with fallback OFF. Run 1 showed
+  supplier=zhipu + fallback lands on agnes (rate-limited, not to be used) and glm-4-flash writes
+  too short; zhipu_free47 = glm-4.7-flash, Zhipu official free text model, thinking off.
+  It is shared with herb-norm S3 (paced 1 worker / 30 s gap): keep this job sequential + gapped.
 Compliance gate, fail closed:
   1. regex: no dose numerals, no efficacy-promise words (cheap, deterministic)
   2. Jev (founder-approved): diagnosis / prescribing / dosage / efficacy claim /
@@ -85,6 +88,8 @@ JEV_Q = {
 # are kept in manifest.json so they can be recalibrated once reviewed drafts accumulate.
 JEV_MAX_VIOLATION = 0.3
 JEV_MIN_LITERATURE = 0.5
+SUPPLIER = os.environ.get("SOCIAL_SUPPLIER", "zhipu_free47")
+CALL_GAP_S = 15
 
 
 def get(url, timeout=40):
@@ -183,16 +188,17 @@ def jev_gate(title, body):
     return p, why
 
 
-def draft(nm, d, platform, attempts=2):
+def draft(nm, d, platform, attempts=3):
     spec, lim, tmax = PLATFORM[platform]
     user = spec + "\n\nMATERIAL (JSON):\n" + json.dumps(material(nm, d), ensure_ascii=False, indent=1)
     rec = {"platform": platform, "attempts": 0, "models": [], "passed": False}
     feedback = ""
     for a in range(attempts):
         rec["attempts"] = a + 1
+        time.sleep(CALL_GAP_S)  # shared free key: stay sequential and gapped
         try:
-            txt, model = ask(SYSTEM, user + feedback, timeout=180, max_tokens=3200, supplier="zhipu",
-                             source="social_drafts", json_mode=False, gw_timeout_ms=90000)
+            txt, model = ask(SYSTEM, user + feedback, timeout=180, max_tokens=3200, supplier=SUPPLIER,
+                             source="social_drafts", json_mode=False, no_fallback=True, gw_timeout_ms=90000)
         except Exception as e:  # noqa: BLE001
             rec["models"].append("error: " + str(e)[:160])
             continue
