@@ -549,6 +549,8 @@ def s2_pilot(out, rules, anchors, n, bsz, sup, max_tokens=6000, probe=(), worker
             for f in futs:
                 f.result()
     t_models = time.time() - t_start
+    for w in ("A", "B"):
+        stats[w]["stopped"] = fails[w] >= 3     # this run gave up on the vendor after 3 consecutive failures
 
     # ---- Jev on disagreements ----
     gated = {r["name"]: cross_gate(done[("A", r["name"])], done[("B", r["name"])], r["name"], clean[r["name"]])
@@ -713,6 +715,7 @@ def write_s3(out, recs, stats, last_ok, sec):
         "failed_batches_this_run": sum(stats[w]["failed_calls"] for w in ("A", "B")),
         "transient_retries_this_run": sum(stats[w]["transient_retries"] for w in ("A", "B")),
         "judged_this_run": {w: stats[w]["returned"] for w in ("A", "B")},
+        "vendor_stopped": [w for w in ("A", "B") if stats[w].get("stopped")],
         "last_success_utc": last_ok or prev.get("last_success_utc", ""),
         "updated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "sec_this_run": round(sec, 1),
         "complete": len(by["incomplete"]) == 0,
@@ -740,11 +743,13 @@ def report_issue(s3, run_url):
         "| failed batches (total / this run) | %d / %d |" % (s3["failed_batches_total"], s3["failed_batches_this_run"]),
         "| congestion retries this run | %d |" % s3["transient_retries_this_run"],
         "| judged this run A / B | %d / %d |" % tuple(rate),
+        "| vendor stopped this run (3 consecutive failures) | %s |" % (",".join(s3.get("vendor_stopped") or []) or "-"),
         "| last successful batch | %s |" % (s3["last_success_utc"] or "-"),
         "| est. hourly runs left | %s |" % ("done" if s3["complete"] else ("stalled" if eta == float("inf") else "%.0f" % (eta + 0.49))),
         "| complete | %s |" % s3["complete"],
     ])
-    state = "done" if s3["complete"] else ("stalled" if stalled else "ok")
+    stopped = s3.get("vendor_stopped") or []
+    state = "done" if s3["complete"] else ("stalled" if stalled else ("stopped:" + ",".join(stopped) if stopped else "ok"))
     title = "\u836f\u540d\u5f52\u4e00 S3 \u8fdb\u5ea6"
     return gh_issue.upsert(os.environ.get("GITHUB_REPOSITORY", ""), "herb-norm", title,
                            "%s %d/%d" % (title, s3["judged_both"], s3["total"]), body, state=state)
