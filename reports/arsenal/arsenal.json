@@ -24711,6 +24711,44 @@
    }
   },
   {
+   "repo": "getsentry/MobileBuildMCP",
+   "url": "https://github.com/getsentry/MobileBuildMCP",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 6416,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-23",
+   "created_at": "2025-03-09",
+   "stars_per_day_lifetime": 11.38,
+   "capability": "提供MCP服务器和CLI，用于iOS和macOS项目中的代理使用",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "model-context-protocol-servers",
+    "tag-non-production",
+    "xcode",
+    "xcodebuild"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 42
+   }
+  },
+  {
    "repo": "op7418/CodePilot",
    "url": "https://github.com/op7418/CodePilot",
    "first_seen": "2026-08-14",
@@ -33893,6 +33931,38 @@
    }
   },
   {
+   "repo": "marmelab/awesome-rest",
+   "url": "https://github.com/marmelab/awesome-rest",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 3916,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-09-23",
+   "created_at": "2015-05-07",
+   "stars_per_day_lifetime": 0.94,
+   "capability": "提供关于RESTful API架构、开发、测试和性能的资源列表",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "rest"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 37
+   }
+  },
+  {
    "repo": "google-gemini/gemini-skills",
    "url": "https://github.com/google-gemini/gemini-skills",
    "first_seen": "2026-08-12",
@@ -39601,6 +39671,46 @@
    }
   },
   {
+   "repo": "pinecone-io/examples",
+   "url": "https://github.com/pinecone-io/examples",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 3045,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Jupyter Notebook",
+   "pushed_at": "2026-09-19",
+   "created_at": "2021-03-09",
+   "stars_per_day_lifetime": 1.5,
+   "capability": "提供 Pinecone 向量数据库的 Jupyter Notebook 示例",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai",
+    "jupyter-notebook",
+    "llm",
+    "pinecone",
+    "python",
+    "rag",
+    "semantic-search",
+    "vector-database",
+    "vector-search"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 95
+   }
+  },
+  {
    "repo": "swirlai/swirl-search",
    "url": "https://github.com/swirlai/swirl-search",
    "first_seen": "2026-09-20",
@@ -43681,6 +43791,45 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 79
+   }
+  },
+  {
+   "repo": "HenryQW/Awesome-TTRSS",
+   "url": "https://github.com/HenryQW/Awesome-TTRSS",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 2591,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "PHP",
+   "pushed_at": "2026-09-24",
+   "created_at": "2017-07-13",
+   "stars_per_day_lifetime": 0.77,
+   "capability": "提供强大的Docker化全合一RSS解决方案",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "docker",
+    "feedly",
+    "fever",
+    "mercury-parser",
+    "rss-feed",
+    "rss-reader",
+    "tt-rss",
+    "ttrss"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 17
    }
   },
   {
@@ -49010,6 +49159,42 @@
    }
   },
   {
+   "repo": "michelpereira/awesome-games-of-coding",
+   "url": "https://github.com/michelpereira/awesome-games-of-coding",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 2158,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-09-23",
+   "created_at": "2017-02-04",
+   "stars_per_day_lifetime": 0.61,
+   "capability": "提供编程语言学习游戏的列表",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "game",
+    "guido-van-robot",
+    "programming-language",
+    "robocode"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 34
+   }
+  },
+  {
    "repo": "tractorjuice/arc-kit",
    "url": "https://github.com/tractorjuice/arc-kit",
    "first_seen": "2026-08-14",
@@ -50630,6 +50815,49 @@
    }
   },
   {
+   "repo": "rynfar/meridian",
+   "url": "https://github.com/rynfar/meridian",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 2045,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-24",
+   "created_at": "2026-01-20",
+   "stars_per_day_lifetime": 8.28,
+   "capability": "使用Claude和Antigravity与Pi、OpenCode等编码客户端交互",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agents",
+    "ai-coding",
+    "aider",
+    "anthropic",
+    "antigravity",
+    "bun",
+    "claude",
+    "claude-agent-sdk",
+    "claude-max",
+    "cline",
+    "crush-cli",
+    "gemini"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 15
+   }
+  },
+  {
    "repo": "CYB3RMX/Qu1cksc0pe",
    "url": "https://github.com/CYB3RMX/Qu1cksc0pe",
    "first_seen": "2026-08-15",
@@ -50953,6 +51181,88 @@
     "sort": "updated",
     "query_breadth": 81,
     "position": 12
+   }
+  },
+  {
+   "repo": "Vincentwei1021/anything2explainer",
+   "url": "https://github.com/Vincentwei1021/anything2explainer",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 2019,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-18",
+   "created_at": "2026-09-08",
+   "stars_per_day_lifetime": 126.19,
+   "capability": "将任何主题转换为黑画布动画解释视频，带语音和字幕",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "ai-video",
+    "claude-code",
+    "claude-code-skill",
+    "codex",
+    "edge-tts",
+    "educational-video",
+    "explainer-video",
+    "kokoro",
+    "motion-graphics",
+    "multi-agent"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:text-to-video stars:>2000 pushed:>2026-06-26",
+    "sort": "stars",
+    "query_breadth": 15,
+    "position": 13
+   }
+  },
+  {
+   "repo": "vmoranv/jshookmcp",
+   "url": "https://github.com/vmoranv/jshookmcp",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 2019,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-24",
+   "created_at": "2026-02-21",
+   "stars_per_day_lifetime": 9.39,
+   "capability": "提供js hook工具包，用于浏览器自动化和调试",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "browser-automation",
+    "debugging",
+    "deobfuscation",
+    "js-reverse",
+    "mcp",
+    "network-analysis",
+    "reverse-engineering",
+    "security-analysis"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 65
    }
   },
   {
@@ -57887,6 +58197,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 59
+   }
+  },
+  {
+   "repo": "Ryze-AI-Adgent/open-seo-mcp-skills",
+   "url": "https://github.com/Ryze-AI-Adgent/open-seo-mcp-skills",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 1248,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Shell",
+   "pushed_at": "2026-09-24",
+   "created_at": "2026-08-29",
+   "stars_per_day_lifetime": 48.0,
+   "capability": "提供免费的SEO MCP服务器和开源SEO和GEO技能",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-seo",
+    "ai-visibility",
+    "backlinks",
+    "claude",
+    "claude-code",
+    "claude-skills",
+    "dataforseo",
+    "generative-engine-optimization",
+    "geo",
+    "geo-mcp",
+    "keyword-research",
+    "llm-seo"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 16
    }
   },
   {
@@ -69529,6 +69882,48 @@
    }
   },
   {
+   "repo": "Karovia/fullstack-ai-agent-roadmap",
+   "url": "https://github.com/Karovia/fullstack-ai-agent-roadmap",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 502,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-07",
+   "created_at": "2026-06-19",
+   "stars_per_day_lifetime": 5.18,
+   "capability": "提供从零基础到AI Agent全栈工程师的教程和项目",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-agent",
+    "chinese",
+    "claude",
+    "fastapi",
+    "fullstack",
+    "javascript",
+    "langgraph",
+    "learning-roadmap",
+    "llm",
+    "mcp",
+    "obsidian"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 73,
+    "position": 58
+   }
+  },
+  {
    "repo": "ai-evals-course/evals-skills",
    "url": "https://github.com/ai-evals-course/evals-skills",
    "first_seen": "2026-09-01",
@@ -69797,6 +70192,42 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 26
+   }
+  },
+  {
+   "repo": "iart-ai/motion-skills",
+   "url": "https://github.com/iart-ai/motion-skills",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 498,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-09-23",
+   "created_at": "2026-06-22",
+   "stars_per_day_lifetime": 5.3,
+   "capability": "教授 AI 编码代理制作动态图形、动画和视频的技能库",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai-agents",
+    "claude-code",
+    "motion-graphics",
+    "remotion",
+    "skills"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 85
    }
   },
   {
@@ -73731,6 +74162,35 @@
    }
   },
   {
+   "repo": "DragonJAR/Android-Pentesting-Skill",
+   "url": "https://github.com/DragonJAR/Android-Pentesting-Skill",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 371,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-23",
+   "created_at": "2026-03-31",
+   "stars_per_day_lifetime": 2.1,
+   "capability": "提供Android Pentesting技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 45
+   }
+  },
+  {
    "repo": "datawhalechina/Path2AGI",
    "url": "https://github.com/datawhalechina/Path2AGI",
    "first_seen": "2026-07-27",
@@ -74134,6 +74594,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 21
+   }
+  },
+  {
+   "repo": "limin112/min-skill",
+   "url": "https://github.com/limin112/min-skill",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 360,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "HTML",
+   "pushed_at": "2026-09-23",
+   "created_at": "2026-05-18",
+   "stars_per_day_lifetime": 2.79,
+   "capability": "提供 Claude 技能集",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 91
    }
   },
   {
@@ -83363,6 +83852,35 @@
    }
   },
   {
+   "repo": "artwist-polyakov/polyakov-claude-skills",
+   "url": "https://github.com/artwist-polyakov/polyakov-claude-skills",
+   "first_seen": "2026-09-24",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-24",
+   "stars": 201,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-23",
+   "created_at": "2025-11-07",
+   "stars_per_day_lifetime": 0.63,
+   "capability": "提供 Claude 技能集",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 98
+   }
+  },
+  {
    "repo": "davidliuk/graph-of-skills",
    "url": "https://github.com/davidliuk/graph-of-skills",
    "first_seen": "2026-08-17",
@@ -91346,7 +91864,7 @@
    }
   }
  ],
- "updated": "2026-09-23",
+ "updated": "2026-09-24",
  "status_enum": [
   "pending",
   "debated",

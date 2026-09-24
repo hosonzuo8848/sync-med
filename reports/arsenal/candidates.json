@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-09-23",
+ "generated": "2026-09-24",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -41,42 +41,42 @@
  },
  "distill": {
   "seat": "zhipu",
-  "calls": 7,
-  "ok": 3
+  "calls": 6,
+  "ok": 2
  },
- "count": 22,
+ "count": 14,
  "candidates": [
   {
-   "repo": "Alisa0808/vox-director",
-   "url": "https://github.com/Alisa0808/vox-director",
-   "description": "Turn one topic into a finished Vox-style paper-collage explainer/ad video — automated end to end on Atlas Cloud + ffmpeg. An agent skill.",
-   "stars": 2010,
+   "repo": "Vincentwei1021/anything2explainer",
+   "url": "https://github.com/Vincentwei1021/anything2explainer",
+   "description": "Topic in, narrated explainer video out. A Claude Code / Codex skill that turns any topic into a black-canvas motion-graphics explainer video with TTS voiceover, subtitles and a chapter progress bar. Chinese or English; every frame drawn in code with Remotion.",
+   "stars": 2019,
    "topics": [
-    "ai",
+    "agent-skills",
+    "ai-agents",
     "ai-video",
     "claude-code",
-    "claude-skill",
-    "collage-video",
-    "dsh-plugin",
+    "claude-code-skill",
+    "codex",
+    "edge-tts",
+    "educational-video",
     "explainer-video",
-    "ffmpeg",
-    "generative-ai",
-    "llm",
+    "kokoro",
     "motion-graphics",
-    "python"
+    "multi-agent"
    ],
-   "lang": "Python",
-   "created_at": "2026-07-10",
-   "pushed_at": "2026-08-11",
-   "age_days": 75,
-   "stars_per_day_lifetime": 26.8,
-   "license": "MIT",
-   "license_family": "permissive",
+   "lang": "TypeScript",
+   "created_at": "2026-09-08",
+   "pushed_at": "2026-09-18",
+   "age_days": 16,
+   "stars_per_day_lifetime": 126.19,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
    "found_by": {
     "dimension": "category",
-    "query": "topic:text-to-video stars:>2000 pushed:>2026-06-25",
+    "query": "topic:text-to-video stars:>2000 pushed:>2026-06-26",
     "sort": "stars",
-    "query_breadth": 14,
+    "query_breadth": 15,
     "position": 13
    },
    "matched_by_n_queries": 1,
@@ -84,8 +84,8 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "自动生成Vox风格的解释性视频，支持Claude技能集成。",
-   "evidence": "Turn one topic into a finished Vox-style paper-collage explainer/ad video — automated end to end on Atlas Cloud + ffmpeg",
+   "capability": "将任何主题转换为黑画布动画解释视频，带语音和字幕",
+   "evidence": "Topic in, narrated explainer video out.",
    "transfer_forms": [
     "skill"
    ],
@@ -95,468 +95,95 @@
    "distilled": true
   },
   {
-   "repo": "kuaidi100-api/java-demo",
-   "url": "https://github.com/kuaidi100-api/java-demo",
-   "description": "快递100API-Java快递查询接口主要应用在电商商城、ERP系统商、WMS系统商、独立站电商卖家、银行等企业。本Java快递查询接口目录提供：快递单号查询API接口、快递电子面单接口、寄快递接口、同城配送接口、快递地图跟踪接口等Java demo。接入只需要跟随Java快递查询接口示例即可，如需帮助，请点击下方官网链接，官网技术人员会免费帮助您接入接口。快递100API开放平台与国内外3000+快递公司合作提供快递单号查询API接口，快递电子面单接口，寄快递接口，快递地图跟踪接口等电商运营必备的物流快递工具.",
-   "stars": 272,
+   "repo": "Karovia/fullstack-ai-agent-roadmap",
+   "url": "https://github.com/Karovia/fullstack-ai-agent-roadmap",
+   "description": "🎯 从零基础到 AI Agent 全栈工程师 · 110 个详细教程 · 58 万字 · 400+ GitHub 项目精选 · Obsidian 友好 · 中文",
+   "stars": 502,
    "topics": [
-    "java",
-    "kuaidi100",
-    "lable",
-    "lableprint",
-    "saas-api",
-    "shipping-api",
-    "tracking-api"
-   ],
-   "lang": "Java",
-   "created_at": "2020-07-21",
-   "pushed_at": "2026-09-23",
-   "age_days": 2255,
-   "stars_per_day_lifetime": 0.12,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "免费 API in:name,description stars:>100 pushed:>2026-06-25",
-    "sort": "stars",
-    "query_breadth": 35,
-    "position": 22
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供快递查询API接口，支持快递单号查询、电子面单等。",
-   "evidence": "快递100API-Java快递查询接口主要应用在电商商城、ERP系统商、WMS系统商、独立站电商卖家、银行等企业。本Java快递查询接口目录提供：快递单号查询API接口、快递电子面单接口、寄快递接口、同城配送接口、快递地图跟踪接口等Java",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "guobao2333/DeepLX-Serverless",
-   "url": "https://github.com/guobao2333/DeepLX-Serverless",
-   "description": "Free DeepL API for Serverless",
-   "stars": 558,
-   "topics": [
-    "api",
-    "deepl",
-    "deeplx",
-    "free-api",
-    "i18n",
-    "javascript",
-    "nodejs",
-    "serverless",
-    "translation"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2024-08-08",
-   "pushed_at": "2026-09-21",
-   "age_days": 776,
-   "stars_per_day_lifetime": 0.72,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:free-api stars:>300 pushed:>2026-06-25",
-    "sort": "stars",
-    "query_breadth": 12,
-    "position": 6
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供免费的DeepL API服务，适用于无服务器环境。",
-   "evidence": "Free DeepL API for Serverless",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "krillinai/OpenCreator",
-   "url": "https://github.com/krillinai/OpenCreator",
-   "description": "Formerly KrillinAI. Open-source AI workspace for creators, powered by Codex. Create videos, images, voice, avatars, video translation, and edits with Agents in one place.",
-   "stars": 12220,
-   "topics": [
-    "agent-skills",
-    "codex-cli",
-    "deskop-app",
-    "dubbing",
-    "image-generation",
-    "localization",
-    "skills",
-    "tts",
-    "video-editing",
-    "video-generation",
-    "video-transcription",
-    "video-translation"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2024-12-17",
-   "pushed_at": "2026-09-23",
-   "age_days": 645,
-   "stars_per_day_lifetime": 18.95,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:image-generation stars:>5000 pushed:>2026-06-25",
-    "sort": "stars",
-    "query_breadth": 19,
-    "position": 11
-   },
-   "matched_by_n_queries": 2,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "开源AI创作空间，支持视频、图像、声音等创作。",
-   "evidence": "Create videos, images, voice, avatars, video translation, and edits with Agents in one place.",
-   "transfer_forms": [
-    "skill",
-    "architecture"
-   ],
-   "line_candidates": [
-    "video",
-    "image"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "MarkPDFdown/markpdfdown",
-   "url": "https://github.com/MarkPDFdown/markpdfdown",
-   "description": "A high-quality PDF to Markdown tool based on large language model visual recognition. 一款基于大模型视觉识别的高质量PDF转Markdown工具",
-   "stars": 2272,
-   "topics": [
-    "llm",
-    "markdown",
-    "pdf",
-    "pdf-converter",
-    "pdf-markdown",
-    "pdf2markdown",
-    "pdf2md"
-   ],
-   "lang": "Python",
-   "created_at": "2025-03-14",
-   "pushed_at": "2026-09-23",
-   "age_days": 558,
-   "stars_per_day_lifetime": 4.07,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "大模型 in:name,description stars:>1000 pushed:>2026-08-24",
-    "sort": "stars",
-    "query_breadth": 59,
-    "position": 41
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "将PDF转换为Markdown格式的高质量工具。",
-   "evidence": "A high-quality PDF to Markdown tool based on large language model visual recognition.",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "superdesigndev/treg",
-   "url": "https://github.com/superdesigndev/treg",
-   "description": "OpenRouter for agent tools. Join community here: https://discord.gg/6mQYYfFMAn",
-   "stars": 2314,
-   "topics": [
-    "agents",
-    "api-keys",
-    "cli",
-    "credentials",
-    "developer-tools",
-    "dsh-plugin",
-    "mcp",
-    "proxy",
-    "python",
-    "registry",
-    "secrets"
-   ],
-   "lang": "Python",
-   "created_at": "2026-07-15",
-   "pushed_at": "2026-09-23",
-   "age_days": 70,
-   "stars_per_day_lifetime": 33.06,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 11
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为智能体工具提供OpenRouter服务。",
-   "evidence": "OpenRouter for agent tools.",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "protegeproject/protege",
-   "url": "https://github.com/protegeproject/protege",
-   "description": "Protege Desktop",
-   "stars": 1534,
-   "topics": [
-    "java",
-    "knowledge-graph",
-    "knowledge-management",
-    "obo",
-    "ontology",
-    "ontology-engineering",
-    "owl",
-    "protege",
-    "protege-desktop",
-    "rdf",
-    "reasoning",
-    "semantics"
-   ],
-   "lang": "Java",
-   "created_at": "2013-08-20",
-   "pushed_at": "2026-09-23",
-   "age_days": 4782,
-   "stars_per_day_lifetime": 0.32,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 56,
-    "position": 13
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "知识图谱构建和管理的Java桌面应用程序。",
-   "evidence": "Protege Desktop",
-   "transfer_forms": [
-    "architecture"
-   ],
-   "line_candidates": [
-    "rag"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "We5ter/Scanners-Box",
-   "url": "https://github.com/We5ter/Scanners-Box",
-   "description": "The Ultimate Open-Source Security Arsenal for Hackers, Enterprises, and AI Agents——面向极客、企业与 AI 智能体的全域开源网络安全工具矩阵",
-   "stars": 9056,
-   "topics": [
-    "agent-security-audit",
-    "agent-security-benchmark",
-    "agent-security-red-teaming",
-    "agent-security-tools",
     "ai",
-    "ai-security",
-    "apk-analysis",
-    "binary-analysis",
-    "code-analyzer",
-    "devsecops",
-    "exploitation-framework",
-    "malware-analysis"
+    "ai-agent",
+    "chinese",
+    "claude",
+    "fastapi",
+    "fullstack",
+    "javascript",
+    "langgraph",
+    "learning-roadmap",
+    "llm",
+    "mcp",
+    "obsidian"
    ],
    "lang": "",
-   "created_at": "2016-12-24",
-   "pushed_at": "2026-09-22",
-   "age_days": 3560,
-   "stars_per_day_lifetime": 2.54,
+   "created_at": "2026-06-19",
+   "pushed_at": "2026-09-07",
+   "age_days": 97,
+   "stars_per_day_lifetime": 5.18,
    "license": "NONE",
    "license_family": "none",
    "found_by": {
     "dimension": "chinese",
-    "query": "智能体 in:name,description stars:>200",
-    "sort": "stars",
-    "query_breadth": 100,
-    "position": 9
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供全面的网络安全工具矩阵。",
-   "evidence": "The Ultimate Open-Source Security Arsenal for Hackers, Enterprises, and AI Agents——面向极客、企业与 AI 智能体的全域开源网络安全工具矩阵",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "EKKOLearnAI/ekko-studio",
-   "url": "https://github.com/EKKOLearnAI/ekko-studio",
-   "description": "Ekko Studio is a local-first AI workspace for multi-agent chat, coding, and visual workflows, available on desktop and the web.",
-   "stars": 11182,
-   "topics": [
-    "agent",
-    "ai-agent",
-    "chat-ui",
-    "coding-agents",
-    "dashboard",
-    "ekko-studio",
-    "hermes",
-    "hermes-agent",
-    "hermes-web-ui",
-    "llm",
-    "multi-agent",
-    "multi-model"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-04-11",
-   "pushed_at": "2026-09-23",
-   "age_days": 165,
-   "stars_per_day_lifetime": 67.77,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-24",
+    "query": "topic:chinese stars:>500 pushed:>2026-08-25",
     "sort": "updated",
-    "query_breadth": 100,
-    "position": 29
+    "query_breadth": 73,
+    "position": 58
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "多智能体AI工作空间，支持聊天、编码和可视化工作流程。",
-   "evidence": "Ekko Studio is a local-first AI workspace for multi-agent chat, coding, and visual workflows, available on desktop and t",
+   "capability": "提供从零基础到AI Agent全栈工程师的教程和项目",
+   "evidence": "110 个详细教程，400+ GitHub 项目精选",
    "transfer_forms": [
-    "skill",
     "architecture"
    ],
    "line_candidates": [
-    "rag"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "feder-cr/invisible_playwright_mcp",
-   "url": "https://github.com/feder-cr/invisible_playwright_mcp",
-   "description": "Anti-detect agentic stealth browser: undetected browsing, browser automation, Python AI web browsing agent, computer use, scraping, lead generation. No captchas.",
-   "stars": 31631,
-   "topics": [
-    "agentic-ai",
-    "ai-agent",
-    "ai-automation",
-    "autonomous-agents",
-    "browser",
-    "claude-code-plugin",
-    "crawler",
-    "gemini-cli-extension",
-    "job-hunting",
-    "job-search",
-    "lead-generation",
-    "llm-agent"
-   ],
-   "lang": "Python",
-   "created_at": "2024-08-04",
-   "pushed_at": "2026-09-23",
-   "age_days": 780,
-   "stars_per_day_lifetime": 40.55,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:agentic-ai stars:>5000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 68,
-    "position": 18
-   },
-   "matched_by_n_queries": 3,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供防检测的浏览器自动化工具，用于网络爬取和生成潜在客户。",
-   "evidence": "Anti-detect agentic stealth browser: undetected browsing, browser automation, Python AI web browsing agent, computer use",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
     "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "oceanbase/seekdb",
-   "url": "https://github.com/oceanbase/seekdb",
-   "description": "The AI-Native Search Database. Best for agent storage, it unifies vector, text, structured, and semi-structured data into a single engine. This all-in-one database makes agents smarter, easier to run, and more stable.",
-   "stars": 3021,
+   "repo": "rynfar/meridian",
+   "url": "https://github.com/rynfar/meridian",
+   "description": "Use Claude and Antigravity with Pi, OpenCode and other coding clients. Local API bridge, usage dashboard and Mac app. Antigravity preview available in 1.74.0.",
+   "stars": 2045,
    "topics": [
     "ai-agents",
-    "copy-on-write",
-    "embedded-database",
-    "full-text-search",
-    "hnsw",
-    "hybrid-search",
-    "langchain",
-    "llamaindex",
-    "mysql",
-    "oceanbase",
-    "python",
-    "rag"
+    "ai-coding",
+    "aider",
+    "anthropic",
+    "antigravity",
+    "bun",
+    "claude",
+    "claude-agent-sdk",
+    "claude-max",
+    "cline",
+    "crush-cli",
+    "gemini"
    ],
-   "lang": "C++",
-   "created_at": "2025-10-21",
-   "pushed_at": "2026-09-23",
-   "age_days": 337,
-   "stars_per_day_lifetime": 8.96,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
+   "lang": "TypeScript",
+   "created_at": "2026-01-20",
+   "pushed_at": "2026-09-24",
+   "age_days": 247,
+   "stars_per_day_lifetime": 8.28,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
-    "dimension": "category",
-    "query": "topic:rag stars:>3000 pushed:>2026-08-24",
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-25",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 4
+    "position": 15
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "AI原生搜索引擎，统一向量、文本、结构化和半结构化数据",
-   "evidence": "This all-in-one database makes agents smarter, easier to run, and more stable.",
+   "capability": "使用Claude和Antigravity与Pi、OpenCode等编码客户端交互",
+   "evidence": "Use Claude and Antigravity with Pi, OpenCode and other coding clients.",
    "transfer_forms": [
-    "deploy"
+    "skill"
    ],
    "line_candidates": [
     "modelpool"
@@ -564,290 +191,78 @@
    "distilled": true
   },
   {
-   "repo": "markets/awesome-ruby",
-   "url": "https://github.com/markets/awesome-ruby",
-   "description": "💎 A collection of awesome Ruby libraries, tools, frameworks and software",
-   "stars": 14157,
+   "repo": "Ryze-AI-Adgent/open-seo-mcp-skills",
+   "url": "https://github.com/Ryze-AI-Adgent/open-seo-mcp-skills",
+   "description": "Free SEO MCP server + open-source SEO and GEO skills for Claude: keyword research, rank tracking, audits, backlinks, AI visibility on your real GSC/GA4/ads data. claude mcp add ryze --transport http https://connector.get-ryze.ai/mcp",
+   "stars": 1248,
    "topics": [
-    "awesome",
-    "awesome-list",
-    "collection",
-    "curated-list",
-    "ruby",
-    "ruby-libraries"
+    "ai-seo",
+    "ai-visibility",
+    "backlinks",
+    "claude",
+    "claude-code",
+    "claude-skills",
+    "dataforseo",
+    "generative-engine-optimization",
+    "geo",
+    "geo-mcp",
+    "keyword-research",
+    "llm-seo"
    ],
-   "lang": "",
-   "created_at": "2014-07-03",
-   "pushed_at": "2026-09-22",
-   "age_days": 4465,
-   "stars_per_day_lifetime": 3.17,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 23
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "收集 Ruby 库、工具、框架和软件的列表",
-   "evidence": "A collection of awesome Ruby libraries, tools, frameworks and software",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "cdleon/awesome-terminals",
-   "url": "https://github.com/cdleon/awesome-terminals",
-   "description": "Terminal Emulators",
-   "stars": 2999,
-   "topics": [
-    "bash",
-    "c",
-    "command-line",
-    "cpp",
-    "golang",
-    "haskell",
-    "node",
-    "powershell",
-    "python",
-    "ruby",
-    "rust",
-    "shell"
-   ],
-   "lang": "",
-   "created_at": "2018-10-07",
-   "pushed_at": "2026-09-22",
-   "age_days": 2908,
-   "stars_per_day_lifetime": 1.03,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 26
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "终端模拟器列表",
-   "evidence": "Terminal Emulators",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "decalage2/awesome-security-hardening",
-   "url": "https://github.com/decalage2/awesome-security-hardening",
-   "description": "A collection of awesome security hardening guides, tools and other resources",
-   "stars": 6556,
-   "topics": [
-    "awesome-list",
-    "best-practices",
-    "blue-team",
-    "blueteam",
-    "cis-benchmarks",
-    "computer-security",
-    "cyber-security",
-    "cybersecurity",
-    "infosec",
-    "linux-hardening",
-    "security",
-    "security-hardening"
-   ],
-   "lang": "",
-   "created_at": "2019-04-29",
-   "pushed_at": "2026-09-22",
-   "age_days": 2704,
-   "stars_per_day_lifetime": 2.42,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 27
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "安全加固指南、工具和其他资源的集合",
-   "evidence": "A collection of awesome security hardening guides, tools and other resources",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "tayllan/awesome-algorithms",
-   "url": "https://github.com/tayllan/awesome-algorithms",
-   "description": "A curated list of awesome places to learn and/or practice algorithms.",
-   "stars": 25569,
-   "topics": [],
-   "lang": "",
-   "created_at": "2014-07-16",
-   "pushed_at": "2026-09-22",
-   "age_days": 4452,
-   "stars_per_day_lifetime": 5.74,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 28
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "算法学习与实践资源列表",
-   "evidence": "A curated list of awesome places to learn and/or practice algorithms.",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "bharathgs/Awesome-pytorch-list",
-   "url": "https://github.com/bharathgs/Awesome-pytorch-list",
-   "description": "A comprehensive list of pytorch related content on github,such as different models,implementations,helper libraries,tutorials etc.",
-   "stars": 16678,
-   "topics": [
-    "awesome",
-    "awesome-list",
-    "computer-vision",
-    "cv",
-    "data-science",
-    "deep-learning",
-    "facebook",
-    "machine-learning",
-    "natural-language-processing",
-    "neural-network",
-    "nlp",
-    "nlp-library"
-   ],
-   "lang": "",
-   "created_at": "2017-03-01",
-   "pushed_at": "2026-09-22",
-   "age_days": 3493,
-   "stars_per_day_lifetime": 4.77,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 49
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "PyTorch 相关内容的综合列表",
-   "evidence": "A comprehensive list of pytorch related content on github,such as different models,implementations,helper libraries,tuto",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "ArtemXTech/personal-os-skills",
-   "url": "https://github.com/ArtemXTech/personal-os-skills",
-   "description": "Claude Code skills for Obsidian | Claude Code x Obsidian Lab starts May 5",
-   "stars": 536,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2025-12-23",
-   "pushed_at": "2026-09-22",
-   "age_days": 274,
-   "stars_per_day_lifetime": 1.96,
+   "lang": "Shell",
+   "created_at": "2026-08-29",
+   "pushed_at": "2026-09-24",
+   "age_days": 26,
+   "stars_per_day_lifetime": 48.0,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-24",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-25",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 56
+    "position": 16
    },
-   "matched_by_n_queries": 1,
+   "matched_by_n_queries": 2,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "Claude Code 技能用于 Obsidian",
-   "evidence": "Claude Code skills for Obsidian",
+   "capability": "提供免费的SEO MCP服务器和开源SEO和GEO技能",
+   "evidence": "Free SEO MCP server + open-source SEO and GEO skills for Claude",
    "transfer_forms": [
-    "skill"
+    "mcp"
    ],
    "line_candidates": [
-    "unknown"
+    "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "zilliztech/deep-searcher",
-   "url": "https://github.com/zilliztech/deep-searcher",
-   "description": "Open Source Deep Research Alternative to Reason and Search on Private Data. Written in Python.",
-   "stars": 8280,
+   "repo": "vmoranv/jshookmcp",
+   "url": "https://github.com/vmoranv/jshookmcp",
+   "description": "js hook toolkit that all you need",
+   "stars": 2019,
    "topics": [
-    "agent",
-    "agentic-rag",
-    "claude",
-    "deep-research",
-    "deepseek",
-    "deepseek-r1",
-    "grok",
-    "grok3",
-    "llama4",
-    "llm",
-    "milvus",
-    "openai"
+    "browser-automation",
+    "debugging",
+    "deobfuscation",
+    "js-reverse",
+    "mcp",
+    "network-analysis",
+    "reverse-engineering",
+    "security-analysis"
    ],
-   "lang": "Python",
-   "created_at": "2025-02-08",
-   "pushed_at": "2026-09-22",
-   "age_days": 592,
-   "stars_per_day_lifetime": 13.99,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
+   "lang": "TypeScript",
+   "created_at": "2026-02-21",
+   "pushed_at": "2026-09-24",
+   "age_days": 215,
+   "stars_per_day_lifetime": 9.39,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
    "found_by": {
-    "dimension": "category",
-    "query": "topic:rag stars:>3000 pushed:>2026-08-24",
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-25",
     "sort": "updated",
     "query_breadth": 100,
     "position": 65
@@ -857,95 +272,210 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "开源深度研究替代方案，用于私有数据上的推理和搜索",
-   "evidence": "Open Source Deep Research Alternative to Reason and Search on Private Data.",
+   "capability": "提供js hook工具包，用于浏览器自动化和调试",
+   "evidence": "js hook toolkit that all you need",
    "transfer_forms": [
-    "deploy"
+    "library"
    ],
    "line_candidates": [
-    "modelpool"
+    "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "53AI/53AIHub",
-   "url": "https://github.com/53AI/53AIHub",
-   "description": "53AI Hub is an open-source AI portal and knowledge base for managing enterprise knowledge, AI agents, prompts, and AI tools, seamlessly integrating with Coze, Dify, FastGPT, RAGFlow. 一个AI知识库与Agent门户",
-   "stars": 4658,
+   "repo": "HenryQW/Awesome-TTRSS",
+   "url": "https://github.com/HenryQW/Awesome-TTRSS",
+   "description": "🐋 Awesome TTRSS, a powerful Dockerised all-in-one RSS solution.",
+   "stars": 2591,
    "topics": [
-    "coze",
-    "dify",
-    "fastgpt",
-    "go",
-    "knowledge",
-    "maxkb",
-    "mcp",
-    "openai",
-    "prompt",
-    "rag",
-    "ragflow"
+    "docker",
+    "feedly",
+    "fever",
+    "mercury-parser",
+    "rss-feed",
+    "rss-reader",
+    "tt-rss",
+    "ttrss"
    ],
-   "lang": "Go",
-   "created_at": "2025-04-24",
-   "pushed_at": "2026-09-22",
-   "age_days": 517,
-   "stars_per_day_lifetime": 9.01,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:rag stars:>3000 pushed:>2026-08-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 67
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "AI 知识库与 Agent 门户，管理企业知识、AI 代理、提示和 AI 工具",
-   "evidence": "53AI Hub is an open-source AI portal and knowledge base for managing enterprise knowledge, AI agents, prompts, and AI to",
-   "transfer_forms": [
-    "mcp",
-    "deploy"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "VDERR/dsh-echocat-skill-panel",
-   "url": "https://github.com/VDERR/dsh-echocat-skill-panel",
-   "description": "DSH 技能调用审计 + 应用内 skill 管理器",
-   "stars": 201,
-   "topics": [
-    "cordis",
-    "deepseek-harness",
-    "dsh-plugin"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-09-18",
-   "pushed_at": "2026-09-22",
-   "age_days": 5,
-   "stars_per_day_lifetime": 40.2,
+   "lang": "PHP",
+   "created_at": "2017-07-13",
+   "pushed_at": "2026-09-24",
+   "age_days": 3360,
+   "stars_per_day_lifetime": 0.77,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-24",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-25",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 70
+    "position": 17
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "DSH 技能调用审计 + 应用内 skill 管理器",
-   "evidence": "DSH 技能调用审计 + 应用内 skill 管理器",
+   "capability": "提供强大的Docker化全合一RSS解决方案",
+   "evidence": "a powerful Dockerised all-in-one RSS solution.",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "michelpereira/awesome-games-of-coding",
+   "url": "https://github.com/michelpereira/awesome-games-of-coding",
+   "description": "A curated list of games that can teach you how to learn a programming language.",
+   "stars": 2158,
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "game",
+    "guido-van-robot",
+    "programming-language",
+    "robocode"
+   ],
+   "lang": "",
+   "created_at": "2017-02-04",
+   "pushed_at": "2026-09-23",
+   "age_days": 3519,
+   "stars_per_day_lifetime": 0.61,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 34
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供编程语言学习游戏的列表",
+   "evidence": "A curated list of games that can teach you how to learn a programming language.",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "marmelab/awesome-rest",
+   "url": "https://github.com/marmelab/awesome-rest",
+   "description": "A collaborative list of great resources about RESTful API architecture, development, test, and performance",
+   "stars": 3916,
+   "topics": [
+    "awesome",
+    "rest"
+   ],
+   "lang": "",
+   "created_at": "2015-05-07",
+   "pushed_at": "2026-09-23",
+   "age_days": 4158,
+   "stars_per_day_lifetime": 0.94,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 37
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供关于RESTful API架构、开发、测试和性能的资源列表",
+   "evidence": "A collaborative list of great resources about RESTful API architecture, development, test, and performance",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "getsentry/MobileBuildMCP",
+   "url": "https://github.com/getsentry/MobileBuildMCP",
+   "description": "A Model Context Protocol (MCP) server and CLI that provides tools for agent use when working on iOS and macOS projects.",
+   "stars": 6416,
+   "topics": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "model-context-protocol-servers",
+    "tag-non-production",
+    "xcode",
+    "xcodebuild"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2025-03-09",
+   "pushed_at": "2026-09-23",
+   "age_days": 564,
+   "stars_per_day_lifetime": 11.38,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 42
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供MCP服务器和CLI，用于iOS和macOS项目中的代理使用",
+   "evidence": "A Model Context Protocol (MCP) server and CLI that provides tools for agent use when working on iOS and macOS projects.",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "DragonJAR/Android-Pentesting-Skill",
+   "url": "https://github.com/DragonJAR/Android-Pentesting-Skill",
+   "description": "Skill de Pentesting para Android",
+   "stars": 371,
+   "topics": [],
+   "lang": "JavaScript",
+   "created_at": "2026-03-31",
+   "pushed_at": "2026-09-23",
+   "age_days": 177,
+   "stars_per_day_lifetime": 2.1,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 45
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供Android Pentesting技能",
+   "evidence": "Skill de Pentesting para Android",
    "transfer_forms": [
     "skill"
    ],
@@ -955,39 +485,75 @@
    "distilled": true
   },
   {
-   "repo": "nimrodfisher/data-analytics-skills",
-   "url": "https://github.com/nimrodfisher/data-analytics-skills",
-   "description": "A comprehensive list of Claude & Codex skills for a wide range of data analytics tasks",
-   "stars": 443,
+   "repo": "iart-ai/motion-skills",
+   "url": "https://github.com/iart-ai/motion-skills",
+   "description": "50 open-source skills that teach your AI coding agent to make motion graphics, animation & video — kinetic typography, data-viz, explainers, TikTok/Reels, WebGL, Manim. 14 installable packs. By iart.ai, the AI motion agent.",
+   "stars": 498,
    "topics": [
+    "ai-agents",
     "claude-code",
-    "codex",
-    "data-analytics",
+    "motion-graphics",
+    "remotion",
     "skills"
    ],
-   "lang": "Python",
-   "created_at": "2026-01-11",
-   "pushed_at": "2026-09-22",
-   "age_days": 255,
-   "stars_per_day_lifetime": 1.74,
+   "lang": "HTML",
+   "created_at": "2026-06-22",
+   "pushed_at": "2026-09-23",
+   "age_days": 94,
+   "stars_per_day_lifetime": 5.3,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-24",
+    "query": "skill in:name stars:>200 pushed:>2026-08-25",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 89
+    "position": 85
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 Claude & Codex 在数据分析任务中的技能列表",
-   "evidence": "Claude & Codex skills for a wide range of data analytics tasks",
+   "capability": "教授 AI 编码代理制作动态图形、动画和视频的技能库",
+   "evidence": "teach your AI coding agent to make motion graphics, animation & video",
    "transfer_forms": [
-    "unknown"
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "limin112/min-skill",
+   "url": "https://github.com/limin112/min-skill",
+   "description": "",
+   "stars": 360,
+   "topics": [],
+   "lang": "HTML",
+   "created_at": "2026-05-18",
+   "pushed_at": "2026-09-23",
+   "age_days": 129,
+   "stars_per_day_lifetime": 2.79,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 91
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 Claude 技能集",
+   "evidence": "набор скиллов для Claude",
+   "transfer_forms": [
+    "skill"
    ],
    "line_candidates": [
     "unknown"
@@ -995,49 +561,82 @@
    "distilled": true
   },
   {
-   "repo": "op7418/guizang-product-video-skill",
-   "url": "https://github.com/op7418/guizang-product-video-skill",
-   "description": "归藏 product video skill：复用真实产品组件和设计语言，用代码制作软件更新宣传片。包含分镜文案、原创配乐、动作音效与视频渲染，支持 Claude Code 和 Codex。",
-   "stars": 221,
+   "repo": "pinecone-io/examples",
+   "url": "https://github.com/pinecone-io/examples",
+   "description": "Jupyter Notebooks to help you get hands-on with Pinecone vector databases",
+   "stars": 3045,
    "topics": [
-    "agent-skills",
-    "claude-code",
-    "codepilot",
-    "codex",
-    "hyperframes",
-    "motion-design",
-    "product-video",
-    "release-notes",
-    "skill",
-    "skills",
-    "video-generation"
+    "ai",
+    "jupyter-notebook",
+    "llm",
+    "pinecone",
+    "python",
+    "rag",
+    "semantic-search",
+    "vector-database",
+    "vector-search"
    ],
-   "lang": "Python",
-   "created_at": "2026-09-18",
-   "pushed_at": "2026-09-22",
-   "age_days": 5,
-   "stars_per_day_lifetime": 44.2,
-   "license": "AGPL-3.0",
-   "license_family": "copyleft",
+   "lang": "Jupyter Notebook",
+   "created_at": "2021-03-09",
+   "pushed_at": "2026-09-19",
+   "age_days": 2025,
+   "stars_per_day_lifetime": 1.5,
+   "license": "MIT",
+   "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-24",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-25",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 97
+    "position": 95
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "生成软件更新宣传片，复用产品组件和设计语言",
-   "evidence": "用代码制作软件更新宣传片",
+   "capability": "提供 Pinecone 向量数据库的 Jupyter Notebook 示例",
+   "evidence": "Jupyter Notebooks to help you get hands-on with Pinecone vector databases",
    "transfer_forms": [
-    "unknown"
+    "dataset"
    ],
    "line_candidates": [
-    "video"
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "artwist-polyakov/polyakov-claude-skills",
+   "url": "https://github.com/artwist-polyakov/polyakov-claude-skills",
+   "description": "Набор скиллов для Claude",
+   "stars": 201,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2025-11-07",
+   "pushed_at": "2026-09-23",
+   "age_days": 321,
+   "stars_per_day_lifetime": 0.63,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 98
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 Claude 技能集",
+   "evidence": "набор скиллов для Claude",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
    ],
    "distilled": true
   }
