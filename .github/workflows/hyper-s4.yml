@@ -12,8 +12,9 @@ name: hyper-s4
 # fleet-watch list (added the same day).
 
 on:
-  schedule:
-    - cron: '0 18 * * *'      # 18:00 UTC = 02:00 Beijing; finishes before goldset-full (04:30 UTC)
+  # 2026-09-24 paused: this nightly run pushed the shared quota past its weekly budget and its output was never imported. Re-enable only after fixing max_tokens and deciding who imports the output.
+  # schedule:
+  #   - cron: '0 18 * * *'      # 18:00 UTC = 02:00 Beijing; finishes before goldset-full (04:30 UTC)
   workflow_dispatch:
     inputs:
       limit:
