@@ -1,8 +1,10 @@
 name: sync
 
 on:
-  schedule:
-    - cron: "0 */3 * * *"          # 每3h自动跑·无人值守(幂等skip-done·补完后都是秒跳)
+  # 2026-09-26: schedule paused to yield the 139 pan account to webp-convert (both log in as the same uid and
+  #   revoke each other's token). Restore these two lines after the conversion batch finishes, then dispatch once.
+  # schedule:
+  #   - cron: "0 */3 * * *"          # 每3h自动跑·无人值守(幂等skip-done·补完后都是秒跳)
     # 2026-07-17: NAME_KEY自愈已验证真实生效(D1现场重建39488个书名成功),恢复cron。
   workflow_dispatch:
     inputs:
