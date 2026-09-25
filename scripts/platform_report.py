@@ -263,8 +263,11 @@ def collect_traffic(end):
     """30 天滚动窗口的真人/爬虫漏斗。SELECT-only;任何失败返回 err,绝不拖垮报告。"""
     d30 = (end - datetime.timedelta(days=30)).isoformat()
     try:
+        # 2026-09-26: bot rows older than 7 days are archived to 123 and moved into page_view_bot_daily as per-day counts
+        # (guyaofang-web migration 069); a day is never in both tables, so the sum keeps L0 = all rows incl. every crawler.
         raw = int(scalar(D1_MAIN,
-            "SELECT COUNT(*) FROM page_view_log WHERE day>='%s'" % d30))
+            "SELECT (SELECT COUNT(*) FROM page_view_log WHERE day>='%s')"
+            " + (SELECT COALESCE(SUM(n), 0) FROM page_view_bot_daily WHERE day>='%s')" % (d30, d30)))
         nonbot = int(scalar(D1_MAIN,
             "SELECT COUNT(*) FROM page_view_log WHERE day>='%s' AND ua_class!='bot'" % d30))
         content = int(scalar(D1_MAIN,
