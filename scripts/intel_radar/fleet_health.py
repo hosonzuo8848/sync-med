@@ -16,7 +16,11 @@ def fetch(url, body=None, timeout=120):
         return json.loads(r.read().decode("utf-8", "replace"))
 
 def probe_health():
-    j = fetch(f"{SITE}/api/gateway/health", timeout=90)
+    # 2026-09-26: without X-Gateway-Key the health endpoint skips minute-quota lanes (Groq) and omits error text
+    hdr = dict(UA, **({"X-Gateway-Key": os.environ["GW_KEY"]} if os.environ.get("GW_KEY") else {}))
+    req = urllib.request.Request(f"{SITE}/api/gateway/health", headers=hdr)
+    with urllib.request.urlopen(req, timeout=90) as r:
+        j = json.loads(r.read().decode("utf-8", "replace"))
     d = j.get("data", j)
     rows = []
     for p in d.get("providers", []):

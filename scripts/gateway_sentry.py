@@ -80,10 +80,13 @@ def main():
     # 必须带正常 UA：urllib 默认发 "Python-urllib/3.11"，会被 CF 的 Bot 防护
     # 直接 403 拦掉（2026-07-31 第一次跑就栽在这，日志里只有一句 HTTP 403 Forbidden，
     # 看不出是被谁拦的——端点本身没有任何鉴权）。
-    req = urllib.request.Request(
-        f'{SITE}/api/gateway/health',
-        headers={'User-Agent': 'gufangai-gateway-sentry/1.0 (+https://www.gufangai.com)',
-                 'Accept': 'application/json'})
+    hdr = {'User-Agent': 'gufangai-gateway-sentry/1.0 (+https://www.gufangai.com)',
+           'Accept': 'application/json'}
+    # 2026-09-26: without X-Gateway-Key the health endpoint skips minute-quota lanes (Groq) and omits error
+    #   text; with Groq as the chain head the sentry must send the key to see the head at all.
+    if os.environ.get('GW_KEY'):
+        hdr['X-Gateway-Key'] = os.environ['GW_KEY']
+    req = urllib.request.Request(f'{SITE}/api/gateway/health', headers=hdr)
     with urllib.request.urlopen(req, timeout=180) as r:
         txt = r.read().decode('utf-8', 'replace')
 

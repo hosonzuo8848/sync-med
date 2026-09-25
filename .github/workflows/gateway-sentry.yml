@@ -32,5 +32,7 @@ jobs:
       - name: 巡查网关链头
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          XUNMAI_HEAD: nvidia
+          # 2026-09-26: health probes minute-quota lanes (Groq) only for keyed callers; head follows the P0 fix (was nvidia, long off the chain)
+          GW_KEY: ${{ secrets.GW_KEY }}
+          XUNMAI_HEAD: groq
         run: python scripts/gateway_sentry.py
