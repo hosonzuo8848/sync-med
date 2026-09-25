@@ -26,7 +26,18 @@ s3 = boto3.client("s3", endpoint_url=EP, aws_access_key_id=AK,
 # (open_platform,与推 zip/pdf 的 PAN_CID/PSEC 是不同凭据对,workflow secret 已存在于仓库)。
 PAN_CLIENT_ID = os.environ.get("PAN_CLIENT_ID"); PAN_CLIENT_SECRET = os.environ.get("PAN_CLIENT_SECRET")
 GID_PDID = {}          # gid -> pan_dir_id,由 list_groups 填充
-_PAN_TOK = {"v": None}
+# 2026-09-26: prep job now logs in once (see pan_login.py + sync.yml) and hands the token
+# to every run-job shard via a masked job output, so 256 shards no longer each call
+# access_token and revoke each other's token. A shard falls back to logging in itself only
+# when the prefetched value is absent (e.g. local run) -- never on mid-run 401 (see pan()
+# below), or shards would recreate the same stampede on the first auth hiccup.
+_PAN_TOK = {"v": os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip() or None}
+
+
+class PanAuthError(RuntimeError):
+    """123 API answered with code != 0 (bad/expired token, revoked by another
+    login, or a real API error) -- never conflate this with "page not found"."""
+
 
 def pan_token():
     if _PAN_TOK["v"]:
@@ -51,7 +62,14 @@ def fetch_page_from_123(pan_dir_id, page_str):
         r = requests.get(f"{PAN}/api/v2/file/list",
                          params={"parentFileId": pan_dir_id, "limit": 100, "lastFileId": last_id},
                          headers=h, timeout=30)
-        d = r.json().get("data") or {}
+        j = r.json()
+        code = j.get("code")
+        if code not in (0, None):
+            # auth failure / API error, NOT "this page doesn't exist" -- do not let
+            # the caller silently read it as an empty file list (fixes the bug where
+            # a revoked token showed up as "123 did not find this page")
+            raise PanAuthError(f"code={code} msg={str(j.get('message', ''))[:80]}")
+        d = j.get("data") or {}
         fl = d.get("fileList") or []
         hit = next((f for f in fl if f.get("filename") == filename), None)
         if hit:
@@ -125,7 +143,10 @@ try:
 except Exception:
     pass
 S = requests.Session()
-_tok = {"v": None}
+# 2026-09-26: same one-login-per-run scheme as PAN_CLIENT_TOKEN_PREFETCHED above, for the
+# other credential pair (PAN_CID/PAN_SEC, used by pan()/put_file() to push zip/pdf).
+_tok = {"v": os.environ.get("PAN_TOKEN_PREFETCHED", "").strip() or None,
+        "prefetched": bool(os.environ.get("PAN_TOKEN_PREFETCHED", "").strip())}
 # circuit breaker: consecutive fully-exhausted pan() calls (persistent 123 rate-limit/token exhaustion).
 # Without this, a shard that hits a *persistent* (not transient) 123 quota outage burns its whole
 # runner window retrying book after book (~15-20min/book worst case) with only every-20-books logging,
@@ -159,8 +180,15 @@ def pan(method, path, body=None):
         msg = str(last.get("message", "")); code = last.get("code")
         # 123 rate limit ("tokens number has exceeded the limit") / 429 / expired token -> backoff + retry
         if "exceeded" in msg or "tokens number" in msg or '\u9891\u7e41' in msg or code in (429, 401):
-            if code == 401:
+            if code == 401 and not _tok["prefetched"]:
                 _tok["v"] = None                  # auth failed -> force token re-fetch
+            # prefetched (the normal matrix-shard path): do NOT re-login mid-run on 401.
+            # That is exactly the stampede this change removes -- every shard hitting 401
+            # near the same moment would each call access_token again and revoke each
+            # other right back. Let this call keep returning the 401 body; the caller
+            # records it as a failure (handle()'s except Exception -> "err:...") and
+            # moves on -- these lines are idempotent/skip-done, so the next scheduled run
+            # (prep logs in fresh) picks up whatever this run couldn't finish.
             time.sleep(delay); delay = min(delay * 2, 60); continue
         _rl["streak"] = 0                 # got a real (non-rate-limit) response -> breaker resets
         return last
@@ -369,7 +397,14 @@ def main():
             print(f"done {ok}/{len(mine)} last={g} a={a} b={b}", flush=True)
     lk = os.environ.get("LEDGER_PREFIX", "_ledger/") + f"shard_{SHARD}.json"
     s3.put_object(Bucket=SRC, Key=lk, Body=json.dumps(ledger, ensure_ascii=False).encode("utf-8"))
-    print(f"=== shard {SHARD} complete {ok}/{len(mine)} | ledger -> {lk} ===", flush=True)
+    # 2026-09-26: never silent about a shard falling back to its own login -- that is exactly
+    # the stampede this whole change removes. If prep's encrypted token didn't make it here
+    # (decrypt step warned already, in the run job's own log), this line is the second,
+    # harder-to-miss signal in the script's own output.
+    fb = [name for name, ok_ in (("zip/pdf-acct", _tok["prefetched"]),
+                                  ("page-read-acct", bool(os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip()))) if not ok_]
+    print(f"=== shard {SHARD} complete {ok}/{len(mine)} | ledger -> {lk} | "
+          f"login_fallback={','.join(fb) or 'none'} ===", flush=True)
 
 
 if __name__ == "__main__":

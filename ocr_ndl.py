@@ -22,7 +22,20 @@ PILOT = os.environ.get("PILOT", "").strip()
 s3 = boto3.client("s3", endpoint_url=EP, aws_access_key_id=AK, aws_secret_access_key=SK, region_name="auto")
 
 PAN = "https://open-api.123pan.com"
-_tok = {"v": None}
+# 2026-09-26: prep job now logs in once (see pan_login.py + pan_crypt.py + ocr_ndl.yml) and
+# hands the token to every run-job shard, encrypted, so 40 shards no longer each call
+# access_token and revoke each other's token. A shard falls back to logging in itself when
+# the prefetched value is absent -- local run, or prep's cipher failed to decrypt (the
+# decrypt step in ocr_ndl.yml already warns about this; LOGIN_FALLBACK below makes it a
+# second, harder-to-miss signal in this script's own D1/ledger output, never silent).
+LOGIN_FALLBACK = not bool(os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip())
+_tok = {"v": os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip() or None}
+
+
+class PanAuthError(RuntimeError):
+    """123 API answered with code != 0 (bad/expired token, revoked by another
+    login, or a real API error) -- never conflate this with "page not found"."""
+
 
 def pan_token():
     if _tok["v"]:
@@ -45,7 +58,16 @@ def fetch_page_from_123(pan_dir_id, page_str):
     for _ in range(20):
         r = requests.get(f"{PAN}/api/v2/file/list", params={"parentFileId": pan_dir_id, "limit": 100, "lastFileId": last_id},
                           headers=h, timeout=30)
-        d = r.json().get("data") or {}
+        j = r.json()
+        code = j.get("code")
+        if code not in (0, None):
+            # auth failure / API error, NOT "this page doesn't exist" -- previously
+            # `j.get("data") or {}` treated a revoked/expired token exactly like an
+            # empty file list, so every list call after a 401 silently reported
+            # "123 did not find this page" (2026-09-21 and later runs both showed
+            # ~298-299/300 pages "not found" per shard -- almost certainly this).
+            raise PanAuthError(f"code={code} msg={str(j.get('message', ''))[:80]}")
+        d = j.get("data") or {}
         fl = d.get("fileList") or []
         hit = next((f for f in fl if f.get("filename") == filename), None)
         if hit:
@@ -57,7 +79,11 @@ def fetch_page_from_123(pan_dir_id, page_str):
     if not file_id:
         return None
     r = requests.get(f"{PAN}/api/v1/file/download_info", params={"fileId": file_id}, headers=h, timeout=30)
-    url = (r.json().get("data") or {}).get("downloadUrl")
+    j2 = r.json()
+    code2 = j2.get("code")
+    if code2 not in (0, None):
+        raise PanAuthError(f"code={code2} msg={str(j2.get('message', ''))[:80]}")
+    url = (j2.get("data") or {}).get("downloadUrl")
     if not url:
         return None
     r = requests.get(url, timeout=60)
@@ -79,7 +105,7 @@ RUN_ID = os.environ.get("GITHUB_RUN_ID", "")
 # 2026-07-19创始人指示:OCR集结进后台管理资产——每个shard跑完写一行汇总到ocr_jobs,
 # 哨兵 book_id='_ndl_pipeline'/table_name='_pipeline_run'(与per-book行共存,见migrations/040)。
 # 后台 Tab4Ocr「云端NDLOCR流水线」区块靠这行数据显示,不用手动查GitHub。
-def d1_report_run(status, total, done_n, skip_n, err_n, low_conf_n, error_msg="", rej_n=0):
+def d1_report_run(status, total, done_n, skip_n, err_n, low_conf_n, error_msg="", rej_n=0, auth_err_n=0):
     now = int(time.time())
     # 质量闸判退数在 ocr_jobs 里没有自己的列,但它不能只印在 run log 里——铁律:
     # "凡是只写进日志的产线一律视为没人看"(pan-register 在日志里连喊 12 天零人响应)。
@@ -88,6 +114,15 @@ def d1_report_run(status, total, done_n, skip_n, err_n, low_conf_n, error_msg=""
     msg = error_msg or ""
     if rej_n:
         msg = (msg + " " if msg else "") + "rej=%d" % rej_n
+    # 2026-09-26: an auth failure (token revoked/expired) is a different problem from
+    # "page not found" -- folding it into err would misreport "account got kicked" as
+    # "upstream missing-page scale". Break it out so the dashboard can tell them apart.
+    if auth_err_n:
+        msg = (msg + " " if msg else "") + "auth_err=%d" % auth_err_n
+    if LOGIN_FALLBACK:
+        # this shard did not get prep's prefetched token (absent or failed to decrypt) and
+        # logged in on its own -- worth seeing on the dashboard, not just the run log.
+        msg = (msg + " " if msg else "") + "login_fallback=1"
     try:
         d1_query(
             "INSERT INTO ocr_jobs (book_id, table_name, run_id, shard, status, engine, "
@@ -262,7 +297,7 @@ if os.path.exists(LEDGER):
         ledger = set()
 print(f"ledger已有 {len(ledger)} 条记录", flush=True)
 
-done, skip, err, low_conf, rejected = 0, 0, 0, 0, 0
+done, skip, err, low_conf, rejected, auth_err = 0, 0, 0, 0, 0, 0
 rejects = []   # 本轮判退明细,收尾时一次性合并进 _ledger/rejected_ocr_ndl_{SHARD}.json
 for bid, p, pdid in mine:
     pstr = str(p).zfill(4)
@@ -282,6 +317,18 @@ for bid, p, pdid in mine:
             continue
         with open(img_path, "wb") as f:
             f.write(content)
+    except PanAuthError as e:
+        # An auth failure (token revoked/expired/API error) is NOT "this page doesn't
+        # exist". fetch_page_from_123 used to read a code!=0 body as an empty file list,
+        # so this kind of failure also landed in err and printed "123 did not find this
+        # page" (runs around 09-21 and later both showed ~298-299/300 pages "not found"
+        # per shard -- very likely mostly this). Separate counter + separate deadletter
+        # key, does not eat into the "123-missing" bucket, reports the real cause
+        # (code + message) instead.
+        print(f"ERR auth {bid} p{p} :: {e}", flush=True)
+        mark_dead(lkey, "auth-error")
+        auth_err += 1
+        continue
     except Exception as e:
         print(f"ERR拉图异常 {bid} p{p} :: {str(e)[:100]}", flush=True)
         mark_dead(lkey, "123-error")
@@ -397,14 +444,16 @@ top_dead = _dead_by_book.most_common(5)
 ocr_reject_log.flush(s3, BUCKET, "ocr_ndl", SHARD, rejects)
 s3.put_object(Bucket=BUCKET, Key=f"_ledger/ocr_ndl_{SHARD}.json",
               Body=json.dumps({"shard": SHARD, "total": len(mine), "done": done, "skip": skip,
-                               "err": err, "low_conf": low_conf, "rejected": rejected,
+                               "err": err, "auth_err": auth_err, "low_conf": low_conf,
+                               "rejected": rejected,
                                "cooled": cooled,
+                               "login_fallback": LOGIN_FALLBACK,
                                "dead_pages": dead_pages, "dead_books": dead_books,
                                "dead_new": _dead_stat["new"]}).encode())
-d1_report_run("done", len(mine), done, skip, err, low_conf, rej_n=rejected)
+d1_report_run("done", len(mine), done, skip, err, low_conf, rej_n=rejected, auth_err_n=auth_err)
 d1_report_dead(dead_pages, dead_books, _dead_stat["new"], cooled, top_dead)
-print(f"=== shard {SHARD} 完成 done={done} skip={skip} err={err} low_conf={low_conf} "
-      f"质量闸判退={rejected} / {len(mine)} ===", flush=True)
+print(f"=== shard {SHARD} 完成 done={done} skip={skip} err={err} auth_err={auth_err} "
+      f"low_conf={low_conf} 质量闸判退={rejected} login_fallback={LOGIN_FALLBACK} / {len(mine)} ===", flush=True)
 print(f"=== 死信 {dead_pages}页/{dead_books}本 (本轮新增{_dead_stat['new']}·冷却跳过{cooled}) ===", flush=True)
 if top_dead:
     # 死页最集中的几本 = 上游 123 缺页最严重的几本,给 CTO 判断上游窟窿规模用。

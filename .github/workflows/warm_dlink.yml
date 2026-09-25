@@ -35,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       shards: ${{ steps.gen.outputs.shards }}
+      pan_token_cipher: ${{ steps.panlogin.outputs.cipher }}
     steps:
       - id: gen
         run: |
@@ -45,6 +46,37 @@ jobs:
           " >> "$GITHUB_OUTPUT"
         env:
           T: ${{ github.event.inputs.total || '3' }}
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet requests
+      # 2026-09-26 rework: log in ONCE here, hand the token to every run-job shard. Fixes 3
+      # shards each calling access_token near the same instant and revoking each other's
+      # token -- warm_dlink.py's KV pan:tok cache already dedupes most of this, but not the
+      # first request of a run, before any shard has written it.
+      #
+      # The token does NOT go into the job output in plaintext -- GitHub Actions silently
+      # drops a job output whose value has been through ::add-mask:: ("Skip output '<name>'
+      # since it may contain secret"; confirmed on a throwaway branch, run 36201413266). The
+      # first version of this fix put the masked token straight into GITHUB_OUTPUT and never
+      # actually worked -- every shard read it back empty and silently logged in itself.
+      # Fix: encrypt with the same PAN_CLIENT_SECRET the run job already has (pan_crypt.py,
+      # openssl aes-256-cbc), put only the CIPHERTEXT in the output. The run job decrypts
+      # with its own copy of that secret and hands the plaintext to the script via
+      # $GITHUB_ENV only (masked first), never through an output or an echo.
+      - name: pan login once
+        id: panlogin
+        run: |
+          set -euo pipefail
+          TOKEN=$(python pan_login.py)
+          if [ -z "$TOKEN" ]; then echo "empty token" >&2; exit 1; fi
+          echo "::add-mask::$TOKEN"
+          CIPHER=$(printf '%s' "$TOKEN" | PAN_PASS="$PAN_SEC" python pan_crypt.py encrypt)
+          echo "cipher=$CIPHER" >> "$GITHUB_OUTPUT"
+        env:
+          PAN_CID: ${{ secrets.PAN_CLIENT_ID }}
+          PAN_SEC: ${{ secrets.PAN_CLIENT_SECRET }}
 
   run:
     needs: prep
@@ -61,6 +93,26 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install --quiet requests
+      # Decrypt what prep encrypted (see prep's "pan login once" comment). Empty/
+      # undecryptable cipher -> do NOT set the env var -> warm_dlink.py's get_token() sees
+      # it absent and falls back to logging in itself (logged, not silent).
+      - name: decrypt prefetched pan token
+        run: |
+          set -euo pipefail
+          if [ -z "$PAN_TOKEN_CIPHER" ]; then
+            echo "WARN: no prefetched token cipher -- this shard will log in itself (fallback)" >&2
+          else
+            TOK=$(printf '%s' "$PAN_TOKEN_CIPHER" | PAN_PASS="$PAN_SEC" python pan_crypt.py decrypt || true)
+            if [ -z "$TOK" ]; then
+              echo "WARN: could not decrypt prefetched token -- this shard will log in itself (fallback)" >&2
+            else
+              echo "::add-mask::$TOK"
+              echo "PAN_CLIENT_TOKEN_PREFETCHED=$TOK" >> "$GITHUB_ENV"
+            fi
+          fi
+        env:
+          PAN_TOKEN_CIPHER: ${{ needs.prep.outputs.pan_token_cipher }}
+          PAN_SEC: ${{ secrets.PAN_CLIENT_SECRET }}
       - name: restore ledger cache
         uses: actions/cache/restore@v4
         with:
@@ -76,6 +128,8 @@ jobs:
           D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
           PAN_CLIENT_ID: ${{ secrets.PAN_CLIENT_ID }}
           PAN_CLIENT_SECRET: ${{ secrets.PAN_CLIENT_SECRET }}
+          # PAN_CLIENT_TOKEN_PREFETCHED already set into $GITHUB_ENV by the decrypt step
+          # above (or left unset -> warm_dlink.py falls back to logging in itself)
           SHARD: ${{ matrix.shard }}
           TOTAL: ${{ github.event.inputs.total || '3' }}
           PILOT: ${{ github.event.inputs.pilot }}
