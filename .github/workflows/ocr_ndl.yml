@@ -9,8 +9,10 @@ on:
       pilot:
         description: pilot page cap per shard (empty = full run)
         default: ""
-  schedule:
-    - cron: '30 */6 * * *'   # 错开ocr.yml(整点),同一套org并发池温和轮换
+  # 2026-09-26: schedule paused to yield the 139 pan account to webp-convert (PAN_CLIENT_ID is the 139 account;
+  #   each shard logs in separately and revokes the converter's token). Restore after the conversion batch.
+  # schedule:
+  #   - cron: '30 */6 * * *'   # 错开ocr.yml(整点),同一套org并发池温和轮换
 
 concurrency:
   group: ocr-ndl-run
