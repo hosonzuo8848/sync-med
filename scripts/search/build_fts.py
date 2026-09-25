@@ -1,7 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-精确检索层 · FTS5 全文索引 + 术语精确表(混合检索的「关键词那一路」)
+Search term table builder (search_terms). The v1 FTS half is retired.
+
+2026-09-26: v1 trigram FTS (books_fts + books_fts_state) is no longer created or
+written here. Retrieval switched to books_fts_v2 (bigram, full text) on
+2026-08-16; v1 only indexed preview_120 and no reader is left. Do NOT add a
+CREATE ... IF NOT EXISTS for it back: once the tables are dropped, that line
+would silently rebuild the whole v1 index on the next cron run.
+
+What is left: fill search_terms (exact table for 2-char terms) from
+sue_graph_nodes / biocomp_entries / herb_compare. INSERT OR IGNORE on the
+composite primary key, so a rerun only adds new rows. Zero R2, zero AI calls.
+Runs in GitHub Actions (.github/workflows/search-index.yml).
+
+Usage:
+  python scripts/search/build_fts.py            # fill search_terms, then verify
+  python scripts/search/build_fts.py --verify   # count only, no writes
+
+Historical rationale (2026-08-03, kept as written; the FTS table it mentions is
+the retired v1):
 
 立此因(2026-08-03 实测):
   平台检索**只有向量一条路**,D1 里零 FTS 索引。问「《伤寒论》哪一条讲桂枝去芍药」
@@ -14,29 +32,6 @@
     大量是 2 字(桂枝/芍药/白术/黄芩)→ 纯 FTS 会漏掉一半查询。
   所以本脚本建**两张东西**:trigram FTS 表兜 ≥3 字的自由文本,
   `search_terms` 术语表兜 2 字术语的精确/前缀匹配。缺任何一张,2 字查询都是黑洞。
-
-索引范围(**本轮只索引 preview_120,这是刻意的**):
-  154,826 段的全文在 R2,D1 里只有 120 字预览(合计 1,851 万字符)。
-  平台铁律「零 R2 移动 / 零 LIST」→ **不许为了建索引去批量读 R2**。
-  全文回填是另一个待创始人决策的议题,本脚本不碰,也不留后门。
-
-幂等(可验证,不是口号):
-  · 索引状态记在 `books_fts_state`(chunk_id 主键),灌库按「源表 LEFT JOIN 状态表
-    取未索引的」拉,重跑只补新增,**不重建全表**;
-  · FTS 写入与状态写入放在**同一次 D1 调用**里(D1 的 /query 支持多语句并按 batch 执行,
-    已实测返回 2 段结果)→ 不存在「写了 FTS 没写状态」的崩溃窗口;
-  · 承诺不成立的话哪里会红:`--verify` 会把 三个数(源表可索引数 / FTS 行数 / 状态行数)
-    并排打出来并在不一致时 exit 1。
-
-铁律:
-  · 只读 D1 + 写两张新表,零 R2、零 AI 调用、不改任何既有表的数据
-  · 本机禁算力 → 设计为在 GitHub Actions 跑(.github/workflows/search-index.yml);
-    本地只允许 `--limit` 小样本试
-
-跑法:
-  python scripts/search/build_fts.py --phase all              # Actions 全量
-  python scripts/search/build_fts.py --phase fts --limit 300  # 本地小样本试
-  python scripts/search/build_fts.py --verify                 # 只对账不写
 """
 import os, sys, time, argparse
 
@@ -62,13 +57,7 @@ def d1r(sql, tries=4):
             time.sleep(wait)
 
 
-FTS_TABLE   = "books_fts"
-STATE_TABLE = "books_fts_state"
 TERM_TABLE  = "search_terms"
-
-# D1 单条 SQL 有长度上限(约 100KB)。preview_120 是 120 个汉字 ≈ 360 字节,
-# 加 chunk_id/text_id 等约 450 字节/行 → 150 行 ≈ 70KB,留足余量。
-DEFAULT_BATCH = 150
 
 # sue_graph_nodes.node_kind → 术语表的 kind(中文)。实测分布:
 #   herb 41434 / formula 26303 / syndrome 994 / book 783 / concept 30 / dynasty 6 / person 5
@@ -85,16 +74,7 @@ TERM_KINDS = ("herb", "formula", "syndrome")
 
 def ensure_tables():
     """建表一律 IF NOT EXISTS —— 重跑不重建,也绝不 DROP 任何东西。"""
-    d1r(f"""CREATE VIRTUAL TABLE IF NOT EXISTS {FTS_TABLE} USING fts5(
-             chunk_id UNINDEXED,
-             text_id  UNINDEXED,
-             vol_no   UNINDEXED,
-             body,
-             tokenize='trigram')""")
-    d1r(f"""CREATE TABLE IF NOT EXISTS {STATE_TABLE} (
-             chunk_id   TEXT PRIMARY KEY,
-             text_id    TEXT,
-             indexed_at INTEGER)""")
+    # v1 books_fts / books_fts_state are intentionally NOT created here (retired 2026-09-26).
     d1r(f"""CREATE TABLE IF NOT EXISTS {TERM_TABLE} (
              term       TEXT NOT NULL,
              kind       TEXT NOT NULL,
@@ -106,62 +86,6 @@ def ensure_tables():
     # 前缀匹配 `term LIKE '桂枝%'` 走得到这个索引(默认 BINARY collation)
     d1r(f"CREATE INDEX IF NOT EXISTS idx_{TERM_TABLE}_term ON {TERM_TABLE}(term)")
     d1r(f"CREATE INDEX IF NOT EXISTS idx_{TERM_TABLE}_kind ON {TERM_TABLE}(kind, term_len)")
-
-
-# ─────────────────────────── Phase 1 · FTS ───────────────────────────
-
-def fetch_pending(batch):
-    """拉「还没索引」的 chunk。反连接走状态表主键,不做全表扫。"""
-    return d1r(f"""SELECT c.chunk_id AS cid, c.text_id AS tid, c.vol_no AS vol, c.preview_120 AS body
-                    FROM books_text_chunks c
-                    LEFT JOIN {STATE_TABLE} s ON s.chunk_id = c.chunk_id
-                   WHERE s.chunk_id IS NULL
-                     AND c.preview_120 IS NOT NULL AND TRIM(c.preview_120) <> ''
-                   ORDER BY c.chunk_id
-                   LIMIT {int(batch)}""")
-
-
-def write_batch(rows):
-    """FTS 与状态在同一次调用里写 —— 两条语句要么都进要么都不进,不留崩溃窗口。"""
-    now = int(time.time())
-    fts_vals = ", ".join(
-        f"({q(r['cid'])}, {q(r['tid'])}, {q(r.get('vol'))}, {q(r['body'])})" for r in rows)
-    st_vals = ", ".join(f"({q(r['cid'])}, {q(r['tid'])}, {now})" for r in rows)
-    sql = (f"INSERT INTO {FTS_TABLE}(chunk_id, text_id, vol_no, body) VALUES {fts_vals}; "
-           f"INSERT OR IGNORE INTO {STATE_TABLE}(chunk_id, text_id, indexed_at) VALUES {st_vals}")
-    d1r(sql)
-    return len(sql)
-
-
-def phase_fts(batch, limit):
-    total_src = d1r("SELECT COUNT(*) AS n FROM books_text_chunks "
-                   "WHERE preview_120 IS NOT NULL AND TRIM(preview_120) <> ''")[0]["n"]
-    done0 = d1r(f"SELECT COUNT(*) AS n FROM {STATE_TABLE}")[0]["n"]
-    print(f"[FTS] 源表可索引 {total_src} 段,已索引 {done0} 段,待补 {total_src - done0} 段", flush=True)
-
-    t0, n, nb, max_sql = time.time(), 0, 0, 0
-    while True:
-        if limit and n >= limit:
-            print(f"[FTS] 达到 --limit {limit},停(本地小样本模式)", flush=True)
-            break
-        take = min(batch, limit - n) if limit else batch
-        rows = fetch_pending(take)
-        if not rows:
-            print("[FTS] 没有待索引的 chunk 了", flush=True)
-            break
-        max_sql = max(max_sql, write_batch(rows))
-        n += len(rows)
-        nb += 1
-        el = time.time() - t0
-        rate = n / el if el > 0 else 0
-        left = (total_src - done0 - n) / rate if rate > 0 else 0
-        print(f"  批 {nb:>5} · 本批 {len(rows)} · 累计 {n} · {el:.1f}s · "
-              f"{rate:.1f} 段/秒 · 预计剩余 {left/60:.1f} 分", flush=True)
-
-    el = time.time() - t0
-    print(f"[FTS] 本轮写入 {n} 段,耗时 {el:.1f}s,{n/el if el>0 else 0:.1f} 段/秒,"
-          f"最大单条 SQL {max_sql} 字节", flush=True)
-    return n, el
 
 
 # ─────────────────────── Phase 2 · 术语精确表 ───────────────────────
@@ -236,48 +160,34 @@ def phase_terms(batch):
 # ───────────────────────────── 对账 ─────────────────────────────
 
 def verify():
-    """三个数并排打。不一致就 exit 1 —— 「幂等」这句话在这里兑现或者穿帮。"""
-    src = d1r("SELECT COUNT(*) AS n FROM books_text_chunks "
-             "WHERE preview_120 IS NOT NULL AND TRIM(preview_120) <> ''")[0]["n"]
+    """Count search_terms. Exit 1 (job goes red) if the table is unreadable or empty."""
     try:
-        fts = d1r(f"SELECT COUNT(*) AS n FROM {FTS_TABLE}")[0]["n"]
-        st = d1r(f"SELECT COUNT(*) AS n FROM {STATE_TABLE}")[0]["n"]
         terms = d1r(f"SELECT COUNT(*) AS n FROM {TERM_TABLE}")[0]["n"]
         t2 = d1r(f"SELECT COUNT(*) AS n FROM {TERM_TABLE} WHERE term_len = 2")[0]["n"]
     except Exception as e:
-        print(f"[对账] 表还没建或读不到:{e}")
+        print(f"[verify] cannot read {TERM_TABLE}: {e}")
         return 1
-    print(f"[对账] 源表可索引 {src} · FTS 行 {fts} · 状态行 {st} · "
-          f"术语 {terms}(其中 2 字 {t2})", flush=True)
-    if fts != st:
-        print(f"[对账] ✗ FTS({fts}) 与状态({st}) 不一致,差 {fts - st} —— 幂等承诺穿帮,查最近一次中断")
+    print(f"[verify] {TERM_TABLE} rows {terms} (2-char {t2})", flush=True)
+    if terms <= 0:
+        print(f"[verify] FAIL: {TERM_TABLE} is empty")
         return 1
-    print(f"[对账] ✓ FTS 与状态一致;覆盖率 {st}/{src} = {st/src*100:.2f}%" if src else "")
     return 0
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--phase", choices=["fts", "terms", "all"], default="all")
-    ap.add_argument("--batch", type=int, default=DEFAULT_BATCH, help="FTS 每批行数(D1 单 SQL 长度上限约 100KB)")
     # 术语行只有 term+两个 id ≈ 80 字节,比 preview_120 短一个量级,批可以大得多
-    ap.add_argument("--term-batch", type=int, default=800, help="术语表每批行数")
-    ap.add_argument("--limit", type=int, default=0, help="本轮最多索引多少段(本地小样本试,0=全量)")
-    ap.add_argument("--verify", action="store_true", help="只对账不写")
+    ap.add_argument("--term-batch", type=int, default=800, help="rows per search_terms insert")
+    ap.add_argument("--verify", action="store_true", help="count only, no writes")
     args = ap.parse_args()
 
     if args.verify:
         sys.exit(verify())
 
     ensure_tables()
-    print("[建表] 三张表就位(IF NOT EXISTS,重跑不重建)", flush=True)
-
-    if args.phase in ("fts", "all"):
-        phase_fts(args.batch, args.limit)
-    if args.phase in ("terms", "all"):
-        phase_terms(args.term_batch)
-
-    sys.exit(verify() if not args.limit else 0)
+    print(f"[tables] {TERM_TABLE} ready (IF NOT EXISTS)", flush=True)
+    phase_terms(args.term_batch)
+    sys.exit(verify())
 
 
 if __name__ == "__main__":
