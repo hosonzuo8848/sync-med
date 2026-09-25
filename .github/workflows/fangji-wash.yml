@@ -1,0 +1,118 @@
+name: fangji-wash
+
+# Formula text extraction pilot -- thin runner only.
+# The extraction script and the source data live in a private repo; this job checks them out,
+# runs them, and pushes results back to that private repo. Nothing is written to git here.
+# Model calls go only through the internal free-pool gateway (named lanes, no fallback).
+# Logs print counts only. No artifacts are uploaded. Manual dispatch only.
+#
+# Required repository secrets (names only; values are set by the maintainer):
+#   GW_KEY              gateway key (already used by other jobs in this repo). Without it a real run
+#                       exits 1 before any call (a missing key must not look like "quota reached").
+#   FANGJI_FORGE_TOKEN  fine-grained token scoped to the private repo (FORGE_TOKEN is accepted too;
+#                       only one of the two is needed): contents read/write (release download/upload),
+#                       issues read/write (progress notes)
+# The Jev spot-check is intentionally NOT wired here: it calls a third-party endpoint directly instead of
+# the gateway. It stays off until it is routed through the gateway.
+#
+# Who sees it when it breaks: the progress Issue in the private repo (issue_number), plus GitHub failure mail.
+# Quota: when the primary extraction lane hits its window/weekly cap the script switches to fallback_lane
+# and keeps going; only when the fallback lane also fails 3 times in a row does it save a checkpoint,
+# note the Issue and exit 0; dispatch again to resume. Auth errors (401/403) never switch lanes: exit 1.
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: "batch id (release fangji-wash-<batch> holds sources and checkpoints)"
+        default: "pilot-02"
+      books:
+        description: "comma-separated book keys (manifest ids), or all"
+        default: "all"
+      chunk_size:
+        description: "chars per chunk (pilot compares 600 and 2000)"
+        default: "600"
+      concurrency:
+        description: "parallel extraction calls"
+        default: "2"
+      dry_run:
+        description: "1 = chunk statistics only, no model calls, no upload"
+        default: "1"
+      extract_lane:
+        description: "primary extraction lane"
+        default: "sn_wash_lite"
+      fallback_lane:
+        description: "extraction lane used after the primary lane hits its cap (none = stop instead)"
+        default: "zhipu_250414"
+      credit_per_char:
+        description: "estimated credits per char (calibration knob; fix after the first real run)"
+        default: "1.0"
+      cap_5h:
+        description: "estimated credit cap per pool, rolling 5 hours"
+        default: "55000"
+      cap_week:
+        description: "estimated credit cap per pool, rolling 7 days"
+        default: "550000"
+      limit_chunks:
+        description: "first N chunks per book only (0 = all; smoke test)"
+        default: "0"
+      review_rate:
+        description: "share of chunks sent to a second model for cross-check"
+        default: "0.1"
+      issue_number:
+        description: "progress issue number in the private repo (0 = open a new one)"
+        default: "1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: herb-norm-pilot   # shares a vendor account with herb-norm: never run the two at once
+  cancel-in-progress: false
+
+jobs:
+  wash:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      GW_KEY: ${{ secrets.GW_KEY }}
+      GH_TOKEN: ${{ secrets.FANGJI_FORGE_TOKEN || secrets.FORGE_TOKEN }}
+      PYTHONIOENCODING: utf-8
+      BATCH: ${{ inputs.batch }}
+      BOOKS: ${{ inputs.books }}
+      CHUNK: ${{ inputs.chunk_size }}
+      CONC: ${{ inputs.concurrency }}
+      DRY: ${{ inputs.dry_run }}
+      EXTRACT_LANE: ${{ inputs.extract_lane }}
+      FALLBACK_LANE: ${{ inputs.fallback_lane }}
+      CREDIT_PER_CHAR: ${{ inputs.credit_per_char }}
+      CAP_5H: ${{ inputs.cap_5h }}
+      CAP_WEEK: ${{ inputs.cap_week }}
+      LIMIT_CHUNKS: ${{ inputs.limit_chunks }}
+      REVIEW_RATE: ${{ inputs.review_rate }}
+      ISSUE_NUMBER: ${{ inputs.issue_number }}
+    steps:
+      - uses: actions/checkout@v4          # this repo: shared gateway client scripts/content_factory/_ai.py
+      - uses: actions/checkout@v4
+        with:
+          repository: hosonzuo8848/sueai-forge
+          token: ${{ secrets.FANGJI_FORGE_TOKEN || secrets.FORGE_TOKEN }}
+          path: forge
+          sparse-checkout: fangji_wash
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q zhconv "setuptools<81"
+      - name: selftest (gateway stubbed)
+        run: python forge/fangji_wash/wash.py --selftest
+      - name: run
+        run: |
+          extra=""
+          if [ "$DRY" = "1" ]; then extra="--dry-run"; fi
+          python forge/fangji_wash/wash.py --batch "$BATCH" --books "$BOOKS" --chunk-size "$CHUNK" \
+            --concurrency "$CONC" --ai-lib scripts/content_factory --deadline-min 270 \
+            --extract-lane "$EXTRACT_LANE" --fallback-lane "$FALLBACK_LANE" \
+            --credit-per-char "$CREDIT_PER_CHAR" --cap-5h "$CAP_5H" --cap-week "$CAP_WEEK" \
+            --limit-chunks "$LIMIT_CHUNKS" --review-rate "$REVIEW_RATE" \
+            --issue --issue-number "$ISSUE_NUMBER" $extra
