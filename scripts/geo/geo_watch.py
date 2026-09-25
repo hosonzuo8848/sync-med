@@ -30,7 +30,11 @@ def gh(method, path, body=None):
 def counts(days_from, days_to):
     w = "created_at >= strftime('%%s','now') - %d*86400 AND created_at < strftime('%%s','now') - %d*86400" % (days_from, days_to)
     fetch = d1("SELECT bot_name, COUNT(*) n FROM page_view_log WHERE %s AND bot_name IN (%s) GROUP BY 1 ORDER BY n DESC" % (w, inl(AI_FETCH)))
-    train = d1("SELECT bot_name, COUNT(*) n FROM page_view_log WHERE %s AND bot_name IN (%s) GROUP BY 1 ORDER BY n DESC" % (w, inl(AI_TRAIN)))
+    # 2026-09-26: bots outside AI_FETCH are counted per UTC day in page_view_bot_daily (guyaofang-web migration 069)
+    # instead of one page_view_log row each; page_view_log still holds their rows from before that change, so add both.
+    train = d1("SELECT bot_name, SUM(n) n FROM (SELECT bot_name, COUNT(*) n FROM page_view_log WHERE %s AND bot_name IN (%s) GROUP BY 1"
+               " UNION ALL SELECT bot_name, SUM(n) n FROM page_view_bot_daily WHERE day > date('now','-%d days') AND day <= date('now','-%d days')"
+               " AND bot_name IN (%s) GROUP BY 1) GROUP BY 1 ORDER BY n DESC" % (w, inl(AI_TRAIN), days_from, days_to, inl(AI_TRAIN)))
     refs = d1("SELECT ref_class, COUNT(*) n FROM page_view_log WHERE %s AND ua_class <> 'bot' AND ref_class IN (%s) GROUP BY 1 ORDER BY n DESC" % (w, inl(AI_REF)))
     top = d1("SELECT path, COUNT(*) n FROM page_view_log WHERE %s AND bot_name IN (%s) GROUP BY 1 ORDER BY n DESC LIMIT 20" % (w, inl(AI_FETCH)))
     humans = d1("SELECT COUNT(*) n FROM page_view_log WHERE %s AND ua_class <> 'bot'" % w)[0]["n"]
