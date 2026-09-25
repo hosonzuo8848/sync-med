@@ -51,7 +51,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  FORGE_REPO: hosonzuo/sueai-forge
+  FORGE_REPO: hosonzuo8848/sueai-forge   # 2026-09-26: private repo consolidated to the core account; FANGJI_FORGE_TOKEN only reaches this one
   # Totals per 123 ACCOUNT across all shards (each shard uses total / shards).
   # file/list is hard-limited to 3/s per account and shared with the site,
   # pan-register and the inventory job; measured write ceiling ~9 pages/s/account.
