@@ -7,6 +7,8 @@
   file/list has a hard 3 req/s per ACCOUNT limit shared by every consumer of
   that account, so the defaults stay well below it.
 - The body code is always checked, never just the HTTP status:
+    no answer / not JSON (5xx page) network hiccup -> the same call is retried in place
+                                   after NET_BACKOFF (2, 5, 15 s), then PanError("net")
     401                            token pushed out by a newer login -> on_401 / TokenInvalid
                                    (checked first: its text says "exceeded the limit")
     429 or the "too frequent" text rate limited -> back off, retry
@@ -15,6 +17,11 @@
   code raise Tripped, and the shard stops. Typical causes: code=1 on every
   write (123 account-level write ban; reads keep working) or rate limiting that
   outlasts every retry. Hammering on only extends the ban.
+- Every failed attempt is counted by kind (net, http<status>, 401, 429, api<code>)
+  into the calling thread's `tl.sink` Counter, so run.py can book it per volume.
+- No instant-upload probe: 318 probes in the first 20-volume run found 0 hits,
+  and each miss leaves an unfinished pre-upload session on 123. A page whose
+  upload may have landed is simply sent again (duplicate=2 overwrites).
 """
 import collections
 import hashlib
@@ -26,6 +33,7 @@ import requests
 API = "https://open-api.123pan.com"
 RATE_WORD = "\u9891\u7e41"          # "too frequent" in 123's rate-limit message
 BREAK_AFTER = 5
+NET_BACKOFF = (2, 5, 15)            # seconds before each retry of a call that got no usable answer
 SLEEP = time.sleep                  # selftest swaps in a no-op
 
 
@@ -82,6 +90,7 @@ class Pan:
         self.s = requests.Session()
         self.max_rate_retry = max_rate_retry
         self.stats = collections.Counter()
+        self.tl = threading.local()     # tl.sink: Counter of failed attempts for the thread's current book
         self.streak = {}                # class -> [code, consecutive failures]
         self._lists = {}
         self._dom = None
@@ -89,6 +98,11 @@ class Pan:
         self._mk_locks = collections.defaultdict(threading.Lock)
 
     # ---- transport -------------------------------------------------------
+    def _note(self, kind):
+        sink = getattr(self.tl, "sink", None)
+        if sink is not None:
+            sink[kind] += 1
+
     def _fail(self, cls, where, code):
         with self._lock:
             s = self.streak.setdefault(cls, [None, 0])
@@ -108,14 +122,19 @@ class Pan:
             self.lim[cls].wait()
             self.stats["call_" + cls] += 1
             tok = self.token
+            r = None
             try:
-                j = self.s.request(method, url, timeout=timeout, headers={
-                    "Platform": "open_platform", "Authorization": "Bearer " + tok}, **kw).json()
+                r = self.s.request(method, url, timeout=timeout, headers={
+                    "Platform": "open_platform", "Authorization": "Bearer " + tok}, **kw)
+                j = r.json()
             except Exception:                                   # noqa: BLE001
+                # no answer at all, or an answer that is not JSON (a 5xx page):
+                # retry this very call (this page) in place, never the whole volume
+                self._note("net" if r is None else "http%s" % getattr(r, "status_code", ""))
                 net_fail += 1
-                if net_fail >= 3:
+                if net_fail > len(NET_BACKOFF):
                     self._fail(cls, where, "net")
-                SLEEP(3 * net_fail)
+                SLEEP(NET_BACKOFF[net_fail - 1])
                 continue
             code = j.get("code")
             if code == 0:
@@ -124,6 +143,7 @@ class Pan:
                 return j.get("data") or {}
             if code == 401:
                 self.stats["token_401"] += 1
+                self._note("401")
                 new = None if renewed or not self.on_401 else self.on_401(tok)
                 if not new:
                     raise TokenInvalid(where)
@@ -132,10 +152,12 @@ class Pan:
             if code == 429 or RATE_WORD in str(j.get("message", "")):
                 rate_hit += 1
                 self.stats["rate_limited"] += 1
+                self._note("429")
                 if rate_hit > self.max_rate_retry:
                     self._fail(cls, where, 429)
                 SLEEP(min(60, 2 ** rate_hit))
                 continue
+            self._note("api%s" % code)
             self._fail(cls, where, code)
 
     # ---- read ------------------------------------------------------------
@@ -223,26 +245,11 @@ class Pan:
             self._dom = dom
         return dom
 
-    def upload(self, dir_id, name, data, try_reuse=False):
-        """Upload one small file; overwrite a same-name file (duplicate=2).
-        try_reuse probes instant upload first (one extra call on the same quota);
-        the caller turns it on only for retries. Returns "reuse" or "up"."""
+    def upload(self, dir_id, name, data):
+        """Upload one small file in one step; overwrite a same-name file (duplicate=2)."""
         etag = hashlib.md5(data).hexdigest()
-        if try_reuse:
-            try:
-                d = self._call("up", "POST", API + "/upload/v2/file/create", "create",
-                               json={"parentFileID": int(dir_id), "filename": name, "etag": etag,
-                                     "size": len(data), "duplicate": 2, "containDir": False})
-                if d.get("reuse"):
-                    self.stats["reuse"] += 1
-                    return "reuse"
-            except PanError as e:
-                if isinstance(e, Tripped) or e.code == 429:
-                    raise
-                # probe refused for another reason -> plain upload below
         self._call("up", "POST", self._domain() + "/upload/v2/file/single/create", "single",
                    files={"file": (name, data, "application/octet-stream")},
                    data={"parentFileID": str(dir_id), "filename": name, "etag": etag,
                          "size": str(len(data)), "duplicate": "2"}, timeout=300)
         self.stats["uploaded"] += 1
-        return "up"
