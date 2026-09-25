@@ -9,7 +9,7 @@ name: webp-convert
 #   prep     selftest (stubbed) -> in-flight cap + shard matrix -> shared token
 #            (logs in only when the stored token is missing / expiring / revoked;
 #            stops when data/webp/accounts.json names another uid for an account)
-#   convert  one job per shard, at most 5 at once in this repo. On 401 a shard
+#   convert  one job per shard, at most 8 at once in this repo. On 401 a shard
 #            re-reads the token file; only shard 0 may log in again, once.
 #            Stops starting books at 320 min, stops in-flight books at 335 min,
 #            writes its ledger/stats to the private repo. Exit 1 on token loss or
@@ -61,8 +61,9 @@ env:
   WEBP_MISC_QPS: '1'
   # 123 red line: <= 20 uploads in flight per account, all writers and all repos
   # together (2026-07-02: ~60 in flight -> account-wide write ban for 2.5 h).
-  # One run here may use 10; with more repos on one account split the 20.
-  WEBP_MAX_INFLIGHT: '10'
+  # One run here may use 16 (80% of 20, CTO 2026-09-26); the other 4 stay free
+  # for sync and other writers. With more repos on one account split the 20.
+  WEBP_MAX_INFLIGHT: '16'
   # Direct-link downloads draw on the paid 123 traffic package the site serves
   # images from. Off until approved; then '1' plus PAN_UID_* / PAN_DIRECT_KEY_*.
   WEBP_DIRECT: '0'
@@ -109,7 +110,7 @@ jobs:
     timeout-minutes: 350
     strategy:
       fail-fast: false
-      max-parallel: 5          # this repo also runs sync / pan-register / sentinels
+      max-parallel: 8          # 8 x 2 = WEBP_MAX_INFLIGHT; the account's other 12 job slots stay for sync / sentinels
       matrix:
         shard: ${{ fromJSON(needs.prep.outputs.shards) }}
     steps:

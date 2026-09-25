@@ -27,7 +27,7 @@ in again, once per run, storing the token only if the file is unchanged since
 read. Otherwise the shard stops with exit 1.
 
 Uploads in flight per account must stay under 123's red line of 20 (all writers
-together): shards x concurrency <= WEBP_MAX_INFLIGHT (default 10) per run.
+together): shards x concurrency <= WEBP_MAX_INFLIGHT (default 16) per run.
 
 Checkpoint: per-book ledger rows go to data/webp/ledger/ in the private repo
 (book_id, target account, numbers only). Rows with status=ok for the same target
@@ -38,6 +38,7 @@ Logs print counters only: no titles, no paths, no book ids, no tokens.
 """
 import argparse
 import base64
+import collections
 import csv
 import glob
 import hashlib
@@ -77,8 +78,11 @@ ACCOUNTS_PATH = "data/webp/accounts.json"
 LEDGER_DIR = "data/webp/ledger"
 STATS_DIR = "data/webp/stats"
 MIN_TOKEN_LIFE = 8 * 3600
-LEDGER_COLS = ["book_id", "target", "status", "pages_expected", "pages_uploaded", "pages_reused",
-               "pages_present", "dst_dir_id", "seconds", "attempts", "err"]
+# fails: every failed attempt of this volume by kind, e.g. "net:2 429:1 download:1"
+# (net / http<status> / 401 / 429 / api<code> from pan.py; download / verify /
+# src_missing / badname / <ExceptionName> from here)
+LEDGER_COLS = ["book_id", "target", "status", "pages_expected", "pages_uploaded",
+               "pages_present", "dst_dir_id", "seconds", "attempts", "err", "fails"]
 ISSUE_TITLE = "\u4e91\u7aef\u8f6c\u56fe\u8fdb\u5ea6"   # progress issue title (zh)
 RETRY_SLEEP = 5
 RENEW_TRIES, RENEW_WAIT = 6, 20     # a shard waits up to ~2 min for a refreshed token
@@ -325,7 +329,7 @@ def check_inflight(shards, conc):
     repos together (2026-07-02: ~60 in flight -> account-wide write ban 2.5 h).
     One run gets WEBP_MAX_INFLIGHT of them; each book thread uploads one page
     at a time, so in flight = shards x concurrency."""
-    cap = int(os.environ.get("WEBP_MAX_INFLIGHT", "10"))
+    cap = int(os.environ.get("WEBP_MAX_INFLIGHT", "16"))
     if shards < 1 or conc < 1 or shards * conc > cap:
         sys.exit("shards x concurrency = %d x %d exceeds WEBP_MAX_INFLIGHT=%d" % (shards, conc, cap))
 
@@ -417,6 +421,7 @@ class Ctx:
         self.why = ""
         self.lock = threading.Lock()
         self.counts = {"src_direct": 0, "src_api": 0}
+        self.fails = collections.Counter()              # failed attempts by kind, whole shard
         self.direct_fail = {}
 
     def halt(self, why):
@@ -463,7 +468,9 @@ def present_pages(tgt, dst_id):
             if f["type"] == 0 and PAGE_RE.match(f["name"])}
 
 
-def _do_book(ctx, row, rec, attempt=1):
+def _do_book(ctx, row, rec, st):
+    """One attempt at one volume. st = {"td": temp dir, "pdf": open doc or None}
+    lives across attempts, so a retry never downloads the source again."""
     a = ctx.a
     # the reader and the D1 registration key volume folders by book_id
     if row["dst_path"].rstrip("/").rpartition("/")[2].split(" ", 1)[0] != row["book_id"]:
@@ -485,55 +492,48 @@ def _do_book(ctx, row, rec, attempt=1):
             raise NoRetry("src_missing")
         rec["status"] = "dry"
         return
-    with tempfile.TemporaryDirectory() as td:
-        doc = None
-        try:
-            # source first: a broken source must not leave an empty folder on 123
-            if stype == "pdf":
-                pdf = os.path.join(td, "src.pdf")
-                fid = int(row["src_file_id"]) if (row.get("src_file_id") or "").strip() else None
-                ctx.fetch(src_acct, row["src_path"], fid, pdf)
-                import fitz
-                doc = fitz.open(pdf)
-                if not (doc.is_pdf and doc.page_count > 0):
-                    raise IOError("download")           # e.g. an HTML error page saved as .pdf
-                total = doc.page_count
-
-                def make(i):
-                    return pdf_page_webp(doc, i - 1)
-            else:
-                imgs = list_images(src, row["src_path"])
-                if not imgs:
-                    raise NoRetry("src_missing")
-                total = len(imgs)
-
-                def make(i):
-                    from PIL import Image
-                    p = os.path.join(td, "img")
-                    f = imgs[i - 1]
-                    ctx.fetch(src_acct, row["src_path"].rstrip("/") + "/" + f["name"], f["id"], p,
-                              f["size"])
-                    with Image.open(p) as im:
-                        return to_webp(im)
-            dst_id = tgt.walk(row["dst_path"], create=True)
-            rec["dst_dir_id"] = dst_id
-            existing = present_pages(tgt, dst_id)
-            want = min(total, a.limit_pages) if a.limit_pages else total
-            rec["pages_expected"] = want
-            # first pass: the bytes are new, so an instant-upload probe would only
-            # double the calls on the upload quota; retries probe (a lost upload
-            # may already sit in the account)
-            reuse = attempt > 1 and not a.no_reuse
-            for i in range(1, want + 1):
-                if ctx.stop.is_set():
-                    raise Stopped()
-                if page_name(i) in existing:
-                    continue
-                how = tgt.upload(dst_id, page_name(i), make(i), try_reuse=reuse)
-                rec["pages_reused" if how == "reuse" else "pages_uploaded"] += 1
-        finally:
-            if doc is not None:
+    # source first: a broken source must not leave an empty folder on 123
+    if stype == "pdf":
+        if st["pdf"] is None:                           # one good download per volume
+            import fitz
+            pdf = os.path.join(st["td"], "src.pdf")
+            fid = int(row["src_file_id"]) if (row.get("src_file_id") or "").strip() else None
+            ctx.fetch(src_acct, row["src_path"], fid, pdf)
+            doc = fitz.open(pdf)
+            if not (doc.is_pdf and doc.page_count > 0):
                 doc.close()
+                raise IOError("download")               # e.g. an HTML error page saved as .pdf
+            st["pdf"] = doc
+        doc = st["pdf"]
+        total = doc.page_count
+
+        def make(i):
+            return pdf_page_webp(doc, i - 1)
+    else:
+        imgs = list_images(src, row["src_path"])
+        if not imgs:
+            raise NoRetry("src_missing")
+        total = len(imgs)
+
+        def make(i):
+            from PIL import Image
+            p = os.path.join(st["td"], "img")
+            f = imgs[i - 1]
+            ctx.fetch(src_acct, row["src_path"].rstrip("/") + "/" + f["name"], f["id"], p, f["size"])
+            with Image.open(p) as im:
+                return to_webp(im)
+    dst_id = tgt.walk(row["dst_path"], create=True)
+    rec["dst_dir_id"] = dst_id
+    existing = present_pages(tgt, dst_id)
+    want = min(total, a.limit_pages) if a.limit_pages else total
+    rec["pages_expected"] = want
+    for i in range(1, want + 1):
+        if ctx.stop.is_set():
+            raise Stopped()
+        if page_name(i) in existing:
+            continue
+        tgt.upload(dst_id, page_name(i), make(i))
+        rec["pages_uploaded"] += 1
     present = present_pages(tgt, dst_id)
     rec["pages_present"] = sum(1 for i in range(1, want + 1) if page_name(i) in present)
     if rec["pages_present"] != want:
@@ -545,36 +545,57 @@ def process_book(ctx, row):
     t0 = time.time()
     rec = dict.fromkeys(LEDGER_COLS, 0)
     rec.update(book_id=row["book_id"], target=ctx.a.target, status="fail", dst_dir_id="", err="")
-    for attempt in range(1, 4):
-        rec["attempts"] = attempt
-        try:
-            _do_book(ctx, row, rec, attempt)
-            rec["err"] = ""
-            break
-        except panmod.TokenInvalid:
-            rec.update(status="fail", err="token")
-            ctx.halt("token")
-            break
-        except panmod.Tripped as e:
-            rec.update(status="fail", err="pan_%s" % e.code)
-            ctx.halt("breaker")
-            break
-        except Stopped:
-            rec.update(status="fail", err="stopped")
-            break
-        except NoRetry as e:
-            rec.update(status="fail", err=str(e))
-            break
-        except panmod.PanError as e:
-            rec.update(status="fail", err="pan_%s" % e.code)
-        except Exception as e:                          # noqa: BLE001
-            rec.update(status="fail", err=(str(e) if isinstance(e, IOError) and str(e) in
-                                           ("download", "verify") else type(e).__name__)[:30])
-        if attempt < 3 and not ctx.stop.is_set():
-            time.sleep(RETRY_SLEEP * attempt)
-        elif ctx.stop.is_set():
-            break
+    fails = collections.Counter()
+    for p in ctx.pans.values():
+        p.tl.sink = fails                               # this thread works on this volume only
+    try:
+        with tempfile.TemporaryDirectory() as td:
+            st = {"td": td, "pdf": None}
+            for attempt in range(1, 4):
+                rec["attempts"] = attempt
+                try:
+                    _do_book(ctx, row, rec, st)
+                    rec["err"] = ""
+                    break
+                except panmod.TokenInvalid:
+                    rec.update(status="fail", err="token")
+                    ctx.halt("token")
+                    break
+                except panmod.Tripped as e:
+                    rec.update(status="fail", err="pan_%s" % e.code)
+                    ctx.halt("breaker")
+                    break
+                except Stopped:
+                    rec.update(status="fail", err="stopped")
+                    break
+                except NoRetry as e:
+                    rec.update(status="fail", err=str(e))
+                    fails[str(e)] += 1
+                    break
+                except panmod.PanError as e:
+                    rec.update(status="fail", err="pan_%s" % e.code)
+                    if e.code == "net":
+                        # the call was already retried in place (NET_BACKOFF); the volume
+                        # stops here and the next dispatch resumes at the missing pages
+                        break
+                except Exception as e:                  # noqa: BLE001
+                    err = (str(e) if isinstance(e, IOError) and str(e) in ("download", "verify")
+                           else type(e).__name__)[:30]
+                    rec.update(status="fail", err=err)
+                    fails[err] += 1
+                if attempt < 3 and not ctx.stop.is_set():
+                    time.sleep(RETRY_SLEEP * attempt)
+                elif ctx.stop.is_set():
+                    break
+            if st["pdf"] is not None:
+                st["pdf"].close()
+    finally:
+        for p in ctx.pans.values():
+            p.tl.sink = None
     rec["seconds"] = int(time.time() - t0)
+    rec["fails"] = " ".join("%s:%d" % kv for kv in sorted(fails.items()))
+    with ctx.lock:
+        ctx.fails.update(fails)
     return rec
 
 
@@ -667,8 +688,8 @@ def cmd_run(a):
              "books_done": len(ledger.rows), "books_deferred": len(todo) - len(ledger.rows),
              "concurrency": a.concurrency, "stop": ctx.why or "-",
              "pages_uploaded": sum(r["pages_uploaded"] for r in ledger.rows),
-             "pages_reused": sum(r["pages_reused"] for r in ledger.rows),
-             "dry": a.dry_run, "limit_pages": a.limit_pages, **ctx.counts, **calls}
+             "dry": a.dry_run, "limit_pages": a.limit_pages, **ctx.counts, **calls,
+             **{"fail_" + k: v for k, v in ctx.fails.items()}}
     forge.write("%s/%s.json" % (STATS_DIR, tag), json.dumps(stats, indent=1).encode(), "webp: stats")
     print("end " + " ".join("%s=%s" % kv for kv in sorted(stats.items())), flush=True)
     # a deadline stop is the normal end of a long run; token / breaker stops are not
@@ -692,7 +713,7 @@ def cmd_summary(a):
     ok = sum(1 for v in last.values() if v == "ok")
     fail = sum(1 for v in last.values() if v == "fail")
     up = sum(r.get("pages_uploaded", 0) for r in runs)
-    reuse = sum(r.get("pages_reused", 0) for r in runs)
+    fails = sum(v for r in runs for k, v in r.items() if k.startswith("fail_"))
     wall = max([r.get("wall_s", 0) for r in runs] or [0])
     rate = sum(v for r in runs for k, v in r.items() if k.endswith("rate_limited"))
     stops = ",".join(sorted({r.get("stop", "-") for r in runs})) or "-"
@@ -701,9 +722,9 @@ def cmd_summary(a):
          "| %s | %d | %d | %d | %d | %d |" % (a.target, len(ids), ok, fail,
                                            sum(1 for v in last.values() if v == "limit"), len(ids) - ok),
          "", "**\u672c\u6b21\u8fd0\u884c** run %s \u00b7 \u5206\u7247 %d \u00b7 "
-         "\u4e0a\u4f20\u9875 %d \u00b7 \u79d2\u4f20\u9875 %d \u00b7 wall %ds \u00b7 "
+         "\u4e0a\u4f20\u9875 %d \u00b7 \u4e2d\u9014\u5931\u8d25 %d \u00b7 wall %ds \u00b7 "
          "\u6bcf\u79d2\u9875\u6570 %.2f \u00b7 \u9650\u6d41\u6b21\u6570 %d \u00b7 stop %s"
-         % (run_id, len(runs), up, reuse, wall, (up + reuse) / wall if wall else 0, rate, stops),
+         % (run_id, len(runs), up, fails, wall, up / wall if wall else 0, rate, stops),
          "", "\u66f4\u65b0\u4e8e %s UTC" % datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")]
     body = "\n".join(L)
     print(body.encode("ascii", "backslashreplace").decode(), flush=True)
@@ -725,8 +746,8 @@ class _FakeResp:
 
 
 class _FakeCloud:
-    """In-memory 123: folders, paginated listing, trash flag, instant upload by
-    md5, and fault injection (429 once, dead tokens, lost uploads, write ban)."""
+    """In-memory 123: folders, paginated listing, trash flag, and fault injection
+    (429 once, dead tokens, lost uploads, dropped connections, write ban)."""
 
     def __init__(self):
         self.nodes = {0: {"name": "", "type": 1, "parent": None}}
@@ -736,8 +757,9 @@ class _FakeCloud:
         self.calls = {}
         self.dead = set()          # tokens answered with 401
         self.drop = {}             # (book_id, filename) -> single uploads to swallow
+        self.net_drop = {}         # (book_id, filename) -> single uploads whose connection breaks
         self.ban_writes = False    # code=1 on every write, like 123's account-level ban
-        self.up_log = []           # (book_id, filename) of every create/single call
+        self.up_log = []           # (book_id, filename) of every single upload that arrived
         self.lock = threading.Lock()
 
     def add(self, parent, name, data=None, trashed=0):
@@ -779,7 +801,7 @@ class _FakeCloud:
             self.fail_once[ep] -= 1
             return _FakeResp({"code": 429, "message": "too frequent"})
         p, j, d = kw.get("params") or {}, kw.get("json") or {}, kw.get("data") or {}
-        if self.ban_writes and ep.endswith(("/file/mkdir", "/file/create", "/single/create")):
+        if self.ban_writes and ep.endswith(("/file/mkdir", "/single/create")):
             return _FakeResp({"code": 1, "message": "denied"})
         if ep.endswith("/api/v2/file/list"):
             rest = [(i, n) for i, n in self.kids(int(p["parentFileId"])) if i > int(p["lastFileId"])]
@@ -795,18 +817,15 @@ class _FakeCloud:
             return _FakeResp({"code": 0, "data": {"dirID": self.add(int(j["parentID"]), j["name"])}})
         if ep.endswith("/file/domain"):
             return _FakeResp({"code": 0, "data": ["fake://up"]})
-        if ep.endswith("/file/create"):
-            self._log(int(j["parentFileID"]), j["filename"])
-            src = next((n for n in self.nodes.values()
-                        if n.get("data") and hashlib.md5(n["data"]).hexdigest() == j["etag"]), None)
-            if src:
-                self._put(int(j["parentFileID"]), j["filename"], src["data"])
-                return _FakeResp({"code": 0, "data": {"reuse": True, "fileID": self.next_id}})
-            return _FakeResp({"code": 0, "data": {"reuse": False, "preuploadID": "x"}})
         if ep.endswith("/single/create"):
             name, data = kw["files"]["file"][0], kw["files"]["file"][1]
             assert hashlib.md5(data).hexdigest() == d["etag"]
-            key = self._log(int(d["parentFileID"]), name)
+            parent = int(d["parentFileID"])
+            key = (self.nodes[parent]["name"].split(" ")[0], name)
+            if self.net_drop.get(key):
+                self.net_drop[key] -= 1
+                raise ConnectionError("connection reset")     # no answer at all
+            self._log(parent, name)
             if self.drop.get(key):
                 self.drop[key] -= 1                    # "success" that never lands
                 return _FakeResp({"code": 0, "data": {"completed": True, "fileID": 1}})
@@ -862,7 +881,8 @@ def selftest():
     # sources: a 2-page PDF, a different 3-page PDF, an HTML error page, 3 JPGs 1/2/10
     pdf_bytes, pdf3 = make_pdf(2, "page"), make_pdf(3, "other")
     cat = cloud.mkpath("/SRC/lib/cat")
-    cloud.add(cat, "Book One secret title.pdf", pdf_bytes)
+    book1_url = "fake://%d" % cloud.add(cat, "Book One secret title.pdf", pdf_bytes)
+    net_urls = ["fake://%d" % cloud.add(cat, "Net%d secret.pdf" % k, make_pdf(3, "net%d" % k)) for k in (1, 2)]
     cloud.add(cat, "Other secret.pdf", pdf3)
     cloud.add(cat, "Html secret.pdf", b"<html><body>error page</body></html>")
     trunc_id = cloud.add(cat, "Trunc secret.pdf", pdf3)
@@ -901,6 +921,8 @@ def selftest():
                    book("tst-0011-01", S + "Other secret.pdf", "tst-0011-01 Kicked secret")],
         "t4.csv": [book("tst-00%d-01" % k, S + "Other secret.pdf", "tst-00%d-01 Ban secret" % k)
                    for k in (12, 13, 14)],
+        "t5.csv": [book("tst-00%d-01" % k, S + "Net%d secret.pdf" % (k - 14), "tst-00%d-01 Net secret" % k)
+                   for k in (15, 16)],
     }
     for fn, rows in lists.items():
         with open(os.path.join(forge_root, "data", "webp", fn), "w", encoding="utf-8", newline="") as f:
@@ -927,9 +949,12 @@ def selftest():
         p.s = cloud
         return p
 
+    dl_log = []                                         # every source download, by url
+
     def fake_download(url, dest):
         if not url.startswith("fake://"):
             return False
+        dl_log.append(url)
         data = cloud.nodes[int(url[7:])]["data"]
         with open(dest, "wb") as f:
             f.write(data[:len(data) // 2] if int(url[7:]) == trunc_id else data)
@@ -1005,17 +1030,19 @@ def selftest():
     check("run1: book 1 has page_0001..0002", sorted(p1) == ["page_0001.webp", "page_0002.webp"])
     check("run1: existing page_0001 kept byte-for-byte, never uploaded",
           p1.get("page_0001.webp") == seed and ups("tst-0001-01", "page_0001.webp") == 0)
-    check("run1: page_0002 sent once, one 429 absorbed, no probe on first pass",
+    check("run1: page_0002 sent once, one 429 absorbed, no probe",
           ups("tst-0001-01", "page_0002.webp") == 1
           and cloud.calls.get("/upload/v2/file/single/create") == 2
           and not cloud.calls.get("/upload/v2/file/create"))
     check("run1: pages are real webp",
           all(Image.open(io.BytesIO(b)).format == "WEBP" for b in p1.values()))
     check("run1: only book 1 processed", "progress 1/1 ok=1" in out_a)
+    fails_429 = rows_of()["tst-0001-01"]["fails"]
 
     # 4. resume: book 1 skipped by ledger; 2 = jpg; 3 = one upload silently lost
-    #    (verify must catch it, the retry probes instant upload); 4 = missing source
+    #    (verify must catch it, the retry re-sends that page); 4 = missing source
     cloud.drop[("tst-0003-01", "page_0002.webp")] = 1
+    del dl_log[:]
     out_b, code = shard("--concurrency", "2")
     p2 = cloud.pages(D + "tst-0002-01 Jpg secret title")
     p3 = cloud.pages(D + "tst-0003-01 Same bytes secret")
@@ -1024,9 +1051,11 @@ def selftest():
     check("run2: jpg natural order 1,2,10",
           [Image.open(io.BytesIO(p2["page_%04d.webp" % i])).convert("RGB").getpixel((5, 5))[k] > 150
            for i, k in ((1, 0), (2, 1), (3, 2))] == [True, True, True])
-    check("run2: lost upload caught by verify, retry fills it by instant upload",
-          len(p3) == 2 and led["tst-0003-01"]["status"] == "ok"
-          and led["tst-0003-01"]["attempts"] == "2" and led["tst-0003-01"]["pages_reused"] == "1")
+    check("run2: lost upload caught by verify; the retry re-sends only that page, no 2nd download",
+          len(p3) == 2 and led["tst-0003-01"]["status"] == "ok" and led["tst-0003-01"]["attempts"] == "2"
+          and ups("tst-0003-01", "page_0002.webp") == 2 and ups("tst-0003-01", "page_0001.webp") == 1
+          and dl_log.count(book1_url) == 1)
+    fails_verify = led["tst-0003-01"]["fails"]
     check("run2: missing source -> fail src_missing, no folder left behind",
           led["tst-0004-01"]["err"] == "src_missing" and "ok=2" in out_b
           and cloud.find(D + "tst-0004-01 Missing secret title") is None)
@@ -1058,6 +1087,7 @@ def selftest():
     check("source: an HTML page saved as .pdf is a failed download, nothing uploaded",
           led["tst-0007-01"]["err"] == "download" and ups("tst-0007-01") == 0
           and cloud.find(D + "tst-0007-01 Html secret") is None)
+    fails_download = led["tst-0007-01"]["fails"]
     check("source: a download shorter than the listed size is a failed download",
           led["tst-0008-01"]["err"] == "download" and ups("tst-0008-01") == 0)
     check("name: folder not starting with book_id -> badname, no folder created",
@@ -1090,11 +1120,11 @@ def selftest():
           and "stop=breaker" in out_z and "tst-0014-01" not in rows_of())
 
     # 11. in-flight cap and matrix
-    out_m, code_m = run("matrix", "--shards", "5", "--concurrency", "2")
-    _, code_m2 = run("matrix", "--shards", "6", "--concurrency", "2")
-    _, code_m3 = shard("--concurrency", "11", dry=1)
-    check("inflight: 5x2 ok, 6x2 and 1x11 refused (cap 10)",
-          code_m == 0 and "shards=[0, 1, 2, 3, 4]" in out_m and code_m2 == 1 and code_m3 == 1)
+    out_m, code_m = run("matrix", "--shards", "8", "--concurrency", "2")
+    _, code_m2 = run("matrix", "--shards", "9", "--concurrency", "2")
+    _, code_m3 = shard("--concurrency", "17", dry=1)
+    check("inflight: 8x2 ok, 9x2 and 1x17 refused (cap 16)",
+          code_m == 0 and "shards=[0, 1, 2, 3, 4, 5, 6, 7]" in out_m and code_m2 == 1 and code_m3 == 1)
 
     # 12. @event keeps the list name out of the command line
     ev = os.path.join(td, "event.json")
@@ -1123,6 +1153,30 @@ def selftest():
         o, _ = shard("--force", s=s, n=3, dry=1)
         got.append(int(re.search(r"mine=(\d+)", o).group(1)))
     check("shards: 3 shards split 4 books", sum(got) == 4)
+
+    # 19. network hiccups: the call is retried in place after 2 / 5 / 15 s; a
+    #     volume is never restarted or downloaded again for them; nothing ever
+    #     probes instant upload; every failed attempt is booked by kind
+    sleeps = []
+    panmod.SLEEP = sleeps.append
+    cloud.net_drop[("tst-0015-01", "page_0002.webp")] = 3      # absorbed by the 3 retries
+    cloud.net_drop[("tst-0016-01", "page_0002.webp")] = 4      # outlasts them
+    del dl_log[:]
+    out_n, code_n = shard("--concurrency", "1", lst="t5.csv")
+    panmod.SLEEP = lambda s: None
+    led = rows_of()
+    n15, n16 = led["tst-0015-01"], led["tst-0016-01"]
+    check("net: 3 drops on one page are retried in place after 2/5/15 s, volume ok at attempt 1",
+          n15["status"] == "ok" and n15["attempts"] == "1" and sleeps[:3] == [2, 5, 15]
+          and len(cloud.pages(D + "tst-0015-01 Net secret")) == 3)
+    check("net: a 4th drop stops the volume (pan_net) with no restart and no 2nd download",
+          n16["err"] == "pan_net" and n16["attempts"] == "1" and dl_log.count(net_urls[1]) == 1
+          and sorted(cloud.pages(D + "tst-0016-01 Net secret")) == ["page_0001.webp"] and code_n == 0)
+    check("probe: no instant-upload probe in any run, so no unfinished pre-upload sessions",
+          not cloud.calls.get("/upload/v2/file/create"))
+    check("fails: every failed attempt is booked by kind in the ledger and in the stats",
+          (fails_429, fails_verify, fails_download, n15["fails"], n16["fails"])
+          == ("429:1", "verify:1", "download:3", "net:3", "net:4") and "fail_net=7" in out_n)
 
     # 15. logs never leak titles / paths / ids / tokens
     alllog = "".join(logs)
@@ -1202,7 +1256,6 @@ def build_parser():
         p.add_argument("--stop-min", type=float, default=335,
                        help="stop in-flight books at their next page (job timeout is 350)")
         p.add_argument("--force", action="store_true", help="ignore ok rows in the ledger")
-        p.add_argument("--no-reuse", action="store_true", help="never probe instant upload")
         # totals per ACCOUNT across all shards; each shard gets total/shards
         p.add_argument("--list-qps", type=float, default=float(os.environ.get("WEBP_LIST_QPS", 1)))
         p.add_argument("--dl-qps", type=float, default=float(os.environ.get("WEBP_DL_QPS", 2)))
