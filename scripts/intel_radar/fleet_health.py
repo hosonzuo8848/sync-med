@@ -30,12 +30,17 @@ def probe_health():
         elif p.get("missing_secret"):
             rows.append((name, "no-key", 0, "missing secret"))
         else:
-            err = str(p.get("error", ""))[:60]
+            # Public repo: never echo upstream error text (keyed calls get org ids / usage numbers); status only.
+            err = str(p.get("error", ""))
             # reasoning-family models return empty content on 1-token probes -> false negative
             if "empty choices/content" in err:
                 rows.append((name, "ok*", p.get("cost_ms", 0), "reasoning-family probe artifact"))
+            elif err.startswith("tier-guard"):
+                rows.append((name, "DOWN", 0, "tier-guard: key looks upgraded to a paid tier"))
+            elif p.get("skipped"):
+                rows.append((name, "skip", 0, "skipped by gateway gate/brake"))
             else:
-                rows.append((name, "DOWN", p.get("cost_ms", 0), err))
+                rows.append((name, "DOWN", p.get("cost_ms", 0), f"HTTP {p.get('status', '?')}"))
     return rows
 
 def probe_usage():
@@ -170,7 +175,7 @@ def main():
 
     lines = ["| provider | status | ms | note |", "|---|---|---|---|"]
     for name, st, ms, note in rows:
-        icon = {"ok": "✅", "ok*": "✅", "no-key": "\U0001F511", "DOWN": "❌"}.get(st, "?")
+        icon = {"skip": "-", "ok": "✅", "ok*": "✅", "no-key": "\U0001F511", "DOWN": "❌"}.get(st, "?")
         lines.append(f"| {name} | {icon} {st} | {ms} | {note} |")
     lines.append("")
     lines.append(f"**e2e pengzhuang**: {'✅' if e2e_status=='ok' else '❌'} {e2e_status} {e2e_s}s {e2e_info}")
