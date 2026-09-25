@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 """Cloud PDF/JPG -> page_NNNN.webp pipeline for 123pan (MVP).
 
-  python run.py matrix  --shards N --concurrency C       (checks the in-flight cap)
+  python run.py plan    --forge DIR --shards N --concurrency C ...  (workflow outputs; in-flight cap;
+                                                                     hourly schedule = auto resume)
   python run.py token   --forge DIR --books SPEC --target main
   python run.py run     --forge DIR --books SPEC --target main --shard 0 --shards 1 ...
   python run.py summary --forge DIR --books SPEC --target main
   python run.py --selftest          (stubbed 123 + download, no network)
 
-SPEC: data/webp/x.csv, comma-separated book_ids, or @event (read the value from
-the workflow_dispatch payload so it never shows up in the public log).
+SPEC: data/webp/x.csv, comma-separated book_ids, @event (read the value from
+the workflow_dispatch payload so it never shows up in the public log) or @auto
+(the list named in the private data/webp/auto.json, used by the schedule).
 
 Book list CSV lives in the PRIVATE repo (data/webp/*.csv), never in this repo:
   book_id,src_type,src_acct,src_path,src_file_id,dst_path,title
@@ -77,6 +79,17 @@ TOK_PATH = "data/webp/tok/%s.enc"
 ACCOUNTS_PATH = "data/webp/accounts.json"
 LEDGER_DIR = "data/webp/ledger"
 STATS_DIR = "data/webp/stats"
+# Hourly schedule = automatic resume (cmd_plan). AUTO_PATH names what it resumes:
+# {"books": "data/webp/x.csv", "shards": 5, "concurrency": 2, "target": "main"};
+# without it the schedule does nothing. After a suspected write ban (breaker, or a
+# refusal in 123's answer) a run writes COOL_DIR/<target>.json and the schedule
+# waits COOLDOWN_S. A pushed-out token or a deadline just resumes next hour. A
+# volume that really failed in GIVE_UP runs is left for a manual dispatch.
+AUTO_PATH = "data/webp/auto.json"
+COOL_DIR = "data/webp/cooldown"
+COOLDOWN_S = 9000
+GIVE_UP = 2
+REFUSE_WORDS = ("\u62d2\u7edd", "\u7981\u6b62", "\u5c01\u7981", "denied", "forbidden")  # refused / forbidden / banned
 MIN_TOKEN_LIFE = 8 * 3600
 # fails: every failed attempt of this volume as "<api>:<kind>:<count>", e.g.
 #   "upload:net:2 list:429:1 volume:download:1". api/kind from pan.py (CATEGORY;
@@ -266,6 +279,8 @@ def load_books(forge_root, spec):
     if spec == "@event":                                # keeps the list name out of the public log
         with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
             spec = str((json.load(f).get("inputs") or {}).get("books", "")).strip()
+    elif spec == "@auto":                               # the hourly resume: list named in the private repo
+        spec = str(json.loads(Forge(forge_root).read(AUTO_PATH) or b"{}").get("books", "")).strip()
     if ".." in spec:
         sys.exit("bad books spec")
     if spec.endswith(".csv"):
@@ -337,9 +352,32 @@ def check_inflight(shards, conc):
         sys.exit("shards x concurrency = %d x %d exceeds WEBP_MAX_INFLIGHT=%d" % (shards, conc, cap))
 
 
-def cmd_matrix(a):
-    check_inflight(a.shards, a.concurrency)
-    print("shards=" + json.dumps(list(range(a.shards))))
+def cmd_plan(a):
+    """Workflow outputs (key=value lines for $GITHUB_OUTPUT). A dispatch runs its
+    inputs. The hourly schedule resumes AUTO_PATH unless a suspected ban is still
+    cooling down or nothing is left; then go=0 and no job starts."""
+    p = {"go": 1, "books": "@event", "shards": a.shards, "conc": a.concurrency, "target": a.target,
+         "dry": a.dry_run, "limit": a.limit_pages}
+    if os.environ.get("GITHUB_EVENT_NAME") == "schedule":
+        forge = Forge(a.forge)
+        auto = json.loads(forge.read(AUTO_PATH) or b"{}")
+        p.update(books="@auto", shards=int(auto.get("shards", 1)), conc=int(auto.get("concurrency", 2)),
+                 target=auto.get("target", "main"), dry=0, limit=0)
+        cool = json.loads(forge.read("%s/%s.json" % (COOL_DIR, p["target"])) or b"{}")
+        left = 0
+        if auto.get("books"):
+            done, failed = done_ids(a.forge, p["target"]), failed_runs(a.forge, p["target"])
+            left = sum(1 for b in load_books(a.forge, "@auto")
+                       if b["book_id"] not in done and failed[b["book_id"]] < GIVE_UP)
+        why = ("no auto list" if not auto.get("books") else
+               "cooling down" if cool.get("until", 0) > time.time() else
+               "nothing left" if not left else "")
+        print("plan: schedule, %d volumes left, %s" % (left, why or "resume"), file=sys.stderr, flush=True)
+        p["go"] = 0 if why else 1
+    check_inflight(p["shards"], p["conc"])
+    for k in ("go", "books", "conc", "target", "dry", "limit"):
+        print("%s=%s" % (k, p[k]))
+    print("shards=" + json.dumps(list(range(p["shards"]))))
 
 
 # ---------------------------------------------------------------- conversion
@@ -425,6 +463,7 @@ class Ctx:
         self.lock = threading.Lock()
         self.counts = {"src_direct": 0, "src_api": 0}
         self.fails = collections.Counter()              # failed attempts by kind, whole shard
+        self.refused = False                            # some answer read like a refusal (suspected ban)
         self.direct_fail = {}
 
     def halt(self, why):
@@ -610,6 +649,7 @@ def process_book(ctx, row):
     rec["fail_msgs"] = " | ".join(said)
     with ctx.lock:
         ctx.fails.update(fails)
+        ctx.refused = ctx.refused or any(w in rec["fail_msgs"] for w in REFUSE_WORDS)
     return rec
 
 
@@ -644,6 +684,15 @@ def done_ids(forge_root, target):
     return {r["book_id"] for r in ledger_rows(forge_root, target) if r.get("status") == "ok"}
 
 
+def failed_runs(forge_root, target):
+    """book_id -> runs in which it really failed (a deadline stop or a pushed-out token is no failure)."""
+    n = collections.Counter()
+    for r in ledger_rows(forge_root, target):
+        if r.get("status") == "fail" and r.get("err") not in ("stopped", "token"):
+            n[r["book_id"]] += 1
+    return n
+
+
 def cmd_run(a):
     t_start = time.time()
     check_inflight(a.shards, a.concurrency)
@@ -651,7 +700,10 @@ def cmd_run(a):
     books = load_books(a.forge, a.books)
     mine = [b for i, b in enumerate(books) if i % a.shards == a.shard]
     done = set() if a.force else done_ids(a.forge, a.target)
-    pending = [b for b in mine if b["book_id"] not in done]
+    failed = failed_runs(a.forge, a.target)
+    pending = [b for b in mine if b["book_id"] not in done
+               and not (a.books == "@auto" and failed[b["book_id"]] >= GIVE_UP)]
+    pending.sort(key=lambda b: (failed[b["book_id"]] > 0, b["book_id"]))   # earlier failures go last
     todo = pending[:a.max_books] if a.max_books else pending
     print("shard %d/%d listed=%d mine=%d skip_done=%d todo=%d dry=%d limit_pages=%d"
           % (a.shard, a.shards, len(books), len(mine), len(mine) - len(pending), len(todo),
@@ -706,6 +758,9 @@ def cmd_run(a):
              **{"fail_" + k: v for k, v in ctx.fails.items()}}
     forge.write("%s/%s.json" % (STATS_DIR, tag), json.dumps(stats, indent=1).encode(), "webp: stats")
     print("end " + " ".join("%s=%s" % kv for kv in sorted(stats.items())), flush=True)
+    if ctx.why == "breaker" or ctx.refused:             # suspected write ban: the schedule waits COOLDOWN_S
+        forge.write("%s/%s.json" % (COOL_DIR, a.target), json.dumps(
+            {"until": int(time.time()) + COOLDOWN_S, "why": ctx.why or "refused"}).encode(), "webp: cooldown")
     # a deadline stop is the normal end of a long run; token / breaker stops are not
     if ctx.why in ("token", "breaker") or not ledger.ok:
         sys.exit(1)
@@ -746,8 +801,10 @@ def cmd_summary(a):
     if token and repo:
         import gh_issue
         prefix = "%s %s" % (ISSUE_TITLE, a.target)
+        # founder's rule: never push to his phone -> body updates only, no comments,
+        # no assignee, no @mention (the body is counters only)
         gh_issue.upsert(repo, "webp-progress", prefix, "%s %d/%d" % (prefix, ok, len(ids)), body,
-                        token=token, state="fail:%d" % fail)
+                        token=token, notify=False)
 
 
 # ---------------------------------------------------------------- selftest
@@ -773,6 +830,7 @@ class _FakeCloud:
         self.drop = {}             # (book_id, filename) -> single uploads to swallow
         self.net_drop = {}         # (book_id, filename) -> single uploads whose connection breaks
         self.err_once = {}         # endpoint suffix -> (code, message) answered once
+        self.internal = {}         # (book_id, filename) -> uploads answered code=1 "internal error"
         self.ban_writes = False    # code=1 on every write, like 123's account-level ban
         self.up_log = []           # (book_id, filename) of every single upload that arrived
         self.lock = threading.Lock()
@@ -843,6 +901,9 @@ class _FakeCloud:
             if self.net_drop.get(key):
                 self.net_drop[key] -= 1
                 raise ConnectionError("connection reset")     # no answer at all
+            if self.internal.get(key):
+                self.internal[key] -= 1
+                return _FakeResp({"code": 1, "message": panmod.INTERNAL_WORD})
             self._log(parent, name)
             if self.drop.get(key):
                 self.drop[key] -= 1                    # "success" that never lands
@@ -942,6 +1003,8 @@ def selftest():
         "t5.csv": [book("tst-00%d-01" % k, S + "Net%d secret.pdf" % (k - 14), "tst-00%d-01 Net secret" % k)
                    for k in (15, 16)],
         "t6.csv": [book("tst-0017-01", S + "Net1 secret.pdf", "tst-0017-01 Err secret")],
+        "t7.csv": [book("tst-00%d-01" % k, S + "Net2 secret.pdf", "tst-00%d-01 Auto secret" % k) for k in (18, 19)],
+        "t8.csv": [book("tst-0020-01", S + "Net2 secret.pdf", "tst-0020-01 Given up secret")],
     }
     for fn, rows in lists.items():
         with open(os.path.join(forge_root, "data", "webp", fn), "w", encoding="utf-8", newline="") as f:
@@ -1139,11 +1202,12 @@ def selftest():
           and "stop=breaker" in out_z and "tst-0014-01" not in rows_of())
 
     # 11. in-flight cap and matrix
-    out_m, code_m = run("matrix", "--shards", "8", "--concurrency", "2")
-    _, code_m2 = run("matrix", "--shards", "9", "--concurrency", "2")
+    out_m, code_m = run("plan", "--forge", forge_root, "--shards", "8", "--concurrency", "2")
+    _, code_m2 = run("plan", "--forge", forge_root, "--shards", "9", "--concurrency", "2")
     _, code_m3 = shard("--concurrency", "17", dry=1)
     check("inflight: 8x2 ok, 9x2 and 1x17 refused (cap 16)",
-          code_m == 0 and "shards=[0, 1, 2, 3, 4, 5, 6, 7]" in out_m and code_m2 == 1 and code_m3 == 1)
+          code_m == 0 and "shards=[0, 1, 2, 3, 4, 5, 6, 7]" in out_m and "go=1" in out_m
+          and "books=@event" in out_m and code_m2 == 1 and code_m3 == 1)
 
     # 12. @event keeps the list name out of the command line
     ev = os.path.join(td, "event.json")
@@ -1209,6 +1273,62 @@ def selftest():
           and said.startswith("mkdir:api1=code=1 busy <tok> at <name> xxx") and tok_now not in said
           and "secret" not in said and len(said) <= len("mkdir:api1=") + 200)
 
+    # 21. code=1 "internal error" on an upload is retried in place like a network hiccup
+    sleeps = []
+    panmod.SLEEP = sleeps.append
+    cloud.internal[("tst-0018-01", "page_0002.webp")] = 2
+    shard("--concurrency", "1", lst="t7.csv")
+    panmod.SLEEP = lambda s: None
+    r18 = rows_of()["tst-0018-01"]
+    check("internal: 2 x code=1 internal error on one upload retried in place (2/5 s), ok at attempt 1",
+          r18["status"] == "ok" and r18["attempts"] == "1" and r18["fails"] == "upload:api1:2"
+          and sleeps[:2] == [2, 5] and rows_of()["tst-0019-01"]["status"] == "ok")
+
+    # 22. hourly resume: the breaker stop in 10. left a 2.5 h cooldown; the schedule
+    #     idles in it and resumes after it, runs nothing when all is done, and leaves
+    #     a volume that failed in GIVE_UP runs to a manual dispatch
+    cool_p = os.path.join(forge_root, *COOL_DIR.split("/"), "main.json")
+    os.makedirs(os.path.dirname(cool_p), exist_ok=True)
+    cool = json.load(open(cool_p, encoding="utf-8")) if os.path.exists(cool_p) else {}
+    auto_p = os.path.join(forge_root, *AUTO_PATH.split("/"))
+
+    def plan_auto(lst):
+        with open(auto_p, "w", encoding="utf-8") as f:
+            json.dump({"books": "data/webp/" + lst, "shards": 1, "concurrency": 1, "target": "main"}, f)
+        return run("plan", "--forge", forge_root)[0]
+
+    os.environ["GITHUB_EVENT_NAME"] = "schedule"
+    p_cool = plan_auto("t8.csv")
+    with open(cool_p, "w", encoding="utf-8") as f:
+        json.dump({"until": 0}, f)
+    p_go, p_done = plan_auto("t8.csv"), plan_auto("t7.csv")
+    with open(os.path.join(forge_root, *LEDGER_DIR.split("/"), "zz-given-up.csv"), "w", encoding="utf-8",
+              newline="") as f:
+        w = csv.DictWriter(f, fieldnames=LEDGER_COLS)
+        w.writeheader()
+        w.writerows([dict(dict.fromkeys(LEDGER_COLS, 0), book_id="tst-0020-01", target="main",
+                          status="fail", err="pan_1", fails="", fail_msgs="")] * GIVE_UP)
+    p_gone = plan_auto("t8.csv")
+    os.environ.pop("GITHUB_EVENT_NAME")
+    out_man, _ = run("run", *base("t8.csv"), "--dry-run", "1")
+    check("resume: breaker -> 2.5 h cooldown; the schedule idles in it and resumes after it",
+          cool.get("why") == "breaker" and cool.get("until", 0) > time.time() + COOLDOWN_S - 3600
+          and "go=0" in p_cool and "cooling down" in p_cool and "go=1" in p_go and "books=@auto" in p_go)
+    check("resume: nothing left -> go=0; a volume failed in %d runs waits for a manual dispatch" % GIVE_UP,
+          "go=0" in p_done and "nothing left" in p_done and "go=0" in p_gone and "todo=1" in out_man)
+
+    # 23. progress issue: body only, never a comment / assignee / @mention (no phone push)
+    import types
+    sent = []
+    sys.modules["gh_issue"] = types.SimpleNamespace(upsert=lambda *a, **k: sent.append((a, k)))
+    os.environ.update(FORGE_TOKEN="x", FORGE_REPO="owner/repo")
+    run("summary", *base("t7.csv"))
+    os.environ.update(FORGE_TOKEN="", FORGE_REPO="")
+    sys.modules.pop("gh_issue")
+    check("issue: silent body update only (notify=False), no @ and no assignee",
+          len(sent) == 1 and sent[0][1].get("notify") is False and "@" not in sent[0][0][4]
+          and "assignees" not in sent[0][1])
+
     # 15. logs never leak titles / paths / ids / tokens
     alllog = "".join(logs)
     check("logs: no titles, paths, ids, tokens",
@@ -1265,10 +1385,14 @@ def selftest():
 def build_parser():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd")
-    m = sub.add_parser("matrix")
-    m.set_defaults(func=cmd_matrix)
-    m.add_argument("--shards", type=int, required=True)
-    m.add_argument("--concurrency", type=int, required=True)
+    m = sub.add_parser("plan")
+    m.set_defaults(func=cmd_plan)
+    m.add_argument("--forge", required=True, help="private repo checkout dir")
+    m.add_argument("--shards", type=int, default=1)
+    m.add_argument("--concurrency", type=int, default=2)
+    m.add_argument("--target", choices=("main", "guji"), default="main")
+    m.add_argument("--dry-run", type=int, default=1)
+    m.add_argument("--limit-pages", type=int, default=0)
     for name, fn in (("token", cmd_token), ("run", cmd_run), ("summary", cmd_summary)):
         p = sub.add_parser(name)
         p.set_defaults(func=fn)
