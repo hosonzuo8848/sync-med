@@ -95,7 +95,7 @@ jobs:
       - uses: actions/checkout@v4          # this repo: shared gateway client scripts/content_factory/_ai.py
       - uses: actions/checkout@v4
         with:
-          repository: hosonzuo/sueai-forge
+          repository: hosonzuo8848/sueai-forge
           token: ${{ secrets.FANGJI_FORGE_TOKEN || secrets.FORGE_TOKEN }}
           path: forge
           sparse-checkout: fangji_wash
