@@ -2560,6 +2560,10 @@ def push_wechat(today: str, top_items: list, raw_counts: dict,
         print('[\u5fae\u4fe1\u63a8\u9001] SERVERCHAN_KEY \u672a\u8bbe\u7f6e\uff0c\u8df3\u8fc7', flush=True)
         return
 
+    if os.environ.get("SERVERCHAN_ENABLE", "") != "1":
+        print('[\u5fae\u4fe1\u63a8\u9001] \u65b9\u7cd6\u63a8\u9001\u5df2\u505c\u7528\uff08\u521b\u59cb\u4eba 2026-09-26\uff09\uff0c\u8df3\u8fc7', flush=True)
+        return
+
     top_n = len(top_items)
     rate  = f"{top_n/total_analyzed*100:.1f}%" if total_analyzed else "N/A"
 
