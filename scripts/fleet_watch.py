@@ -772,6 +772,187 @@ def fmt_d1_capacity(r):
     return lines
 
 
+# ---- Free-tier quota usage table (2026-09-26) -------------------------------------------------------------
+# Reads yesterday's (UTC) ai_call_logs from D1 and checks each free-tier source's usage against its own
+# published daily allowance. One source (e.g. Groq) may hold several keys/lanes; each lane that has its own
+# limit gets its own row so a single overloaded key does not average out against its idle siblings.
+# "daily" = a per-day quota that resets every UTC midnight -- only these are eligible for the red flag
+# (utilization < 50% means the free allowance is going unused). "once"/"none" sources (one-time credit packs,
+# or a lane whose official daily cap we could not confirm) are informational only and are never red-flagged.
+FREE_QUOTA_DB = "guyaofang-db"
+
+FREE_QUOTA_SOURCES = [
+    # Groq: 1000 requests/day per key (RPD, published limit), one row per lane so a braked lane
+    # never masks the other three. "groq" itself is behind a paid brake as of 2026-09 -- it will
+    # legitimately show 0 calls; braked=True keeps that 0 out of the red-flag check.
+    {"key": "groq", "label": "Groq(groq)", "match": ("exact", "groq"), "unit": "calls",
+     "limit": 1000, "refresh": "daily", "braked": True,
+     "note": "\u6bcf\u628a\u94a5\u5319\u6bcf\u5929 1000 \u6b21\u8bf7\u6c42(RPD,\u5b98\u65b9\u6587\u6863);"
+             "\u7f51\u5173\u8f66\u9053 groq \u76ee\u524d\u88ab\u4ed8\u8d39\u5239\u8f66\u6321\u7740,"
+             "\u4e0d\u4f1a\u6709\u8c03\u7528,\u5982\u5b9e\u663e\u793a 0,\u4e0d\u56e0\u5239\u8f66\u6807\u7ea2\u3002"},
+    {"key": "groq2", "label": "Groq(groq2)", "match": ("exact", "groq2"), "unit": "calls",
+     "limit": 1000, "refresh": "daily",
+     "note": "\u6bcf\u628a\u94a5\u5319\u6bcf\u5929 1000 \u6b21\u8bf7\u6c42(RPD,\u5b98\u65b9\u6587\u6863),"
+             "\u7f51\u5173\u8f66\u9053 groq2\u3002"},
+    {"key": "groq3", "label": "Groq(groq3)", "match": ("exact", "groq3"), "unit": "calls",
+     "limit": 1000, "refresh": "daily",
+     "note": "\u6bcf\u628a\u94a5\u5319\u6bcf\u5929 1000 \u6b21\u8bf7\u6c42(RPD,\u5b98\u65b9\u6587\u6863),"
+             "\u7f51\u5173\u8f66\u9053 groq3\u3002"},
+    {"key": "groq4", "label": "Groq(groq4)", "match": ("exact", "groq4"), "unit": "calls",
+     "limit": 1000, "refresh": "daily",
+     "note": "\u6bcf\u628a\u94a5\u5319\u6bcf\u5929 1000 \u6b21\u8bf7\u6c42(RPD,\u5b98\u65b9\u6587\u6863),"
+             "\u7f51\u5173\u8f66\u9053 groq4\u3002"},
+    # LLM7: 1M tokens/day per key, 3 keys. Lanes are not wired into the gateway yet (landing the same day this
+    # was written), so the provider name is unknown -- match by prefix. per_key=True scales the displayed
+    # limit to however many distinct llm7* provider names actually show up in yesterday's data, so a partially
+    # wired pool is not compared against the full 3-key ceiling before all 3 lanes exist.
+    {"key": "llm7", "label": "LLM7(3\u628a\u5408\u8ba1)", "match": ("prefix", "llm7"), "unit": "tokens",
+     "limit": 1_000_000, "per_key": True, "refresh": "daily", "unwired_if_absent": True,
+     "note": "\u6bcf\u628a\u94a5\u5319\u6bcf\u5929 100 \u4e07 token,\u5171 3 \u628a;\u8f66\u9053\u8fd8\u6ca1\u63a5\u8fdb"
+             "\u7f51\u5173(\u4eca\u5929\u4f1a\u63a5),\u8f66\u9053\u540d\u5f85\u5b9a,\u5148\u7528 provider "
+             "\u524d\u7f00 llm7 \u5339\u914d;\u6628\u65e5\u65e0\u5339\u914d\u6570\u636e\u5219\u663e\u793a"
+             "\u672a\u63a5\u5165\u3002"},
+    # OpenRouter free tier: no published fixed daily-request number (it scales with account top-up), so limit
+    # stays None -- the row shows usage only and is never red-flagged (pct is None whenever limit is None).
+    {"key": "openrouter", "label": "OpenRouter \u514d\u8d39\u6863", "match": ("prefix", "openrouter"),
+     "unit": "calls", "limit": None, "refresh": "daily",
+     "note": "OpenRouter \u514d\u8d39\u6863\u6bcf\u65e5\u8bf7\u6c42\u6570\u4e0e\u8d26\u6237\u5145\u503c\u989d\u6709\u5173,"
+             "\u5b98\u65b9\u6587\u6863\u672a\u7ed9\u56fa\u5b9a\u6bcf\u65e5\u6570\u5b57,\u989d\u5ea6\u586b None"
+             "(\u67e5\u4e0d\u6e05),\u53ea\u5217\u7528\u91cf\u3002"},
+    # zhipu*: current main lane (glm-4-flash plus glm-4.5-flash / glm-4.7-flash etc). This query groups by
+    # provider only, not provider+model, so the per-model official cap for glm-4.5/4.7-flash specifically was
+    # not separately confirmed -- limit stays None, usage-only, never red-flagged (refresh=none by design).
+    {"key": "zhipu", "label": "\u667a\u8c31 zhipu*", "match": ("prefix", "zhipu"), "unit": "calls",
+     "limit": None, "refresh": "none",
+     "note": "\u667a\u8c31\u73b0\u6709\u4e3b\u529b\u7ebf(\u542b glm-4-flash / glm-4.5-flash / glm-4.7-flash "
+             "\u7b49\u591a\u4e2a\u6a21\u578b);\u672c\u67e5\u8be2\u6309 provider \u805a\u5408\u4e0d\u62c6 model,"
+             "glm-4.5-flash/4.7-flash \u5355\u72ec\u7684\u5b98\u65b9\u6bcf\u65e5\u989d\u5ea6\u672a\u67e5\u5230"
+             "\u786e\u6570,\u989d\u5ea6\u586b None,\u53ea\u5217\u7528\u91cf\u4e0d\u6807\u7ea2\u3002"},
+    # ModelScope: about 200 "wei li" (points, ~1 per call) per day, UTC-midnight reset (confirmed prior art).
+    {"key": "modelscope", "label": "\u9b54\u642d modelscope", "match": ("exact", "modelscope"), "unit": "calls",
+     "limit": 200, "refresh": "daily",
+     "note": "\u6bcf\u5929\u7ea6 200 \u9b54\u7c92(\u7ea6 200 \u6b21),\u6309 UTC 00:00 \u91cd\u7f6e\u3002"},
+    # SenseNova (sn_*): current main lane, usage-only.
+    {"key": "sn_", "label": "\u5546\u6c64 sn_*", "match": ("prefix", "sn_"), "unit": "calls",
+     "limit": None, "refresh": "none",
+     "note": "\u5546\u6c64(SenseNova),\u73b0\u6709\u4e3b\u529b\u7ebf,\u53ea\u5217\u7528\u91cf\u4e0d\u6807\u7ea2\u3002"},
+    # Tencent (tc_*): one-time/annual free credit pack, not a daily-reset quota.
+    {"key": "tc_", "label": "\u817e\u8baf tc_*", "match": ("prefix", "tc_"), "unit": "calls",
+     "limit": None, "refresh": "once",
+     "note": "\u817e\u8baf(tc_*),\u4e00\u6b21\u6027/\u6309\u5e74\u514d\u8d39\u5305,\u4e0d\u6309\u5929\u5237\u65b0,"
+             "\u53ea\u5217\u7528\u91cf\u3002"},
+    # Voyage: one-time/annual free credit pack, not a daily-reset quota.
+    {"key": "voyage", "label": "Voyage", "match": ("exact", "voyage"), "unit": "calls",
+     "limit": None, "refresh": "once",
+     "note": "Voyage,\u4e00\u6b21\u6027/\u6309\u5e74\u514d\u8d39\u5305,\u4e0d\u6309\u5929\u5237\u65b0,"
+             "\u53ea\u5217\u7528\u91cf\u3002"},
+]
+
+
+def _match_providers(match, by_provider):
+    kind, pat = match
+    if kind == "exact":
+        return [pat] if pat in by_provider else []
+    return sorted(p for p in by_provider if p.startswith(pat))
+
+
+def _quota_row(src, by_provider):
+    '''Fold one FREE_QUOTA_SOURCES entry plus yesterday\'s grouped rows into a display-ready row.
+    Kept separate from free_quota_usage() so it can be unit-tested without stubbing _cf().'''
+    matched = _match_providers(src["match"], by_provider)
+    unit = src["unit"]
+    unwired = bool(src.get("unwired_if_absent")) and not matched
+    if unwired:
+        used = None
+    elif matched:
+        field = "tokens" if unit == "tokens" else "calls"
+        used = sum(int(by_provider[p].get(field) or 0) for p in matched)
+    else:
+        used = 0                                   # known lane, genuinely zero calls yesterday
+    limit = src.get("limit")
+    if limit is not None and src.get("per_key") and matched:
+        limit = limit * len(matched)               # scale to however many keys actually reported
+    pct = (used / limit * 100) if (used is not None and limit) else None
+    alert = (src["refresh"] == "daily" and not src.get("braked") and not unwired
+             and pct is not None and pct < 50.0)
+    return {"key": src["key"], "label": src["label"], "unit": unit, "used": used,
+            "limit": limit, "pct": pct, "refresh": src["refresh"],
+            "braked": bool(src.get("braked")), "unwired": unwired, "alert": alert,
+            "note": src["note"], "providers_matched": matched}
+
+
+def free_quota_usage(now):
+    '''\u514d\u8d39\u989d\u5ea6\u4f7f\u7528\u8868:\u6309 provider \u805a\u5408\u6628\u65e5(UTC)\u4e00\u5929\u7684
+    ai_call_logs,\u5bf9\u7167 FREE_QUOTA_SOURCES \u91cc\u767b\u8bb0\u7684\u6bcf\u65e5\u989d\u5ea6\u3002
+    \u53ea\u8bfb:\u4e00\u6b21\u5e93\u5217\u8868 + \u4e00\u6761 GROUP BY provider \u805a\u5408 SQL(\u4e0d\u626b
+    \u591a\u5929\u3001\u4e0d\u9010\u884c\u62c9)\u3002'''
+    r = {"ok": False, "skip_reason": "", "day": "", "rows": []}
+    if not (os.environ.get("CF_ACCOUNT_ID") and os.environ.get("D1_API_TOKEN")):
+        r["skip_reason"] = "\u7f3a\u73af\u5883\u53d8\u91cf CF_ACCOUNT_ID / D1_API_TOKEN"
+        return r
+    try:
+        j = _cf("/d1/database?per_page=100")
+        if not j.get("success"):
+            r["skip_reason"] = "\u5e93\u5217\u8868\u5931\u8d25: %s" % str(j.get("errors", ""))[:100]
+            return r
+        uuid_map = {d["name"]: d["uuid"] for d in (j.get("result") or [])}
+        if FREE_QUOTA_DB not in uuid_map:
+            r["skip_reason"] = "\u672a\u627e\u5230\u5e93 %s" % FREE_QUOTA_DB
+            return r
+        today_utc = now.astimezone(timezone.utc).date()
+        yday = today_utc - timedelta(days=1)
+        start = "%s 00:00:00" % yday
+        end = "%s 00:00:00" % today_utc
+        r["day"] = str(yday)
+        sql = ("SELECT provider, COUNT(*) AS calls, "
+               "SUM(CASE WHEN success=1 THEN 1 ELSE 0 END) AS ok_calls, "
+               "SUM(IFNULL(total_tokens,0)) AS tokens "
+               "FROM ai_call_logs WHERE ts >= '%s' AND ts < '%s' GROUP BY provider" % (start, end))
+        resp = _cf("/d1/database/%s/query" % uuid_map[FREE_QUOTA_DB], {"sql": sql})
+        rows = (resp.get("result") or [{}])[0].get("results") or []
+        by_provider = {row["provider"]: row for row in rows if row.get("provider")}
+        r["rows"] = [_quota_row(src, by_provider) for src in FREE_QUOTA_SOURCES]
+        r["ok"] = True
+        return r
+    except Exception as e:
+        r["skip_reason"] = "\u5f02\u5e38: %s" % str(e)[:120]
+        return r
+
+
+def fmt_free_quota(r):
+    lines = ["", "### \u514d\u8d39\u989d\u5ea6\u4f7f\u7528\u8868(\u6628\u65e5 UTC %s)" % (r.get("day") or "?")]
+    if not r.get("ok"):
+        reason = r.get("skip_reason") or "\u672a\u77e5"
+        lines.append("- \u8df3\u8fc7: %s" % reason)
+        return lines
+    lines.append("| \u6765\u6e90 | \u6628\u65e5\u7528\u91cf | \u6bcf\u65e5\u514d\u8d39\u989d\u5ea6 | \u5229\u7528\u7387 "
+                  "| \u5237\u65b0 | \u8bf4\u660e |")
+    lines.append("|---|---:|---:|---:|---|---|")
+    refresh_label = {"daily": "\u6309\u5929", "once": "\u4e00\u6b21\u6027/\u6309\u5e74",
+                      "none": "\u4e0d\u6309\u5929\u5237\u65b0"}
+    for row in r["rows"]:
+        mark = "\U0001f534 " if row["alert"] else ""
+        if row["unwired"]:
+            used_str, limit_str, pct_str = "\u672a\u63a5\u5165", "-", "\u2014"
+        else:
+            unit_suffix = "tok" if row["unit"] == "tokens" else "\u6b21"
+            used_str = f"{row['used']:,} {unit_suffix}"
+            limit_str = f"{row['limit']:,}" if row["limit"] else "\u672a\u77e5(\u89c1\u8bf4\u660e)"
+            pct_str = f"{row['pct']:.1f}%" if row["pct"] is not None else "\u2014"
+        note = row["note"]
+        if row["braked"]:
+            note += "(\u5239\u8f66\u4e2d,\u4e0d\u8ba1\u5165\u6807\u7ea2)"
+        lines.append(f"| {mark}{row['label']} | {used_str} | {limit_str} | {pct_str} | "
+                      f"{refresh_label.get(row['refresh'], row['refresh'])} | {note} |")
+    lines.append("- \u7ea2\u8272\u6807\u8bb0 = refresh=daily \u4e14\u672a\u88ab\u5239\u8f66/\u672a\u63a5\u5165\u7684"
+                  "\u6765\u6e90\u5229\u7528\u7387 < 50%(\u514d\u8d39\u989d\u5ea6\u88ab\u6d6a\u8d39)\u3002")
+    lines.append("- \u4e00\u6b21\u6027/\u6309\u5e74\u989d\u5ea6(tc_*\u3001voyage)\u4e0e\u73b0\u6709\u4e3b\u529b\u7ebf"
+                  "(zhipu*\u3001sn_*)\u53ea\u5217\u7528\u91cf,\u4e0d\u53c2\u4e0e\u6807\u7ea2\u3002")
+    lines.append("- \u6570\u636e\u6e90: D1 guyaofang-db.ai_call_logs,\u6309 provider \u805a\u5408\u6628\u65e5"
+                  "(UTC)\u4e00\u5929,\u53ea\u53d1 1 \u6761 SQL(\u4e0d\u626b\u591a\u5929\u3001\u4e0d\u9010\u884c\u62c9)\u3002")
+    return lines
+
+
 def main():
     if not TOKEN:
         print("ERROR: GITHUB_TOKEN not set", file=sys.stderr)
@@ -807,18 +988,26 @@ def main():
     d1cap = d1_capacity_check(now)
     print(f"  ok={d1cap['ok']} total={d1cap['total']} alert={d1cap['alert']} {d1cap.get('skip_reason', '')}", file=sys.stderr)
 
+
+    print("Running free quota usage check...", file=sys.stderr)
+    quota = free_quota_usage(now)
+    quota_alert_rows = sum(1 for row in quota.get("rows", []) if row.get("alert")) if quota.get("ok") else 0
+    print(f"  ok={quota['ok']} day={quota.get('day','')} red_rows={quota_alert_rows} {quota.get('skip_reason', '')}",
+          file=sys.stderr)
+
     report = build_report(results, ocr_depth, now)
-    
+
     report += "\n" + "\n".join(fmt_d1_vs_pan(d1pan))
     report += "\n" + "\n".join(fmt_d1_capacity(d1cap))
+    report += "\n" + "\n".join(fmt_free_quota(quota))
     print(report)
 
-    
+
     wf_alert_count = sum(1 for r in results if r["alert"])
     ocr_depth_alert = 1 if ocr_depth.get("alert") else 0
     d1pan_alert = 1 if d1pan.get("alert") else 0
     d1cap_alert = 1 if d1cap.get("alert") else 0
-    alert_count = wf_alert_count + ocr_depth_alert + d1pan_alert + d1cap_alert
+    alert_count = wf_alert_count + ocr_depth_alert + d1pan_alert + d1cap_alert + quota_alert_rows
 
     with open(os.environ.get("GITHUB_OUTPUT", "/dev/null"), "a", encoding="utf-8") as f:
         f.write(f"alert_count={alert_count}\n")
