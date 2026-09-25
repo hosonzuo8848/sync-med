@@ -181,12 +181,20 @@ def pan_json(method, url, headers=None, body=None, attempts=2):
     return last
 
 
-# -- token: process-local cache -> KV pan:tok -> mint fresh ------------------------------
-_tok_cache = {"v": None}
+# -- token: process-local cache -> prefetched (prep job) -> KV pan:tok -> mint fresh -----
+# 2026-09-26: prep job now logs in once (see pan_login.py + warm_dlink.yml) and hands the
+# token to every run-job shard via a masked job output, so 3 shards starting within the
+# same instant no longer race to mint their own token before KV pan:tok is populated (the
+# original KV-cache path still closes that race most of the time, but not always -- shards
+# launch close enough together that the first request can still land before any of them has
+# written pan:tok). A shard falls back to the KV-cache path only when the prefetched value
+# is absent (e.g. local run).
+_tok_cache = {"v": os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip() or None}
 
 
 def get_token():
     if _tok_cache["v"]:
+        kv_put("pan:tok", _tok_cache["v"], 1728000)  # keep KV warm for other consumers too
         return _tok_cache["v"]
     cached = kv_get("pan:tok")
     if cached:
