@@ -35,9 +35,9 @@ jobs:
       # 2026-09-26: log in ONCE per credential pair here, hand the token to every run-job
       # shard via a masked job output. Fixes 256 shards (max-parallel 3) each calling
       # access_token and revoking each other's token -- 123 keeps only the newest login per
-      # account (see webp-convert.yml's header for the same account being shared, and
-      # scripts/webp_convert/run.py's mask()/Renewer for the masking convention this
-      # follows). Two pairs: PAN_CID/PAN_SEC pushes zip/pdf (pan()/token() in sync.py),
+      # account (see webp-convert.yml's header for the same account being shared, and its
+      # Python pipeline's mask()/Renewer for the masking convention this follows).
+      # Two pairs: PAN_CID/PAN_SEC pushes zip/pdf (pan()/token() in sync.py),
       # PAN_CLIENT_ID/PAN_CLIENT_SECRET reads pages (pan_token() in sync.py).
       - name: pan login once (zip/pdf account)
         id: panlogin

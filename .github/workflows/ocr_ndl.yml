@@ -37,7 +37,7 @@ jobs:
       # 2026-09-26: log in ONCE here, hand the token to every run-job shard via a masked
       # job output. Fixes 40 shards (max-parallel 8) each calling access_token and
       # revoking each other's token -- 123 keeps only the newest login per account. Same
-      # masking convention as webp-convert.yml / scripts/webp_convert/run.py's mask().
+      # masking convention as webp-convert.yml's Python pipeline uses for its own token.
       - name: pan login once
         id: panlogin
         run: |

@@ -55,7 +55,7 @@ jobs:
       # job output. Fixes 3 shards each calling access_token near the same instant and
       # revoking each other's token -- warm_dlink.py's KV pan:tok cache already dedupes
       # most of this, but not the first request of a run, before any shard has written it.
-      # Same masking convention as webp-convert.yml / scripts/webp_convert/run.py's mask().
+      # Same masking convention as webp-convert.yml's Python pipeline uses for its own token.
       - name: pan login once
         id: panlogin
         run: |
