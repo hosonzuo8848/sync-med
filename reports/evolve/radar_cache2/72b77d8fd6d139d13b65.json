@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "adopt",
+ "metric": "检索召回率",
+ "how": "使用 LightRAG 进行双级检索和知识图谱增强",
+ "effort": "中",
+ "current": "Cloudflare Vectorize (索引 `tcm-rag-768`, 183万向量) + `bge-m3`/`gte-base` 嵌入(Workers AI 或 ONNX)",
+ "beats": "在检索召回率上可能胜出，提供更精准的检索结果",
+ "why": "LightRAG 是一个纯 Python SDK，无需服务器，与当前使用的 Cloudflare Vectorize 和 Workers AI 兼容，且在检索召回率上可能提供改进"
+}

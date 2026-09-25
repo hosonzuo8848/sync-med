@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "GitHub Actions 批量跑: paddleocr (Python) / MinerU (Python) / tesseract (WASM/二进制) → 结果存 R2/D1",
+ "beats": "",
+ "why": "已在家底:OCR产线正在用paddleocr、MinerU、tesseract"
+}

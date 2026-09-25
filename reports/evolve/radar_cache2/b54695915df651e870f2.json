@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "无",
+ "how": "无",
+ "effort": "无",
+ "current": "Cloudflare Pages (React) + `pdf.js` / 自研 Canvas 分页渲染 + 会员门禁 KV",
+ "beats": "无",
+ "why": "已在家底: 使用 Cloudflare Pages 和 React，无需常驻主机"
+}

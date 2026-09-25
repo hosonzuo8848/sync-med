@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Workers AI (Llama 3 / DeepSeek) + Vectorize RAG + 结构化 Prompt 工程",
+ "beats": "",
+ "why": "已在家底: Workers AI 和 Vectorize RAG 已在用"
+}

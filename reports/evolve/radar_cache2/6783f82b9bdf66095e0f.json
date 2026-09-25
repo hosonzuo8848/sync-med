@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "GitHub Actions (Python `httpx`/`playwright`) → R2 归档 → D1 对账",
+ "beats": "",
+ "why": "已在家底: 采集下载线正在用 GitHub Actions (Python `httpx`/`playwright`) 进行自动化下载和上传"
+}

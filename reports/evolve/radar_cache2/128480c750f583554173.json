@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "Cloudflare Pages (React) + `pdf.js` / 自研 Canvas 分页渲染 + 会员门禁 KV",
+ "beats": "",
+ "why": "已在家底: 使用 React 和 pdf.js 进行 PDF 渲染"
+}

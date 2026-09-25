@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "D1 存节点边(6.9万) + 前端 `graphology`/`d3-force`(2D) + `three.js`(3D) 渲染",
+ "beats": "",
+ "why": "已在家底: 知识图谱星图已使用 D1 存储节点边，且前端使用 `graphology`、`d3-force` 和 `three.js` 进行渲染"
+}

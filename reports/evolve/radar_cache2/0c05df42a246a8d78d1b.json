@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "adopt",
+ "metric": "网页抓取效率和速度",
+ "how": "替换当前使用的爬虫工具",
+ "effort": "中",
+ "current": "GitHub Actions 批量跑: `httpx`/`playwright`",
+ "beats": "抓取速度 +30%，内存使用 -20%，支持更多网站结构解析",
+ "why": "无需常驻主机，纯库形式，且在效率和速度上有明显提升"
+}
