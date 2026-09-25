@@ -106,7 +106,8 @@ jobs:
           # so a stale row keeps a dead provider at the head of a chain. Rules, all from ai_call_logs over 7 days:
           #   demote  : enabled row, n>=50 and success<20%      -> enabled=0 (rows whose notes start with "manual" are never touched)
           #   restore : auto-demoted row, n>=20 and success>=60% -> enabled=1
-          #   champion: per task, if the champion is <50% (n>=50) or missing, the best enabled contender >=70% (n>=50) takes over
+          #   champion: per task, if the champion is <50% (n>=50) or missing, the best enabled contender >=70% (n>=50) takes over;
+          #             a champion with <50 calls is kept (cold start) and one whose notes start with "manual" is never swapped out
           stats = {r["provider"]: r for r in q("SELECT provider, ROUND(AVG(success),3) AS s, COUNT(*) AS n FROM ai_call_logs WHERE ts >= datetime('now','-7 days') GROUP BY provider")["results"]}
           demoted, restored, swapped = [], [], []
           for r in q("SELECT model_key, provider, enabled, notes FROM model_registry")["results"]:
@@ -118,12 +119,12 @@ jobs:
               elif r["enabled"] == 0 and notes.startswith("auto-demoted") and st["n"] >= 20 and st["s"] >= 0.6:
                   q("UPDATE model_registry SET enabled=1, notes=?, updated_at=? WHERE model_key=?", [f"auto-restored {today}: 7d {st['s']*100:.1f}%/{st['n']}", now, r["model_key"]]); restored.append(r["provider"])
           by_task = {}
-          for r in q("SELECT model_key, provider, role, task FROM model_registry WHERE enabled=1 AND is_free=1 AND role IN ('champion','contender')")["results"]:
+          for r in q("SELECT model_key, provider, role, task, notes FROM model_registry WHERE enabled=1 AND is_free=1 AND role IN ('champion','contender')")["results"]:
               by_task.setdefault(r["task"], []).append(r)
           for task, rs in by_task.items():
               champ = next((r for r in rs if r["role"] == "champion"), None)
               cs = stats.get(champ["provider"]) if champ else None
-              if champ and cs and cs["n"] >= 50 and cs["s"] >= 0.5: continue
+              if champ and ((champ.get("notes") or "").startswith("manual") or not cs or cs["n"] < 50 or cs["s"] >= 0.5): continue
               cands = [r for r in rs if r["role"] == "contender" and stats.get(r["provider"], {}).get("n", 0) >= 50]
               best = max(cands, key=lambda r: stats[r["provider"]]["s"], default=None)
               if not best or stats[best["provider"]]["s"] < 0.7: continue
