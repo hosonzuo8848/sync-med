@@ -17,14 +17,19 @@
   code raise Tripped, and the shard stops. Typical causes: code=1 on every
   write (123 account-level write ban; reads keep working) or rate limiting that
   outlasts every retry. Hammering on only extends the ban.
-- Every failed attempt is counted by kind (net, http<status>, 401, 429, api<code>)
-  into the calling thread's `tl.sink` Counter, so run.py can book it per volume.
+- Every failed attempt is counted as "<api>:<kind>" into the calling thread's
+  `tl.sink` Counter, so run.py can book it per volume. api = CATEGORY[where]
+  (token / mkdir / upload / list / download / other); kind = net, http<status>,
+  401, 429 or api<code>. `tl.msgs` keeps the latest raw answer per key
+  ("code=<c> <message>", or the exception for no answer), token-free, <= 200 chars.
+  These go to the private ledger only, never to the public log.
 - No instant-upload probe: 318 probes in the first 20-volume run found 0 hits,
   and each miss leaves an unfinished pre-upload session on 123. A page whose
   upload may have landed is simply sent again (duplicate=2 overwrites).
 """
 import collections
 import hashlib
+import re
 import threading
 import time
 
@@ -35,6 +40,12 @@ RATE_WORD = "\u9891\u7e41"          # "too frequent" in 123's rate-limit message
 BREAK_AFTER = 5
 NET_BACKOFF = (2, 5, 15)            # seconds before each retry of a call that got no usable answer
 SLEEP = time.sleep                  # selftest swaps in a no-op
+# the `where` label of each call -> the API category booked with its failures.
+# single/create is one call that covers precheck, upload and completion.
+CATEGORY = {"access_token": "token", "user_info": "token", "mkdir": "mkdir", "single": "upload",
+            "list": "list", "download_info": "download"}
+MSG_MAX = 200
+JWT_RE = re.compile(r"eyJ[\w-]+\.[\w-]+\.[\w-]+")
 
 
 class TokenInvalid(Exception):
@@ -98,10 +109,17 @@ class Pan:
         self._mk_locks = collections.defaultdict(threading.Lock)
 
     # ---- transport -------------------------------------------------------
-    def _note(self, kind):
+    def _note(self, where, kind, detail, tok):
         sink = getattr(self.tl, "sink", None)
-        if sink is not None:
-            sink[kind] += 1
+        if sink is None:
+            return
+        key = "%s:%s" % (CATEGORY.get(where, "other"), kind)
+        sink[key] += 1
+        msgs = getattr(self.tl, "msgs", None)
+        if msgs is not None:
+            for t in {tok, self.token} - {None, ""}:
+                detail = detail.replace(t, "<tok>")
+            msgs[key] = JWT_RE.sub("<tok>", " ".join(str(detail).split()))[:MSG_MAX]
 
     def _fail(self, cls, where, code):
         with self._lock:
@@ -127,10 +145,14 @@ class Pan:
                 r = self.s.request(method, url, timeout=timeout, headers={
                     "Platform": "open_platform", "Authorization": "Bearer " + tok}, **kw)
                 j = r.json()
-            except Exception:                                   # noqa: BLE001
+            except Exception as e:                              # noqa: BLE001
                 # no answer at all, or an answer that is not JSON (a 5xx page):
                 # retry this very call (this page) in place, never the whole volume
-                self._note("net" if r is None else "http%s" % getattr(r, "status_code", ""))
+                if r is None:
+                    self._note(where, "net", "%s %s" % (type(e).__name__, e), tok)
+                else:
+                    self._note(where, "http%s" % getattr(r, "status_code", ""),
+                               "http %s %s" % (getattr(r, "status_code", ""), getattr(r, "text", "")), tok)
                 net_fail += 1
                 if net_fail > len(NET_BACKOFF):
                     self._fail(cls, where, "net")
@@ -141,9 +163,10 @@ class Pan:
                 with self._lock:
                     self.streak.pop(cls, None)
                 return j.get("data") or {}
+            said = "code=%s %s" % (code, j.get("message", ""))
             if code == 401:
                 self.stats["token_401"] += 1
-                self._note("401")
+                self._note(where, "401", said, tok)
                 new = None if renewed or not self.on_401 else self.on_401(tok)
                 if not new:
                     raise TokenInvalid(where)
@@ -152,12 +175,12 @@ class Pan:
             if code == 429 or RATE_WORD in str(j.get("message", "")):
                 rate_hit += 1
                 self.stats["rate_limited"] += 1
-                self._note("429")
+                self._note(where, "429", said, tok)
                 if rate_hit > self.max_rate_retry:
                     self._fail(cls, where, 429)
                 SLEEP(min(60, 2 ** rate_hit))
                 continue
-            self._note("api%s" % code)
+            self._note(where, "api%s" % code, said, tok)
             self._fail(cls, where, code)
 
     # ---- read ------------------------------------------------------------
