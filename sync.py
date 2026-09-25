@@ -397,7 +397,14 @@ def main():
             print(f"done {ok}/{len(mine)} last={g} a={a} b={b}", flush=True)
     lk = os.environ.get("LEDGER_PREFIX", "_ledger/") + f"shard_{SHARD}.json"
     s3.put_object(Bucket=SRC, Key=lk, Body=json.dumps(ledger, ensure_ascii=False).encode("utf-8"))
-    print(f"=== shard {SHARD} complete {ok}/{len(mine)} | ledger -> {lk} ===", flush=True)
+    # 2026-09-26: never silent about a shard falling back to its own login -- that is exactly
+    # the stampede this whole change removes. If prep's encrypted token didn't make it here
+    # (decrypt step warned already, in the run job's own log), this line is the second,
+    # harder-to-miss signal in the script's own output.
+    fb = [name for name, ok_ in (("zip/pdf-acct", _tok["prefetched"]),
+                                  ("page-read-acct", bool(os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip()))) if not ok_]
+    print(f"=== shard {SHARD} complete {ok}/{len(mine)} | ledger -> {lk} | "
+          f"login_fallback={','.join(fb) or 'none'} ===", flush=True)
 
 
 if __name__ == "__main__":

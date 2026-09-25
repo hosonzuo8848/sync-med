@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       shards: ${{ steps.g.outputs.shards }}
-      pan_token: ${{ steps.panlogin.outputs.token }}
-      pan_client_token: ${{ steps.panlogin2.outputs.token }}
+      pan_token_cipher: ${{ steps.panlogin.outputs.cipher }}
+      pan_client_token_cipher: ${{ steps.panlogin2.outputs.cipher }}
     steps:
       - id: g
         run: python -c "import json,os;print('shards='+json.dumps(list(range(int(os.environ['T'])))))" >> "$GITHUB_OUTPUT"
@@ -32,12 +32,25 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install --quiet boto3 requests pillow
-      # 2026-09-26: log in ONCE per credential pair here, hand the token to every run-job
-      # shard via a masked job output. Fixes 256 shards (max-parallel 3) each calling
-      # access_token and revoking each other's token -- 123 keeps only the newest login per
-      # account (see webp-convert.yml's header for the same account being shared, and its
-      # Python pipeline's mask()/Renewer for the masking convention this follows).
-      # Two pairs: PAN_CID/PAN_SEC pushes zip/pdf (pan()/token() in sync.py),
+      # 2026-09-26 rework: log in ONCE per credential pair here, hand the token to every
+      # run-job shard so 256 shards (max-parallel 3) stop each calling access_token and
+      # revoking each other's token -- 123 keeps only the newest login per account (see
+      # webp-convert.yml's header for the same account being shared).
+      #
+      # The token does NOT go into the job output in plaintext. GitHub Actions silently
+      # drops a job output whose value has been through ::add-mask:: ("Skip output '<name>'
+      # since it may contain secret") -- confirmed on a throwaway branch, run 36201413266:
+      # a masked output came back empty on the downstream side while a plain sibling output
+      # in the same job came through fine. The first version of this fix (PR #741 initial
+      # commit) put the masked token straight into GITHUB_OUTPUT and never actually worked
+      # -- every shard silently fell through to "prefetched token absent -> log in myself".
+      #
+      # Fix: encrypt the token with the credential secret the run job already has (pan_crypt.py,
+      # openssl aes-256-cbc), and put only the CIPHERTEXT into the job output -- ciphertext is
+      # not a registered secret, GitHub does not touch it. The plaintext token itself only ever
+      # goes into $GITHUB_ENV (not subject to that output-scanning behavior), masked first.
+      #
+      # Two credential pairs: PAN_CID/PAN_SEC pushes zip/pdf (pan()/token() in sync.py),
       # PAN_CLIENT_ID/PAN_CLIENT_SECRET reads pages (pan_token() in sync.py).
       - name: pan login once (zip/pdf account)
         id: panlogin
@@ -46,7 +59,9 @@ jobs:
           TOKEN=$(python pan_login.py)
           if [ -z "$TOKEN" ]; then echo "empty token" >&2; exit 1; fi
           echo "::add-mask::$TOKEN"
-          echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
+          echo "PAN_TOKEN_PREFETCHED=$TOKEN" >> "$GITHUB_ENV"
+          CIPHER=$(printf '%s' "$TOKEN" | PAN_PASS="$PAN_SEC" python pan_crypt.py encrypt)
+          echo "cipher=$CIPHER" >> "$GITHUB_OUTPUT"
         env:
           PAN_BASE: ${{ secrets.PAN_BASE }}
           PAN_CID: ${{ secrets.PAN_CID }}
@@ -58,7 +73,8 @@ jobs:
           TOKEN=$(python pan_login.py)
           if [ -z "$TOKEN" ]; then echo "empty token" >&2; exit 1; fi
           echo "::add-mask::$TOKEN"
-          echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
+          CIPHER=$(printf '%s' "$TOKEN" | PAN_PASS="$PAN_SEC" python pan_crypt.py encrypt)
+          echo "cipher=$CIPHER" >> "$GITHUB_OUTPUT"
         env:
           PAN_BASE: ${{ secrets.PAN_BASE }}
           PAN_CID: ${{ secrets.PAN_CLIENT_ID }}
@@ -76,7 +92,7 @@ jobs:
           PAN_SEC: ${{ secrets.PAN_SEC }}
           PAN_DIR_A: ${{ secrets.PAN_DIR_A }}
           PAN_DIR_B: ${{ secrets.PAN_DIR_B }}
-          PAN_TOKEN_PREFETCHED: ${{ steps.panlogin.outputs.token }}
+          # PAN_TOKEN_PREFETCHED already set into $GITHUB_ENV by the login step above
 
   run:
     needs: prep
@@ -93,15 +109,43 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install --quiet boto3 requests pillow
-      # job outputs are NOT masked across jobs (each job is a fresh runner) -- re-apply the
-      # mask here before this job's own logs can echo the token back in plain text.
-      - name: mask prefetched pan tokens
+      # Decrypt what prep encrypted (see prep's "pan login once" comment for why this isn't
+      # a plain job output). Each cipher was encrypted with the matching credential secret,
+      # which this job also has -- decrypt with it, mask the plaintext immediately (mask is
+      # per-job-runner, never shared across jobs), hand it to the script via $GITHUB_ENV
+      # only. Empty/undecryptable cipher -> do NOT set the env var -> sync.py's token()/
+      # pan_token() see it absent and fall back to logging in themselves (logged below, not
+      # silent), same as a local/manual run with no prep step at all.
+      - name: decrypt prefetched pan tokens
         run: |
-          echo "::add-mask::$PAN_TOKEN_PREFETCHED"
-          echo "::add-mask::$PAN_CLIENT_TOKEN_PREFETCHED"
+          set -euo pipefail
+          if [ -z "$PAN_TOKEN_CIPHER" ]; then
+            echo "WARN: no prefetched zip/pdf-account token cipher -- this shard will log in itself (fallback)" >&2
+          else
+            TOK=$(printf '%s' "$PAN_TOKEN_CIPHER" | PAN_PASS="$PAN_SEC" python pan_crypt.py decrypt || true)
+            if [ -z "$TOK" ]; then
+              echo "WARN: could not decrypt zip/pdf-account token -- this shard will log in itself (fallback)" >&2
+            else
+              echo "::add-mask::$TOK"
+              echo "PAN_TOKEN_PREFETCHED=$TOK" >> "$GITHUB_ENV"
+            fi
+          fi
+          if [ -z "$PAN_CLIENT_TOKEN_CIPHER" ]; then
+            echo "WARN: no prefetched page-read-account token cipher -- this shard will log in itself (fallback)" >&2
+          else
+            TOK2=$(printf '%s' "$PAN_CLIENT_TOKEN_CIPHER" | PAN_PASS="$PAN_CLIENT_SECRET" python pan_crypt.py decrypt || true)
+            if [ -z "$TOK2" ]; then
+              echo "WARN: could not decrypt page-read-account token -- this shard will log in itself (fallback)" >&2
+            else
+              echo "::add-mask::$TOK2"
+              echo "PAN_CLIENT_TOKEN_PREFETCHED=$TOK2" >> "$GITHUB_ENV"
+            fi
+          fi
         env:
-          PAN_TOKEN_PREFETCHED: ${{ needs.prep.outputs.pan_token }}
-          PAN_CLIENT_TOKEN_PREFETCHED: ${{ needs.prep.outputs.pan_client_token }}
+          PAN_TOKEN_CIPHER: ${{ needs.prep.outputs.pan_token_cipher }}
+          PAN_CLIENT_TOKEN_CIPHER: ${{ needs.prep.outputs.pan_client_token_cipher }}
+          PAN_SEC: ${{ secrets.PAN_SEC }}
+          PAN_CLIENT_SECRET: ${{ secrets.PAN_CLIENT_SECRET }}
       - run: python sync.py
         env:
           S_EP: ${{ secrets.S_EP }}
@@ -121,9 +165,7 @@ jobs:
           # 2026-07-22: 取图从123需要的open_platform凭据(与推zip/pdf的PAN_CID/PSEC不同对,secret仓库已有)
           PAN_CLIENT_ID: ${{ secrets.PAN_CLIENT_ID }}
           PAN_CLIENT_SECRET: ${{ secrets.PAN_CLIENT_SECRET }}
-          # 2026-09-26: both logged in once by prep -- see pan_login.py. sync.py's token()/
-          # pan_token() use these instead of calling access_token themselves.
-          PAN_TOKEN_PREFETCHED: ${{ needs.prep.outputs.pan_token }}
-          PAN_CLIENT_TOKEN_PREFETCHED: ${{ needs.prep.outputs.pan_client_token }}
+          # PAN_TOKEN_PREFETCHED / PAN_CLIENT_TOKEN_PREFETCHED already set into $GITHUB_ENV
+          # by the decrypt step above (or left unset -> sync.py falls back to logging in)
           SHARD: ${{ matrix.shard }}
           TOTAL: ${{ github.event.inputs.total || '256' }}

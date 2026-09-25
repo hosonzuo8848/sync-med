@@ -182,13 +182,16 @@ def pan_json(method, url, headers=None, body=None, attempts=2):
 
 
 # -- token: process-local cache -> prefetched (prep job) -> KV pan:tok -> mint fresh -----
-# 2026-09-26: prep job now logs in once (see pan_login.py + warm_dlink.yml) and hands the
-# token to every run-job shard via a masked job output, so 3 shards starting within the
+# 2026-09-26: prep job now logs in once (see pan_login.py + pan_crypt.py + warm_dlink.yml)
+# and hands the token to every run-job shard, encrypted, so 3 shards starting within the
 # same instant no longer race to mint their own token before KV pan:tok is populated (the
 # original KV-cache path still closes that race most of the time, but not always -- shards
 # launch close enough together that the first request can still land before any of them has
-# written pan:tok). A shard falls back to the KV-cache path only when the prefetched value
-# is absent (e.g. local run).
+# written pan:tok). A shard falls back to the KV-cache path when the prefetched value is
+# absent -- local run, or prep's cipher failed to decrypt (warm_dlink.yml's decrypt step
+# already warns; LOGIN_FALLBACK below makes it a second, harder-to-miss signal in this
+# script's own output, never silent).
+LOGIN_FALLBACK = not bool(os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip())
 _tok_cache = {"v": os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip() or None}
 
 
@@ -360,7 +363,7 @@ def main():
     print(f"=== shard {SHARD}/{TOTAL} done in {el:.0f}s: attempted={stat['attempted']} "
           f"ledger_skip={stat['ledger_skip']} kv_skip={stat['kv_skip']} "
           f"warmed_thumb={stat['warmed_thumb']} warmed_page={stat['warmed_page']} "
-          f"transient={stat['transient']} ===", flush=True)
+          f"transient={stat['transient']} login_fallback={LOGIN_FALLBACK} ===", flush=True)
 
 
 if __name__ == "__main__":

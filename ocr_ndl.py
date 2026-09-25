@@ -22,10 +22,13 @@ PILOT = os.environ.get("PILOT", "").strip()
 s3 = boto3.client("s3", endpoint_url=EP, aws_access_key_id=AK, aws_secret_access_key=SK, region_name="auto")
 
 PAN = "https://open-api.123pan.com"
-# 2026-09-26: prep job now logs in once (see pan_login.py + ocr_ndl.yml) and hands the
-# token to every run-job shard via a masked job output, so 40 shards no longer each call
-# access_token and revoke each other's token. A shard falls back to logging in itself only
-# when the prefetched value is absent (e.g. local run).
+# 2026-09-26: prep job now logs in once (see pan_login.py + pan_crypt.py + ocr_ndl.yml) and
+# hands the token to every run-job shard, encrypted, so 40 shards no longer each call
+# access_token and revoke each other's token. A shard falls back to logging in itself when
+# the prefetched value is absent -- local run, or prep's cipher failed to decrypt (the
+# decrypt step in ocr_ndl.yml already warns about this; LOGIN_FALLBACK below makes it a
+# second, harder-to-miss signal in this script's own D1/ledger output, never silent).
+LOGIN_FALLBACK = not bool(os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip())
 _tok = {"v": os.environ.get("PAN_CLIENT_TOKEN_PREFETCHED", "").strip() or None}
 
 
@@ -116,6 +119,10 @@ def d1_report_run(status, total, done_n, skip_n, err_n, low_conf_n, error_msg=""
     # "upstream missing-page scale". Break it out so the dashboard can tell them apart.
     if auth_err_n:
         msg = (msg + " " if msg else "") + "auth_err=%d" % auth_err_n
+    if LOGIN_FALLBACK:
+        # this shard did not get prep's prefetched token (absent or failed to decrypt) and
+        # logged in on its own -- worth seeing on the dashboard, not just the run log.
+        msg = (msg + " " if msg else "") + "login_fallback=1"
     try:
         d1_query(
             "INSERT INTO ocr_jobs (book_id, table_name, run_id, shard, status, engine, "
@@ -440,12 +447,13 @@ s3.put_object(Bucket=BUCKET, Key=f"_ledger/ocr_ndl_{SHARD}.json",
                                "err": err, "auth_err": auth_err, "low_conf": low_conf,
                                "rejected": rejected,
                                "cooled": cooled,
+                               "login_fallback": LOGIN_FALLBACK,
                                "dead_pages": dead_pages, "dead_books": dead_books,
                                "dead_new": _dead_stat["new"]}).encode())
 d1_report_run("done", len(mine), done, skip, err, low_conf, rej_n=rejected, auth_err_n=auth_err)
 d1_report_dead(dead_pages, dead_books, _dead_stat["new"], cooled, top_dead)
 print(f"=== shard {SHARD} 完成 done={done} skip={skip} err={err} auth_err={auth_err} "
-      f"low_conf={low_conf} 质量闸判退={rejected} / {len(mine)} ===", flush=True)
+      f"low_conf={low_conf} 质量闸判退={rejected} login_fallback={LOGIN_FALLBACK} / {len(mine)} ===", flush=True)
 print(f"=== 死信 {dead_pages}页/{dead_books}本 (本轮新增{_dead_stat['new']}·冷却跳过{cooled}) ===", flush=True)
 if top_dead:
     # 死页最集中的几本 = 上游 123 缺页最严重的几本,给 CTO 判断上游窟窿规模用。

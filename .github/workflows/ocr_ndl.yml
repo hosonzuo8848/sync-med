@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       shards: ${{ steps.g.outputs.shards }}
-      pan_token: ${{ steps.panlogin.outputs.token }}
+      pan_token_cipher: ${{ steps.panlogin.outputs.cipher }}
     steps:
       - id: g
         run: python -c "import json,os;print('shards='+json.dumps(list(range(int(os.environ['T'])))))" >> "$GITHUB_OUTPUT"
@@ -34,10 +34,19 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install --quiet requests
-      # 2026-09-26: log in ONCE here, hand the token to every run-job shard via a masked
-      # job output. Fixes 40 shards (max-parallel 8) each calling access_token and
-      # revoking each other's token -- 123 keeps only the newest login per account. Same
-      # masking convention as webp-convert.yml's Python pipeline uses for its own token.
+      # 2026-09-26 rework: log in ONCE here, hand the token to every run-job shard. Fixes 40
+      # shards (max-parallel 8) each calling access_token and revoking each other's token --
+      # 123 keeps only the newest login per account.
+      #
+      # The token does NOT go into the job output in plaintext -- GitHub Actions silently
+      # drops a job output whose value has been through ::add-mask:: ("Skip output '<name>'
+      # since it may contain secret"; confirmed on a throwaway branch, run 36201413266). The
+      # first version of this fix put the masked token straight into GITHUB_OUTPUT and never
+      # actually worked -- every shard read it back empty and silently logged in itself.
+      # Fix: encrypt with the same PAN_CLIENT_SECRET the run job already has (pan_crypt.py,
+      # openssl aes-256-cbc), put only the CIPHERTEXT in the output. The run job decrypts
+      # with its own copy of that secret and hands the plaintext to the script via
+      # $GITHUB_ENV only (masked first), never through an output or an echo.
       - name: pan login once
         id: panlogin
         run: |
@@ -45,7 +54,8 @@ jobs:
           TOKEN=$(python pan_login.py)
           if [ -z "$TOKEN" ]; then echo "empty token" >&2; exit 1; fi
           echo "::add-mask::$TOKEN"
-          echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
+          CIPHER=$(printf '%s' "$TOKEN" | PAN_PASS="$PAN_SEC" python pan_crypt.py encrypt)
+          echo "cipher=$CIPHER" >> "$GITHUB_OUTPUT"
         env:
           PAN_CID: ${{ secrets.PAN_CLIENT_ID }}
           PAN_SEC: ${{ secrets.PAN_CLIENT_SECRET }}
@@ -65,12 +75,26 @@ jobs:
           python-version: "3.11"
       - run: git clone --depth 1 https://github.com/ndl-lab/ndlocr-lite
       - run: pip install --quiet -r ndlocr-lite/requirements.txt boto3 requests
-      # job outputs are NOT masked across jobs (each job is a fresh runner) -- re-apply the
-      # mask here before this job's own logs can echo the token back in plain text.
-      - name: mask prefetched pan token
-        run: echo "::add-mask::$PAN_CLIENT_TOKEN_PREFETCHED"
+      # Decrypt what prep encrypted (see prep's "pan login once" comment). Empty/
+      # undecryptable cipher -> do NOT set the env var -> ocr_ndl.py's pan_token() sees it
+      # absent and falls back to logging in itself (logged, not silent).
+      - name: decrypt prefetched pan token
+        run: |
+          set -euo pipefail
+          if [ -z "$PAN_TOKEN_CIPHER" ]; then
+            echo "WARN: no prefetched token cipher -- this shard will log in itself (fallback)" >&2
+          else
+            TOK=$(printf '%s' "$PAN_TOKEN_CIPHER" | PAN_PASS="$PAN_SEC" python pan_crypt.py decrypt || true)
+            if [ -z "$TOK" ]; then
+              echo "WARN: could not decrypt prefetched token -- this shard will log in itself (fallback)" >&2
+            else
+              echo "::add-mask::$TOK"
+              echo "PAN_CLIENT_TOKEN_PREFETCHED=$TOK" >> "$GITHUB_ENV"
+            fi
+          fi
         env:
-          PAN_CLIENT_TOKEN_PREFETCHED: ${{ needs.prep.outputs.pan_token }}
+          PAN_TOKEN_CIPHER: ${{ needs.prep.outputs.pan_token_cipher }}
+          PAN_SEC: ${{ secrets.PAN_CLIENT_SECRET }}
       # deadletter.json rides in the same cache as the ledger: it is the record of
       # pages that failed, without which every run re-fetches the same dead pages
       # forever (2026-07-28: err was running at twice done, 92% of it the same
@@ -96,9 +120,8 @@ jobs:
           D1_API_TOKEN: ${{ secrets.D1_API_TOKEN }}
           PAN_CLIENT_ID: ${{ secrets.PAN_CLIENT_ID }}
           PAN_CLIENT_SECRET: ${{ secrets.PAN_CLIENT_SECRET }}
-          # 2026-09-26: logged in once by prep -- see pan_login.py. pan_token() in
-          # ocr_ndl.py uses this instead of calling access_token itself.
-          PAN_CLIENT_TOKEN_PREFETCHED: ${{ needs.prep.outputs.pan_token }}
+          # PAN_CLIENT_TOKEN_PREFETCHED already set into $GITHUB_ENV by the decrypt step
+          # above (or left unset -> ocr_ndl.py falls back to logging in itself)
           SHARD: ${{ matrix.shard }}
           TOTAL: ${{ github.event.inputs.total || '40' }}
           PILOT: ${{ github.event.inputs.pilot }}
