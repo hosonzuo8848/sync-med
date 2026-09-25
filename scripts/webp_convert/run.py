@@ -43,6 +43,7 @@ import glob
 import hashlib
 import io
 import json
+import math
 import os
 import random
 import re
@@ -59,9 +60,15 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.dirname(HERE))          # scripts/ (gh_issue)
 import pan as panmod                               # noqa: E402
 
-# Same render parameters as the local v8 engine, so cloud pages match the
-# pages already on the site: fitz 120 dpi, clamp to WebP max side, q80 m0.
-PDF_DPI, WEBP_Q, WEBP_METHOD, WEBP_MAX = 120, 80, 0, 16383
+# Page size rule (CTO, 2026-09-26, tier D): long side = min(source long side,
+# WEBP_MAX), WebP q80 method 4, and the source is never upscaled. The source of a
+# PDF page is its largest raster image (the scan): the page is rendered so that
+# image lands 1:1, then shrunk with LANCZOS. The old fixed 120 dpi render blew a
+# 6408 px scan up to 8010 px (~7 MB a page). A page without a usable raster
+# image (vector / text) falls back to PDF_DPI.
+PDF_DPI, WEBP_Q, WEBP_METHOD, WEBP_MAX = 120, 80, 4, 3200
+RENDER_MAX = 16383     # WebP's side limit; bounds the 1:1 render of a small scan on a huge page
+SCAN_MIN = 64          # an image thinner than this is an icon / spacer, never the page scan
 PAGE_RE = re.compile(r"^page_(\d{4,})\.webp$")
 IMG_EXT = (".jpg", ".jpeg", ".png", ".tif", ".tiff")
 CRED_ENV = {"main": ("PAN_CID_MAIN", "PAN_SEC_MAIN"), "guji": ("PAN_CID_GUJI", "PAN_SEC_GUJI")}
@@ -329,22 +336,43 @@ def cmd_matrix(a):
 
 
 # ---------------------------------------------------------------- conversion
-def to_webp(img):
+def to_webp(img, max_side=None):
+    """Shrink (never enlarge) to max_side (default WEBP_MAX) with LANCZOS; encode."""
     from PIL import Image
     if img.mode != "RGB":
         img = img.convert("RGB")
-    if max(img.size) > WEBP_MAX:
-        r = WEBP_MAX / max(img.size)
-        img = img.resize((int(img.width * r), int(img.height * r)), Image.LANCZOS)
+    cap = max_side or WEBP_MAX
+    if max(img.size) > cap:
+        r = cap / max(img.size)
+        img = img.resize((max(1, round(img.width * r)), max(1, round(img.height * r))), Image.LANCZOS)
     buf = io.BytesIO()
     img.save(buf, "webp", quality=WEBP_Q, method=WEBP_METHOD)
     return buf.getvalue()
 
 
+def native_zoom(page):
+    """Pixels per point at which the page's largest raster image (the scan) is
+    drawn 1:1. Pages without one fall back to PDF_DPI."""
+    best, zoom = 0, PDF_DPI / 72.0
+    for im in page.get_image_info():
+        a, b, c, d = im["transform"][:4]
+        sx, sy = math.hypot(a, b), math.hypot(c, d)       # drawn size in points (rotation-proof)
+        w, h = im["width"], im["height"]
+        if min(w, h) >= SCAN_MIN and sx > 0 and sy > 0 and w * h > best:
+            best, zoom = w * h, min(w / sx, h / sy)
+    return zoom
+
+
 def pdf_page_webp(doc, idx0):
+    import fitz
     from PIL import Image
-    pix = doc[idx0].get_pixmap(dpi=PDF_DPI)
-    return to_webp(Image.frombytes("RGB", (pix.width, pix.height), pix.samples))
+    page = doc[idx0]
+    long_pt = max(page.rect.width, page.rect.height)
+    zoom = native_zoom(page)
+    want = min(round(long_pt * zoom), WEBP_MAX)         # never above the scan's own size
+    zoom = min(zoom, RENDER_MAX / long_pt)
+    pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom))
+    return to_webp(Image.frombytes("RGB", (pix.width, pix.height), pix.samples), want)
 
 
 def direct_url(acct, path):
@@ -1116,6 +1144,30 @@ def selftest():
         ("/42/a/b.pdf-%s-%s-42-k" % (exp, rnd)).encode()).hexdigest() and u.netloc == "42.cdn.123clouddisk.com")
     for k in ("PAN_UID_GUJI", "PAN_DIRECT_KEY_GUJI", "WEBP_DIRECT"):
         os.environ.pop(k, None)
+
+    # 18. page size: long side = min(scan long side, 3200) (CTO rule, pinned here on
+    #     purpose). Each scan is drawn at 72 dpi (1 px per point), so the old fixed
+    #     120 dpi render would have enlarged it 1.67x. 4281 px also guards the
+    #     resize rounding: int(4281 * 3200 / 4281) is 3199. A 32 px stamp drawn
+    #     300 pt wide after the scan must not be taken for the scan, and a page
+    #     whose only image is a 1 px spacer renders like a vector page.
+    def page_long(w, h, *imgs):                        # imgs: ((px_w, px_h), rect or None = full page)
+        doc = fitz.open()
+        pg = doc.new_page(width=w, height=h)
+        for size, rect in imgs:
+            b = io.BytesIO()
+            Image.new("RGB", size, (120, 110, 100)).save(b, "png")
+            pg.insert_image(rect or pg.rect, stream=b.getvalue())
+        out = Image.open(io.BytesIO(pdf_page_webp(doc, 0)))
+        doc.close()
+        return max(out.size)
+
+    stamp = ((32, 32), fitz.Rect(0, 0, 300, 300))
+    check("render: 1000 px scan -> 1000 px page, never enlarged",
+          page_long(1000, 600, ((1000, 600), None), stamp) == 1000)
+    check("render: 4281 px scan -> 3200 px page", page_long(4281, 2400, ((4281, 2400), None), stamp) == 3200)
+    check("render: page with only a 1 px spacer -> %d dpi like a vector page" % PDF_DPI,
+          page_long(200, 300, ((1, 1), None)) == 500)
 
     for name, ok in checks:
         print("%s  %s" % ("PASS" if ok else "FAIL", name))
