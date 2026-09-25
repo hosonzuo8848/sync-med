@@ -43,3 +43,9 @@ jobs:
       #   冻结今日存量为基线,只拦"新增第二份"或"新硬编码端点"。基线只缩不增。
       - name: 单一实现闸 (single-source guard)
         run: python scripts/guard_single_source.py
+
+      # Python 3.11 编译闸(2026-09-26):runner 和各条产线用的都是 3.11,本机常常是 3.12。
+      #   3.12 放宽了 f-string 等语法,本机编得过、云端报 SyntaxError。#729 就是这样把整个 fleet-watch 打挂的。
+      #   这里用和线上相同的 3.11 把 scripts/ 全部编译一遍,编不过就红。
+      - name: Python 3.11 编译闸 (scripts/)
+        run: python -m compileall -q scripts
