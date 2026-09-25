@@ -655,6 +655,122 @@ def fmt_d1_vs_pan(r):
 
 
 
+
+# ---- D1 capacity sentinel (2026-09-26) -------------------------------------------------------------
+# The D1 storage included in Workers Paid is 5 GB for the whole account; on 2026-09-26 it stood at 4.926 GB.
+# Principle page: F:/0book/docs/new, D1 storage principles dated 2026-09-26.
+D1_CAP_BYTES = 5_000_000_000
+D1_CAP_ALERT_RATIO = 0.8                          # red from 80% (4.0 GB)
+D1_CAP_DBS = ("guyaofang-db", "bohui-cms-v2")     # together >99% of the bytes; their tables are snapshotted for growth
+D1_CAP_SNAP = ".fleet_d1_snap.json"               # kept between runs by the actions/cache step in fleet-watch.yml
+D1_CAP_TOP = 5
+
+
+def _cf(path, body=None):
+    acc = os.environ["CF_ACCOUNT_ID"]; tok = os.environ["D1_API_TOKEN"]
+    req = urllib.request.Request(f"https://api.cloudflare.com/client/v4/accounts/{acc}{path}",
+        method="POST" if body is not None else "GET",
+        headers={"Authorization": "Bearer " + tok, "Content-Type": "application/json"},
+        data=json.dumps(body).encode("utf-8") if body is not None else None)
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        return json.loads(resp.read())
+
+
+def d1_capacity_check(now):
+    '''D1 \u5b58\u50a8\u54e8\u5175:\u5404\u5e93\u5927\u5c0f\u3001\u8d26\u6237\u5408\u8ba1\u5bf9 5 GB \u7684 80% \u7ebf\u3001\u4ee5\u53ca\u4e0e\u4e0a\u4e00\u8f6e\u76f8\u6bd4\u5728\u6da8\u7684\u524d\u4e94\u5f20\u8868\u3002
+    \u53ea\u8bfb:\u4e00\u6b21\u5e93\u5217\u8868 + \u6bcf\u5e93\u4e00\u6b21 sqlite_master + \u6bcf\u8868\u4e00\u6b21 MAX(rowid)(\u53ea\u8bfb 1 \u884c)+ \u5728\u6da8\u7684\u8868\u5404\u62bd\u6700\u65b0 200 \u884c\u91cf\u5e73\u5747\u884c\u957f\u3002'''
+    r = {"ok": False, "alert": False, "alert_msg": "", "skip_reason": "", "dbs": [], "total": 0,
+         "growth": [], "hours": None, "first_run": False}
+    if not (os.environ.get("CF_ACCOUNT_ID") and os.environ.get("D1_API_TOKEN")):
+        r["skip_reason"] = "\u7f3a\u73af\u5883\u53d8\u91cf CF_ACCOUNT_ID / D1_API_TOKEN"
+        return r
+    try:
+        j = _cf("/d1/database?per_page=100")
+        if not j.get("success"):
+            r["skip_reason"] = f"\u5e93\u5217\u8868\u5931\u8d25: {str(j.get('errors', ''))[:100]}"
+            return r
+        dbs = j.get("result") or []
+        r["dbs"] = sorted(((d["name"], int(d.get("file_size") or 0)) for d in dbs), key=lambda x: -x[1])
+        r["total"] = sum(s for _, s in r["dbs"])
+        uuid = {d["name"]: d["uuid"] for d in dbs}
+
+        def q(name, sql):
+            return (_cf(f"/d1/database/{uuid[name]}/query", {"sql": sql}).get("result") or [{}])[0].get("results") or []
+
+        cur = {}
+        for name in D1_CAP_DBS:
+            if name not in uuid:
+                continue
+            tabs = [t["name"] for t in q(name, "SELECT name FROM sqlite_master WHERE type='table' AND sql NOT LIKE 'CREATE VIRTUAL%' "
+                                               "AND name NOT LIKE 'sqlite_%' AND name NOT LIKE '_cf_%'")]
+            for t in tabs:
+                if "_fts" in t:
+                    continue                  # FTS shadow tables: rowids are encoded, MAX(rowid) is not a row count
+                try:
+                    m = q(name, 'SELECT MAX(rowid) m FROM "%s"' % t.replace('"', '""'))
+                    if m and m[0].get("m") is not None:
+                        cur[f"{name}/{t}"] = int(m[0]["m"])
+                except Exception:              # WITHOUT ROWID or transient error: skip this table only
+                    continue
+        prev = None
+        try:
+            prev = json.load(open(D1_CAP_SNAP, encoding="utf-8"))
+        except Exception:
+            r["first_run"] = True
+        if prev and prev.get("rows"):
+            hours = (now.timestamp() - float(prev["at"])) / 3600
+            r["hours"] = round(hours, 2)
+            grown = sorted(((k, v - prev["rows"].get(k, v)) for k, v in cur.items() if v > prev["rows"].get(k, v)),
+                           key=lambda x: -x[1])[:D1_CAP_TOP * 2]
+            for key, d in grown:
+                name, t = key.split("/", 1)
+                try:
+                    cols = [c["name"] for c in q(name, "SELECT name FROM pragma_table_info('%s')" % t.replace("'", "''"))]
+                    expr = "+".join('IFNULL(LENGTH(CAST("%s" AS BLOB)),0)' % c.replace('"', '""') for c in cols) or "0"
+                    a = q(name, 'SELECT AVG(%s) a FROM (SELECT * FROM "%s" ORDER BY rowid DESC LIMIT 200)' % (expr, t.replace('"', '""')))
+                    avg = float((a[0].get("a") if a else 0) or 0)
+                except Exception:
+                    avg = 0.0
+                per_day = d * avg / hours * 24 if hours > 0 else 0
+                r["growth"].append({"table": key, "rows": d, "avg_bytes": round(avg), "mb_per_day": round(per_day / 1e6, 2)})
+            r["growth"] = sorted(r["growth"], key=lambda g: -g["mb_per_day"])[:D1_CAP_TOP]
+        with open(D1_CAP_SNAP, "w", encoding="utf-8") as f:
+            json.dump({"at": now.timestamp(), "rows": cur}, f)
+        r["ok"] = True
+        limit = D1_CAP_BYTES * D1_CAP_ALERT_RATIO
+        if r["total"] > limit:
+            r["alert"] = True
+            r["alert_msg"] = f"D1 \u8d26\u6237\u5408\u8ba1 {r['total'] / 1e9:.3f} GB / 5 GB,\u8d85\u8fc7 80% \u7ebf(4.0 GB)"
+        return r
+    except Exception as e:
+        r["skip_reason"] = f"\u5f02\u5e38: {str(e)[:120]}"
+        return r
+
+
+def fmt_d1_capacity(r):
+    lines = ["", "### D1 \u5bb9\u91cf\u54e8\u5175"]
+    if not r.get("ok"):
+        lines.append(f"- \u8df3\u8fc7: {r.get('skip_reason', '\u672a\u77e5')}")
+        return lines
+    mark = "\U0001f534" if r.get("alert") else "\U0001f7e2"
+    lines.append(f"- {mark} \u8d26\u6237\u5408\u8ba1 **{r['total'] / 1e9:.3f} GB** / 5 GB(80% \u7ebf = 4.0 GB)")
+    lines.append("- \u5404\u5e93: " + " \u00b7 ".join(f"{n} {s / 1e9:.3f} GB" for n, s in r["dbs"][:5]))
+    if r.get("first_run"):
+        lines.append("- \u5728\u6da8\u7684\u8868: \u9996\u6b21\u8fd0\u884c,\u5df2\u5b58\u5feb\u7167,\u4e0b\u4e00\u8f6e\u8d77\u62a5\u589e\u91cf")
+    elif not r["growth"]:
+        lines.append(f"- \u5728\u6da8\u7684\u8868: \u8fd1 {r['hours']} \u5c0f\u65f6\u6ca1\u6709\u8868\u65b0\u589e\u884c")
+    else:
+        lines.append(f"- \u8fd1 {r['hours']} \u5c0f\u65f6\u65b0\u589e\u884c\u6700\u591a\u7684\u8868(\u6298\u5408\u6bcf\u5929,\u53ea\u542b\u884c\u6570\u636e\u3001\u4e0d\u542b\u7d22\u5f15\u4e0e\u66f4\u65b0):")
+        lines.append("")
+        lines.append("| \u8868 | \u65b0\u589e\u884c | \u5e73\u5747\u884c\u957f | \u6298\u5408\u6bcf\u5929 |")
+        lines.append("|---|---:|---:|---:|")
+        for g in r["growth"]:
+            lines.append(f"| `{g['table']}` | {g['rows']:,} | {g['avg_bytes']} B | {g['mb_per_day']} MB |")
+    if r.get("alert"):
+        lines.append(f"- \u26a0\ufe0f \u544a\u8b66: {r['alert_msg']}")
+    return lines
+
+
 def main():
     if not TOKEN:
         print("ERROR: GITHUB_TOKEN not set", file=sys.stderr)
@@ -686,16 +802,22 @@ def main():
         print(f"  skipped: {d1pan.get('skip_reason','')}", file=sys.stderr)
 
     
+    print("Running D1 capacity sentinel...", file=sys.stderr)
+    d1cap = d1_capacity_check(now)
+    print(f"  ok={d1cap['ok']} total={d1cap['total']} alert={d1cap['alert']} {d1cap.get('skip_reason', '')}", file=sys.stderr)
+
     report = build_report(results, ocr_depth, now)
     
     report += "\n" + "\n".join(fmt_d1_vs_pan(d1pan))
+    report += "\n" + "\n".join(fmt_d1_capacity(d1cap))
     print(report)
 
     
     wf_alert_count = sum(1 for r in results if r["alert"])
     ocr_depth_alert = 1 if ocr_depth.get("alert") else 0
     d1pan_alert = 1 if d1pan.get("alert") else 0
-    alert_count = wf_alert_count + ocr_depth_alert + d1pan_alert
+    d1cap_alert = 1 if d1cap.get("alert") else 0
+    alert_count = wf_alert_count + ocr_depth_alert + d1pan_alert + d1cap_alert
 
     with open(os.environ.get("GITHUB_OUTPUT", "/dev/null"), "a", encoding="utf-8") as f:
         f.write(f"alert_count={alert_count}\n")
