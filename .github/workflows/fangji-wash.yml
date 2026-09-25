@@ -1,0 +1,78 @@
+name: fangji-wash
+
+# Formula text extraction pilot -- thin runner only.
+# The extraction script and the source data live in a private repo; this job checks them out,
+# runs them, and pushes results back to that private repo. Nothing is written to git here.
+# Model calls go only through the internal free-pool gateway (named lanes, no fallback).
+# Logs print counts only. No artifacts are uploaded. Manual dispatch only.
+#
+# Required repository secrets (names only; values are set by the maintainer):
+#   GW_KEY              gateway key (already used by other jobs in this repo)
+#   FANGJI_FORGE_TOKEN  fine-grained token scoped to the private repo:
+#                       contents read/write (release download/upload), issues read/write (progress notes)
+#   JEV_API_KEY         optional, already present; read only when the script runs with --jev
+#
+# Who sees it when it breaks: the progress Issue in the private repo, plus GitHub failure mail.
+# Quota hit: the script saves a checkpoint, notes the Issue and exits 0; dispatch again to resume.
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: "batch id (release fangji-wash-<batch> holds sources and checkpoints)"
+        default: "pilot-01"
+      books:
+        description: "comma-separated book keys, or all"
+        default: "all"
+      chunk_size:
+        description: "chars per chunk (pilot compares 600 and 2000)"
+        default: "600"
+      concurrency:
+        description: "parallel extraction calls"
+        default: "2"
+      dry_run:
+        description: "1 = chunk statistics only, no model calls, no upload"
+        default: "1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: herb-norm-pilot   # shares a vendor account with herb-norm: never run the two at once
+  cancel-in-progress: false
+
+jobs:
+  wash:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      GW_KEY: ${{ secrets.GW_KEY }}
+      JEV_API_KEY: ${{ secrets.JEV_API_KEY }}
+      GH_TOKEN: ${{ secrets.FANGJI_FORGE_TOKEN }}
+      PYTHONIOENCODING: utf-8
+      BATCH: ${{ inputs.batch }}
+      BOOKS: ${{ inputs.books }}
+      CHUNK: ${{ inputs.chunk_size }}
+      CONC: ${{ inputs.concurrency }}
+      DRY: ${{ inputs.dry_run }}
+    steps:
+      - uses: actions/checkout@v4          # this repo: shared gateway client scripts/content_factory/_ai.py
+      - uses: actions/checkout@v4
+        with:
+          repository: hosonzuo/sueai-forge
+          token: ${{ secrets.FANGJI_FORGE_TOKEN }}
+          path: forge
+          sparse-checkout: fangji_wash
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q zhconv "setuptools<81"
+      - name: selftest (gateway stubbed)
+        run: python forge/fangji_wash/wash.py --selftest
+      - name: run
+        run: |
+          extra=""
+          if [ "$DRY" = "1" ]; then extra="--dry-run"; fi
+          python forge/fangji_wash/wash.py --batch "$BATCH" --books "$BOOKS" --chunk-size "$CHUNK" \
+            --concurrency "$CONC" --ai-lib scripts/content_factory --deadline-min 270 --issue $extra
