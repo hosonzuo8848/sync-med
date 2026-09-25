@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 """Minimal 123pan open-platform client for the webp-convert pipeline.
 
-- No login inside a shard. The caller hands in an access token taken from the
-  shared token broker (run.py token). A 123 account keeps at most 3 live
-  tokens and other jobs use them too, so shards must never log in themselves.
+- A shard never logs in on its own. It gets the shared token (run.py token)
+  and, on 401, asks its on_401 hook for a replacement (run.py Renewer).
 - Every call passes a per-class rate limiter: list / dl / up / misc.
   file/list has a hard 3 req/s per ACCOUNT limit shared by every consumer of
   that account, so the defaults stay well below it.
-- 123 reports rate limiting as HTTP 200 + body code 429 (or a "too frequent"
-  message), so the body code is always checked, never just the HTTP status.
+- The body code is always checked, never just the HTTP status:
+    401                            token pushed out by a newer login -> on_401 / TokenInvalid
+                                   (checked first: its text says "exceeded the limit")
+    429 or the "too frequent" text rate limited -> back off, retry
+    anything else                  PanError, no retry here
+- Breaker: BREAK_AFTER consecutive failed calls of one class ending in the same
+  code raise Tripped, and the shard stops. Typical causes: code=1 on every
+  write (123 account-level write ban; reads keep working) or rate limiting that
+  outlasts every retry. Hammering on only extends the ban.
 """
 import collections
 import hashlib
@@ -18,18 +24,23 @@ import time
 import requests
 
 API = "https://open-api.123pan.com"
-# "\u9891\u7e41" = "too frequent" in the 123 error message
-RATE_WORDS = ("\u9891\u7e41", "exceed", "limit", "tokens number")
+RATE_WORD = "\u9891\u7e41"          # "too frequent" in 123's rate-limit message
+BREAK_AFTER = 5
+SLEEP = time.sleep                  # selftest swaps in a no-op
 
 
 class TokenInvalid(Exception):
-    """401 / token rejected. Shards stop instead of logging in again."""
+    """401 and no replacement token: the shard stops."""
 
 
 class PanError(Exception):
     def __init__(self, where, code):
         super().__init__("%s code=%s" % (where, code))
         self.code = code
+
+
+class Tripped(PanError):
+    """The same failure BREAK_AFTER times in a row: stop the shard."""
 
 
 class Limiter:
@@ -64,48 +75,68 @@ def login(client_id, client_secret):
 
 
 class Pan:
-    def __init__(self, token, qps, max_rate_retry=8):
-        self.h = {"Platform": "open_platform", "Authorization": "Bearer " + token}
+    def __init__(self, token, qps, max_rate_retry=8, on_401=None):
+        self.token = token
+        self.on_401 = on_401            # callable(rejected_token) -> new token or None
         self.lim = {k: Limiter(v) for k, v in qps.items()}
         self.s = requests.Session()
         self.max_rate_retry = max_rate_retry
         self.stats = collections.Counter()
+        self.streak = {}                # class -> [code, consecutive failures]
         self._lists = {}
         self._dom = None
         self._lock = threading.Lock()
         self._mk_locks = collections.defaultdict(threading.Lock)
 
     # ---- transport -------------------------------------------------------
+    def _fail(self, cls, where, code):
+        with self._lock:
+            s = self.streak.setdefault(cls, [None, 0])
+            s[1] = s[1] + 1 if s[0] == code else 1
+            s[0] = code
+            n = s[1]
+        if n >= BREAK_AFTER:
+            self.stats["tripped"] += 1
+            raise Tripped(where, code)
+        raise PanError(where, code)
+
     def _call(self, cls, method, url, where, **kw):
-        net_fail = 0
-        rate_hit = 0
+        net_fail = rate_hit = 0
+        renewed = False
         timeout = kw.pop("timeout", 90)
         while True:
             self.lim[cls].wait()
             self.stats["call_" + cls] += 1
+            tok = self.token
             try:
-                j = self.s.request(method, url, headers=self.h, timeout=timeout, **kw).json()
+                j = self.s.request(method, url, timeout=timeout, headers={
+                    "Platform": "open_platform", "Authorization": "Bearer " + tok}, **kw).json()
             except Exception:                                   # noqa: BLE001
                 net_fail += 1
                 if net_fail >= 3:
-                    raise PanError(where, "net")
-                time.sleep(3 * net_fail)
+                    self._fail(cls, where, "net")
+                SLEEP(3 * net_fail)
                 continue
             code = j.get("code")
             if code == 0:
+                with self._lock:
+                    self.streak.pop(cls, None)
                 return j.get("data") or {}
-            msg = str(j.get("message", "")).lower()
-            # rate check first: one of 123's rate-limit messages says "tokens number"
-            if code == 429 or any(w in msg for w in RATE_WORDS):
+            if code == 401:
+                self.stats["token_401"] += 1
+                new = None if renewed or not self.on_401 else self.on_401(tok)
+                if not new:
+                    raise TokenInvalid(where)
+                self.token, renewed = new, True
+                continue
+            if code == 429 or RATE_WORD in str(j.get("message", "")):
                 rate_hit += 1
                 self.stats["rate_limited"] += 1
                 if rate_hit > self.max_rate_retry:
-                    raise PanError(where, 429)
-                time.sleep(min(60, 2 ** rate_hit))
+                    self._fail(cls, where, 429)
+                SLEEP(min(60, 2 ** rate_hit))
                 continue
-            if code == 401:
-                raise TokenInvalid(where)
-            raise PanError(where, code)
+            self._fail(cls, where, code)
 
     # ---- read ------------------------------------------------------------
     def list_all(self, dir_id, fresh=False):
@@ -192,9 +223,10 @@ class Pan:
             self._dom = dom
         return dom
 
-    def upload(self, dir_id, name, data, try_reuse=True):
+    def upload(self, dir_id, name, data, try_reuse=False):
         """Upload one small file; overwrite a same-name file (duplicate=2).
-        Returns "reuse" (instant upload, no bytes sent) or "up"."""
+        try_reuse probes instant upload first (one extra call on the same quota);
+        the caller turns it on only for retries. Returns "reuse" or "up"."""
         etag = hashlib.md5(data).hexdigest()
         if try_reuse:
             try:
@@ -205,9 +237,9 @@ class Pan:
                     self.stats["reuse"] += 1
                     return "reuse"
             except PanError as e:
-                if e.code == 429:
+                if isinstance(e, Tripped) or e.code == 429:
                     raise
-                # create endpoint refused for another reason -> plain upload below
+                # probe refused for another reason -> plain upload below
         self._call("up", "POST", self._domain() + "/upload/v2/file/single/create", "single",
                    files={"file": (name, data, "application/octet-stream")},
                    data={"parentFileID": str(dir_id), "filename": name, "etag": etag,
