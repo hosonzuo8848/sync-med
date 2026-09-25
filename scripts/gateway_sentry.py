@@ -42,7 +42,7 @@ CLAUDE.md 第 8 条：「凡是只写进日志的产线，一律视为没人看�
   · 全绿时带 create=False 调一次：有 Issue 就更新成"已恢复"并发通知，
     没有就什么都不做（绝不为了报平安凭空开 Issue）
 """
-import os, re, sys, urllib.request
+import json, os, re, sys, urllib.request
 
 # 本文件的 print 里带 ✅/❌，在 Windows 默认 GBK 终端上会整脚本崩掉，
 # 而且崩出来的话是「网关哨兵失败：'gbk' codec can't encode...」——
@@ -68,11 +68,38 @@ MIN_HEALTHY = int(os.environ.get('MIN_HEALTHY', '6'))   # 免费池可用家数�
 TITLE_PREFIX = '🔌 '
 
 
+# This repo is PUBLIC: Actions logs and Issues are world-readable. Keyed health calls return raw upstream
+#   error text (org ids, usage numbers), so only a coarse kind ever leaves this script, never the text.
+_KINDS = (('tier-guard', 'tier-guard'), ('gw:overrides', 'braked'), ('cooling', 'cooling'),
+          ('empty choices', 'empty'), ('timeout|timed out|abort', 'timeout'),
+          ('429|rate limit|quota', 'rate-limit'), ('401|403|unauthori|forbidden', 'auth'))
+
+
+def err_kind(err):
+    e = (err or '').lower()
+    return next((k for pat, k in _KINDS if re.search(pat, e)), 'other' if e else '')
+
+
+def parse_rows(txt):
+    try:
+        j = json.loads(txt)
+        provs = (j.get('data') or j).get('providers') or []
+    except (ValueError, AttributeError):
+        # Fallback: pull rows one by one so one malformed entry does not drop the other 20+.
+        provs = [{'name': n, 'ok': ok == 'true', 'status': int(st), 'cost_ms': int(ms), 'error': err or ''}
+                 for n, ok, st, ms, err in re.findall(
+                     r'\{"name":"([^"]+)","ok":(\w+),"status":(\d+),"cost_ms":(\d+)(?:,"error":"(.*?)")?\}', txt)]
+    return [{'name': p['name'], 'ok': bool(p.get('ok')),
+             'status': p.get('status') or ('skipped' if p.get('skipped') else 'no-key' if p.get('missing_secret') else '?'),
+             'cost_ms': int(p.get('cost_ms') or 0), 'kind': err_kind(p.get('error'))}
+            for p in provs if p.get('name')]
+
+
 def provider_table(rows):
-    out = ['## 全部供应商', '', '| 供应商 | 状态 | 延迟 | 错误 |', '|---|---|---|---|']
+    out = ['## 全部供应商', '', '| 供应商 | 状态 | 延迟 | kind |', '|---|---|---|---|']
     for r in rows:
         out.append(f"| {r['name']} | {'✅' if r['ok'] else '❌ ' + str(r['status'])} "
-                   f"| {r['cost_ms']}ms | {r['error'][:60]} |")
+                   f"| {r['cost_ms']}ms | {r['kind']} |")
     return out
 
 
@@ -90,14 +117,7 @@ def main():
     with urllib.request.urlopen(req, timeout=180) as r:
         txt = r.read().decode('utf-8', 'replace')
 
-    # 用正则逐条抠而不是整体 json.loads：供应商的 error 字段里常带未转义的引号，
-    # 整体解析会挂在某一条上，把其余 20 多家的状态一起丢掉。
-    rows = []
-    for m in re.finditer(
-            r'\{"name":"([^"]+)","ok":(\w+),"status":(\d+),"cost_ms":(\d+)(?:,"error":"(.*?)")?\}', txt):
-        n, ok, st, ms, err = m.groups()
-        rows.append({'name': n, 'ok': ok == 'true', 'status': int(st),
-                     'cost_ms': int(ms), 'error': (err or '')[:160]})
+    rows = parse_rows(txt)
 
     if not rows:
         print('健康检查没解析出任何供应商 —— 端点可能变了，需要人看', file=sys.stderr)
@@ -107,12 +127,13 @@ def main():
     head    = next((r for r in rows if r['name'] == HEAD), None)
     head_down = (head is not None and not head['ok'])
     pool_low  = len(healthy) < MIN_HEALTHY
+    tier = [r['name'] for r in rows if r['kind'] == 'tier-guard']   # key looks upgraded to a paid tier
 
     print(f'供应商 {len(rows)} 家 · 可用 {len(healthy)} 家 · 链头 {HEAD} '
           f'{"❌ " + str(head["status"]) if head_down else "✅" if head else "⚠️ 不在名单里"}')
     for r in rows:
         if not r['ok']:
-            print(f"  ❌ {r['name']:14} {r['status']} {r['error'][:70]}")
+            print(f"  ❌ {r['name']:14} {r['status']} {r['kind']}")
 
     # ── 状态签名：决定这一轮要不要出声 ──────────────────────────────────
     # 只装"会改变处置动作"的东西。延迟毫秒数这类每轮都在变的不能进来，
@@ -122,9 +143,11 @@ def main():
         sig.append(f"head_down:{HEAD}:{head['status']}")
     if pool_low:
         sig.append(f'pool_low:{len(healthy)}')
+    if tier:
+        sig.append('tier:' + ','.join(tier))
     state = '|'.join(sig) if sig else 'ok'
 
-    if not head_down and not pool_low:
+    if not head_down and not pool_low and not tier:
         # 全绿。**不新开 Issue**（create=False），但如果之前开过一个，
         # 把它更新成"已恢复"——fail→ok 是一次状态变化，会自动发出恢复通知。
         # 改之前这里是直接 return，于是恢复后那个写着"挂了"的 Issue 一直开着。
@@ -140,12 +163,13 @@ def main():
         return
 
     title = (f'{TITLE_PREFIX}网关链头挂了 · ' + HEAD) if head_down \
+        else (f'{TITLE_PREFIX}tier-guard: ' + ','.join(tier)) if tier \
         else f'{TITLE_PREFIX}免费池可用家数跌到 {len(healthy)}'
     lines = [f'> 数据源：`{SITE}/api/gateway/health`', '']
     if head_down:
         lines += ['## 🔴 链头不可用', '',
                   f"寻脉/生成走的是 **{HEAD}**，现在 `status={head['status']}`：",
-                  '', f"```\n{head['error']}\n```", '',
+                  '', f"`{head['kind'] or 'other'}` (raw upstream text withheld: public repo)", '',
                   '**注意故障形态**：链头挂了会自动落回默认链的小模型，接口仍返回 200、',
                   'JSON 结构完整，用户看到的是"古籍里没有找到直接记载"而不是错误页——',
                   '监控一片绿，但功能实际已不可用。',
@@ -153,6 +177,10 @@ def main():
                   '或修复该供应商的凭据。', '']
     if pool_low:
         lines += [f'## 🟡 免费池可用 {len(healthy)}/{len(rows)} 家（阈值 {MIN_HEALTHY}）', '']
+    if tier:
+        lines += ['## tier-guard', '',
+                  f"`{', '.join(tier)}`: x-ratelimit-limit headers exceeded the free tier, so the gateway braked "
+                  'that key for 7 days. Check the account for a bound card before clearing KV `tier:<secret>`.', '']
     lines += provider_table(rows)
     body = '\n'.join(lines)
 
