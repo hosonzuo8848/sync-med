@@ -78,11 +78,14 @@ ACCOUNTS_PATH = "data/webp/accounts.json"
 LEDGER_DIR = "data/webp/ledger"
 STATS_DIR = "data/webp/stats"
 MIN_TOKEN_LIFE = 8 * 3600
-# fails: every failed attempt of this volume by kind, e.g. "net:2 429:1 download:1"
-# (net / http<status> / 401 / 429 / api<code> from pan.py; download / verify /
-# src_missing / badname / <ExceptionName> from here)
+# fails: every failed attempt of this volume as "<api>:<kind>:<count>", e.g.
+#   "upload:net:2 list:429:1 volume:download:1". api/kind from pan.py (CATEGORY;
+#   net / http<status> / 401 / 429 / api<code>), or volume:<download | verify |
+#   src_missing | badname | ExceptionName> from here.
+# fail_msgs: per key the latest raw answer, "<key>=code=<c> <message>", <= 200
+#   chars, no token, titles and path segments replaced by <name>. Private ledger only.
 LEDGER_COLS = ["book_id", "target", "status", "pages_expected", "pages_uploaded",
-               "pages_present", "dst_dir_id", "seconds", "attempts", "err", "fails"]
+               "pages_present", "dst_dir_id", "seconds", "attempts", "err", "fails", "fail_msgs"]
 ISSUE_TITLE = "\u4e91\u7aef\u8f6c\u56fe\u8fdb\u5ea6"   # progress issue title (zh)
 RETRY_SLEEP = 5
 RENEW_TRIES, RENEW_WAIT = 6, 20     # a shard waits up to ~2 min for a refreshed token
@@ -545,9 +548,9 @@ def process_book(ctx, row):
     t0 = time.time()
     rec = dict.fromkeys(LEDGER_COLS, 0)
     rec.update(book_id=row["book_id"], target=ctx.a.target, status="fail", dst_dir_id="", err="")
-    fails = collections.Counter()
+    fails, msgs = collections.Counter(), {}
     for p in ctx.pans.values():
-        p.tl.sink = fails                               # this thread works on this volume only
+        p.tl.sink, p.tl.msgs = fails, msgs              # this thread works on this volume only
     try:
         with tempfile.TemporaryDirectory() as td:
             st = {"td": td, "pdf": None}
@@ -570,7 +573,7 @@ def process_book(ctx, row):
                     break
                 except NoRetry as e:
                     rec.update(status="fail", err=str(e))
-                    fails[str(e)] += 1
+                    fails["volume:" + str(e)] += 1
                     break
                 except panmod.PanError as e:
                     rec.update(status="fail", err="pan_%s" % e.code)
@@ -582,7 +585,9 @@ def process_book(ctx, row):
                     err = (str(e) if isinstance(e, IOError) and str(e) in ("download", "verify")
                            else type(e).__name__)[:30]
                     rec.update(status="fail", err=err)
-                    fails[err] += 1
+                    fails["volume:" + err] += 1
+                    if err not in ("download", "verify"):
+                        msgs["volume:" + err] = str(e)[:200]
                 if attempt < 3 and not ctx.stop.is_set():
                     time.sleep(RETRY_SLEEP * attempt)
                 elif ctx.stop.is_set():
@@ -591,9 +596,18 @@ def process_book(ctx, row):
                 st["pdf"].close()
     finally:
         for p in ctx.pans.values():
-            p.tl.sink = None
+            p.tl.sink = p.tl.msgs = None
     rec["seconds"] = int(time.time() - t0)
     rec["fails"] = " ".join("%s:%d" % kv for kv in sorted(fails.items()))
+    # the ledger keeps ids and numbers only: blank out any title / path segment 123 echoed back
+    names = sorted({s for s in [row.get("title") or ""] + (row.get("dst_path") or "").split("/")
+                    + (row.get("src_path") or "").split("/") if len(s) >= 4}, key=len, reverse=True)
+    said = []
+    for k, v in sorted(msgs.items()):
+        for s in names:
+            v = v.replace(s, "<name>")
+        said.append("%s=%s" % (k, v))
+    rec["fail_msgs"] = " | ".join(said)
     with ctx.lock:
         ctx.fails.update(fails)
     return rec
@@ -758,6 +772,7 @@ class _FakeCloud:
         self.dead = set()          # tokens answered with 401
         self.drop = {}             # (book_id, filename) -> single uploads to swallow
         self.net_drop = {}         # (book_id, filename) -> single uploads whose connection breaks
+        self.err_once = {}         # endpoint suffix -> (code, message) answered once
         self.ban_writes = False    # code=1 on every write, like 123's account-level ban
         self.up_log = []           # (book_id, filename) of every single upload that arrived
         self.lock = threading.Lock()
@@ -800,6 +815,9 @@ class _FakeCloud:
         if self.fail_once.get(ep):
             self.fail_once[ep] -= 1
             return _FakeResp({"code": 429, "message": "too frequent"})
+        for suffix in [s for s in self.err_once if ep.endswith(s)]:
+            code, msg = self.err_once.pop(suffix)
+            return _FakeResp({"code": code, "message": msg})
         p, j, d = kw.get("params") or {}, kw.get("json") or {}, kw.get("data") or {}
         if self.ban_writes and ep.endswith(("/file/mkdir", "/single/create")):
             return _FakeResp({"code": 1, "message": "denied"})
@@ -923,6 +941,7 @@ def selftest():
                    for k in (12, 13, 14)],
         "t5.csv": [book("tst-00%d-01" % k, S + "Net%d secret.pdf" % (k - 14), "tst-00%d-01 Net secret" % k)
                    for k in (15, 16)],
+        "t6.csv": [book("tst-0017-01", S + "Net1 secret.pdf", "tst-0017-01 Err secret")],
     }
     for fn, rows in lists.items():
         with open(os.path.join(forge_root, "data", "webp", fn), "w", encoding="utf-8", newline="") as f:
@@ -1174,9 +1193,21 @@ def selftest():
           and sorted(cloud.pages(D + "tst-0016-01 Net secret")) == ["page_0001.webp"] and code_n == 0)
     check("probe: no instant-upload probe in any run, so no unfinished pre-upload sessions",
           not cloud.calls.get("/upload/v2/file/create"))
-    check("fails: every failed attempt is booked by kind in the ledger and in the stats",
+    check("fails: every failed attempt is booked as api:kind in the ledger and in the stats",
           (fails_429, fails_verify, fails_download, n15["fails"], n16["fails"])
-          == ("429:1", "verify:1", "download:3", "net:3", "net:4") and "fail_net=7" in out_n)
+          == ("upload:429:1", "volume:verify:1", "volume:download:3", "upload:net:3", "upload:net:4")
+          and "fail_upload:net=7" in out_n)
+
+    # 20. the raw answer is booked with its api, token-free, names blanked, <= 200 chars
+    tok_now = cur_token("main")
+    cloud.err_once["/file/mkdir"] = (1, "busy %s at tst-0017-01 Err secret %s" % (tok_now, "x" * 300))
+    out_r, _ = shard("--concurrency", "1", lst="t6.csv")
+    r17 = rows_of()["tst-0017-01"]
+    said = r17["fail_msgs"]
+    check("fail_msgs: mkdir code=1 booked with its message, no token, no name, <= 200 chars",
+          r17["status"] == "ok" and r17["fails"] == "mkdir:api1:1"
+          and said.startswith("mkdir:api1=code=1 busy <tok> at <name> xxx") and tok_now not in said
+          and "secret" not in said and len(said) <= len("mkdir:api1=") + 200)
 
     # 15. logs never leak titles / paths / ids / tokens
     alllog = "".join(logs)
