@@ -750,7 +750,8 @@ def d1_capacity_check(now):
 def fmt_d1_capacity(r):
     lines = ["", "### D1 \u5bb9\u91cf\u54e8\u5175"]
     if not r.get("ok"):
-        lines.append(f"- \u8df3\u8fc7: {r.get('skip_reason', '\u672a\u77e5')}")
+        reason = r.get("skip_reason") or "\u672a\u77e5"   # kept outside the f-string: Python 3.11 rejects backslashes in f-string expressions
+        lines.append(f"- \u8df3\u8fc7: {reason}")
         return lines
     mark = "\U0001f534" if r.get("alert") else "\U0001f7e2"
     lines.append(f"- {mark} \u8d26\u6237\u5408\u8ba1 **{r['total'] / 1e9:.3f} GB** / 5 GB(80% \u7ebf = 4.0 GB)")
