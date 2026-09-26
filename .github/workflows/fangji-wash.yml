@@ -4,7 +4,15 @@ name: fangji-wash
 # The extraction script and the source data live in a private repo; this job checks them out,
 # runs them, and pushes results back to that private repo. Nothing is written to git here.
 # Model calls go only through the internal free-pool gateway (named lanes, no fallback).
-# Logs print counts only. No artifacts are uploaded. Manual dispatch only.
+# Logs print counts only. No artifacts are uploaded.
+#
+# Auto-resume (no human dispatch needed): besides manual dispatch, the job starts
+#   - right after each herb-norm-s3 run completes (the shared concurrency group is free at that moment;
+#     a cron start would sit pending and be replaced by the next hourly herb-norm), and
+#   - every 6 hours as a fallback, which only matters once herb-norm-s3 has finished and disabled itself.
+# Automatic starts use the values set at the top of the run step (edit there to move to a new batch). Every start
+# resumes from the checkpoint; chunks already done are skipped, so repeated starts cost nothing.
+# A start that makes zero model calls (batch done, or quota not back yet) writes no Issue comment.
 #
 # Required repository secrets (names only; values are set by the maintainer):
 #   GW_KEY              gateway key (already used by other jobs in this repo). Without it a real run
@@ -18,9 +26,14 @@ name: fangji-wash
 # Who sees it when it breaks: the progress Issue in the private repo (issue_number), plus GitHub failure mail.
 # Quota: when the primary extraction lane hits its window/weekly cap the script switches to fallback_lane
 # and keeps going; only when the fallback lane also fails 3 times in a row does it save a checkpoint,
-# note the Issue and exit 0; dispatch again to resume. Auth errors (401/403) never switch lanes: exit 1.
+# note the Issue and exit 0; the next automatic start resumes. Auth errors (401/403) never switch lanes: exit 1.
 
 on:
+  workflow_run:
+    workflows: [herb-norm-s3]
+    types: [completed]
+  schedule:
+    - cron: '41 */6 * * *'
   workflow_dispatch:
     inputs:
       batch:
@@ -108,6 +121,12 @@ jobs:
         run: python forge/fangji_wash/wash.py --selftest
       - name: run
         run: |
+          if [ "$GITHUB_EVENT_NAME" != "workflow_dispatch" ]; then
+            # automatic start (no inputs): real run of the current batch -- edit here to move to a new batch
+            BATCH=pilot-02 BOOKS=all CHUNK=600 CONC=2 DRY=0 EXTRACT_LANE=zhipu_250414 FALLBACK_LANE=none
+            CREDIT_PER_CHAR=1.0 CAP_5H=55000 CAP_WEEK=550000 LIMIT_CHUNKS=0 REVIEW_RATE=0.1 ISSUE_NUMBER=1
+            echo "auto start ($GITHUB_EVENT_NAME): batch $BATCH lane $EXTRACT_LANE fallback $FALLBACK_LANE"
+          fi
           extra=""
           if [ "$DRY" = "1" ]; then extra="--dry-run"; fi
           python forge/fangji_wash/wash.py --batch "$BATCH" --books "$BOOKS" --chunk-size "$CHUNK" \
