@@ -1,12 +1,15 @@
 name: webp-convert
-# Cloud PDF/JPG -> page_NNNN.webp for 123pan (MVP). Manual dispatch only.
+# Cloud PDF/JPG -> page_NNNN.webp for 123pan. Manual dispatch, plus an hourly
+# automatic resume of the list named in the private data/webp/auto.json.
 # Book lists, ledgers and the shared 123 token live in the PRIVATE repo
 # (FORGE_REPO); this public repo holds code only. Logs print counters only; the
-# books input is read from the event payload (--books @event), so list names
+# books input is read from the event payload (--books @event; the schedule uses
+# @auto = the private data/webp/auto.json), so list names
 # and ids never show up in step headers. No artifacts are uploaded.
 #
 # Order of a run:
-#   prep     selftest (stubbed) -> in-flight cap + shard matrix -> shared token
+#   prep     selftest (stubbed) -> plan (inputs, or the hourly resume: go / skip for a
+#            suspected-ban cooldown or nothing left) + in-flight cap -> shared token
 #            (logs in only when the stored token is missing / expiring / revoked;
 #            stops when data/webp/accounts.json names another uid for an account)
 #   convert  one job per shard, at most 8 at once in this repo. On 401 a shard
@@ -39,6 +42,11 @@ on:
       limit_pages:
         description: 'smoke test: only the first N pages of each book (0 = all)'
         default: '0'
+  # Automatic resume: every hour `run.py plan` reads data/webp/auto.json in the
+  # private repo and starts only when something is left and no suspected-ban
+  # cooldown is running (see run.py AUTO_PATH / COOL_DIR). No auto.json = idle.
+  schedule:
+    - cron: '23 * * * *'
 
 permissions:
   contents: read
@@ -47,7 +55,7 @@ permissions:
 # One run per 123 target account at a time in this repo: two runs side by side
 # would double the uploads in flight on that account.
 concurrency:
-  group: webp-convert-${{ inputs.target_account }}
+  group: webp-convert-${{ inputs.target_account || 'main' }}   # a scheduled run has no inputs; it resumes main
   cancel-in-progress: false
 
 env:
@@ -73,7 +81,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     outputs:
+      go: ${{ steps.m.outputs.go }}
       shards: ${{ steps.m.outputs.shards }}
+      books: ${{ steps.m.outputs.books }}
+      conc: ${{ steps.m.outputs.conc }}
+      target: ${{ steps.m.outputs.target }}
+      dry: ${{ steps.m.outputs.dry }}
+      limit: ${{ steps.m.outputs.limit }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
@@ -88,24 +102,32 @@ jobs:
       - run: pip install --quiet requests cryptography pymupdf pillow
       - name: selftest (stubbed 123 and download, no network)
         run: python scripts/webp_convert/run.py --selftest
-      - name: in-flight cap + shard matrix
+      - name: plan (dispatch inputs, or the hourly resume) + in-flight cap
         id: m
         env:
-          SHARDS: ${{ inputs.shards }}
-          CONC: ${{ inputs.concurrency }}
-        run: python scripts/webp_convert/run.py matrix --shards "$SHARDS" --concurrency "$CONC" >> "$GITHUB_OUTPUT"
+          SHARDS: ${{ inputs.shards || '1' }}
+          CONC: ${{ inputs.concurrency || '2' }}
+          TARGET: ${{ inputs.target_account || 'main' }}
+          DRY: ${{ inputs.dry_run || '1' }}
+          LIMIT: ${{ inputs.limit_pages || '0' }}
+        run: >
+          python scripts/webp_convert/run.py plan --forge forge --shards "$SHARDS" --concurrency "$CONC"
+          --target "$TARGET" --dry-run "$DRY" --limit-pages "$LIMIT" >> "$GITHUB_OUTPUT"
       - name: shared 123 token
+        if: steps.m.outputs.go == '1'
         env:
-          TARGET: ${{ inputs.target_account }}
+          TARGET: ${{ steps.m.outputs.target }}
+          BOOKS: ${{ steps.m.outputs.books }}
           FORGE_TOKEN: ${{ secrets.FORGE_TOKEN || secrets.FANGJI_FORGE_TOKEN }}
           PAN_CID_MAIN: ${{ secrets.PAN_CID }}
           PAN_SEC_MAIN: ${{ secrets.PAN_SEC }}
           PAN_CID_GUJI: ${{ secrets.PAN_CID2 }}
           PAN_SEC_GUJI: ${{ secrets.PAN_SEC2 }}
-        run: python scripts/webp_convert/run.py token --forge forge --books @event --target "$TARGET"
+        run: python scripts/webp_convert/run.py token --forge forge --books "$BOOKS" --target "$TARGET"
 
   convert:
     needs: prep
+    if: needs.prep.outputs.go == '1'
     runs-on: ubuntu-latest
     timeout-minutes: 350
     strategy:
@@ -127,25 +149,26 @@ jobs:
       - run: pip install --quiet requests cryptography pymupdf pillow
       - name: convert + upload one shard
         env:
-          TARGET: ${{ inputs.target_account }}
+          TARGET: ${{ needs.prep.outputs.target }}
+          BOOKS: ${{ needs.prep.outputs.books }}
           SHARD: ${{ matrix.shard }}
           SHARDS: ${{ strategy.job-total }}
-          CONC: ${{ inputs.concurrency }}
-          DRY: ${{ inputs.dry_run }}
-          LIMIT: ${{ inputs.limit_pages }}
+          CONC: ${{ needs.prep.outputs.conc }}
+          DRY: ${{ needs.prep.outputs.dry }}
+          LIMIT: ${{ needs.prep.outputs.limit }}
           FORGE_TOKEN: ${{ secrets.FORGE_TOKEN || secrets.FANGJI_FORGE_TOKEN }}
           PAN_CID_MAIN: ${{ secrets.PAN_CID }}
           PAN_SEC_MAIN: ${{ secrets.PAN_SEC }}
           PAN_CID_GUJI: ${{ secrets.PAN_CID2 }}
           PAN_SEC_GUJI: ${{ secrets.PAN_SEC2 }}
         run: >
-          python scripts/webp_convert/run.py run --forge forge --books @event
+          python scripts/webp_convert/run.py run --forge forge --books "$BOOKS"
           --target "$TARGET" --shard "$SHARD" --shards "$SHARDS" --concurrency "$CONC"
           --dry-run "$DRY" --limit-pages "$LIMIT" --deadline-min 320 --stop-min 335
 
   summary:
     needs: [prep, convert]
-    if: always() && needs.prep.result == 'success'
+    if: always() && needs.prep.result == 'success' && needs.prep.outputs.go == '1'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -162,6 +185,7 @@ jobs:
       - run: pip install --quiet requests
       - name: progress issue in the private repo
         env:
-          TARGET: ${{ inputs.target_account }}
+          TARGET: ${{ needs.prep.outputs.target }}
+          BOOKS: ${{ needs.prep.outputs.books }}
           FORGE_TOKEN: ${{ secrets.FORGE_TOKEN || secrets.FANGJI_FORGE_TOKEN }}
-        run: python scripts/webp_convert/run.py summary --forge forge --books @event --target "$TARGET"
+        run: python scripts/webp_convert/run.py summary --forge forge --books "$BOOKS" --target "$TARGET"

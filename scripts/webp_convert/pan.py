@@ -9,6 +9,7 @@
 - The body code is always checked, never just the HTTP status:
     no answer / not JSON (5xx page) network hiccup -> the same call is retried in place
                                    after NET_BACKOFF (2, 5, 15 s), then PanError("net")
+    upload code=1 "internal error" same in-place retries (INTERNAL_WORD), then PanError(1)
     401                            token pushed out by a newer login -> on_401 / TokenInvalid
                                    (checked first: its text says "exceeded the limit")
     429 or the "too frequent" text rate limited -> back off, retry
@@ -46,6 +47,10 @@ CATEGORY = {"access_token": "token", "user_info": "token", "mkdir": "mkdir", "si
             "list": "list", "download_info": "download"}
 MSG_MAX = 200
 JWT_RE = re.compile(r"eyJ[\w-]+\.[\w-]+\.[\w-]+")
+# code=1 with this text on an upload is a hiccup of 123's upload service (runs
+# 36200294899 / 36192502762: 31 of them, most gone on retry), not a write ban: the
+# upload is retried in place like a network failure; the breaker still stops a streak
+INTERNAL_WORD = "\u670d\u52a1\u5185\u90e8\u9519\u8bef"      # "internal server error"
 
 
 class TokenInvalid(Exception):
@@ -181,6 +186,12 @@ class Pan:
                 SLEEP(min(60, 2 ** rate_hit))
                 continue
             self._note(where, "api%s" % code, said, tok)
+            if cls == "up" and code == 1 and INTERNAL_WORD in str(j.get("message", "")):
+                net_fail += 1                           # same budget and backoff as a network failure
+                if net_fail > len(NET_BACKOFF):
+                    self._fail(cls, where, code)
+                SLEEP(NET_BACKOFF[net_fail - 1])
+                continue
             self._fail(cls, where, code)
 
     # ---- read ------------------------------------------------------------
