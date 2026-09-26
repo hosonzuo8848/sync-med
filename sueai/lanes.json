@@ -64,12 +64,12 @@
       ],
       "verified": true,
       "status": "active",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": null,
       "metrics": {
         "latencyMs": 4934,
         "latencyNote": "经代理实测",
-        "probeMs": 1616,
+        "probeMs": 2407,
         "latencyRangeMs": [
           4934,
           26073
@@ -91,10 +91,10 @@
       "tags": [],
       "verified": false,
       "status": "error",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": "HTTP 410 {\"type\":\"about:blank\",\"title\":\"Gone\",\"status\":410,\"detail\":\"The model 'openai/gpt-oss-120b' has reached its end of life on 2026-09-03T08:00:",
       "metrics": {
-        "probeMs": 25,
+        "probeMs": 41,
         "gateDate": "2026-07-27",
         "gateCases": 6,
         "gatePass": 3,
@@ -122,11 +122,11 @@
       ],
       "verified": true,
       "status": "error",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": "HTTP 404 {\"message\":\"Model gemma-4-31b is archived and unavailable for the organization.\",\"type\":\"model_archived_error\",\"param\":\"model\",\"code\":\"model",
       "metrics": {
         "rateLimit": "tight",
-        "probeMs": 352
+        "probeMs": 168
       },
       "notes": "最快。在 Cloudflare 后面：默认 UA 吃 403（error 1010），必须带浏览器 UA。限流紧，并发压低。"
     },
@@ -146,7 +146,7 @@
       ],
       "verified": true,
       "status": "no_key",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": "环境里没有 SILICONFLOW_KEY（也没有别名 SILICONFLOW_API_KEY）",
       "metrics": {
         "passRate72b": 0.69,
@@ -172,11 +172,11 @@
       ],
       "verified": true,
       "status": "active",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": null,
       "metrics": {
         "latencyMs": 669,
-        "probeMs": 843
+        "probeMs": 1094
       },
       "notes": "免费档，实测 669ms 返回正确。glm-5.x 是付费档，勿顺手升版本号。"
     },
@@ -195,10 +195,10 @@
       ],
       "verified": true,
       "status": "active",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": null,
       "metrics": {
-        "probeMs": 6014
+        "probeMs": 9076
       },
       "notes": "免费。粗活主力。"
     },
@@ -219,10 +219,10 @@
       ],
       "verified": true,
       "status": "active",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": null,
       "metrics": {
-        "probeMs": 2253
+        "probeMs": 2866
       },
       "notes": "商汤免费档转发 deepseek-v4-flash。"
     },
@@ -240,10 +240,10 @@
       "tags": [],
       "verified": false,
       "status": "error",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": "HTTP 404 {\"error\":{\"message\":\"model is not found\",\"type\":\"not_found_error\",\"code\":\"5\"}}",
       "metrics": {
-        "probeMs": 807
+        "probeMs": 225
       }
     },
     {
@@ -260,10 +260,10 @@
       "tags": [],
       "verified": false,
       "status": "error",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": "HTTP 404 {\"error\":{\"message\":\"model is not found\",\"type\":\"not_found_error\",\"code\":\"5\"}}",
       "metrics": {
-        "probeMs": 211
+        "probeMs": 225
       }
     },
     {
@@ -280,10 +280,10 @@
       "tags": [],
       "verified": false,
       "status": "error",
-      "lastChecked": "2026-09-25",
+      "lastChecked": "2026-09-26",
       "lastError": "HTTP 404 {\"error\":{\"message\":\"model is not found\",\"type\":\"not_found_error\",\"code\":\"5\"}}",
       "metrics": {
-        "probeMs": 227
+        "probeMs": 219
       }
     },
     {
