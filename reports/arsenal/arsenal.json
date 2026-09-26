@@ -4480,6 +4480,53 @@
    }
   },
   {
+   "repo": "unclecode/crawl4ai",
+   "url": "https://github.com/unclecode/crawl4ai",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 84276,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-25",
+   "created_at": "2024-05-09",
+   "stars_per_day_lifetime": 96.87,
+   "capability": "开源网络爬虫和抓取工具，将任何网站转换为干净的、LLM 准备好的 Markdown 格式。",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video",
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-agents",
+    "crawler",
+    "data-extraction",
+    "llm",
+    "markdown",
+    "mcp",
+    "open-source",
+    "playwright",
+    "python",
+    "rag",
+    "scraper"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 56
+   }
+  },
+  {
    "repo": "Developer-Y/cs-video-courses",
    "url": "https://github.com/Developer-Y/cs-video-courses",
    "first_seen": "2026-09-09",
@@ -8920,6 +8967,51 @@
     "sort": "stars",
     "query_breadth": 24,
     "position": 0
+   }
+  },
+  {
+   "repo": "ScrapeGraphAI/Scrapegraph-ai",
+   "url": "https://github.com/ScrapeGraphAI/Scrapegraph-ai",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 31310,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-25",
+   "created_at": "2024-01-27",
+   "stars_per_day_lifetime": 32.18,
+   "capability": "基于AI的Python爬虫，用于数据提取。",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "image",
+    "modelpool"
+   ],
+   "topics": [
+    "ai-crawler",
+    "ai-scraping",
+    "ai-search",
+    "crawler",
+    "data-extraction",
+    "firecrawl-alternative",
+    "large-language-model",
+    "llm",
+    "markdown",
+    "rag",
+    "scraping",
+    "scraping-python"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 43
    }
   },
   {
@@ -28519,6 +28611,49 @@
    }
   },
   {
+   "repo": "zhkl0228/unidbg",
+   "url": "https://github.com/zhkl0228/unidbg",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 5229,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Java",
+   "pushed_at": "2026-09-26",
+   "created_at": "2019-02-26",
+   "stars_per_day_lifetime": 1.89,
+   "capability": "允许模拟Android和iOS原生库。",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "android",
+    "capstone",
+    "debugger",
+    "dynarmic",
+    "emulation",
+    "emulator",
+    "fishhook",
+    "hypervisor",
+    "ios",
+    "keystone",
+    "kvm",
+    "mcp"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
+   }
+  },
+  {
    "repo": "yinggaozhen/awesome-go-cn",
    "url": "https://github.com/yinggaozhen/awesome-go-cn",
    "first_seen": "2026-08-21",
@@ -44013,6 +44148,50 @@
    }
   },
   {
+   "repo": "Natively-AI-assistant/natively-cluely-ai-assistant",
+   "url": "https://github.com/Natively-AI-assistant/natively-cluely-ai-assistant",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 2597,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-01-27",
+   "stars_per_day_lifetime": 10.73,
+   "capability": "提供免费的开放源代码AI会议助手、面试助手和笔记记录器。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "ai-assistant",
+    "ai-tools",
+    "cheating",
+    "claude-code",
+    "claude-skills",
+    "cluely",
+    "cluely-alternative",
+    "cluely-clone",
+    "final-round-ai"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 52
+   }
+  },
+  {
    "repo": "jeremylongshore/claude-code-plugins-plus-skills",
    "url": "https://github.com/jeremylongshore/claude-code-plugins-plus-skills",
    "first_seen": "2026-08-04",
@@ -45133,6 +45312,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 5
+   }
+  },
+  {
+   "repo": "irinabuht12-oss/google-ads-meta-ads-mcp",
+   "url": "https://github.com/irinabuht12-oss/google-ads-meta-ads-mcp",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 2503,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-09-25",
+   "created_at": "2026-04-06",
+   "stars_per_day_lifetime": 14.47,
+   "capability": "提供Google Ads MCP服务器、Meta Ads MCP、GA4和Search Console的远程MCP。",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "advertising",
+    "chatgpt",
+    "claude",
+    "cursor",
+    "facebook-ads",
+    "facebook-ads-mcp",
+    "ga4",
+    "google-ads",
+    "google-ads-mcp",
+    "google-ads-mcp-server",
+    "google-analytics",
+    "google-analytics-mcp"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 20
    }
   },
   {
@@ -46750,6 +46972,51 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 74
+   }
+  },
+  {
+   "repo": "beenuar/AiSOC",
+   "url": "https://github.com/beenuar/AiSOC",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 2368,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-05-02",
+   "stars_per_day_lifetime": 16.11,
+   "capability": "开源AI安全运营中心，提供警报融合、LLM代理分类、MITRE ATT&CK调查和可重放的决策账本。",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "ai-security",
+    "alert-triage",
+    "blue-team",
+    "cybersecurity",
+    "detection-engineering",
+    "incident-response",
+    "langgraph",
+    "llm-agents",
+    "mcp",
+    "mitre-attack",
+    "model-context-protocol"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 4
    }
   },
   {
@@ -55118,6 +55385,45 @@
    }
   },
   {
+   "repo": "patrickchugh/terravision",
+   "url": "https://github.com/patrickchugh/terravision",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 1639,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Python",
+   "pushed_at": "2026-09-25",
+   "created_at": "2022-03-13",
+   "stars_per_day_lifetime": 0.99,
+   "capability": "提供专业云架构图，从Terraform代码或JSON图生成。",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skill",
+    "architecture-diagram",
+    "cloud-architecture",
+    "diagrams-as-code",
+    "docs-as-code",
+    "drawio",
+    "llm-tools",
+    "mcp-server"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 32
+   }
+  },
+  {
    "repo": "XiaomingX/1000-chinese-independent-developer-plus",
    "url": "https://github.com/XiaomingX/1000-chinese-independent-developer-plus",
    "first_seen": "2026-07-26",
@@ -59877,6 +60183,50 @@
    }
   },
   {
+   "repo": "gamedev-skills/awesome-gamedev-agent-skills",
+   "url": "https://github.com/gamedev-skills/awesome-gamedev-agent-skills",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 1160,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-25",
+   "created_at": "2026-06-24",
+   "stars_per_day_lifetime": 12.34,
+   "capability": "提供73个游戏开发技能，用于AI编码代理。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "antigravity",
+    "awesome-list",
+    "claude-code",
+    "cline",
+    "codex",
+    "cursor",
+    "game-dev",
+    "game-development",
+    "gamedev",
+    "gemini-cli"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 35
+   }
+  },
+  {
    "repo": "LancelotRar/best-cf-ips",
    "url": "https://github.com/LancelotRar/best-cf-ips",
    "first_seen": "2026-09-09",
@@ -62606,6 +62956,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 43
+   }
+  },
+  {
+   "repo": "aiming-lab/SkillRL",
+   "url": "https://github.com/aiming-lab/SkillRL",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 984,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-25",
+   "created_at": "2026-02-08",
+   "stars_per_day_lifetime": 4.28,
+   "capability": "通过递归技能增强强化学习进化智能体。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 66
    }
   },
   {
@@ -77763,6 +78142,50 @@
    }
   },
   {
+   "repo": "TripoGrowthLab/awesome-astra-prompts",
+   "url": "https://github.com/TripoGrowthLab/awesome-astra-prompts",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 303,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-09-05",
+   "stars_per_day_lifetime": 14.43,
+   "capability": "提供多语言GPT-6 Astra提示和3D示例，用于游戏、Blender场景和交互式世界。",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "image",
+    "modelpool"
+   ],
+   "topics": [
+    "3d",
+    "ai-prompts",
+    "astra-prompts",
+    "awesome-list",
+    "blender",
+    "game-development",
+    "gpt-6-astra",
+    "multilingual",
+    "prompt-engineering",
+    "threejs",
+    "tripo"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "prompts in:name stars:>300 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 21,
+    "position": 0
+   }
+  },
+  {
    "repo": "Anil-matcha/awesome-seedance-2.5-api-prompts",
    "url": "https://github.com/Anil-matcha/awesome-seedance-2.5-api-prompts",
    "first_seen": "2026-08-18",
@@ -77954,6 +78377,50 @@
     "sort": "stars",
     "query_breadth": 6,
     "position": 5
+   }
+  },
+  {
+   "repo": "kldhsh123/Afterglow",
+   "url": "https://github.com/kldhsh123/Afterglow",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 301,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Python",
+   "pushed_at": "2026-09-22",
+   "created_at": "2026-05-22",
+   "stars_per_day_lifetime": 2.37,
+   "capability": "使用社交软件聊天记录结合向量数据库，让AI扮演社交角色。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "rag",
+    "modelpool"
+   ],
+   "topics": [
+    "afterglow",
+    "ai-companion",
+    "digital-companion",
+    "lancedb",
+    "llm",
+    "python",
+    "qq-chat",
+    "rag",
+    "semantic-search",
+    "vector-database",
+    "vue"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "微调 in:name,description stars:>300 pushed:>2026-06-28",
+    "sort": "stars",
+    "query_breadth": 22,
+    "position": 21
    }
   },
   {
@@ -78750,6 +79217,49 @@
     "sort": "stars",
     "query_breadth": 18,
     "position": 13
+   }
+  },
+  {
+   "repo": "MarcoNasi/AI-Skills",
+   "url": "https://github.com/MarcoNasi/AI-Skills",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 286,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "pushed_at": "2026-09-25",
+   "created_at": "2026-01-26",
+   "stars_per_day_lifetime": 1.18,
+   "capability": "收集了 150 多个针对软件开发、前端、后端、自动化、UI/UX、SEO 和 DevOps 的专业 AI 技能。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-skills",
+    "claude-code",
+    "claude-skills",
+    "collection",
+    "cursor-skill",
+    "cursor-skills",
+    "ide-skills",
+    "skills",
+    "skills-collection",
+    "trae",
+    "trae-ai",
+    "trae-ide"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 96
    }
   },
   {
@@ -86708,6 +87218,48 @@
    }
   },
   {
+   "repo": "zouyuxuan122/dsh-our-free-model",
+   "url": "https://github.com/zouyuxuan122/dsh-our-free-model",
+   "first_seen": "2026-09-26",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-26",
+   "stars": 138,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-09-24",
+   "stars_per_day_lifetime": 69.0,
+   "capability": "在dsh中安装插件，无需登录、注册或填API Key即可使用免费模型。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agents",
+    "deepseek",
+    "deepseek-harness",
+    "developer-tools",
+    "dsh",
+    "dsh-plugin",
+    "free-model",
+    "llm",
+    "model-provider",
+    "openai-compatible"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-06-28",
+    "sort": "stars",
+    "query_breadth": 35,
+    "position": 31
+   }
+  },
+  {
    "repo": "Swayingleaves/novanova-studio",
    "url": "https://github.com/Swayingleaves/novanova-studio",
    "first_seen": "2026-08-21",
@@ -92482,7 +93034,7 @@
    }
   }
  ],
- "updated": "2026-09-25",
+ "updated": "2026-09-26",
  "status_enum": [
   "pending",
   "debated",
