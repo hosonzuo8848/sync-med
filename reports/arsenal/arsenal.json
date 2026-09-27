@@ -33923,6 +33923,50 @@
    }
   },
   {
+   "repo": "mergisi/awesome-openclaw-agents",
+   "url": "https://github.com/mergisi/awesome-openclaw-agents",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 3987,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-02-05",
+   "stars_per_day_lifetime": 17.04,
+   "capability": "提供 162 个生产就绪的 AI 代理模板。",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent-templates",
+    "ai-agents",
+    "ai-automation",
+    "anthropic",
+    "automation",
+    "awesome",
+    "awesome-list",
+    "claude",
+    "community-agents",
+    "crewclaw",
+    "docker",
+    "llm"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 33
+   }
+  },
+  {
    "repo": "jaywcjlove/free-font",
    "url": "https://github.com/jaywcjlove/free-font",
    "first_seen": "2026-08-09",
@@ -34047,6 +34091,50 @@
     "sort": "updated",
     "query_breadth": 79,
     "position": 53
+   }
+  },
+  {
+   "repo": "matt1398/claude-devtools",
+   "url": "https://github.com/matt1398/claude-devtools",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 3950,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-02-07",
+   "stars_per_day_lifetime": 17.03,
+   "capability": "Claude Code 的开发工具，用于检查会话日志和工具调用。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-agent",
+    "ai-debugging",
+    "ai-tools",
+    "anthropic",
+    "claude",
+    "claude-code",
+    "claude-code-tools",
+    "debugging",
+    "desktop-app",
+    "developer-tools",
+    "devtools"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 55
    }
   },
   {
@@ -49116,6 +49204,38 @@
    }
   },
   {
+   "repo": "wx-chevalier/Awesome-Books-Notes",
+   "url": "https://github.com/wx-chevalier/Awesome-Books-Notes",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 2202,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "HTML",
+   "pushed_at": "2026-09-27",
+   "created_at": "2017-11-06",
+   "stars_per_day_lifetime": 0.68,
+   "capability": "计算机科学和技术领域相关书籍的仓库。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "book"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 9
+   }
+  },
+  {
    "repo": "sudhakar3697/awesome-electron-alternatives",
    "url": "https://github.com/sudhakar3697/awesome-electron-alternatives",
    "first_seen": "2026-09-21",
@@ -50943,6 +51063,47 @@
    }
   },
   {
+   "repo": "yb2460/harness-anything",
+   "url": "https://github.com/yb2460/harness-anything",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 2078,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-05-27",
+   "stars_per_day_lifetime": 16.89,
+   "capability": "AI 代理控制中心，支持 WPS、MS Office 等应用程序的自动化。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "automation",
+    "cli",
+    "cli-anything",
+    "com",
+    "office",
+    "python",
+    "windows",
+    "wps"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 49
+   }
+  },
+  {
    "repo": "cporter202/social-media-scraping-apis",
    "url": "https://github.com/cporter202/social-media-scraping-apis",
    "first_seen": "2026-07-26",
@@ -51915,6 +52076,51 @@
     "sort": "stars",
     "query_breadth": 18,
     "position": 1
+   }
+  },
+  {
+   "repo": "0xsline/OpenChatCut",
+   "url": "https://github.com/0xsline/OpenChatCut",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 2013,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-27",
+   "created_at": "2026-07-15",
+   "stars_per_day_lifetime": 27.2,
+   "capability": "开源本地对话式 AI 视频编辑器，具有专业多轨道时间线、技能和 MCP 集成。",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "agent-skills",
+    "agentic-ai",
+    "ai-agent",
+    "ai-video-editor",
+    "capcut",
+    "chatcut",
+    "claude-code",
+    "codex",
+    "desktop-app",
+    "electron",
+    "ffmpeg",
+    "local-first"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 18
    }
   },
   {
@@ -58728,6 +58934,49 @@
    }
   },
   {
+   "repo": "LangChat/langchat",
+   "url": "https://github.com/LangChat/langchat",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 1286,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Vue",
+   "pushed_at": "2026-09-27",
+   "created_at": "2024-02-08",
+   "stars_per_day_lifetime": 1.34,
+   "capability": "开源 AI Agent 应用平台，支持多模型、知识库 RAG、MCP 和智能问答。",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "topics": [
+    "agent",
+    "ai-agent",
+    "java",
+    "knowledge-base",
+    "langchain4j",
+    "llm",
+    "mcp",
+    "rag",
+    "spring-boot",
+    "vue3"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "RAG 知识库 in:name,description stars:>200",
+    "sort": "stars",
+    "query_breadth": 26,
+    "position": 4
+   }
+  },
+  {
    "repo": "alchaincyf/huashu-skills",
    "url": "https://github.com/alchaincyf/huashu-skills",
    "first_seen": "2026-08-02",
@@ -62414,6 +62663,44 @@
    }
   },
   {
+   "repo": "awlevin/typesafe-computer-use",
+   "url": "https://github.com/awlevin/typesafe-computer-use",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 1012,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-09-16",
+   "stars_per_day_lifetime": 92.0,
+   "capability": "使用 OCR 技术进行屏幕识别，并使用 TypeSafe 进行自动化操作。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "ocr"
+   ],
+   "topics": [
+    "ai-agents",
+    "automation",
+    "computer-use",
+    "macos",
+    "ocr",
+    "typesafe"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-06-29",
+    "sort": "updated",
+    "query_breadth": 79,
+    "position": 16
+   }
+  },
+  {
    "repo": "cisco-ai-defense/mcp-scanner",
    "url": "https://github.com/cisco-ai-defense/mcp-scanner",
    "first_seen": "2026-08-06",
@@ -63608,6 +63895,42 @@
     "sort": "stars",
     "query_breadth": 19,
     "position": 4
+   }
+  },
+  {
+   "repo": "SynaLinks/synalinks-skills",
+   "url": "https://github.com/SynaLinks/synalinks-skills",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 907,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-26",
+   "created_at": "2023-06-17",
+   "stars_per_day_lifetime": 0.76,
+   "capability": "为Synalinks OSS提供编码代理（Coding Agents）技能。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "artificial-intelligence",
+    "large-language-models",
+    "neuro-symbolic",
+    "neuro-symbolic-ai",
+    "neurosymbolic"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 59
    }
   },
   {
@@ -70226,6 +70549,51 @@
    }
   },
   {
+   "repo": "aqm857886159/Nomi",
+   "url": "https://github.com/aqm857886159/Nomi",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 523,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-27",
+   "created_at": "2026-05-04",
+   "stars_per_day_lifetime": 3.58,
+   "capability": "开源 AI 视频工作台，支持本地模型和 ComfyUI，通过 MCP 进行视频制作。",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai-agent",
+    "ai-video",
+    "ai-video-generator",
+    "bring-your-own-key",
+    "comfyui",
+    "creative-tools",
+    "desktop-app",
+    "electron",
+    "image-generation",
+    "local-first",
+    "mcp",
+    "offline"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 33,
+    "position": 20
+   }
+  },
+  {
    "repo": "huiliyi37/Tianshu-harness",
    "url": "https://github.com/huiliyi37/Tianshu-harness",
    "first_seen": "2026-09-09",
@@ -76621,6 +76989,35 @@
    }
   },
   {
+   "repo": "Prisma-Labs-Dev/apple-skills",
+   "url": "https://github.com/Prisma-Labs-Dev/apple-skills",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 335,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-02-19",
+   "stars_per_day_lifetime": 1.52,
+   "capability": "为Claude Code和Codex提供Apple开发技能，涵盖iOS 26+ API、SwiftUI、Liquid Glass等最新内容。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 67
+   }
+  },
+  {
    "repo": "njzjz/nsfc-agent-skills",
    "url": "https://github.com/njzjz/nsfc-agent-skills",
    "first_seen": "2026-08-27",
@@ -76936,6 +77333,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 1
+   }
+  },
+  {
+   "repo": "SYuan03/Skill-Anything",
+   "url": "https://github.com/SYuan03/Skill-Anything",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 331,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-03-25",
+   "stars_per_day_lifetime": 1.78,
+   "capability": "将任何来源（PDF、视频、网页、音频、文本）转换为包含测验、闪卡和间隔重复的交互式学习包，一键生成12节学习指南。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "active-recall",
+    "ai-learning",
+    "cli-tool",
+    "education",
+    "flashcard-generator",
+    "knowledge-extraction",
+    "learning-tool",
+    "llm",
+    "openai",
+    "pdf-to-quiz",
+    "python",
+    "quiz-generator"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 62
    }
   },
   {
@@ -79576,6 +80016,36 @@
     "sort": "stars",
     "query_breadth": 19,
     "position": 9
+   }
+  },
+  {
+   "repo": "duoduoler-ops/Table-skills",
+   "url": "https://github.com/duoduoler-ops/Table-skills",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 276,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-27",
+   "created_at": "2026-09-05",
+   "stars_per_day_lifetime": 12.55,
+   "capability": "自用 AI Skills 合集，用于项目交接和网页替身。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 14
    }
   },
   {
@@ -83788,6 +84258,35 @@
    }
   },
   {
+   "repo": "Rieranthony/product-film-skill",
+   "url": "https://github.com/Rieranthony/product-film-skill",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 208,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-26",
+   "created_at": "2026-09-26",
+   "stars_per_day_lifetime": 208.0,
+   "capability": "无法从仓库描述中确定具体功能。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 65
+   }
+  },
+  {
    "repo": "SenmuuuuW/universal-diagnostic-tutor-skill",
    "url": "https://github.com/SenmuuuuW/universal-diagnostic-tutor-skill",
    "first_seen": "2026-09-15",
@@ -84624,6 +85123,36 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 2
+   }
+  },
+  {
+   "repo": "lingbol088-spec/codex-gpt-5.6-5.5-instruct",
+   "url": "https://github.com/lingbol088-spec/codex-gpt-5.6-5.5-instruct",
+   "first_seen": "2026-09-27",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-27",
+   "stars": 203,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-08-06",
+   "created_at": "2026-08-06",
+   "stars_per_day_lifetime": 3.9,
+   "capability": "GPT-5.6/5.5 指令工程框架，提供一键部署和技能模块。",
+   "transfer_forms": [
+    "deploy",
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-29",
+    "sort": "stars",
+    "query_breadth": 70,
+    "position": 69
    }
   },
   {
@@ -93034,7 +93563,7 @@
    }
   }
  ],
- "updated": "2026-09-26",
+ "updated": "2026-09-27",
  "status_enum": [
   "pending",
   "debated",
