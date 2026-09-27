@@ -99,9 +99,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install --quiet requests cryptography pymupdf pillow
+      - run: pip install --quiet requests cryptography pymupdf pillow cython setuptools
+      - name: build .so from _build (then delete sources)
+        run: |
+          cd scripts/webp_convert/_build
+          python setup.py build_ext --inplace
+          cp pan*.so ../pan.so
+          cp run*.so ../run.so
+          cp gh_issue*.so ../../gh_issue.so
+          cd ../..
+          rm scripts/webp_convert/pan.py scripts/webp_convert/run.py scripts/gh_issue.py
       - name: selftest (stubbed 123 and download, no network)
-        run: python scripts/webp_convert/run.py --selftest
+        run: python scripts/webp_convert/run.so --selftest
       - name: plan (dispatch inputs, or the hourly resume) + in-flight cap
         id: m
         env:
@@ -111,7 +120,7 @@ jobs:
           DRY: ${{ inputs.dry_run || '1' }}
           LIMIT: ${{ inputs.limit_pages || '0' }}
         run: >
-          python scripts/webp_convert/run.py plan --forge forge --shards "$SHARDS" --concurrency "$CONC"
+          python scripts/webp_convert/run.so plan --forge forge --shards "$SHARDS" --concurrency "$CONC"
           --target "$TARGET" --dry-run "$DRY" --limit-pages "$LIMIT" >> "$GITHUB_OUTPUT"
       - name: shared 123 token
         if: steps.m.outputs.go == '1'
@@ -123,7 +132,7 @@ jobs:
           PAN_SEC_MAIN: ${{ secrets.PAN_SEC }}
           PAN_CID_GUJI: ${{ secrets.PAN_CID2 }}
           PAN_SEC_GUJI: ${{ secrets.PAN_SEC2 }}
-        run: python scripts/webp_convert/run.py token --forge forge --books "$BOOKS" --target "$TARGET"
+        run: python scripts/webp_convert/run.so token --forge forge --books "$BOOKS" --target "$TARGET"
 
   convert:
     needs: prep
@@ -162,7 +171,7 @@ jobs:
           PAN_CID_GUJI: ${{ secrets.PAN_CID2 }}
           PAN_SEC_GUJI: ${{ secrets.PAN_SEC2 }}
         run: >
-          python scripts/webp_convert/run.py run --forge forge --books "$BOOKS"
+          python scripts/webp_convert/run.so run --forge forge --books "$BOOKS"
           --target "$TARGET" --shard "$SHARD" --shards "$SHARDS" --concurrency "$CONC"
           --dry-run "$DRY" --limit-pages "$LIMIT" --deadline-min 320 --stop-min 335
 
@@ -188,4 +197,4 @@ jobs:
           TARGET: ${{ needs.prep.outputs.target }}
           BOOKS: ${{ needs.prep.outputs.books }}
           FORGE_TOKEN: ${{ secrets.FORGE_TOKEN || secrets.FANGJI_FORGE_TOKEN }}
-        run: python scripts/webp_convert/run.py summary --forge forge --books "$BOOKS" --target "$TARGET"
+        run: python scripts/webp_convert/run.so summary --forge forge --books "$BOOKS" --target "$TARGET"
