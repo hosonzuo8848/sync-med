@@ -28,19 +28,19 @@
   "tag": "v0.27.2"
  },
  "microsoft/graphrag": {
-  "published_at": "2026-08-21T15:24:30Z",
-  "tag": "v3.1.2"
+  "published_at": "2026-09-24T02:25:49Z",
+  "tag": "v3.2.0"
  },
  "opendatalab/MinerU": {
-  "published_at": "2026-09-20T16:40:19Z",
-  "tag": "mineru-4.0.5-released"
+  "published_at": "2026-09-27T19:50:50Z",
+  "tag": "mineru-4.0.8-released"
  },
  "unclecode/crawl4ai": {
-  "published_at": "2026-08-31T11:34:14Z",
-  "tag": "v0.9.3"
+  "published_at": "2026-09-23T12:14:55Z",
+  "tag": "v0.9.4"
  },
  "vercel/satori": {
-  "published_at": "2026-08-24T12:48:18Z",
-  "tag": "0.33.4"
+  "published_at": "2026-09-22T15:57:21Z",
+  "tag": "0.33.5"
  }
 }
