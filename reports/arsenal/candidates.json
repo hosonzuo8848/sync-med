@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-09-27",
+ "generated": "2026-09-28",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -40,303 +40,221 @@
   "failed_queries": []
  },
  "distill": {
-  "seat": "sensenova",
-  "calls": 4,
+  "seat": "zhipu",
+  "calls": 6,
   "ok": 2
  },
- "count": 14,
+ "count": 17,
  "candidates": [
   {
-   "repo": "aqm857886159/Nomi",
-   "url": "https://github.com/aqm857886159/Nomi",
-   "description": "Open-source AI video workbench. Bring any model or your local ComfyUI, and let Claude Code / Codex / Cursor direct it over MCP — storyboard, references, generation, editable first cut on a real timeline. Local-first: projects, prompts, and keys stay on your machine. No account, no telemetry.",
-   "stars": 523,
+   "repo": "youart-open-source/awesome-gpt-image-2-5-prompts",
+   "url": "https://github.com/youart-open-source/awesome-gpt-image-2-5-prompts",
+   "description": "GPT Image 2.5 prompts, verbatim and credited: 150 community prompts across 9 use cases, each with the author who wrote it and their post. Free to run.",
+   "stars": 309,
    "topics": [
-    "ai-agent",
-    "ai-video",
-    "ai-video-generator",
-    "bring-your-own-key",
-    "comfyui",
-    "creative-tools",
-    "desktop-app",
-    "electron",
+    "ai-prompts",
+    "awesome-list",
+    "chatgpt-image-2-5-prompts",
+    "gpt-image",
+    "gpt-image-2",
+    "gpt-image-2-5",
+    "gpt-image-2-5-prompts",
     "image-generation",
-    "local-first",
-    "mcp",
-    "offline"
+    "openai",
+    "prompt-engineering",
+    "prompt-library",
+    "text-to-image"
    ],
-   "lang": "TypeScript",
-   "created_at": "2026-05-04",
-   "pushed_at": "2026-09-27",
-   "age_days": 146,
-   "stars_per_day_lifetime": 3.58,
-   "license": "AGPL-3.0",
-   "license_family": "copyleft",
-   "found_by": {
-    "dimension": "category",
-    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
-    "sort": "stars",
-    "query_breadth": 33,
-    "position": 20
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "开源 AI 视频工作台，支持本地模型和 ComfyUI，通过 MCP 进行视频制作。",
-   "evidence": "Open-source AI video workbench.",
-   "transfer_forms": [
-    "mcp",
-    "skill",
-    "deploy"
-   ],
-   "line_candidates": [
-    "video"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "LangChat/langchat",
-   "url": "https://github.com/LangChat/langchat",
-   "description": "LangChat 是由 LangChat Team 开发的开源 AI Agent 应用平台，支持多模型、Agent、知识库 RAG、Skills、MCP 与智能问数。",
-   "stars": 1286,
-   "topics": [
-    "agent",
-    "ai-agent",
-    "java",
-    "knowledge-base",
-    "langchain4j",
-    "llm",
-    "mcp",
-    "rag",
-    "spring-boot",
-    "vue3"
-   ],
-   "lang": "Vue",
-   "created_at": "2024-02-08",
-   "pushed_at": "2026-09-27",
-   "age_days": 962,
-   "stars_per_day_lifetime": 1.34,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "RAG 知识库 in:name,description stars:>200",
-    "sort": "stars",
-    "query_breadth": 26,
-    "position": 4
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "开源 AI Agent 应用平台，支持多模型、知识库 RAG、MCP 和智能问答。",
-   "evidence": "Open-source AI Agent application platform.",
-   "transfer_forms": [
-    "mcp",
-    "skill",
-    "deploy"
-   ],
-   "line_candidates": [
-    "rag"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "0xsline/OpenChatCut",
-   "url": "https://github.com/0xsline/OpenChatCut",
-   "description": "Open-source, local-first conversational AI video editor with a professional multi-track timeline, Agent Skills, MCP integration, and Remotion rendering.",
-   "stars": 2013,
-   "topics": [
-    "agent-skills",
-    "agentic-ai",
-    "ai-agent",
-    "ai-video-editor",
-    "capcut",
-    "chatcut",
-    "claude-code",
-    "codex",
-    "desktop-app",
-    "electron",
-    "ffmpeg",
-    "local-first"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-07-15",
-   "pushed_at": "2026-09-27",
-   "age_days": 74,
-   "stars_per_day_lifetime": 27.2,
-   "license": "AGPL-3.0",
-   "license_family": "copyleft",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-28",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 18
-   },
-   "matched_by_n_queries": 2,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "开源本地对话式 AI 视频编辑器，具有专业多轨道时间线、技能和 MCP 集成。",
-   "evidence": "Open-source local conversational AI video editor.",
-   "transfer_forms": [
-    "mcp",
-    "skill",
-    "deploy"
-   ],
-   "line_candidates": [
-    "video"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "awlevin/typesafe-computer-use",
-   "url": "https://github.com/awlevin/typesafe-computer-use",
-   "description": "Computer use for about $0.0002 a step: OCR the screen, classify the next action with TypeSafe, click. macOS.",
-   "stars": 1012,
-   "topics": [
-    "ai-agents",
-    "automation",
-    "computer-use",
-    "macos",
-    "ocr",
-    "typesafe"
-   ],
-   "lang": "Python",
-   "created_at": "2026-09-16",
-   "pushed_at": "2026-09-26",
-   "age_days": 11,
-   "stars_per_day_lifetime": 92.0,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:ocr stars:>1000 pushed:>2026-06-29",
-    "sort": "updated",
-    "query_breadth": 79,
-    "position": 16
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "使用 OCR 技术进行屏幕识别，并使用 TypeSafe 进行自动化操作。",
-   "evidence": "Computer use for about $0.0002 a step: OCR the screen.",
-   "transfer_forms": [
-    "skill",
-    "library"
-   ],
-   "line_candidates": [
-    "ocr"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "lingbol088-spec/codex-gpt-5.6-5.5-instruct",
-   "url": "https://github.com/lingbol088-spec/codex-gpt-5.6-5.5-instruct",
-   "description": "gpt-5.6/5.5-instruct —— GPT-5.6 / GPT-5.5 (Codex CLI) 的指令工程框架。通过 CTF 竞赛心理框架重构运行上下文，让模型的安全训练不被激活。不是打压拒绝，而是让拒绝通路不发生，拷打ai。一键部署，62 行提示词，50 个技能模块，纯 Python 无依赖。关注塔菲？",
-   "stars": 203,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-08-06",
-   "pushed_at": "2026-08-06",
-   "age_days": 52,
-   "stars_per_day_lifetime": 3.9,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-29",
-    "sort": "stars",
-    "query_breadth": 70,
-    "position": 69
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "GPT-5.6/5.5 指令工程框架，提供一键部署和技能模块。",
-   "evidence": "GPT-5.6 / GPT-5.5 (Codex CLI) 的指令工程框架。",
-   "transfer_forms": [
-    "deploy",
-    "dataset"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "yb2460/harness-anything",
-   "url": "https://github.com/yb2460/harness-anything",
-   "description": "Harness Anything - AI agent control hub: WPS, MS Office, Zotero, Photoshop, 47 CLI commands, 27 academic skills, SVG-to-PPTX",
-   "stars": 2078,
-   "topics": [
-    "ai-agent",
-    "automation",
-    "cli",
-    "cli-anything",
-    "com",
-    "office",
-    "python",
-    "windows",
-    "wps"
-   ],
-   "lang": "Python",
-   "created_at": "2026-05-27",
-   "pushed_at": "2026-09-26",
-   "age_days": 123,
-   "stars_per_day_lifetime": 16.89,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-28",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 49
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "AI 代理控制中心，支持 WPS、MS Office 等应用程序的自动化。",
-   "evidence": "AI agent control hub: WPS, MS Office.",
-   "transfer_forms": [
-    "skill",
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "wx-chevalier/Awesome-Books-Notes",
-   "url": "https://github.com/wx-chevalier/Awesome-Books-Notes",
-   "description": ":books: Awesome CS Books(with Digests)/Series(.pdf by git lfs) Warehouse for Geeks, ProgrammingLanguage, SoftwareEngineering, Web, AI, ServerSideApplication, Infrastructure, FE etc. :dizzy: 优秀创业、商业、产品、人文、计算机科学与技术领域相关的书籍归档，以及我的读书笔记。",
-   "stars": 2202,
-   "topics": [
-    "book"
-   ],
-   "lang": "HTML",
-   "created_at": "2017-11-06",
-   "pushed_at": "2026-09-27",
-   "age_days": 3247,
-   "stars_per_day_lifetime": 0.68,
+   "lang": "JavaScript",
+   "created_at": "2026-09-10",
+   "pushed_at": "2026-09-11",
+   "age_days": 18,
+   "stars_per_day_lifetime": 17.17,
    "license": "NOASSERTION",
    "license_family": "unknown",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-28",
+    "query": "prompts in:name stars:>300 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 22,
+    "position": 17
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 GPT Image 2.5 提示词库，包含社区贡献的150个提示词",
+   "evidence": "GPT Image 2.5 prompts, verbatim and credited: 150 community prompts across 9 use cases",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "lemomo-ai/lemo-opuscar",
+   "url": "https://github.com/lemomo-ai/lemo-opuscar",
+   "description": "39 film styles, each a reusable style prompt plus a short film made entirely in code by Claude Opus 5.5. Pick a style, bring your own story, and let your agent direct. | Opus5.5 x 39 种影片风格：风格提示词 + 纯代码样片 + 导演与技术指南",
+   "stars": 412,
+   "topics": [
+    "ai-agents",
+    "ai-video",
+    "animation",
+    "canvas",
+    "claude",
+    "claude-code",
+    "creative-coding",
+    "ffmpeg",
+    "filmmaking",
+    "motion-graphics",
+    "prompt-library",
+    "text-to-speech"
+   ],
+   "lang": "JavaScript",
+   "created_at": "2026-09-26",
+   "pushed_at": "2026-09-27",
+   "age_days": 2,
+   "stars_per_day_lifetime": 206.0,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-30",
+    "sort": "stars",
+    "query_breadth": 72,
+    "position": 46
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供39种影片风格提示词及样片，用于创意编码和影片制作",
+   "evidence": "39 film styles, each a reusable style prompt plus a short film made entirely in code by Claude Opus 5.5",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "getoneapi/OneAPI",
+   "url": "https://github.com/getoneapi/OneAPI",
+   "description": "OneAPI，提供各种数据API，用户信息、视频列表、详情、点赞、评论数据、综合搜索等，包括：Douyin（抖音）、Xiaohongshu（小红书）、Kuaishou（快手）、Bilibili（哔哩哔哩）、Weibo（微博）、Toutiao（今日头条）、Xigua（西瓜视频）、Lemon8、Tiktok、Youtube等接口、数据、API、爬虫、采集。",
+   "stars": 101,
+   "topics": [
+    "api",
+    "bilibili",
+    "bilibili-api",
+    "data",
+    "data-api",
+    "douyin",
+    "douyin-api",
+    "kuaishou",
+    "kuaishou-api",
+    "lemon8",
+    "tiktok",
+    "tiktok-api"
+   ],
+   "lang": "Python",
+   "created_at": "2025-09-12",
+   "pushed_at": "2026-09-22",
+   "age_days": 381,
+   "stars_per_day_lifetime": 0.27,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 64,
+    "position": 63
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供多种社交媒体数据API，包括抖音、小红书等",
+   "evidence": "提供各种数据API，用户信息、视频列表、详情、点赞、评论数据、综合搜索等",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Kristories/awesome-guidelines",
+   "url": "https://github.com/Kristories/awesome-guidelines",
+   "description": "Programming style, best practices, and coding conventions.",
+   "stars": 11133,
+   "topics": [
+    "awesome",
+    "awesome-guidelines",
+    "awesome-list",
+    "code-quality",
+    "coding-conventions",
+    "guidelines",
+    "hacktoberfest",
+    "style-conventions",
+    "style-guide"
+   ],
+   "lang": "JavaScript",
+   "created_at": "2017-07-12",
+   "pushed_at": "2026-09-28",
+   "age_days": 3365,
+   "stars_per_day_lifetime": 3.31,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集编程风格、最佳实践和编码规范",
+   "evidence": "Programming style, best practices, and coding conventions",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "neiesc/awesome-minimalist",
+   "url": "https://github.com/neiesc/awesome-minimalist",
+   "description": "A curated list of awesome minimalist frameworks (simple and lightweight).",
+   "stars": 3659,
+   "topics": [
+    "awesome-lists",
+    "hacktoberfest",
+    "minimalistic"
+   ],
+   "lang": "Astro",
+   "created_at": "2013-12-11",
+   "pushed_at": "2026-09-28",
+   "age_days": 4674,
+   "stars_per_day_lifetime": 0.78,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
     "sort": "updated",
     "query_breadth": 100,
     "position": 9
@@ -346,10 +264,10 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "计算机科学和技术领域相关书籍的仓库。",
-   "evidence": "Awesome CS Books(with Digests)/Series(.pdf by git lfs) Warehouse for Geeks.",
+   "capability": "收集简约框架列表，适用于快速开发",
+   "evidence": "A curated list of awesome minimalist frameworks (simple and lightweight)",
    "transfer_forms": [
-    "unknown"
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -357,83 +275,128 @@
    "distilled": true
   },
   {
-   "repo": "matt1398/claude-devtools",
-   "url": "https://github.com/matt1398/claude-devtools",
-   "description": "The missing DevTools for Claude Code — inspect session logs, tool calls, token usage, subagents, and context window in a visual UI. Free, open source.",
-   "stars": 3950,
+   "repo": "Neeeophytee/finding-unknowns-skills",
+   "url": "https://github.com/Neeeophytee/finding-unknowns-skills",
+   "description": "14 installable skills for Claude Code, OpenAI Codex, and Hermes: find unknowns, clarify requirements, manage context, test assumptions, and verify bug fixes with regression evidence.",
+   "stars": 339,
    "topics": [
-    "ai",
-    "ai-agent",
-    "ai-debugging",
-    "ai-tools",
-    "anthropic",
+    "agent-skills",
+    "ai-agents",
     "claude",
     "claude-code",
-    "claude-code-tools",
-    "debugging",
-    "desktop-app",
-    "developer-tools",
-    "devtools"
+    "codex",
+    "cursor",
+    "hermes-agent",
+    "kimi-k3",
+    "openai-codex",
+    "prompting",
+    "skills"
    ],
-   "lang": "TypeScript",
-   "created_at": "2026-02-07",
-   "pushed_at": "2026-09-26",
-   "age_days": 232,
-   "stars_per_day_lifetime": 17.03,
+   "lang": "Python",
+   "created_at": "2026-07-05",
+   "pushed_at": "2026-09-28",
+   "age_days": 85,
+   "stars_per_day_lifetime": 3.99,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-08-28",
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 55
+    "position": 16
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "Claude Code 的开发工具，用于检查会话日志和工具调用。",
-   "evidence": "The missing DevTools for Claude Code.",
+   "capability": "提供Claude Code、OpenAI Codex和Hermes的技能，用于AI代理",
+   "evidence": "14 installable skills for Claude Code, OpenAI Codex, and Hermes",
    "transfer_forms": [
-    "skill",
-    "library"
+    "skill"
    ],
    "line_candidates": [
-    "unknown"
+    "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "duoduoler-ops/Table-skills",
-   "url": "https://github.com/duoduoler-ops/Table-skills",
-   "description": "自用 AI Skills 合集：项目交接与网页替身，让长任务接续更清楚，让独立重任务交给网页 ChatGPT。",
-   "stars": 276,
+   "repo": "majidmanzarpour/threejs-game-skills",
+   "url": "https://github.com/majidmanzarpour/threejs-game-skills",
+   "description": "Agent skills for building playable, polished Three.js browser games with gameplay, AAA-style graphics, UI, QA, and optional AI-generated 3D, image, and audio assets.",
+   "stars": 2150,
    "topics": [],
    "lang": "Python",
-   "created_at": "2026-09-05",
-   "pushed_at": "2026-09-27",
-   "age_days": 22,
-   "stars_per_day_lifetime": 12.55,
+   "created_at": "2026-06-14",
+   "pushed_at": "2026-09-28",
+   "age_days": 106,
+   "stars_per_day_lifetime": 20.28,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 14
+    "position": 18
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "自用 AI Skills 合集，用于项目交接和网页替身。",
-   "evidence": "自用 AI Skills 合集：项目交接与网页替身。",
+   "capability": "提供构建Three.js游戏的技能，包括图形、UI和QA",
+   "evidence": "Agent skills for building playable, polished Three.js browser games with gameplay, AAA-style graphics, UI, QA",
    "transfer_forms": [
-    "skill",
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "gbdev/awesome-gbdev",
+   "url": "https://github.com/gbdev/awesome-gbdev",
+   "description": "A curated list of Game Boy development resources such as tools, docs, emulators, related projects and open-source ROMs.",
+   "stars": 4515,
+   "topics": [
+    "assembler",
+    "awesome",
+    "awesome-list",
+    "cartridge",
+    "dmg",
+    "documentation",
+    "game-boy-development",
+    "game-development",
+    "gameboy",
+    "gameboy-color",
+    "gameboy-color-emulator",
+    "gameboy-emulator"
+   ],
+   "lang": "",
+   "created_at": "2016-02-23",
+   "pushed_at": "2026-09-27",
+   "age_days": 3870,
+   "stars_per_day_lifetime": 1.17,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 23
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集Game Boy开发资源，如工具、文档、模拟器等",
+   "evidence": "A curated list of Game Boy development resources such as tools, docs, emulators",
+   "transfer_forms": [
     "library"
    ],
    "line_candidates": [
@@ -442,47 +405,170 @@
    "distilled": true
   },
   {
-   "repo": "mergisi/awesome-openclaw-agents",
-   "url": "https://github.com/mergisi/awesome-openclaw-agents",
-   "description": "162 production-ready AI agent templates for OpenClaw. SOUL.md configs across 19 categories. Submit yours!",
-   "stars": 3987,
+   "repo": "danielecook/Awesome-Bioinformatics",
+   "url": "https://github.com/danielecook/Awesome-Bioinformatics",
+   "description": "A curated list of awesome Bioinformatics libraries and software.",
+   "stars": 4306,
    "topics": [
-    "ai-agent-templates",
-    "ai-agents",
-    "ai-automation",
-    "anthropic",
-    "automation",
     "awesome",
     "awesome-list",
-    "claude",
-    "community-agents",
-    "crewclaw",
-    "docker",
-    "llm"
+    "bioinformatics"
    ],
-   "lang": "HTML",
-   "created_at": "2026-02-05",
-   "pushed_at": "2026-09-26",
-   "age_days": 234,
-   "stars_per_day_lifetime": 17.04,
+   "lang": "",
+   "created_at": "2014-08-27",
+   "pushed_at": "2026-09-27",
+   "age_days": 4415,
+   "stars_per_day_lifetime": 0.98,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 26
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集生物信息学库和软件列表",
+   "evidence": "A curated list of awesome Bioinformatics libraries and software",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "ziadoz/awesome-php",
+   "url": "https://github.com/ziadoz/awesome-php",
+   "description": "A curated list of amazingly awesome PHP libraries, resources and shiny things.",
+   "stars": 32716,
+   "topics": [
+    "awesome",
+    "awesome-lists",
+    "php",
+    "php-applications",
+    "php-framework",
+    "php-installation",
+    "php-library"
+   ],
+   "lang": "",
+   "created_at": "2013-11-26",
+   "pushed_at": "2026-09-27",
+   "age_days": 4689,
+   "stars_per_day_lifetime": 6.98,
+   "license": "WTFPL",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 29
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集PHP库、资源和工具列表",
+   "evidence": "A curated list of amazingly awesome PHP libraries, resources and shiny things",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "VoltAgent/voltagent",
+   "url": "https://github.com/VoltAgent/voltagent",
+   "description": "AI Agent Engineering Platform built on an Open Source TypeScript AI Agent Framework",
+   "stars": 10682,
+   "topics": [
+    "agents",
+    "ai",
+    "ai-agents",
+    "ai-agents-framework",
+    "aiagentframework",
+    "chatbots",
+    "chatgpt",
+    "framework",
+    "javascript",
+    "llm",
+    "llm-observability",
+    "mcp"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2025-04-16",
+   "pushed_at": "2026-09-28",
+   "age_days": 530,
+   "stars_per_day_lifetime": 20.15,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-08-28",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-29",
     "sort": "updated",
     "query_breadth": 100,
     "position": 33
    },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "构建基于 TypeScript 的 AI 代理工程平台",
+   "evidence": "AI Agent Engineering Platform built on an Open Source TypeScript AI Agent Framework",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "win4r/MuseAI-Skills",
+   "url": "https://github.com/win4r/MuseAI-Skills",
+   "description": "muse.ai (Muse AI) skills and runtime snapshot: 68 skills, workflow guides, connector manifests. muse.ai 技能与运行环境文件；非官方存档 / Unofficial archive.",
+   "stars": 282,
+   "topics": [
+    "agent-skills",
+    "meta",
+    "muse",
+    "skills"
+   ],
+   "lang": "HTML",
+   "created_at": "2026-09-25",
+   "pushed_at": "2026-09-28",
+   "age_days": 3,
+   "stars_per_day_lifetime": 94.0,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 34
+   },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 162 个生产就绪的 AI 代理模板。",
-   "evidence": "162 production-ready AI agent templates for OpenClaw.",
+   "capability": "提供 muse.ai 技能与运行环境文件的非官方存档",
+   "evidence": "muse.ai (Muse AI) skills and runtime snapshot: 68 skills, workflow guides, connector manifests. muse.ai 技能与运行环境文件；非官方存档 ",
    "transfer_forms": [
-    "dataset",
+    "skill",
     "library"
    ],
    "line_candidates": [
@@ -491,40 +577,86 @@
    "distilled": true
   },
   {
-   "repo": "SynaLinks/synalinks-skills",
-   "url": "https://github.com/SynaLinks/synalinks-skills",
-   "description": "Coding Agents skills for Synalinks OSS",
-   "stars": 907,
+   "repo": "kaankiziltug/logo-design-skill",
+   "url": "https://github.com/kaankiziltug/logo-design-skill",
+   "description": "A comprehensive logo-design skill for Claude, Gemini CLI, Codex and other AI agents: principles, process, SVG craft, testing tools and a 1,400+ logo reference library.",
+   "stars": 208,
    "topics": [
-    "artificial-intelligence",
-    "large-language-models",
-    "neuro-symbolic",
-    "neuro-symbolic-ai",
-    "neurosymbolic"
+    "agent-skills",
+    "branding",
+    "claude",
+    "claude-skills",
+    "codex",
+    "gemini-cli",
+    "logo-design",
+    "svg"
+   ],
+   "lang": "HTML",
+   "created_at": "2026-09-26",
+   "pushed_at": "2026-09-27",
+   "age_days": 2,
+   "stars_per_day_lifetime": 104.0,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 44
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "为 Claude, Gemini CLI, Codex 等AI代理提供全面的标志设计技能",
+   "evidence": "A comprehensive logo-design skill for Claude, Gemini CLI, Codex and other AI agents: principles, process, SVG craft, tes",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "iflytek/iFly-Skills",
+   "url": "https://github.com/iflytek/iFly-Skills",
+   "description": "Official collection of iFLYTEK skills for speech, OCR, translation, proofreading, and multimodal AI capabilities.",
+   "stars": 218,
+   "topics": [
+    "agent",
+    "iflytek-astron",
+    "skill",
+    "skill-md",
+    "skills"
    ],
    "lang": "Python",
-   "created_at": "2023-06-17",
-   "pushed_at": "2026-09-26",
-   "age_days": 1198,
-   "stars_per_day_lifetime": 0.76,
+   "created_at": "2026-03-30",
+   "pushed_at": "2026-09-27",
+   "age_days": 182,
+   "stars_per_day_lifetime": 1.2,
    "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 59
+    "position": 54
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为Synalinks OSS提供编码代理（Coding Agents）技能。",
-   "evidence": "描述为Coding Agents skills for Synalinks OSS，主题含neuro-symbolic。",
+   "capability": "提供 iFLYTEK 的语音、OCR、翻译、校对和多模态 AI 技能的官方集合",
+   "evidence": "Official collection of iFLYTEK skills for speech, OCR, translation, proofreading, and multimodal AI capabilities.",
    "transfer_forms": [
-    "skill"
+    "skill",
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -532,47 +664,35 @@
    "distilled": true
   },
   {
-   "repo": "SYuan03/Skill-Anything",
-   "url": "https://github.com/SYuan03/Skill-Anything",
-   "description": "Any source (PDF, video, web, audio, text) to interactive learning package with quizzes, flashcards and spaced repetition. One command, 12-section study guide.",
-   "stars": 331,
-   "topics": [
-    "active-recall",
-    "ai-learning",
-    "cli-tool",
-    "education",
-    "flashcard-generator",
-    "knowledge-extraction",
-    "learning-tool",
-    "llm",
-    "openai",
-    "pdf-to-quiz",
-    "python",
-    "quiz-generator"
-   ],
+   "repo": "ViktorAxelsen/MemSkill",
+   "url": "https://github.com/ViktorAxelsen/MemSkill",
+   "description": "[NeurIPS'26] MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents",
+   "stars": 582,
+   "topics": [],
    "lang": "Python",
-   "created_at": "2026-03-25",
-   "pushed_at": "2026-09-26",
-   "age_days": 186,
-   "stars_per_day_lifetime": 1.78,
-   "license": "MIT",
+   "created_at": "2026-01-30",
+   "pushed_at": "2026-09-27",
+   "age_days": 241,
+   "stars_per_day_lifetime": 2.41,
+   "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 62
+    "position": 57
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "将任何来源（PDF、视频、网页、音频、文本）转换为包含测验、闪卡和间隔重复的交互式学习包，一键生成12节学习指南。",
-   "evidence": "描述明确转换任意来源为交互式学习包，含视频但属学习工具。",
+   "capability": "学习并进化自我进化代理的记忆技能",
+   "evidence": "[NeurIPS'26] MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents",
    "transfer_forms": [
-    "skill"
+    "skill",
+    "architecture"
    ],
    "line_candidates": [
     "unknown"
@@ -580,34 +700,35 @@
    "distilled": true
   },
   {
-   "repo": "Rieranthony/product-film-skill",
-   "url": "https://github.com/Rieranthony/product-film-skill",
-   "description": "",
-   "stars": 208,
+   "repo": "ozrwayne/rw-research-skill",
+   "url": "https://github.com/ozrwayne/rw-research-skill",
+   "description": "Twelve standalone research workflow skills for questions, literature, evidence, design, writing, and submission.",
+   "stars": 207,
    "topics": [],
-   "lang": "TypeScript",
-   "created_at": "2026-09-26",
-   "pushed_at": "2026-09-26",
-   "age_days": 1,
-   "stars_per_day_lifetime": 208.0,
-   "license": "MIT",
+   "lang": "Python",
+   "created_at": "2026-07-11",
+   "pushed_at": "2026-09-27",
+   "age_days": 79,
+   "stars_per_day_lifetime": 2.62,
+   "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 65
+    "position": 66
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "无法从仓库描述中确定具体功能。",
-   "evidence": "无描述与话题，仅仓库名product-film-skill。",
+   "capability": "提供独立研究工作流程技能，包括问题、文献、证据、设计、写作和提交",
+   "evidence": "Twelve standalone research workflow skills for questions, literature, evidence, design, writing, and submission.",
    "transfer_forms": [
-    "unknown"
+    "skill",
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -615,34 +736,43 @@
    "distilled": true
   },
   {
-   "repo": "Prisma-Labs-Dev/apple-skills",
-   "url": "https://github.com/Prisma-Labs-Dev/apple-skills",
-   "description": "Apple development skills for Claude Code and Codex — latest iOS 26+ APIs, SwiftUI, Liquid Glass, and more",
-   "stars": 335,
-   "topics": [],
-   "lang": "TypeScript",
-   "created_at": "2026-02-19",
-   "pushed_at": "2026-09-26",
-   "age_days": 220,
-   "stars_per_day_lifetime": 1.52,
+   "repo": "ai4s-research/awesome-ai-for-science",
+   "url": "https://github.com/ai4s-research/awesome-ai-for-science",
+   "description": "A curated list of awesome AI tools, libraries, papers, datasets, and frameworks that accelerate scientific discovery — from physics and chemistry to biology, materials, and beyond.",
+   "stars": 2002,
+   "topics": [
+    "ai-for-science",
+    "ai4s",
+    "ai4science",
+    "awesome",
+    "awesome-list",
+    "bioinformatics",
+    "scientific-ai"
+   ],
+   "lang": "",
+   "created_at": "2025-10-04",
+   "pushed_at": "2026-09-24",
+   "age_days": 359,
+   "stars_per_day_lifetime": 5.58,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-08-28",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 67
+    "position": 88
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为Claude Code和Codex提供Apple开发技能，涵盖iOS 26+ API、SwiftUI、Liquid Glass等最新内容。",
-   "evidence": "描述写明Apple development skills for Claude Code and Codex。",
+   "capability": "收集加速科学发现的 AI 工具、库、论文、数据集和框架的精选列表",
+   "evidence": "A curated list of awesome AI tools, libraries, papers, datasets, and frameworks that accelerate scientific discovery — f",
    "transfer_forms": [
-    "skill"
+    "dataset",
+    "library"
    ],
    "line_candidates": [
     "unknown"

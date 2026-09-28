@@ -8613,6 +8613,43 @@
    }
   },
   {
+   "repo": "ziadoz/awesome-php",
+   "url": "https://github.com/ziadoz/awesome-php",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 32716,
+   "license": "WTFPL",
+   "license_family": "unknown",
+   "pushed_at": "2026-09-27",
+   "created_at": "2013-11-26",
+   "stars_per_day_lifetime": 6.98,
+   "capability": "收集PHP库、资源和工具列表",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-lists",
+    "php",
+    "php-applications",
+    "php-framework",
+    "php-installation",
+    "php-library"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 29
+   }
+  },
+  {
    "repo": "blader/humanizer",
    "url": "https://github.com/blader/humanizer",
    "first_seen": "2026-08-02",
@@ -18745,6 +18782,46 @@
    }
   },
   {
+   "repo": "Kristories/awesome-guidelines",
+   "url": "https://github.com/Kristories/awesome-guidelines",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 11133,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-28",
+   "created_at": "2017-07-12",
+   "stars_per_day_lifetime": 3.31,
+   "capability": "收集编程风格、最佳实践和编码规范",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-guidelines",
+    "awesome-list",
+    "code-quality",
+    "coding-conventions",
+    "guidelines",
+    "hacktoberfest",
+    "style-conventions",
+    "style-guide"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
+   }
+  },
+  {
    "repo": "edoardottt/awesome-hacker-search-engines",
    "url": "https://github.com/edoardottt/awesome-hacker-search-engines",
    "first_seen": "2026-09-02",
@@ -19230,6 +19307,50 @@
     "sort": "updated",
     "query_breadth": 65,
     "position": 2
+   }
+  },
+  {
+   "repo": "VoltAgent/voltagent",
+   "url": "https://github.com/VoltAgent/voltagent",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 10682,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-09-28",
+   "created_at": "2025-04-16",
+   "stars_per_day_lifetime": 20.15,
+   "capability": "构建基于 TypeScript 的 AI 代理工程平台",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agents",
+    "ai",
+    "ai-agents",
+    "ai-agents-framework",
+    "aiagentframework",
+    "chatbots",
+    "chatgpt",
+    "framework",
+    "javascript",
+    "llm",
+    "llm-observability",
+    "mcp"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 33
    }
   },
   {
@@ -31211,6 +31332,48 @@
    }
   },
   {
+   "repo": "gbdev/awesome-gbdev",
+   "url": "https://github.com/gbdev/awesome-gbdev",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 4515,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "pushed_at": "2026-09-27",
+   "created_at": "2016-02-23",
+   "stars_per_day_lifetime": 1.17,
+   "capability": "收集Game Boy开发资源，如工具、文档、模拟器等",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "assembler",
+    "awesome",
+    "awesome-list",
+    "cartridge",
+    "dmg",
+    "documentation",
+    "game-boy-development",
+    "game-development",
+    "gameboy",
+    "gameboy-color",
+    "gameboy-color-emulator",
+    "gameboy-emulator"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 23
+   }
+  },
+  {
    "repo": "osfans/trime",
    "url": "https://github.com/osfans/trime",
    "first_seen": "2026-07-26",
@@ -32451,6 +32614,39 @@
     "sort": "stars",
     "query_breadth": 3,
     "position": 1
+   }
+  },
+  {
+   "repo": "danielecook/Awesome-Bioinformatics",
+   "url": "https://github.com/danielecook/Awesome-Bioinformatics",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 4306,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-09-27",
+   "created_at": "2014-08-27",
+   "stars_per_day_lifetime": 0.98,
+   "capability": "收集生物信息学库和软件列表",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "bioinformatics"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 26
    }
   },
   {
@@ -35810,6 +36006,40 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 97
+   }
+  },
+  {
+   "repo": "neiesc/awesome-minimalist",
+   "url": "https://github.com/neiesc/awesome-minimalist",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 3659,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "lang": "Astro",
+   "pushed_at": "2026-09-28",
+   "created_at": "2013-12-11",
+   "stars_per_day_lifetime": 0.78,
+   "capability": "收集简约框架列表，适用于快速开发",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome-lists",
+    "hacktoberfest",
+    "minimalistic"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 9
    }
   },
   {
@@ -49969,6 +50199,35 @@
    }
   },
   {
+   "repo": "majidmanzarpour/threejs-game-skills",
+   "url": "https://github.com/majidmanzarpour/threejs-game-skills",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 2150,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-28",
+   "created_at": "2026-06-14",
+   "stars_per_day_lifetime": 20.28,
+   "capability": "提供构建Three.js游戏的技能，包括图形、UI和QA",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 18
+   }
+  },
+  {
    "repo": "NVIDIA-NeMo/DataDesigner",
    "url": "https://github.com/NVIDIA-NeMo/DataDesigner",
    "first_seen": "2026-08-05",
@@ -52565,6 +52824,44 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 18
+   }
+  },
+  {
+   "repo": "ai4s-research/awesome-ai-for-science",
+   "url": "https://github.com/ai4s-research/awesome-ai-for-science",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 2002,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-09-24",
+   "created_at": "2025-10-04",
+   "stars_per_day_lifetime": 5.58,
+   "capability": "收集加速科学发现的 AI 工具、库、论文、数据集和框架的精选列表",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-for-science",
+    "ai4s",
+    "ai4science",
+    "awesome",
+    "awesome-list",
+    "bioinformatics",
+    "scientific-ai"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 88
    }
   },
   {
@@ -69018,6 +69315,36 @@
    }
   },
   {
+   "repo": "ViktorAxelsen/MemSkill",
+   "url": "https://github.com/ViktorAxelsen/MemSkill",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 582,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-27",
+   "created_at": "2026-01-30",
+   "stars_per_day_lifetime": 2.41,
+   "capability": "学习并进化自我进化代理的记忆技能",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 57
+   }
+  },
+  {
    "repo": "w8123/EnterpriseAgentFramework",
    "url": "https://github.com/w8123/EnterpriseAgentFramework",
    "first_seen": "2026-08-19",
@@ -74351,6 +74678,49 @@
    }
   },
   {
+   "repo": "lemomo-ai/lemo-opuscar",
+   "url": "https://github.com/lemomo-ai/lemo-opuscar",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 412,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-27",
+   "created_at": "2026-09-26",
+   "stars_per_day_lifetime": 206.0,
+   "capability": "提供39种影片风格提示词及样片，用于创意编码和影片制作",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "topics": [
+    "ai-agents",
+    "ai-video",
+    "animation",
+    "canvas",
+    "claude",
+    "claude-code",
+    "creative-coding",
+    "ffmpeg",
+    "filmmaking",
+    "motion-graphics",
+    "prompt-library",
+    "text-to-speech"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-06-30",
+    "sort": "stars",
+    "query_breadth": 72,
+    "position": 46
+   }
+  },
+  {
    "repo": "thoughtbot/top_secret",
    "url": "https://github.com/thoughtbot/top_secret",
    "first_seen": "2026-07-26",
@@ -76859,6 +77229,48 @@
    }
   },
   {
+   "repo": "Neeeophytee/finding-unknowns-skills",
+   "url": "https://github.com/Neeeophytee/finding-unknowns-skills",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 339,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-28",
+   "created_at": "2026-07-05",
+   "stars_per_day_lifetime": 3.99,
+   "capability": "提供Claude Code、OpenAI Codex和Hermes的技能，用于AI代理",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "claude",
+    "claude-code",
+    "codex",
+    "cursor",
+    "hermes-agent",
+    "kimi-k3",
+    "openai-codex",
+    "prompting",
+    "skills"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 16
+   }
+  },
+  {
    "repo": "BZDmathclub/bzd-math-modeling-skills",
    "url": "https://github.com/BZDmathclub/bzd-math-modeling-skills",
    "first_seen": "2026-09-14",
@@ -78415,6 +78827,49 @@
    }
   },
   {
+   "repo": "youart-open-source/awesome-gpt-image-2-5-prompts",
+   "url": "https://github.com/youart-open-source/awesome-gpt-image-2-5-prompts",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 309,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "JavaScript",
+   "pushed_at": "2026-09-11",
+   "created_at": "2026-09-10",
+   "stars_per_day_lifetime": 17.17,
+   "capability": "提供 GPT Image 2.5 提示词库，包含社区贡献的150个提示词",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "topics": [
+    "ai-prompts",
+    "awesome-list",
+    "chatgpt-image-2-5-prompts",
+    "gpt-image",
+    "gpt-image-2",
+    "gpt-image-2-5",
+    "gpt-image-2-5-prompts",
+    "image-generation",
+    "openai",
+    "prompt-engineering",
+    "prompt-library",
+    "text-to-image"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "prompts in:name stars:>300 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 22,
+    "position": 17
+   }
+  },
+  {
    "repo": "AlpacaLabsLLC/skills-for-architects",
    "url": "https://github.com/AlpacaLabsLLC/skills-for-architects",
    "first_seen": "2026-08-15",
@@ -79786,6 +80241,42 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 40
+   }
+  },
+  {
+   "repo": "win4r/MuseAI-Skills",
+   "url": "https://github.com/win4r/MuseAI-Skills",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 282,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "HTML",
+   "pushed_at": "2026-09-28",
+   "created_at": "2026-09-25",
+   "stars_per_day_lifetime": 94.0,
+   "capability": "提供 muse.ai 技能与运行环境文件的非官方存档",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "meta",
+    "muse",
+    "skills"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 34
    }
   },
   {
@@ -83245,6 +83736,43 @@
    }
   },
   {
+   "repo": "iflytek/iFly-Skills",
+   "url": "https://github.com/iflytek/iFly-Skills",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 218,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-27",
+   "created_at": "2026-03-30",
+   "stars_per_day_lifetime": 1.2,
+   "capability": "提供 iFLYTEK 的语音、OCR、翻译、校对和多模态 AI 技能的官方集合",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent",
+    "iflytek-astron",
+    "skill",
+    "skill-md",
+    "skills"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 54
+   }
+  },
+  {
    "repo": "spences10/svelte-claude-skills",
    "url": "https://github.com/spences10/svelte-claude-skills",
    "first_seen": "2026-09-20",
@@ -84349,6 +84877,46 @@
    }
   },
   {
+   "repo": "kaankiziltug/logo-design-skill",
+   "url": "https://github.com/kaankiziltug/logo-design-skill",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 208,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-09-27",
+   "created_at": "2026-09-26",
+   "stars_per_day_lifetime": 104.0,
+   "capability": "为 Claude, Gemini CLI, Codex 等AI代理提供全面的标志设计技能",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "branding",
+    "claude",
+    "claude-skills",
+    "codex",
+    "gemini-cli",
+    "logo-design",
+    "svg"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 44
+   }
+  },
+  {
    "repo": "microsoft/Dataverse-skills",
    "url": "https://github.com/microsoft/Dataverse-skills",
    "first_seen": "2026-08-22",
@@ -84537,6 +85105,36 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 58
+   }
+  },
+  {
+   "repo": "ozrwayne/rw-research-skill",
+   "url": "https://github.com/ozrwayne/rw-research-skill",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 207,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-27",
+   "created_at": "2026-07-11",
+   "stars_per_day_lifetime": 2.62,
+   "capability": "提供独立研究工作流程技能，包括问题、文献、证据、设计、写作和提交",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-08-29",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 66
    }
   },
   {
@@ -91011,6 +91609,49 @@
    }
   },
   {
+   "repo": "getoneapi/OneAPI",
+   "url": "https://github.com/getoneapi/OneAPI",
+   "first_seen": "2026-09-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-09-28",
+   "stars": 101,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Python",
+   "pushed_at": "2026-09-22",
+   "created_at": "2025-09-12",
+   "stars_per_day_lifetime": 0.27,
+   "capability": "提供多种社交媒体数据API，包括抖音、小红书等",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "api",
+    "bilibili",
+    "bilibili-api",
+    "data",
+    "data-api",
+    "douyin",
+    "douyin-api",
+    "kuaishou",
+    "kuaishou-api",
+    "lemon8",
+    "tiktok",
+    "tiktok-api"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 64,
+    "position": 63
+   }
+  },
+  {
    "repo": "huanmin123/juhe-ai",
    "url": "https://github.com/huanmin123/juhe-ai",
    "first_seen": "2026-08-20",
@@ -93563,7 +94204,7 @@
    }
   }
  ],
- "updated": "2026-09-27",
+ "updated": "2026-09-28",
  "status_enum": [
   "pending",
   "debated",
