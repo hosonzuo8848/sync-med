@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "目前使用的是自研的阅读器模块",
+ "beats": "",
+ "why": "Caddy是一个Web服务器，与阅读器模块的功能不直接相关"
+}

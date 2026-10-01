@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "自研的古籍辨证参阅报告生成系统",
+ "beats": "",
+ "why": "项目专注于 Claude Code 代理的技能和流程纪律，与古籍辨证参阅报告生成系统需求不符"
+}
