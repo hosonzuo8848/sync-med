@@ -1,0 +1,733 @@
+{
+ "extra": {
+  "actions": {
+   "cancelled": 317,
+   "failure": 486,
+   "per_workflow": {
+    "Authoritative Ingest": {
+     "cancelled": 4,
+     "failure": 0,
+     "n": 120,
+     "other": 0,
+     "success": 116
+    },
+    "Competitor & Regulatory Radar": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 7,
+     "other": 0,
+     "success": 7
+    },
+    "Content Factory": {
+     "cancelled": 0,
+     "failure": 6,
+     "n": 134,
+     "other": 0,
+     "success": 128
+    },
+    "Evolve Adopt": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 30,
+     "other": 0,
+     "success": 30
+    },
+    "Evolve Controller": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 114,
+     "other": 0,
+     "success": 114
+    },
+    "Evolve Race": {
+     "cancelled": 0,
+     "failure": 1,
+     "n": 5,
+     "other": 0,
+     "success": 4
+    },
+    "Gitleaks": {
+     "cancelled": 63,
+     "failure": 7,
+     "n": 290,
+     "other": 0,
+     "success": 220
+    },
+    "Graph Community": {
+     "cancelled": 0,
+     "failure": 1,
+     "n": 30,
+     "other": 0,
+     "success": 29
+    },
+    "IndexNow Push (主动推送收录)": {
+     "cancelled": 0,
+     "failure": 29,
+     "n": 30,
+     "other": 0,
+     "success": 1
+    },
+    "Intel Radar Daily Report v3": {
+     "cancelled": 4,
+     "failure": 2,
+     "n": 36,
+     "other": 0,
+     "success": 30
+    },
+    "Judge Scorecard": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 4,
+     "other": 0,
+     "success": 4
+    },
+    "NVIDIA Model Probe": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 1,
+     "other": 0,
+     "success": 1
+    },
+    "OCR Layout Quality Probe": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 1,
+     "other": 0,
+     "success": 1
+    },
+    "OCR Structure Probe (PP-StructureV3)": {
+     "cancelled": 0,
+     "failure": 1,
+     "n": 3,
+     "other": 0,
+     "success": 2
+    },
+    "Prewarm Embed Cache (寻脉预热)": {
+     "cancelled": 0,
+     "failure": 4,
+     "n": 4,
+     "other": 0,
+     "success": 0
+    },
+    "Radar Race": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 30,
+     "other": 0,
+     "success": 30
+    },
+    "Review Drain": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 114,
+     "other": 0,
+     "success": 114
+    },
+    "Search Index": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 30,
+     "other": 0,
+     "success": 30
+    },
+    "Social Drafts (generate only)": {
+     "cancelled": 1,
+     "failure": 2,
+     "n": 6,
+     "other": 0,
+     "success": 3
+    },
+    "clean-embed-ingest": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 114,
+     "other": 0,
+     "success": 114
+    },
+    "code-self-audit": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 4,
+     "other": 0,
+     "success": 4
+    },
+    "ctext_harvest": {
+     "cancelled": 0,
+     "failure": 20,
+     "n": 118,
+     "other": 0,
+     "success": 98
+    },
+    "fangji-ai-refine": {
+     "cancelled": 38,
+     "failure": 0,
+     "n": 38,
+     "other": 0,
+     "success": 0
+    },
+    "fangji-wash": {
+     "cancelled": 0,
+     "failure": 2,
+     "n": 5,
+     "other": 0,
+     "success": 3
+    },
+    "fleet-health": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 143,
+     "other": 0,
+     "success": 143
+    },
+    "forge-smoke": {
+     "cancelled": 0,
+     "failure": 2,
+     "n": 28,
+     "other": 0,
+     "success": 26
+    },
+    "frontend-sentinel": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 119,
+     "other": 0,
+     "success": 119
+    },
+    "gen-thumbs": {
+     "cancelled": 1,
+     "failure": 0,
+     "n": 101,
+     "other": 0,
+     "success": 100
+    },
+    "gen-thumbs-fast": {
+     "cancelled": 1,
+     "failure": 0,
+     "n": 88,
+     "other": 0,
+     "success": 87
+    },
+    "geo-watch": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 4,
+     "other": 0,
+     "success": 4
+    },
+    "guard-no-list-objects": {
+     "cancelled": 0,
+     "failure": 7,
+     "n": 260,
+     "other": 0,
+     "success": 253
+    },
+    "guji-health": {
+     "cancelled": 0,
+     "failure": 2,
+     "n": 25,
+     "other": 0,
+     "success": 23
+    },
+    "gw-registry-sync": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 23,
+     "other": 0,
+     "success": 23
+    },
+    "gw-snapshot": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 134,
+     "other": 0,
+     "success": 134
+    },
+    "herb-norm-pilot": {
+     "cancelled": 1,
+     "failure": 1,
+     "n": 9,
+     "other": 0,
+     "success": 7
+    },
+    "herb-norm-s3": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 52,
+     "other": 0,
+     "success": 52
+    },
+    "hyper-probe": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 4,
+     "other": 0,
+     "success": 4
+    },
+    "hyper-s3": {
+     "cancelled": 4,
+     "failure": 0,
+     "n": 15,
+     "other": 0,
+     "success": 11
+    },
+    "hyper-s4": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 15,
+     "other": 0,
+     "success": 15
+    },
+    "india_harvest": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 23,
+     "other": 0,
+     "success": 23
+    },
+    "intel-compile": {
+     "cancelled": 0,
+     "failure": 1,
+     "n": 90,
+     "other": 0,
+     "success": 89
+    },
+    "intel-zh-feeds": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 34,
+     "other": 0,
+     "success": 34
+    },
+    "lane-probe": {
+     "cancelled": 0,
+     "failure": 1,
+     "n": 30,
+     "other": 0,
+     "success": 29
+    },
+    "laya-zh-eval": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 1,
+     "other": 0,
+     "success": 1
+    },
+    "make_video": {
+     "cancelled": 0,
+     "failure": 20,
+     "n": 30,
+     "other": 0,
+     "success": 10
+    },
+    "metrics-card": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 22,
+     "other": 0,
+     "success": 22
+    },
+    "ocr-ndl": {
+     "cancelled": 1,
+     "failure": 3,
+     "n": 97,
+     "other": 0,
+     "success": 93
+    },
+    "ocr-quality": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 30,
+     "other": 0,
+     "success": 30
+    },
+    "ocr-quality-audit": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 4,
+     "other": 0,
+     "success": 4
+    },
+    "ocr-release": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 30,
+     "other": 0,
+     "success": 30
+    },
+    "ocr-to-rag": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 89,
+     "other": 0,
+     "success": 89
+    },
+    "ocr_xf": {
+     "cancelled": 7,
+     "failure": 0,
+     "n": 7,
+     "other": 0,
+     "success": 0
+    },
+    "pan-audit": {
+     "cancelled": 3,
+     "failure": 3,
+     "n": 30,
+     "other": 0,
+     "success": 24
+    },
+    "pan-inventory": {
+     "cancelled": 2,
+     "failure": 0,
+     "n": 4,
+     "other": 0,
+     "success": 2
+    },
+    "pan-register": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 30,
+     "other": 0,
+     "success": 30
+    },
+    "pan-tidy": {
+     "cancelled": 0,
+     "failure": 2,
+     "n": 114,
+     "other": 0,
+     "success": 112
+    },
+    "probe-mask-output": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 1,
+     "other": 0,
+     "success": 1
+    },
+    "r2-usage-audit": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 30,
+     "other": 0,
+     "success": 30
+    },
+    "report-daily": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 30,
+     "other": 15,
+     "success": 15
+    },
+    "report-monthly": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 1,
+     "other": 0,
+     "success": 1
+    },
+    "report-weekly": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 4,
+     "other": 0,
+     "success": 4
+    },
+    "research-report": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 3,
+     "other": 0,
+     "success": 3
+    },
+    "rights-ai-classify": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 3,
+     "other": 0,
+     "success": 3
+    },
+    "sueai-council": {
+     "cancelled": 0,
+     "failure": 28,
+     "n": 30,
+     "other": 0,
+     "success": 2
+    },
+    "sync": {
+     "cancelled": 126,
+     "failure": 0,
+     "n": 126,
+     "other": 0,
+     "success": 0
+    },
+    "指挥中心": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 1,
+     "other": 1,
+     "success": 0
+    },
+    "百家论道内容工厂": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 144,
+     "other": 0,
+     "success": 144
+    },
+    "评论区吵架引擎": {
+     "cancelled": 0,
+     "failure": 137,
+     "n": 137,
+     "other": 0,
+     "success": 0
+    },
+    "💰 Intake Sentry · 内测申请哨兵": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 142,
+     "other": 0,
+     "success": 142
+    },
+    "📏 Gold Set Full · 金标全量评测": {
+     "cancelled": 2,
+     "failure": 0,
+     "n": 7,
+     "other": 0,
+     "success": 5
+    },
+    "🔌 Gateway Sentry · 网关链头哨兵": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 143,
+     "other": 0,
+     "success": 143
+    },
+    "🔍 本地-GitHub 一致性审计": {
+     "cancelled": 0,
+     "failure": 0,
+     "n": 5,
+     "other": 0,
+     "success": 5
+    },
+    "🚨 Compliance Line · 合规红线独立闸": {
+     "cancelled": 0,
+     "failure": 15,
+     "n": 30,
+     "other": 0,
+     "success": 15
+    },
+    "🛡️ Fleet Watch": {
+     "cancelled": 0,
+     "failure": 1,
+     "n": 141,
+     "other": 0,
+     "success": 140
+    }
+   },
+   "success": 2500,
+   "total": 2500
+  },
+  "attendance": {
+   "expected": 30,
+   "missing": [
+    "2026-09-01",
+    "2026-09-02",
+    "2026-09-04",
+    "2026-09-05",
+    "2026-09-06",
+    "2026-09-07",
+    "2026-09-11",
+    "2026-09-12",
+    "2026-09-13",
+    "2026-09-14",
+    "2026-09-15",
+    "2026-09-16",
+    "2026-09-17",
+    "2026-09-18",
+    "2026-09-19",
+    "2026-09-20",
+    "2026-09-21",
+    "2026-09-22",
+    "2026-09-23",
+    "2026-09-24",
+    "2026-09-25",
+    "2026-09-26",
+    "2026-09-27",
+    "2026-09-28",
+    "2026-09-29",
+    "2026-09-30"
+   ],
+   "present": [
+    "2026-09-03",
+    "2026-09-08",
+    "2026-09-09",
+    "2026-09-10"
+   ]
+  },
+  "traffic": {
+   "err": null,
+   "funnel": {
+    "content": 15320,
+    "logged_in": 3,
+    "nonbot": 74280,
+    "raw": 345772
+   },
+   "pages": [
+    {
+     "by_country": "US:24, CN:17, TW:3, XK:1, QA:1, FR:1",
+     "ips": 47,
+     "name": "阅读器",
+     "path": "/reader%"
+    },
+    {
+     "by_country": "US:20, CN:4, FR:3, GB:2, CA:2, TH:1",
+     "ips": 32,
+     "name": "星图",
+     "path": "/starmap%"
+    },
+    {
+     "by_country": "US:24, CN:7, SG:5, FR:4, GB:3, DE:3",
+     "ips": 46,
+     "name": "寻脉",
+     "path": "/xunmai%"
+    },
+    {
+     "by_country": "US:8, CN:3",
+     "ips": 11,
+     "name": "本草",
+     "path": "/bencao%"
+    },
+    {
+     "by_country": "CN:703, DE:250, FI:156, SE:146, US:78, NL:24",
+     "ips": 1357,
+     "name": "方剂",
+     "path": "/fangji%"
+    },
+    {
+     "by_country": "CN:11, US:10, BR:2, KR:1, CR:1, CG:1",
+     "ips": 26,
+     "name": "全文",
+     "path": "/text%"
+    }
+   ],
+   "window": "2026-08-31"
+  }
+ },
+ "generated_at": "2026-10-01T14:43:01.384188+08:00",
+ "key": "2026-09",
+ "metrics": {
+  "cand_pending": {
+   "err": null,
+   "value": 5777
+  },
+  "daodu_total": {
+   "err": null,
+   "value": 1953
+  },
+  "formulas_books": {
+   "err": null,
+   "value": 1210
+  },
+  "formulas_names": {
+   "err": null,
+   "value": 44563
+  },
+  "formulas_total": {
+   "err": null,
+   "value": 98174
+  },
+  "graph_edges": {
+   "err": null,
+   "value": 161583
+  },
+  "graph_edges_tier1": {
+   "err": null,
+   "value": 1056
+  },
+  "graph_nodes": {
+   "err": null,
+   "value": 53453
+  },
+  "gufang_lib": {
+   "err": null,
+   "value": 0
+  },
+  "guji_visible": {
+   "err": null,
+   "value": 6925
+  },
+  "med_visible": {
+   "err": null,
+   "value": 46828
+  },
+  "pub_drift_ai_ok": {
+   "err": null,
+   "value": 0
+  },
+  "pub_drift_rows": {
+   "err": null,
+   "value": 0
+  },
+  "pub_v1_rows": {
+   "err": null,
+   "value": 86883
+  },
+  "pub_v2_gate": {
+   "err": null,
+   "value": 13431
+  },
+  "wiki_pages_facts": {
+   "err": null,
+   "value": 28049
+  },
+  "wiki_pages_published": {
+   "err": null,
+   "value": 8243
+  }
+ },
+ "period": "monthly",
+ "range": [
+  "2026-09-01",
+  "2026-09-30"
+ ],
+ "run_id": "36826069812",
+ "tables": {
+  "daodu_by_ver": {
+   "err": null,
+   "rows": [
+    {
+     "k": "daodu-v3-ragground",
+     "n": 898
+    },
+    {
+     "k": "daodu-v3-corpus-batch",
+     "n": 893
+    },
+    {
+     "k": "daodu-multi-v1",
+     "n": 162
+    }
+   ]
+  },
+  "med_by_collection": {
+   "err": null,
+   "rows": [
+    {
+     "k": "overseas_guji",
+     "n": 25646
+    },
+    {
+     "k": "overseas",
+     "n": 20896
+    },
+    {
+     "k": "fojing",
+     "n": 273
+    },
+    {
+     "k": "nonmed_junk",
+     "n": 13
+    }
+   ]
+  }
+ }
+}
