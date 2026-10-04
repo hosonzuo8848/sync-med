@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "自研的古籍辨证参阅报告生成系统",
+ "beats": "",
+ "why": "已在家底:我们的AI寻脉模块是自研的，且与superpowers项目提供的功能不匹配"
+}
