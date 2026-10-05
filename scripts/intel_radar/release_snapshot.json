@@ -16,31 +16,31 @@
   "tag": "v3.9.2"
  },
  "adbar/trafilatura": {
-  "published_at": "2026-07-31T16:07:10Z",
-  "tag": "v2.2.0"
+  "published_at": "2026-10-02T16:53:41Z",
+  "tag": "v2.3.0"
  },
  "dreammis/social-auto-upload": {
   "published_at": "2024-04-10T05:27:16Z",
   "tag": "oh-v1.0"
  },
  "infiniflow/ragflow": {
-  "published_at": "2026-09-10T11:11:35Z",
-  "tag": "v0.27.2"
+  "published_at": "2026-09-29T05:52:57Z",
+  "tag": "v1.0.0-rc1"
  },
  "microsoft/graphrag": {
   "published_at": "2026-09-24T02:25:49Z",
   "tag": "v3.2.0"
  },
  "opendatalab/MinerU": {
-  "published_at": "2026-09-27T19:50:50Z",
-  "tag": "mineru-4.0.8-released"
+  "published_at": "2026-09-29T07:18:10Z",
+  "tag": "mineru-4.0.10-released"
  },
  "unclecode/crawl4ai": {
   "published_at": "2026-09-23T12:14:55Z",
   "tag": "v0.9.4"
  },
  "vercel/satori": {
-  "published_at": "2026-09-22T15:57:21Z",
-  "tag": "0.33.5"
+  "published_at": "2026-10-02T12:28:37Z",
+  "tag": "0.35.0"
  }
 }
