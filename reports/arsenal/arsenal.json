@@ -11429,6 +11429,42 @@
    }
   },
   {
+   "repo": "alexpate/awesome-design-systems",
+   "url": "https://github.com/alexpate/awesome-design-systems",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 26069,
+   "license": "Unlicense",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-06",
+   "created_at": "2017-06-06",
+   "stars_per_day_lifetime": 7.64,
+   "capability": "收集各种设计系统的资源",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "design-systems",
+    "hacktoberfest",
+    "pattern-library",
+    "ui-library"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 38
+   }
+  },
+  {
    "repo": "xiaojieonly/Ehviewer_CN_SXJ",
    "url": "https://github.com/xiaojieonly/Ehviewer_CN_SXJ",
    "first_seen": "2026-08-10",
@@ -24039,6 +24075,38 @@
     "sort": "stars",
     "query_breadth": 58,
     "position": 16
+   }
+  },
+  {
+   "repo": "ChromeDevTools/awesome-chrome-devtools",
+   "url": "https://github.com/ChromeDevTools/awesome-chrome-devtools",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 7157,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-06",
+   "created_at": "2016-03-08",
+   "stars_per_day_lifetime": 1.85,
+   "capability": "收集Chrome DevTools和DevTools Protocol生态系统中的工具和资源",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 20
    }
   },
   {
@@ -39717,6 +39785,46 @@
    }
   },
   {
+   "repo": "rguo12/awesome-causality-algorithms",
+   "url": "https://github.com/rguo12/awesome-causality-algorithms",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 3290,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-07",
+   "created_at": "2018-09-19",
+   "stars_per_day_lifetime": 1.12,
+   "capability": "提供学习因果关系的算法索引",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "baselines",
+    "causal-inference",
+    "causality",
+    "causality-algorithms",
+    "causality-analysis",
+    "learning-to-rank",
+    "multilabel-classification",
+    "recommender-system",
+    "unconfoundedness-assumption"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 9
+   }
+  },
+  {
    "repo": "SamurAIGPT/llm-wiki-agent",
    "url": "https://github.com/SamurAIGPT/llm-wiki-agent",
    "first_seen": "2026-07-30",
@@ -44230,6 +44338,35 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 73
+   }
+  },
+  {
+   "repo": "YanjieZe/awesome-humanoid-robot-learning",
+   "url": "https://github.com/YanjieZe/awesome-humanoid-robot-learning",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 2797,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-06",
+   "created_at": "2024-10-30",
+   "stars_per_day_lifetime": 3.96,
+   "capability": "提供类人机器人学习领域的论文列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 29
    }
   },
   {
@@ -51712,6 +51849,49 @@
    }
   },
   {
+   "repo": "atomicstrata/llm-wiki-compiler",
+   "url": "https://github.com/atomicstrata/llm-wiki-compiler",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 2164,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-07",
+   "created_at": "2026-04-05",
+   "stars_per_day_lifetime": 11.7,
+   "capability": "将原始知识源转换为相互链接的维基百科",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "cli",
+    "compiler",
+    "context-engineering",
+    "karpathy",
+    "knowledge-base",
+    "knowledge-compilation",
+    "llm",
+    "markdown",
+    "mcp",
+    "mcp-server"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 53
+   }
+  },
+  {
    "repo": "HUANGCHIHHUNGLeo/claude-real-video",
    "url": "https://github.com/HUANGCHIHHUNGLeo/claude-real-video",
    "first_seen": "2026-09-20",
@@ -52983,6 +53163,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 42
+   }
+  },
+  {
+   "repo": "maxritter/pilot-shell",
+   "url": "https://github.com/maxritter/pilot-shell",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 2083,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-07",
+   "created_at": "2025-10-18",
+   "stars_per_day_lifetime": 5.88,
+   "capability": "为Claude Code和OpenAI Codex提供专业上下文和工具工程",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "agentic-engineering",
+    "ai-coding",
+    "anthropic",
+    "claude-code",
+    "code-quality",
+    "code-review",
+    "codex",
+    "codex-cli",
+    "coding-agents",
+    "context-engineering",
+    "developer-tools"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 22
    }
   },
   {
@@ -77188,6 +77411,44 @@
    }
   },
   {
+   "repo": "menkesu/awesome-pm-skills",
+   "url": "https://github.com/menkesu/awesome-pm-skills",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 429,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-10-06",
+   "created_at": "2026-01-28",
+   "stars_per_day_lifetime": 1.7,
+   "capability": "提供基于 Lenny's Podcast 的产品管理工作流程",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "awesome-list",
+    "claude",
+    "cursor",
+    "lenny-rachitsky",
+    "pm-skills",
+    "product-management"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 74
+   }
+  },
+  {
    "repo": "Annyfee/agent-craft",
    "url": "https://github.com/Annyfee/agent-craft",
    "first_seen": "2026-08-20",
@@ -81437,6 +81698,46 @@
    }
   },
   {
+   "repo": "mfoud444/ollamafreeapi",
+   "url": "https://github.com/mfoud444/ollamafreeapi",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 320,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Python",
+   "pushed_at": "2026-10-06",
+   "created_at": "2025-05-26",
+   "stars_per_day_lifetime": 0.64,
+   "capability": "提供Ollama LLMs的免费分布式API访问",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-api",
+    "deepseek",
+    "free-ai",
+    "free-ai-api",
+    "free-api",
+    "llama",
+    "llm",
+    "mistral",
+    "ollama"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "free llm api in:name,description stars:>200 pushed:>2026-07-09",
+    "sort": "stars",
+    "query_breadth": 13,
+    "position": 9
+   }
+  },
+  {
    "repo": "zhuyansen/agent-skills-hub",
    "url": "https://github.com/zhuyansen/agent-skills-hub",
    "first_seen": "2026-08-02",
@@ -82907,6 +83208,89 @@
     "sort": "stars",
     "query_breadth": 30,
     "position": 17
+   }
+  },
+  {
+   "repo": "hexiaofeier/hehe-industry-research-skill-pack",
+   "url": "https://github.com/hexiaofeier/hehe-industry-research-skill-pack",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 299,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-06",
+   "created_at": "2026-09-15",
+   "stars_per_day_lifetime": 13.59,
+   "capability": "提供行业与企业研究技能包，支持行业研究、企业研究、市场分析等模块",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "company-research",
+    "financial-analysis",
+    "industry-analysis",
+    "industry-chain-map",
+    "industry-research",
+    "market-analysis",
+    "market-research",
+    "market-sizing"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 68
+   }
+  },
+  {
+   "repo": "lingxling/awesome-skills-cn",
+   "url": "https://github.com/lingxling/awesome-skills-cn",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 299,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-07",
+   "created_at": "2026-02-13",
+   "stars_per_day_lifetime": 1.27,
+   "capability": "提供7000+Skills的中文学习版和教程",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agents",
+    "anthropic",
+    "antigravity",
+    "awesome-list",
+    "chinese",
+    "claude",
+    "claude-skills",
+    "huggingface",
+    "obsidian",
+    "openai",
+    "openclaw",
+    "scientific"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 19
    }
   },
   {
@@ -88979,6 +89363,34 @@
    }
   },
   {
+   "repo": "jasonbitsmith/muse-skills",
+   "url": "https://github.com/jasonbitsmith/muse-skills",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 206,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-10-06",
+   "created_at": "2026-10-05",
+   "stars_per_day_lifetime": 103.0,
+   "capability": "提供 300 条 Muse 技能，包含痛点与做法",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 89
+   }
+  },
+  {
    "repo": "nejib1/Free-LLM",
    "url": "https://github.com/nejib1/Free-LLM",
    "first_seen": "2026-08-19",
@@ -93798,6 +94210,49 @@
    }
   },
   {
+   "repo": "cv-cat/catbus",
+   "url": "https://github.com/cv-cat/catbus",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 110,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-07",
+   "created_at": "2026-09-27",
+   "stars_per_day_lifetime": 11.0,
+   "capability": "提供统一命令和JSON输出，用于操作多个社交媒体平台",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "topics": [
+    "ai-agent",
+    "bilibili",
+    "claude-code",
+    "cli",
+    "crawler",
+    "douyin",
+    "jd",
+    "kuaishou",
+    "nodejs",
+    "rednote",
+    "spider",
+    "taobao"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 69,
+    "position": 63
+   }
+  },
+  {
    "repo": "peter123023/awesome-free-llm-api",
    "url": "https://github.com/peter123023/awesome-free-llm-api",
    "first_seen": "2026-09-09",
@@ -94162,6 +94617,44 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 67
+   }
+  },
+  {
+   "repo": "joeseesun/qiaomu-codex-imagegen",
+   "url": "https://github.com/joeseesun/qiaomu-codex-imagegen",
+   "first_seen": "2026-10-07",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-07",
+   "stars": 107,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-04",
+   "created_at": "2026-10-04",
+   "stars_per_day_lifetime": 35.67,
+   "capability": "使任何Agent能够调用Codex内置的图像生成功能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "image-generation",
+    "mcp",
+    "poster-design",
+    "xiaohongshu"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 69,
+    "position": 65
    }
   },
   {
@@ -98589,7 +99082,7 @@
    }
   }
  ],
- "updated": "2026-10-06",
+ "updated": "2026-10-07",
  "status_enum": [
   "pending",
   "debated",
