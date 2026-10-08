@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线 —— 古籍扫描件转文字，云端 Actions 批量跑",
+ "verdict": "skip",
+ "metric": null,
+ "how": null,
+ "effort": null,
+ "current": "我们目前使用的是 Tesseract OCR 和 PDFMiner 库进行 PDF 到文本的转换",
+ "beats": null,
+ "why": "该项目专注于 PDF 到 Markdown 和 JSON 的转换，而非古籍扫描件的处理，且未提及在古籍扫描件转换方面的性能优势。"
+}

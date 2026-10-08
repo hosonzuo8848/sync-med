@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "skip",
+ "metric": null,
+ "how": null,
+ "effort": null,
+ "current": "Neo4j 是我们目前使用的图数据库",
+ "beats": null,
+ "why": "已在家底:Neo4j 是我们目前使用的图数据库"
+}
