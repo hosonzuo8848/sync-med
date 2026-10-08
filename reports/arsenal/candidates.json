@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-10-07",
+ "generated": "2026-10-08",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -40,359 +40,43 @@
   "failed_queries": []
  },
  "distill": {
-  "seat": "zhipu",
-  "calls": 6,
+  "seat": "longcat",
+  "calls": 5,
   "ok": 2
  },
- "count": 13,
+ "count": 16,
  "candidates": [
   {
-   "repo": "mfoud444/ollamafreeapi",
-   "url": "https://github.com/mfoud444/ollamafreeapi",
-   "description": "OllamaFreeAPI: Free Distributed API for Ollama LLMs  Public gateway to our managed Ollama servers with: - Zero-configuration access to 50+ models - Auto load-balanced across global nodes - Free tier with no API keys required - Built on ollama-python",
-   "stars": 320,
-   "topics": [
-    "ai-api",
-    "deepseek",
-    "free-ai",
-    "free-ai-api",
-    "free-api",
-    "llama",
-    "llm",
-    "mistral",
-    "ollama"
-   ],
-   "lang": "Python",
-   "created_at": "2025-05-26",
-   "pushed_at": "2026-10-06",
-   "age_days": 499,
-   "stars_per_day_lifetime": 0.64,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "free llm api in:name,description stars:>200 pushed:>2026-07-09",
-    "sort": "stars",
-    "query_breadth": 13,
-    "position": 9
-   },
-   "matched_by_n_queries": 2,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供Ollama LLMs的免费分布式API访问",
-   "evidence": "Public gateway to our managed Ollama servers",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "maxritter/pilot-shell",
-   "url": "https://github.com/maxritter/pilot-shell",
-   "description": "Professional context and harness engineering for Claude Code and OpenAI Codex. Build production-grade software with spec-driven development, TDD, persistent memory, quality gates, code intelligence, human oversight, and end-to-end verification.",
-   "stars": 2083,
-   "topics": [
-    "agent-skills",
-    "agentic-engineering",
-    "ai-coding",
-    "anthropic",
-    "claude-code",
-    "code-quality",
-    "code-review",
-    "codex",
-    "codex-cli",
-    "coding-agents",
-    "context-engineering",
-    "developer-tools"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2025-10-18",
-   "pushed_at": "2026-10-07",
-   "age_days": 354,
-   "stars_per_day_lifetime": 5.88,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-09-07",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 22
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为Claude Code和OpenAI Codex提供专业上下文和工具工程",
-   "evidence": "Professional context and harness engineering for Claude Code and OpenAI Codex",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "cv-cat/catbus",
-   "url": "https://github.com/cv-cat/catbus",
-   "description": "一个命令操作小红书、抖音、TikTok、B 站、快手、微博、闲鱼、淘宝、京东、X：统一的命令与 JSON 输出，给人和 AI Agent 用",
-   "stars": 110,
-   "topics": [
-    "ai-agent",
-    "bilibili",
-    "claude-code",
-    "cli",
-    "crawler",
-    "douyin",
-    "jd",
-    "kuaishou",
-    "nodejs",
-    "rednote",
-    "spider",
-    "taobao"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-09-27",
-   "pushed_at": "2026-10-07",
-   "age_days": 10,
-   "stars_per_day_lifetime": 11.0,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:xiaohongshu stars:>100",
-    "sort": "stars",
-    "query_breadth": 69,
-    "position": 63
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供统一命令和JSON输出，用于操作多个社交媒体平台",
-   "evidence": "一个命令操作小红书、抖音、TikTok、B 站、快手、微博、闲鱼、淘宝、京东、X",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "image"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "atomicstrata/llm-wiki-compiler",
-   "url": "https://github.com/atomicstrata/llm-wiki-compiler",
-   "description": "The knowledge compiler. Raw sources in, interlinked wiki out. Inspired by Karpathy's LLM Wiki pattern.",
-   "stars": 2164,
+   "repo": "undefined-ui/second-brain-os",
+   "url": "https://github.com/undefined-ui/second-brain-os",
+   "description": "An AI second brain that maintains itself. Full guide, starter vault, agent skills and scripts for a self-organizing knowledge base in Claude Code and Obsidian.",
+   "stars": 1009,
    "topics": [
     "agent-skills",
     "ai-agents",
-    "cli",
-    "compiler",
-    "context-engineering",
-    "karpathy",
-    "knowledge-base",
-    "knowledge-compilation",
-    "llm",
-    "markdown",
-    "mcp",
-    "mcp-server"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-04-05",
-   "pushed_at": "2026-10-07",
-   "age_days": 185,
-   "stars_per_day_lifetime": 11.7,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-09-07",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 53
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "将原始知识源转换为相互链接的维基百科",
-   "evidence": "The knowledge compiler. Raw sources in, interlinked wiki out",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "joeseesun/qiaomu-codex-imagegen",
-   "url": "https://github.com/joeseesun/qiaomu-codex-imagegen",
-   "description": "让任何 Agent 调用 Codex 内置生图（MCP + CLI + Skill），内置小红书、视频封面、Mondo 海报技巧 · Codex image generation for any agent",
-   "stars": 107,
-   "topics": [
-    "agent-skills",
-    "claude-code",
-    "codex",
-    "image-generation",
-    "mcp",
-    "poster-design",
-    "xiaohongshu"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-10-04",
-   "pushed_at": "2026-10-04",
-   "age_days": 3,
-   "stars_per_day_lifetime": 35.67,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:xiaohongshu stars:>100",
-    "sort": "stars",
-    "query_breadth": 69,
-    "position": 65
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "使任何Agent能够调用Codex内置的图像生成功能",
-   "evidence": "Codex image generation for any agent",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "rguo12/awesome-causality-algorithms",
-   "url": "https://github.com/rguo12/awesome-causality-algorithms",
-   "description": "An index of algorithms for learning causality with data",
-   "stars": 3290,
-   "topics": [
-    "awesome",
-    "baselines",
-    "causal-inference",
-    "causality",
-    "causality-algorithms",
-    "causality-analysis",
-    "learning-to-rank",
-    "multilabel-classification",
-    "recommender-system",
-    "unconfoundedness-assumption"
-   ],
-   "lang": "",
-   "created_at": "2018-09-19",
-   "pushed_at": "2026-10-07",
-   "age_days": 2940,
-   "stars_per_day_lifetime": 1.12,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-07",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 9
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供学习因果关系的算法索引",
-   "evidence": "An index of algorithms for learning causality with data",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "lingxling/awesome-skills-cn",
-   "url": "https://github.com/lingxling/awesome-skills-cn",
-   "description": "热门Skills中文cn学习版+教程，提供7000+Skills，集成claude skills (11w+Star) | awesome-openclaw-skills (4w+Star) | ui-ux-pro-max-skill (4w+Star)等10余个热门Skill项目",
-   "stars": 299,
-   "topics": [
-    "agents",
-    "anthropic",
-    "antigravity",
-    "awesome-list",
-    "chinese",
     "claude",
+    "claude-code",
     "claude-skills",
-    "huggingface",
+    "knowledge-graph",
+    "knowledge-management",
+    "llm",
+    "mcp",
     "obsidian",
-    "openai",
-    "openclaw",
-    "scientific"
+    "personal-knowledge-base",
+    "pkm"
    ],
-   "lang": "Python",
-   "created_at": "2026-02-13",
+   "lang": "HTML",
+   "created_at": "2026-09-07",
    "pushed_at": "2026-10-07",
-   "age_days": 236,
-   "stars_per_day_lifetime": 1.27,
+   "age_days": 31,
+   "stars_per_day_lifetime": 32.55,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-07",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-09-08",
     "sort": "updated",
-    "query_breadth": 100,
-    "position": 19
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供7000+Skills的中文学习版和教程",
-   "evidence": "提供7000+Skills，集成claude skills",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "ChromeDevTools/awesome-chrome-devtools",
-   "url": "https://github.com/ChromeDevTools/awesome-chrome-devtools",
-   "description": "Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem",
-   "stars": 7157,
-   "topics": [
-    "awesome",
-    "awesome-list"
-   ],
-   "lang": "",
-   "created_at": "2016-03-08",
-   "pushed_at": "2026-10-06",
-   "age_days": 3865,
-   "stars_per_day_lifetime": 1.85,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-07",
-    "sort": "updated",
-    "query_breadth": 100,
+    "query_breadth": 57,
     "position": 20
    },
    "matched_by_n_queries": 1,
@@ -400,32 +84,237 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "收集Chrome DevTools和DevTools Protocol生态系统中的工具和资源",
-   "evidence": "Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem",
+   "capability": "构建个人知识库的AI第二大脑，支持Claude Code和Obsidian。",
+   "evidence": "agent-skills, knowledge-management, personal-knowledge-base",
    "transfer_forms": [
-    "unknown"
+    "skill",
+    "architecture"
    ],
    "line_candidates": [
-    "unknown"
+    "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "YanjieZe/awesome-humanoid-robot-learning",
-   "url": "https://github.com/YanjieZe/awesome-humanoid-robot-learning",
-   "description": "A Paper List for Humanoid Robot Learning.",
-   "stars": 2797,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2024-10-30",
-   "pushed_at": "2026-10-06",
-   "age_days": 707,
-   "stars_per_day_lifetime": 3.96,
+   "repo": "metasequoiaime/msime",
+   "url": "https://github.com/metasequoiaime/msime",
+   "description": "下一代跨平台水杉输入法（MSIME）：面向 Android、iOS、macOS、Linux、Windows 与 HarmonyOS 的多平台中文输入法，使用共享输入引擎与各平台原生宿主。",
+   "stars": 512,
+   "topics": [
+    "android",
+    "chinese",
+    "cpp",
+    "harmonyos",
+    "ime",
+    "input-method",
+    "inputmethodkit",
+    "ios",
+    "linux",
+    "macos",
+    "pinyin",
+    "rust"
+   ],
+   "lang": "Rust",
+   "created_at": "2026-09-02",
+   "pushed_at": "2026-10-08",
+   "age_days": 36,
+   "stars_per_day_lifetime": 14.22,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 69,
+    "position": 1
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "跨平台中文输入法，支持Android、iOS、macOS、Linux、Windows与HarmonyOS。",
+   "evidence": "ime, input-method, inputmethodkit, ios, macos, pinyin",
+   "transfer_forms": [
+    "library",
+    "deploy"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "QingYunA/answer-me-with-html",
+   "url": "https://github.com/QingYunA/answer-me-with-html",
+   "description": "Answer me with HTML — an agent skill that answers hard questions with a one-page HTML you can actually read. 让 AI Agent 用一页 HTML 回答复杂问题。",
+   "stars": 2182,
+   "topics": [
+    "agent-skill",
+    "ai-agent",
+    "claude-code",
+    "claude-code-skill",
+    "claude-skill",
+    "claude-skills",
+    "cli",
+    "diagram",
+    "explainer",
+    "html",
+    "llm",
+    "ste100"
+   ],
+   "lang": "JavaScript",
+   "created_at": "2026-10-02",
+   "pushed_at": "2026-10-08",
+   "age_days": 6,
+   "stars_per_day_lifetime": 363.67,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 11
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "使用HTML回答复杂问题的AI技能。",
+   "evidence": "agent-skill, ai-agent, claude-code, claude-skills",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "feder-cr/invisible_dots",
+   "url": "https://github.com/feder-cr/invisible_dots",
+   "description": "Open-source, self-hosted alternative to OpenAI Dots, Grok Bot. Built to be undetectable by anti-bot systems.",
+   "stars": 31819,
+   "topics": [
+    "agent-skills",
+    "agentic-ai",
+    "ai-agent",
+    "ai-agents",
+    "ai-assistant",
+    "antidetect-browser",
+    "automation",
+    "autonomous-agents",
+    "browser-automation",
+    "claude-cowork",
+    "computer-use",
+    "computer-use-agent"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2024-08-04",
+   "pushed_at": "2026-10-08",
+   "age_days": 795,
+   "stars_per_day_lifetime": 40.02,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-07",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 73,
+    "position": 25
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "开源、自托管的OpenAI Dots替代品，用于自动化和自主代理。",
+   "evidence": "agent-skills, agentic-ai, ai-agent, ai-assistants",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "joeseesun/opus-video-prompts",
+   "url": "https://github.com/joeseesun/opus-video-prompts",
+   "description": "Claude Opus 5.5 用代码生成视频：全网案例与可直接复制的提示词 | Copy-ready prompts & 54 cases of Opus 5.5 code-rendered videos",
+   "stars": 205,
+   "topics": [
+    "claude",
+    "claude-code",
+    "motion-graphics",
+    "opus",
+    "prompts",
+    "remotion",
+    "video-generation"
+   ],
+   "lang": "",
+   "created_at": "2026-09-27",
+   "pushed_at": "2026-09-27",
+   "age_days": 11,
+   "stars_per_day_lifetime": 18.64,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-10",
+    "sort": "stars",
+    "query_breadth": 75,
+    "position": 73
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "使用Claude Opus 5.5代码生成视频的案例和提示词。",
+   "evidence": "claude, motion-graphics, opus, prompts, video-generation",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "MemTensor/memmy-agent",
+   "url": "https://github.com/MemTensor/memmy-agent",
+   "description": "🍙  A personal AI agent & local memory hub for all AI agents, gives every AI one shared, fully controlled memory and persistent context — all AI remember the same you. Now supports Claude Code, Codex, OpenClaw and Hermes Agent etc.",
+   "stars": 2073,
+   "topics": [
+    "agent",
+    "agentic-ai",
+    "ai-agents",
+    "chatgpt",
+    "claude-code",
+    "cli",
+    "codex",
+    "cursor",
+    "desktop-app",
+    "desktop-pet",
+    "dsh-plugin",
+    "hermes-agent"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-07-16",
+   "pushed_at": "2026-10-08",
+   "age_days": 84,
+   "stars_per_day_lifetime": 24.68,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-09-08",
     "sort": "updated",
     "query_breadth": 100,
     "position": 29
@@ -435,129 +324,84 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供类人机器人学习领域的论文列表",
-   "evidence": "A Paper List for Humanoid Robot Learning",
+   "capability": "个人AI代理和本地记忆中心，支持多个AI代理共享记忆。",
+   "evidence": "agent, agentic-ai, ai-agents, chatgpt",
    "transfer_forms": [
-    "unknown"
+    "skill",
+    "architecture"
    ],
    "line_candidates": [
-    "unknown"
+    "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "alexpate/awesome-design-systems",
-   "url": "https://github.com/alexpate/awesome-design-systems",
-   "description": "💅🏻 ⚒ A collection of awesome design systems",
-   "stars": 26069,
+   "repo": "Achno/gowall",
+   "url": "https://github.com/Achno/gowall",
+   "description": "A tool to convert a Wallpaper's color scheme / palette, OCR with VLM's Traditional & Hybrid, Image Compression ,color palette extraction,  image upsacling with Adversarial Networks  and more image processing features.",
+   "stars": 2314,
    "topics": [
-    "awesome",
-    "awesome-list",
-    "design-systems",
-    "hacktoberfest",
-    "pattern-library",
-    "ui-library"
+    "background-removal",
+    "cli",
+    "color-extractor",
+    "color-palette",
+    "color-scheme",
+    "compression",
+    "go",
+    "image",
+    "image-converter",
+    "image-processing",
+    "ocr",
+    "pixel-art"
    ],
-   "lang": "",
-   "created_at": "2017-06-06",
-   "pushed_at": "2026-10-06",
-   "age_days": 3410,
-   "stars_per_day_lifetime": 7.64,
-   "license": "Unlicense",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-07",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 38
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "收集各种设计系统的资源",
-   "evidence": "A collection of awesome design systems",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "hexiaofeier/hehe-industry-research-skill-pack",
-   "url": "https://github.com/hexiaofeier/hehe-industry-research-skill-pack",
-   "description": "盒盒原创中文行业与企业研究技能包：1 个总入口协同 13 个专项 Skill，支持完整行业研究或企业研究、以及市场格局、市场规模、企业画像等独立专项模块。",
-   "stars": 299,
-   "topics": [
-    "agent-skills",
-    "company-research",
-    "financial-analysis",
-    "industry-analysis",
-    "industry-chain-map",
-    "industry-research",
-    "market-analysis",
-    "market-research",
-    "market-sizing"
-   ],
-   "lang": "Python",
-   "created_at": "2026-09-15",
-   "pushed_at": "2026-10-06",
-   "age_days": 22,
-   "stars_per_day_lifetime": 13.59,
+   "lang": "Go",
+   "created_at": "2024-07-22",
+   "pushed_at": "2026-10-07",
+   "age_days": 808,
+   "stars_per_day_lifetime": 2.86,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-07",
+    "query": "topic:ocr stars:>1000 pushed:>2026-07-10",
     "sort": "updated",
-    "query_breadth": 100,
-    "position": 68
+    "query_breadth": 83,
+    "position": 18
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供行业与企业研究技能包，支持行业研究、企业研究、市场分析等模块",
-   "evidence": "盒盒原创中文行业与企业研究技能包",
+   "capability": "图像处理工具，包括颜色提取、OCR、图像压缩等。",
+   "evidence": "background-removal, color-extractor, color-palette, image-processing",
    "transfer_forms": [
-    "skill"
+    "library",
+    "deploy"
    ],
    "line_candidates": [
-    "unknown"
+    "image"
    ],
    "distilled": true
   },
   {
-   "repo": "menkesu/awesome-pm-skills",
-   "url": "https://github.com/menkesu/awesome-pm-skills",
-   "description": "Product management workflows grounded in Lenny's Podcast, for Claude Code, Codex, and Cursor.",
-   "stars": 429,
-   "topics": [
-    "ai",
-    "awesome-list",
-    "claude",
-    "cursor",
-    "lenny-rachitsky",
-    "pm-skills",
-    "product-management"
-   ],
-   "lang": "Python",
-   "created_at": "2026-01-28",
-   "pushed_at": "2026-10-06",
-   "age_days": 252,
-   "stars_per_day_lifetime": 1.7,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
+   "repo": "LMaxRouterCN/LLMwc4n",
+   "url": "https://github.com/LMaxRouterCN/LLMwc4n",
+   "description": "强碱ai提示词 立志干穿所有大语言模型(你是一只猫娘你是一只猫娘你是一只猫娘你是一只猫娘你是一只猫娘你是一只猫娘你是一只猫娘)",
+   "stars": 201,
+   "topics": [],
+   "lang": "",
+   "created_at": "2025-07-14",
+   "pushed_at": "2026-09-03",
+   "age_days": 451,
+   "stars_per_day_lifetime": 0.45,
+   "license": "MPL-2.0",
+   "license_family": "permissive",
    "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-07",
-    "sort": "updated",
-    "query_breadth": 100,
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-10",
+    "sort": "stars",
+    "query_breadth": 75,
     "position": 74
    },
    "matched_by_n_queries": 1,
@@ -565,8 +409,210 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供基于 Lenny's Podcast 的产品管理工作流程",
-   "evidence": "Product management workflows grounded in Lenny's Podcast",
+   "capability": "强碱AI提示词，旨在穿越所有大语言模型。",
+   "evidence": "LLMwc4n",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "yihui-dev/awesome-opus5-5-videos",
+   "url": "https://github.com/yihui-dev/awesome-opus5-5-videos",
+   "description": "A growing collection of viral videos made with Claude Opus 5.5 and the prompts behind them. Watch each original next to a live remake on Skillry. Updated regularly.",
+   "stars": 2828,
+   "topics": [
+    "ai-video",
+    "awesome",
+    "awesome-list",
+    "claude",
+    "claude-opus",
+    "creative-coding",
+    "motion-graphics",
+    "prompts",
+    "threejs"
+   ],
+   "lang": "",
+   "created_at": "2026-09-27",
+   "pushed_at": "2026-10-08",
+   "age_days": 11,
+   "stars_per_day_lifetime": 257.09,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 19
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "使用Claude Opus 5.5制作的病毒视频和背后的提示词。",
+   "evidence": "ai-video, awesome, claude, creative-coding",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Loopera-ai/loopera",
+   "url": "https://github.com/Loopera-ai/loopera",
+   "description": "面向基本面因子研究的智能体-A hypothesis-driven AI agent for fundamental factor research, with evidence-gated validation and research memory.",
+   "stars": 536,
+   "topics": [
+    "ai",
+    "ai-agent",
+    "quant"
+   ],
+   "lang": "",
+   "created_at": "2026-09-08",
+   "pushed_at": "2026-09-21",
+   "age_days": 30,
+   "stars_per_day_lifetime": 17.87,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "智能体 in:name,description stars:>200",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 98
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "面向基本面因子研究的智能体，具有证据门控验证和研究记忆。",
+   "evidence": "ai, ai-agent, quant",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "xialeiliu/Awesome-Incremental-Learning",
+   "url": "https://github.com/xialeiliu/Awesome-Incremental-Learning",
+   "description": "Awesome Incremental Learning",
+   "stars": 4530,
+   "topics": [],
+   "lang": "",
+   "created_at": "2018-08-28",
+   "pushed_at": "2026-10-08",
+   "age_days": 2963,
+   "stars_per_day_lifetime": 1.53,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 22
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集增量学习相关资源列表",
+   "evidence": "描述“Awesome Incremental Learning”表明是增量学习资源列表",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "ad-si/awesome-3d-printing",
+   "url": "https://github.com/ad-si/awesome-3d-printing",
+   "description": "A curated list of awesome 3D printing resources",
+   "stars": 2002,
+   "topics": [
+    "3d",
+    "3d-printer",
+    "3d-printing",
+    "3d-scanner",
+    "3d-scanning",
+    "awesome",
+    "awesome-list",
+    "cad",
+    "g-code",
+    "slicer"
+   ],
+   "lang": "",
+   "created_at": "2016-01-07",
+   "pushed_at": "2026-10-07",
+   "age_days": 3927,
+   "stars_per_day_lifetime": 0.51,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 41
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集3D打印相关资源列表",
+   "evidence": "描述“A curated list of awesome 3D printing resources”",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "carnot-tech/jinba-consulting-pptx-skill",
+   "url": "https://github.com/carnot-tech/jinba-consulting-pptx-skill",
+   "description": "AIにまじなPPTXを作らせる Claude Code / Codex スキル",
+   "stars": 1136,
+   "topics": [],
+   "lang": "HTML",
+   "created_at": "2026-09-02",
+   "pushed_at": "2026-10-07",
+   "age_days": 36,
+   "stars_per_day_lifetime": 31.56,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 48
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供让AI生成高质量PPTX的技能",
+   "evidence": "描述“AIにまじなPPTXを作らせる Claude Code / Codex スキル”",
    "transfer_forms": [
     "skill"
    ],
@@ -576,32 +622,102 @@
    "distilled": true
   },
   {
-   "repo": "jasonbitsmith/muse-skills",
-   "url": "https://github.com/jasonbitsmith/muse-skills",
-   "description": "300 条 Muse 技能：每条一句话痛点 + 三步做法，点开就能用",
-   "stars": 206,
+   "repo": "Leanmcp/gateway-skills",
+   "url": "https://github.com/Leanmcp/gateway-skills",
+   "description": "See your claude code logs in clear details in your dashboard",
+   "stars": 2110,
    "topics": [],
-   "lang": "",
-   "created_at": "2026-10-05",
-   "pushed_at": "2026-10-06",
-   "age_days": 2,
-   "stars_per_day_lifetime": 103.0,
-   "license": "NONE",
-   "license_family": "none",
+   "lang": "Python",
+   "created_at": "2026-03-31",
+   "pushed_at": "2026-10-07",
+   "age_days": 191,
+   "stars_per_day_lifetime": 11.05,
+   "license": "MIT",
+   "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-07",
+    "query": "skill in:name stars:>200 pushed:>2026-09-08",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 89
+    "position": 69
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 300 条 Muse 技能，包含痛点与做法",
-   "evidence": "300 条 Muse 技能：每条一句话痛点 + 三步做法",
+   "capability": "在仪表板中清晰查看Claude代码日志",
+   "evidence": "描述“See your claude code logs in clear details in your dashboard”",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "thomast1906/github-copilot-agent-skills",
+   "url": "https://github.com/thomast1906/github-copilot-agent-skills",
+   "description": "Repo containing my GitHub Copilot Agent & Skills - continually experimenting!",
+   "stars": 202,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-02-18",
+   "pushed_at": "2026-10-07",
+   "age_days": 232,
+   "stars_per_day_lifetime": 0.87,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 71
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "包含GitHub Copilot代理和技能，持续实验",
+   "evidence": "描述“Repo containing my GitHub Copilot Agent & Skills”",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "tuya/tuya-openclaw-skills",
+   "url": "https://github.com/tuya/tuya-openclaw-skills",
+   "description": "Tuya AI Skill Library for OpenClaw/TuyaClaw - An AI-driven skill set built for the development of Tuya's smart ecosystem (e.g., device control).",
+   "stars": 479,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-03-12",
+   "pushed_at": "2026-10-07",
+   "age_days": 210,
+   "stars_per_day_lifetime": 2.28,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-08",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 99
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "为Tuya智能生态系统开发的AI技能库，例如设备控制",
+   "evidence": "描述“Tuya AI Skill Library for OpenClaw/TuyaClaw”",
    "transfer_forms": [
     "skill"
    ],
