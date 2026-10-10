@@ -86,11 +86,10 @@
   {
    "who": "gateway · nvidia 默认(nemotron-3-ultra)",
    "supplier": "nvidia",
-   "want_model": null,
    "score": null,
    "delta": null,
    "cls": {},
-   "note": "调用失败 RuntimeError: HTTP 503 nvidia | tried=[] errors={'code': 'GATEWAY_ALL_FAILED', 'message': '网关所有候选供应商均失败（尝试：nvidia）'}"
+   "note": "推理污染,提取失败(找不到完整「你是…只输出JSON」块),作废"
   },
   {
    "who": "gateway · 智谱 glm-4-flash",
