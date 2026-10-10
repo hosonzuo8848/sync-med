@@ -49642,6 +49642,46 @@
    }
   },
   {
+   "repo": "MobileFirstLLC/social-media-hacker-list",
+   "url": "https://github.com/MobileFirstLLC/social-media-hacker-list",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 2356,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-10-09",
+   "created_at": "2020-10-03",
+   "stars_per_day_lifetime": 1.07,
+   "capability": "提供社交媒体增强应用和工具列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "facebook",
+    "instagram",
+    "linkedin",
+    "mastodon",
+    "reddit",
+    "snapchat",
+    "social-media",
+    "twitter",
+    "youtube"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 37,
+    "position": 13
+   }
+  },
+  {
    "repo": "datopian/portaljs",
    "url": "https://github.com/datopian/portaljs",
    "first_seen": "2026-08-20",
@@ -66226,6 +66266,51 @@
    }
   },
   {
+   "repo": "fabio-rovai/open-ontologies",
+   "url": "https://github.com/fabio-rovai/open-ontologies",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 1008,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-10-09",
+   "created_at": "2026-03-09",
+   "stars_per_day_lifetime": 4.69,
+   "capability": "管理生产本体变更，提供审计报告和证明",
+   "transfer_forms": [
+    "mcp",
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai-native",
+    "description-logics",
+    "formal-verification",
+    "infrastructure-as-code",
+    "isabelle-language",
+    "knowledge-graph",
+    "lean",
+    "lean4",
+    "mcp",
+    "mcp-server",
+    "ontology",
+    "owl"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-09-10",
+    "sort": "updated",
+    "query_breadth": 58,
+    "position": 26
+   }
+  },
+  {
    "repo": "DaoYiSec/SecSkills",
    "url": "https://github.com/DaoYiSec/SecSkills",
    "first_seen": "2026-09-14",
@@ -66334,6 +66419,48 @@
    }
   },
   {
+   "repo": "apify/mcpc",
+   "url": "https://github.com/apify/mcpc",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 1004,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-09",
+   "created_at": "2025-12-09",
+   "stars_per_day_lifetime": 3.29,
+   "capability": "最兼容的MCP CLI客户端，支持工具、资源、提示、补全、异步任务、技能、stdio和Streamable HTTP",
+   "transfer_forms": [
+    "skill",
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agents",
+    "bash",
+    "claude",
+    "cli",
+    "code-mode",
+    "command-line",
+    "mcp",
+    "mcp-client",
+    "model-context-protocol",
+    "shell"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 65
+   }
+  },
+  {
    "repo": "SylphxAI/anymd",
    "url": "https://github.com/SylphxAI/anymd",
    "first_seen": "2026-10-01",
@@ -66374,6 +66501,51 @@
     "sort": "updated",
     "query_breadth": 82,
     "position": 6
+   }
+  },
+  {
+   "repo": "awdr74100/figwright",
+   "url": "https://github.com/awdr74100/figwright",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 1003,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-10",
+   "created_at": "2026-06-18",
+   "stars_per_day_lifetime": 8.8,
+   "capability": "提供双向 Figma MCP 服务器，将设计转换为代码",
+   "transfer_forms": [
+    "mcp",
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "claude-code",
+    "codegen",
+    "codex",
+    "cursor",
+    "design-to-code",
+    "figma",
+    "figma-mcp",
+    "figma-plugin",
+    "figma-to-code",
+    "mcp",
+    "model-context-protocol"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 23
    }
   },
   {
@@ -84586,6 +84758,35 @@
    }
   },
   {
+   "repo": "chengyi-ai/cy-carousel-skill",
+   "url": "https://github.com/chengyi-ai/cy-carousel-skill",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 288,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-10-09",
+   "created_at": "2026-10-04",
+   "stars_per_day_lifetime": 48.0,
+   "capability": "图文轮播Skill，提供选题查证、素材查找、排版、检查、打包，交付封面和10页内容",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 62
+   }
+  },
+  {
    "repo": "devonmochi/byetype",
    "url": "https://github.com/devonmochi/byetype",
    "first_seen": "2026-07-30",
@@ -85394,6 +85595,36 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 7
+   }
+  },
+  {
+   "repo": "kitze/skillbox",
+   "url": "https://github.com/kitze/skillbox",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 267,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-09",
+   "created_at": "2026-09-17",
+   "stars_per_day_lifetime": 11.61,
+   "capability": "自托管、版本化的AI代理技能库，支持MCP，范围客户端和可选Jev推荐",
+   "transfer_forms": [
+    "skill",
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 87
    }
   },
   {
@@ -88994,6 +89225,49 @@
    }
   },
   {
+   "repo": "z91772524-ai/pojia-next",
+   "url": "https://github.com/z91772524-ai/pojia-next",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 214,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-10",
+   "created_at": "2026-09-17",
+   "stars_per_day_lifetime": 9.3,
+   "capability": "提供脚本自动化工具，支持多个客户端提示词和人格替换",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "automation",
+    "claude-code",
+    "codex",
+    "cursor",
+    "deepseek-harness",
+    "dsh",
+    "exe",
+    "glm",
+    "no-dependencies",
+    "one-click",
+    "persona"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-12",
+    "sort": "stars",
+    "query_breadth": 77,
+    "position": 73
+   }
+  },
+  {
    "repo": "Sac-Y/identity-skill",
    "url": "https://github.com/Sac-Y/identity-skill",
    "first_seen": "2026-07-30",
@@ -90337,6 +90611,43 @@
    }
   },
   {
+   "repo": "Dicklesworthstone/meta_skill",
+   "url": "https://github.com/Dicklesworthstone/meta_skill",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 205,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Rust",
+   "pushed_at": "2026-10-10",
+   "created_at": "2026-01-13",
+   "stars_per_day_lifetime": 0.76,
+   "capability": "本地优先的AI编码代理技能管理平台，支持SQLite+Git持久化，语义搜索，Bandit优化建议和MCP集成",
+   "transfer_forms": [
+    "skill",
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agents",
+    "cli",
+    "developer-tools",
+    "mcp",
+    "rust"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 32
+   }
+  },
+  {
    "repo": "Kyure-A/agent-skills-nix",
    "url": "https://github.com/Kyure-A/agent-skills-nix",
    "first_seen": "2026-08-11",
@@ -90808,6 +91119,35 @@
    }
   },
   {
+   "repo": "juliaError/econ-TopJournal-writing-Skill",
+   "url": "https://github.com/juliaError/econ-TopJournal-writing-Skill",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 203,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-10-09",
+   "created_at": "2026-05-12",
+   "stars_per_day_lifetime": 1.34,
+   "capability": "经济类顶级期刊写作技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 86
+   }
+  },
+  {
    "repo": "lingbol088-spec/codex-gpt-5.6-5.5-instruct",
    "url": "https://github.com/lingbol088-spec/codex-gpt-5.6-5.5-instruct",
    "first_seen": "2026-09-27",
@@ -91165,6 +91505,43 @@
    }
   },
   {
+   "repo": "Jac21/SkillSet",
+   "url": "https://github.com/Jac21/SkillSet",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 201,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-09",
+   "created_at": "2016-02-12",
+   "stars_per_day_lifetime": 0.05,
+   "capability": "直观的求职者技能可视化工具，利用D3.js和JSONResume",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "css",
+    "d3",
+    "fetch-api",
+    "json-schema",
+    "jsonresume",
+    "visualization"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 45
+   }
+  },
+  {
    "repo": "LMaxRouterCN/LLMwc4n",
    "url": "https://github.com/LMaxRouterCN/LLMwc4n",
    "first_seen": "2026-10-08",
@@ -91396,6 +91773,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 9
+   }
+  },
+  {
+   "repo": "huangbai-AI/sd-2-5-prompt",
+   "url": "https://github.com/huangbai-AI/sd-2-5-prompt",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 201,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Python",
+   "pushed_at": "2026-08-05",
+   "created_at": "2026-08-02",
+   "stars_per_day_lifetime": 2.91,
+   "capability": "编写 Seedance 2.5 视频提示词",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-12",
+    "sort": "stars",
+    "query_breadth": 77,
+    "position": 76
    }
   },
   {
@@ -91795,6 +92201,44 @@
     "sort": "stars",
     "query_breadth": 18,
     "position": 15
+   }
+  },
+  {
+   "repo": "megumi-ben/marco-polo.skill",
+   "url": "https://github.com/megumi-ben/marco-polo.skill",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 197,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "HTML",
+   "pushed_at": "2026-10-09",
+   "created_at": "2026-06-30",
+   "stars_per_day_lifetime": 1.93,
+   "capability": "提供 AI 旅行规划技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-travel",
+    "amap",
+    "fliggy",
+    "itinerary",
+    "travel-planner",
+    "xiaohongshu"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 72,
+    "position": 50
    }
   },
   {
@@ -93157,6 +93601,42 @@
     "sort": "stars",
     "query_breadth": 17,
     "position": 13
+   }
+  },
+  {
+   "repo": "KristenPan/pickoo-your-favorites",
+   "url": "https://github.com/KristenPan/pickoo-your-favorites",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 150,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-17",
+   "created_at": "2026-08-25",
+   "stars_per_day_lifetime": 3.26,
+   "capability": "提供本地创作者收藏工作台，支持 Markdown 捕获和浏览器 UI",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "creator-tools",
+    "local-first",
+    "markdown",
+    "xiaohongshu"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 72,
+    "position": 61
    }
   },
   {
@@ -95441,6 +95921,48 @@
    }
   },
   {
+   "repo": "xiaodou-official/xiaodou-open-platform",
+   "url": "https://github.com/xiaodou-official/xiaodou-open-platform",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 108,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "pushed_at": "2026-10-06",
+   "created_at": "2026-09-27",
+   "stars_per_day_lifetime": 8.31,
+   "capability": "提供个人支付和收款通道，支持虚拟商品交易",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "aggregate-payment",
+    "alipay",
+    "card-key",
+    "china",
+    "digital-downloads",
+    "digital-goods",
+    "faka",
+    "h5-payment",
+    "online-courses",
+    "openapi",
+    "payment",
+    "payment-api"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-07-12",
+    "sort": "stars",
+    "query_breadth": 38,
+    "position": 36
+   }
+  },
+  {
    "repo": "Andonywang123/Epost",
    "url": "https://github.com/Andonywang123/Epost",
    "first_seen": "2026-09-18",
@@ -96696,6 +97218,48 @@
     "sort": "stars",
     "query_breadth": 29,
     "position": 27
+   }
+  },
+  {
+   "repo": "bubblevv/ai-api-gongyi-nav",
+   "url": "https://github.com/bubblevv/ai-api-gongyi-nav",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 102,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "HTML",
+   "pushed_at": "2026-10-09",
+   "created_at": "2026-06-04",
+   "stars_per_day_lifetime": 0.8,
+   "capability": "导航 AI API 公益中转站",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-api",
+    "ai-navigation",
+    "api-relay",
+    "chatgpt-api",
+    "claude",
+    "codex",
+    "deepseek",
+    "free-api",
+    "github-pages",
+    "gpt",
+    "new-api"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "API 中转 in:name,description stars:>100 pushed:>2026-07-12",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 17
    }
   },
   {
@@ -99139,6 +99703,34 @@
    }
   },
   {
+   "repo": "taskyoooo/ziwei-doushu-skill",
+   "url": "https://github.com/taskyoooo/ziwei-doushu-skill",
+   "first_seen": "2026-10-10",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-10",
+   "stars": 21,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-04-16",
+   "created_at": "2026-04-16",
+   "stars_per_day_lifetime": 0.12,
+   "capability": "提供古籍命理分析 Claude Skill",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "古籍 in:name,description stars:>20",
+    "sort": "stars",
+    "query_breadth": 46,
+    "position": 45
+   }
+  },
+  {
    "repo": "zhaoyanh/taohongjing",
    "url": "https://github.com/zhaoyanh/taohongjing",
    "first_seen": "2026-08-02",
@@ -100096,7 +100688,7 @@
    }
   }
  ],
- "updated": "2026-10-09",
+ "updated": "2026-10-10",
  "status_enum": [
   "pending",
   "debated",
