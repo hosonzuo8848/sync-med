@@ -15983,6 +15983,45 @@
    }
   },
   {
+   "repo": "sparanoid/chinese-copywriting-guidelines",
+   "url": "https://github.com/sparanoid/chinese-copywriting-guidelines",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 15744,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-12",
+   "created_at": "2014-03-17",
+   "stars_per_day_lifetime": 3.43,
+   "capability": "提供中文文案排版指南",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "chinese",
+    "chinese-simplified",
+    "chinese-traditional",
+    "copywriting",
+    "css",
+    "documentation",
+    "guideline",
+    "leancloud",
+    "markdown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 67,
+    "position": 24
+   }
+  },
+  {
    "repo": "composio-community/awesome-codex-skills",
    "url": "https://github.com/composio-community/awesome-codex-skills",
    "first_seen": "2026-08-04",
@@ -21161,6 +21200,44 @@
    }
   },
   {
+   "repo": "meirwah/awesome-incident-response",
+   "url": "https://github.com/meirwah/awesome-incident-response",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 9447,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-13",
+   "created_at": "2015-11-10",
+   "stars_per_day_lifetime": 2.37,
+   "capability": "收集整理事件响应工具的列表",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "cybersecurity",
+    "dfir",
+    "incident-response",
+    "incident-response-tooling",
+    "list",
+    "security"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 13
+   }
+  },
+  {
    "repo": "fenixsoft/awesome-fenix",
    "url": "https://github.com/fenixsoft/awesome-fenix",
    "first_seen": "2026-09-14",
@@ -24963,6 +25040,41 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 41
+   }
+  },
+  {
+   "repo": "wheresryan22/anatomy",
+   "url": "https://github.com/wheresryan22/anatomy",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 6847,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-12",
+   "created_at": "2026-10-08",
+   "stars_per_day_lifetime": 1369.4,
+   "capability": "创建交互式等距插图，生成 SVG 和 WebGL 效果",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skill",
+    "open-source",
+    "svg",
+    "vizualization"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "agent skill in:name,description stars:>300 pushed:>2026-07-15",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 73
    }
   },
   {
@@ -34943,6 +35055,35 @@
    }
   },
   {
+   "repo": "hotheadhacker/awesome-selfhost-docker",
+   "url": "https://github.com/hotheadhacker/awesome-selfhost-docker",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 4091,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "HTML",
+   "pushed_at": "2026-10-12",
+   "created_at": "2024-07-15",
+   "stars_per_day_lifetime": 4.99,
+   "capability": "提供可Docker部署的软件列表",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 44
+   }
+  },
+  {
    "repo": "archestra-ai/archestra",
    "url": "https://github.com/archestra-ai/archestra",
    "first_seen": "2026-08-01",
@@ -39572,6 +39713,49 @@
     "sort": "updated",
     "query_breadth": 53,
     "position": 19
+   }
+  },
+  {
+   "repo": "Anil-matcha/awesome-open-source-saas-alternatives",
+   "url": "https://github.com/Anil-matcha/awesome-open-source-saas-alternatives",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 3397,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-12",
+   "created_at": "2023-11-10",
+   "stars_per_day_lifetime": 3.18,
+   "capability": "提供开源SaaS应用替代方案列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "alternatives",
+    "auth0-alternative",
+    "awesome",
+    "awesome-list",
+    "figma-alternative",
+    "firebase-alternative",
+    "free-software",
+    "notion-alternative",
+    "open-source",
+    "open-source-alternatives",
+    "open-source-software",
+    "postman-alternative"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 52
    }
   },
   {
@@ -44976,6 +45160,42 @@
    }
   },
   {
+   "repo": "engineering-management/awesome-engineering-management",
+   "url": "https://github.com/engineering-management/awesome-engineering-management",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 2779,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-12",
+   "created_at": "2021-06-11",
+   "stars_per_day_lifetime": 1.43,
+   "capability": "提供工程管理和领导力学习工具",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "engineering-management",
+    "leadership",
+    "productivity",
+    "project-management"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 58
+   }
+  },
+  {
    "repo": "bmpi-dev/awesome-seo",
    "url": "https://github.com/bmpi-dev/awesome-seo",
    "first_seen": "2026-08-24",
@@ -46092,6 +46312,44 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 24
+   }
+  },
+  {
+   "repo": "italiaremote/awesome-italia-remote",
+   "url": "https://github.com/italiaremote/awesome-italia-remote",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 2656,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Go",
+   "pushed_at": "2026-10-12",
+   "created_at": "2022-01-24",
+   "stars_per_day_lifetime": 1.54,
+   "capability": "提供意大利远程工作公司列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "italy",
+    "jobs",
+    "list",
+    "remote",
+    "remote-jobs"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 59
    }
   },
   {
@@ -54906,6 +55164,50 @@
    }
   },
   {
+   "repo": "xuanyustudio/LocalMiniDrama",
+   "url": "https://github.com/xuanyustudio/LocalMiniDrama",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 2041,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-12",
+   "created_at": "2026-02-10",
+   "stars_per_day_lifetime": 8.33,
+   "capability": "开源本地 AI 短剧 & 漫剧生成工具，从故事到成片一站式完成",
+   "transfer_forms": [
+    "skill",
+    "dataset"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai",
+    "ai-agent",
+    "ai-mini-drama",
+    "ai-video",
+    "electron",
+    "javascript",
+    "mini-drama",
+    "nodejs",
+    "offline",
+    "offline-short-drama",
+    "open-source",
+    "short-video"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 72
+   }
+  },
+  {
    "repo": "BetaStreetOmnis/xhs_ai_publisher",
    "url": "https://github.com/BetaStreetOmnis/xhs_ai_publisher",
    "first_seen": "2026-07-26",
@@ -55092,6 +55394,50 @@
    }
   },
   {
+   "repo": "skalesapp/skales",
+   "url": "https://github.com/skalesapp/skales",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 2035,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "pushed_at": "2026-10-12",
+   "created_at": "2026-03-08",
+   "stars_per_day_lifetime": 9.29,
+   "capability": "跨平台个人 AI 代理，支持自动化任务和桌面/浏览器自动化",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "ai-agent",
+    "ai-assistant",
+    "android",
+    "automation",
+    "autonomous-agent",
+    "desktop-app",
+    "electron",
+    "ios",
+    "linux",
+    "llm",
+    "local-ai"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 65
+   }
+  },
+  {
    "repo": "A9T9/RPA",
    "url": "https://github.com/A9T9/RPA",
    "first_seen": "2026-09-22",
@@ -55133,6 +55479,48 @@
     "sort": "updated",
     "query_breadth": 81,
     "position": 12
+   }
+  },
+  {
+   "repo": "isair/jarvis",
+   "url": "https://github.com/isair/jarvis",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 2021,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-10-13",
+   "created_at": "2025-08-19",
+   "stars_per_day_lifetime": 4.81,
+   "capability": "提供 100% 私密的 AI 语音助手，可在电脑上使用（离线）",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "assistant",
+    "health",
+    "machine-learning",
+    "mcp",
+    "nutrition",
+    "privacy",
+    "private",
+    "search",
+    "searching",
+    "voice"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 38
    }
   },
   {
@@ -55862,6 +56250,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 18
+   }
+  },
+  {
+   "repo": "Ebony-Vinyl/EAC-Desktop",
+   "url": "https://github.com/Ebony-Vinyl/EAC-Desktop",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 2002,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-12",
+   "created_at": "2026-08-14",
+   "stars_per_day_lifetime": 33.37,
+   "capability": "桌面版插件和谐共存平台",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "deepseek",
+    "deepseek-harness",
+    "desktop",
+    "desktop-app",
+    "dsh",
+    "dsh-plugin",
+    "dsh-plugins",
+    "dshdesktop",
+    "electron",
+    "tauri",
+    "windows"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 75
    }
   },
   {
@@ -57441,6 +57872,39 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 34
+   }
+  },
+  {
+   "repo": "benchflow-ai/skillsbench",
+   "url": "https://github.com/benchflow-ai/skillsbench",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 1842,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "PDDL",
+   "pushed_at": "2026-10-13",
+   "created_at": "2025-12-29",
+   "stars_per_day_lifetime": 6.4,
+   "capability": "评估技能和智能体效果",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "benchmark",
+    "skillsbench"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 18
    }
   },
   {
@@ -66478,6 +66942,48 @@
    }
   },
   {
+   "repo": "alpacahq/alpaca-mcp-server",
+   "url": "https://github.com/alpacahq/alpaca-mcp-server",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 1018,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-12",
+   "created_at": "2025-06-03",
+   "stars_per_day_lifetime": 2.05,
+   "capability": "提供股票、ETF、加密货币交易API",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai-trading",
+    "algorithmic-trading",
+    "crypto",
+    "etfs",
+    "mcp",
+    "mcp-server",
+    "options",
+    "stocks",
+    "trading",
+    "trading-api"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 72
+   }
+  },
+  {
    "repo": "titanwings/ex-skill",
    "url": "https://github.com/titanwings/ex-skill",
    "first_seen": "2026-08-13",
@@ -67013,6 +67519,51 @@
     "sort": "stars",
     "query_breadth": 16,
     "position": 15
+   }
+  },
+  {
+   "repo": "ciddwd/overlay-translator",
+   "url": "https://github.com/ciddwd/overlay-translator",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 1005,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Kotlin",
+   "pushed_at": "2026-10-13",
+   "created_at": "2026-06-22",
+   "stars_per_day_lifetime": 8.89,
+   "capability": "开源 Android 屏幕实时翻译工具，支持 OCR 和多种翻译服务",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "image",
+    "unknown"
+   ],
+   "topics": [
+    "android",
+    "android-app",
+    "game-translation",
+    "gguf",
+    "kotlin",
+    "llama-cpp",
+    "llm",
+    "manga",
+    "manga-ocr",
+    "mlkit",
+    "no-root",
+    "ocr"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-07-15",
+    "sort": "updated",
+    "query_breadth": 87,
+    "position": 13
    }
   },
   {
@@ -79974,6 +80525,44 @@
    }
   },
   {
+   "repo": "trustfuture/simon-skills",
+   "url": "https://github.com/trustfuture/simon-skills",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 397,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-13",
+   "created_at": "2026-09-20",
+   "stars_per_day_lifetime": 17.26,
+   "capability": "提供AI视频生成技能集合",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video",
+    "unknown"
+   ],
+   "topics": [
+    "claude-code",
+    "codex",
+    "excalidraw",
+    "remotion",
+    "skills",
+    "video-generation"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 29
+   }
+  },
+  {
    "repo": "fundgao/DAO_DE_JING",
    "url": "https://github.com/fundgao/DAO_DE_JING",
    "first_seen": "2026-08-13",
@@ -80607,6 +81196,44 @@
    }
   },
   {
+   "repo": "joeseesun/qiaomu-meta-skill",
+   "url": "https://github.com/joeseesun/qiaomu-meta-skill",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 384,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-13",
+   "created_at": "2026-05-20",
+   "stars_per_day_lifetime": 2.63,
+   "capability": "创建和评估乔木Agent技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-workflow",
+    "qiaomu",
+    "skill-creator",
+    "skill-evaluation",
+    "skillsmp"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 15
+   }
+  },
+  {
    "repo": "panxunying/ai-coding-welfare",
    "url": "https://github.com/panxunying/ai-coding-welfare",
    "first_seen": "2026-09-01",
@@ -80804,6 +81431,43 @@
     "sort": "stars",
     "query_breadth": 19,
     "position": 6
+   }
+  },
+  {
+   "repo": "joeseesun/qiaomu-cut-skill",
+   "url": "https://github.com/joeseesun/qiaomu-cut-skill",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 374,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-13",
+   "created_at": "2026-07-18",
+   "stars_per_day_lifetime": 4.3,
+   "capability": "乔木智能视频导演 Skill，提供素材治理、双语字幕、品牌包装与渲染",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "agent-skill",
+    "ai-video",
+    "ffmpeg",
+    "nodejs",
+    "subtitles",
+    "video-editing"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 14
    }
   },
   {
@@ -84300,6 +84964,50 @@
    }
   },
   {
+   "repo": "fumingyang2004/Tulpa",
+   "url": "https://github.com/fumingyang2004/Tulpa",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 305,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-10",
+   "created_at": "2026-09-26",
+   "stars_per_day_lifetime": 17.94,
+   "capability": "通过 MCP 让桌面 Agent 访问 QQ/微信数据，加入群聊",
+   "transfer_forms": [
+    "mcp",
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai-agents",
+    "antigravity",
+    "claude-code",
+    "codex",
+    "deepseek-harness",
+    "gpt",
+    "mcp",
+    "onebot",
+    "qq-bot",
+    "snowluma",
+    "workbuddy"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "微调 in:name,description stars:>300 pushed:>2026-07-15",
+    "sort": "stars",
+    "query_breadth": 22,
+    "position": 21
+   }
+  },
+  {
    "repo": "yanhua1010/self-media-content-workflow",
    "url": "https://github.com/yanhua1010/self-media-content-workflow",
    "first_seen": "2026-07-29",
@@ -86761,6 +87469,49 @@
     "sort": "stars",
     "query_breadth": 2,
     "position": 1
+   }
+  },
+  {
+   "repo": "oil-oil/oil-cover",
+   "url": "https://github.com/oil-oil/oil-cover",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 265,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-10-04",
+   "created_at": "2026-06-25",
+   "stars_per_day_lifetime": 2.41,
+   "capability": "为 Claude Code & Codex 生成视频封面和缩略图技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "agent-skill",
+    "agent-skills",
+    "bilibili",
+    "claude-code",
+    "claude-skills",
+    "codex",
+    "codex-skill",
+    "content-creation",
+    "cover",
+    "cover-design",
+    "image-generation",
+    "skill"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 74,
+    "position": 45
    }
   },
   {
@@ -93940,6 +94691,35 @@
    }
   },
   {
+   "repo": "Dave-cc/vibe-knowledge-film",
+   "url": "https://github.com/Dave-cc/vibe-knowledge-film",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 173,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-13",
+   "created_at": "2026-10-06",
+   "stars_per_day_lifetime": 24.71,
+   "capability": "抖音爆款 Vibe 知识短片 skill，深度拆解爆款视频，一键出片",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-15",
+    "sort": "stars",
+    "query_breadth": 55,
+    "position": 44
+   }
+  },
+  {
    "repo": "DeekeScript/ad-dke",
    "url": "https://github.com/DeekeScript/ad-dke",
    "first_seen": "2026-07-29",
@@ -98121,6 +98901,49 @@
    }
   },
   {
+   "repo": "Laihiujin/Prism",
+   "url": "https://github.com/Laihiujin/Prism",
+   "first_seen": "2026-10-13",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-13",
+   "stars": 103,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-10-11",
+   "created_at": "2026-01-19",
+   "stars_per_day_lifetime": 0.39,
+   "capability": "AI 驱动的多账号/多平台矩阵投放/发布平台，支持异步高并发自动化视频发布",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "auto-publish",
+    "automation",
+    "bilibili",
+    "content-publishing",
+    "douyin",
+    "kuaishou",
+    "matrix-publishing",
+    "multi-account",
+    "multi-platform",
+    "patchright",
+    "scheduled-publishing",
+    "scheduler"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-07-15",
+    "sort": "stars",
+    "query_breadth": 28,
+    "position": 27
+   }
+  },
+  {
    "repo": "LancelotRar/best-cf-domains",
    "url": "https://github.com/LancelotRar/best-cf-domains",
    "first_seen": "2026-09-22",
@@ -101924,7 +102747,7 @@
    }
   }
  ],
- "updated": "2026-10-12",
+ "updated": "2026-10-13",
  "status_enum": [
   "pending",
   "debated",
