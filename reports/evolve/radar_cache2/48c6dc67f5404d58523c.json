@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": null,
+ "how": null,
+ "effort": null,
+ "current": "使用自研OCR技术",
+ "beats": null,
+ "why": "PaddlePaddle/PaddleOCR需要依赖PaddlePaddle深度学习框架，不符合零常驻主机的运行形态。"
+}

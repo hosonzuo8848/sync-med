@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "使用自研OCR技术",
+ "beats": "",
+ "why": "未在家底，且为纯库，无需常驻主机"
+}

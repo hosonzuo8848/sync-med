@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线 —— 古籍扫描件转文字，云端 Actions 批量跑",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "我们目前使用的是 Tesseract OCR 和 PDFMiner 库进行 PDF 到文本的转换",
+ "beats": "",
+ "why": "未在家底，且功能不匹配 OCR 产线需求"
+}

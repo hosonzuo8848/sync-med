@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "adopt",
+ "metric": "图谱构建效率",
+ "how": "使用 graphify 库构建知识图谱",
+ "effort": "中",
+ "current": "目前使用自研图谱构建工具",
+ "beats": "构建速度更快，支持更多社区检测和评分功能",
+ "why": "Graphify-Labs 是一个纯库，无需服务器，易于集成"
+}

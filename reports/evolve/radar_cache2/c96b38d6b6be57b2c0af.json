@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "未在家底，且非纯库/脚本/前端组件"
+}

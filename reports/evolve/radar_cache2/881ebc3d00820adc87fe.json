@@ -1,0 +1,10 @@
+{
+ "module": "检索路由 —— /api/retrieve",
+ "verdict": "skip",
+ "metric": "",
+ "how": "",
+ "effort": "",
+ "current": "",
+ "beats": "",
+ "why": "需要常驻服务器，不符合无主机要求"
+}
