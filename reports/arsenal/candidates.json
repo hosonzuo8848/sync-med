@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-10-13",
+ "generated": "2026-10-15",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -41,53 +41,51 @@
  },
  "distill": {
   "seat": "zhipu",
-  "calls": 8,
+  "calls": 7,
   "ok": 3
  },
- "count": 21,
+ "count": 23,
  "candidates": [
   {
-   "repo": "oil-oil/oil-cover",
-   "url": "https://github.com/oil-oil/oil-cover",
-   "description": "Video cover & thumbnail skill for Claude Code & Codex. 帮你用视频画面做小红书和 B 站封面。",
-   "stars": 265,
+   "repo": "edenfunf/reelmimic",
+   "url": "https://github.com/edenfunf/reelmimic",
+   "description": "Show it a video you love. Get a new video in the same style. An AI crew (Claude Code or Codex) plans, builds and reviews it with you.",
+   "stars": 3250,
    "topics": [
-    "agent-skill",
-    "agent-skills",
-    "bilibili",
+    "2d-animation",
+    "ai-agents",
+    "ai-video",
+    "animation",
     "claude-code",
-    "claude-skills",
     "codex",
-    "codex-skill",
-    "content-creation",
-    "cover",
-    "cover-design",
-    "image-generation",
-    "skill"
+    "multi-agent",
+    "style-transfer",
+    "video-generation"
    ],
-   "lang": "Python",
-   "created_at": "2026-06-25",
-   "pushed_at": "2026-10-04",
-   "age_days": 110,
-   "stars_per_day_lifetime": 2.41,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
+   "lang": "JavaScript",
+   "created_at": "2026-09-28",
+   "pushed_at": "2026-10-15",
+   "age_days": 17,
+   "stars_per_day_lifetime": 191.18,
+   "license": "MIT",
+   "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "topic:xiaohongshu stars:>100",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-07-17",
     "sort": "stars",
-    "query_breadth": 74,
-    "position": 45
+    "query_breadth": 21,
+    "position": 19
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为 Claude Code & Codex 生成视频封面和缩略图技能",
-   "evidence": "Video cover & thumbnail skill for Claude Code & Codex.",
+   "capability": "根据视频风格生成新视频",
+   "evidence": "Show it a video you love. Get a new video in the same style.",
    "transfer_forms": [
-    "skill"
+    "skill",
+    "architecture"
    ],
    "line_candidates": [
     "video"
@@ -95,95 +93,34 @@
    "distilled": true
   },
   {
-   "repo": "fumingyang2004/Tulpa",
-   "url": "https://github.com/fumingyang2004/Tulpa",
-   "description": "通过 MCP，让几乎所有桌面 Agent 都能访问 QQ / 微信的本地数据、调用相关功能，甚至直接加入 QQ 群聊变成你的群友！",
-   "stars": 305,
-   "topics": [
-    "ai-agents",
-    "antigravity",
-    "claude-code",
-    "codex",
-    "deepseek-harness",
-    "gpt",
-    "mcp",
-    "onebot",
-    "qq-bot",
-    "snowluma",
-    "workbuddy"
-   ],
-   "lang": "Python",
-   "created_at": "2026-09-26",
-   "pushed_at": "2026-10-10",
-   "age_days": 17,
-   "stars_per_day_lifetime": 17.94,
+   "repo": "kirito8/free-newapi",
+   "url": "https://github.com/kirito8/free-newapi",
+   "description": "免费 API 中转站导航 | 免费/公益大模型 API 中转站与额度清单",
+   "stars": 101,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-09-04",
+   "pushed_at": "2026-10-15",
+   "age_days": 41,
+   "stars_per_day_lifetime": 2.46,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "chinese",
-    "query": "微调 in:name,description stars:>300 pushed:>2026-07-15",
+    "query": "API 中转 in:name,description stars:>100 pushed:>2026-07-17",
     "sort": "stars",
-    "query_breadth": 22,
-    "position": 21
+    "query_breadth": 20,
+    "position": 19
    },
-   "matched_by_n_queries": 1,
+   "matched_by_n_queries": 2,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "通过 MCP 让桌面 Agent 访问 QQ/微信数据，加入群聊",
-   "evidence": "通过 MCP，让几乎所有桌面 Agent 都能访问 QQ / 微信的本地数据、调用相关功能，甚至直接加入 QQ 群聊变成你的群友！",
+   "capability": "免费 API 中转站导航",
+   "evidence": "免费 API 中转站导航",
    "transfer_forms": [
-    "mcp",
-    "skill"
-   ],
-   "line_candidates": [
-    "modelpool",
     "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "isair/jarvis",
-   "url": "https://github.com/isair/jarvis",
-   "description": "A 100% private AI voice assistant that lives on your computer (works offline). Talk naturally as if Jarvis is a third person in the room, and get conversational responses. It remembers everything, knows location and time, can check the web, control Chrome, track nutrition, and more with support for unlimited MCPs / tools without context rot.",
-   "stars": 2021,
-   "topics": [
-    "ai",
-    "assistant",
-    "health",
-    "machine-learning",
-    "mcp",
-    "nutrition",
-    "privacy",
-    "private",
-    "search",
-    "searching",
-    "voice"
-   ],
-   "lang": "Python",
-   "created_at": "2025-08-19",
-   "pushed_at": "2026-10-13",
-   "age_days": 420,
-   "stars_per_day_lifetime": 4.81,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 38
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供 100% 私密的 AI 语音助手，可在电脑上使用（离线）",
-   "evidence": "A 100% private AI voice assistant that lives on your computer (works offline).",
-   "transfer_forms": [
-    "skill"
    ],
    "line_candidates": [
     "unknown"
@@ -191,408 +128,263 @@
    "distilled": true
   },
   {
-   "repo": "ciddwd/overlay-translator",
-   "url": "https://github.com/ciddwd/overlay-translator",
-   "description": "无需 ROOT 的开源 Android 屏幕实时翻译工具，适合游戏、视觉小说和漫画。支持端侧与云端 OCR、离线 LLM、多种翻译服务和文字朗读（TTS），译文可直接显示在画面上。Open-source no-root Android real-time screen translator for games, visual novels, and manga. Supports on-device and cloud OCR, offline LLMs, multiple translation services, on-screen translations, and text-to-speech (TTS).",
-   "stars": 1005,
+   "repo": "bherbruck/solidcraft",
+   "url": "https://github.com/bherbruck/solidcraft",
+   "description": "SolidCraft: an open-source parametric 3D CAD application built in pure Rust. Desktop, web, and automation through MCP.",
+   "stars": 2464,
    "topics": [
-    "android",
-    "android-app",
-    "game-translation",
-    "gguf",
-    "kotlin",
-    "llama-cpp",
-    "llm",
-    "manga",
-    "manga-ocr",
-    "mlkit",
-    "no-root",
-    "ocr"
+    "3d-modeling",
+    "brep",
+    "cad",
+    "egui",
+    "mcp",
+    "parametric-cad",
+    "rust",
+    "step",
+    "wasm"
    ],
-   "lang": "Kotlin",
-   "created_at": "2026-06-22",
-   "pushed_at": "2026-10-13",
-   "age_days": 113,
-   "stars_per_day_lifetime": 8.89,
+   "lang": "Rust",
+   "created_at": "2026-10-07",
+   "pushed_at": "2026-10-15",
+   "age_days": 8,
+   "stars_per_day_lifetime": 308.0,
    "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
-    "dimension": "category",
-    "query": "topic:ocr stars:>1000 pushed:>2026-07-15",
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-09-15",
     "sort": "updated",
-    "query_breadth": 87,
-    "position": 13
+    "query_breadth": 100,
+    "position": 19
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "开源 Android 屏幕实时翻译工具，支持 OCR 和多种翻译服务",
-   "evidence": "Open-source no-root Android real-time screen translator for games, visual novels, and manga. Supports on-device and clou",
+   "capability": "开源参数化 3D CAD 应用",
+   "evidence": "an open-source parametric 3D CAD application built in pure Rust.",
    "transfer_forms": [
-    "skill",
-    "library"
+    "deploy",
+    "architecture"
    ],
    "line_candidates": [
-    "image",
-    "unknown"
+    "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "Laihiujin/Prism",
-   "url": "https://github.com/Laihiujin/Prism",
-   "description": "AI 驱动的多账号 / 多平台矩阵投放/发布平台，支持异步高并发自动化视频发布",
-   "stars": 103,
+   "repo": "DexZane/awesome-web-prompts",
+   "url": "https://github.com/DexZane/awesome-web-prompts",
+   "description": "A curated collection of AI prompts behind stunning, creative websites",
+   "stars": 304,
    "topics": [
-    "auto-publish",
-    "automation",
-    "bilibili",
-    "content-publishing",
-    "douyin",
-    "kuaishou",
-    "matrix-publishing",
-    "multi-account",
-    "multi-platform",
-    "patchright",
-    "scheduled-publishing",
-    "scheduler"
+    "awsome",
+    "awsome-lists",
+    "design",
+    "web"
    ],
    "lang": "HTML",
-   "created_at": "2026-01-19",
-   "pushed_at": "2026-10-11",
-   "age_days": 267,
-   "stars_per_day_lifetime": 0.39,
+   "created_at": "2026-07-02",
+   "pushed_at": "2026-10-15",
+   "age_days": 105,
+   "stars_per_day_lifetime": 2.9,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "prompts in:name stars:>300 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 30,
+    "position": 9
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "AI 生成创意网站提示词集合",
+   "evidence": "A curated collection of AI prompts behind stunning, creative websites",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "honwee/mynah",
+   "url": "https://github.com/honwee/mynah",
+   "description": "Mynah — self-hosted realtime digital human. One GPU, full admin console, Apache-2.0. 自己服务器上的实时数字人系统",
+   "stars": 180,
+   "topics": [
+    "asr",
+    "avatar",
+    "digital-human",
+    "golang",
+    "lip-sync",
+    "musetalk",
+    "realtime",
+    "self-hosted",
+    "tts",
+    "webrtc"
+   ],
+   "lang": "Go",
+   "created_at": "2026-10-07",
+   "pushed_at": "2026-10-15",
+   "age_days": 8,
+   "stars_per_day_lifetime": 22.5,
    "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "chinese",
-    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-07-15",
+    "query": "数字人 in:name,description stars:>100 pushed:>2026-07-17",
     "sort": "stars",
-    "query_breadth": 28,
-    "position": 27
+    "query_breadth": 31,
+    "position": 23
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "自托管实时数字人系统",
+   "evidence": "self-hosted realtime digital human",
+   "transfer_forms": [
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "onehumanbeing/esp32-iphone-agent",
+   "url": "https://github.com/onehumanbeing/esp32-iphone-agent",
+   "description": "Let an AI model use a real iPhone with a $7 ESP32: AirPlay eyes, USB HID hands, any OpenAI-compatible vision model. No Mac, no developer account, no jailbreak.",
+   "stars": 2156,
+   "topics": [
+    "ai-agent",
+    "airplay",
+    "automation",
+    "computer-use",
+    "esp32",
+    "esp32-s3",
+    "iphone",
+    "llm",
+    "usb-hid"
+   ],
+   "lang": "C",
+   "created_at": "2026-10-11",
+   "pushed_at": "2026-10-15",
+   "age_days": 4,
+   "stars_per_day_lifetime": 539.0,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 32
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "使用 ESP32 控制iPhone的AI模型",
+   "evidence": "Let an AI model use a real iPhone with a $7 ESP32",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "trailhq/Trail-Code",
+   "url": "https://github.com/trailhq/Trail-Code",
+   "description": "Turbocharge Claude Code, Cursor, Codex, Gemini & every coding agent: faster, cheaper, with contextual understanding specific to your codebase.",
+   "stars": 10038,
+   "topics": [
+    "ai-agents",
+    "anthropic",
+    "claude-code",
+    "cli",
+    "code-graph",
+    "codex",
+    "context-engineering",
+    "cursor",
+    "developer-tools",
+    "gemini",
+    "knowledge-graph",
+    "llm"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-07-03",
+   "pushed_at": "2026-10-15",
+   "age_days": 104,
+   "stars_per_day_lifetime": 96.52,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 55,
+    "position": 2
    },
    "matched_by_n_queries": 3,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "AI 驱动的多账号/多平台矩阵投放/发布平台，支持异步高并发自动化视频发布",
-   "evidence": "AI 驱动的多账号 / 多平台矩阵投放/发布平台，支持异步高并发自动化视频发布",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "video"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "skalesapp/skales",
-   "url": "https://github.com/skalesapp/skales",
-   "description": "Personal AI agent for macOS, Windows, Linux, Android & iOS. Set a goal, it works alone: coding (Skales Code), desktop + browser automation, autonomous scheduled Tasks. Teams of agents and humans across paired desktops. Agent2Agent, MCP, computer use, voice, local LLMs (Ollama), Agent Skills (SKILL.md). 26 AI providers, BYOK. No Docker, no terminal.",
-   "stars": 2035,
-   "topics": [
-    "agentic-ai",
-    "ai-agent",
-    "ai-assistant",
-    "android",
-    "automation",
-    "autonomous-agent",
-    "desktop-app",
-    "electron",
-    "ios",
-    "linux",
-    "llm",
-    "local-ai"
-   ],
-   "lang": "",
-   "created_at": "2026-03-08",
-   "pushed_at": "2026-10-12",
-   "age_days": 219,
-   "stars_per_day_lifetime": 9.29,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 65
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "跨平台个人 AI 代理，支持自动化任务和桌面/浏览器自动化",
-   "evidence": "Personal AI agent for macOS, Windows, Linux, Android & iOS. Set a goal, it works alone: coding (Skales Code), desktop + ",
+   "capability": "增强 Claude Code 等编码代理",
+   "evidence": "Turbocharge Claude Code, Cursor, Codex, Gemini & every coding agent",
    "transfer_forms": [
     "skill",
     "architecture"
    ],
    "line_candidates": [
-    "modelpool",
-    "unknown"
+    "rag"
    ],
    "distilled": true
   },
   {
-   "repo": "meirwah/awesome-incident-response",
-   "url": "https://github.com/meirwah/awesome-incident-response",
-   "description": "A curated list of tools for incident response",
-   "stars": 9447,
+   "repo": "wxxxcxx/ms-ra-forwarder",
+   "url": "https://github.com/wxxxcxx/ms-ra-forwarder",
+   "description": "免费的在线文本转语音API",
+   "stars": 1059,
    "topics": [
-    "awesome",
-    "awesome-list",
-    "cybersecurity",
-    "dfir",
-    "incident-response",
-    "incident-response-tooling",
-    "list",
-    "security"
-   ],
-   "lang": "",
-   "created_at": "2015-11-10",
-   "pushed_at": "2026-10-13",
-   "age_days": 3990,
-   "stars_per_day_lifetime": 2.37,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 13
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "收集整理事件响应工具的列表",
-   "evidence": "A curated list of tools for incident response",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Dave-cc/vibe-knowledge-film",
-   "url": "https://github.com/Dave-cc/vibe-knowledge-film",
-   "description": "抖音爆款Vibe知识大赏知识短片skill，深度拆解爆款视频，复刻画风，导演分镜表，自动配音效，一键出片",
-   "stars": 173,
-   "topics": [],
-   "lang": "JavaScript",
-   "created_at": "2026-10-06",
-   "pushed_at": "2026-10-13",
-   "age_days": 7,
-   "stars_per_day_lifetime": 24.71,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-15",
-    "sort": "stars",
-    "query_breadth": 55,
-    "position": 44
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "抖音爆款 Vibe 知识短片 skill，深度拆解爆款视频，一键出片",
-   "evidence": "抖音爆款Vibe知识大赏知识短片skill，深度拆解爆款视频，复刻画风，导演分镜表，自动配音效，一键出片",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "video"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "xuanyustudio/LocalMiniDrama",
-   "url": "https://github.com/xuanyustudio/LocalMiniDrama",
-   "description": "🎬 seedance2接入  开源本地 AI 短剧 & 漫剧生成工具 —— 从故事到成片一站式完成，数据不出本机，短剧工作流管理平台，高灵活度，AI真人剧，AI漫剧本地搞定。 Open-source local AI short drama maker: story → storyboard → video, fully offline, your data stays yours. 纳米流水线",
-   "stars": 2041,
-   "topics": [
-    "ai",
-    "ai-agent",
-    "ai-mini-drama",
-    "ai-video",
-    "electron",
-    "javascript",
-    "mini-drama",
-    "nodejs",
-    "offline",
-    "offline-short-drama",
-    "open-source",
-    "short-video"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-02-10",
-   "pushed_at": "2026-10-12",
-   "age_days": 245,
-   "stars_per_day_lifetime": 8.33,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 72
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "开源本地 AI 短剧 & 漫剧生成工具，从故事到成片一站式完成",
-   "evidence": "🎬 seedance2接入  开源本地 AI 短剧 & 漫剧生成工具 —— 从故事到成片一站式完成，数据不出本机，短剧工作流管理平台，高灵活度，AI真人剧，AI漫剧本地搞定。 Open-source local AI short drama",
-   "transfer_forms": [
-    "skill",
-    "dataset"
-   ],
-   "line_candidates": [
-    "video"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "joeseesun/qiaomu-cut-skill",
-   "url": "https://github.com/joeseesun/qiaomu-cut-skill",
-   "description": "乔木智能视频导演 Skill：素材治理、双语字幕、品牌包装与可复现渲染 | Agent-native video director with governed sourcing and verifiable rendering",
-   "stars": 374,
-   "topics": [
-    "agent-skill",
-    "ai-video",
-    "ffmpeg",
-    "nodejs",
-    "subtitles",
-    "video-editing"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-07-18",
-   "pushed_at": "2026-10-13",
-   "age_days": 87,
-   "stars_per_day_lifetime": 4.3,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 14
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "乔木智能视频导演 Skill，提供素材治理、双语字幕、品牌包装与渲染",
-   "evidence": "乔木智能视频导演 Skill：素材治理、双语字幕、品牌包装与可复现渲染",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "video"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "sparanoid/chinese-copywriting-guidelines",
-   "url": "https://github.com/sparanoid/chinese-copywriting-guidelines",
-   "description": "Chinese copywriting guidelines for better written communication／中文文案排版指北",
-   "stars": 15744,
-   "topics": [
-    "chinese",
-    "chinese-simplified",
-    "chinese-traditional",
-    "copywriting",
-    "css",
-    "documentation",
-    "guideline",
-    "leancloud",
-    "markdown"
-   ],
-   "lang": "",
-   "created_at": "2014-03-17",
-   "pushed_at": "2026-10-12",
-   "age_days": 4593,
-   "stars_per_day_lifetime": 3.43,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "topic:chinese stars:>500 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 67,
-    "position": 24
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供中文文案排版指南",
-   "evidence": "Chinese copywriting guidelines for better written communication／中文文案排版指北",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Ebony-Vinyl/EAC-Desktop",
-   "url": "https://github.com/Ebony-Vinyl/EAC-Desktop",
-   "description": "Embracing All Creation (Desktop) — Dedicated to the Harmonious Coexistence of Hundreds of DSH Plugins / 揽尽万象（桌面版） —— 致力于让数百个DSH插件和谐共存",
-   "stars": 2002,
-   "topics": [
-    "ai-agent",
-    "deepseek",
-    "deepseek-harness",
-    "desktop",
-    "desktop-app",
-    "dsh",
-    "dsh-plugin",
-    "dsh-plugins",
-    "dshdesktop",
-    "electron",
-    "tauri",
-    "windows"
+    "tts",
+    "tts-api"
    ],
    "lang": "TypeScript",
-   "created_at": "2026-08-14",
-   "pushed_at": "2026-10-12",
-   "age_days": 60,
-   "stars_per_day_lifetime": 33.37,
-   "license": "MIT",
-   "license_family": "permissive",
+   "created_at": "2022-01-08",
+   "pushed_at": "2026-10-13",
+   "age_days": 1741,
+   "stars_per_day_lifetime": 0.61,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 75
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-07-17",
+    "sort": "stars",
+    "query_breadth": 39,
+    "position": 12
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "桌面版插件和谐共存平台",
-   "evidence": "Embracing All Creation (Desktop) — Dedicated to the Harmonious Coexistence of Hundreds of DSH Plugins / 揽尽万象（桌面版） —— 致力于",
+   "capability": "免费在线文本转语音API",
+   "evidence": "免费的在线文本转语音API",
    "transfer_forms": [
     "unknown"
    ],
@@ -602,111 +394,116 @@
    "distilled": true
   },
   {
-   "repo": "joeseesun/qiaomu-meta-skill",
-   "url": "https://github.com/joeseesun/qiaomu-meta-skill",
-   "description": "把工作流变成可研究、可评测、可发布的乔木 Agent Skill | Turn workflows into researched, tested, release-ready agent skills.",
-   "stars": 384,
+   "repo": "Anil-matcha/open-agent-email",
+   "url": "https://github.com/Anil-matcha/open-agent-email",
+   "description": "Open-source email infrastructure for AI agents: secure inboxes, REST and MCP APIs, SMTP, human approval workflows, signed webhooks, and Python and TypeScript SDKs. Self-host with Docker and PostgreSQL.",
+   "stars": 2092,
    "topics": [
-    "agent-skills",
-    "ai-workflow",
-    "qiaomu",
-    "skill-creator",
-    "skill-evaluation",
-    "skillsmp"
+    "agent-email",
+    "agentic-ai",
+    "ai-agents",
+    "aws-ses",
+    "developer-tools",
+    "email-api",
+    "email-automation",
+    "email-infrastructure",
+    "fastapi",
+    "human-in-the-loop",
+    "imap",
+    "mcp"
    ],
    "lang": "Python",
-   "created_at": "2026-05-20",
-   "pushed_at": "2026-10-13",
-   "age_days": 146,
-   "stars_per_day_lifetime": 2.63,
-   "license": "MIT",
-   "license_family": "permissive",
+   "created_at": "2023-05-05",
+   "pushed_at": "2026-10-15",
+   "age_days": 1259,
+   "stars_per_day_lifetime": 1.66,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-13",
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-09-15",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 15
+    "position": 50
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "创建和评估乔木Agent技能",
-   "evidence": "Turn workflows into researched, tested, release-ready agent skills.",
+   "capability": "开源AI代理电子邮件基础设施",
+   "evidence": "Open-source email infrastructure for AI agents",
+   "transfer_forms": [
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "resend/resend-skills",
+   "url": "https://github.com/resend/resend-skills",
+   "description": "Agent Skills for working with Resend to send and receive emails.",
+   "stars": 201,
+   "topics": [],
+   "lang": "JavaScript",
+   "created_at": "2026-01-20",
+   "pushed_at": "2026-10-14",
+   "age_days": 268,
+   "stars_per_day_lifetime": 0.75,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 33
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "使用 Resend 发送和接收电子邮件的代理技能",
+   "evidence": "Agent Skills for working with Resend to send and receive emails.",
    "transfer_forms": [
     "skill"
    ],
    "line_candidates": [
-    "modelpool",
     "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "benchflow-ai/skillsbench",
-   "url": "https://github.com/benchflow-ai/skillsbench",
-   "description": "SkillsBench evaluates how well skills work and how effective agents are at using them.",
-   "stars": 1842,
+   "repo": "1c7/Translate-Subtitle-File",
+   "url": "https://github.com/1c7/Translate-Subtitle-File",
+   "description": "翻译字幕文件：拖入 .srt / .ass / .vtt，点一下就翻完。产品名称：译幕（Zimoo）有网页版和 Mac / Windows 桌面版，支持 DeepSeek、Gemini、GPT、Claude、Kimi、智谱等 AI 大模型，和其他软件最大的区别（差异）：用户配置自己的 API Key 来做翻译，这样的好处是费用是最低的。",
+   "stars": 2633,
    "topics": [
-    "benchmark",
-    "skillsbench"
+    "ass",
+    "captions",
+    "desktop-app",
+    "electron",
+    "srt",
+    "subtitle",
+    "vtt",
+    "vuejs"
    ],
-   "lang": "PDDL",
-   "created_at": "2025-12-29",
-   "pushed_at": "2026-10-13",
-   "age_days": 288,
-   "stars_per_day_lifetime": 6.4,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
+   "lang": "",
+   "created_at": "2017-12-17",
+   "pushed_at": "2026-10-15",
+   "age_days": 3224,
+   "stars_per_day_lifetime": 0.82,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 18
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "评估技能和智能体效果",
-   "evidence": "SkillsBench evaluates how well skills work and how effective agents are at using them.",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "trustfuture/simon-skills",
-   "url": "https://github.com/trustfuture/simon-skills",
-   "description": "不露脸做视频账号的 AI skill 合集：调查长片 + 手绘白板讲解视频，一句选题出片、配音字幕、封面与各平台文案",
-   "stars": 397,
-   "topics": [
-    "claude-code",
-    "codex",
-    "excalidraw",
-    "remotion",
-    "skills",
-    "video-generation"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-09-20",
-   "pushed_at": "2026-10-13",
-   "age_days": 23,
-   "stars_per_day_lifetime": 17.26,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
+    "dimension": "chinese",
+    "query": "大模型 in:name,description stars:>1000 pushed:>2026-09-15",
+    "sort": "stars",
+    "query_breadth": 53,
     "position": 29
    },
    "matched_by_n_queries": 1,
@@ -714,92 +511,421 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供AI视频生成技能集合",
-   "evidence": "不露脸做视频账号的 AI skill 合集：调查长片 + 手绘白板讲解视频，一句选题出片、配音字幕、封面与各平台文案",
+   "capability": "翻译字幕文件，支持多种AI模型翻译",
+   "evidence": "翻译字幕文件，支持多种AI模型翻译",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "mit-han-lab/ncu-report-skill",
+   "url": "https://github.com/mit-han-lab/ncu-report-skill",
+   "description": "",
+   "stars": 256,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-04-13",
+   "pushed_at": "2026-10-14",
+   "age_days": 185,
+   "stars_per_day_lifetime": 1.38,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 35
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 Python 代码库",
+   "evidence": "提供 Python 代码库",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Arekejoker/qwen21-nsfw-pose-skill",
+   "url": "https://github.com/Arekejoker/qwen21-nsfw-pose-skill",
+   "description": "Qwen-Image 2.1 NSFW/姿势出图 skill：作者级提示词配方 + NSFW LoRA + 136 姿势 VNCCS 人偶控制；适用 Claude Code / Codex / Cursor / OpenClaw",
+   "stars": 1399,
+   "topics": [
+    "agent-skill",
+    "comfyui",
+    "image-generation",
+    "openclaw",
+    "pose-control",
+    "qwen-image"
+   ],
+   "lang": "Python",
+   "created_at": "2026-10-13",
+   "pushed_at": "2026-10-14",
+   "age_days": 2,
+   "stars_per_day_lifetime": 699.5,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-17",
+    "sort": "stars",
+    "query_breadth": 78,
+    "position": 20
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "生成 NSFW/姿势出图 skill",
+   "evidence": "Qwen-Image 2.1 NSFW/姿势出图 skill",
    "transfer_forms": [
     "skill"
    ],
    "line_candidates": [
-    "video",
-    "unknown"
+    "image"
    ],
    "distilled": true
   },
   {
-   "repo": "hotheadhacker/awesome-selfhost-docker",
-   "url": "https://github.com/hotheadhacker/awesome-selfhost-docker",
-   "description": "🚀 Curated list of open-source, self-hosted projects deployable with Docker and docker-compose. Your go-to resource for amazing self-hostable software.",
-   "stars": 4091,
-   "topics": [],
-   "lang": "HTML",
-   "created_at": "2024-07-15",
-   "pushed_at": "2026-10-12",
-   "age_days": 820,
-   "stars_per_day_lifetime": 4.99,
-   "license": "NONE",
-   "license_family": "none",
+   "repo": "pathwaycom/serviette",
+   "url": "https://github.com/pathwaycom/serviette",
+   "description": "Ready-to-run cloud templates for RAG, AI pipelines, and enterprise search with live data. 🐳Docker-friendly.⚡Always in sync with Sharepoint, Google Drive, S3, Kafka, PostgreSQL, real-time data APIs, and more.",
+   "stars": 58789,
+   "topics": [
+    "chatbot",
+    "hugging-face",
+    "llm",
+    "llm-local",
+    "llm-prompting",
+    "llm-security",
+    "llmops",
+    "machine-learning",
+    "open-ai",
+    "pathway",
+    "rag",
+    "real-time"
+   ],
+   "lang": "Jupyter Notebook",
+   "created_at": "2023-07-19",
+   "pushed_at": "2026-10-14",
+   "age_days": 1184,
+   "stars_per_day_lifetime": 49.65,
+   "license": "MIT",
+   "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
+    "query": "topic:rag stars:>3000 pushed:>2026-09-15",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 44
+    "position": 47
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供可Docker部署的软件列表",
-   "evidence": "Curated list of open-source, self-hosted projects deployable with Docker and docker-compose.",
+   "capability": "提供 RAG、AI 管道和企业搜索的云模板",
+   "evidence": "Ready-to-run cloud templates for RAG, AI pipelines, and enterprise search",
    "transfer_forms": [
+    "mcp",
     "deploy"
    ],
    "line_candidates": [
+    "rag"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "jtydhr88/comfyui-custom-node-skills",
+   "url": "https://github.com/jtydhr88/comfyui-custom-node-skills",
+   "description": "A curated collection of [Claude Code skills](https://docs.anthropic.com/en/docs/claude-code/skills) for developing ComfyUI custom nodes. These skills give Claude comprehensive knowledge of the ComfyUI node system, covering both the V3 (recommended) and V1 (legacy) APIs.",
+   "stars": 298,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-03-05",
+   "pushed_at": "2026-10-14",
+   "age_days": 224,
+   "stars_per_day_lifetime": 1.33,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 55
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 ComfyUI 定制节点技能",
+   "evidence": "A curated collection of [Claude Code skills] for developing ComfyUI custom nodes",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
     "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "Anil-matcha/awesome-open-source-saas-alternatives",
-   "url": "https://github.com/Anil-matcha/awesome-open-source-saas-alternatives",
-   "description": "Open source alternatives to paid SaaS apps: Notion, Slack, Auth0, Vercel and more. Curated list with licenses and GitHub stars.",
-   "stars": 3397,
+   "repo": "heygen-com/hyperframes-community-skills",
+   "url": "https://github.com/heygen-com/hyperframes-community-skills",
+   "description": "Community-maintained skills for specialized HyperFrames workflows.",
+   "stars": 206,
    "topics": [
-    "alternatives",
-    "auth0-alternative",
-    "awesome",
-    "awesome-list",
-    "figma-alternative",
-    "firebase-alternative",
-    "free-software",
-    "notion-alternative",
-    "open-source",
-    "open-source-alternatives",
-    "open-source-software",
-    "postman-alternative"
+    "agent-skills",
+    "ai-agents",
+    "hyperframes",
+    "video-automation"
    ],
    "lang": "JavaScript",
-   "created_at": "2023-11-10",
-   "pushed_at": "2026-10-12",
-   "age_days": 1068,
-   "stars_per_day_lifetime": 3.18,
+   "created_at": "2026-08-25",
+   "pushed_at": "2026-10-14",
+   "age_days": 51,
+   "stars_per_day_lifetime": 4.04,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 70
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 HyperFrames 工作流程的技能",
+   "evidence": "Community-maintained skills for specialized HyperFrames workflows",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "mongodb-developer/GenAI-Showcase",
+   "url": "https://github.com/mongodb-developer/GenAI-Showcase",
+   "description": "MongoDB's Generative AI Showcase: an exhaustive collection of examples and sample applications covering Retrieval-Augmented Generation (RAG), AI agents, and industry-specific use cases.",
+   "stars": 4268,
+   "topics": [
+    "agents",
+    "artificial-intelligence",
+    "atlas",
+    "generative-ai",
+    "jupyter-notebook",
+    "llms",
+    "mongodb",
+    "python",
+    "rag"
+   ],
+   "lang": "Jupyter Notebook",
+   "created_at": "2024-01-30",
+   "pushed_at": "2026-10-13",
+   "age_days": 989,
+   "stars_per_day_lifetime": 4.32,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 71
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "展示 MongoDB 生成式 AI 应用示例",
+   "evidence": "MongoDB's Generative AI Showcase: an exhaustive collection of examples and sample applications covering Retrieval-Augmen",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "thedivergentai/Game-Dev-Agentic-Skills",
+   "url": "https://github.com/thedivergentai/Game-Dev-Agentic-Skills",
+   "description": "Multi-engine long-term memory for game AI agents. Deep Godot 4.7+ (99 skills, 27 genre blueprints) + Bevy docs-first parity — audited patterns, persona orchestration (Analyst · Auditor · Builder), production-grade engineering.",
+   "stars": 854,
+   "topics": [],
+   "lang": "GDScript",
+   "created_at": "2026-02-07",
+   "pushed_at": "2026-10-14",
+   "age_days": 250,
+   "stars_per_day_lifetime": 3.42,
+   "license": "LGPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 78
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供游戏 AI 代理的多引擎长期记忆",
+   "evidence": "Multi-engine long-term memory for game AI agents",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "skillmds/skillmd",
+   "url": "https://github.com/skillmds/skillmd",
+   "description": "Lint, search, and install Agent Skills (SKILL.md) — CLI + MCP server + lint engine",
+   "stars": 241,
+   "topics": [
+    "agent-skills",
+    "agent-skills-registry",
+    "ai-agents",
+    "claude",
+    "claude-code",
+    "cli",
+    "codex",
+    "cursor",
+    "lint",
+    "mcp",
+    "model-context-protocol",
+    "sarif"
+   ],
+   "lang": "JavaScript",
+   "created_at": "2026-08-25",
+   "pushed_at": "2026-10-14",
+   "age_days": 51,
+   "stars_per_day_lifetime": 4.73,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 86
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 Agent Skills 的 lint、搜索和安装",
+   "evidence": "Lint, search, and install Agent Skills (SKILL.md) — CLI + MCP server + lint engine",
+   "transfer_forms": [
+    "library",
+    "mcp"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Bhanunamikaze/Agentic-SEO-Skill",
+   "url": "https://github.com/Bhanunamikaze/Agentic-SEO-Skill",
+   "description": "An LLM-first SEO analysis skill for Antigravity, Codex, Claude with 16 specialized sub-skills, 10 specialist agents, and 88 optional utility scripts used as evidence collectors.",
+   "stars": 969,
+   "topics": [
+    "ai-skill",
+    "ai-skills",
+    "antigravity-ai",
+    "antigravity-skills",
+    "antigravity-tools",
+    "claude-skill",
+    "claude-skills",
+    "codex-skill",
+    "codex-skills",
+    "seo",
+    "seo-optimization",
+    "skills"
+   ],
+   "lang": "Python",
+   "created_at": "2026-03-02",
+   "pushed_at": "2026-10-14",
+   "age_days": 227,
+   "stars_per_day_lifetime": 4.27,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-15",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 87
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 SEO 分析技能",
+   "evidence": "An LLM-first SEO analysis skill for Antigravity, Codex, Claude",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "zhuima/awesome-cloudflare",
+   "url": "https://github.com/zhuima/awesome-cloudflare",
+   "description": "⛅️ 精选的 Cloudflare 工具、开源项目、指南、博客和其他资源列表。/ ⛅️ A curated list of Cloudflare tools, open source projects, guides, blogs and other resources.",
+   "stars": 15531,
+   "topics": [],
+   "lang": "",
+   "created_at": "2024-04-07",
+   "pushed_at": "2026-10-13",
+   "age_days": 921,
+   "stars_per_day_lifetime": 16.86,
    "license": "NONE",
    "license_family": "none",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-15",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 52
+    "position": 89
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供开源SaaS应用替代方案列表",
-   "evidence": "Open source alternatives to paid SaaS apps: Notion, Slack, Auth0, Vercel and more.",
+   "capability": "提供精选的 Cloudflare 工具和资源列表",
+   "evidence": "精选的 Cloudflare 工具、开源项目、指南、博客和其他资源列表",
    "transfer_forms": [
     "unknown"
    ],
@@ -809,84 +935,34 @@
    "distilled": true
   },
   {
-   "repo": "engineering-management/awesome-engineering-management",
-   "url": "https://github.com/engineering-management/awesome-engineering-management",
-   "description": "Pointers and tools for learning and day-to-day practice of engineering management & leadership.",
-   "stars": 2779,
-   "topics": [
-    "awesome",
-    "awesome-list",
-    "engineering-management",
-    "leadership",
-    "productivity",
-    "project-management"
-   ],
-   "lang": "",
-   "created_at": "2021-06-11",
-   "pushed_at": "2026-10-12",
-   "age_days": 1950,
-   "stars_per_day_lifetime": 1.43,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 58
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供工程管理和领导力学习工具",
-   "evidence": "Pointers and tools for learning and day-to-day practice of engineering management & leadership.",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "italiaremote/awesome-italia-remote",
-   "url": "https://github.com/italiaremote/awesome-italia-remote",
-   "description": "A list of remote-friendly or full-remote companies that targets Italian talents.",
-   "stars": 2656,
-   "topics": [
-    "awesome",
-    "awesome-list",
-    "italy",
-    "jobs",
-    "list",
-    "remote",
-    "remote-jobs"
-   ],
-   "lang": "Go",
-   "created_at": "2022-01-24",
-   "pushed_at": "2026-10-12",
-   "age_days": 1723,
-   "stars_per_day_lifetime": 1.54,
+   "repo": "yunshenwuchuxun/latex-paper-skills",
+   "url": "https://github.com/yunshenwuchuxun/latex-paper-skills",
+   "description": "A modular skill-based framework for writing, revising, and managing LaTeX academic papers with AI assistance.",
+   "stars": 269,
+   "topics": [],
+   "lang": "TeX",
+   "created_at": "2026-03-18",
+   "pushed_at": "2026-10-14",
+   "age_days": 211,
+   "stars_per_day_lifetime": 1.27,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-13",
+    "query": "skill in:name stars:>200 pushed:>2026-09-15",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 59
+    "position": 93
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供意大利远程工作公司列表",
-   "evidence": "A list of remote-friendly or full-remote companies that targets Italian talents.",
+   "capability": "提供 LaTeX 学术论文写作、修订和管理框架",
+   "evidence": "写作、修订、管理 LaTeX 学术论文的模块化技能框架",
    "transfer_forms": [
-    "unknown"
+    "skill"
    ],
    "line_candidates": [
     "unknown"
@@ -894,84 +970,41 @@
    "distilled": true
   },
   {
-   "repo": "alpacahq/alpaca-mcp-server",
-   "url": "https://github.com/alpacahq/alpaca-mcp-server",
-   "description": "Alpaca’s official MCP Server lets you trade stocks, ETFs, crypto, and options, run data analysis, and build strategies in plain English directly from your favorite LLM tools and IDEs",
-   "stars": 1018,
+   "repo": "Jakubantalik/transitions.dev",
+   "url": "https://github.com/Jakubantalik/transitions.dev",
+   "description": "UI motion agent, a library of 43+ crafted transitions, a skill that fits your workflow.",
+   "stars": 5327,
    "topics": [
-    "ai-trading",
-    "algorithmic-trading",
-    "crypto",
-    "etfs",
-    "mcp",
-    "mcp-server",
-    "options",
-    "stocks",
-    "trading",
-    "trading-api"
+    "design",
+    "motion",
+    "motionskill",
+    "product",
+    "skill",
+    "ui-design",
+    "ux",
+    "ux-design"
    ],
-   "lang": "Python",
-   "created_at": "2025-06-03",
-   "pushed_at": "2026-10-12",
-   "age_days": 497,
-   "stars_per_day_lifetime": 2.05,
-   "license": "MIT",
-   "license_family": "permissive",
+   "lang": "HTML",
+   "created_at": "2026-04-21",
+   "pushed_at": "2026-10-14",
+   "age_days": 177,
+   "stars_per_day_lifetime": 30.1,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
    "found_by": {
     "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-13",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 72
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供股票、ETF、加密货币交易API",
-   "evidence": "Alpaca’s official MCP Server lets you trade stocks, ETFs, crypto, and options, run data analysis, and build strategies i",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "modelpool",
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "wheresryan22/anatomy",
-   "url": "https://github.com/wheresryan22/anatomy",
-   "description": "An agent skill for creating detailed, interactive isometric illustrations of real-world machines and complex systems. Generates polished SVGs with optional WebGL shaders and 3D effects.",
-   "stars": 6847,
-   "topics": [
-    "agent-skill",
-    "open-source",
-    "svg",
-    "vizualization"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-10-08",
-   "pushed_at": "2026-10-12",
-   "age_days": 5,
-   "stars_per_day_lifetime": 1369.4,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "agent skill in:name,description stars:>300 pushed:>2026-07-15",
+    "query": "agent skill in:name,description stars:>300 pushed:>2026-07-17",
     "sort": "stars",
     "query_breadth": 100,
-    "position": 73
+    "position": 97
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "创建交互式等距插图，生成 SVG 和 WebGL 效果",
-   "evidence": "An agent skill for creating detailed, interactive isometric illustrations of real-world machines and complex systems.",
+   "capability": "提供 UI 动作代理和过渡效果库",
+   "evidence": "UI 动作代理，43+ 精心制作的过渡效果库",
    "transfer_forms": [
     "skill"
    ],
