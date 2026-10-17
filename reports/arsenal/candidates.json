@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-10-16",
+ "generated": "2026-10-17",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -41,53 +41,40 @@
  },
  "distill": {
   "seat": "zhipu",
-  "calls": 6,
-  "ok": 2
+  "calls": 3,
+  "ok": 1
  },
- "count": 16,
+ "count": 7,
  "candidates": [
   {
-   "repo": "shcherbak-ai/contextgem",
-   "url": "https://github.com/shcherbak-ai/contextgem",
-   "description": "Extract structured data and insights from documents using LLMs and decision models",
-   "stars": 2009,
-   "topics": [
-    "ai",
-    "contract-analysis",
-    "data-extraction",
-    "decision-models",
-    "document-ai",
-    "document-intelligence",
-    "document-processing",
-    "generative-ai",
-    "information-extraction",
-    "legal-tech",
-    "legaltech",
-    "llm"
-   ],
-   "lang": "Python",
-   "created_at": "2024-10-11",
-   "pushed_at": "2026-10-16",
-   "age_days": 735,
-   "stars_per_day_lifetime": 2.73,
+   "repo": "originaleric/dig-ui-skill",
+   "url": "https://github.com/originaleric/dig-ui-skill",
+   "description": "Built by Dig:An agent-readable, prompt-as-code design system for Codex, Cursor, and Claude Code: catalogs, layouts, blocks, workflows, and personal UI customization.",
+   "stars": 232,
+   "topics": [],
+   "lang": "HTML",
+   "created_at": "2026-05-30",
+   "pushed_at": "2026-10-17",
+   "age_days": 140,
+   "stars_per_day_lifetime": 1.66,
    "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "topic:information-extraction stars:>500 pushed:>2026-07-18",
-    "sort": "stars",
-    "query_breadth": 7,
-    "position": 2
+    "query": "skill in:name stars:>200 pushed:>2026-09-17",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "从文档中提取结构化数据和洞察，使用 LLM 和决策模型",
-   "evidence": "Extract structured data and insights from documents using LLMs and decision models",
+   "capability": "提供 Codex、Cursor 和 Claude Code 的 UI 设计系统，支持个人 UI 定制。",
+   "evidence": "Built by Dig:An agent-readable, prompt-as-code design system for Codex, Cursor, and Claude Code: catalogs, layouts, bloc",
    "transfer_forms": [
-    "unknown"
+    "skill"
    ],
    "line_candidates": [
     "unknown"
@@ -95,45 +82,32 @@
    "distilled": true
   },
   {
-   "repo": "Licoy/Quosparr",
-   "url": "https://github.com/Licoy/Quosparr",
-   "description": "🐦 Native menu bar & tray app for macOS, Windows and Linux: track Codex, Claude Code and Grok quotas, resets, API-equivalent cost and local sessions, with multi-account and API relay switching | 原生 macOS、Windows、Linux 菜单栏与托盘应用，统一查看 Codex、Claude Code、Grok 额度、重置动态、API 等价成本与本机会话，支持多账号与中转 API 切换",
-   "stars": 289,
-   "topics": [
-    "anthropic",
-    "chatgpt",
-    "claude-code",
-    "codex-reset",
-    "developer-tools",
-    "grok",
-    "grok-build",
-    "linux",
-    "macos",
-    "menu-bar",
-    "openai",
-    "openai-codex"
-   ],
-   "lang": "Go",
-   "created_at": "2026-06-29",
-   "pushed_at": "2026-10-16",
-   "age_days": 109,
-   "stars_per_day_lifetime": 2.65,
-   "license": "AGPL-3.0",
-   "license_family": "copyleft",
+   "repo": "xgwangdl/AI-Interview",
+   "url": "https://github.com/xgwangdl/AI-Interview",
+   "description": "开源的 AI 模拟面试系统：真人数字人面试官开口提问、按你的回答追问，报告逐题打分；另含 Docker 判题笔试与 AI 简历优化。Java 21 + Spring AI Alibaba + Vue 3。",
+   "stars": 234,
+   "topics": [],
+   "lang": "Java",
+   "created_at": "2025-02-18",
+   "pushed_at": "2026-10-17",
+   "age_days": 606,
+   "stars_per_day_lifetime": 0.39,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
     "dimension": "chinese",
-    "query": "API 中转 in:name,description stars:>100 pushed:>2026-07-18",
+    "query": "数字人 in:name,description stars:>100 pushed:>2026-07-19",
     "sort": "stars",
-    "query_breadth": 21,
-    "position": 9
+    "query_breadth": 33,
+    "position": 22
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "原生菜单栏和托盘应用程序，跟踪 Codex、Claude Code 和 Grok 配额、重置、API 成本和本地会话",
-   "evidence": "Native menu bar & tray app for macOS, Windows and Linux: track Codex, Claude Code and Grok quotas, resets, API-equivalen",
+   "capability": "开源 AI 模拟面试系统，包含真人数字人面试官、Docker 判题笔试和 AI 简历优化。",
+   "evidence": "开源 AI 模拟面试系统：真人数字人面试官开口提问、按你的回答追问，报告逐题打分；另含 Docker 判题笔试与 AI 简历优化。",
    "transfer_forms": [
     "unknown"
    ],
@@ -143,389 +117,95 @@
    "distilled": true
   },
   {
-   "repo": "kaomei/stickman-video-director",
-   "url": "https://github.com/kaomei/stickman-video-director",
-   "description": "AI stickman animation style library & video prompts.｜火柴人动画画风大全：输入话题，生成脚本、动态分镜及配音音效提示词。",
-   "stars": 2156,
+   "repo": "textbee/textbee",
+   "url": "https://github.com/textbee/textbee",
+   "description": "Open-source SMS gateway. Turn your Android phone into an SMS API: send and receive SMS from your apps over REST and webhooks. Self-hostable, with a free hosted plan.",
+   "stars": 3179,
    "topics": [
-    "agent-skills",
-    "ai-animation",
-    "ai-video",
-    "animation-prompts",
-    "codex-skill",
-    "content-creation",
-    "gemini",
-    "google-flow",
-    "stick-figure-animation",
-    "stickman-animation",
-    "storyboard",
-    "video-prompts"
+    "android",
+    "android-sms",
+    "android-sms-gateway",
+    "android-sms-sender",
+    "api",
+    "foss",
+    "gateway",
+    "mcp-server",
+    "open-source",
+    "self-hosted",
+    "send-sms",
+    "sim"
    ],
-   "lang": "Python",
-   "created_at": "2026-08-03",
-   "pushed_at": "2026-10-15",
-   "age_days": 74,
-   "stars_per_day_lifetime": 29.14,
+   "lang": "TypeScript",
+   "created_at": "2022-03-18",
+   "pushed_at": "2026-10-16",
+   "age_days": 1674,
+   "stars_per_day_lifetime": 1.9,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "stock",
-    "query": "topic:content-creation stars:>1000 pushed:>2026-07-18",
+    "query": "topic:mcp-server stars:>1000 pushed:>2026-09-17",
     "sort": "stars",
-    "query_breadth": 16,
-    "position": 10
+    "query_breadth": 100,
+    "position": 91
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "开源 SMS 网关，将 Android 手机转换为 SMS API，支持发送和接收 SMS。",
+   "evidence": "Open-source SMS gateway. Turn your Android phone into an SMS API: send and receive SMS from your apps over REST and webh",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "zereight/gitlab-mcp",
+   "url": "https://github.com/zereight/gitlab-mcp",
+   "description": "MCP server for GitLab: 100+ tools for projects, MRs, issues, pipelines, wikis and more via the GitLab REST/GraphQL API",
+   "stars": 2047,
+   "topics": [
+    "ai",
+    "claude",
+    "cursor",
+    "devtools",
+    "gitlab",
+    "gitlab-api",
+    "llm",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2025-02-11",
+   "pushed_at": "2026-10-17",
+   "age_days": 613,
+   "stars_per_day_lifetime": 3.34,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-17",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 20
    },
    "matched_by_n_queries": 2,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "AI 火柴人动画风格库和视频提示词生成器",
-   "evidence": "AI stickman animation style library & video prompts.｜火柴人动画画风大全：输入话题，生成脚本、动态分镜及配音音效提示词。",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "NanmiCoder/open-image-prompts",
-   "url": "https://github.com/NanmiCoder/open-image-prompts",
-   "description": "Open, local-first visual prompt archive with traceable prompt-image references and installable Agent Skills.",
-   "stars": 305,
-   "topics": [
-    "image-skill",
-    "imagesprompts",
-    "open-image-prompts",
-    "openimages"
-   ],
-   "lang": "Python",
-   "created_at": "2026-07-23",
-   "pushed_at": "2026-10-16",
-   "age_days": 85,
-   "stars_per_day_lifetime": 3.59,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "prompts in:name stars:>300 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 32,
-    "position": 7
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "开放、本地优先的视觉提示词存档，具有可追踪的提示词-图像引用和可安装的 Agent Skills",
-   "evidence": "Open, local-first visual prompt archive with traceable prompt-image references and installable Agent Skills.",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "LycheeAILab/avatar-forge",
-   "url": "https://github.com/LycheeAILab/avatar-forge",
-   "description": "一个将人物图片、参考声音和口播稿转化为完整数字人口播视频的开源 Agent Skill。",
-   "stars": 101,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-08-12",
-   "pushed_at": "2026-10-10",
-   "age_days": 65,
-   "stars_per_day_lifetime": 1.55,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "数字人 in:name,description stars:>100 pushed:>2026-07-18",
-    "sort": "stars",
-    "query_breadth": 32,
-    "position": 31
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "将人物图片、参考声音和口播稿转化为完整数字人口播视频的开源 Agent Skill",
-   "evidence": "一个将人物图片、参考声音和口播稿转化为完整数字人口播视频的开源 Agent Skill。",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "flyteorg/flyte",
-   "url": "https://github.com/flyteorg/flyte",
-   "description": "Type-safe, distributed orchestration of agents, ML pipelines, and real-time inference on your k8s — in pure Python with async/await, also other languages (rust, go and ts)",
-   "stars": 7706,
-   "topics": [
-    "agent-runtime",
-    "agents",
-    "ai-runtime",
-    "kubernetes-cluster",
-    "machine-learning",
-    "mcp",
-    "mlops",
-    "model-serving",
-    "model-training",
-    "python",
-    "reinforcement-learning",
-    "scale"
-   ],
-   "lang": "Go",
-   "created_at": "2019-10-21",
-   "pushed_at": "2026-10-16",
-   "age_days": 2552,
-   "stars_per_day_lifetime": 3.02,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 59
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "在 k8s 上进行代理、ML 流程和实时推理的类型安全、分布式编排，纯 Python 实现",
-   "evidence": "Type-safe, distributed orchestration of agents, ML pipelines, and real-time inference on your k8s — in pure Python with ",
+   "capability": "为 GitLab 提供的 MCP 服务器，支持项目、MR、问题、流水线、维基等功能。",
+   "evidence": "MCP server for GitLab: 100+ tools for projects, MRs, issues, pipelines, wikis and more via the GitLab REST/GraphQL API",
    "transfer_forms": [
     "mcp",
-    "deploy"
-   ],
-   "line_candidates": [
-    "modelpool",
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "coflyn/Mori",
-   "url": "https://github.com/coflyn/Mori",
-   "description": "Client-side downloader app built with Capacitor and Tauri.",
-   "stars": 177,
-   "topics": [
-    "capacitor",
-    "client-side",
-    "downloader",
-    "mori",
-    "scraper",
-    "social-media",
-    "tauri"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-04-10",
-   "pushed_at": "2026-10-15",
-   "age_days": 189,
-   "stars_per_day_lifetime": 0.94,
-   "license": "GPL-3.0",
-   "license_family": "copyleft",
-   "found_by": {
-    "dimension": "category",
-    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
-    "sort": "stars",
-    "query_breadth": 40,
-    "position": 34
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "使用 Capacitor 和 Tauri 构建的客户端下载应用程序",
-   "evidence": "Client-side downloader app built with Capacitor and Tauri.",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "DayuanJiang/next-ai-draw-io",
-   "url": "https://github.com/DayuanJiang/next-ai-draw-io",
-   "description": "Draw and edit draw.io diagrams by chatting with an AI. Web app, desktop app, and an MCP server for Claude Code, Cursor, Codex and VS Code.",
-   "stars": 36267,
-   "topics": [
-    "ai",
-    "architecture-diagram",
-    "claude-code",
-    "diagram-generator",
-    "diagrams",
-    "draw-io",
-    "drawio",
-    "electron",
-    "flowchart",
-    "llm",
-    "mcp",
-    "mcp-server"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2025-03-23",
-   "pushed_at": "2026-10-16",
-   "age_days": 572,
-   "stars_per_day_lifetime": 63.4,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 3
-   },
-   "matched_by_n_queries": 3,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "通过聊天与 AI 交互来绘制和编辑 draw.io 图表，包括 Web 应用、桌面应用和 Claude Code、Cursor、Codex 和 VS Code 的 MCP 服务器",
-   "evidence": "Draw and edit draw.io diagrams by chatting with an AI. Web app, desktop app, and an MCP server for Claude Code, Cursor, ",
-   "transfer_forms": [
-    "mcp",
-    "deploy"
-   ],
-   "line_candidates": [
-    "modelpool",
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "davidsonfellipe/awesome-wpo",
-   "url": "https://github.com/davidsonfellipe/awesome-wpo",
-   "description": "A curated list of Web Performance Optimization.",
-   "stars": 9121,
-   "topics": [
-    "awesome",
-    "awesome-list",
-    "list",
-    "webperf",
-    "webperf-metrics",
-    "webperformance"
-   ],
-   "lang": "",
-   "created_at": "2014-10-14",
-   "pushed_at": "2026-10-16",
-   "age_days": 4385,
-   "stars_per_day_lifetime": 2.08,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 6
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "Web 性能优化的精选列表",
-   "evidence": "A curated list of Web Performance Optimization.",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Masriyan/Claude-Code-CyberSecurity-Skill",
-   "url": "https://github.com/Masriyan/Claude-Code-CyberSecurity-Skill",
-   "description": "22 production-quality Claude Code Skills for cybersecurity professionals , covering offensive security, defensive operations, reverse engineering, threat hunting, threat intelligence, purple team / adversary emulation, CSOC automation, AI/LLM security, mobile, OT/ICS, GRC, software supply chain security, and more.",
-   "stars": 479,
-   "topics": [
-    "claude-skills",
-    "claudecode"
-   ],
-   "lang": "Python",
-   "created_at": "2026-02-27",
-   "pushed_at": "2026-10-16",
-   "age_days": 231,
-   "stars_per_day_lifetime": 2.07,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 16
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为网络安全专业人士提供的 22 个生产质量的 Claude Code Skills，涵盖进攻安全、防御操作、逆向工程、威胁狩猎、威胁情报等",
-   "evidence": "22 production-quality Claude Code Skills for cybersecurity professionals , covering offensive security, defensive operat",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "xjli360/sealeap-amazon-skills",
-   "url": "https://github.com/xjli360/sealeap-amazon-skills",
-   "description": "Reusable Agent Skills for Amazon product research, listings, advertising, inventory, and operations.",
-   "stars": 278,
-   "topics": [
-    "advertising",
-    "agent-skills",
-    "ai-agents",
-    "amazon-ads",
-    "amazon-seller",
-    "codex",
-    "ecommerce",
-    "marketing-automation"
-   ],
-   "lang": "Python",
-   "created_at": "2026-08-21",
-   "pushed_at": "2026-10-16",
-   "age_days": 56,
-   "stars_per_day_lifetime": 4.96,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 19
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为亚马逊产品研究、列表、广告、库存和运营提供可重用代理技能",
-   "evidence": "topics: advertising, agent-skills, ai-agents, amazon-ads, amazon-seller, codex, ecommerce, marketing-automation",
-   "transfer_forms": [
-    "skill"
+    "library"
    ],
    "line_candidates": [
     "modelpool"
@@ -533,220 +213,128 @@
    "distilled": true
   },
   {
-   "repo": "mehdihadeli/awesome-software-architecture",
-   "url": "https://github.com/mehdihadeli/awesome-software-architecture",
-   "description": "📚 A curated list of awesome articles, videos, and other resources to learn and practice software architecture, patterns, and principles.",
-   "stars": 11723,
-   "topics": [
-    "architectural-patterns",
-    "architectural-styles",
-    "architecture",
-    "awesome-list",
-    "clean-architecture",
-    "ddd",
-    "ddd-architecture",
-    "design-pattern",
-    "design-patterns",
-    "design-systems",
-    "event-driven-architecture",
-    "microservice"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2021-02-06",
-   "pushed_at": "2026-10-15",
-   "age_days": 2078,
-   "stars_per_day_lifetime": 5.64,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 31
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供软件架构、模式和原则的学习和实践资源列表",
-   "evidence": "topics: architectural-patterns, architectural-styles, architecture, awesome-list, clean-architecture, ddd, ddd-architect",
-   "transfer_forms": [
-    "architecture"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "brabadu/awesome-fonts",
-   "url": "https://github.com/brabadu/awesome-fonts",
-   "description": "Curated list of fonts and everything",
-   "stars": 2083,
+   "repo": "yaolifeng0629/Awesome-independent-tools",
+   "url": "https://github.com/yaolifeng0629/Awesome-independent-tools",
+   "description": "收录独立开发、AI出海领域最新、最实用的工具与资源（Build Faster with Better Tools）",
+   "stars": 2469,
    "topics": [
     "awesome",
     "awesome-list",
-    "fonts",
-    "free-fonts",
-    "google-fonts",
-    "icon-font",
-    "list",
-    "programming-fonts"
+    "awesome-resources",
+    "dev",
+    "developer",
+    "developer-tools",
+    "development",
+    "independent",
+    "indiehacker",
+    "indiehackers",
+    "tools"
    ],
    "lang": "",
-   "created_at": "2015-01-10",
-   "pushed_at": "2026-10-15",
-   "age_days": 4297,
-   "stars_per_day_lifetime": 0.48,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 36
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供字体和相关信息列表",
-   "evidence": "topics: awesome, awesome-list, fonts, free-fonts, google-fonts, icon-font, list, programming-fonts",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "vonzosten/awesome-LangGraph",
-   "url": "https://github.com/vonzosten/awesome-LangGraph",
-   "description": "An index of the LangChain + LangGraph ecosystem: concepts, projects, tools, templates, and guides for LLM & multi-agent apps.",
-   "stars": 2025,
-   "topics": [
-    "ai",
-    "awesome",
-    "awesome-list",
-    "langchain",
-    "langgraph",
-    "llm",
-    "llm-agents"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2024-11-02",
-   "pushed_at": "2026-10-15",
-   "age_days": 713,
-   "stars_per_day_lifetime": 2.84,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-16",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 44
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "LangChain + LangGraph 生态系统索引，包括概念、项目、工具、模板和指南",
-   "evidence": "topics: ai, awesome, awesome-list, langchain, langgraph, llm, llm-agents",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "knoxgraeme/skillfish",
-   "url": "https://github.com/knoxgraeme/skillfish",
-   "description": "The skill manager for AI coding agents. Install, update, and sync skills across Claude Code, Cursor, Copilot + more.",
-   "stars": 324,
-   "topics": [],
-   "lang": "TypeScript",
-   "created_at": "2026-01-21",
-   "pushed_at": "2026-10-15",
-   "age_days": 268,
-   "stars_per_day_lifetime": 1.21,
+   "created_at": "2024-09-10",
+   "pushed_at": "2026-10-16",
+   "age_days": 767,
+   "stars_per_day_lifetime": 3.22,
    "license": "AGPL-3.0",
    "license_family": "copyleft",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-16",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-17",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 51
+    "position": 39
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "AI 编码代理的技能管理器，用于安装、更新和同步技能",
-   "evidence": "topics: -",
+   "capability": "收录独立开发、AI 出海领域的工具与资源列表。",
+   "evidence": "收录独立开发、AI 出海领域最新、最实用的工具与资源（Build Faster with Better Tools）",
    "transfer_forms": [
-    "skill"
+    "dataset",
+    "library"
    ],
    "line_candidates": [
-    "modelpool"
+    "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "referodesign/refero_skill",
-   "url": "https://github.com/referodesign/refero_skill",
-   "description": "Research-first design skill for AI agents. 150K+ real app screens and flows via Refero MCP.",
-   "stars": 311,
+   "repo": "BeamusWayne/simp-skill",
+   "url": "https://github.com/BeamusWayne/simp-skill",
+   "description": "不教 PUA，只教真心。Win your crush before it's too late. Inspired by colleague-skill（同事skill）",
+   "stars": 324,
    "topics": [
-    "agent",
-    "agent-skills",
+    "anthropic",
+    "chinese",
     "claude",
-    "claude-code-plugin",
-    "codex-plugin",
-    "cursor",
-    "cursor-plugin",
-    "design",
-    "figma",
-    "gemini-cli-extension",
-    "mcp",
-    "refero"
+    "claude-code",
+    "claude-skills",
+    "dating",
+    "llm"
    ],
    "lang": "Python",
-   "created_at": "2026-02-05",
-   "pushed_at": "2026-10-15",
-   "age_days": 253,
-   "stars_per_day_lifetime": 1.23,
+   "created_at": "2026-04-05",
+   "pushed_at": "2026-10-16",
+   "age_days": 195,
+   "stars_per_day_lifetime": 1.66,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-16",
+    "query": "skill in:name stars:>200 pushed:>2026-09-17",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 93
+    "position": 60
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为 AI 代理提供以研究为基础的设计技能，包含 150K+ 真实应用屏幕和流程",
-   "evidence": "topics: agent, agent-skills, claude, claude-code-plugin, codex-plugin, cursor, cursor-plugin, design, figma, gemini-cli-",
+   "capability": "基于 Claude 的恋爱技能，帮助用户赢得心仪对象。",
+   "evidence": "不教 PUA，只教真心。Win your crush before it's too late. Inspired by colleague-skill（同事skill）",
    "transfer_forms": [
     "skill"
    ],
    "line_candidates": [
-    "modelpool"
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "FANzR-arch/Numerologist_skills",
+   "url": "https://github.com/FANzR-arch/Numerologist_skills",
+   "description": "🔮 An engineering framework to stop LLM hallucinations in Chinese astrology. / 给“赛博半仙”戴上紧箍咒：减少幻觉、固定排盘步骤的奇门遁甲与紫微斗数 AI skills。",
+   "stars": 1444,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-03-25",
+   "pushed_at": "2026-10-16",
+   "age_days": 206,
+   "stars_per_day_lifetime": 7.01,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-17",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 78
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "用于减少中国占星术中 LLM 幻觉的工程框架。",
+   "evidence": "An engineering framework to stop LLM hallucinations in Chinese astrology. / 给“赛博半仙”戴上紧箍咒：减少幻觉、固定排盘步骤的奇门遁甲与紫微斗数 AI skills",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
    ],
    "distilled": true
   }

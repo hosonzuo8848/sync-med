@@ -41799,6 +41799,50 @@
    }
   },
   {
+   "repo": "textbee/textbee",
+   "url": "https://github.com/textbee/textbee",
+   "first_seen": "2026-10-17",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-17",
+   "stars": 3179,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-16",
+   "created_at": "2022-03-18",
+   "stars_per_day_lifetime": 1.9,
+   "capability": "开源 SMS 网关，将 Android 手机转换为 SMS API，支持发送和接收 SMS。",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "android",
+    "android-sms",
+    "android-sms-gateway",
+    "android-sms-sender",
+    "api",
+    "foss",
+    "gateway",
+    "mcp-server",
+    "open-source",
+    "self-hosted",
+    "send-sms",
+    "sim"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp-server stars:>1000 pushed:>2026-09-17",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 91
+   }
+  },
+  {
    "repo": "FireRedTeam/FireRed-OpenStoryline",
    "url": "https://github.com/FireRedTeam/FireRed-OpenStoryline",
    "first_seen": "2026-07-31",
@@ -49086,6 +49130,48 @@
    }
   },
   {
+   "repo": "yaolifeng0629/Awesome-independent-tools",
+   "url": "https://github.com/yaolifeng0629/Awesome-independent-tools",
+   "first_seen": "2026-10-17",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-17",
+   "stars": 2469,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "pushed_at": "2026-10-16",
+   "created_at": "2024-09-10",
+   "stars_per_day_lifetime": 3.22,
+   "capability": "收录独立开发、AI 出海领域的工具与资源列表。",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "awesome-resources",
+    "dev",
+    "developer",
+    "developer-tools",
+    "development",
+    "independent",
+    "indiehacker",
+    "indiehackers",
+    "tools"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-17",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 39
+   }
+  },
+  {
    "repo": "bherbruck/solidcraft",
    "url": "https://github.com/bherbruck/solidcraft",
    "first_seen": "2026-10-15",
@@ -55603,6 +55689,48 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 94
+   }
+  },
+  {
+   "repo": "zereight/gitlab-mcp",
+   "url": "https://github.com/zereight/gitlab-mcp",
+   "first_seen": "2026-10-17",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-17",
+   "stars": 2047,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-17",
+   "created_at": "2025-02-11",
+   "stars_per_day_lifetime": 3.34,
+   "capability": "为 GitLab 提供的 MCP 服务器，支持项目、MR、问题、流水线、维基等功能。",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai",
+    "claude",
+    "cursor",
+    "devtools",
+    "gitlab",
+    "gitlab-api",
+    "llm",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-17",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 20
    }
   },
   {
@@ -62369,6 +62497,35 @@
     "sort": "updated",
     "query_breadth": 79,
     "position": 68
+   }
+  },
+  {
+   "repo": "FANzR-arch/Numerologist_skills",
+   "url": "https://github.com/FANzR-arch/Numerologist_skills",
+   "first_seen": "2026-10-17",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-17",
+   "stars": 1444,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Python",
+   "pushed_at": "2026-10-16",
+   "created_at": "2026-03-25",
+   "stars_per_day_lifetime": 7.01,
+   "capability": "用于减少中国占星术中 LLM 幻觉的工程框架。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-17",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 78
    }
   },
   {
@@ -84898,6 +85055,44 @@
    }
   },
   {
+   "repo": "BeamusWayne/simp-skill",
+   "url": "https://github.com/BeamusWayne/simp-skill",
+   "first_seen": "2026-10-17",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-17",
+   "stars": 324,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-16",
+   "created_at": "2026-04-05",
+   "stars_per_day_lifetime": 1.66,
+   "capability": "基于 Claude 的恋爱技能，帮助用户赢得心仪对象。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "anthropic",
+    "chinese",
+    "claude",
+    "claude-code",
+    "claude-skills",
+    "dating",
+    "llm"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-17",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 60
+   }
+  },
+  {
    "repo": "knoxgraeme/skillfish",
    "url": "https://github.com/knoxgraeme/skillfish",
    "first_seen": "2026-10-16",
@@ -90411,6 +90606,35 @@
    }
   },
   {
+   "repo": "xgwangdl/AI-Interview",
+   "url": "https://github.com/xgwangdl/AI-Interview",
+   "first_seen": "2026-10-17",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-17",
+   "stars": 234,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Java",
+   "pushed_at": "2026-10-17",
+   "created_at": "2025-02-18",
+   "stars_per_day_lifetime": 0.39,
+   "capability": "开源 AI 模拟面试系统，包含真人数字人面试官、Docker 判题笔试和 AI 简历优化。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "数字人 in:name,description stars:>100 pushed:>2026-07-19",
+    "sort": "stars",
+    "query_breadth": 33,
+    "position": 22
+   }
+  },
+  {
    "repo": "yunyuyuan/nuxt3-blog",
    "url": "https://github.com/yunyuyuan/nuxt3-blog",
    "first_seen": "2026-08-02",
@@ -90539,6 +90763,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 15
+   }
+  },
+  {
+   "repo": "originaleric/dig-ui-skill",
+   "url": "https://github.com/originaleric/dig-ui-skill",
+   "first_seen": "2026-10-17",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-17",
+   "stars": 232,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-10-17",
+   "created_at": "2026-05-30",
+   "stars_per_day_lifetime": 1.66,
+   "capability": "提供 Codex、Cursor 和 Claude Code 的 UI 设计系统，支持个人 UI 定制。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-17",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
    }
   },
   {
@@ -104209,7 +104462,7 @@
    }
   }
  ],
- "updated": "2026-10-16",
+ "updated": "2026-10-17",
  "status_enum": [
   "pending",
   "debated",
