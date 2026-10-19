@@ -1,0 +1,170 @@
+{
+ "extra": {
+  "traffic": {
+   "err": null,
+   "funnel": {
+    "content": 28579,
+    "logged_in": 0,
+    "nonbot": 61852,
+    "raw": 423433
+   },
+   "pages": [
+    {
+     "by_country": "CN:65, US:35, TW:13, SG:11, VN:9, BR:7",
+     "ips": 140,
+     "name": "阅读器",
+     "path": "/reader%"
+    },
+    {
+     "by_country": "US:13, DE:5, HK:2, GB:2, CN:2, CA:2",
+     "ips": 26,
+     "name": "星图",
+     "path": "/starmap%"
+    },
+    {
+     "by_country": "US:16, DE:8, CN:4, SG:3, GB:2, CA:2",
+     "ips": 35,
+     "name": "寻脉",
+     "path": "/xunmai%"
+    },
+    {
+     "by_country": "US:3, CN:2",
+     "ips": 5,
+     "name": "本草",
+     "path": "/bencao%"
+    },
+    {
+     "by_country": "CN:1254, DE:128, SE:111, FI:73, US:71, BR:67",
+     "ips": 1704,
+     "name": "方剂",
+     "path": "/fangji%"
+    },
+    {
+     "by_country": "CN:10, US:8, BR:2, AR:2, RS:1, MX:1",
+     "ips": 24,
+     "name": "全文",
+     "path": "/text%"
+    }
+   ],
+   "window": "2026-09-20"
+  }
+ },
+ "generated_at": "2026-10-20T04:01:26.455614+08:00",
+ "key": "2026-10-20",
+ "metrics": {
+  "cand_pending": {
+   "err": null,
+   "value": 5777
+  },
+  "daodu_total": {
+   "err": null,
+   "value": 1953
+  },
+  "formulas_books": {
+   "err": null,
+   "value": 1210
+  },
+  "formulas_names": {
+   "err": null,
+   "value": 44563
+  },
+  "formulas_total": {
+   "err": null,
+   "value": 98174
+  },
+  "graph_edges": {
+   "err": null,
+   "value": 161583
+  },
+  "graph_edges_tier1": {
+   "err": null,
+   "value": 1056
+  },
+  "graph_nodes": {
+   "err": null,
+   "value": 53453
+  },
+  "gufang_lib": {
+   "err": null,
+   "value": 0
+  },
+  "guji_visible": {
+   "err": null,
+   "value": 6925
+  },
+  "med_visible": {
+   "err": null,
+   "value": 46849
+  },
+  "pub_drift_ai_ok": {
+   "err": null,
+   "value": 0
+  },
+  "pub_drift_rows": {
+   "err": null,
+   "value": 0
+  },
+  "pub_v1_rows": {
+   "err": null,
+   "value": 86883
+  },
+  "pub_v2_gate": {
+   "err": null,
+   "value": 13431
+  },
+  "wiki_pages_facts": {
+   "err": null,
+   "value": 28319
+  },
+  "wiki_pages_published": {
+   "err": null,
+   "value": 14653
+  }
+ },
+ "period": "daily",
+ "range": [
+  "2026-10-20",
+  "2026-10-20"
+ ],
+ "run_id": "39315764005",
+ "tables": {
+  "daodu_by_ver": {
+   "err": null,
+   "rows": [
+    {
+     "k": "daodu-v3-ragground",
+     "n": 898
+    },
+    {
+     "k": "daodu-v3-corpus-batch",
+     "n": 893
+    },
+    {
+     "k": "daodu-multi-v1",
+     "n": 162
+    }
+   ]
+  },
+  "med_by_collection": {
+   "err": null,
+   "rows": [
+    {
+     "k": "overseas_guji",
+     "n": 25667
+    },
+    {
+     "k": "overseas",
+     "n": 20896
+    },
+    {
+     "k": "fojing",
+     "n": 273
+    },
+    {
+     "k": "nonmed_junk",
+     "n": 13
+    }
+   ]
+  }
+ }
+}
