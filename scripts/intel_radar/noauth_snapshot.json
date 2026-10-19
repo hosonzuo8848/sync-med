@@ -26,7 +26,7 @@
  "devin-cli-agentic": {
   "hasFree": true,
   "noAuth": true,
-  "note": "No API key required — public OpenCode endpoint with Kimi, GLM, Qwen, MiMo, MiniMax models. Free tier only works from within OpenCode.",
+  "note": "Free — anonymous access to multiple AI models via DuckDuckGo.",
   "website": "https://docs.devin.ai/work-with-devin/devin-cli"
  },
  "duckduckgo-web": {
@@ -34,12 +34,6 @@
   "noAuth": true,
   "note": "Free — anonymous access to multiple AI models via DuckDuckGo.",
   "website": "https://duckduckgo.com/duckchat"
- },
- "opencode": {
-  "hasFree": true,
-  "noAuth": true,
-  "note": "No API key required — public OpenCode endpoint with Kimi, GLM, Qwen, MiMo, MiniMax models. Free tier only works from within OpenCode.",
-  "website": "https://opencode.ai"
  },
  "uncloseai": {
   "hasFree": true,
