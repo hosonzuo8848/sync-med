@@ -5,6 +5,9 @@ on:
       roster_file:
         description: 'roster json path in repo (ascii-escaped)'
         default: 'scripts/fuji_roster.json'
+      gap_csv:
+        description: 'CSV 直通模式:book_id,fileId,book_title,source_root,library,req_no (留空=走 roster)'
+        default: ''
       source_root:
         description: 'source_root for new records'
         default: 'fujikawa'
@@ -14,6 +17,12 @@ on:
       limit:
         description: 'max books to enroll, 0 = all'
         default: '0'
+      conc:
+        description: '123 list 并发数(上传线占用余量下别超过 12)'
+        default: '8'
+      min_pages:
+        description: '页数低于此值视为未传完/残件,不入档(与 pan_audit FIX 同门槛)'
+        default: '4'
 concurrency:
   group: pan-enroll
   cancel-in-progress: false
@@ -34,9 +43,12 @@ jobs:
           PAN_SEC: ${{ secrets.PAN_SEC }}
           ASSET_SYNC_TOKEN: ${{ secrets.ASSET_SYNC_TOKEN }}
           ROSTER_FILE: ${{ inputs.roster_file }}
+          GAP_CSV: ${{ inputs.gap_csv }}
           SOURCE_ROOT: ${{ inputs.source_root }}
           FOLDER_PREFIX: ${{ inputs.prefix }}
           LIMIT: ${{ inputs.limit }}
+          CONC: ${{ inputs.conc }}
+          MIN_PAGES: ${{ inputs.min_pages }}
         run: python scripts/pan_enroll.py
       - uses: actions/upload-artifact@v4
         if: always()
