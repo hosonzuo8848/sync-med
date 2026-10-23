@@ -1127,5 +1127,100 @@
       "age_days": 89.51,
       "reason": "\u6700\u65b0\u5165\u5e93\u8ddd\u4eca 89.5 \u5929,\u8d85\u8fc7 7 \u5929\u9608\u503c,\u7591\u4f3c\u5165\u5e93\u7ba1\u7ebf\u505c\u6446"
     }
+  },
+  {
+    "checked_at_bj": "2026-10-23 21:35:16",
+    "alert_count": 2,
+    "alerts": [
+      "cover",
+      "page:overseas"
+    ],
+    "cover": {
+      "name": "cover_real_ratio",
+      "ok": false,
+      "alert": true,
+      "reason": "D1\u62bd\u6837\u5931\u8d25: HTTPSConnectionPool(host='api.cloudflare.com', port=443): Read timed out. (read timeout=30)"
+    },
+    "pages": {
+      "name": "page_availability",
+      "targets": {
+        "home": {
+          "label": "\u9996\u9875 /",
+          "url": "https://gufangai.com/",
+          "status_list": [
+            200,
+            200,
+            200
+          ],
+          "median_ms": 771,
+          "item_count": null,
+          "alert": false
+        },
+        "overseas": {
+          "label": "\u6d77\u5916\u533b\u4e66\u5217\u8868 /api/library/overseas?agg=1",
+          "url": "https://gufangai.com/api/library/overseas?agg=1",
+          "status_list": [
+            null,
+            null,
+            null
+          ],
+          "median_ms": null,
+          "item_count": 0,
+          "alert": true
+        },
+        "overseas_guji": {
+          "label": "\u6d77\u5916\u53e4\u7c4d\u5217\u8868 /api/library/overseas-guji?agg=1",
+          "url": "https://gufangai.com/api/library/overseas-guji?agg=1",
+          "status_list": [
+            200,
+            200,
+            200
+          ],
+          "median_ms": 427,
+          "item_count": 35,
+          "alert": false
+        },
+        "daodu_list": {
+          "label": "AI\u5bfc\u8bfb\u5217\u8868 /api/daodu/list?limit=20",
+          "url": "https://gufangai.com/api/daodu/list?limit=20",
+          "status_list": [
+            200,
+            200,
+            200
+          ],
+          "median_ms": 1033,
+          "item_count": 24,
+          "alert": false
+        }
+      },
+      "alert": true
+    },
+    "ai_search": {
+      "name": "ai_search",
+      "url": "https://gufangai.com/api/ai/search",
+      "status": 200,
+      "elapsed_ms": 14076,
+      "alert": false,
+      "evidence_count": 8,
+      "formula_count": 5,
+      "ok_field": true
+    },
+    "graph": {
+      "name": "graph",
+      "url": "https://gufangai.com/api/ai/graph",
+      "elapsed_ms": 1672,
+      "alert": false,
+      "nodes": 2092,
+      "links": 3200,
+      "prev_nodes": 2092,
+      "prev_links": 3200
+    },
+    "freshness": {
+      "name": "d1_freshness",
+      "alert": false,
+      "raw_value": "2026-10-23 13:37:03",
+      "latest_created_at": "2026-10-23T13:37:03+00:00",
+      "age_days": 0.0
+    }
   }
 ]
