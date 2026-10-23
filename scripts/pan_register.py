@@ -1,8 +1,8 @@
 # scan 123 page-image folders and register dir ids into D1 via the narrow sync endpoint.
 # MODE=scan     -> enumerate folders under /<root>/GufangP/yaofang, dump CSV, peek one sample folder
 # MODE=register -> same enumeration, then POST each (book_id, fileId) to SYNC_URL (idempotent)
-import os, sys, csv, time
-from concurrent.futures import ThreadPoolExecutor
+import os, sys, csv, time, threading
+from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 import requests
 
 PAN = os.environ.get("PAN_BASE", "https://open-api.123pan.com")
@@ -10,9 +10,10 @@ PCID = os.environ["PAN_CID"]; PSEC = os.environ["PAN_SEC"]
 SYNC_URL = os.environ.get("SYNC_URL", "https://gufangai.com/api/admin/asset/pan-sync")
 MODE = os.environ.get("MODE", "scan")
 LIMIT = int(os.environ.get("LIMIT", "0") or 0)
-# 注册写入 D1 的并发。2026-10-23 创始人:官方账号 20 线程,把 6 提到 12(可用 CONC 覆盖)。
-# 注意:这只影响「扫描完之后往 pan-sync 写」这一段,**不影响 123 扫描速度**——
-#   扫描走 iter_children,受 123 file/list 3 QPS 硬限流,是串行的,那才是耗时主因。
+# 并发两处,2026-10-23 创始人澄清:买的 123 API 是 20 线程配额,上传线占几个,剩下的给扫描读。
+#   SCAN_CONC:扫描 123 的并发(默认 12)。原来是全串行,一页一页翻 file/list,654 万文件要 6 小时。
+#   CONC     :扫描完之后往 D1 pan-sync 写入的并发(默认 12,原 6)。
+SCAN_CONC = int(os.environ.get("SCAN_CONC", "12") or 12)
 CONC = int(os.environ.get("CONC", "12") or 12)
 # path segments from drive root; first segment is CJK, kept escaped (public repo opsec)
 PATHS = ([p.split(",") for p in os.environ["PAN_PATH"].split(";") if p.strip()]
@@ -28,30 +29,51 @@ from book_id import to_book_id                       # noqa: E402
 
 S = requests.Session()
 _tok = {"v": None}
+# 2026-10-23 扫描并发化:12 个线程同时读 123,共享的 Session/token 必须线程安全。
+#   ① Session 不保证跨线程安全 → 每线程一个(线程池会复用线程,所以仍是长连接复用)
+#   ② token 冷启动时 12 个线程会同时发现为空 → 加锁 + 双检,只取一次
+_tlock = threading.Lock()
+_local = threading.local()
+
+
+def _sess():
+    s = getattr(_local, "s", None)
+    if s is None:
+        s = requests.Session()
+        _local.s = s
+    return s
 
 
 def token():
-    if _tok["v"]:
-        return _tok["v"]
-    r = S.post(PAN + "/api/v1/access_token", headers={"Platform": "open_platform"},
-               json={"clientID": PCID, "clientSecret": PSEC}, timeout=30)
-    _tok["v"] = (r.json().get("data") or {}).get("accessToken")
-    if not _tok["v"]:
-        sys.exit("access_token failed: " + r.text[:200])
-    return _tok["v"]
+    v = _tok["v"]
+    if v:
+        return v
+    with _tlock:
+        if _tok["v"]:                     # 双检:并发冷启动只打一次 access_token
+            return _tok["v"]
+        r = _sess().post(PAN + "/api/v1/access_token", headers={"Platform": "open_platform"},
+                         json={"clientID": PCID, "clientSecret": PSEC}, timeout=30)
+        v = (r.json().get("data") or {}).get("accessToken")
+        if not v:
+            # 注意:子线程里 sys.exit() 只结束那个线程、不会让整个任务失败 —— 必须抛异常,
+            #   由主线程 f.result() 接住后整任务红掉,否则会静默扫出一份空清单。
+            raise RuntimeError("access_token failed: " + r.text[:200])
+        _tok["v"] = v
+        return v
 
 
 def pan(method, path, body=None):
     for att in range(8):
         h = {"Authorization": "Bearer " + token(), "Platform": "open_platform"}
         try:
-            r = S.request(method, PAN + path, headers=h, json=body, timeout=60)
+            r = _sess().request(method, PAN + path, headers=h, json=body, timeout=60)
             j = r.json()
             if j.get("code") == 0:
                 return j
             msg = str(j.get("message", ""))
             if r.status_code == 401 or "token" in msg.lower():
-                _tok["v"] = None
+                with _tlock:
+                    _tok["v"] = None
         except Exception:
             pass
         time.sleep(min(60, 2 * (2 ** att)))
@@ -127,45 +149,70 @@ def main():
         m = _re.search(r"(\d+)\s*$", str(name))
         return int(m.group(1)) if m else None
 
-    def _bump():
-        if len(folders) % 2000 == 0:
-            print("..%d folders" % len(folders), flush=True)
-
-    def walk(fid, depth, trail, agg=None):
-        # agg = work-level reqno (e.g. 'zi300-0074') when inside a book-aggregate folder;
-        #       then this level's children are VOLUME folders.
-        nonlocal files_seen
+    # ── 并发 BFS(2026-10-23)──────────────────────────────────────────────
+    # 语义与原来的递归 walk 逐步对齐,只把「一个目录一个目录排队列」换成「12 个目录同时在飞」:
+    #   · process_dir 是纯函数:读一个目录 → 返回 (挂上的, 认不出的, 待继续的子目录, 散文件数)。
+    #     它不碰任何共享状态。
+    #   · folders / unrecognized / files_seen 只由主线程改写 → 不需要锁。
+    def process_dir(item):
+        fid, depth, trail, agg = item
         subdirs = []
+        nfiles = 0
         for it in iter_children(fid):
             if it.get("type") == 1:
                 subdirs.append((it.get("filename"), it.get("fileId")))
             else:
-                files_seen += 1
+                nfiles += 1
+        found, unrec, nxt = [], [], []
         for name, cid in subdirs:
             rid = to_book_id(name)
             if agg is not None:
                 # inside aggregate -> volume folder
                 if (known is not None and rid in known) or FULL_ID.match(rid):
-                    folders.append((rid, cid)); _bump()          # volume named with full id
+                    found.append((rid, cid))                          # volume named with full id
                     continue
                 v = trailing_vol(name)
                 if v is not None:
-                    folders.append(("%s-%02d" % (agg, v), cid)); _bump()   # title+volnum -> agg-05
+                    found.append(("%s-%02d" % (agg, v), cid))         # title+volnum -> agg-05
                 else:
-                    unrecognized.append(("%s/%s" % (trail, name), cid))
+                    unrec.append(("%s/%s" % (trail, name), cid))
                 continue
             # not inside aggregate. ORDER MATTERS: known full-id first, then two-seg reqno as
             # aggregate (WORK before FULL so 'zi300-0074' descends instead of matching FULL's wide arm).
             if known is not None and rid in known:
-                folders.append((rid, cid)); _bump()              # known full id (old flat layout)
+                found.append((rid, cid))                              # known full id (old flat layout)
             elif WORK_ID.match(rid):
-                walk(cid, depth + 1, "%s/%s" % (trail, name), agg=rid)     # book-aggregate -> volumes
+                nxt.append((cid, depth + 1, "%s/%s" % (trail, name), rid))    # book-aggregate -> volumes
             elif FULL_ID.match(rid):
-                folders.append((rid, cid)); _bump()              # full id, scan mode (known=None)
+                found.append((rid, cid))                              # full id, scan mode (known=None)
             elif depth < 6:
-                walk(cid, depth + 1, "%s/%s" % (trail, name))    # category layer
+                nxt.append((cid, depth + 1, "%s/%s" % (trail, name), None))   # category layer
             else:
-                unrecognized.append(("%s/%s" % (trail, name), cid))
+                unrec.append(("%s/%s" % (trail, name), cid))
+        return found, unrec, nxt, nfiles
+
+    def scan_tree(root_fid):
+        """并发扫一棵树。返回散文件数;挂上的/认不出的由主线程 extend 进外层列表。"""
+        nfiles = 0
+        last_bump = len(folders)
+        ex = ThreadPoolExecutor(max_workers=SCAN_CONC)
+        try:
+            futures = {ex.submit(process_dir, (root_fid, 0, "~", None))}
+            while futures:
+                done, futures = wait(futures, return_when=FIRST_COMPLETED)
+                for f in done:
+                    fo, un, nx, nf = f.result()     # worker 抛错(token 失败等)在这里冒出来 → 整任务失败
+                    folders.extend(fo)
+                    unrecognized.extend(un)
+                    nfiles += nf
+                    for it in nx:
+                        futures.add(ex.submit(process_dir, it))
+                    if len(folders) - last_bump >= 2000:
+                        print("..%d folders" % len(folders), flush=True)
+                        last_bump = len(folders)
+        finally:
+            ex.shutdown(wait=True)
+        return nfiles
 
     for segs in PATHS:
         cur = 0
@@ -184,7 +231,7 @@ def main():
             continue
         print(f"path ok ({len(segs)} segs) -> {cur}", flush=True)
         n0 = len(folders)
-        walk(cur, 0, "~")
+        files_seen += scan_tree(cur)
         print(f"  subtotal this path: {len(folders) - n0}", flush=True)
     print(f"SCAN total folders={len(folders)} loose_files={files_seen} unrecognized={len(unrecognized)}", flush=True)
     os.makedirs("out", exist_ok=True)

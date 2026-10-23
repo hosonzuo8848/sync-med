@@ -11,6 +11,12 @@ on:
       path:
         description: 'comma-separated 123 folder path from root (empty = default yaofang)'
         default: ''
+      scan_conc:
+        description: '123 read concurrency (account quota 20 lines; uploads hold a few, so 12)'
+        default: '12'
+      reg_conc:
+        description: 'D1 write concurrency'
+        default: '12'
   schedule:
     - cron: '0 3 * * *'   # 2026-07-17 改每天1次(原每2h,但单次实测耗3-5小时,比触发间隔还长,导致排队积压)
 concurrency:
@@ -35,6 +41,10 @@ jobs:
           MODE: ${{ inputs.mode || 'auto' }}
           LIMIT: ${{ inputs.limit || '0' }}
           PAN_PATH: ${{ inputs.path || '' }}
+          # 并发参数放在 GitHub 配置里,调它不用改代码。
+          # 123 账户配额 20 线程,上传线长期占几条 → 读盘走 12。
+          SCAN_CONC: ${{ inputs.scan_conc || '12' }}
+          CONC: ${{ inputs.reg_conc || '12' }}
         run: python scripts/pan_register.py
       - uses: actions/upload-artifact@v4
         if: always()
