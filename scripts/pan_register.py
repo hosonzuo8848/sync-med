@@ -10,6 +10,10 @@ PCID = os.environ["PAN_CID"]; PSEC = os.environ["PAN_SEC"]
 SYNC_URL = os.environ.get("SYNC_URL", "https://gufangai.com/api/admin/asset/pan-sync")
 MODE = os.environ.get("MODE", "scan")
 LIMIT = int(os.environ.get("LIMIT", "0") or 0)
+# 注册写入 D1 的并发。2026-10-23 创始人:官方账号 20 线程,把 6 提到 12(可用 CONC 覆盖)。
+# 注意:这只影响「扫描完之后往 pan-sync 写」这一段,**不影响 123 扫描速度**——
+#   扫描走 iter_children,受 123 file/list 3 QPS 硬限流,是串行的,那才是耗时主因。
+CONC = int(os.environ.get("CONC", "12") or 12)
 # path segments from drive root; first segment is CJK, kept escaped (public repo opsec)
 PATHS = ([p.split(",") for p in os.environ["PAN_PATH"].split(";") if p.strip()]
          if os.environ.get("PAN_PATH") else None)  # None -> auto-discover under GufangP
@@ -267,7 +271,7 @@ def main():
         return bid, fid, "err"
 
     done = 0
-    with ThreadPoolExecutor(max_workers=6) as ex:
+    with ThreadPoolExecutor(max_workers=CONC) as ex:
         for res in ex.map(reg, todo):
             results.append(res)
             st = res[2]
