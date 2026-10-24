@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-10-23",
+ "generated": "2026-10-24",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -41,127 +41,149 @@
  },
  "distill": {
   "seat": "zhipu",
-  "calls": 8,
-  "ok": 3
+  "calls": 6,
+  "ok": 2
  },
- "count": 23,
+ "count": 18,
  "candidates": [
   {
-   "repo": "Hommy-master/capcut-mate",
-   "url": "https://github.com/Hommy-master/capcut-mate",
-   "description": "开源剪映小助手｜剪映API | 扣子插件 | Open-source CapCut automation toolkit to generate & download draft files.  | skills",
-   "stars": 2005,
+   "repo": "instructa/ai-prompts",
+   "url": "https://github.com/instructa/ai-prompts",
+   "description": "Curated AI Prompts for Cursor Rules, Cline, Windsurf and Github Copilot",
+   "stars": 1102,
    "topics": [
-    "capcut",
-    "capcut-mate",
-    "coze",
-    "jianying",
-    "opensource",
-    "skills",
-    "video-automation"
+    "agent",
+    "ai-agent",
+    "ai-prompts",
+    "cline",
+    "copilot",
+    "cursor",
+    "cursor-ai",
+    "github-copilot",
+    "prompting",
+    "prompts",
+    "windsurf"
    ],
-   "lang": "Python",
-   "created_at": "2025-08-31",
-   "pushed_at": "2026-10-20",
-   "age_days": 418,
-   "stars_per_day_lifetime": 4.8,
-   "license": "Apache-2.0",
+   "lang": "JavaScript",
+   "created_at": "2025-02-12",
+   "pushed_at": "2026-10-17",
+   "age_days": 619,
+   "stars_per_day_lifetime": 1.78,
+   "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "topic:video-automation stars:>2000 pushed:>2026-07-25",
-    "sort": "stars",
-    "query_breadth": 4,
-    "position": 3
+    "query": "prompts in:name stars:>300 pushed:>2026-09-24",
+    "sort": "updated",
+    "query_breadth": 33,
+    "position": 16
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "自动化生成和下载剪映视频草稿文件的工具",
-   "evidence": "Open-source CapCut automation toolkit to generate & download draft files.",
+   "capability": "提供Cursor、Cline、Windsurf和GitHub Copilot的AI提示词库",
+   "evidence": "Curated AI Prompts for Cursor Rules, Cline, Windsurf and Github Copilot",
    "transfer_forms": [
-    "unknown"
+    "dataset"
    ],
    "line_candidates": [
-    "video"
+    "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "mizaawa/ZakoProxyCLI",
-   "url": "https://github.com/mizaawa/ZakoProxyCLI",
-   "description": "基于Rust编写的中转API破甲项目，支持Responses / Chat Completions / Anthropic Messages API，支持ChatGPT/Claude/Grok/Gemini/Deepseek/Glm/Kimi等大多数主流模型",
-   "stars": 107,
-   "topics": [],
-   "lang": "Rust",
-   "created_at": "2026-10-15",
-   "pushed_at": "2026-10-22",
-   "age_days": 8,
-   "stars_per_day_lifetime": 13.38,
+   "repo": "jaikydota/BullFlow",
+   "url": "https://github.com/jaikydota/BullFlow",
+   "description": "推量牛 BullFlow — 开源企业级 RAG 解决方案：从企业知识库、营销内容自动化生产到全域内容分发 | Open-source enterprise RAG solution: knowledge base → automated marketing content → omnichannel publishing. 知识库全链路本地开源模型，无需付费模型；AI Agent 创作图文 / 图片 / 视频，一键发布抖音、小红书、公众号、LinkedIn、YouTube 等 17 个平台。Commercial-grade, multi-tenant, billing & admin built in. MIT",
+   "stars": 110,
+   "topics": [
+    "ai-agents",
+    "bge-m3",
+    "content-generation",
+    "elasticsearch",
+    "knowledge-base",
+    "langgraph",
+    "milvus",
+    "multi-tenant",
+    "rag",
+    "social-media-marketing"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-10-14",
+   "pushed_at": "2026-10-14",
+   "age_days": 10,
+   "stars_per_day_lifetime": 11.0,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "chinese",
-    "query": "API 中转 in:name,description stars:>100 pushed:>2026-07-25",
+    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-07-26",
     "sort": "stars",
-    "query_breadth": 21,
-    "position": 19
+    "query_breadth": 27,
+    "position": 26
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "支持多种模型的API中转服务",
-   "evidence": "Supports Responses / Chat Completions / Anthropic Messages API, supports ChatGPT/Claude/Grok/Gemini/Deepseek/Glm/Kimi等大多",
+   "capability": "开源企业级RAG解决方案，从知识库到内容分发",
+   "evidence": "Open-source enterprise RAG solution: knowledge base → automated marketing content → omnichannel publishing.",
    "transfer_forms": [
-    "unknown"
+    "mcp",
+    "deploy",
+    "library"
    ],
    "line_candidates": [
-    "unknown"
+    "rag"
    ],
    "distilled": true
   },
   {
-   "repo": "ginlix-ai/LangAlpha",
-   "url": "https://github.com/ginlix-ai/LangAlpha",
-   "description": "Claude Code for Financial Market",
-   "stars": 2040,
+   "repo": "ShenSeanChen/waku-agent",
+   "url": "https://github.com/ShenSeanChen/waku-agent",
+   "description": "Waku Waku! Waku Agent is a local-first AI agent harness you actually own, including loop, memory, eval, all in code built to stay legible as it grows.",
+   "stars": 2089,
    "topics": [
-    "agent",
-    "investment",
-    "langchain",
-    "langraph",
+    "agent-framework",
+    "ai-agent",
+    "ai-assistant",
+    "claude",
+    "evals",
     "llm",
-    "mcp",
-    "skills",
-    "trading"
+    "llmops",
+    "local-first",
+    "openai",
+    "personal-assistant",
+    "python",
+    "sqlite"
    ],
    "lang": "Python",
-   "created_at": "2026-01-18",
+   "created_at": "2026-07-10",
    "pushed_at": "2026-10-23",
-   "age_days": 278,
-   "stars_per_day_lifetime": 7.34,
-   "license": "Apache-2.0",
+   "age_days": 106,
+   "stars_per_day_lifetime": 19.71,
+   "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-09-23",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-24",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 65
+    "position": 54
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为金融市场设计的Claude代码",
-   "evidence": "Claude Code for Financial Market",
+   "capability": "本地优先的AI代理工具，包括循环、内存、评估等功能",
+   "evidence": "Waku Waku! Waku Agent is a local-first AI agent harness you actually own...",
    "transfer_forms": [
-    "unknown"
+    "skill",
+    "architecture"
    ],
    "line_candidates": [
     "unknown"
@@ -169,506 +191,119 @@
    "distilled": true
   },
   {
-   "repo": "FeatherHunter/dsh-mattpocock-skills-deck",
-   "url": "https://github.com/FeatherHunter/dsh-mattpocock-skills-deck",
-   "description": "🌟安装即自带mattpocock/skills v1.3.1的27个工程与效率技能，无需手动装技能。400亿token打造本插件，在原始技能之上提供10倍的开发效率，也能帮助新手更快上手该技能套件。全力支持GitHub issue；Markdown为预览版；GitLab暂不支持。感谢您的使用和支持🌹",
-   "stars": 205,
+   "repo": "pingcap/autoflow",
+   "url": "https://github.com/pingcap/autoflow",
+   "description": "pingcap/autoflow is a Graph RAG based and conversational knowledge base tool built with TiDB Serverless Vector Storage. Demo: https://tidb.ai",
+   "stars": 2978,
    "topics": [
-    "agent",
-    "ai",
-    "claude",
-    "deepseek-harness",
-    "dsh",
-    "dsh-better-sidebar",
-    "dsh-plugin",
-    "github-issues",
-    "skills",
-    "wayfinder"
+    "chatbot",
+    "cot",
+    "graphrag",
+    "knowledge-graph",
+    "mysql",
+    "rag",
+    "serverless",
+    "vector-database"
    ],
    "lang": "TypeScript",
-   "created_at": "2026-08-17",
+   "created_at": "2024-02-05",
    "pushed_at": "2026-10-23",
-   "age_days": 67,
-   "stars_per_day_lifetime": 3.06,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 3
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供27个工程与效率技能的GitHub插件",
-   "evidence": "🌟安装即自带mattpocock/skills v1.3.1的27个工程与效率技能",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "lss233/kirara-ai",
-   "url": "https://github.com/lss233/kirara-ai",
-   "description": "🤖 可 DIY 的 多模态 AI 聊天机器人 | 🚀 快速接入 微信、 QQ、Telegram、等聊天平台 | 🦈支持DeepSeek、Grok、Claude、Ollama、Gemini、OpenAI | 工作流系统、网页搜索、AI画图、人设调教、虚拟女仆、语音对话 |",
-   "stars": 19150,
-   "topics": [
-    "bard",
-    "bot",
-    "chatglm-6b",
-    "chatgpt",
-    "deepseek",
-    "discord",
-    "ernie",
-    "go-cqhttp",
-    "grok",
-    "mirai",
-    "new-bing",
-    "ollama"
-   ],
-   "lang": "Python",
-   "created_at": "2022-12-05",
-   "pushed_at": "2026-10-22",
-   "age_days": 1418,
-   "stars_per_day_lifetime": 13.5,
-   "license": "AGPL-3.0",
-   "license_family": "copyleft",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "微调 in:name,description stars:>300 pushed:>2026-07-25",
-    "sort": "stars",
-    "query_breadth": 23,
-    "position": 1
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "可DIY的多模态AI聊天机器人",
-   "evidence": "🤖 可 DIY 的 多模态 AI 聊天机器人",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "gnipbao/dao-skill",
-   "url": "https://github.com/gnipbao/dao-skill",
-   "description": "道生万物：从混沌需求生成可运行、可验证、可进化的 Agent Skill",
-   "stars": 246,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-07-07",
-   "pushed_at": "2026-10-23",
-   "age_days": 108,
-   "stars_per_day_lifetime": 2.28,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 13
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "生成可运行、可验证、可进化的Agent Skill",
-   "evidence": "从混沌需求生成可运行、可验证、可进化的 Agent Skill",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "CM-idea/SnowAir",
-   "url": "https://github.com/CM-idea/SnowAir",
-   "description": "SnowAir 是一款轻量化的截图与标注工具，涵盖截图、录屏、演示、贴图、OCR识别、翻译等功能，自由截图，尽在轻雪。",
-   "stars": 110,
-   "topics": [
-    "canvas",
-    "draw",
-    "efficiency",
-    "office",
-    "paint",
-    "screen-capture",
-    "snowair",
-    "video"
-   ],
-   "lang": "C++",
-   "created_at": "2026-08-26",
-   "pushed_at": "2026-10-22",
-   "age_days": 58,
-   "stars_per_day_lifetime": 1.9,
+   "age_days": 992,
+   "stars_per_day_lifetime": 3.0,
    "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
-    "dimension": "chinese",
-    "query": "OCR 识别 in:name,description stars:>100 pushed:>2026-07-25",
-    "sort": "stars",
-    "query_breadth": 26,
-    "position": 24
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-09-24",
+    "sort": "updated",
+    "query_breadth": 58,
+    "position": 28
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "轻量化的截图与标注工具，包含多种功能",
-   "evidence": "涵盖截图、录屏、演示、贴图、OCR识别、翻译等功能",
+   "capability": "基于Graph RAG和TiDB Serverless Vector Storage的对话式知识库工具",
+   "evidence": "pingcap/autoflow is a Graph RAG based and conversational knowledge base tool...",
    "transfer_forms": [
-    "unknown"
+    "deploy",
+    "library"
    ],
    "line_candidates": [
-    "video"
+    "rag"
    ],
    "distilled": true
   },
   {
-   "repo": "antfu/skills-pack",
-   "url": "https://github.com/antfu/skills-pack",
-   "description": "Anthony's curated agent skills pack.",
-   "stars": 316,
-   "topics": [],
+   "repo": "yunyuyuan/nuxt-blog",
+   "url": "https://github.com/yunyuyuan/nuxt-blog",
+   "description": "A pure front-end blog written using Vue3, Nuxt3, and the GitHub API,free deployment, online writing.一个使用Vue3,Nuxt3,GitHub API写的纯前端博客，免费部署，在线写作",
+   "stars": 236,
+   "topics": [
+    "nuxt",
+    "nuxt3",
+    "serverless-functions",
+    "static-blog",
+    "typescript",
+    "vercel",
+    "vue",
+    "vue3"
+   ],
    "lang": "TypeScript",
-   "created_at": "2026-09-25",
+   "created_at": "2021-10-24",
    "pushed_at": "2026-10-23",
-   "age_days": 28,
-   "stars_per_day_lifetime": 11.29,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 24
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "精选的智能体技能包",
-   "evidence": "Anthony's curated agent skills pack.",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "zinging/chinese-history-atlas",
-   "url": "https://github.com/zinging/chinese-history-atlas",
-   "description": "帝王谱系・思想源流・诗词鉴赏 · 格物致知 · 神话异志，5合1的中国历史可视化学习站：77 帝时间线与疆域地图、儒释道诸子理学心学经典精读、22 位文人行迹地图与名篇赏析、18部工艺典籍、9部古代神话异志与图鉴欣赏。演示平台↓↓↓",
-   "stars": 28,
-   "topics": [
-    "buddhism",
-    "chinese-culture",
-    "chinese-history",
-    "chinese-literature",
-    "chinese-philosophy",
-    "chinese-religion",
-    "classical-chinese-poetry",
-    "confucianism",
-    "daoism",
-    "historical-atlas",
-    "history-education",
-    "history-visualization"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-10-08",
-   "pushed_at": "2026-10-22",
-   "age_days": 15,
-   "stars_per_day_lifetime": 1.87,
+   "age_days": 1826,
+   "stars_per_day_lifetime": 0.13,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "chinese",
-    "query": "古籍 in:name,description stars:>20",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-07-26",
     "sort": "stars",
-    "query_breadth": 47,
-    "position": 42
+    "query_breadth": 39,
+    "position": 27
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "中国历史可视化学习站",
-   "evidence": "帝王谱系・思想源流・诗词鉴赏 · 格物致知 · 神话异志，5合1的中国历史可视化学习站",
+   "capability": "使用Vue3、Nuxt3和GitHub API编写的纯前端博客",
+   "evidence": "A pure front-end blog written using Vue3, Nuxt3, and the GitHub API...",
    "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "mylc2010/sci-translation-skill",
-   "url": "https://github.com/mylc2010/sci-translation-skill",
-   "description": "An evidence-preserving Chinese-to-English manuscript translation and review workflow for computing, medicine and other STEM disciplines.",
-   "stars": 240,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-10-12",
-   "pushed_at": "2026-10-23",
-   "age_days": 11,
-   "stars_per_day_lifetime": 21.82,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 31
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "计算、医学等STEM学科的中文到英文翻译和审查工作流程",
-   "evidence": "An evidence-preserving Chinese-to-English manuscript translation and review workflow for computing, medicine and other S",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "LingCore/WinShun",
-   "url": "https://github.com/LingCore/WinShun",
-   "description": "Win顺：免费开源的 Windows 快速搜索启动器。双击 Ctrl，拼音秒搜文件、全文搜索 Word/Excel/PDF、剪贴板历史（代替 Win+V）、对话框搜索、任务栏搜索、插件、AI 助手 MCP。Free Windows search launcher: pinyin file search, full-text search, clipboard history, MCP server. Everything/Listary alternative.",
-   "stars": 506,
-   "topics": [
-    "chinese",
-    "clipboard-history",
-    "clipboard-manager",
-    "cpp",
-    "everything",
-    "file-search",
-    "full-text-search",
-    "launcher",
-    "listary",
-    "mcp",
-    "mcp-server",
-    "ntfs"
-   ],
-   "lang": "C++",
-   "created_at": "2026-10-08",
-   "pushed_at": "2026-10-22",
-   "age_days": 15,
-   "stars_per_day_lifetime": 33.73,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "topic:chinese stars:>500 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 78,
-    "position": 30
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供 Windows 快速搜索启动器功能，包括拼音搜索、全文搜索、剪贴板历史等",
-   "evidence": "Win顺：免费开源的 Windows 快速搜索启动器。双击 Ctrl，拼音秒搜文件、全文搜索 Word/Excel/PDF、剪贴板历史（代替 Win+V）、对话框搜索、任务栏搜索、插件、AI 助手 MCP。Everything/Listar",
-   "transfer_forms": [
-    "mcp",
-    "skill",
-    "architecture",
     "deploy"
    ],
    "line_candidates": [
-    "video",
-    "image",
-    "modelpool",
     "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "HexRaysSA/ida-mcp",
-   "url": "https://github.com/HexRaysSA/ida-mcp",
-   "description": "Official Hex-Rays IDA MCP Server.",
-   "stars": 1356,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-08-27",
-   "pushed_at": "2026-10-22",
-   "age_days": 57,
-   "stars_per_day_lifetime": 23.79,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 35
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供 Hex-Rays IDA MCP 服务器",
-   "evidence": "Official Hex-Rays IDA MCP Server.",
-   "transfer_forms": [
-    "mcp",
-    "architecture",
-    "unknown"
-   ],
-   "line_candidates": [
-    "modelpool",
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "BeckyGlobal/PaidToStudyAbroad",
-   "url": "https://github.com/BeckyGlobal/PaidToStudyAbroad",
-   "description": "高性价比人生指南·海外版：高性价比留学。出国留学奖学金、免学费、政府全奖、带薪读博，德国日本学手艺有人发钱，美加澳奖学金单独成节。不是你花钱去留学，是你拿钱去留学。71 条，只引官方来源。关注作者：微信视频号 Becky在地球村",
-   "stars": 518,
+   "repo": "Derpyu520/qq-bridge",
+   "url": "https://github.com/Derpyu520/qq-bridge",
+   "description": "Bridge between QQ (SnowLuma OneBot v11) and DeepSeek Harness agents: social simulation, safe MCP tools, slang learning and more.",
+   "stars": 2038,
    "topics": [
-    "australia",
-    "canada",
-    "chinese",
-    "csc",
-    "css-profile",
-    "free-tuition",
-    "germany",
-    "guide",
-    "howtolivebetter",
-    "international-students",
-    "japan",
-    "phd"
+    "ai-agent",
+    "chatbot",
+    "deepseek-harness",
+    "dsh",
+    "onebot",
+    "qq-bot",
+    "snowluma"
    ],
-   "lang": "HTML",
-   "created_at": "2026-10-15",
-   "pushed_at": "2026-10-21",
-   "age_days": 8,
-   "stars_per_day_lifetime": 64.75,
+   "lang": "JavaScript",
+   "created_at": "2026-08-25",
+   "pushed_at": "2026-10-22",
+   "age_days": 60,
+   "stars_per_day_lifetime": 33.97,
    "license": "NOASSERTION",
    "license_family": "unknown",
    "found_by": {
-    "dimension": "chinese",
-    "query": "topic:chinese stars:>500 pushed:>2026-09-23",
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-24",
     "sort": "updated",
-    "query_breadth": 78,
-    "position": 34
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供海外留学指南，包括奖学金、免学费等信息",
-   "evidence": "高性价比人生指南·海外版：高性价比留学。出国留学奖学金、免学费、政府全奖、带薪读博，德国日本学手艺有人发钱，美加澳奖学金单独成节。不是你花钱去留学，是你拿钱去留学。71 条，只引官方来源。关注作者：微信视频号 Becky在地球村",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "dweinstein/awesome-frida",
-   "url": "https://github.com/dweinstein/awesome-frida",
-   "description": "Awesome Frida - A curated list of Frida resources http://www.frida.re/ (https://github.com/frida/frida)",
-   "stars": 3552,
-   "topics": [
-    "android",
-    "awesome",
-    "dynamic-analysis",
-    "frida",
-    "hooking",
-    "ios",
-    "r2frida"
-   ],
-   "lang": "",
-   "created_at": "2016-05-09",
-   "pushed_at": "2026-10-22",
-   "age_days": 3819,
-   "stars_per_day_lifetime": 0.93,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 45
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供 Frida 资源列表",
-   "evidence": "Awesome Frida - A curated list of Frida resources http://www.frida.re/ (https://github.com/frida/frida)",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "heqiangdiao-wq/AI-Cross-Border-Ecommerce-Agent-Toolkit",
-   "url": "https://github.com/heqiangdiao-wq/AI-Cross-Border-Ecommerce-Agent-Toolkit",
-   "description": "AI 跨境电商运营智能体工具箱 · 把运营 SOP 拆成 7 个可复用的 AI Agent 工作流，含 Prompt、模板与真实案例",
-   "stars": 545,
-   "topics": [
-    "ai-agents",
-    "cross-border-ecommerce",
-    "ecommerce",
-    "llm",
-    "mercado-livre",
-    "prompt-engineering",
-    "shopee",
-    "sop",
-    "workflow-automation"
-   ],
-   "lang": "Python",
-   "created_at": "2026-10-13",
-   "pushed_at": "2026-10-18",
-   "age_days": 10,
-   "stars_per_day_lifetime": 54.5,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "智能体 in:name,description stars:>200",
-    "sort": "stars",
     "query_breadth": 100,
     "position": 99
    },
@@ -677,56 +312,58 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 AI 跨境电商运营智能体工具箱，包含 AI Agent 工作流",
-   "evidence": "AI 跨境电商运营智能体工具箱 · 把运营 SOP 拆成 7 个可复用的 AI Agent 工作流，含 Prompt、模板与真实案例",
+   "capability": "QQ和DeepSeek Harness代理之间的桥梁，支持社交模拟等",
+   "evidence": "Bridge between QQ (SnowLuma OneBot v11) and DeepSeek Harness agents...",
    "transfer_forms": [
-    "skill",
-    "architecture",
-    "unknown"
+    "skill"
    ],
    "line_candidates": [
-    "video",
-    "modelpool",
     "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "ivbeg/awesome-status-pages",
-   "url": "https://github.com/ivbeg/awesome-status-pages",
-   "description": "Awesome list of status page open source software, services and public status pages of major internet companies",
-   "stars": 3829,
+   "repo": "awarexone/Agentic-Bug-Hunter",
+   "url": "https://github.com/awarexone/Agentic-Bug-Hunter",
+   "description": "AI-powered bug bounty hunting toolkit that works with or without subscription.",
+   "stars": 5416,
    "topics": [
-    "awesome",
-    "awesome-list",
-    "monitoring",
-    "opensource",
-    "status",
-    "statuspage"
+    "agentic-ai",
+    "ai-security",
+    "appsec",
+    "bug-bounty",
+    "bugcrowd",
+    "claude-ai",
+    "claude-code",
+    "ethical-hacking",
+    "graphql-security",
+    "hackerone",
+    "hacking-tool",
+    "llm-security"
    ],
-   "lang": "",
-   "created_at": "2017-03-15",
-   "pushed_at": "2026-10-22",
-   "age_days": 3509,
-   "stars_per_day_lifetime": 1.09,
+   "lang": "Python",
+   "created_at": "2026-03-08",
+   "pushed_at": "2026-10-23",
+   "age_days": 230,
+   "stars_per_day_lifetime": 23.55,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-23",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-09-24",
     "sort": "updated",
-    "query_breadth": 100,
-    "position": 51
+    "query_breadth": 79,
+    "position": 52
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供状态页面开源软件和服务列表",
-   "evidence": "Awesome list of status page open source software, services and public status pages of major internet companies",
+   "capability": "AI驱动的漏洞赏金猎人工具，支持订阅和非订阅模式",
+   "evidence": "AI-powered bug bounty hunting toolkit that works with or without subscription.",
    "transfer_forms": [
-    "unknown"
+    "skill"
    ],
    "line_candidates": [
     "unknown"
@@ -734,23 +371,113 @@
    "distilled": true
   },
   {
-   "repo": "blessonism/search-skills",
-   "url": "https://github.com/blessonism/search-skills",
-   "description": "skills for deep search — multi-source search, content extraction, and structured research reports.",
-   "stars": 438,
+   "repo": "jiaotuke/ziping-shushu",
+   "url": "https://github.com/jiaotuke/ziping-shushu",
+   "description": "子平术数，根据年月日时自动排盘，检索相关古籍信息，大模型根据古籍信息按照固定算八字逻辑对命盘进行分析",
+   "stars": 31,
    "topics": [],
    "lang": "Python",
-   "created_at": "2026-02-08",
+   "created_at": "2026-10-22",
+   "pushed_at": "2026-10-23",
+   "age_days": 2,
+   "stars_per_day_lifetime": 15.5,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "古籍 in:name,description stars:>20",
+    "sort": "stars",
+    "query_breadth": 48,
+    "position": 40
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "根据年月日时自动排盘，检索相关古籍信息，分析命盘",
+   "evidence": "子平术数，根据年月日时自动排盘，检索相关古籍信息...",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "datalab-to/indra",
+   "url": "https://github.com/datalab-to/indra",
+   "description": "1M param OCR model - runs on CPU, 15x faster than tesseract, close to 1B+ param models in accuracy",
+   "stars": 1004,
+   "topics": [
+    "ai",
+    "cpu",
+    "document-parsing",
+    "ocr",
+    "onnx",
+    "pdf"
+   ],
+   "lang": "Python",
+   "created_at": "2026-10-13",
    "pushed_at": "2026-10-22",
-   "age_days": 257,
-   "stars_per_day_lifetime": 1.7,
-   "license": "MIT",
+   "age_days": 11,
+   "stars_per_day_lifetime": 91.27,
+   "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-23",
+    "query": "topic:ocr stars:>1000 pushed:>2026-07-26",
     "sort": "updated",
-    "query_breadth": 100,
+    "query_breadth": 89,
+    "position": 37
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "运行在CPU上的1M参数OCR模型，速度快于tesseract，准确度接近1B+参数模型",
+   "evidence": "1M param OCR model - runs on CPU, 15x faster than tesseract...",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "ocr"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "juneix/EmbyX",
+   "url": "https://github.com/juneix/EmbyX",
+   "description": "Watch Emby short videos like Tiktok. 像刷抖音一样看 Emby 短视频。",
+   "stars": 101,
+   "topics": [
+    "docker",
+    "emby",
+    "emby-client",
+    "instagram",
+    "jellyfin",
+    "jellyfin-client",
+    "local-first",
+    "media-player",
+    "nas",
+    "self-hosted",
+    "tiktok",
+    "twitter"
+   ],
+   "lang": "HTML",
+   "created_at": "2025-11-20",
+   "pushed_at": "2026-10-23",
+   "age_days": 338,
+   "stars_per_day_lifetime": 0.3,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-26",
+    "sort": "stars",
+    "query_breadth": 56,
     "position": 55
    },
    "matched_by_n_queries": 1,
@@ -758,10 +485,10 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供深度搜索技能，包括多源搜索、内容提取和结构化研究报告",
-   "evidence": "skills for deep search — multi-source search, content extraction, and structured research reports.",
+   "capability": "像刷抖音一样观看Emby短视频",
+   "evidence": "Watch Emby short videos like Tiktok.",
    "transfer_forms": [
-    "unknown"
+    "deploy"
    ],
    "line_candidates": [
     "unknown"
@@ -769,43 +496,39 @@
    "distilled": true
   },
   {
-   "repo": "bytewax/awesome-public-real-time-datasets",
-   "url": "https://github.com/bytewax/awesome-public-real-time-datasets",
-   "description": "A list of publicly available datasets with real-time data maintained by the team at bytewax.io",
-   "stars": 2957,
+   "repo": "dustinspecker/awesome-eslint",
+   "url": "https://github.com/dustinspecker/awesome-eslint",
+   "description": "A list of awesome ESLint plugins, configs, etc.",
+   "stars": 4770,
    "topics": [
+    "awesome",
     "awesome-list",
-    "data",
-    "data-science",
-    "data-visualization",
-    "datasets",
-    "real-time",
-    "streaming"
+    "eslint",
+    "list"
    ],
    "lang": "",
-   "created_at": "2023-05-25",
-   "pushed_at": "2026-10-22",
-   "age_days": 1247,
-   "stars_per_day_lifetime": 2.37,
+   "created_at": "2015-10-30",
+   "pushed_at": "2026-10-24",
+   "age_days": 4012,
+   "stars_per_day_lifetime": 1.19,
    "license": "CC0-1.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-23",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-24",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 59
+    "position": 12
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供实时数据集列表",
-   "evidence": "A list of publicly available datasets with real-time data maintained by the team at bytewax.io",
+   "capability": "列出优秀的 ESLint 插件和配置",
+   "evidence": "topics: awesome, awesome-list, eslint, list",
    "transfer_forms": [
-    "dataset",
-    "unknown"
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -813,99 +536,83 @@
    "distilled": true
   },
   {
-   "repo": "ANative-Lab/EvoAgentX",
-   "url": "https://github.com/ANative-Lab/EvoAgentX",
-   "description": "🚀 EvoAgentX: Building a Self-Evolving Ecosystem of AI Agents",
-   "stars": 3396,
-   "topics": [
-    "agent",
-    "ai",
-    "ai-agents",
-    "llms",
-    "memory",
-    "multi-agent-systems",
-    "natural-language-processing",
-    "rag",
-    "self-evolving",
-    "tool",
-    "tools"
-   ],
-   "lang": "Python",
-   "created_at": "2025-04-15",
-   "pushed_at": "2026-10-22",
-   "age_days": 556,
-   "stars_per_day_lifetime": 6.11,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
+   "repo": "YD-233/kimi-break",
+   "url": "https://github.com/YD-233/kimi-break",
+   "description": "Kimi Code 渗透破甲（Jailbreak）系统提示词 · AI 红队研究",
+   "stars": 202,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-08-17",
+   "pushed_at": "2026-10-19",
+   "age_days": 68,
+   "stars_per_day_lifetime": 2.97,
+   "license": "MIT",
+   "license_family": "permissive",
    "found_by": {
-    "dimension": "category",
-    "query": "topic:rag stars:>3000 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 65
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-26",
+    "sort": "stars",
+    "query_breadth": 84,
+    "position": 83
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "构建自进化的 AI 代理生态系统",
-   "evidence": "🚀 EvoAgentX: Building a Self-Evolving Ecosystem of AI Agents",
+   "capability": "提供 Kimi Code 渗透破甲系统提示词",
+   "evidence": "topics: -",
    "transfer_forms": [
-    "skill",
-    "architecture",
     "unknown"
    ],
    "line_candidates": [
-    "modelpool",
     "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "fatwang2/search2ai",
-   "url": "https://github.com/fatwang2/search2ai",
-   "description": "Self-hosted search gateway for AI agents. Unified search, news and page extraction with provider fallback. REST API, MCP server and TypeScript library.",
-   "stars": 1282,
+   "repo": "ollaya-dev/ollaya",
+   "url": "https://github.com/ollaya-dev/ollaya",
+   "description": "Jev-compatible API server for open decision models. Ollama for decision models: pull and serve 25 model families (Laya, pplx-decider, Clef, Winnow, coba...) locally or self-hosted behind /v1/systemone. The TypeSafe SDK works unchanged: set its base URL and pick an open model. CLI, desktop app, Docker, MCP server, public bench.",
+   "stars": 1388,
    "topics": [
-    "ai-agents",
-    "cloudflare-workers",
-    "hono",
-    "mcp",
+    "calibration",
+    "decision-model",
+    "decision-models",
+    "inference-server",
+    "jev",
+    "jev-alternative",
+    "jev-compatible",
+    "laya",
+    "llama-cpp",
+    "local-inference",
     "mcp-server",
-    "openai-compatible",
-    "search",
-    "search-api",
-    "search-gateway",
-    "search1api",
-    "self-hosted",
-    "tool-calling"
+    "model-serving"
    ],
-   "lang": "TypeScript",
-   "created_at": "2023-12-18",
-   "pushed_at": "2026-10-22",
-   "age_days": 1040,
-   "stars_per_day_lifetime": 1.23,
-   "license": "MIT",
+   "lang": "Rust",
+   "created_at": "2026-09-23",
+   "pushed_at": "2026-10-24",
+   "age_days": 31,
+   "stars_per_day_lifetime": 44.77,
+   "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-23",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-24",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 66
+    "position": 15
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供自托管搜索网关，用于 AI 代理",
-   "evidence": "Self-hosted search gateway for AI agents. Unified search, news and page extraction with provider fallback. REST API, MCP",
+   "capability": "提供决策模型 API 服务器和模型服务",
+   "evidence": "topics: calibration, decision-model, decision-models, inference-server, jev, jev-alternative, jev-compatible, laya, llam",
    "transfer_forms": [
-    "skill",
-    "library",
-    "unknown"
+    "mcp",
+    "library"
    ],
    "line_candidates": [
     "modelpool",
@@ -914,69 +621,39 @@
    "distilled": true
   },
   {
-   "repo": "runningZ1/union-search-skill",
-   "url": "https://github.com/runningZ1/union-search-skill",
-   "description": "统一搜索工具集 - 跨平台内容搜索解决方案，支持 B 站/抖音/小红书/GitHub/Twitter 等 20+ 平台",
-   "stars": 756,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-01-31",
-   "pushed_at": "2026-10-22",
-   "age_days": 265,
-   "stars_per_day_lifetime": 2.85,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-23",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 76
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "跨平台内容搜索解决方案，支持20+平台",
-   "evidence": "支持 B 站/抖音/小红书/GitHub/Twitter 等 20+ 平台",
-   "transfer_forms": [
-    "skill"
+   "repo": "ocaml-community/awesome-ocaml",
+   "url": "https://github.com/ocaml-community/awesome-ocaml",
+   "description": "A curated collection of awesome OCaml tools, frameworks, libraries and articles.",
+   "stars": 3126,
+   "topics": [
+    "awesome",
+    "ocaml",
+    "programming-language",
+    "resources"
    ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "asuojun/claude-vision-skill",
-   "url": "https://github.com/asuojun/claude-vision-skill",
-   "description": "",
-   "stars": 2300,
-   "topics": [],
-   "lang": "JavaScript",
-   "created_at": "2026-05-02",
-   "pushed_at": "2026-10-22",
-   "age_days": 174,
-   "stars_per_day_lifetime": 13.22,
+   "lang": "",
+   "created_at": "2014-07-24",
+   "pushed_at": "2026-10-23",
+   "age_days": 4475,
+   "stars_per_day_lifetime": 0.7,
    "license": "NONE",
    "license_family": "none",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-23",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-24",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 86
+    "position": 42
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "未知",
-   "evidence": "未知",
+   "capability": "收集 OCaml 工具、框架、库和文章",
+   "evidence": "topics: awesome, ocaml, programming-language, resources",
    "transfer_forms": [
-    "unknown"
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -984,44 +661,168 @@
    "distilled": true
   },
   {
-   "repo": "Jakeschincariol/replica-skill",
-   "url": "https://github.com/Jakeschincariol/replica-skill",
-   "description": "Eleven free Claude skills that clone any app: reverse-engineer it, rebuild it, test it for bugs, then fix what its users hate. Free, MIT.",
-   "stars": 4758,
+   "repo": "dictcp/awesome-git",
+   "url": "https://github.com/dictcp/awesome-git",
+   "description": "A curated list of amazingly awesome Git tools, resources and shiny things",
+   "stars": 2960,
    "topics": [
-    "agent",
-    "agent-skills",
-    "app-clone",
-    "claude",
-    "claude-code",
-    "claude-skills",
-    "indie-hacker",
-    "reverse-engineering",
-    "saas"
+    "awesome",
+    "awesome-list",
+    "awesome-lists",
+    "git"
    ],
-   "lang": "Python",
-   "created_at": "2026-10-03",
-   "pushed_at": "2026-10-03",
-   "age_days": 20,
-   "stars_per_day_lifetime": 237.9,
-   "license": "MIT",
+   "lang": "",
+   "created_at": "2015-08-20",
+   "pushed_at": "2026-10-23",
+   "age_days": 4083,
+   "stars_per_day_lifetime": 0.72,
+   "license": "CC0-1.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>500 pushed:>2026-07-25",
-    "sort": "stars",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-24",
+    "sort": "updated",
     "query_breadth": 100,
-    "position": 92
+    "position": 54
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供11个免费Claude技能，用于克隆任何应用",
-   "evidence": "Eleven free Claude skills that clone any app: reverse-engineer it, rebuild it, test it for bugs, then fix what its users",
+   "capability": "列出 Git 工具、资源和亮点",
+   "evidence": "topics: awesome, awesome-list, awesome-lists, git",
    "transfer_forms": [
-    "skill"
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "aipotheosis-labs/aci",
+   "url": "https://github.com/aipotheosis-labs/aci",
+   "description": "ACI.dev is the open source tool-calling platform that hooks up 600+ tools into any agentic IDE or custom AI agent through direct function calling or a unified MCP server. The birthplace of VibeOps.",
+   "stars": 4921,
+   "topics": [
+    "agents",
+    "ai",
+    "ai-agents",
+    "api",
+    "developer-tools",
+    "function-calling",
+    "integration",
+    "llm",
+    "mcp",
+    "oauth2",
+    "open-source",
+    "permissions"
+   ],
+   "lang": "Python",
+   "created_at": "2024-09-19",
+   "pushed_at": "2026-10-23",
+   "age_days": 765,
+   "stars_per_day_lifetime": 6.43,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-24",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 63
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供工具调用平台，连接 600+ 工具",
+   "evidence": "topics: agents, ai, ai-agents, api, developer-tools, function-calling, integration, llm, mcp, oauth2, open-source, permi",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "hoodini/ai-agents-skills",
+   "url": "https://github.com/hoodini/ai-agents-skills",
+   "description": "🧠 AI Agent Skills Repository - A curated collection of specialized skills for AI coding agents (Claude Code, GitHub Copilot, Cursor, Windsurf). Created by Yuval Avidani using GitHub Copilot via VS Code Insiders.",
+   "stars": 290,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-01-07",
+   "pushed_at": "2026-10-23",
+   "age_days": 290,
+   "stars_per_day_lifetime": 1.0,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-24",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 82
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集 AI 编码代理的专用技能",
+   "evidence": "topics: -",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "utkusen/sast-skills",
+   "url": "https://github.com/utkusen/sast-skills",
+   "description": "Collection of agent skills to find vulnerabilities inside your web/mobile apps.",
+   "stars": 1345,
+   "topics": [
+    "ai-security",
+    "claude",
+    "claude-code",
+    "sast"
+   ],
+   "lang": "",
+   "created_at": "2026-03-30",
+   "pushed_at": "2026-10-23",
+   "age_days": 208,
+   "stars_per_day_lifetime": 6.47,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-24",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 84
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集用于寻找 Web/移动应用漏洞的代理技能",
+   "evidence": "topics: ai-security, claude, claude-code, sast",
+   "transfer_forms": [
+    "skill",
+    "library"
    ],
    "line_candidates": [
     "unknown"
