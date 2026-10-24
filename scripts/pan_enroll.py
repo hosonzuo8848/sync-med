@@ -111,6 +111,18 @@ def should_enroll(pages):
     return pages is not None and pages >= MIN_PAGES
 
 
+def shortfall_tag(pages):
+    """页数不足 MIN_PAGES 时的状态标签 —— "空"和"不完整"是两回事,必须分开。
+
+    · 0 页     -> empty      : 目录存在但一张图都没有
+    · 1~3 页   -> incomplete : 上传没跑完的残件,下一轮可能补齐
+
+    2026-10-23 全量建档时这两类被混标成同一个 empty(679 条),
+    结果「空目录几个、残件几个」查不出来,白返工一次。
+    """
+    return "empty" if pages == 0 else "incomplete"
+
+
 def main_from_csv():
     """CSV 直通:book_id / fileId 已由 pan-register 扫定,只需数页 + 建档。
 
@@ -126,7 +138,8 @@ def main_from_csv():
         rows = rows[:LIMIT]
         print(f"limited to {len(rows)}", flush=True)
 
-    stats = {"ok": 0, "exists": 0, "empty": 0, "listfail": 0, "bad": 0, "err": 0}
+    stats = {"ok": 0, "exists": 0, "empty": 0, "incomplete": 0,
+             "listfail": 0, "bad": 0, "err": 0}
     results = []
 
     def one(x):
@@ -136,7 +149,9 @@ def main_from_csv():
             return bid, fid, -1, "listfail"
         pages = len(nums)
         if pages < MIN_PAGES:
-            return bid, fid, pages, "empty"      # 未传完/残件,不入档,等下一轮
+            # 0 页 = 真·空目录;1-(MIN_PAGES-1) 页 = 上传未完成的残件。
+            # 两者处置完全不同,不许再混标成 empty。
+            return bid, fid, pages, shortfall_tag(pages)
         body = {
             "book_id": bid,
             "book_title": x["book_title"],

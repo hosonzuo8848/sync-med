@@ -30,10 +30,10 @@ def load_parts(path=SRC):
                 if isinstance(t, ast.Name) and t.id in ("PAGE_RE", "MIN_PAGES"):
                     exec(ast.get_source_segment(src, node), ns)
                     got.add(t.id)
-        elif isinstance(node, ast.FunctionDef) and node.name in ("page_nums", "should_enroll"):
+        elif isinstance(node, ast.FunctionDef) and node.name in ("page_nums", "should_enroll", "shortfall_tag"):
             exec(ast.get_source_segment(src, node), ns)
             got.add(node.name)
-    missing = {"PAGE_RE", "MIN_PAGES", "page_nums", "should_enroll"} - got
+    missing = {"PAGE_RE", "MIN_PAGES", "page_nums", "should_enroll", "shortfall_tag"} - got
     assert not missing, "源码结构变了,抠不到: %s" % missing
     return ns
 
@@ -103,6 +103,22 @@ def test_min_pages_threshold():
     assert se(thr) is True
     assert se(0) is False
     assert se(None) is False, "list 失败不能入档"
+
+
+def test_shortfall_tag_splits_empty_and_incomplete():
+    """0 页(真空)和 1~3 页(残件)必须分开标,否则「空几个、残几个」查不出来。
+
+    旧实现无条件 return "empty",本条会红:
+      2026-10-23 全量建档 679 条全被标成 empty,事后拆分才发现只有 7 条是真真空。
+    """
+    ns = load_parts()
+    tag = ns["shortfall_tag"]
+    thr = ns["MIN_PAGES"]
+
+    assert tag(0) == "empty", "0 页必须是 empty"
+    for p in range(1, thr):
+        assert tag(p) == "incomplete", "%d 页必须标 incomplete,实际 %r" % (p, tag(p))
+        assert tag(p) != tag(0), "%d 页与 0 页必须可区分" % (p,)
 
 
 if __name__ == "__main__":
