@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-10-24",
+ "generated": "2026-10-25",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -41,146 +41,86 @@
  },
  "distill": {
   "seat": "zhipu",
-  "calls": 6,
-  "ok": 2
+  "calls": 3,
+  "ok": 1
  },
- "count": 18,
+ "count": 9,
  "candidates": [
   {
-   "repo": "instructa/ai-prompts",
-   "url": "https://github.com/instructa/ai-prompts",
-   "description": "Curated AI Prompts for Cursor Rules, Cline, Windsurf and Github Copilot",
-   "stars": 1102,
+   "repo": "Downvid/downvid",
+   "url": "https://github.com/Downvid/downvid",
+   "description": "现代化的开源跨平台视频下载工具 — 一键保存全网无水印高清视频 / A modern, cross-platform open-source video downloader GUI for yt-dlp & FFmpeg",
+   "stars": 1109,
    "topics": [
-    "agent",
-    "ai-agent",
-    "ai-prompts",
-    "cline",
-    "copilot",
-    "cursor",
-    "cursor-ai",
-    "github-copilot",
-    "prompting",
-    "prompts",
-    "windsurf"
+    "aria2",
+    "bilibili-downloader",
+    "cross-platform",
+    "desktop-app",
+    "douyin-downloader",
+    "download-manager",
+    "electron",
+    "ffmpeg",
+    "kuaishou-downloader",
+    "linux",
+    "macos",
+    "media-downloader"
    ],
-   "lang": "JavaScript",
-   "created_at": "2025-02-12",
-   "pushed_at": "2026-10-17",
-   "age_days": 619,
-   "stars_per_day_lifetime": 1.78,
+   "lang": "TypeScript",
+   "created_at": "2026-08-22",
+   "pushed_at": "2026-10-24",
+   "age_days": 64,
+   "stars_per_day_lifetime": 17.33,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "prompts in:name stars:>300 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 33,
-    "position": 16
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 42,
+    "position": 21
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供Cursor、Cline、Windsurf和GitHub Copilot的AI提示词库",
-   "evidence": "Curated AI Prompts for Cursor Rules, Cline, Windsurf and Github Copilot",
+   "capability": "跨平台视频下载工具，支持全网无水印高清视频下载",
+   "evidence": "一键保存全网无水印高清视频",
    "transfer_forms": [
-    "dataset"
+    "deploy"
    ],
    "line_candidates": [
-    "unknown"
+    "video"
    ],
    "distilled": true
   },
   {
-   "repo": "jaikydota/BullFlow",
-   "url": "https://github.com/jaikydota/BullFlow",
-   "description": "推量牛 BullFlow — 开源企业级 RAG 解决方案：从企业知识库、营销内容自动化生产到全域内容分发 | Open-source enterprise RAG solution: knowledge base → automated marketing content → omnichannel publishing. 知识库全链路本地开源模型，无需付费模型；AI Agent 创作图文 / 图片 / 视频，一键发布抖音、小红书、公众号、LinkedIn、YouTube 等 17 个平台。Commercial-grade, multi-tenant, billing & admin built in. MIT",
-   "stars": 110,
-   "topics": [
-    "ai-agents",
-    "bge-m3",
-    "content-generation",
-    "elasticsearch",
-    "knowledge-base",
-    "langgraph",
-    "milvus",
-    "multi-tenant",
-    "rag",
-    "social-media-marketing"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-10-14",
-   "pushed_at": "2026-10-14",
-   "age_days": 10,
-   "stars_per_day_lifetime": 11.0,
-   "license": "MIT",
-   "license_family": "permissive",
+   "repo": "AAswordman/Operit2",
+   "url": "https://github.com/AAswordman/Operit2",
+   "description": "全平台的AI Agent智能体，在各个平台都有极强的适配性，支持跨平台数据同步",
+   "stars": 553,
+   "topics": [],
+   "lang": "Rust",
+   "created_at": "2026-05-18",
+   "pushed_at": "2026-10-25",
+   "age_days": 160,
+   "stars_per_day_lifetime": 3.46,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
    "found_by": {
     "dimension": "chinese",
-    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-07-26",
+    "query": "智能体 in:name,description stars:>200",
     "sort": "stars",
-    "query_breadth": 27,
-    "position": 26
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "开源企业级RAG解决方案，从知识库到内容分发",
-   "evidence": "Open-source enterprise RAG solution: knowledge base → automated marketing content → omnichannel publishing.",
-   "transfer_forms": [
-    "mcp",
-    "deploy",
-    "library"
-   ],
-   "line_candidates": [
-    "rag"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "ShenSeanChen/waku-agent",
-   "url": "https://github.com/ShenSeanChen/waku-agent",
-   "description": "Waku Waku! Waku Agent is a local-first AI agent harness you actually own, including loop, memory, eval, all in code built to stay legible as it grows.",
-   "stars": 2089,
-   "topics": [
-    "agent-framework",
-    "ai-agent",
-    "ai-assistant",
-    "claude",
-    "evals",
-    "llm",
-    "llmops",
-    "local-first",
-    "openai",
-    "personal-assistant",
-    "python",
-    "sqlite"
-   ],
-   "lang": "Python",
-   "created_at": "2026-07-10",
-   "pushed_at": "2026-10-23",
-   "age_days": 106,
-   "stars_per_day_lifetime": 19.71,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-24",
-    "sort": "updated",
     "query_breadth": 100,
-    "position": 54
+    "position": 98
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "本地优先的AI代理工具，包括循环、内存、评估等功能",
-   "evidence": "Waku Waku! Waku Agent is a local-first AI agent harness you actually own...",
+   "capability": "全平台AI Agent智能体，支持跨平台数据同步",
+   "evidence": "全平台的AI Agent智能体，支持跨平台数据同步",
    "transfer_forms": [
     "skill",
     "architecture"
@@ -191,214 +131,37 @@
    "distilled": true
   },
   {
-   "repo": "pingcap/autoflow",
-   "url": "https://github.com/pingcap/autoflow",
-   "description": "pingcap/autoflow is a Graph RAG based and conversational knowledge base tool built with TiDB Serverless Vector Storage. Demo: https://tidb.ai",
-   "stars": 2978,
+   "repo": "irenerachel/visual-style-ppt-skill",
+   "url": "https://github.com/irenerachel/visual-style-ppt-skill",
+   "description": "【Skill】视觉风格 PPT 生成工作流",
+   "stars": 393,
    "topics": [
-    "chatbot",
-    "cot",
-    "graphrag",
-    "knowledge-graph",
-    "mysql",
-    "rag",
-    "serverless",
-    "vector-database"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2024-02-05",
-   "pushed_at": "2026-10-23",
-   "age_days": 992,
-   "stars_per_day_lifetime": 3.0,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 58,
-    "position": 28
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "基于Graph RAG和TiDB Serverless Vector Storage的对话式知识库工具",
-   "evidence": "pingcap/autoflow is a Graph RAG based and conversational knowledge base tool...",
-   "transfer_forms": [
-    "deploy",
-    "library"
-   ],
-   "line_candidates": [
-    "rag"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "yunyuyuan/nuxt-blog",
-   "url": "https://github.com/yunyuyuan/nuxt-blog",
-   "description": "A pure front-end blog written using Vue3, Nuxt3, and the GitHub API,free deployment, online writing.一个使用Vue3,Nuxt3,GitHub API写的纯前端博客，免费部署，在线写作",
-   "stars": 236,
-   "topics": [
-    "nuxt",
-    "nuxt3",
-    "serverless-functions",
-    "static-blog",
-    "typescript",
-    "vercel",
-    "vue",
-    "vue3"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2021-10-24",
-   "pushed_at": "2026-10-23",
-   "age_days": 1826,
-   "stars_per_day_lifetime": 0.13,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "免费 API in:name,description stars:>100 pushed:>2026-07-26",
-    "sort": "stars",
-    "query_breadth": 39,
-    "position": 27
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "使用Vue3、Nuxt3和GitHub API编写的纯前端博客",
-   "evidence": "A pure front-end blog written using Vue3, Nuxt3, and the GitHub API...",
-   "transfer_forms": [
-    "deploy"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Derpyu520/qq-bridge",
-   "url": "https://github.com/Derpyu520/qq-bridge",
-   "description": "Bridge between QQ (SnowLuma OneBot v11) and DeepSeek Harness agents: social simulation, safe MCP tools, slang learning and more.",
-   "stars": 2038,
-   "topics": [
-    "ai-agent",
-    "chatbot",
-    "deepseek-harness",
-    "dsh",
-    "onebot",
-    "qq-bot",
-    "snowluma"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-08-25",
-   "pushed_at": "2026-10-22",
-   "age_days": 60,
-   "stars_per_day_lifetime": 33.97,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 99
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "QQ和DeepSeek Harness代理之间的桥梁，支持社交模拟等",
-   "evidence": "Bridge between QQ (SnowLuma OneBot v11) and DeepSeek Harness agents...",
-   "transfer_forms": [
+    "claude-skill",
     "skill"
    ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "awarexone/Agentic-Bug-Hunter",
-   "url": "https://github.com/awarexone/Agentic-Bug-Hunter",
-   "description": "AI-powered bug bounty hunting toolkit that works with or without subscription.",
-   "stars": 5416,
-   "topics": [
-    "agentic-ai",
-    "ai-security",
-    "appsec",
-    "bug-bounty",
-    "bugcrowd",
-    "claude-ai",
-    "claude-code",
-    "ethical-hacking",
-    "graphql-security",
-    "hackerone",
-    "hacking-tool",
-    "llm-security"
-   ],
-   "lang": "Python",
-   "created_at": "2026-03-08",
-   "pushed_at": "2026-10-23",
-   "age_days": 230,
-   "stars_per_day_lifetime": 23.55,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:agentic-ai stars:>5000 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 79,
-    "position": 52
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "AI驱动的漏洞赏金猎人工具，支持订阅和非订阅模式",
-   "evidence": "AI-powered bug bounty hunting toolkit that works with or without subscription.",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "jiaotuke/ziping-shushu",
-   "url": "https://github.com/jiaotuke/ziping-shushu",
-   "description": "子平术数，根据年月日时自动排盘，检索相关古籍信息，大模型根据古籍信息按照固定算八字逻辑对命盘进行分析",
-   "stars": 31,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-10-22",
-   "pushed_at": "2026-10-23",
-   "age_days": 2,
-   "stars_per_day_lifetime": 15.5,
+   "lang": "",
+   "created_at": "2026-04-29",
+   "pushed_at": "2026-10-25",
+   "age_days": 179,
+   "stars_per_day_lifetime": 2.2,
    "license": "NONE",
    "license_family": "none",
    "found_by": {
-    "dimension": "chinese",
-    "query": "古籍 in:name,description stars:>20",
-    "sort": "stars",
-    "query_breadth": 48,
-    "position": 40
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "根据年月日时自动排盘，检索相关古籍信息，分析命盘",
-   "evidence": "子平术数，根据年月日时自动排盘，检索相关古籍信息...",
+   "capability": "视觉风格PPT生成工作流Skill",
+   "evidence": "视觉风格 PPT 生成工作流",
    "transfer_forms": [
-    "dataset"
+    "skill"
    ],
    "line_candidates": [
     "unknown"
@@ -406,423 +169,266 @@
    "distilled": true
   },
   {
-   "repo": "datalab-to/indra",
-   "url": "https://github.com/datalab-to/indra",
-   "description": "1M param OCR model - runs on CPU, 15x faster than tesseract, close to 1B+ param models in accuracy",
-   "stars": 1004,
+   "repo": "chatmcp/mcpso",
+   "url": "https://github.com/chatmcp/mcpso",
+   "description": "directory for Awesome MCP Servers",
+   "stars": 2111,
    "topics": [
-    "ai",
-    "cpu",
-    "document-parsing",
-    "ocr",
-    "onnx",
-    "pdf"
+    "awesome-mcp-servers",
+    "mcp",
+    "mcp-server-store",
+    "mcp-servers",
+    "mcp-servers-directory"
    ],
-   "lang": "Python",
-   "created_at": "2026-10-13",
-   "pushed_at": "2026-10-22",
-   "age_days": 11,
-   "stars_per_day_lifetime": 91.27,
+   "lang": "TypeScript",
+   "created_at": "2024-12-06",
+   "pushed_at": "2026-10-25",
+   "age_days": 688,
+   "stars_per_day_lifetime": 3.07,
    "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "topic:ocr stars:>1000 pushed:>2026-07-26",
-    "sort": "updated",
-    "query_breadth": 89,
-    "position": 37
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "运行在CPU上的1M参数OCR模型，速度快于tesseract，准确度接近1B+参数模型",
-   "evidence": "1M param OCR model - runs on CPU, 15x faster than tesseract...",
-   "transfer_forms": [
-    "dataset"
-   ],
-   "line_candidates": [
-    "ocr"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "juneix/EmbyX",
-   "url": "https://github.com/juneix/EmbyX",
-   "description": "Watch Emby short videos like Tiktok. 像刷抖音一样看 Emby 短视频。",
-   "stars": 101,
-   "topics": [
-    "docker",
-    "emby",
-    "emby-client",
-    "instagram",
-    "jellyfin",
-    "jellyfin-client",
-    "local-first",
-    "media-player",
-    "nas",
-    "self-hosted",
-    "tiktok",
-    "twitter"
-   ],
-   "lang": "HTML",
-   "created_at": "2025-11-20",
-   "pushed_at": "2026-10-23",
-   "age_days": 338,
-   "stars_per_day_lifetime": 0.3,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-26",
-    "sort": "stars",
-    "query_breadth": 56,
-    "position": 55
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "像刷抖音一样观看Emby短视频",
-   "evidence": "Watch Emby short videos like Tiktok.",
-   "transfer_forms": [
-    "deploy"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "dustinspecker/awesome-eslint",
-   "url": "https://github.com/dustinspecker/awesome-eslint",
-   "description": "A list of awesome ESLint plugins, configs, etc.",
-   "stars": 4770,
-   "topics": [
-    "awesome",
-    "awesome-list",
-    "eslint",
-    "list"
-   ],
-   "lang": "",
-   "created_at": "2015-10-30",
-   "pushed_at": "2026-10-24",
-   "age_days": 4012,
-   "stars_per_day_lifetime": 1.19,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-24",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-25",
     "sort": "updated",
     "query_breadth": 100,
     "position": 12
    },
-   "matched_by_n_queries": 1,
+   "matched_by_n_queries": 2,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "列出优秀的 ESLint 插件和配置",
-   "evidence": "topics: awesome, awesome-list, eslint, list",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "YD-233/kimi-break",
-   "url": "https://github.com/YD-233/kimi-break",
-   "description": "Kimi Code 渗透破甲（Jailbreak）系统提示词 · AI 红队研究",
-   "stars": 202,
-   "topics": [],
-   "lang": "",
-   "created_at": "2026-08-17",
-   "pushed_at": "2026-10-19",
-   "age_days": 68,
-   "stars_per_day_lifetime": 2.97,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-26",
-    "sort": "stars",
-    "query_breadth": 84,
-    "position": 83
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供 Kimi Code 渗透破甲系统提示词",
-   "evidence": "topics: -",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "ollaya-dev/ollaya",
-   "url": "https://github.com/ollaya-dev/ollaya",
-   "description": "Jev-compatible API server for open decision models. Ollama for decision models: pull and serve 25 model families (Laya, pplx-decider, Clef, Winnow, coba...) locally or self-hosted behind /v1/systemone. The TypeSafe SDK works unchanged: set its base URL and pick an open model. CLI, desktop app, Docker, MCP server, public bench.",
-   "stars": 1388,
-   "topics": [
-    "calibration",
-    "decision-model",
-    "decision-models",
-    "inference-server",
-    "jev",
-    "jev-alternative",
-    "jev-compatible",
-    "laya",
-    "llama-cpp",
-    "local-inference",
-    "mcp-server",
-    "model-serving"
-   ],
-   "lang": "Rust",
-   "created_at": "2026-09-23",
-   "pushed_at": "2026-10-24",
-   "age_days": 31,
-   "stars_per_day_lifetime": 44.77,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 15
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供决策模型 API 服务器和模型服务",
-   "evidence": "topics: calibration, decision-model, decision-models, inference-server, jev, jev-alternative, jev-compatible, laya, llam",
+   "capability": "MCP服务器目录",
+   "evidence": "directory for Awesome MCP Servers",
    "transfer_forms": [
     "mcp",
-    "library"
+    "architecture"
    ],
    "line_candidates": [
-    "modelpool",
-    "unknown"
+    "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "ocaml-community/awesome-ocaml",
-   "url": "https://github.com/ocaml-community/awesome-ocaml",
-   "description": "A curated collection of awesome OCaml tools, frameworks, libraries and articles.",
-   "stars": 3126,
-   "topics": [
-    "awesome",
-    "ocaml",
-    "programming-language",
-    "resources"
-   ],
-   "lang": "",
-   "created_at": "2014-07-24",
-   "pushed_at": "2026-10-23",
-   "age_days": 4475,
-   "stars_per_day_lifetime": 0.7,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 42
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "收集 OCaml 工具、框架、库和文章",
-   "evidence": "topics: awesome, ocaml, programming-language, resources",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "dictcp/awesome-git",
-   "url": "https://github.com/dictcp/awesome-git",
-   "description": "A curated list of amazingly awesome Git tools, resources and shiny things",
-   "stars": 2960,
+   "repo": "opsre/awesome-ops",
+   "url": "https://github.com/opsre/awesome-ops",
+   "description": "🧰 记录每一个与运维相关的优秀项目，⚗️ 项目内表格通过 GitHub Action 自动生成，📥 当前收录项目 656 个。",
+   "stars": 2095,
    "topics": [
     "awesome",
     "awesome-list",
-    "awesome-lists",
-    "git"
+    "awesome-ops",
+    "backup",
+    "cicd",
+    "cmdb",
+    "docker",
+    "elasticsearch",
+    "eryajf",
+    "jenkins",
+    "kubernetes",
+    "mysql"
    ],
-   "lang": "",
-   "created_at": "2015-08-20",
-   "pushed_at": "2026-10-23",
-   "age_days": 4083,
-   "stars_per_day_lifetime": 0.72,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 54
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "列出 Git 工具、资源和亮点",
-   "evidence": "topics: awesome, awesome-list, awesome-lists, git",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "aipotheosis-labs/aci",
-   "url": "https://github.com/aipotheosis-labs/aci",
-   "description": "ACI.dev is the open source tool-calling platform that hooks up 600+ tools into any agentic IDE or custom AI agent through direct function calling or a unified MCP server. The birthplace of VibeOps.",
-   "stars": 4921,
-   "topics": [
-    "agents",
-    "ai",
-    "ai-agents",
-    "api",
-    "developer-tools",
-    "function-calling",
-    "integration",
-    "llm",
-    "mcp",
-    "oauth2",
-    "open-source",
-    "permissions"
-   ],
-   "lang": "Python",
-   "created_at": "2024-09-19",
-   "pushed_at": "2026-10-23",
-   "age_days": 765,
-   "stars_per_day_lifetime": 6.43,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 63
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供工具调用平台，连接 600+ 工具",
-   "evidence": "topics: agents, ai, ai-agents, api, developer-tools, function-calling, integration, llm, mcp, oauth2, open-source, permi",
-   "transfer_forms": [
-    "mcp",
-    "skill",
-    "architecture",
-    "deploy"
-   ],
-   "line_candidates": [
-    "modelpool",
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "hoodini/ai-agents-skills",
-   "url": "https://github.com/hoodini/ai-agents-skills",
-   "description": "🧠 AI Agent Skills Repository - A curated collection of specialized skills for AI coding agents (Claude Code, GitHub Copilot, Cursor, Windsurf). Created by Yuval Avidani using GitHub Copilot via VS Code Insiders.",
-   "stars": 290,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-01-07",
-   "pushed_at": "2026-10-23",
-   "age_days": 290,
-   "stars_per_day_lifetime": 1.0,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-24",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 82
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "收集 AI 编码代理的专用技能",
-   "evidence": "topics: -",
-   "transfer_forms": [
-    "skill",
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "utkusen/sast-skills",
-   "url": "https://github.com/utkusen/sast-skills",
-   "description": "Collection of agent skills to find vulnerabilities inside your web/mobile apps.",
-   "stars": 1345,
-   "topics": [
-    "ai-security",
-    "claude",
-    "claude-code",
-    "sast"
-   ],
-   "lang": "",
-   "created_at": "2026-03-30",
-   "pushed_at": "2026-10-23",
-   "age_days": 208,
-   "stars_per_day_lifetime": 6.47,
+   "lang": "Go Template",
+   "created_at": "2024-01-07",
+   "pushed_at": "2026-10-24",
+   "age_days": 1022,
+   "stars_per_day_lifetime": 2.05,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-24",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-25",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 84
+    "position": 32
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "收集用于寻找 Web/移动应用漏洞的代理技能",
-   "evidence": "topics: ai-security, claude, claude-code, sast",
+   "capability": "运维相关优秀项目列表",
+   "evidence": "记录每一个与运维相关的优秀项目",
    "transfer_forms": [
-    "skill",
     "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Clipcat-ai/clipcat-skill",
+   "url": "https://github.com/Clipcat-ai/clipcat-skill",
+   "description": "AI TikTok Video Generator for Shop Sellers - find viral inspiration, replicate winning videos and publish to TikTok. | Codex, ChatGPT, Claude Code, OpenClaw",
+   "stars": 323,
+   "topics": [
+    "ai-agent-cli",
+    "ai-agent-skills",
+    "ai-image-generation",
+    "ai-video-generation",
+    "ai-video-prompts",
+    "claude-code",
+    "clipcat-skills-install",
+    "codex",
+    "openclaw",
+    "short-video-automation",
+    "tiktok-analysis",
+    "tiktok-publishing-api"
+   ],
+   "lang": "",
+   "created_at": "2026-03-17",
+   "pushed_at": "2026-10-24",
+   "age_days": 222,
+   "stars_per_day_lifetime": 1.45,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 41
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "AI TikTok视频生成工具，支持视频生成和发布",
+   "evidence": "AI TikTok Video Generator for Shop Sellers",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "DengShiyingA/harmonyos-ai-skill",
+   "url": "https://github.com/DengShiyingA/harmonyos-ai-skill",
+   "description": "鸿蒙(HarmonyOS NEXT)开发知识包,一份源文件自动产出 Claude Code / Cursor / Copilot / Codex / Gemini CLI / Windsurf / ChatGPT 等 11+ AI 工具的配置文件,让 AI 像熟读华为文档的工程师一样帮你写 ArkTS / ArkUI。",
+   "stars": 284,
+   "topics": [
+    "agents-md",
+    "ai-coding-assistant",
+    "arkts",
+    "arkui",
+    "claude-code",
+    "cline",
+    "continue-dev",
+    "copilot",
+    "cursor",
+    "gemini-cli",
+    "harmonyos",
+    "harmonyos-next"
+   ],
+   "lang": "Shell",
+   "created_at": "2026-04-05",
+   "pushed_at": "2026-10-24",
+   "age_days": 203,
+   "stars_per_day_lifetime": 1.4,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 61
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "鸿蒙开发知识包，自动产出多种AI工具配置文件",
+   "evidence": "一份源文件自动产出 Claude Code / Cursor / Copilot / Codex / Gemini CLI / Windsurf / ChatGPT 等 11+ AI 工具的配置文件",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "antonbabenko/terraform-skill",
+   "url": "https://github.com/antonbabenko/terraform-skill",
+   "description": "Terraform & OpenTofu Skill for AI Agents - testing, modules, CI/CD, and production patterns",
+   "stars": 2427,
+   "topics": [
+    "agent-skills",
+    "best-practices",
+    "claude-code",
+    "claude-skills",
+    "devops",
+    "infrastructure-as-code",
+    "modules",
+    "opentofu",
+    "terraform",
+    "testing"
+   ],
+   "lang": "",
+   "created_at": "2026-01-15",
+   "pushed_at": "2026-10-24",
+   "age_days": 283,
+   "stars_per_day_lifetime": 8.58,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 71
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "Terraform & OpenTofu技能，用于AI Agent",
+   "evidence": "Terraform & OpenTofu Skill for AI Agents",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "skilltraining-project/skill-training",
+   "url": "https://github.com/skilltraining-project/skill-training",
+   "description": "Skill training with a corruption and reconstruction loop: train an agent's skill library, not its weights.",
+   "stars": 422,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-09-26",
+   "pushed_at": "2026-10-24",
+   "age_days": 29,
+   "stars_per_day_lifetime": 14.55,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 87
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "技能训练项目，训练智能体的技能库",
+   "evidence": "Skill training with a corruption and reconstruction loop",
+   "transfer_forms": [
+    "skill"
    ],
    "line_candidates": [
     "unknown"

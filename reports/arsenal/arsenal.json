@@ -51408,6 +51408,46 @@
    }
   },
   {
+   "repo": "antonbabenko/terraform-skill",
+   "url": "https://github.com/antonbabenko/terraform-skill",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 2427,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "pushed_at": "2026-10-24",
+   "created_at": "2026-01-15",
+   "stars_per_day_lifetime": 8.58,
+   "capability": "Terraform & OpenTofu技能，用于AI Agent",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "best-practices",
+    "claude-code",
+    "claude-skills",
+    "devops",
+    "infrastructure-as-code",
+    "modules",
+    "opentofu",
+    "terraform",
+    "testing"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 71
+   }
+  },
+  {
    "repo": "Justineo/vue-awesome",
    "url": "https://github.com/Justineo/vue-awesome",
    "first_seen": "2026-09-22",
@@ -55991,6 +56031,43 @@
    }
   },
   {
+   "repo": "chatmcp/mcpso",
+   "url": "https://github.com/chatmcp/mcpso",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 2111,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-25",
+   "created_at": "2024-12-06",
+   "stars_per_day_lifetime": 3.07,
+   "capability": "MCP服务器目录",
+   "transfer_forms": [
+    "mcp",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "awesome-mcp-servers",
+    "mcp",
+    "mcp-server-store",
+    "mcp-servers",
+    "mcp-servers-directory"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 12
+   }
+  },
+  {
    "repo": "Leanmcp/gateway-skills",
    "url": "https://github.com/Leanmcp/gateway-skills",
    "first_seen": "2026-10-08",
@@ -56279,6 +56356,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 65
+   }
+  },
+  {
+   "repo": "opsre/awesome-ops",
+   "url": "https://github.com/opsre/awesome-ops",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 2095,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Go Template",
+   "pushed_at": "2026-10-24",
+   "created_at": "2024-01-07",
+   "stars_per_day_lifetime": 2.05,
+   "capability": "运维相关优秀项目列表",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "awesome-ops",
+    "backup",
+    "cicd",
+    "cmdb",
+    "docker",
+    "elasticsearch",
+    "eryajf",
+    "jenkins",
+    "kubernetes",
+    "mysql"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 32
    }
   },
   {
@@ -68941,6 +69061,49 @@
    }
   },
   {
+   "repo": "Downvid/downvid",
+   "url": "https://github.com/Downvid/downvid",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 1109,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-24",
+   "created_at": "2026-08-22",
+   "stars_per_day_lifetime": 17.33,
+   "capability": "跨平台视频下载工具，支持全网无水印高清视频下载",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "aria2",
+    "bilibili-downloader",
+    "cross-platform",
+    "desktop-app",
+    "douyin-downloader",
+    "download-manager",
+    "electron",
+    "ffmpeg",
+    "kuaishou-downloader",
+    "linux",
+    "macos",
+    "media-downloader"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 42,
+    "position": 21
+   }
+  },
+  {
    "repo": "ModernRelay/omnigraph",
    "url": "https://github.com/ModernRelay/omnigraph",
    "first_seen": "2026-09-09",
@@ -78835,6 +78998,36 @@
    }
   },
   {
+   "repo": "AAswordman/Operit2",
+   "url": "https://github.com/AAswordman/Operit2",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 553,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Rust",
+   "pushed_at": "2026-10-25",
+   "created_at": "2026-05-18",
+   "stars_per_day_lifetime": 3.46,
+   "capability": "全平台AI Agent智能体，支持跨平台数据同步",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "智能体 in:name,description stars:>200",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 98
+   }
+  },
+  {
    "repo": "binggandata/bggg-skills",
    "url": "https://github.com/binggandata/bggg-skills",
    "first_seen": "2026-08-05",
@@ -84060,6 +84253,35 @@
    }
   },
   {
+   "repo": "skilltraining-project/skill-training",
+   "url": "https://github.com/skilltraining-project/skill-training",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 422,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-10-24",
+   "created_at": "2026-09-26",
+   "stars_per_day_lifetime": 14.55,
+   "capability": "技能训练项目，训练智能体的技能库",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 87
+   }
+  },
+  {
    "repo": "ZeroPointRepo/awesome-hermes-skills",
    "url": "https://github.com/ZeroPointRepo/awesome-hermes-skills",
    "first_seen": "2026-08-18",
@@ -84949,6 +85171,38 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 22
+   }
+  },
+  {
+   "repo": "irenerachel/visual-style-ppt-skill",
+   "url": "https://github.com/irenerachel/visual-style-ppt-skill",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 393,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-10-25",
+   "created_at": "2026-04-29",
+   "stars_per_day_lifetime": 2.2,
+   "capability": "视觉风格PPT生成工作流Skill",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "claude-skill",
+    "skill"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
    }
   },
   {
@@ -88430,6 +88684,48 @@
    }
   },
   {
+   "repo": "Clipcat-ai/clipcat-skill",
+   "url": "https://github.com/Clipcat-ai/clipcat-skill",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 323,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-10-24",
+   "created_at": "2026-03-17",
+   "stars_per_day_lifetime": 1.45,
+   "capability": "AI TikTok视频生成工具，支持视频生成和发布",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai-agent-cli",
+    "ai-agent-skills",
+    "ai-image-generation",
+    "ai-video-generation",
+    "ai-video-prompts",
+    "claude-code",
+    "clipcat-skills-install",
+    "codex",
+    "openclaw",
+    "short-video-automation",
+    "tiktok-analysis",
+    "tiktok-publishing-api"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 41
+   }
+  },
+  {
    "repo": "DJChanahCJD/otter-music",
    "url": "https://github.com/DJChanahCJD/otter-music",
    "first_seen": "2026-08-02",
@@ -91447,6 +91743,49 @@
     "sort": "stars",
     "query_breadth": 47,
     "position": 30
+   }
+  },
+  {
+   "repo": "DengShiyingA/harmonyos-ai-skill",
+   "url": "https://github.com/DengShiyingA/harmonyos-ai-skill",
+   "first_seen": "2026-10-25",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-25",
+   "stars": 284,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Shell",
+   "pushed_at": "2026-10-24",
+   "created_at": "2026-04-05",
+   "stars_per_day_lifetime": 1.4,
+   "capability": "鸿蒙开发知识包，自动产出多种AI工具配置文件",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agents-md",
+    "ai-coding-assistant",
+    "arkts",
+    "arkui",
+    "claude-code",
+    "cline",
+    "continue-dev",
+    "copilot",
+    "cursor",
+    "gemini-cli",
+    "harmonyos",
+    "harmonyos-next"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-25",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 61
    }
   },
   {
@@ -109149,7 +109488,7 @@
    }
   }
  ],
- "updated": "2026-10-24",
+ "updated": "2026-10-25",
  "status_enum": [
   "pending",
   "debated",
