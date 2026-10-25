@@ -54,7 +54,7 @@
    "score": null,
    "delta": null,
    "cls": {},
-   "note": "调用失败 HTTPError: HTTP Error 403: Forbidden"
+   "note": "调用失败 HTTPError: HTTP Error 429: Too Many Requests"
   },
   {
    "who": "opencode · laguna-s-2.1-free",
@@ -81,7 +81,7 @@
    "score": null,
    "delta": null,
    "cls": {},
-   "note": "调用失败 HTTPError: HTTP Error 403: Forbidden"
+   "note": "调用失败 HTTPError: HTTP Error 429: Too Many Requests"
   },
   {
    "who": "gateway · nvidia 默认(nemotron-3-ultra)",
