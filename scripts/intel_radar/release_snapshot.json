@@ -20,8 +20,8 @@
   "tag": "v2.3.1"
  },
  "dreammis/social-auto-upload": {
-  "published_at": "2024-04-10T05:27:16Z",
-  "tag": "oh-v1.0"
+  "published_at": "2026-10-22T18:15:56Z",
+  "tag": "v1.0.0-skills.2"
  },
  "infiniflow/ragflow": {
   "published_at": "2026-10-16T09:49:48Z",
@@ -40,7 +40,7 @@
   "tag": "v0.9.5"
  },
  "vercel/satori": {
-  "published_at": "2026-10-16T07:37:39Z",
-  "tag": "0.62.0"
+  "published_at": "2026-10-20T09:08:32Z",
+  "tag": "0.63.2"
  }
 }
