@@ -36,7 +36,7 @@
    "score": null,
    "delta": null,
    "cls": {},
-   "note": "调用失败 HTTPError: HTTP Error 410: Gone"
+   "note": "调用失败 HTTPError: HTTP Error 400: Bad Request"
   },
   {
    "who": "opencode · ling-3.0-flash-free",
@@ -54,7 +54,7 @@
    "score": null,
    "delta": null,
    "cls": {},
-   "note": "调用失败 HTTPError: HTTP Error 429: Too Many Requests"
+   "note": "调用失败 HTTPError: HTTP Error 400: Bad Request"
   },
   {
    "who": "opencode · laguna-s-2.1-free",
