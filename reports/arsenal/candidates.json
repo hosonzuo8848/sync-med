@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-10-26",
+ "generated": "2026-10-27",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -40,150 +40,48 @@
   "failed_queries": []
  },
  "distill": {
-  "seat": "sensenova",
-  "calls": 4,
+  "seat": "zhipu",
+  "calls": 6,
   "ok": 2
  },
- "count": 13,
+ "count": 16,
  "candidates": [
   {
-   "repo": "huaxialucaicaizi/ai-startup-skills",
-   "url": "https://github.com/huaxialucaicaizi/ai-startup-skills",
-   "description": "创业公司做 AI 产品的 7 步 Agent Skill 合集：验证 → BP → 政策 → 路演 → 获客 → 定价 → 注册。",
-   "stars": 226,
+   "repo": "SoMarkAI/OXR",
+   "url": "https://github.com/SoMarkAI/OXR",
+   "description": "An open-source document parsing model with SOTA accuracy and speed, using an RSI loop during post-training.",
+   "stars": 1060,
    "topics": [
-    "agent-skills",
-    "ai",
-    "business-plan",
-    "claude-code",
-    "codex",
-    "cursor",
-    "entrepreneurship",
-    "growth",
-    "mvp-validation",
-    "one-person-company",
-    "openai",
-    "pricing"
+    "agent",
+    "llm-tools",
+    "ocr",
+    "rsi",
+    "vlm",
+    "vlm-ocr"
    ],
    "lang": "Python",
-   "created_at": "2026-10-22",
-   "pushed_at": "2026-10-26",
-   "age_days": 4,
-   "stars_per_day_lifetime": 56.5,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-26",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 34
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供创业公司AI产品开发步骤指南",
-   "evidence": "创业公司做AI产品的7步Agent Skill合集：验证 → BP → 政策 → 路演 → 获客 → 定价 → 注册。",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "designfuchen/word-atlas",
-   "url": "https://github.com/designfuchen/word-atlas",
-   "description": "词光 · 一词一画，点亮雅思 — 7,298 IELTS words, each with an original illustration, UK/US audio, 14,596 example sentences and FSRS review. Free, open source, no login. Dataset CC BY 4.0.",
-   "stars": 872,
-   "topics": [
-    "chinese",
-    "dataset",
-    "english-learning",
-    "flashcards",
-    "fsrs",
-    "ielts",
-    "language-learning",
-    "pwa",
-    "react",
-    "spaced-repetition",
-    "vocabulary",
-    "webgl"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-10-25",
-   "pushed_at": "2026-10-26",
-   "age_days": 1,
-   "stars_per_day_lifetime": 872.0,
+   "created_at": "2026-10-05",
+   "pushed_at": "2026-10-24",
+   "age_days": 22,
+   "stars_per_day_lifetime": 48.18,
    "license": "NOASSERTION",
    "license_family": "unknown",
    "found_by": {
-    "dimension": "chinese",
-    "query": "topic:chinese stars:>500 pushed:>2026-09-26",
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-07-29",
     "sort": "updated",
-    "query_breadth": 77,
-    "position": 13
+    "query_breadth": 89,
+    "position": 35
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供IELTS词汇学习资源",
-   "evidence": "词光 · 一词一画，点亮雅思 — 7,298 IELTS words, each with an original illustration, UK/US audio, 14,596 example sentences and FSRS r",
+   "capability": "开源文档解析模型，使用RSI循环进行后训练，具有高精度和速度。",
+   "evidence": "An open-source document parsing model with SOTA accuracy and speed, using an RSI loop during post-training.",
    "transfer_forms": [
-    "dataset"
-   ],
-   "line_candidates": [
-    "image"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "EgoAlpha/prompt-in-context-learning",
-   "url": "https://github.com/EgoAlpha/prompt-in-context-learning",
-   "description": "Awesome resources for in-context learning and prompt engineering: Mastery of the LLMs such as ChatGPT, GPT-3, and FlanT5, with up-to-date and cutting-edge updates.",
-   "stars": 2248,
-   "topics": [
-    "ai-agent",
-    "chain-of-thought",
-    "chatbot",
-    "chatgpt",
-    "chatgpt-api",
-    "cot",
-    "in-context-learning",
-    "language-modeling",
-    "large-language-model",
-    "llm",
-    "pre-training",
-    "prompt"
-   ],
-   "lang": "Jupyter Notebook",
-   "created_at": "2023-03-08",
-   "pushed_at": "2026-10-26",
-   "age_days": 1328,
-   "stars_per_day_lifetime": 1.69,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-26",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 18
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供上下文学习与提示工程资源",
-   "evidence": "Awesome resources for in-context learning and prompt engineering: Mastery of the LLMs such as ChatGPT, GPT-3, and FlanT5",
-   "transfer_forms": [
-    "library"
+    "unknown"
    ],
    "line_candidates": [
     "unknown"
@@ -191,228 +89,40 @@
    "distilled": true
   },
   {
-   "repo": "xiaobeicn/skills-summary",
-   "url": "https://github.com/xiaobeicn/skills-summary",
-   "description": "An documentation to improve oneself",
-   "stars": 266,
+   "repo": "cyber-xiaoya/cyber-xiaoya-live",
+   "url": "https://github.com/cyber-xiaoya/cyber-xiaoya-live",
+   "description": "赛博小雅直播版 · 组件版数字人（Vidu s2）· 免费开源 AGPL-3.0 · 作者：天工开帧（抖音/B站/YouTube 同名）",
+   "stars": 169,
    "topics": [
-    "git",
-    "go",
-    "javascript",
-    "markdown",
-    "mysql",
-    "nosql",
-    "php",
-    "programming",
+    "agpl",
+    "danmaku",
+    "digital-human",
+    "live-streaming",
     "python",
-    "skills"
-   ],
-   "lang": "",
-   "created_at": "2014-11-28",
-   "pushed_at": "2026-10-26",
-   "age_days": 4350,
-   "stars_per_day_lifetime": 0.06,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-26",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 39
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供编程技能文档",
-   "evidence": "An documentation to improve oneself",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "wchao6891/PromptDirector",
-   "url": "https://github.com/wchao6891/PromptDirector",
-   "description": "Spot it. Save it. Free, local-first Chrome extension for images, videos and prompts. Explore 2,000+ curated cases and connect your library to AI Agents via MCP. 提示词导演",
-   "stars": 236,
-   "topics": [
-    "ai-art",
-    "ai-video",
-    "chrome-extension",
-    "claude-code",
-    "codex",
-    "higgsfield",
-    "jimeng",
-    "local-first",
-    "mcp",
-    "midjourney",
-    "moodboard",
-    "prompt-engineering"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-07-19",
-   "pushed_at": "2026-10-22",
-   "age_days": 99,
-   "stars_per_day_lifetime": 2.38,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-28",
-    "sort": "stars",
-    "query_breadth": 83,
-    "position": 75
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供AI图像、视频和提示词的Chrome扩展",
-   "evidence": "Free, local-first Chrome extension for images, videos and prompts. Explore 2,000+ curated cases and connect your library",
-   "transfer_forms": [
-    "skill",
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "glincker/thesvg",
-   "url": "https://github.com/glincker/thesvg",
-   "description": "The open SVG brand library: 7,600+ brand logos and cloud icons (AWS, Azure, GCP) as official SVG. Search, copy, ship via npm, CDN, CLI, React, Vue, Svelte, Figma, VS Code, Raycast and MCP. Free, MIT, no gatekeeping.",
-   "stars": 2902,
-   "topics": [
-    "aws",
-    "brand-assets",
-    "brand-logos",
-    "cdn",
-    "cloud-icons",
-    "icon-library",
-    "icon-pack",
-    "icons",
-    "logos",
-    "mcp-server",
-    "nextjs",
-    "npm-package"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-03-07",
-   "pushed_at": "2026-10-25",
-   "age_days": 233,
-   "stars_per_day_lifetime": 12.45,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp-server stars:>1000 pushed:>2026-09-26",
-    "sort": "stars",
-    "query_breadth": 100,
-    "position": 99
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供开放SVG品牌库",
-   "evidence": "The open SVG brand library: 7,600+ brand logos and cloud icons (AWS, Azure, GCP) as official SVG.",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "mcpjungle/MCPJungle",
-   "url": "https://github.com/mcpjungle/MCPJungle",
-   "description": "One place to manage & connect to all your MCP servers",
-   "stars": 1309,
-   "topics": [
-    "ai-agents",
-    "infrastructure",
-    "mcp",
-    "mcp-gateway",
-    "mcp-registry",
-    "mcp-server",
-    "model-context-protocol",
-    "self-hosted"
-   ],
-   "lang": "Go",
-   "created_at": "2025-05-15",
-   "pushed_at": "2026-10-25",
-   "age_days": 529,
-   "stars_per_day_lifetime": 2.47,
-   "license": "MPL-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-26",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 43
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供MCP服务器管理与连接工具",
-   "evidence": "One place to manage & connect to all your MCP servers",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "rddmwmddr/android-ad-cleaner",
-   "url": "https://github.com/rddmwmddr/android-ad-cleaner",
-   "description": "关掉国产安卓手机系统里的广告、热搜、资讯推荐和营销推送。不 root，可还原，支持 AI 智能体一键执行。",
-   "stars": 1072,
-   "topics": [
-    "adb",
-    "ai-agent",
-    "android",
-    "coloros",
-    "debloat",
-    "hyperos",
-    "magicos",
-    "originos"
+    "tts",
+    "vidu"
    ],
    "lang": "Python",
    "created_at": "2026-10-24",
-   "pushed_at": "2026-10-25",
-   "age_days": 2,
-   "stars_per_day_lifetime": 536.0,
-   "license": "MIT",
-   "license_family": "permissive",
+   "pushed_at": "2026-10-24",
+   "age_days": 3,
+   "stars_per_day_lifetime": 56.33,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
    "found_by": {
     "dimension": "chinese",
-    "query": "智能体 in:name,description stars:>200",
+    "query": "数字人 in:name,description stars:>100 pushed:>2026-07-29",
     "sort": "stars",
-    "query_breadth": 100,
-    "position": 60
+    "query_breadth": 35,
+    "position": 25
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供安卓手机系统广告清理工具",
-   "evidence": "关掉国产安卓手机系统里的广告、热搜、资讯推荐和营销推送。",
+   "capability": "赛博小雅直播版，组件版数字人（Vidu s2），免费开源AGPL-3.0。",
+   "evidence": "赛博小雅直播版 · 组件版数字人（Vidu s2）· 免费开源 AGPL-3.0 · 作者：天工开帧（抖音/B站/YouTube 同名）",
    "transfer_forms": [
     "unknown"
    ],
@@ -422,34 +132,97 @@
    "distilled": true
   },
   {
-   "repo": "elayadesign/redesign-skill",
-   "url": "https://github.com/elayadesign/redesign-skill",
-   "description": "",
-   "stars": 322,
-   "topics": [],
-   "lang": "",
-   "created_at": "2026-07-18",
+   "repo": "SamurAIGPT/postiz-cheap",
+   "url": "https://github.com/SamurAIGPT/postiz-cheap",
+   "description": "Free, open-source Postiz alternative: self-host a social media scheduler with an AI post writer, content calendar, and publishing across 8 platforms. MIT licensed; external provider charges may apply.",
+   "stars": 1275,
+   "topics": [
+    "ai",
+    "ai-content-generation",
+    "content-calendar",
+    "content-scheduling",
+    "facebook",
+    "free",
+    "instagram",
+    "linkedin",
+    "nextjs",
+    "open-source",
+    "pinterest",
+    "postiz-alternative"
+   ],
+   "lang": "JavaScript",
+   "created_at": "2023-05-19",
    "pushed_at": "2026-10-26",
-   "age_days": 100,
-   "stars_per_day_lifetime": 3.22,
+   "age_days": 1257,
+   "stars_per_day_lifetime": 1.01,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:social-media-automation stars:>300 pushed:>2026-07-29",
+    "sort": "stars",
+    "query_breadth": 7,
+    "position": 4
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "开源社交媒体调度器，带AI帖子撰写器、内容日历和跨8个平台的发布。",
+   "evidence": "Free, open-source Postiz alternative: self-host a social media scheduler with an AI post writer, content calendar, and p",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "minhnv0807/ai-business-skills",
+   "url": "https://github.com/minhnv0807/ai-business-skills",
+   "description": "138 bilingual AI marketing skills (69 VN + 69 Global) for Claude Code, OpenCode, Codex, VS Code. Four role SOP packs — content, design, performance, leader ops — plus strategy, personal brand, AI avatar, dropshipping, design master, knowledge library. 4 regions (US/EU/SEA/LATAM) + Vietnam 2025-2026. Companion: opa-kit.",
+   "stars": 632,
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "ai-avatar",
+    "anthropic",
+    "chatgpt",
+    "claude-code",
+    "claude-plugin",
+    "content-marketing",
+    "copilot",
+    "cursor",
+    "dropshipping",
+    "gemini"
+   ],
+   "lang": "JavaScript",
+   "created_at": "2026-04-15",
+   "pushed_at": "2026-10-27",
+   "age_days": 195,
+   "stars_per_day_lifetime": 3.24,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-26",
+    "query": "skill in:name stars:>200 pushed:>2026-09-27",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 46
+    "position": 11
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供技能学习资源",
-   "evidence": "提供技能学习资源",
+   "capability": "提供138个双语AI营销技能，包括内容、设计、性能、领导运营等策略包。",
+   "evidence": "138 bilingual AI marketing skills (69 VN + 69 Global) for Claude Code, OpenCode, Codex, VS Code. Four role SOP packs — c",
    "transfer_forms": [
-    "unknown"
+    "skill",
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -457,102 +230,68 @@
    "distilled": true
   },
   {
-   "repo": "cranebeaker/coop-anything",
-   "url": "https://github.com/cranebeaker/coop-anything",
-   "description": "Co-op Anything: point your AI agent at any single-player game and play it with friends (online and/or splitscreen!). MCP server and playbook to let you reverse engineer, fix, test, ship and share what it learns.",
-   "stars": 1388,
+   "repo": "liangdabiao/whiteboard-teacher-video",
+   "url": "https://github.com/liangdabiao/whiteboard-teacher-video",
+   "description": "MG动画视频skill, 抖音爆款Vibe知识大赏知识短片 ，  自动配音效，一键出片。图文讲解视频 skill  —— 把讲解稿变成「手绘会动的画面」讲解视频。  图形由代码逐笔绘出、文字逐字写出、讲到哪画到哪。五套风格可选，本地 Chrome 渲染， 零生图 API 成本 ，任何改动秒级重渲。",
+   "stars": 180,
    "topics": [],
    "lang": "Python",
    "created_at": "2026-10-16",
-   "pushed_at": "2026-10-25",
-   "age_days": 10,
-   "stars_per_day_lifetime": 138.8,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-26",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 59
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供多人在线或分屏游戏合作工具",
-   "evidence": "Co-op Anything: point your AI agent at any single-player game and play it with friends (online and/or splitscreen!). MCP",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "gotalab/skillport",
-   "url": "https://github.com/gotalab/skillport",
-   "description": "Bring Agent Skills to Any AI Agent and Coding Agent — via CLI or MCP. Manage once, serve anywhere.",
-   "stars": 418,
-   "topics": [
-    "agent-skills",
-    "ai-agent",
-    "claude",
-    "codex",
-    "context-engineering",
-    "cursor",
-    "github-copilot",
-    "mcp",
-    "skills"
-   ],
-   "lang": "Python",
-   "created_at": "2025-12-01",
-   "pushed_at": "2026-10-25",
-   "age_days": 329,
-   "stars_per_day_lifetime": 1.27,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-26",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 67
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "通过CLI或MCP向任意AI代理和编码代理分发与管理Agent Skills，一次管理多处使用。",
-   "evidence": "描述提到Bring Agent Skills via CLI or MCP",
-   "transfer_forms": [
-    "mcp",
-    "deploy"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "flowful-ai/cad-skill",
-   "url": "https://github.com/flowful-ai/cad-skill",
-   "description": "Claude Code skill for parametric 3D-printable model generation with CadQuery",
-   "stars": 693,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-02-10",
-   "pushed_at": "2026-10-25",
-   "age_days": 258,
-   "stars_per_day_lifetime": 2.69,
+   "pushed_at": "2026-10-26",
+   "age_days": 11,
+   "stars_per_day_lifetime": 16.36,
    "license": "NOASSERTION",
    "license_family": "unknown",
    "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-26",
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-29",
+    "sort": "stars",
+    "query_breadth": 60,
+    "position": 45
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "MG动画视频技能，将讲解稿转换为手绘动画讲解视频。",
+   "evidence": "MG动画视频skill, 抖音爆款Vibe知识大赏知识短片 ，  自动配音效，一键出片。图文讲解视频 skill  —— 把讲解稿变成「手绘会动的画面」讲解视频。  图形由代码逐笔绘出、文字逐字写出、讲到哪画到哪。五套风格可选，本地 Chr",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Nexting-ai/nexting",
+   "url": "https://github.com/Nexting-ai/nexting",
+   "description": "Remote control for Claude Code, Codex, Grok, and Cursor on Mac or PC. View sessions, send tasks, and drive them remotely from your phone, PIN, or Ring. OpenClaw supported.",
+   "stars": 2057,
+   "topics": [
+    "agent-remote-control",
+    "ai-agent",
+    "ai-wearable",
+    "claude-code",
+    "codex",
+    "hardware",
+    "nrf52840",
+    "openclaw",
+    "remote-control",
+    "wearable"
+   ],
+   "lang": "C",
+   "created_at": "2026-03-10",
+   "pushed_at": "2026-10-26",
+   "age_days": 231,
+   "stars_per_day_lifetime": 8.9,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-27",
     "sort": "updated",
     "query_breadth": 100,
     "position": 79
@@ -562,8 +301,318 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为Claude Code提供技能，使用CadQuery生成参数化3D可打印模型。",
-   "evidence": "描述为Claude Code skill for parametric 3D-printable model generation",
+   "capability": "远程控制Claude Code、Codex、Grok和Cursor的软件，支持OpenClaw。",
+   "evidence": "Remote control for Claude Code, Codex, Grok, and Cursor on Mac or PC. View sessions, send tasks, and drive them remotely",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "briiirussell/cybersecurity-skills",
+   "url": "https://github.com/briiirussell/cybersecurity-skills",
+   "description": "Cybersecurity skills for AI coding agents (Claude Code, Cursor, Codex)",
+   "stars": 435,
+   "topics": [],
+   "lang": "JavaScript",
+   "created_at": "2026-03-13",
+   "pushed_at": "2026-10-27",
+   "age_days": 228,
+   "stars_per_day_lifetime": 1.91,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 15
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "为AI编码代理（Claude Code、Cursor、Codex）提供网络安全技能。",
+   "evidence": "Cybersecurity skills for AI coding agents (Claude Code, Cursor, Codex)",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "liuhaisi2026212-maker/taishang-laojun",
+   "url": "https://github.com/liuhaisi2026212-maker/taishang-laojun",
+   "description": "太上老君·AI炼丹炉：抖音/小红书短视频创作 Skill。不知道拍啥、不会写稿，丢给你的 AI：找对标拆爆款、选题、系列策划、口播稿、标题、复盘、去AI味。Claude Code / Codex 等 npx 一行安装，豆包等聊天智能体用 Bot 版。",
+   "stars": 117,
+   "topics": [
+    "agent-skills",
+    "ai-writing",
+    "chinese",
+    "claude-skills",
+    "codex-skills",
+    "content-creation",
+    "copywriting",
+    "douyin",
+    "humanizer",
+    "prompt-engineering",
+    "short-video",
+    "skills"
+   ],
+   "lang": "Markdown",
+   "created_at": "2026-10-22",
+   "pushed_at": "2026-10-27",
+   "age_days": 5,
+   "stars_per_day_lifetime": 23.4,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-29",
+    "sort": "stars",
+    "query_breadth": 60,
+    "position": 51
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "抖音/小红书短视频创作Skill，提供选题、系列策划、口播稿等AI辅助功能。",
+   "evidence": "太上老君·AI炼丹炉：抖音/小红书短视频创作 Skill。不知道拍啥、不会写稿，丢给你的 AI：找对标拆爆款、选题、系列策划、口播稿、标题、复盘、去AI味。Claude Code / Codex 等 npx 一行安装，豆包等聊天智能体用 B",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "helloianneo/awesome-claude-code-skills",
+   "url": "https://github.com/helloianneo/awesome-claude-code-skills",
+   "description": "Claude Code 最实用的 Skills / Agents / Plugins 精选合集 | 50+ 精选 | 按场景分类 | 带推荐等级 | 复制即装",
+   "stars": 499,
+   "topics": [
+    "ai-agents",
+    "awesome",
+    "awesome-list",
+    "claude",
+    "claude-code",
+    "cursor",
+    "design",
+    "developer-tools",
+    "frontend",
+    "skills"
+   ],
+   "lang": "",
+   "created_at": "2026-04-13",
+   "pushed_at": "2026-10-27",
+   "age_days": 197,
+   "stars_per_day_lifetime": 2.53,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 34
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "Claude Code最实用的Skills/Agents/Plugins精选合集，按场景分类。",
+   "evidence": "Claude Code 最实用的 Skills / Agents / Plugins 精选合集 | 50+ 精选 | 按场景分类 | 带推荐等级 | 复制即装",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "xiazhuo123456789/vibe-knowledge-video",
+   "url": "https://github.com/xiazhuo123456789/vibe-knowledge-video",
+   "description": "Vibe知识大赏风格 AI 知识视频 Skill — 纯代码生成电影感知识短视频（无配音·双语字幕·合成BGM·历史文献再现），风格规范逆向自 8 条抖音爆款原片（1091 帧逐秒分析）",
+   "stars": 112,
+   "topics": [
+    "ai-video",
+    "douyin",
+    "ffmpeg",
+    "html-canvas",
+    "knowledge-video",
+    "prompt-engineering",
+    "python",
+    "skill",
+    "typescript",
+    "video-generation"
+   ],
+   "lang": "Python",
+   "created_at": "2026-10-09",
+   "pushed_at": "2026-10-25",
+   "age_days": 18,
+   "stars_per_day_lifetime": 6.22,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-29",
+    "sort": "stars",
+    "query_breadth": 60,
+    "position": 53
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "Vibe知识大赏风格AI知识视频Skill，纯代码生成电影感知识短视频。",
+   "evidence": "Vibe知识大赏风格 AI 知识视频 Skill — 纯代码生成电影感知识短视频（无配音·双语字幕·合成BGM·历史文献再现），风格规范逆向自 8 条抖音爆款原片（1091 帧逐秒分析）",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "dkozlov/awesome-knowledge-distillation",
+   "url": "https://github.com/dkozlov/awesome-knowledge-distillation",
+   "description": "Awesome Knowledge Distillation",
+   "stars": 3916,
+   "topics": [
+    "co-training",
+    "deep-learning",
+    "distillation",
+    "distillation-model",
+    "kd",
+    "knowldge-distillation",
+    "knowledge-distillation",
+    "knowledge-transfer",
+    "model-compression",
+    "model-distillation",
+    "teacher-student"
+   ],
+   "lang": "",
+   "created_at": "2017-02-28",
+   "pushed_at": "2026-10-26",
+   "age_days": 3528,
+   "stars_per_day_lifetime": 1.11,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 51
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集知识蒸馏相关资源与信息",
+   "evidence": "topics: co-training, deep-learning, distillation, distillation-model, kd, knowldge-distillation, knowledge-distillation,",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "xianyu110/ecommerce-video-skills",
+   "url": "https://github.com/xianyu110/ecommerce-video-skills",
+   "description": "12 个电商短视频 Agent Skills：3秒钩子、卖点分镜、图生视频提示词、edge-tts 配音、字幕花字、ffmpeg 自动成片、抖音/TikTok Shop/视频号导出、直播切片、多语言配音、封面A/B · Claude Code / Codex / Cursor",
+   "stars": 104,
+   "topics": [
+    "agent-skills",
+    "ai-video",
+    "chinese",
+    "claude-skills",
+    "codex-skills",
+    "cursor",
+    "douyin",
+    "ecommerce",
+    "edge-tts",
+    "ffmpeg",
+    "short-video",
+    "tiktok-shop"
+   ],
+   "lang": "Python",
+   "created_at": "2026-10-04",
+   "pushed_at": "2026-10-05",
+   "age_days": 23,
+   "stars_per_day_lifetime": 4.52,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-29",
+    "sort": "stars",
+    "query_breadth": 60,
+    "position": 58
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供电商短视频制作技能",
+   "evidence": "topics: agent-skills, ai-video, chinese, claude-skills, codex-skills, cursor, douyin, ecommerce, edge-tts, ffmpeg, short",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "OpenZeppelin/openzeppelin-skills",
+   "url": "https://github.com/OpenZeppelin/openzeppelin-skills",
+   "description": "Agent skills for secure smart contract development with OpenZeppelin Contracts libraries",
+   "stars": 219,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-02-05",
+   "pushed_at": "2026-10-26",
+   "age_days": 264,
+   "stars_per_day_lifetime": 0.83,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-27",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 82
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供安全智能合约开发技能",
+   "evidence": "topics: -",
    "transfer_forms": [
     "skill"
    ],
@@ -573,47 +622,110 @@
    "distilled": true
   },
   {
-   "repo": "explorium-ai/gtm-skills",
-   "url": "https://github.com/explorium-ai/gtm-skills",
-   "description": "GTM Skills for Claude & Codex",
-   "stars": 311,
-   "topics": [
-    "abm",
-    "account-research",
-    "ai-agents",
-    "b2b-sales",
-    "claude",
-    "claude-code",
-    "codex",
-    "cold-email",
-    "contact-info",
-    "crm-tools",
-    "email-marketing",
-    "enrichment"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-06-01",
-   "pushed_at": "2026-10-25",
-   "age_days": 147,
-   "stars_per_day_lifetime": 2.12,
-   "license": "MIT",
-   "license_family": "permissive",
+   "repo": "MOKEAIGC/MOKEAIGC-work-V017",
+   "url": "https://github.com/MOKEAIGC/MOKEAIGC-work-V017",
+   "description": "影感世界观构建导演。把任意灵感、氛围、文化、地点、名字、类型或参考图，转化为一个可信的想象世界，并通过 9 张电影感静帧图像提示词呈现（居民、动物、建筑、地景、日常、迁徙/运动、声音/文化、权力/张力、肖像）",
+   "stars": 207,
+   "topics": [],
+   "lang": "",
+   "created_at": "2026-07-26",
+   "pushed_at": "2026-10-11",
+   "age_days": 93,
+   "stars_per_day_lifetime": 2.23,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-09-26",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 89
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-07-29",
+    "sort": "stars",
+    "query_breadth": 85,
+    "position": 84
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为Claude与Codex提供GTM（市场推广）相关的技能集。",
-   "evidence": "描述为GTM Skills for Claude & Codex",
+   "capability": "构建电影感世界观并生成图像",
+   "evidence": "topics: -",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Gaoyuan-0423/biomedical-paper-reader",
+   "url": "https://github.com/Gaoyuan-0423/biomedical-paper-reader",
+   "description": "生物医学论文精读 Skill 与本地阅读 App：逐图解析、证据评估、研究设计借鉴，支持中文、英文及双语报告。 | Biomedical paper-reading skill & local app: figure analysis, evidence appraisal, and research design insights. Chinese, English & bilingual reports.",
+   "stars": 147,
+   "topics": [
+    "agent-skills",
+    "biomedical",
+    "chinese",
+    "paper-reading",
+    "research-design"
+   ],
+   "lang": "Python",
+   "created_at": "2026-09-26",
+   "pushed_at": "2026-10-26",
+   "age_days": 31,
+   "stars_per_day_lifetime": 4.74,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 55
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供生物医学论文精读与阅读应用",
+   "evidence": "topics: agent-skills, biomedical, chinese, paper-reading, research-design",
    "transfer_forms": [
     "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "ailabx/agilab",
+   "url": "https://github.com/ailabx/agilab",
+   "description": "AgiLab(Agi实验室)，专注于将前沿AI技术落地：量化金融以及自媒体智能化运营。",
+   "stars": 965,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2017-12-10",
+   "pushed_at": "2026-10-26",
+   "age_days": 3243,
+   "stars_per_day_lifetime": 0.3,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "智能体 in:name,description stars:>200",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 67
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "将AI技术应用于量化金融和自媒体运营",
+   "evidence": "topics: -",
+   "transfer_forms": [
+    "architecture"
    ],
    "line_candidates": [
     "unknown"
