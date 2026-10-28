@@ -37217,6 +37217,41 @@
    }
   },
   {
+   "repo": "JefMari/awesome-wysiwyg-editors",
+   "url": "https://github.com/JefMari/awesome-wysiwyg-editors",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 3987,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-10-27",
+   "created_at": "2017-04-21",
+   "stars_per_day_lifetime": 1.15,
+   "capability": "提供 WYSIWYG 编辑器列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "rich-text-editor",
+    "wysiwyg",
+    "wysiwyg-editor"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 65
+   }
+  },
+  {
    "repo": "mergisi/awesome-openclaw-agents",
    "url": "https://github.com/mergisi/awesome-openclaw-agents",
    "first_seen": "2026-09-27",
@@ -41250,6 +41285,51 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 13
+   }
+  },
+  {
+   "repo": "ai-boost/awesome-image-video-prompts",
+   "url": "https://github.com/ai-boost/awesome-image-video-prompts",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 3402,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Python",
+   "pushed_at": "2026-10-28",
+   "created_at": "2023-11-09",
+   "stars_per_day_lifetime": 3.14,
+   "capability": "提供 AI 视频和图像模型的提示词，包括输出示例和编辑视频的代理配方。",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "image",
+    "video"
+   ],
+   "topics": [
+    "agents",
+    "ai-video",
+    "ai-video-editing",
+    "awesome",
+    "awesome-list",
+    "ffmpeg",
+    "gemini-omni",
+    "gpt-image",
+    "image-prompts",
+    "image-to-video",
+    "kling",
+    "minimax-h3"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:text-to-video stars:>2000 pushed:>2026-07-30",
+    "sort": "stars",
+    "query_breadth": 15,
+    "position": 8
    }
   },
   {
@@ -45839,6 +45919,37 @@
    }
   },
   {
+   "repo": "hotcoffeeshake/tong-jincheng-skill",
+   "url": "https://github.com/hotcoffeeshake/tong-jincheng-skill",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 2951,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-27",
+   "created_at": "2026-04-05",
+   "stars_per_day_lifetime": 14.33,
+   "capability": "提供人际关系分析技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "dating"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 91
+   }
+  },
+  {
    "repo": "ogkalu2/comic-translate",
    "url": "https://github.com/ogkalu2/comic-translate",
    "first_seen": "2026-09-16",
@@ -46629,6 +46740,49 @@
     "sort": "stars",
     "query_breadth": 55,
     "position": 29
+   }
+  },
+  {
+   "repo": "Nriver/trilium-translation",
+   "url": "https://github.com/Nriver/trilium-translation",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 2853,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Python",
+   "pushed_at": "2026-10-28",
+   "created_at": "2021-06-06",
+   "stars_per_day_lifetime": 1.45,
+   "capability": "为 Trilium Notes 提供翻译功能，优化中文体验。",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "aur",
+    "aur-packages",
+    "chinese",
+    "docker",
+    "docker-compose",
+    "dockerfile",
+    "enhancement",
+    "i18n",
+    "note-taking",
+    "scoop",
+    "self-hosted",
+    "translation"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 0
    }
   },
   {
@@ -53660,6 +53814,50 @@
    }
   },
   {
+   "repo": "amontlabs/lcu",
+   "url": "https://github.com/amontlabs/lcu",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 2266,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-28",
+   "created_at": "2026-09-22",
+   "stars_per_day_lifetime": 62.94,
+   "capability": "提供 Codex 计算机使用功能，可嵌入任何工具中。",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "accessibility",
+    "agent-skills",
+    "browser-automation",
+    "claude-code",
+    "codex-cli",
+    "computer-use",
+    "desktop-automation",
+    "library",
+    "linux",
+    "macos",
+    "mcp",
+    "pi-agent"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 96
+   }
+  },
+  {
    "repo": "yctimlin/mcp_excalidraw",
    "url": "https://github.com/yctimlin/mcp_excalidraw",
    "first_seen": "2026-08-09",
@@ -56483,6 +56681,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 65
+   }
+  },
+  {
+   "repo": "Caerind/AwesomeCppGameDev",
+   "url": "https://github.com/Caerind/AwesomeCppGameDev",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 2095,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Markdown",
+   "pushed_at": "2026-10-27",
+   "created_at": "2017-08-06",
+   "stars_per_day_lifetime": 0.62,
+   "capability": "提供 C++ 游戏开发资源列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 36
    }
   },
   {
@@ -62508,6 +62735,45 @@
     "sort": "stars",
     "query_breadth": 9,
     "position": 3
+   }
+  },
+  {
+   "repo": "HelixDB/helix-foundry",
+   "url": "https://github.com/HelixDB/helix-foundry",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 1680,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-28",
+   "created_at": "2026-10-07",
+   "stars_per_day_lifetime": 80.0,
+   "capability": "连接公司数据，通过代理创建本体，并将其加载到 HelixDB 中。",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "topics": [
+    "ai-agents",
+    "data-integration",
+    "golang",
+    "graph-database",
+    "helixdb",
+    "knowledge-graph",
+    "nextjs",
+    "ontology"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 59,
+    "position": 14
    }
   },
   {
@@ -69236,6 +69502,50 @@
    }
   },
   {
+   "repo": "ooboqoo/shiping",
+   "url": "https://github.com/ooboqoo/shiping",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 1112,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-23",
+   "created_at": "2025-08-20",
+   "stars_per_day_lifetime": 2.56,
+   "capability": "识屏 Shiping：截屏 + AI，看懂屏幕上的任何内容。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "image",
+    "video"
+   ],
+   "topics": [
+    "ai-assistant",
+    "coding-interview",
+    "deepseek",
+    "electron",
+    "interview",
+    "interview-assistant",
+    "leetcode",
+    "llm",
+    "ocr",
+    "online-exam",
+    "screenshot",
+    "vision"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:ocr stars:>1000 pushed:>2026-07-30",
+    "sort": "updated",
+    "query_breadth": 90,
+    "position": 44
+   }
+  },
+  {
    "repo": "skygazer42/DL-Hub",
    "url": "https://github.com/skygazer42/DL-Hub",
    "first_seen": "2026-08-13",
@@ -71574,6 +71884,50 @@
    }
   },
   {
+   "repo": "hashgraph-online/hol-guard",
+   "url": "https://github.com/hashgraph-online/hol-guard",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 1004,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-28",
+   "created_at": "2026-03-28",
+   "stars_per_day_lifetime": 4.69,
+   "capability": "开源 AI 代理防病毒软件，提供运行时风险工具、秘密访问、提示注入等防护。",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-security",
+    "ai-agent-security",
+    "ai-agents",
+    "ai-antivirus",
+    "ai-security",
+    "claude-code",
+    "cursor",
+    "devsecops",
+    "gemini-cli",
+    "mcp",
+    "mcp-security",
+    "openclaw"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 0
+   }
+  },
+  {
    "repo": "realskyrin/capcap",
    "url": "https://github.com/realskyrin/capcap",
    "first_seen": "2026-10-22",
@@ -73010,6 +73364,46 @@
     "sort": "stars",
     "query_breadth": 19,
     "position": 4
+   }
+  },
+  {
+   "repo": "anhao/ai-pose-gallery-zh",
+   "url": "https://github.com/anhao/ai-pose-gallery-zh",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 911,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "HTML",
+   "pushed_at": "2026-10-27",
+   "created_at": "2026-10-27",
+   "stars_per_day_lifetime": 911.0,
+   "capability": "提供中文版 AI 姿势参考图库。",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "topics": [
+    "ai-art",
+    "chinese",
+    "cloudflare-pages",
+    "gallery",
+    "i18n",
+    "pose",
+    "reference-images",
+    "static-site"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 23
    }
   },
   {
@@ -78237,6 +78631,42 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 15
+   }
+  },
+  {
+   "repo": "NEORUAA/XHS_Downloader_Android",
+   "url": "https://github.com/NEORUAA/XHS_Downloader_Android",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 607,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Kotlin",
+   "pushed_at": "2026-09-26",
+   "created_at": "2025-10-30",
+   "stars_per_day_lifetime": 1.67,
+   "capability": "小红书无压缩无水印原图下载器。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "topics": [
+    "android-application",
+    "downloader",
+    "jetpack-compose",
+    "miuix",
+    "xiaohongshu"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 78,
+    "position": 31
    }
   },
   {
@@ -95337,6 +95767,39 @@
    }
   },
   {
+   "repo": "imlewc/video-to-subtitle-summary-skill",
+   "url": "https://github.com/imlewc/video-to-subtitle-summary-skill",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 235,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-28",
+   "created_at": "2026-02-19",
+   "stars_per_day_lifetime": 0.94,
+   "capability": "将视频转换为字幕和AI总结",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai",
+    "video-summary"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 42
+   }
+  },
+  {
    "repo": "itd2008/yiran",
    "url": "https://github.com/itd2008/yiran",
    "first_seen": "2026-08-14",
@@ -97093,6 +97556,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 54
+   }
+  },
+  {
+   "repo": "konlu/story-studio",
+   "url": "https://github.com/konlu/story-studio",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 218,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-26",
+   "created_at": "2026-10-26",
+   "stars_per_day_lifetime": 109.0,
+   "capability": "一站式 AI 短视频内容创作代理技能。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-07-30",
+    "sort": "stars",
+    "query_breadth": 61,
+    "position": 43
    }
   },
   {
@@ -100085,6 +100577,35 @@
     "sort": "stars",
     "query_breadth": 21,
     "position": 20
+   }
+  },
+  {
+   "repo": "superhero-tech/superhero-skills",
+   "url": "https://github.com/superhero-tech/superhero-skills",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 202,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-27",
+   "created_at": "2026-08-21",
+   "stars_per_day_lifetime": 2.97,
+   "capability": "提供产品构建者技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-28",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 79
    }
   },
   {
@@ -107518,6 +108039,50 @@
    }
   },
   {
+   "repo": "everyinfra/everyinfra-agent-plugins",
+   "url": "https://github.com/everyinfra/everyinfra-agent-plugins",
+   "first_seen": "2026-10-28",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-28",
+   "stars": 101,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-27",
+   "created_at": "2026-09-01",
+   "stars_per_day_lifetime": 1.77,
+   "capability": "提供 EveryInfra MCP 服务器和代理插件，支持多平台数据抓取。",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agents",
+    "amazon-scraper",
+    "captcha-solver",
+    "claude-code",
+    "cursor",
+    "douyin",
+    "everyinfra",
+    "instagram-api",
+    "linkedin-scraper",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 78,
+    "position": 77
+   }
+  },
+  {
    "repo": "getoneapi/OneAPI",
    "url": "https://github.com/getoneapi/OneAPI",
    "first_seen": "2026-09-28",
@@ -110589,7 +111154,7 @@
    }
   }
  ],
- "updated": "2026-10-27",
+ "updated": "2026-10-28",
  "status_enum": [
   "pending",
   "debated",
