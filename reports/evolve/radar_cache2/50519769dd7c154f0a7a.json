@@ -1,0 +1,10 @@
+{
+ "module": "采集下载线",
+ "verdict": "adopt",
+ "metric": "爬取效率和页面覆盖率",
+ "how": "集成到 GitHub Actions 中进行自动化爬取",
+ "effort": "中",
+ "current": "自研爬虫框架",
+ "beats": "爬取速度和页面覆盖率",
+ "why": "该项目在爬取效率和页面覆盖率上有显著优势"
+}

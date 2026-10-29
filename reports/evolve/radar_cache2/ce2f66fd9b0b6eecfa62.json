@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "adopt",
+ "metric": "PDF转文字准确率",
+ "how": "集成MinerU进行PDF转文字",
+ "effort": "中",
+ "current": "目前使用Tesseract OCR进行PDF转文字",
+ "beats": "在PDF格式识别和表格提取方面",
+ "why": "MinerU支持更复杂的PDF格式处理，提高转换准确率"
+}

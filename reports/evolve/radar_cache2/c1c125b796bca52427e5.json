@@ -1,0 +1,10 @@
+{
+ "module": "AI寻脉",
+ "verdict": "adopt",
+ "metric": "调试工作流效率",
+ "how": "集成superpowers进行工作流调试和规划",
+ "effort": "中",
+ "current": "目前使用自定义的调试工具和流程规划方法",
+ "beats": "调试效率",
+ "why": "superpowers提供强大的工作流调试和规划功能，可显著提升效率"
+}

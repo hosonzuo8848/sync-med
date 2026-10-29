@@ -1,0 +1,10 @@
+{
+ "module": "RAG向量检索",
+ "verdict": "adopt",
+ "metric": "检索召回率",
+ "how": "集成Elasticsearch作为向量检索后端",
+ "effort": "中",
+ "current": "tcm-rag-768",
+ "beats": "更强大的搜索功能和更广泛的索引能力",
+ "why": "Elasticsearch是业界领先的搜索引擎，能够提供更精准的检索结果"
+}

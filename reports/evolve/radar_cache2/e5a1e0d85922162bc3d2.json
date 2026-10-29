@@ -1,0 +1,10 @@
+{
+ "module": "OCR产线",
+ "verdict": "adopt",
+ "metric": "字符错误率",
+ "how": "替换现有OCR引擎",
+ "effort": "中",
+ "current": "Tesseract OCR",
+ "beats": "更低的字符错误率",
+ "why": "tesseract-ocr是OCR领域的知名工具，预计性能更优"
+}

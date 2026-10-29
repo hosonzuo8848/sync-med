@@ -1,0 +1,10 @@
+{
+ "module": "知识图谱星图",
+ "verdict": "adopt",
+ "metric": "图谱节点处理速度",
+ "how": "使用 Neo4j 替换当前图数据库",
+ "effort": "中",
+ "current": "当前使用 sue_graph_nodes/edges",
+ "beats": "在节点处理速度和查询效率上",
+ "why": "Neo4j 是业界领先的图数据库，性能优越"
+}

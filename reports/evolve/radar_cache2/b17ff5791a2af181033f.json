@@ -1,0 +1,10 @@
+{
+ "module": "前台阅读器",
+ "verdict": "adopt",
+ "metric": "用户体验",
+ "how": "集成browser-use实现网页自动化，提升阅读体验",
+ "effort": "中",
+ "current": "目前使用原生JavaScript进行页面交互",
+ "beats": "自动化程度和兼容性",
+ "why": "browser-use提供更强大的自动化能力，提升用户体验"
+}
