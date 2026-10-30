@@ -16623,6 +16623,51 @@
    }
   },
   {
+   "repo": "liketrek/TREK",
+   "url": "https://github.com/liketrek/TREK",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 15232,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-29",
+   "created_at": "2026-03-19",
+   "stars_per_day_lifetime": 67.7,
+   "capability": "提供开源旅行规划器，支持实时协作、预订、预算、打包清单等。",
+   "transfer_forms": [
+    "deploy",
+    "architecture"
+   ],
+   "line_candidates": [
+    "video",
+    "image"
+   ],
+   "topics": [
+    "budget-tracker",
+    "collaborative",
+    "docker",
+    "itinerary",
+    "mcp-server",
+    "offline-first",
+    "open-source",
+    "openstreetmap",
+    "packing-list",
+    "pwa",
+    "real-time",
+    "self-hosted"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp-server stars:>1000 pushed:>2026-09-30",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 31
+   }
+  },
+  {
    "repo": "public-api-lists/public-api-lists",
    "url": "https://github.com/public-api-lists/public-api-lists",
    "first_seen": "2026-07-26",
@@ -27872,6 +27917,50 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 18
+   }
+  },
+  {
+   "repo": "google/elephant-goldfish-model",
+   "url": "https://github.com/google/elephant-goldfish-model",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 6161,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-30",
+   "created_at": "2026-09-13",
+   "stars_per_day_lifetime": 131.09,
+   "capability": "提供设计软件的AI技能，包括设计审查和软件设计。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "antigravity",
+    "claude-code",
+    "claude-code-plugin",
+    "claude-skills",
+    "codex",
+    "codex-plugin",
+    "coding-agents",
+    "context-engineering",
+    "developer-tools",
+    "gemini"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "agent skill in:name,description stars:>300 pushed:>2026-08-01",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 95
    }
   },
   {
@@ -44556,6 +44645,52 @@
    }
   },
   {
+   "repo": "PurpleDoubleD/locally-uncensored",
+   "url": "https://github.com/PurpleDoubleD/locally-uncensored",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 3037,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-29",
+   "created_at": "2026-03-24",
+   "stars_per_day_lifetime": 13.8,
+   "capability": "提供桌面端AI创作工具，包括聊天、图像和视频生成，以及编码代理功能。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "video",
+    "image",
+    "modelpool"
+   ],
+   "topics": [
+    "agent",
+    "ai-chat",
+    "ai-studio",
+    "all-in-one",
+    "coding-agent",
+    "desktop-app",
+    "flux",
+    "image-generation",
+    "linux",
+    "llm",
+    "local-ai",
+    "local-llm"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-08-01",
+    "sort": "stars",
+    "query_breadth": 22,
+    "position": 21
+   }
+  },
+  {
    "repo": "awesome-mlss/awesome-mlss",
    "url": "https://github.com/awesome-mlss/awesome-mlss",
    "first_seen": "2026-09-14",
@@ -54399,6 +54534,50 @@
    }
   },
   {
+   "repo": "sandbox-quantum/switch",
+   "url": "https://github.com/sandbox-quantum/switch",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 2222,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-10-30",
+   "created_at": "2026-07-16",
+   "stars_per_day_lifetime": 20.96,
+   "capability": "提供开源AI团队成员，支持Slack、Teams、Discord等平台。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-orchestration",
+    "ai",
+    "ai-agents",
+    "chatops",
+    "discord",
+    "langchain",
+    "mcp",
+    "microsoft-teams",
+    "multi-agent",
+    "open-source",
+    "openai",
+    "self-hosted"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-09-30",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 50
+   }
+  },
+  {
    "repo": "NanoNets/Graft",
    "url": "https://github.com/NanoNets/Graft",
    "first_seen": "2026-08-13",
@@ -59752,6 +59931,50 @@
    }
   },
   {
+   "repo": "Paca-AI/paca",
+   "url": "https://github.com/Paca-AI/paca",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 2002,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Go",
+   "pushed_at": "2026-10-30",
+   "created_at": "2026-03-20",
+   "stars_per_day_lifetime": 8.94,
+   "capability": "提供AI原生、开源的Jira、Trello、ClickUp替代品，适用于Scrum团队。",
+   "transfer_forms": [
+    "mcp",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agent",
+    "bdd",
+    "clickup-alternative",
+    "jira-alternative",
+    "mcp",
+    "open-source",
+    "openhands",
+    "project-management",
+    "scrum",
+    "scrumban",
+    "self-hosted",
+    "trello-alternative"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-09-30",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
+   }
+  },
+  {
    "repo": "ad-si/awesome-3d-printing",
    "url": "https://github.com/ad-si/awesome-3d-printing",
    "first_seen": "2026-10-08",
@@ -64741,6 +64964,51 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 64
+   }
+  },
+  {
+   "repo": "akfamily/aktools",
+   "url": "https://github.com/akfamily/aktools",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 1503,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-30",
+   "created_at": "2019-12-17",
+   "stars_per_day_lifetime": 0.6,
+   "capability": "为AKShare提供HTTP API和MCP服务器，用于获取金融数据。",
+   "transfer_forms": [
+    "library",
+    "dataset"
+   ],
+   "line_candidates": [
+    "formula",
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agent",
+    "akshare",
+    "claude",
+    "data-science",
+    "fastapi",
+    "financial-data",
+    "http-api",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "openapi",
+    "quant"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-09-30",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 1
    }
   },
   {
@@ -76634,6 +76902,49 @@
    }
   },
   {
+   "repo": "AnxForever/stylekit",
+   "url": "https://github.com/AnxForever/stylekit",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 720,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-29",
+   "created_at": "2026-02-01",
+   "stars_per_day_lifetime": 2.66,
+   "capability": "提供149种网页与UI设计风格，附AI提示词、设计tokens和组件配方。",
+   "transfer_forms": [
+    "library",
+    "dataset"
+   ],
+   "line_candidates": [
+    "image",
+    "modelpool"
+   ],
+   "topics": [
+    "ai-frontend",
+    "ai-prompts",
+    "claude",
+    "cursor",
+    "design-system",
+    "design-tokens",
+    "mcp",
+    "prompt-engineering",
+    "ui-design",
+    "web-design"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-01",
+    "sort": "stars",
+    "query_breadth": 87,
+    "position": 44
+   }
+  },
+  {
    "repo": "laravel/prompts",
    "url": "https://github.com/laravel/prompts",
    "first_seen": "2026-07-26",
@@ -77209,6 +77520,49 @@
     "sort": "stars",
     "query_breadth": 24,
     "position": 6
+   }
+  },
+  {
+   "repo": "Illyism/seo-skills",
+   "url": "https://github.com/Illyism/seo-skills",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 682,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-10-30",
+   "created_at": "2026-06-10",
+   "stars_per_day_lifetime": 4.8,
+   "capability": "为Claude Code、Cursor和Codex提供SEO技能，包括SEO自动导航、标题标签等。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "ai-seo",
+    "claude-code",
+    "claude-skills",
+    "codex",
+    "content-marketing",
+    "copywriting",
+    "cursor",
+    "generative-engine-optimization",
+    "keyword-research",
+    "link-building"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-09-30",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 10
    }
   },
   {
@@ -82458,6 +82812,49 @@
     "sort": "updated",
     "query_breadth": 56,
     "position": 4
+   }
+  },
+  {
+   "repo": "AIPMAndy/how-to-survive-unemployment",
+   "url": "https://github.com/AIPMAndy/how-to-survive-unemployment",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 500,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-10-30",
+   "created_at": "2026-10-09",
+   "stars_per_day_lifetime": 23.81,
+   "capability": "提供中国打工人失业自救手册，包括政策原文和核验日期。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "career",
+    "career-guide",
+    "checklist",
+    "china",
+    "china-policy",
+    "chinese-guide",
+    "handbook",
+    "hr",
+    "job-search",
+    "labor-law",
+    "laid-off",
+    "layoff"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 29
    }
   },
   {
@@ -104465,6 +104862,43 @@
    }
   },
   {
+   "repo": "pyqdcyy123-byte/IP-Bot",
+   "url": "https://github.com/pyqdcyy123-byte/IP-Bot",
+   "first_seen": "2026-10-30",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-30",
+   "stars": 135,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-28",
+   "created_at": "2026-10-27",
+   "stars_per_day_lifetime": 45.0,
+   "capability": "数字人IP口播智能体视频创作工作台及后台，支持本地/云端部署。",
+   "transfer_forms": [
+    "deploy",
+    "architecture"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "digital-human",
+    "electron",
+    "speech-synthesis",
+    "video-generation",
+    "vue3"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "数字人 in:name,description stars:>100 pushed:>2026-08-01",
+    "sort": "stars",
+    "query_breadth": 38,
+    "position": 28
+   }
+  },
+  {
    "repo": "qitry/Qimi-API",
    "url": "https://github.com/qitry/Qimi-API",
    "first_seen": "2026-08-03",
@@ -111670,7 +112104,7 @@
    }
   }
  ],
- "updated": "2026-10-29",
+ "updated": "2026-10-30",
  "status_enum": [
   "pending",
   "debated",
