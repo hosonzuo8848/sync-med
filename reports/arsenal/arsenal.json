@@ -2091,6 +2091,35 @@
    }
   },
   {
+   "repo": "ytdl-org/youtube-dl",
+   "url": "https://github.com/ytdl-org/youtube-dl",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 141434,
+   "license": "Unlicense",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-30",
+   "created_at": "2010-10-31",
+   "stars_per_day_lifetime": 24.2,
+   "capability": "下载 YouTube 和其他视频网站的视频",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "video in:name,description stars:>20000 pushed:>2026-08-02",
+    "sort": "stars",
+    "query_breadth": 34,
+    "position": 1
+   }
+  },
+  {
    "repo": "vercel/next.js",
    "url": "https://github.com/vercel/next.js",
    "first_seen": "2026-07-28",
@@ -4394,6 +4423,44 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 3
+   }
+  },
+  {
+   "repo": "ant-design/ant-design",
+   "url": "https://github.com/ant-design/ant-design",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 100016,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-30",
+   "created_at": "2015-04-24",
+   "stars_per_day_lifetime": 23.77,
+   "capability": "提供企业级UI设计语言和React组件库，用于构建用户界面。",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ant-design",
+    "antd",
+    "design-systems",
+    "react",
+    "typescript",
+    "ui-kit",
+    "ui-library"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "stars:>100000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 64
    }
   },
   {
@@ -20332,6 +20399,40 @@
    }
   },
   {
+   "repo": "hslatman/awesome-threat-intelligence",
+   "url": "https://github.com/hslatman/awesome-threat-intelligence",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 10807,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-30",
+   "created_at": "2015-12-21",
+   "stars_per_day_lifetime": 2.72,
+   "capability": "收集威胁情报资源列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "hacktoberfest",
+    "security"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 43
+   }
+  },
+  {
    "repo": "0x4m4/hexstrike-ai",
    "url": "https://github.com/0x4m4/hexstrike-ai",
    "first_seen": "2026-08-04",
@@ -20613,6 +20714,43 @@
     "sort": "stars",
     "query_breadth": 57,
     "position": 12
+   }
+  },
+  {
+   "repo": "tigerless-labs/autoharness",
+   "url": "https://github.com/tigerless-labs/autoharness",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 10515,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-30",
+   "created_at": "2026-06-09",
+   "stars_per_day_lifetime": 73.02,
+   "capability": "构建下一代代理的自我学习层，从实际工作中学习技能",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "claude-code",
+    "claude-code-plugin",
+    "llm-agents",
+    "python"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "agent skill in:name,description stars:>300 pushed:>2026-08-02",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 57
    }
   },
   {
@@ -30311,6 +30449,45 @@
    }
   },
   {
+   "repo": "hyprland-community/awesome-hyprland",
+   "url": "https://github.com/hyprland-community/awesome-hyprland",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 5382,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-30",
+   "created_at": "2022-12-09",
+   "stars_per_day_lifetime": 3.78,
+   "capability": "为 Hyprland 提供资源列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "awesome-lists",
+    "awesome-readme",
+    "awesome-resources",
+    "hyprland",
+    "hyprland-ipc",
+    "list",
+    "resources"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 40
+   }
+  },
+  {
    "repo": "rocketride-org/rocketride-server",
    "url": "https://github.com/rocketride-org/rocketride-server",
    "first_seen": "2026-07-28",
@@ -33892,6 +34069,49 @@
     "sort": "stars",
     "query_breadth": 43,
     "position": 7
+   }
+  },
+  {
+   "repo": "AgenticResourceRegistry/AgenticResourceRegistry",
+   "url": "https://github.com/AgenticResourceRegistry/AgenticResourceRegistry",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 4534,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-31",
+   "created_at": "2026-03-30",
+   "stars_per_day_lifetime": 21.09,
+   "capability": "共享和发现编码代理资源",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agents",
+    "analytics",
+    "antigravity",
+    "claude-code",
+    "cli-tool",
+    "codex",
+    "cursor",
+    "cursor-ai",
+    "insights",
+    "kiro",
+    "large-language-models",
+    "mcp"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 98
    }
   },
   {
@@ -47061,6 +47281,48 @@
    }
   },
   {
+   "repo": "ccch1mneyyy/dsh-Go",
+   "url": "https://github.com/ccch1mneyyy/dsh-Go",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 2842,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Dart",
+   "pushed_at": "2026-10-30",
+   "created_at": "2026-10-25",
+   "stars_per_day_lifetime": 473.67,
+   "capability": "DeepSeek Harness 的移动端版本，可遥控电脑",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "android",
+    "android-app",
+    "coding-agent",
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "dsh-tui",
+    "flutter",
+    "llm"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 50
+   }
+  },
+  {
    "repo": "go-ego/gse",
    "url": "https://github.com/go-ego/gse",
    "first_seen": "2026-09-09",
@@ -49615,6 +49877,51 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 79
+   }
+  },
+  {
+   "repo": "vercel-labs/agent-desktop",
+   "url": "https://github.com/vercel-labs/agent-desktop",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 2593,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-10-31",
+   "created_at": "2026-02-19",
+   "stars_per_day_lifetime": 10.21,
+   "capability": "为任何代理提供可靠的桌面计算机使用",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "accessibility",
+    "accessibility-api",
+    "ai-agents",
+    "automation",
+    "cli",
+    "computer-use",
+    "computer-use-agent",
+    "computer-use-agents",
+    "desktop-automation",
+    "macos",
+    "mcp",
+    "rust"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 31
    }
   },
   {
@@ -57220,6 +57527,51 @@
    }
   },
   {
+   "repo": "uber/ADR",
+   "url": "https://github.com/uber/ADR",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 2090,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-31",
+   "created_at": "2026-04-19",
+   "stars_per_day_lifetime": 10.72,
+   "capability": "通过可观察性、安全基准和威胁检测来保护企业 AI 代理",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-security",
+    "ai-agents",
+    "ai-security",
+    "benchmark",
+    "claude",
+    "claude-code",
+    "codex",
+    "cursor",
+    "llm-security",
+    "mcp",
+    "model-context-protocol",
+    "prompt-injection"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 91
+   }
+  },
+  {
    "repo": "ShenSeanChen/waku-agent",
    "url": "https://github.com/ShenSeanChen/waku-agent",
    "first_seen": "2026-10-24",
@@ -58872,6 +59224,42 @@
    }
   },
   {
+   "repo": "saeidshirazi/awesome-android-security",
+   "url": "https://github.com/saeidshirazi/awesome-android-security",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 2035,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-30",
+   "created_at": "2020-09-18",
+   "stars_per_day_lifetime": 0.91,
+   "capability": "收集 Android 安全相关资料和资源",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "android-awesome",
+    "android-cookbook",
+    "android-malware",
+    "android-pentest",
+    "android-pentesting",
+    "android-security"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 21
+   }
+  },
+  {
    "repo": "skalesapp/skales",
    "url": "https://github.com/skalesapp/skales",
    "first_seen": "2026-10-13",
@@ -59531,6 +59919,46 @@
    }
   },
   {
+   "repo": "stripe/ai",
+   "url": "https://github.com/stripe/ai",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 2009,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-31",
+   "created_at": "2024-11-11",
+   "stars_per_day_lifetime": 2.79,
+   "capability": "提供一站式工具集，用于构建基于Stripe的AI产品和业务。",
+   "transfer_forms": [
+    "library",
+    "mcp"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "gemini-cli-extension",
+    "llm",
+    "llm-agents",
+    "mcp",
+    "python",
+    "typescript",
+    "workflows"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 99
+   }
+  },
+  {
    "repo": "Hommy-master/capcut-mate",
    "url": "https://github.com/Hommy-master/capcut-mate",
    "first_seen": "2026-10-23",
@@ -59636,6 +60064,50 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 36
+   }
+  },
+  {
+   "repo": "nimbalyst/nimbalyst",
+   "url": "https://github.com/nimbalyst/nimbalyst",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 2005,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-31",
+   "created_at": "2025-10-30",
+   "stars_per_day_lifetime": 5.48,
+   "capability": "开源视觉工作空间，用于并行运行多个编码代理",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "agentic-ide",
+    "ai-agents",
+    "ai-coding-assistant",
+    "claude-code",
+    "codex",
+    "coding-agent",
+    "developer-tools",
+    "electron",
+    "ide",
+    "kanban",
+    "markdown-editor"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 33
    }
   },
   {
@@ -67928,6 +68400,50 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 59
+   }
+  },
+  {
+   "repo": "codewithMUHILAN/Lightswind-UI-Library",
+   "url": "https://github.com/codewithMUHILAN/Lightswind-UI-Library",
+   "first_seen": "2026-10-31",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-10-31",
+   "stars": 1250,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-30",
+   "created_at": "2023-07-11",
+   "stars_per_day_lifetime": 1.03,
+   "capability": "提供AI原生CLI优先的React组件库，包含160+组件并支持MCP服务器集成。",
+   "transfer_forms": [
+    "library",
+    "mcp"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-native",
+    "animated-components",
+    "component-library",
+    "design-system",
+    "framer-motion",
+    "frontend",
+    "gsap",
+    "lightswind-ui",
+    "mcp-server",
+    "nextjs",
+    "react",
+    "tailwindcss"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-01",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 75
    }
   },
   {
@@ -112104,7 +112620,7 @@
    }
   }
  ],
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "status_enum": [
   "pending",
   "debated",
