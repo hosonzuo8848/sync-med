@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-10-31",
+ "generated": "2026-11-01",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -40,91 +40,55 @@
   "failed_queries": []
  },
  "distill": {
-  "seat": "sensenova",
-  "calls": 4,
-  "ok": 2
+  "seat": "zhipu",
+  "calls": 3,
+  "ok": 1
  },
- "count": 13,
+ "count": 8,
  "candidates": [
   {
-   "repo": "ytdl-org/youtube-dl",
-   "url": "https://github.com/ytdl-org/youtube-dl",
-   "description": "Command-line program to download videos from YouTube.com and other video sites",
-   "stars": 141434,
-   "topics": [],
+   "repo": "LeoYeAI/agent-master-skills",
+   "url": "https://github.com/LeoYeAI/agent-master-skills",
+   "description": "🧠 Curated collection of 2700+ best agent skills — AI, coding, marketing, design, finance and more. Harness-agnostic: works with Claude Code, Codex, Cursor, Gemini CLI, OpenClaw, Hermes and any Agent Skills runtime. Refreshed daily by MyClaw.ai — Powered by MyClaw.ai",
+   "stars": 2168,
+   "topics": [
+    "agent-skills",
+    "agentskills",
+    "ai-agent",
+    "ai-agents",
+    "anthropic-skills",
+    "claude-code",
+    "codex",
+    "curated",
+    "cursor",
+    "gemini-cli",
+    "hermes",
+    "myclaw"
+   ],
    "lang": "Python",
-   "created_at": "2010-10-31",
-   "pushed_at": "2026-10-30",
-   "age_days": 5844,
-   "stars_per_day_lifetime": 24.2,
-   "license": "Unlicense",
+   "created_at": "2026-03-02",
+   "pushed_at": "2026-11-01",
+   "age_days": 244,
+   "stars_per_day_lifetime": 8.89,
+   "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "video in:name,description stars:>20000 pushed:>2026-08-02",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
     "sort": "stars",
-    "query_breadth": 34,
-    "position": 1
+    "query_breadth": 46,
+    "position": 20
    },
-   "matched_by_n_queries": 2,
+   "matched_by_n_queries": 3,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "下载 YouTube 和其他视频网站的视频",
-   "evidence": "Command-line program to download videos from YouTube.com and other video sites",
+   "capability": "收集和整理2700+个AI代理技能，支持多种运行时环境。",
+   "evidence": "Curated collection of 2700+ best agent skills — AI, coding, marketing, design, finance and more.",
    "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "video"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "vercel-labs/agent-desktop",
-   "url": "https://github.com/vercel-labs/agent-desktop",
-   "description": "Agent Desktop gives any agent reliable computer use on the desktop. Built with Rust, it sees any app's real UI structure through OS accessibility trees and operates it — refs stay stable and actions stay safe to retry, instead of guessing from pixels.",
-   "stars": 2593,
-   "topics": [
-    "accessibility",
-    "accessibility-api",
-    "ai-agents",
-    "automation",
-    "cli",
-    "computer-use",
-    "computer-use-agent",
-    "computer-use-agents",
-    "desktop-automation",
-    "macos",
-    "mcp",
-    "rust"
-   ],
-   "lang": "Rust",
-   "created_at": "2026-02-19",
-   "pushed_at": "2026-10-31",
-   "age_days": 254,
-   "stars_per_day_lifetime": 10.21,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 31
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为任何代理提供可靠的桌面计算机使用",
-   "evidence": "Agent Desktop gives any agent reliable computer use on the desktop",
-   "transfer_forms": [
-    "mcp",
     "skill",
-    "architecture"
+    "library"
    ],
    "line_candidates": [
     "modelpool"
@@ -132,87 +96,41 @@
    "distilled": true
   },
   {
-   "repo": "saeidshirazi/awesome-android-security",
-   "url": "https://github.com/saeidshirazi/awesome-android-security",
-   "description": "A curated list of Android Security materials and resources For Pentesters and Bug Hunters",
-   "stars": 2035,
+   "repo": "wangzan101/Mika",
+   "url": "https://github.com/wangzan101/Mika",
+   "description": "An on-device AI agent for Android that operates apps and the web to get things done for you.",
+   "stars": 3031,
    "topics": [
-    "android-awesome",
-    "android-cookbook",
-    "android-malware",
-    "android-pentest",
-    "android-pentesting",
-    "android-security"
+    "accessibility",
+    "ai-agent",
+    "android",
+    "automation",
+    "jetpack-compose",
+    "kotlin",
+    "llm",
+    "mobile-agent"
    ],
-   "lang": "",
-   "created_at": "2020-09-18",
-   "pushed_at": "2026-10-30",
-   "age_days": 2234,
-   "stars_per_day_lifetime": 0.91,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-10-01",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 21
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "收集 Android 安全相关资料和资源",
-   "evidence": "A curated list of Android Security materials and resources For Pentesters and Bug Hunters",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "nimbalyst/nimbalyst",
-   "url": "https://github.com/nimbalyst/nimbalyst",
-   "description": "Nimbalyst - The open-source visual workspace for Claude Code, Codex, and OpenCode. Run multiple coding agents in parallel, edit their work visually in markdown, mockups, and diagrams, and track tasks. Free, MIT-licensed desktop app for macOS, Windows, Linux, with mobile companion for iOS and Android.",
-   "stars": 2005,
-   "topics": [
-    "agentic-ai",
-    "agentic-ide",
-    "ai-agents",
-    "ai-coding-assistant",
-    "claude-code",
-    "codex",
-    "coding-agent",
-    "developer-tools",
-    "electron",
-    "ide",
-    "kanban",
-    "markdown-editor"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2025-10-30",
-   "pushed_at": "2026-10-31",
-   "age_days": 366,
-   "stars_per_day_lifetime": 5.48,
-   "license": "MIT",
+   "lang": "Kotlin",
+   "created_at": "2026-10-29",
+   "pushed_at": "2026-11-01",
+   "age_days": 3,
+   "stars_per_day_lifetime": 1010.33,
+   "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-02",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 33
+    "position": 34
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "开源视觉工作空间，用于并行运行多个编码代理",
-   "evidence": "Nimbalyst - The open-source visual workspace for Claude Code, Codex, and OpenCode",
+   "capability": "为Android设备提供设备端AI代理，操作应用和网页完成任务。",
+   "evidence": "An on-device AI agent for Android that operates apps and the web to get things done for you.",
    "transfer_forms": [
     "skill",
     "architecture"
@@ -223,44 +141,162 @@
    "distilled": true
   },
   {
-   "repo": "hyprland-community/awesome-hyprland",
-   "url": "https://github.com/hyprland-community/awesome-hyprland",
-   "description": "Awesome list for Hyprland [maintainer=@yavko]",
-   "stars": 5382,
+   "repo": "Accenture/AmpliGraph",
+   "url": "https://github.com/Accenture/AmpliGraph",
+   "description": "Python library for Representation Learning on Knowledge Graphs https://docs.ampligraph.org",
+   "stars": 2243,
    "topics": [
+    "graph-embeddings",
+    "graph-representation-learning",
+    "knowledge-graph",
+    "knowledge-graph-embeddings",
+    "machine-learning",
+    "relational-learning",
+    "representation-learning"
+   ],
+   "lang": "Python",
+   "created_at": "2019-01-09",
+   "pushed_at": "2026-10-23",
+   "age_days": 2853,
+   "stars_per_day_lifetime": 0.79,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-10-02",
+    "sort": "updated",
+    "query_breadth": 59,
+    "position": 47
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "Python库，用于知识图谱上的表示学习。",
+   "evidence": "Python library for Representation Learning on Knowledge Graphs",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "hey-yx/allparse",
+   "url": "https://github.com/hey-yx/allparse",
+   "description": "给一条分享链接，返回无水印视频/图集直链。支持抖音、小红书、快手、B站、微博、X/Twitter、YouTube、Instagram、TikTok",
+   "stars": 105,
+   "topics": [
+    "api",
+    "douyin",
+    "kuaishou",
+    "parse-server",
+    "short-video",
+    "xiaohongshu"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2025-01-17",
+   "pushed_at": "2026-10-31",
+   "age_days": 653,
+   "stars_per_day_lifetime": 0.16,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 77,
+    "position": 76
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供短视频平台分享链接解析服务，返回无水印视频/图集直链。",
+   "evidence": "给一条分享链接，返回无水印视频/图集直链。支持抖音、小红书、快手、B站、微博、X/Twitter、YouTube、Instagram、TikTok",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "trungdq88/Awesome-Black-Friday-Cyber-Monday",
+   "url": "https://github.com/trungdq88/Awesome-Black-Friday-Cyber-Monday",
+   "description": "Awesome apps, software, and SaaS deals on Black Friday.",
+   "stars": 7490,
+   "topics": [],
+   "lang": "",
+   "created_at": "2022-11-22",
+   "pushed_at": "2026-11-01",
+   "age_days": 1440,
+   "stars_per_day_lifetime": 5.2,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-02",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 6
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集黑色星期五和网络星期一的应用、软件和SaaS优惠信息。",
+   "evidence": "Awesome apps, software, and SaaS deals on Black Friday.",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "agmmnn/awesome-blender",
+   "url": "https://github.com/agmmnn/awesome-blender",
+   "description": "🪐 A curated list of awesome Blender addons, tools, tutorials; and 3D resources for everyone.",
+   "stars": 7541,
+   "topics": [
+    "3d",
+    "3d-models",
     "awesome",
     "awesome-list",
-    "awesome-lists",
-    "awesome-readme",
-    "awesome-resources",
-    "hyprland",
-    "hyprland-ipc",
-    "list",
-    "resources"
+    "blender",
+    "blender-addon",
+    "list"
    ],
    "lang": "",
-   "created_at": "2022-12-09",
-   "pushed_at": "2026-10-30",
-   "age_days": 1422,
-   "stars_per_day_lifetime": 3.78,
+   "created_at": "2020-01-19",
+   "pushed_at": "2026-10-31",
+   "age_days": 2478,
+   "stars_per_day_lifetime": 3.04,
    "license": "CC0-1.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-10-01",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-02",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 40
+    "position": 30
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为 Hyprland 提供资源列表",
-   "evidence": "Awesome list for Hyprland",
+   "capability": "收集Blender插件、工具、教程和3D资源列表。",
+   "evidence": "A curated list of awesome Blender addons, tools, tutorials; and 3D resources for everyone.",
    "transfer_forms": [
-    "unknown"
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -268,136 +304,47 @@
    "distilled": true
   },
   {
-   "repo": "ccch1mneyyy/dsh-Go",
-   "url": "https://github.com/ccch1mneyyy/dsh-Go",
-   "description": "dsh-go — DeepSeek Harness 装进口袋：手机本机运行，也能遥控你的电脑。",
-   "stars": 2842,
+   "repo": "alexgaoth/awesome-reverse-engineered",
+   "url": "https://github.com/alexgaoth/awesome-reverse-engineered",
+   "description": "Don't reverse engineer it twice. 17,000+ open-source tools built by reverse engineering closed apps, APIs, devices, protocols, file formats, games and AI tools. Search site + agent skill + MCP server, refreshed nightly.",
+   "stars": 1011,
    "topics": [
-    "ai-agent",
-    "android",
-    "android-app",
-    "coding-agent",
-    "deepseek",
-    "deepseek-harness",
-    "dsh",
-    "dsh-plugin",
-    "dsh-tui",
-    "flutter",
-    "llm"
-   ],
-   "lang": "Dart",
-   "created_at": "2026-10-25",
-   "pushed_at": "2026-10-30",
-   "age_days": 6,
-   "stars_per_day_lifetime": 473.67,
-   "license": "AGPL-3.0",
-   "license_family": "copyleft",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-01",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 50
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "DeepSeek Harness 的移动端版本，可遥控电脑",
-   "evidence": "dsh-go — DeepSeek Harness 装进口袋：手机本机运行，也能遥控你的电脑",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "hslatman/awesome-threat-intelligence",
-   "url": "https://github.com/hslatman/awesome-threat-intelligence",
-   "description": "A curated list of Awesome Threat Intelligence resources",
-   "stars": 10807,
-   "topics": [
+    "agent-skills",
+    "ai-agents",
     "awesome",
     "awesome-list",
+    "claude-code",
+    "decompilation",
+    "file-formats",
+    "game-decompilation",
+    "game-preservation",
     "hacktoberfest",
-    "security"
+    "home-assistant",
+    "interoperability"
    ],
-   "lang": "",
-   "created_at": "2015-12-21",
-   "pushed_at": "2026-10-30",
-   "age_days": 3967,
-   "stars_per_day_lifetime": 2.72,
-   "license": "Apache-2.0",
+   "lang": "Python",
+   "created_at": "2026-10-11",
+   "pushed_at": "2026-10-31",
+   "age_days": 21,
+   "stars_per_day_lifetime": 48.14,
+   "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-10-01",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-02",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 43
+    "position": 55
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "收集威胁情报资源列表",
-   "evidence": "A curated list of Awesome Threat Intelligence resources",
+   "capability": "收集通过逆向工程构建的开源工具列表。",
+   "evidence": "17,000+ open-source tools built by reverse engineering closed apps, APIs, devices, protocols, file formats, games and AI",
    "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "uber/ADR",
-   "url": "https://github.com/uber/ADR",
-   "description": "ADR secures enterprise AI agents through observability, security benchmarking, and threat detection. Deployed at Uber.",
-   "stars": 2090,
-   "topics": [
-    "agent-security",
-    "ai-agents",
-    "ai-security",
-    "benchmark",
-    "claude",
-    "claude-code",
-    "codex",
-    "cursor",
-    "llm-security",
-    "mcp",
-    "model-context-protocol",
-    "prompt-injection"
-   ],
-   "lang": "Python",
-   "created_at": "2026-04-19",
-   "pushed_at": "2026-10-31",
-   "age_days": 195,
-   "stars_per_day_lifetime": 10.72,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 91
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "通过可观察性、安全基准和威胁检测来保护企业 AI 代理",
-   "evidence": "ADR secures enterprise AI agents through observability, security benchmarking, and threat detection",
-   "transfer_forms": [
-    "mcp",
-    "skill",
-    "architecture"
+    "library"
    ],
    "line_candidates": [
     "modelpool"
@@ -405,229 +352,38 @@
    "distilled": true
   },
   {
-   "repo": "tigerless-labs/autoharness",
-   "url": "https://github.com/tigerless-labs/autoharness",
-   "description": "Building the self-learning layer next-gen agents will ship with, learning skills from real work.",
-   "stars": 10515,
-   "topics": [
-    "agent-skills",
-    "claude-code",
-    "claude-code-plugin",
-    "llm-agents",
-    "python"
-   ],
-   "lang": "Python",
-   "created_at": "2026-06-09",
-   "pushed_at": "2026-10-30",
-   "age_days": 144,
-   "stars_per_day_lifetime": 73.02,
-   "license": "MIT",
-   "license_family": "permissive",
+   "repo": "futantan/agent-skills.md",
+   "url": "https://github.com/futantan/agent-skills.md",
+   "description": "Find awesome Agent Skills",
+   "stars": 311,
+   "topics": [],
+   "lang": "TypeScript",
+   "created_at": "2025-12-29",
+   "pushed_at": "2026-10-31",
+   "age_days": 307,
+   "stars_per_day_lifetime": 1.01,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
     "dimension": "category",
-    "query": "agent skill in:name,description stars:>300 pushed:>2026-08-02",
-    "sort": "stars",
+    "query": "skill in:name stars:>200 pushed:>2026-10-02",
+    "sort": "updated",
     "query_breadth": 100,
-    "position": 57
+    "position": 65
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "构建下一代代理的自我学习层，从实际工作中学习技能",
-   "evidence": "Building the self-learning layer next-gen agents will ship with, learning skills from real work",
+   "capability": "列出优秀的代理技能。",
+   "evidence": "Find awesome Agent Skills",
    "transfer_forms": [
     "skill",
-    "architecture"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "AgenticResourceRegistry/AgenticResourceRegistry",
-   "url": "https://github.com/AgenticResourceRegistry/AgenticResourceRegistry",
-   "description": "Share and discover coding agent resources across your team. Self-hosted, Apache 2.0, works with Claude Code, Kiro, Cursor, Codex, Pi and more.",
-   "stars": 4534,
-   "topics": [
-    "agents",
-    "analytics",
-    "antigravity",
-    "claude-code",
-    "cli-tool",
-    "codex",
-    "cursor",
-    "cursor-ai",
-    "insights",
-    "kiro",
-    "large-language-models",
-    "mcp"
-   ],
-   "lang": "Python",
-   "created_at": "2026-03-30",
-   "pushed_at": "2026-10-31",
-   "age_days": 215,
-   "stars_per_day_lifetime": 21.09,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 98
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "共享和发现编码代理资源",
-   "evidence": "Share and discover coding agent resources across your team",
-   "transfer_forms": [
     "library"
    ],
    "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "ant-design/ant-design",
-   "url": "https://github.com/ant-design/ant-design",
-   "description": "An enterprise-class UI design language and React UI library",
-   "stars": 100016,
-   "topics": [
-    "ant-design",
-    "antd",
-    "design-systems",
-    "react",
-    "typescript",
-    "ui-kit",
-    "ui-library"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2015-04-24",
-   "pushed_at": "2026-10-30",
-   "age_days": 4208,
-   "stars_per_day_lifetime": 23.77,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "stars:>100000 pushed:>2026-10-01",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 64
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供企业级UI设计语言和React组件库，用于构建用户界面。",
-   "evidence": "An enterprise-class UI design language and React UI library.",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "stripe/ai",
-   "url": "https://github.com/stripe/ai",
-   "description": "One-stop shop for building AI-powered products and businesses with Stripe.",
-   "stars": 2009,
-   "topics": [
-    "ai",
-    "gemini-cli-extension",
-    "llm",
-    "llm-agents",
-    "mcp",
-    "python",
-    "typescript",
-    "workflows"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2024-11-11",
-   "pushed_at": "2026-10-31",
-   "age_days": 719,
-   "stars_per_day_lifetime": 2.79,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-10-01",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 99
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供一站式工具集，用于构建基于Stripe的AI产品和业务。",
-   "evidence": "One-stop shop for building AI-powered products and businesses with Stripe; topics包含mcp.",
-   "transfer_forms": [
-    "library",
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "codewithMUHILAN/Lightswind-UI-Library",
-   "url": "https://github.com/codewithMUHILAN/Lightswind-UI-Library",
-   "description": "The AI-native CLI-first React component library. 160+ animated, accessible, production-ready components with MCP Server support for Cursor, Claude & GitHub Copilot. Copy-paste architecture — you own the code.",
-   "stars": 1250,
-   "topics": [
-    "ai-native",
-    "animated-components",
-    "component-library",
-    "design-system",
-    "framer-motion",
-    "frontend",
-    "gsap",
-    "lightswind-ui",
-    "mcp-server",
-    "nextjs",
-    "react",
-    "tailwindcss"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2023-07-11",
-   "pushed_at": "2026-10-30",
-   "age_days": 1208,
-   "stars_per_day_lifetime": 1.03,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-01",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 75
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供AI原生CLI优先的React组件库，包含160+组件并支持MCP服务器集成。",
-   "evidence": "AI-native CLI-first React component library ... with MCP Server support.",
-   "transfer_forms": [
-    "library",
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
+    "modelpool"
    ],
    "distilled": true
   }

@@ -25034,6 +25034,71 @@
    }
   },
   {
+   "repo": "agmmnn/awesome-blender",
+   "url": "https://github.com/agmmnn/awesome-blender",
+   "first_seen": "2026-11-01",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-01",
+   "stars": 7541,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-31",
+   "created_at": "2020-01-19",
+   "stars_per_day_lifetime": 3.04,
+   "capability": "收集Blender插件、工具、教程和3D资源列表。",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "3d",
+    "3d-models",
+    "awesome",
+    "awesome-list",
+    "blender",
+    "blender-addon",
+    "list"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-02",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 30
+   }
+  },
+  {
+   "repo": "trungdq88/Awesome-Black-Friday-Cyber-Monday",
+   "url": "https://github.com/trungdq88/Awesome-Black-Friday-Cyber-Monday",
+   "first_seen": "2026-11-01",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-01",
+   "stars": 7490,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-11-01",
+   "created_at": "2022-11-22",
+   "stars_per_day_lifetime": 5.2,
+   "capability": "收集黑色星期五和网络星期一的应用、软件和SaaS优惠信息。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-02",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 6
+   }
+  },
+  {
    "repo": "refly-ai/refly",
    "url": "https://github.com/refly-ai/refly",
    "first_seen": "2026-08-14",
@@ -44948,6 +45013,46 @@
    }
   },
   {
+   "repo": "wangzan101/Mika",
+   "url": "https://github.com/wangzan101/Mika",
+   "first_seen": "2026-11-01",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-01",
+   "stars": 3031,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Kotlin",
+   "pushed_at": "2026-11-01",
+   "created_at": "2026-10-29",
+   "stars_per_day_lifetime": 1010.33,
+   "capability": "为Android设备提供设备端AI代理，操作应用和网页完成任务。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "accessibility",
+    "ai-agent",
+    "android",
+    "automation",
+    "jetpack-compose",
+    "kotlin",
+    "llm",
+    "mobile-agent"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-02",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 34
+   }
+  },
+  {
    "repo": "endymecy/awesome-deeplearning-resources",
    "url": "https://github.com/endymecy/awesome-deeplearning-resources",
    "first_seen": "2026-10-21",
@@ -54652,6 +54757,44 @@
    }
   },
   {
+   "repo": "Accenture/AmpliGraph",
+   "url": "https://github.com/Accenture/AmpliGraph",
+   "first_seen": "2026-11-01",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-01",
+   "stars": 2243,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-23",
+   "created_at": "2019-01-09",
+   "stars_per_day_lifetime": 0.79,
+   "capability": "Python库，用于知识图谱上的表示学习。",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "graph-embeddings",
+    "graph-representation-learning",
+    "knowledge-graph",
+    "knowledge-graph-embeddings",
+    "machine-learning",
+    "relational-learning",
+    "representation-learning"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-10-02",
+    "sort": "updated",
+    "query_breadth": 59,
+    "position": 47
+   }
+  },
+  {
    "repo": "holynova/gushi_namer",
    "url": "https://github.com/holynova/gushi_namer",
    "first_seen": "2026-08-09",
@@ -56014,6 +56157,50 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 32
+   }
+  },
+  {
+   "repo": "LeoYeAI/agent-master-skills",
+   "url": "https://github.com/LeoYeAI/agent-master-skills",
+   "first_seen": "2026-11-01",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-01",
+   "stars": 2168,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-01",
+   "created_at": "2026-03-02",
+   "stars_per_day_lifetime": 8.89,
+   "capability": "收集和整理2700+个AI代理技能，支持多种运行时环境。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "agentskills",
+    "ai-agent",
+    "ai-agents",
+    "anthropic-skills",
+    "claude-code",
+    "codex",
+    "curated",
+    "cursor",
+    "gemini-cli",
+    "hermes",
+    "myclaw"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 46,
+    "position": 20
    }
   },
   {
@@ -72469,6 +72656,49 @@
     "sort": "updated",
     "query_breadth": 79,
     "position": 16
+   }
+  },
+  {
+   "repo": "alexgaoth/awesome-reverse-engineered",
+   "url": "https://github.com/alexgaoth/awesome-reverse-engineered",
+   "first_seen": "2026-11-01",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-01",
+   "stars": 1011,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-31",
+   "created_at": "2026-10-11",
+   "stars_per_day_lifetime": 48.14,
+   "capability": "收集通过逆向工程构建的开源工具列表。",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "awesome",
+    "awesome-list",
+    "claude-code",
+    "decompilation",
+    "file-formats",
+    "game-decompilation",
+    "game-preservation",
+    "hacktoberfest",
+    "home-assistant",
+    "interoperability"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-02",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 55
    }
   },
   {
@@ -91858,6 +92088,36 @@
    }
   },
   {
+   "repo": "futantan/agent-skills.md",
+   "url": "https://github.com/futantan/agent-skills.md",
+   "first_seen": "2026-11-01",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-01",
+   "stars": 311,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-31",
+   "created_at": "2025-12-29",
+   "stars_per_day_lifetime": 1.01,
+   "capability": "列出优秀的代理技能。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-02",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 65
+   }
+  },
+  {
    "repo": "referodesign/refero_skill",
    "url": "https://github.com/referodesign/refero_skill",
    "first_seen": "2026-10-16",
@@ -107852,6 +108112,43 @@
    }
   },
   {
+   "repo": "hey-yx/allparse",
+   "url": "https://github.com/hey-yx/allparse",
+   "first_seen": "2026-11-01",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-01",
+   "stars": 105,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-31",
+   "created_at": "2025-01-17",
+   "stars_per_day_lifetime": 0.16,
+   "capability": "提供短视频平台分享链接解析服务，返回无水印视频/图集直链。",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "api",
+    "douyin",
+    "kuaishou",
+    "parse-server",
+    "short-video",
+    "xiaohongshu"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 77,
+    "position": 76
+   }
+  },
+  {
    "repo": "jiahuiqu17/paper-signal",
    "url": "https://github.com/jiahuiqu17/paper-signal",
    "first_seen": "2026-08-27",
@@ -112620,7 +112917,7 @@
    }
   }
  ],
- "updated": "2026-10-31",
+ "updated": "2026-11-01",
  "status_enum": [
   "pending",
   "debated",
