@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-11-01",
+ "generated": "2026-11-02",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -41,249 +41,123 @@
  },
  "distill": {
   "seat": "zhipu",
-  "calls": 3,
+  "calls": 10,
   "ok": 1
  },
- "count": 8,
+ "count": 20,
  "candidates": [
   {
-   "repo": "LeoYeAI/agent-master-skills",
-   "url": "https://github.com/LeoYeAI/agent-master-skills",
-   "description": "🧠 Curated collection of 2700+ best agent skills — AI, coding, marketing, design, finance and more. Harness-agnostic: works with Claude Code, Codex, Cursor, Gemini CLI, OpenClaw, Hermes and any Agent Skills runtime. Refreshed daily by MyClaw.ai — Powered by MyClaw.ai",
-   "stars": 2168,
+   "repo": "KnifeLemon/Filee",
+   "url": "https://github.com/KnifeLemon/Filee",
+   "description": "Free, open-source file converter. Convert 263 formats offline by drag & drop — images, PDF, Word, Excel, PowerPoint, HWP/HWPX, video, audio, e-books and archives. No upload, no Office needed.",
+   "stars": 20275,
    "topics": [
-    "agent-skills",
-    "agentskills",
-    "ai-agent",
-    "ai-agents",
-    "anthropic-skills",
-    "claude-code",
-    "codex",
-    "curated",
-    "cursor",
-    "gemini-cli",
-    "hermes",
-    "myclaw"
+    "audio-converter",
+    "avalonia",
+    "batch-conversion",
+    "converter",
+    "csharp",
+    "document-converter",
+    "docx-to-pdf",
+    "dotnet",
+    "drag-and-drop",
+    "file-conversion",
+    "file-converter",
+    "heic-converter"
    ],
-   "lang": "Python",
-   "created_at": "2026-03-02",
-   "pushed_at": "2026-11-01",
-   "age_days": 244,
-   "stars_per_day_lifetime": 8.89,
+   "lang": "C#",
+   "created_at": "2026-09-29",
+   "pushed_at": "2026-11-02",
+   "age_days": 34,
+   "stars_per_day_lifetime": 596.32,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "query": "video in:name,description stars:>20000 pushed:>2026-08-04",
     "sort": "stars",
-    "query_breadth": 46,
-    "position": 20
+    "query_breadth": 35,
+    "position": 33
    },
-   "matched_by_n_queries": 3,
+   "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "收集和整理2700+个AI代理技能，支持多种运行时环境。",
-   "evidence": "Curated collection of 2700+ best agent skills — AI, coding, marketing, design, finance and more.",
+   "capability": "",
+   "evidence": "",
    "transfer_forms": [
-    "skill",
-    "library"
+    "unknown"
    ],
    "line_candidates": [
-    "modelpool"
+    "unknown"
    ],
-   "distilled": true
+   "distilled": false
   },
   {
-   "repo": "wangzan101/Mika",
-   "url": "https://github.com/wangzan101/Mika",
-   "description": "An on-device AI agent for Android that operates apps and the web to get things done for you.",
-   "stars": 3031,
-   "topics": [
-    "accessibility",
-    "ai-agent",
-    "android",
-    "automation",
-    "jetpack-compose",
-    "kotlin",
-    "llm",
-    "mobile-agent"
+   "repo": "ibh4/mac-Buddy",
+   "url": "https://github.com/ibh4/mac-Buddy",
+   "description": "🍔 mac-Buddy · 麦麦搭子｜基于麦当劳 MCP 的智能点餐助手，支持口味记忆、餐单微调、营养查看与随机推荐。记得你的老样子，也懂你想换换口味。Your taste. Your Buddy.",
+   "stars": 302,
+   "topics": [],
+   "lang": "TypeScript",
+   "created_at": "2026-10-10",
+   "pushed_at": "2026-10-10",
+   "age_days": 23,
+   "stars_per_day_lifetime": 13.13,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "微调 in:name,description stars:>300 pushed:>2026-08-04",
+    "sort": "stars",
+    "query_breadth": 23,
+    "position": 22
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "",
+   "evidence": "",
+   "transfer_forms": [
+    "unknown"
    ],
-   "lang": "Kotlin",
-   "created_at": "2026-10-29",
-   "pushed_at": "2026-11-01",
-   "age_days": 3,
-   "stars_per_day_lifetime": 1010.33,
-   "license": "Apache-2.0",
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": false
+  },
+  {
+   "repo": "akfamily/akshare",
+   "url": "https://github.com/akfamily/akshare",
+   "description": "AKShare is an elegant and simple financial data interface library for Python, built for human beings! 开源财经数据接口库",
+   "stars": 23164,
+   "topics": [
+    "academic",
+    "akshare",
+    "asset-pricing",
+    "bond",
+    "currency",
+    "data",
+    "data-analysis",
+    "data-science",
+    "datasets",
+    "economic-data",
+    "economics",
+    "finance"
+   ],
+   "lang": "Python",
+   "created_at": "2019-10-01",
+   "pushed_at": "2026-11-02",
+   "age_days": 2589,
+   "stars_per_day_lifetime": 8.95,
+   "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-02",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 34
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为Android设备提供设备端AI代理，操作应用和网页完成任务。",
-   "evidence": "An on-device AI agent for Android that operates apps and the web to get things done for you.",
-   "transfer_forms": [
-    "skill",
-    "architecture"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Accenture/AmpliGraph",
-   "url": "https://github.com/Accenture/AmpliGraph",
-   "description": "Python library for Representation Learning on Knowledge Graphs https://docs.ampligraph.org",
-   "stars": 2243,
-   "topics": [
-    "graph-embeddings",
-    "graph-representation-learning",
-    "knowledge-graph",
-    "knowledge-graph-embeddings",
-    "machine-learning",
-    "relational-learning",
-    "representation-learning"
-   ],
-   "lang": "Python",
-   "created_at": "2019-01-09",
-   "pushed_at": "2026-10-23",
-   "age_days": 2853,
-   "stars_per_day_lifetime": 0.79,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-10-02",
-    "sort": "updated",
-    "query_breadth": 59,
-    "position": 47
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "Python库，用于知识图谱上的表示学习。",
-   "evidence": "Python library for Representation Learning on Knowledge Graphs",
-   "transfer_forms": [
-    "library"
-   ],
-   "line_candidates": [
-    "modelpool"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "hey-yx/allparse",
-   "url": "https://github.com/hey-yx/allparse",
-   "description": "给一条分享链接，返回无水印视频/图集直链。支持抖音、小红书、快手、B站、微博、X/Twitter、YouTube、Instagram、TikTok",
-   "stars": 105,
-   "topics": [
-    "api",
-    "douyin",
-    "kuaishou",
-    "parse-server",
-    "short-video",
-    "xiaohongshu"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2025-01-17",
-   "pushed_at": "2026-10-31",
-   "age_days": 653,
-   "stars_per_day_lifetime": 0.16,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:xiaohongshu stars:>100",
-    "sort": "stars",
-    "query_breadth": 77,
-    "position": 76
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供短视频平台分享链接解析服务，返回无水印视频/图集直链。",
-   "evidence": "给一条分享链接，返回无水印视频/图集直链。支持抖音、小红书、快手、B站、微博、X/Twitter、YouTube、Instagram、TikTok",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "trungdq88/Awesome-Black-Friday-Cyber-Monday",
-   "url": "https://github.com/trungdq88/Awesome-Black-Friday-Cyber-Monday",
-   "description": "Awesome apps, software, and SaaS deals on Black Friday.",
-   "stars": 7490,
-   "topics": [],
-   "lang": "",
-   "created_at": "2022-11-22",
-   "pushed_at": "2026-11-01",
-   "age_days": 1440,
-   "stars_per_day_lifetime": 5.2,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-10-02",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 6
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "收集黑色星期五和网络星期一的应用、软件和SaaS优惠信息。",
-   "evidence": "Awesome apps, software, and SaaS deals on Black Friday.",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "agmmnn/awesome-blender",
-   "url": "https://github.com/agmmnn/awesome-blender",
-   "description": "🪐 A curated list of awesome Blender addons, tools, tutorials; and 3D resources for everyone.",
-   "stars": 7541,
-   "topics": [
-    "3d",
-    "3d-models",
-    "awesome",
-    "awesome-list",
-    "blender",
-    "blender-addon",
-    "list"
-   ],
-   "lang": "",
-   "created_at": "2020-01-19",
-   "pushed_at": "2026-10-31",
-   "age_days": 2478,
-   "stars_per_day_lifetime": 3.04,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-10-02",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-03",
     "sort": "updated",
     "query_breadth": 100,
     "position": 30
@@ -293,82 +167,299 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "收集Blender插件、工具、教程和3D资源列表。",
-   "evidence": "A curated list of awesome Blender addons, tools, tutorials; and 3D resources for everyone.",
+   "capability": "",
+   "evidence": "",
    "transfer_forms": [
-    "library"
+    "unknown"
    ],
    "line_candidates": [
     "unknown"
    ],
-   "distilled": true
+   "distilled": false
   },
   {
-   "repo": "alexgaoth/awesome-reverse-engineered",
-   "url": "https://github.com/alexgaoth/awesome-reverse-engineered",
-   "description": "Don't reverse engineer it twice. 17,000+ open-source tools built by reverse engineering closed apps, APIs, devices, protocols, file formats, games and AI tools. Search site + agent skill + MCP server, refreshed nightly.",
-   "stars": 1011,
+   "repo": "UnderleveledBuilder/awesome-social-media-skills",
+   "url": "https://github.com/UnderleveledBuilder/awesome-social-media-skills",
+   "description": "自媒体运营 Skill（技能包）精选：小红书、抖音、公众号、视频号、B 站、X、YouTube、TikTok、LinkedIn 的选题、写稿、配图、发布和数据，千问、豆包、龙虾 OpenClaw、WorkBuddy、Claude Code、Codex 等智能体可用 | Curated agent skills for social media: Xiaohongshu (RedNote), Douyin, WeChat, X, YouTube, TikTok and LinkedIn",
+   "stars": 134,
    "topics": [
     "agent-skills",
-    "ai-agents",
     "awesome",
     "awesome-list",
     "claude-code",
-    "decompilation",
-    "file-formats",
-    "game-decompilation",
-    "game-preservation",
-    "hacktoberfest",
-    "home-assistant",
-    "interoperability"
+    "claude-skills",
+    "codex",
+    "content-creator",
+    "douyin",
+    "linkedin",
+    "mcp",
+    "openclaw",
+    "rednote"
    ],
    "lang": "Python",
-   "created_at": "2026-10-11",
-   "pushed_at": "2026-10-31",
-   "age_days": 21,
-   "stars_per_day_lifetime": 48.14,
-   "license": "MIT",
+   "created_at": "2026-10-19",
+   "pushed_at": "2026-11-01",
+   "age_days": 14,
+   "stars_per_day_lifetime": 9.57,
+   "license": "CC0-1.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-02",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 55
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 47,
+    "position": 44
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "",
+   "evidence": "",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": false
+  },
+  {
+   "repo": "h0ll0w-AkuZr0guY/MiaoTask",
+   "url": "https://github.com/h0ll0w-AkuZr0guY/MiaoTask",
+   "description": "🐱 MiaoTask：基于 uiautomator2 + ADB 的本地多设备任务工作台，结合 UI 控件识别与离线 OCR 辅助。支持 USB / Wi-Fi、多设备并行、分身串行和活动源码按需更新，提供 Windows 便携包；已适配淘宝淘金币、芭芭农场、红包签到、成就中心与双11活动以及支付宝月月赚活动。",
+   "stars": 103,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-10-18",
+   "pushed_at": "2026-11-02",
+   "age_days": 15,
+   "stars_per_day_lifetime": 6.87,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "OCR 识别 in:name,description stars:>100 pushed:>2026-08-04",
+    "sort": "stars",
+    "query_breadth": 29,
+    "position": 28
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "收集通过逆向工程构建的开源工具列表。",
-   "evidence": "17,000+ open-source tools built by reverse engineering closed apps, APIs, devices, protocols, file formats, games and AI",
+   "capability": "",
+   "evidence": "",
    "transfer_forms": [
-    "library"
+    "unknown"
    ],
    "line_candidates": [
-    "modelpool"
+    "unknown"
    ],
-   "distilled": true
+   "distilled": false
   },
   {
-   "repo": "futantan/agent-skills.md",
-   "url": "https://github.com/futantan/agent-skills.md",
-   "description": "Find awesome Agent Skills",
-   "stars": 311,
-   "topics": [],
+   "repo": "leemysw/yovoice",
+   "url": "https://github.com/leemysw/yovoice",
+   "description": "Open-source local AI audio & music studio for macOS & Windows. TTS, voice cloning, songs with lyrics, and multi-track scores — 100% offline, zero API fees.",
+   "stars": 2020,
+   "topics": [
+    "ai-music",
+    "audio",
+    "desktop-app",
+    "local-ai",
+    "macos",
+    "mcp",
+    "midi",
+    "music-generation",
+    "offline-ai",
+    "skill",
+    "text-to-speech",
+    "tts"
+   ],
    "lang": "TypeScript",
-   "created_at": "2025-12-29",
-   "pushed_at": "2026-10-31",
-   "age_days": 307,
-   "stars_per_day_lifetime": 1.01,
-   "license": "NONE",
-   "license_family": "none",
+   "created_at": "2026-09-15",
+   "pushed_at": "2026-11-02",
+   "age_days": 48,
+   "stars_per_day_lifetime": 42.08,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
    "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-10-02",
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-03",
     "sort": "updated",
     "query_breadth": 100,
+    "position": 67
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "",
+   "evidence": "",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": false
+  },
+  {
+   "repo": "AhmadHassan-BTed/AutoSwarm-Shadow-Adapter",
+   "url": "https://github.com/AhmadHassan-BTed/AutoSwarm-Shadow-Adapter",
+   "description": "Zero-modification Human-in-the-Loop adapter for OpenOPC's agentic DAG runtime.",
+   "stars": 5099,
+   "topics": [
+    "agentic-ai",
+    "agentic-workflow",
+    "ai-employee",
+    "ai-native",
+    "ai-workforce",
+    "dag-orchestration",
+    "external-agent-adapter",
+    "fastapi",
+    "generative-ai",
+    "hitl",
+    "human-in-the-loop",
+    "human-oversight"
+   ],
+   "lang": "Python",
+   "created_at": "2026-07-25",
+   "pushed_at": "2026-10-20",
+   "age_days": 100,
+   "stars_per_day_lifetime": 50.99,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 81,
+    "position": 73
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "",
+   "evidence": "",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": false
+  },
+  {
+   "repo": "fanchenggang/Davflare",
+   "url": "https://github.com/fanchenggang/Davflare",
+   "description": "Self-hosted cloud drive on Cloudflare R2 — web file manager + WebDAV, with chunked uploads, expiring share links, trash, thumbnails, search & API keys. | 基于 Cloudflare R2 的免费私有云盘：Web 文件管理 + WebDAV 服务，Pages & Workers 全 serverless 部署，大文件分块上传、分享链接（可设过期）、回收站、缩略图、搜索与开放 API",
+   "stars": 101,
+   "topics": [
+    "cloud-storage",
+    "cloudflare",
+    "cloudflare-pages",
+    "cloudflare-workers",
+    "file-manager",
+    "r2",
+    "self-hosted",
+    "serverless",
+    "webdav"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-08-21",
+   "pushed_at": "2026-10-26",
+   "age_days": 73,
+   "stars_per_day_lifetime": 1.38,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-08-04",
+    "sort": "stars",
+    "query_breadth": 38,
+    "position": 37
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "",
+   "evidence": "",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": false
+  },
+  {
+   "repo": "awesome-opencode/awesome-opencode",
+   "url": "https://github.com/awesome-opencode/awesome-opencode",
+   "description": "A curated list of awesome plugins, themes, agents, projects, and resources for https://opencode.ai",
+   "stars": 10832,
+   "topics": [],
+   "lang": "JavaScript",
+   "created_at": "2025-09-22",
+   "pushed_at": "2026-11-01",
+   "age_days": 406,
+   "stars_per_day_lifetime": 26.68,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 39
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "",
+   "evidence": "",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": false
+  },
+  {
+   "repo": "zhanghao123vip/ai-manju-skills",
+   "url": "https://github.com/zhanghao123vip/ai-manju-skills",
+   "description": "21 个题材的 AI 漫剧全流程 Skill：一句点子生成企划案、资产图提示词、分集剧本、分镜与视频提示词。可用于 Claude Code、WorkBuddy、DeepSeek",
+   "stars": 294,
+   "topics": [
+    "ai-skills",
+    "ai-video",
+    "chinese",
+    "claude-code",
+    "prompt-engineering"
+   ],
+   "lang": "",
+   "created_at": "2026-10-31",
+   "pushed_at": "2026-11-01",
+   "age_days": 2,
+   "stars_per_day_lifetime": 147.0,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-04",
+    "sort": "stars",
+    "query_breadth": 89,
     "position": 65
    },
    "matched_by_n_queries": 1,
@@ -376,14 +467,438 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "列出优秀的代理技能。",
-   "evidence": "Find awesome Agent Skills",
+   "capability": "",
+   "evidence": "",
    "transfer_forms": [
-    "skill",
-    "library"
+    "unknown"
    ],
    "line_candidates": [
-    "modelpool"
+    "unknown"
+   ],
+   "distilled": false
+  },
+  {
+   "repo": "wheelry/deep-skill-finder",
+   "url": "https://github.com/wheelry/deep-skill-finder",
+   "description": "Deep Skill Finder – Real Tests Real Reviews find skills that Real Work",
+   "stars": 577,
+   "topics": [
+    "agent",
+    "agent-skills",
+    "ai",
+    "ai-agent",
+    "ai-tools",
+    "skill"
+   ],
+   "lang": "Python",
+   "created_at": "2026-06-30",
+   "pushed_at": "2026-11-02",
+   "age_days": 125,
+   "stars_per_day_lifetime": 4.62,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 39
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "寻找和评估AI技能",
+   "evidence": "Real Tests Real Reviews find skills that Real Work",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "XiaoyeCodes/code-animation-prompts",
+   "url": "https://github.com/XiaoyeCodes/code-animation-prompts",
+   "description": "341 种代码动画风格提示词、193 张参考静帧与离线挑选器，封装为 Claude Code / Codex Skill，支持一键导入与 HTML 视频渲染。",
+   "stars": 260,
+   "topics": [
+    "agent-skills",
+    "animation",
+    "claude-code",
+    "codex",
+    "creative-coding",
+    "prompts",
+    "video-generation"
+   ],
+   "lang": "HTML",
+   "created_at": "2026-10-29",
+   "pushed_at": "2026-10-29",
+   "age_days": 4,
+   "stars_per_day_lifetime": 65.0,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-04",
+    "sort": "stars",
+    "query_breadth": 89,
+    "position": 73
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供代码动画风格提示词和视频渲染",
+   "evidence": "341 种代码动画风格提示词、193 张参考静帧与离线挑选器，封装为 Claude Code / Codex Skill，支持一键导入与 HTML 视频渲染。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "sarsonj/rodokmen-skill",
+   "url": "https://github.com/sarsonj/rodokmen-skill",
+   "description": "",
+   "stars": 395,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2026-10-16",
+   "pushed_at": "2026-11-01",
+   "age_days": 17,
+   "stars_per_day_lifetime": 23.24,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 51
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供未知功能",
+   "evidence": "提供未知功能",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "EvovexAI/EvoFlow",
+   "url": "https://github.com/EvovexAI/EvoFlow",
+   "description": "原生 Agent Runtime / 智能体员工 / 智能体编排 / 知识库 / 长任务。官网 www.evovexai.com",
+   "stars": 582,
+   "topics": [
+    "agent",
+    "desktop",
+    "multi-agent",
+    "source-available",
+    "tauri",
+    "workflow"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-05-11",
+   "pushed_at": "2026-11-02",
+   "age_days": 175,
+   "stars_per_day_lifetime": 3.33,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "智能体 in:name,description stars:>200",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 99
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供智能体运行时和知识库",
+   "evidence": "原生 Agent Runtime / 智能体员工 / 智能体编排 / 知识库 / 长任务。",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "harishsg993010/damn-vulnerable-MCP-server",
+   "url": "https://github.com/harishsg993010/damn-vulnerable-MCP-server",
+   "description": "Damn Vulnerable MCP Server",
+   "stars": 1362,
+   "topics": [],
+   "lang": "Python",
+   "created_at": "2025-04-16",
+   "pushed_at": "2026-11-01",
+   "age_days": 565,
+   "stars_per_day_lifetime": 2.41,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 52
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供易受攻击的MCP服务器",
+   "evidence": "Damn Vulnerable MCP Server",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "fatihaydost/brand-identity-skill",
+   "url": "https://github.com/fatihaydost/brand-identity-skill",
+   "description": "A Claude Code skill that designs a brand identity as one system: logo, typography and colour palette built together from one brief, measured, compared as identity cards, and delivered as a brand guidelines kit.",
+   "stars": 282,
+   "topics": [
+    "accessibility",
+    "agent-skills",
+    "agy",
+    "brand",
+    "brand-identity",
+    "branding",
+    "claude",
+    "claude-code",
+    "claude-skills",
+    "codex",
+    "color",
+    "color-palette"
+   ],
+   "lang": "Python",
+   "created_at": "2026-10-04",
+   "pushed_at": "2026-11-01",
+   "age_days": 29,
+   "stars_per_day_lifetime": 9.72,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 60
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "设计品牌身份系统",
+   "evidence": "A Claude Code skill that designs a brand identity as one system: logo, typography and colour palette built together from",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "PavelGrigoryevDS/awesome-data-analysis",
+   "url": "https://github.com/PavelGrigoryevDS/awesome-data-analysis",
+   "description": "🚀 500+ curated resources for Data Analysis & Data Science: Python, SQL, Statistics, ML, AI, Visualization, Cheatsheets, Roadmaps, Interview Prep. For beginners and experts.",
+   "stars": 2158,
+   "topics": [
+    "ai",
+    "analytics",
+    "awesome-list",
+    "big-data",
+    "business-intelligence",
+    "dashboard",
+    "data-analysis",
+    "data-science",
+    "data-visualization",
+    "datasets",
+    "eda",
+    "jupyter-notebook"
+   ],
+   "lang": "",
+   "created_at": "2025-07-30",
+   "pushed_at": "2026-11-01",
+   "age_days": 460,
+   "stars_per_day_lifetime": 4.69,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 62
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供数据分析资源列表",
+   "evidence": "500+ curated resources for Data Analysis & Data Science: Python, SQL, Statistics, ML, AI, Visualization, Cheatsheets, Ro",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "refly-ai/refly-skills",
+   "url": "https://github.com/refly-ai/refly-skills",
+   "description": "Refly skills repository",
+   "stars": 204,
+   "topics": [],
+   "lang": "JavaScript",
+   "created_at": "2026-01-25",
+   "pushed_at": "2026-11-01",
+   "age_days": 281,
+   "stars_per_day_lifetime": 0.73,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 62
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供技能库",
+   "evidence": "Refly skills repository",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "ashishps1/awesome-system-design-resources",
+   "url": "https://github.com/ashishps1/awesome-system-design-resources",
+   "description": "Learn System Design concepts and prepare for interviews using free resources.",
+   "stars": 43024,
+   "topics": [
+    "awesome",
+    "backend",
+    "computer-science",
+    "distributed-systems",
+    "high-level-design",
+    "hld",
+    "interview",
+    "interview-questions",
+    "scalability",
+    "system-design"
+   ],
+   "lang": "Java",
+   "created_at": "2023-10-25",
+   "pushed_at": "2026-11-01",
+   "age_days": 1104,
+   "stars_per_day_lifetime": 38.97,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 63
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供系统设计资源",
+   "evidence": "Learn System Design concepts and prepare for interviews using free resources.",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "2akouwu/reverify",
+   "url": "https://github.com/2akouwu/reverify",
+   "description": "Stop your AI from making things up — it proposes, deterministic tools decide, every claim checked against ground truth with evidence. Grounded facts and context survive resets. Reverse engineering is the proving ground. MCP server + CLI.",
+   "stars": 1322,
+   "topics": [
+    "ai",
+    "ai-agents",
+    "ai-coding",
+    "anti-hallucination",
+    "binary-analysis",
+    "context-engineering",
+    "ctf",
+    "developer-tools",
+    "disassembler",
+    "grounding",
+    "hallucination",
+    "hallucination-detection"
+   ],
+   "lang": "Python",
+   "created_at": "2026-08-31",
+   "pushed_at": "2026-11-01",
+   "age_days": 63,
+   "stars_per_day_lifetime": 20.98,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-03",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 67
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供AI反幻觉工具",
+   "evidence": "Stop your AI from making things up — it proposes, deterministic tools decide, every claim checked against ground truth w",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
    ],
    "distilled": true
   }
