@@ -4172,6 +4172,43 @@
    }
   },
   {
+   "repo": "pbakaus/impeccable",
+   "url": "https://github.com/pbakaus/impeccable",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 100789,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-11-02",
+   "created_at": "2025-11-16",
+   "stars_per_day_lifetime": 286.33,
+   "capability": "为编码代理提供设计词汇，用于引导、审查和审计，以避免 AI 错误",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai",
+    "anti-slop",
+    "design",
+    "slop"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "stars:>100000 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 57
+   }
+  },
+  {
    "repo": "rasbt/LLMs-from-scratch",
    "url": "https://github.com/rasbt/LLMs-from-scratch",
    "first_seen": "2026-08-06",
@@ -15173,6 +15210,46 @@
    }
   },
   {
+   "repo": "emcie-co/parlant",
+   "url": "https://github.com/emcie-co/parlant",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 18318,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-02",
+   "created_at": "2024-02-15",
+   "stars_per_day_lifetime": 18.47,
+   "capability": "构建面向客户的聊天 AI 代理平台，通过描述行为让编码代理实现。",
+   "transfer_forms": [
+    "deploy",
+    "architecture",
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "customer-experience",
+    "customer-service",
+    "customer-success",
+    "lead-generation",
+    "llm",
+    "python"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 62
+   }
+  },
+  {
    "repo": "arc53/DocsGPT",
    "url": "https://github.com/arc53/DocsGPT",
    "first_seen": "2026-09-13",
@@ -19924,6 +20001,45 @@
     "sort": "updated",
     "query_breadth": 66,
     "position": 11
+   }
+  },
+  {
+   "repo": "Lightricks/LTX-Video",
+   "url": "https://github.com/Lightricks/LTX-Video",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 11284,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-02",
+   "created_at": "2024-11-20",
+   "stars_per_day_lifetime": 15.83,
+   "capability": "LTX-Video 官方仓库，提供文本到视频和图像到视频的扩散模型生成。",
+   "transfer_forms": [
+    "library",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video",
+    "modelpool"
+   ],
+   "topics": [
+    "diffusion-models",
+    "dit",
+    "image-to-video",
+    "image-to-video-generation",
+    "text-to-video",
+    "text-to-video-generation"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:text-to-video stars:>2000 pushed:>2026-08-05",
+    "sort": "stars",
+    "query_breadth": 17,
+    "position": 4
    }
   },
   {
@@ -37378,6 +37494,40 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 0
+   }
+  },
+  {
+   "repo": "kakoni/awesome-healthcare",
+   "url": "https://github.com/kakoni/awesome-healthcare",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 4042,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-02",
+   "created_at": "2016-02-23",
+   "stars_per_day_lifetime": 1.03,
+   "capability": "收录开源医疗软件、库、工具和资源的精选列表。",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "health",
+    "list"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 35
    }
   },
   {
@@ -60172,6 +60322,48 @@
    }
   },
   {
+   "repo": "qybaihe/bla",
+   "url": "https://github.com/qybaihe/bla",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 2014,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-03",
+   "created_at": "2026-10-25",
+   "stars_per_day_lifetime": 223.78,
+   "capability": "通过投毒、耗尽和幻觉手段保护二进制文件、Electron 应用、JS、Python 和 WebAssembly 免受 AI 逆向工程。",
+   "transfer_forms": [
+    "library",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "adversarial-ai",
+    "claude-code",
+    "cursor",
+    "electron-security",
+    "llm-security",
+    "mcp",
+    "mcp-server",
+    "obfuscation",
+    "reverse-engineering",
+    "webassembly"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 93
+   }
+  },
+  {
    "repo": "0xsline/OpenChatCut",
    "url": "https://github.com/0xsline/OpenChatCut",
    "first_seen": "2026-09-27",
@@ -65993,6 +66185,36 @@
    }
   },
   {
+   "repo": "bbylw/ui-ux-pro-max-skill-cn",
+   "url": "https://github.com/bbylw/ui-ux-pro-max-skill-cn",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 1496,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Astro",
+   "pushed_at": "2026-11-02",
+   "created_at": "2026-01-01",
+   "stars_per_day_lifetime": 4.89,
+   "capability": "提供 UI/UX Pro Max 技能库的官方中文教程，帮助中文开发者快速上手 AI 设计技能",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 62
+   }
+  },
+  {
    "repo": "hashicorp/terraform-mcp-server",
    "url": "https://github.com/hashicorp/terraform-mcp-server",
    "first_seen": "2026-08-05",
@@ -67205,6 +67427,51 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 3
+   }
+  },
+  {
+   "repo": "vshulcz/deja-vu",
+   "url": "https://github.com/vshulcz/deja-vu",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 1376,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Go",
+   "pushed_at": "2026-11-03",
+   "created_at": "2026-07-14",
+   "stars_per_day_lifetime": 12.29,
+   "capability": "提供 Claude Code、Codex、Cursor 等记忆功能，支持 44 个代理的 AI 编码记忆管理",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-memory",
+    "claude-code",
+    "claude-code-hooks",
+    "claude-code-memory",
+    "cline",
+    "codex",
+    "codex-memory",
+    "cursor",
+    "dsh-plugin",
+    "gemini-cli-extension",
+    "kimi-code",
+    "llm-memory"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 41
    }
   },
   {
@@ -70002,6 +70269,52 @@
    }
   },
   {
+   "repo": "Ricky-7-Yan/intelligent-audit-system",
+   "url": "https://github.com/Ricky-7-Yan/intelligent-audit-system",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 1178,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-02",
+   "created_at": "2025-10-28",
+   "stars_per_day_lifetime": 3.18,
+   "capability": "AuditPilot 提供可审计的企业 AI 代理，包含证据基础工作流、治理工具、评估测试和人工审查。",
+   "transfer_forms": [
+    "deploy",
+    "architecture",
+    "mcp"
+   ],
+   "line_candidates": [
+    "rag",
+    "unknown"
+   ],
+   "topics": [
+    "agent-evaluation",
+    "agent-runtime",
+    "agentic-rag",
+    "ai-agent",
+    "audit",
+    "evaluation-harness",
+    "fastapi",
+    "human-in-the-loop",
+    "knowledge-graph",
+    "llmops",
+    "mcp",
+    "multi-agent"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 61,
+    "position": 23
+   }
+  },
+  {
    "repo": "iszhouhua/social-media-copilot",
    "url": "https://github.com/iszhouhua/social-media-copilot",
    "first_seen": "2026-07-27",
@@ -71442,6 +71755,41 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 53
+   }
+  },
+  {
+   "repo": "jae-jae/fetcher-mcp",
+   "url": "https://github.com/jae-jae/fetcher-mcp",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 1087,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-03",
+   "created_at": "2025-03-19",
+   "stars_per_day_lifetime": 1.83,
+   "capability": "MCP 服务器，使用 Playwright 无头浏览器抓取网页内容。",
+   "transfer_forms": [
+    "mcp",
+    "deploy"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "mcp",
+    "playwright"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 34
    }
   },
   {
@@ -83287,6 +83635,54 @@
    }
   },
   {
+   "repo": "himovo/movo",
+   "url": "https://github.com/himovo/movo",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 511,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-11-03",
+   "created_at": "2026-09-01",
+   "stars_per_day_lifetime": 8.11,
+   "capability": "将 DeepSeek Harness 转变为自托管的企业 Agent 平台，包含知识、深度研究、内容生成、浏览器自动化、治理和管理控制。",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "deploy",
+    "architecture"
+   ],
+   "line_candidates": [
+    "rag",
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "agent",
+    "ai-agents",
+    "brower-automation",
+    "dsh-plugin",
+    "enterprise-agents",
+    "mcp",
+    "movo",
+    "rag",
+    "skills",
+    "vibe-coding",
+    "workflow",
+    "workflow-automation"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "content automation in:name,description stars:>500 pushed:>2026-08-05",
+    "sort": "stars",
+    "query_breadth": 5,
+    "position": 4
+   }
+  },
+  {
    "repo": "Zchary1106/agent-interview-hub",
    "url": "https://github.com/Zchary1106/agent-interview-hub",
    "first_seen": "2026-09-17",
@@ -93538,6 +93934,44 @@
    }
   },
   {
+   "repo": "openclimatefix/skillful_nowcasting",
+   "url": "https://github.com/openclimatefix/skillful_nowcasting",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 301,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-02",
+   "created_at": "2021-09-02",
+   "stars_per_day_lifetime": 0.16,
+   "capability": "实现 DeepMind 的雷达深度生成模型 (DGMR)，用于天气预报的生成模型",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "gan",
+    "nowcasting",
+    "nowcasting-models",
+    "nowcasting-precipitation",
+    "pytorch",
+    "pytorch-implementation",
+    "pytorch-lightning"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 71
+   }
+  },
+  {
    "repo": "pnp/powerplatform-prompts",
    "url": "https://github.com/pnp/powerplatform-prompts",
    "first_seen": "2026-10-06",
@@ -95630,6 +96064,46 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 7
+   }
+  },
+  {
+   "repo": "aaitor/skill-video-studio",
+   "url": "https://github.com/aaitor/skill-video-studio",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 267,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-11-02",
+   "created_at": "2026-08-26",
+   "stars_per_day_lifetime": 3.87,
+   "capability": "提供 Claude Code 的视频技能，支持真实浏览器捕获、品牌化合成和本地化处理",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "agent-skills",
+    "agents",
+    "claude-code",
+    "devrel",
+    "ffmpeg",
+    "harness",
+    "playwright",
+    "video"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-04",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 68
    }
   },
   {
@@ -98248,6 +98722,42 @@
     "sort": "stars",
     "query_breadth": 80,
     "position": 75
+   }
+  },
+  {
+   "repo": "huaguoxingkong/dsh-prompt-rewriter",
+   "url": "https://github.com/huaguoxingkong/dsh-prompt-rewriter",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 230,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-02",
+   "created_at": "2026-10-28",
+   "stars_per_day_lifetime": 38.33,
+   "capability": "在输入框旁一键将半成品草稿增强为可执行提示词，只改不发送。",
+   "transfer_forms": [
+    "skill",
+    "mcp"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "prompt"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-05",
+    "sort": "stars",
+    "query_breadth": 88,
+    "position": 83
    }
   },
   {
@@ -103171,6 +103681,48 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 0
+   }
+  },
+  {
+   "repo": "abbosaliboev/free-ai-bible",
+   "url": "https://github.com/abbosaliboev/free-ai-bible",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 201,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-22",
+   "created_at": "2026-04-17",
+   "stars_per_day_lifetime": 1.0,
+   "capability": "收录 700+ 免费 AI API 与工具的资源目录，涵盖 LLM、图像生成、模型托管和本地 AI。",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "ai-tools",
+    "api",
+    "artificial-intelligence",
+    "awesome-list",
+    "chatgpt-alternative",
+    "developer-tools",
+    "free",
+    "llm",
+    "machine-learning",
+    "open-source"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "free llm api in:name,description stars:>200 pushed:>2026-08-05",
+    "sort": "stars",
+    "query_breadth": 16,
+    "position": 15
    }
   },
   {
@@ -108345,6 +108897,49 @@
     "sort": "stars",
     "query_breadth": 45,
     "position": 43
+   }
+  },
+  {
+   "repo": "duyunzhoudyz/dyz-med-paper-skills",
+   "url": "https://github.com/duyunzhoudyz/dyz-med-paper-skills",
+   "first_seen": "2026-11-03",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-03",
+   "stars": 107,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-11-01",
+   "created_at": "2026-11-01",
+   "stars_per_day_lifetime": 53.5,
+   "capability": "提供 32 个面向中国医生和研究生的 Agent Skills，覆盖医学论文写作、文献检索、投稿和审稿。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "academic-writing",
+    "agent-skills",
+    "ai-agents",
+    "biostatistics",
+    "claude-code",
+    "clinical-research",
+    "codex",
+    "literature-review",
+    "manuscript",
+    "medical-research",
+    "medical-writing",
+    "meta-analysis"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 75
    }
   },
   {
@@ -113655,7 +114250,7 @@
    }
   }
  ],
- "updated": "2026-11-02",
+ "updated": "2026-11-03",
  "status_enum": [
   "pending",
   "debated",
