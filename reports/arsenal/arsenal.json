@@ -15210,6 +15210,47 @@
    }
   },
   {
+   "repo": "xming521/WeClone",
+   "url": "https://github.com/xming521/WeClone",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 18344,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "Python",
+   "pushed_at": "2026-11-04",
+   "created_at": "2024-01-31",
+   "stars_per_day_lifetime": 18.2,
+   "capability": "构建个人生活画像，提供类似你的助手和克隆人",
+   "transfer_forms": [
+    "mcp",
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent",
+    "ai-clone",
+    "chat-history",
+    "digital-twin",
+    "llm",
+    "mcp",
+    "memory",
+    "personal-ai",
+    "telegram"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 61
+   }
+  },
+  {
    "repo": "emcie-co/parlant",
    "url": "https://github.com/emcie-co/parlant",
    "first_seen": "2026-11-03",
@@ -32429,6 +32470,43 @@
     "sort": "stars",
     "query_breadth": 37,
     "position": 4
+   }
+  },
+  {
+   "repo": "Jakeschincariol/day-trader-skill",
+   "url": "https://github.com/Jakeschincariol/day-trader-skill",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 5029,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-10-20",
+   "created_at": "2026-10-20",
+   "stars_per_day_lifetime": 335.27,
+   "capability": "提供用于日交易的 11 个 Claude 技能，包括扫描图表、跟踪新闻、时间进出和回放结果",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "backtesting",
+    "claude",
+    "claude-skills",
+    "day-trading",
+    "stock-market"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>500 pushed:>2026-08-06",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 97
    }
   },
   {
@@ -52218,6 +52296,46 @@
    }
   },
   {
+   "repo": "Yutong-Zhou-cv/Awesome-Text-to-Image",
+   "url": "https://github.com/Yutong-Zhou-cv/Awesome-Text-to-Image",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 2446,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-03",
+   "created_at": "2020-10-13",
+   "stars_per_day_lifetime": 1.11,
+   "capability": "关于文本到图像生成技术的调查报告",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "topics": [
+    "awseome-list",
+    "generative-adversarial-network",
+    "image-generation",
+    "image-manipulation",
+    "image-synthesis",
+    "multimodal",
+    "multimodal-deep-learning",
+    "survey",
+    "text-to-face",
+    "text-to-image"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 48
+   }
+  },
+  {
    "repo": "jherrodthomas/automotive-skills-suite",
    "url": "https://github.com/jherrodthomas/automotive-skills-suite",
    "first_seen": "2026-08-13",
@@ -53307,6 +53425,49 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 80
+   }
+  },
+  {
+   "repo": "modelflare-ai/AnyModelBot",
+   "url": "https://github.com/modelflare-ai/AnyModelBot",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 2374,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-03",
+   "created_at": "2026-10-27",
+   "stars_per_day_lifetime": 296.75,
+   "capability": "提供多种 AI 模型的本地化聊天机器人解决方案",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "ai-assistant",
+    "chatbot",
+    "claude",
+    "computer-use",
+    "deepseek",
+    "desktop-app",
+    "dsh",
+    "electron",
+    "feishu",
+    "gemini",
+    "gpt"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 79
    }
   },
   {
@@ -56346,6 +56507,41 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 16
+   }
+  },
+  {
+   "repo": "TheComputerM/awesome-svelte",
+   "url": "https://github.com/TheComputerM/awesome-svelte",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 2177,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-03",
+   "created_at": "2020-09-29",
+   "stars_per_day_lifetime": 0.98,
+   "capability": "提供 Svelte 资源列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "sapper",
+    "svelte",
+    "sveltejs"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 61
    }
   },
   {
@@ -73446,6 +73642,35 @@
    }
   },
   {
+   "repo": "classfang/ssh-mcp-server",
+   "url": "https://github.com/classfang/ssh-mcp-server",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 1010,
+   "license": "ISC",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-04",
+   "created_at": "2025-04-16",
+   "stars_per_day_lifetime": 1.78,
+   "capability": "提供基于 SSH 的 MCP 服务",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 9
+   }
+  },
+  {
    "repo": "cisco-ai-defense/mcp-scanner",
    "url": "https://github.com/cisco-ai-defense/mcp-scanner",
    "first_seen": "2026-08-06",
@@ -74058,6 +74283,47 @@
    }
   },
   {
+   "repo": "sirkirby/unifi-mcp",
+   "url": "https://github.com/sirkirby/unifi-mcp",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 1003,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-03",
+   "created_at": "2025-04-21",
+   "stars_per_day_lifetime": 1.78,
+   "capability": "提供 UniFi 应用程序系列（网络、保护、访问）的 MCP 服务器和 Graph API",
+   "transfer_forms": [
+    "mcp",
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "home-automation",
+    "mcp-server",
+    "unifi",
+    "unifi-access",
+    "unifi-controller",
+    "unifi-network",
+    "unifi-protect"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 93
+   }
+  },
+  {
    "repo": "ArcadeAI/arcade-mcp",
    "url": "https://github.com/ArcadeAI/arcade-mcp",
    "first_seen": "2026-08-13",
@@ -74553,6 +74819,43 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 66
+   }
+  },
+  {
+   "repo": "kebenxiaoming/matrix",
+   "url": "https://github.com/kebenxiaoming/matrix",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 982,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-04",
+   "created_at": "2024-05-15",
+   "stars_per_day_lifetime": 1.09,
+   "capability": "实现抖音、快手等社交媒体平台的视频自动化发布",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "douyin",
+    "kuaishou",
+    "matrix",
+    "video",
+    "wechat",
+    "xhs"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-08-06",
+    "sort": "stars",
+    "query_breadth": 27,
+    "position": 10
    }
   },
   {
@@ -76048,6 +76351,49 @@
     "sort": "stars",
     "query_breadth": 11,
     "position": 4
+   }
+  },
+  {
+   "repo": "rshankras/claude-code-apple-skills",
+   "url": "https://github.com/rshankras/claude-code-apple-skills",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 855,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Swift",
+   "pushed_at": "2026-11-04",
+   "created_at": "2025-10-29",
+   "stars_per_day_lifetime": 2.3,
+   "capability": "为苹果平台开发提供 Claude Code 技能，包括代码生成、App Store 优化等",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-tools",
+    "anthropic",
+    "app-store",
+    "apple",
+    "aso",
+    "claude",
+    "claude-code",
+    "code-generation",
+    "developer-tools",
+    "indie-developer",
+    "ios"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 0
    }
   },
   {
@@ -91722,6 +92068,50 @@
    }
   },
   {
+   "repo": "likaku/Mck-ppt-design-skill",
+   "url": "https://github.com/likaku/Mck-ppt-design-skill",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 329,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-03",
+   "created_at": "2026-03-03",
+   "stars_per_day_lifetime": 1.34,
+   "capability": "提供麦肯锡风格的 AI 代理 PowerPoint 设计系统",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skill",
+    "ai-skill",
+    "ai-skills",
+    "ba",
+    "business",
+    "claude",
+    "claude-code",
+    "claude-skill",
+    "consulting",
+    "design-system",
+    "mckinsey",
+    "pitch-deck"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 94
+   }
+  },
+  {
    "repo": "Azure-Samples/azure-search-power-skills",
    "url": "https://github.com/Azure-Samples/azure-search-power-skills",
    "first_seen": "2026-08-19",
@@ -101142,6 +101532,35 @@
    }
   },
   {
+   "repo": "jing1312/nature-figure-skill",
+   "url": "https://github.com/jing1312/nature-figure-skill",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 211,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-04",
+   "created_at": "2026-05-24",
+   "stars_per_day_lifetime": 1.29,
+   "capability": "提供图片编辑和修改功能，追求图像完美",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 49
+   }
+  },
+  {
    "repo": "liustack/modsearch",
    "url": "https://github.com/liustack/modsearch",
    "first_seen": "2026-08-22",
@@ -101318,6 +101737,35 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 81
+   }
+  },
+  {
+   "repo": "makevoid/motion-graphics-music-video-skill",
+   "url": "https://github.com/makevoid/motion-graphics-music-video-skill",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 210,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Ruby",
+   "pushed_at": "2026-11-03",
+   "created_at": "2026-09-26",
+   "stars_per_day_lifetime": 5.38,
+   "capability": "从音乐和提示词创建高质量动态图形视频",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-05",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 72
    }
   },
   {
@@ -112678,6 +113126,92 @@
    }
   },
   {
+   "repo": "C0HERENCE/tcm",
+   "url": "https://github.com/C0HERENCE/tcm",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 61,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Java",
+   "pushed_at": "2023-02-13",
+   "created_at": "2021-03-28",
+   "stars_per_day_lifetime": 0.03,
+   "capability": "中医药知识科普平台，基于 SpringBoot+vue 构建",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 99,
+    "position": 92
+   }
+  },
+  {
+   "repo": "xingbofeng/cornerstone-chinese-document",
+   "url": "https://github.com/xingbofeng/cornerstone-chinese-document",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 60,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2018-03-08",
+   "created_at": "2018-01-11",
+   "stars_per_day_lifetime": 0.02,
+   "capability": "Cornerstone 图像处理库的中文文档",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 99,
+    "position": 93
+   }
+  },
+  {
+   "repo": "dingyuanyind/WeBodyCare",
+   "url": "https://github.com/dingyuanyind/WeBodyCare",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 59,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "JavaScript",
+   "pushed_at": "2025-06-27",
+   "created_at": "2023-06-27",
+   "stars_per_day_lifetime": 0.05,
+   "capability": "提供体检预约小程序，管理体检预约数，缓解排队现象",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 99,
+    "position": 94
+   }
+  },
+  {
    "repo": "shanleiguang/vBooks",
    "url": "https://github.com/shanleiguang/vBooks",
    "first_seen": "2026-08-05",
@@ -112713,6 +113247,103 @@
     "sort": "stars",
     "query_breadth": 43,
     "position": 29
+   }
+  },
+  {
+   "repo": "Leopoldthecoder/doctor-jones-extension",
+   "url": "https://github.com/Leopoldthecoder/doctor-jones-extension",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 54,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-07-12",
+   "created_at": "2019-06-23",
+   "stars_per_day_lifetime": 0.02,
+   "capability": "提供琼斯医生 Chrome 扩展美化中文排版",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 99,
+    "position": 95
+   }
+  },
+  {
+   "repo": "timor-m/fnos-app-health-records",
+   "url": "https://github.com/timor-m/fnos-app-health-records",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 53,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-04",
+   "created_at": "2026-07-23",
+   "stars_per_day_lifetime": 0.51,
+   "capability": "提供家庭健康报告归档应用，支持 OCR 和 AI 生成结构化记录",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "fnos-app",
+    "health",
+    "health-records"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 99,
+    "position": 96
+   }
+  },
+  {
+   "repo": "Ma-Tao007/springboot_vue_pitManager",
+   "url": "https://github.com/Ma-Tao007/springboot_vue_pitManager",
+   "first_seen": "2026-11-04",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-04",
+   "stars": 52,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2022-09-28",
+   "created_at": "2021-08-27",
+   "stars_per_day_lifetime": 0.03,
+   "capability": "提供基于 springboot+vue 的宠物服务管理系统",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "pit",
+    "server",
+    "springboot",
+    "vue"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "中医 in:name,description stars:>50",
+    "sort": "stars",
+    "query_breadth": 99,
+    "position": 97
    }
   },
   {
@@ -114250,7 +114881,7 @@
    }
   }
  ],
- "updated": "2026-11-03",
+ "updated": "2026-11-04",
  "status_enum": [
   "pending",
   "debated",
