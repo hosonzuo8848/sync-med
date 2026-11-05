@@ -9265,6 +9265,50 @@
    }
   },
   {
+   "repo": "feder-cr/Jobs_Applier_AI_Agent_AIHawk",
+   "url": "https://github.com/feder-cr/Jobs_Applier_AI_Agent_AIHawk",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 32388,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-05",
+   "created_at": "2024-08-04",
+   "stars_per_day_lifetime": 39.35,
+   "capability": "根据简历自动申请工作",
+   "transfer_forms": [
+    "mcp",
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "ai-agents",
+    "automation",
+    "browser-automation",
+    "job-application",
+    "job-board",
+    "job-search",
+    "mcp",
+    "playwright",
+    "python",
+    "resume",
+    "terminal-app"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 13
+   }
+  },
+  {
    "repo": "K-Dense-AI/scientific-agent-skills",
    "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
    "first_seen": "2026-08-02",
@@ -25257,6 +25301,49 @@
    }
   },
   {
+   "repo": "BuilderIO/agent-native",
+   "url": "https://github.com/BuilderIO/agent-native",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 7613,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-05",
+   "created_at": "2026-03-12",
+   "stars_per_day_lifetime": 31.99,
+   "capability": "构建 agentic 应用框架",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-framework",
+    "agent-native",
+    "agentic-ai",
+    "agents",
+    "ai",
+    "ai-agents",
+    "framework",
+    "generative-ui",
+    "mcp",
+    "open-source",
+    "react",
+    "typescript"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 79,
+    "position": 12
+   }
+  },
+  {
    "repo": "0xInfection/Awesome-WAF",
    "url": "https://github.com/0xInfection/Awesome-WAF",
    "first_seen": "2026-08-27",
@@ -28558,6 +28645,47 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 13
+   }
+  },
+  {
+   "repo": "JimLiu/baoyu-design",
+   "url": "https://github.com/JimLiu/baoyu-design",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 6109,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-05",
+   "created_at": "2026-06-07",
+   "stars_per_day_lifetime": 40.46,
+   "capability": "本地运行 Claude Design 作为代理技能，用于 UI 设计和原型制作",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "claude",
+    "claude-code",
+    "claude-design",
+    "cursor",
+    "design",
+    "dsh-plugin",
+    "dsh-plugins",
+    "prototyping",
+    "ui-design"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "agent skill in:name,description stars:>300 pushed:>2026-08-07",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 99
    }
   },
   {
@@ -47567,6 +47695,48 @@
    }
   },
   {
+   "repo": "KKKKhazix/agent-autoloop",
+   "url": "https://github.com/KKKKhazix/agent-autoloop",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 2875,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-05",
+   "created_at": "2026-11-03",
+   "stars_per_day_lifetime": 1437.5,
+   "capability": "使命令行 Agent 自动处理任务",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agents",
+    "automation",
+    "claude-code",
+    "cli",
+    "codex",
+    "event-driven",
+    "mcp",
+    "nodejs",
+    "self-hosted",
+    "typescript",
+    "workflow"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 58
+   }
+  },
+  {
    "repo": "off-grid-ai/OGAM",
    "url": "https://github.com/off-grid-ai/OGAM",
    "first_seen": "2026-08-06",
@@ -54037,6 +54207,40 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 13
+   }
+  },
+  {
+   "repo": "rajasegar/awesome-htmx",
+   "url": "https://github.com/rajasegar/awesome-htmx",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 2325,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-05",
+   "created_at": "2021-03-06",
+   "stars_per_day_lifetime": 1.12,
+   "capability": "收集和展示 htmx 相关的精彩资源列表",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "hacktoberfest",
+    "htmx"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 7
    }
   },
   {
@@ -61799,6 +62003,49 @@
    }
   },
   {
+   "repo": "composio-community/awesome-claude-plugins",
+   "url": "https://github.com/composio-community/awesome-claude-plugins",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 1979,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-05",
+   "created_at": "2025-10-22",
+   "stars_per_day_lifetime": 5.22,
+   "capability": "提供 Claude Code 扩展插件列表",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "anthropic",
+    "claude-ai",
+    "claude-code",
+    "claude-code-plugin",
+    "claude-code-plugin-marketplace",
+    "claude-code-plugins",
+    "claude-code-plugins-marketplace",
+    "claude-cowork",
+    "claude-desktop",
+    "claude-plugins",
+    "claude-skills",
+    "plugins"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 29
+   }
+  },
+  {
    "repo": "jnMetaCode/agency-orchestrator",
    "url": "https://github.com/jnMetaCode/agency-orchestrator",
    "first_seen": "2026-08-03",
@@ -66558,6 +66805,35 @@
     "sort": "stars",
     "query_breadth": 14,
     "position": 11
+   }
+  },
+  {
+   "repo": "op7418/guizang-s-prompt",
+   "url": "https://github.com/op7418/guizang-s-prompt",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 1485,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-11-04",
+   "created_at": "2025-12-29",
+   "stars_per_day_lifetime": 4.77,
+   "capability": "存储和提供歸藏撰写的 AI 模型提示词",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-07",
+    "sort": "stars",
+    "query_breadth": 89,
+    "position": 25
    }
   },
   {
@@ -74113,6 +74389,51 @@
    }
   },
   {
+   "repo": "ChatCut-Inc/agent-plugin",
+   "url": "https://github.com/ChatCut-Inc/agent-plugin",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 1003,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-05",
+   "created_at": "2026-06-25",
+   "stars_per_day_lifetime": 7.54,
+   "capability": "为多个 AI 代理提供视频编辑功能，包括添加字幕和特效",
+   "transfer_forms": [
+    "skill",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video",
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agents",
+    "captions",
+    "chatcut",
+    "chatgpt",
+    "claude-skills",
+    "codex",
+    "codex-plugin",
+    "codex-skills",
+    "cursor",
+    "gemini-cli",
+    "mcp",
+    "mcp-server"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 28
+   }
+  },
+  {
    "repo": "SylphxAI/anymd",
    "url": "https://github.com/SylphxAI/anymd",
    "first_seen": "2026-10-01",
@@ -75703,6 +76024,34 @@
    }
   },
   {
+   "repo": "MobinX/awesome-mcp-list",
+   "url": "https://github.com/MobinX/awesome-mcp-list",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 905,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-04",
+   "created_at": "2025-03-24",
+   "stars_per_day_lifetime": 1.53,
+   "capability": "提供 MCP 服务器列表",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 48,
+    "position": 26
+   }
+  },
+  {
    "repo": "Skythinker616/gpt-assistant-android",
    "url": "https://github.com/Skythinker616/gpt-assistant-android",
    "first_seen": "2026-08-16",
@@ -75815,6 +76164,43 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 36
+   }
+  },
+  {
+   "repo": "DDDMUC/dsh-free-search",
+   "url": "https://github.com/DDDMUC/dsh-free-search",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 891,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-04",
+   "created_at": "2026-08-14",
+   "stars_per_day_lifetime": 10.73,
+   "capability": "为 DeepSeek Harness 提供免费网络搜索服务",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "bing",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "duckduckgo",
+    "web-search"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "免费 API in:name,description stars:>100 pushed:>2026-08-07",
+    "sort": "stars",
+    "query_breadth": 40,
+    "position": 15
    }
   },
   {
@@ -84411,6 +84797,44 @@
     "sort": "stars",
     "query_breadth": 38,
     "position": 18
+   }
+  },
+  {
+   "repo": "andyhuo520/vibe-knowledge",
+   "url": "https://github.com/andyhuo520/vibe-knowledge",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 503,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-28",
+   "created_at": "2026-10-28",
+   "stars_per_day_lifetime": 62.88,
+   "capability": "生成知识短片",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "chinese",
+    "claude-code",
+    "claude-skills",
+    "explainer-video",
+    "text-to-video",
+    "threejs",
+    "video-generation"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 82,
+    "position": 58
    }
   },
   {
@@ -95552,6 +95976,44 @@
    }
   },
   {
+   "repo": "Lanqiao-Luca/ai-video-marker",
+   "url": "https://github.com/Lanqiao-Luca/ai-video-marker",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 287,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-04",
+   "created_at": "2026-10-25",
+   "stars_per_day_lifetime": 26.09,
+   "capability": "AI 视频制作与 AIGC 创作工作流",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-video",
+    "ai-workflow",
+    "aigc",
+    "animation",
+    "coding-agent",
+    "pixel-art",
+    "python"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-08-07",
+    "sort": "stars",
+    "query_breadth": 61,
+    "position": 40
+   }
+  },
+  {
    "repo": "MangoFisher/TestBrain",
    "url": "https://github.com/MangoFisher/TestBrain",
    "first_seen": "2026-07-30",
@@ -96634,6 +97096,49 @@
    }
   },
   {
+   "repo": "duyunzhoudyz/dyz-gongwen-skills",
+   "url": "https://github.com/duyunzhoudyz/dyz-gongwen-skills",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 266,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Python",
+   "pushed_at": "2026-11-04",
+   "created_at": "2026-10-15",
+   "stars_per_day_lifetime": 12.67,
+   "capability": "提供 AI 公文写作助手，支持多种文书格式",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-writing",
+    "ai-writing-tool",
+    "chinese-official-document",
+    "chinese-writing",
+    "claude-code-skill",
+    "claude-skills",
+    "codex",
+    "cursor",
+    "deepseek",
+    "docx",
+    "gongwen"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 75
+   }
+  },
+  {
    "repo": "unnoo/zsxq-skill",
    "url": "https://github.com/unnoo/zsxq-skill",
    "first_seen": "2026-08-28",
@@ -97210,6 +97715,40 @@
    }
   },
   {
+   "repo": "cafe3310/public-agent-skills",
+   "url": "https://github.com/cafe3310/public-agent-skills",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 256,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-04",
+   "created_at": "2026-02-18",
+   "stars_per_day_lifetime": 0.98,
+   "capability": "提供个人代理技能以提高生活质量",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skill-repository",
+    "gemini-cli",
+    "skills"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 78
+   }
+  },
+  {
    "repo": "mit-han-lab/ncu-report-skill",
    "url": "https://github.com/mit-han-lab/ncu-report-skill",
    "first_seen": "2026-10-15",
@@ -97736,6 +98275,42 @@
     "sort": "stars",
     "query_breadth": 32,
     "position": 22
+   }
+  },
+  {
+   "repo": "SNL-UCSB/paper-writing-skill",
+   "url": "https://github.com/SNL-UCSB/paper-writing-skill",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 250,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Shell",
+   "pushed_at": "2026-11-04",
+   "created_at": "2026-03-25",
+   "stars_per_day_lifetime": 1.11,
+   "capability": "提供用于撰写研究论文的 Claude Code 技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "academic-writing",
+    "claude-code",
+    "paper-writing",
+    "phd",
+    "research"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-06",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 58
    }
   },
   {
@@ -102329,6 +102904,46 @@
    }
   },
   {
+   "repo": "Akillll-DuoHe/fy-code-animation",
+   "url": "https://github.com/Akillll-DuoHe/fy-code-animation",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 207,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-30",
+   "created_at": "2026-10-30",
+   "stars_per_day_lifetime": 34.5,
+   "capability": "创建中文文案、画风提示词和声音的代码动画",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video",
+    "image"
+   ],
+   "topics": [
+    "animation",
+    "chinese",
+    "code-animation",
+    "deepseek-harness",
+    "dsh-skill",
+    "motion-design",
+    "remotion",
+    "skill"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-07",
+    "sort": "stars",
+    "query_breadth": 89,
+    "position": 88
+   }
+  },
+  {
    "repo": "MOKEAIGC/MOKEAIGC-work-V017",
    "url": "https://github.com/MOKEAIGC/MOKEAIGC-work-V017",
    "first_seen": "2026-10-27",
@@ -106245,6 +106860,45 @@
     "sort": "stars",
     "query_breadth": 32,
     "position": 28
+   }
+  },
+  {
+   "repo": "zackchewa/awesome-china-mcp",
+   "url": "https://github.com/zackchewa/awesome-china-mcp",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 154,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-04",
+   "created_at": "2026-06-30",
+   "stars_per_day_lifetime": 1.2,
+   "capability": "提供中文 MCP 服务器索引",
+   "transfer_forms": [
+    "mcp"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agents",
+    "awesome-list",
+    "china",
+    "chinese",
+    "composio",
+    "llm",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 48,
+    "position": 45
    }
   },
   {
@@ -110786,6 +111440,42 @@
    }
   },
   {
+   "repo": "woniuniuniu/dsh-media-desk",
+   "url": "https://github.com/woniuniuniu/dsh-media-desk",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 103,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-05",
+   "created_at": "2026-11-02",
+   "stars_per_day_lifetime": 34.33,
+   "capability": "DeepSeek Harness 自媒体工作台插件",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "content-creation",
+    "deepseek",
+    "deepseek-harness",
+    "dsh-plugin",
+    "xiaohongshu"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:xiaohongshu stars:>100",
+    "sort": "stars",
+    "query_breadth": 79,
+    "position": 77
+   }
+  },
+  {
    "repo": "SailingLoong/LoongPort",
    "url": "https://github.com/SailingLoong/LoongPort",
    "first_seen": "2026-08-29",
@@ -111370,6 +112060,35 @@
     "sort": "stars",
     "query_breadth": 23,
     "position": 22
+   }
+  },
+  {
+   "repo": "Pluviobyte/awesome-talking-head-skills",
+   "url": "https://github.com/Pluviobyte/awesome-talking-head-skills",
+   "first_seen": "2026-11-05",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-05",
+   "stars": 101,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Shell",
+   "pushed_at": "2026-10-27",
+   "created_at": "2026-10-27",
+   "stars_per_day_lifetime": 11.22,
+   "capability": "将口播博主动作拆分为可复用的 Agent Skill",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "数字人 in:name,description stars:>100 pushed:>2026-08-07",
+    "sort": "stars",
+    "query_breadth": 37,
+    "position": 36
    }
   },
   {
@@ -114881,7 +115600,7 @@
    }
   }
  ],
- "updated": "2026-11-04",
+ "updated": "2026-11-05",
  "status_enum": [
   "pending",
   "debated",
