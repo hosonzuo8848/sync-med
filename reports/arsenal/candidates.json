@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-11-05",
+ "generated": "2026-11-06",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -44,83 +44,96 @@
   "calls": 6,
   "ok": 2
  },
- "count": 19,
+ "count": 13,
  "candidates": [
   {
-   "repo": "MobinX/awesome-mcp-list",
-   "url": "https://github.com/MobinX/awesome-mcp-list",
-   "description": "A concise list for mcp servers",
-   "stars": 905,
-   "topics": [],
-   "lang": "",
-   "created_at": "2025-03-24",
-   "pushed_at": "2026-11-04",
-   "age_days": 591,
-   "stars_per_day_lifetime": 1.53,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
+   "repo": "lzwme/finance-quant-skills",
+   "url": "https://github.com/lzwme/finance-quant-skills",
+   "description": "一个面向金融量化交易领域的 Agent Skills 技能维护仓库，主要聚焦A股量化交易。",
+   "stars": 474,
+   "topics": [
+    "agent-skills",
+    "skills"
+   ],
+   "lang": "Python",
+   "created_at": "2026-03-25",
+   "pushed_at": "2026-11-06",
+   "age_days": 226,
+   "stars_per_day_lifetime": 2.1,
+   "license": "NONE",
+   "license_family": "none",
    "found_by": {
     "dimension": "category",
-    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
-    "sort": "stars",
-    "query_breadth": 48,
-    "position": 26
+    "query": "skill in:name stars:>200 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 25
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 MCP 服务器列表",
-   "evidence": "topics: - | A concise list for mcp servers",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Pluviobyte/awesome-talking-head-skills",
-   "url": "https://github.com/Pluviobyte/awesome-talking-head-skills",
-   "description": "把口播博主的出镜动作拆成可复用的 Agent Skill，用于口播数字人生成",
-   "stars": 101,
-   "topics": [],
-   "lang": "Shell",
-   "created_at": "2026-10-27",
-   "pushed_at": "2026-10-27",
-   "age_days": 9,
-   "stars_per_day_lifetime": 11.22,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "数字人 in:name,description stars:>100 pushed:>2026-08-07",
-    "sort": "stars",
-    "query_breadth": 37,
-    "position": 36
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "将口播博主动作拆分为可复用的 Agent Skill",
-   "evidence": "topics: - | 把口播博主的出镜动作拆成可复用的 Agent Skill",
+   "capability": "维护金融量化交易领域的 Agent Skills",
+   "evidence": "面向金融量化交易领域的 Agent Skills 技能维护仓库",
    "transfer_forms": [
     "skill"
    ],
    "line_candidates": [
-    "unknown"
+    "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "feder-cr/Jobs_Applier_AI_Agent_AIHawk",
-   "url": "https://github.com/feder-cr/Jobs_Applier_AI_Agent_AIHawk",
-   "description": "Give it your resume, get the jobs that fit, select them and apply. Runs in your terminal, with a browser you can watch.",
-   "stars": 32388,
+   "repo": "shanleiguang/vModou",
+   "url": "https://github.com/shanleiguang/vModou",
+   "description": "兀雨墨斗古籍刻本掃描圖像變形糾正工具 Distortion correction for scanned images of Chinese ancient books",
+   "stars": 21,
+   "topics": [
+    "ancient-books",
+    "chinese-tranditional",
+    "design-tools",
+    "distorted-images",
+    "distortion-correction",
+    "image-processing",
+    "imagemagick",
+    "perl",
+    "publisher"
+   ],
+   "lang": "Perl",
+   "created_at": "2025-08-12",
+   "pushed_at": "2025-08-22",
+   "age_days": 451,
+   "stars_per_day_lifetime": 0.05,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "古籍 in:name,description stars:>20",
+    "sort": "stars",
+    "query_breadth": 49,
+    "position": 48
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "纠正古籍扫描图像变形",
+   "evidence": "古籍刻本掃描圖像變形糾正工具",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "feder-cr/Jobs_Applier_AI_Agent",
+   "url": "https://github.com/feder-cr/Jobs_Applier_AI_Agent",
+   "description": "An AI web agent that applies to jobs for you while you sleep.",
+   "stars": 32381,
    "topics": [
     "ai-agent",
     "ai-agents",
@@ -137,542 +150,199 @@
    ],
    "lang": "Python",
    "created_at": "2024-08-04",
-   "pushed_at": "2026-11-05",
-   "age_days": 823,
-   "stars_per_day_lifetime": 39.35,
+   "pushed_at": "2026-11-06",
+   "age_days": 824,
+   "stars_per_day_lifetime": 39.3,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-06",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-07",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 13
+    "position": 49
    },
    "matched_by_n_queries": 2,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "根据简历自动申请工作",
-   "evidence": "topics: ai-agent, ai-agents, automation, browser-automation, job-application, job-board, job-search, mcp, playwright, py",
+   "capability": "AI 自动申请工作",
+   "evidence": "AI web agent that applies to jobs for you",
    "transfer_forms": [
     "mcp",
     "skill"
    ],
    "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "zackchewa/awesome-china-mcp",
-   "url": "https://github.com/zackchewa/awesome-china-mcp",
-   "description": "Curated index of MCP servers for Chinese apps — connect your AI agent to 高德地图, 12306, 小红书, 飞书, 语雀, A股 and more. The open-source 'Composio for China'.",
-   "stars": 154,
-   "topics": [
-    "ai-agents",
-    "awesome-list",
-    "china",
-    "chinese",
-    "composio",
-    "llm",
-    "mcp",
-    "mcp-server",
-    "model-context-protocol"
-   ],
-   "lang": "",
-   "created_at": "2026-06-30",
-   "pushed_at": "2026-11-04",
-   "age_days": 128,
-   "stars_per_day_lifetime": 1.2,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
-    "sort": "stars",
-    "query_breadth": 48,
-    "position": 45
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供中文 MCP 服务器索引",
-   "evidence": "topics: ai-agents, awesome-list, china, chinese, composio, llm, mcp, mcp-server, model-context-protocol | Curated index ",
-   "transfer_forms": [
-    "mcp"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "DDDMUC/dsh-free-search",
-   "url": "https://github.com/DDDMUC/dsh-free-search",
-   "description": "为DeepSeek Harness提供的免费网络搜索服务商——即使没有API密钥也可使用。Free web search provider for DeepSeek Harness - usable even without an API key.",
-   "stars": 891,
-   "topics": [
-    "bing",
-    "deepseek-harness",
-    "dsh",
-    "dsh-plugin",
-    "duckduckgo",
-    "web-search"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-08-14",
-   "pushed_at": "2026-11-04",
-   "age_days": 83,
-   "stars_per_day_lifetime": 10.73,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "免费 API in:name,description stars:>100 pushed:>2026-08-07",
-    "sort": "stars",
-    "query_breadth": 40,
-    "position": 15
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为 DeepSeek Harness 提供免费网络搜索服务",
-   "evidence": "topics: bing, deepseek-harness, dsh, dsh-plugin, duckduckgo, web-search | 为DeepSeek Harness提供的免费网络搜索服务商",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "KKKKhazix/agent-autoloop",
-   "url": "https://github.com/KKKKhazix/agent-autoloop",
-   "description": "让你的命令行 Agent 在后台自己接活、自己跟进到底；平时不烦你，遇到拿不准的事才发卡片找你拍板。",
-   "stars": 2875,
-   "topics": [
-    "ai-agents",
-    "automation",
-    "claude-code",
-    "cli",
-    "codex",
-    "event-driven",
-    "mcp",
-    "nodejs",
-    "self-hosted",
-    "typescript",
-    "workflow"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-11-03",
-   "pushed_at": "2026-11-05",
-   "age_days": 2,
-   "stars_per_day_lifetime": 1437.5,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-10-06",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 58
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "使命令行 Agent 自动处理任务",
-   "evidence": "topics: ai-agents, automation, claude-code, cli, codex, event-driven, mcp, nodejs, self-hosted, typescript, workflow | 让",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "BuilderIO/agent-native",
-   "url": "https://github.com/BuilderIO/agent-native",
-   "description": "A framework for building agentic apps",
-   "stars": 7613,
-   "topics": [
-    "agent-framework",
-    "agent-native",
-    "agentic-ai",
-    "agents",
-    "ai",
-    "ai-agents",
-    "framework",
-    "generative-ui",
-    "mcp",
-    "open-source",
-    "react",
-    "typescript"
-   ],
-   "lang": "TypeScript",
-   "created_at": "2026-03-12",
-   "pushed_at": "2026-11-05",
-   "age_days": 238,
-   "stars_per_day_lifetime": 31.99,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:agentic-ai stars:>5000 pushed:>2026-10-06",
-    "sort": "updated",
-    "query_breadth": 79,
-    "position": 12
-   },
-   "matched_by_n_queries": 2,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "构建 agentic 应用框架",
-   "evidence": "topics: agent-framework, agent-native, agentic-ai, agents, ai, ai-agents, framework, generative-ui, mcp, open-source, re",
-   "transfer_forms": [
-    "architecture"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "Lanqiao-Luca/ai-video-marker",
-   "url": "https://github.com/Lanqiao-Luca/ai-video-marker",
-   "description": "🎬 AI 视频制作与 AIGC 创作工作流（AI Video Creation Workflow）｜用 AI 制作视频、像素动画与漫画短片｜分镜、素材、配乐、模板与可运行 Python 示例｜Blender 分层动画与剪映制作方法",
-   "stars": 287,
-   "topics": [
-    "ai-video",
-    "ai-workflow",
-    "aigc",
-    "animation",
-    "coding-agent",
-    "pixel-art",
-    "python"
-   ],
-   "lang": "Python",
-   "created_at": "2026-10-25",
-   "pushed_at": "2026-11-04",
-   "age_days": 11,
-   "stars_per_day_lifetime": 26.09,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "短视频 in:name,description stars:>100 pushed:>2026-08-07",
-    "sort": "stars",
-    "query_breadth": 61,
-    "position": 40
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "AI 视频制作与 AIGC 创作工作流",
-   "evidence": "topics: ai-video, ai-workflow, aigc, animation, coding-agent, pixel-art, python | 🎬 AI 视频制作与 AIGC 创作工作流",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "woniuniuniu/dsh-media-desk",
-   "url": "https://github.com/woniuniuniu/dsh-media-desk",
-   "description": "DeepSeek Harness 自媒体工作台插件：一句话记灵感，一键生成脚本、封面、配图和分镜",
-   "stars": 103,
-   "topics": [
-    "content-creation",
-    "deepseek",
-    "deepseek-harness",
-    "dsh-plugin",
-    "xiaohongshu"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-11-02",
-   "pushed_at": "2026-11-05",
-   "age_days": 3,
-   "stars_per_day_lifetime": 34.33,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "topic:xiaohongshu stars:>100",
-    "sort": "stars",
-    "query_breadth": 79,
-    "position": 77
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "DeepSeek Harness 自媒体工作台插件",
-   "evidence": "topics: content-creation, deepseek, deepseek-harness, dsh-plugin, xiaohongshu | DeepSeek Harness 自媒体工作台插件",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "andyhuo520/vibe-knowledge",
-   "url": "https://github.com/andyhuo520/vibe-knowledge",
-   "description": "Vibe 知识大赏：一个知识点 → 一条有旁白、每句有出处的精品知识短片（Claude Code skill · 44 套风格 · 代码逐帧成片）",
-   "stars": 503,
-   "topics": [
-    "chinese",
-    "claude-code",
-    "claude-skills",
-    "explainer-video",
-    "text-to-video",
-    "threejs",
-    "video-generation"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-10-28",
-   "pushed_at": "2026-10-28",
-   "age_days": 8,
-   "stars_per_day_lifetime": 62.88,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "topic:chinese stars:>500 pushed:>2026-10-06",
-    "sort": "updated",
-    "query_breadth": 82,
-    "position": 58
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "生成知识短片",
-   "evidence": "topics: chinese, claude-code, claude-skills, explainer-video, text-to-video, threejs, video-generation | Vibe 知识大赏：一个知识点",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "rajasegar/awesome-htmx",
-   "url": "https://github.com/rajasegar/awesome-htmx",
-   "description": "Awesome things about htmx",
-   "stars": 2325,
-   "topics": [
-    "awesome",
-    "awesome-list",
-    "hacktoberfest",
-    "htmx"
-   ],
-   "lang": "",
-   "created_at": "2021-03-06",
-   "pushed_at": "2026-11-05",
-   "age_days": 2070,
-   "stars_per_day_lifetime": 1.12,
-   "license": "CC0-1.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-10-06",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 7
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "收集和展示 htmx 相关的精彩资源列表",
-   "evidence": "topics: awesome, awesome-list, hacktoberfest, htmx",
-   "transfer_forms": [
-    "unknown"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "op7418/guizang-s-prompt",
-   "url": "https://github.com/op7418/guizang-s-prompt",
-   "description": "这里是歸藏的提示词储存库，存放着歸藏撰写的所有 AI 模型提示词（This is Guizang's prompt repository, containing all AI model prompts written by Guizang.）",
-   "stars": 1485,
-   "topics": [],
-   "lang": "HTML",
-   "created_at": "2025-12-29",
-   "pushed_at": "2026-11-04",
-   "age_days": 311,
-   "stars_per_day_lifetime": 4.77,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-07",
-    "sort": "stars",
-    "query_breadth": 89,
-    "position": 25
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "存储和提供歸藏撰写的 AI 模型提示词",
-   "evidence": "topics: -",
-   "transfer_forms": [
-    "dataset"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "ChatCut-Inc/agent-plugin",
-   "url": "https://github.com/ChatCut-Inc/agent-plugin",
-   "description": "AI video editor for agents. ChatCut plugin and MCP server for Codex, ChatGPT, Claude Code, Cursor, Grok, Gemini CLI, WorkBuddy, Doubao Work and Qwen Work: edit your own footage by chatting, add captions and subtitles, remove silences and filler words, create motion graphics, and export an editable timeline.",
-   "stars": 1003,
-   "topics": [
-    "ai-agents",
-    "captions",
-    "chatcut",
-    "chatgpt",
-    "claude-skills",
-    "codex",
-    "codex-plugin",
-    "codex-skills",
-    "cursor",
-    "gemini-cli",
-    "mcp",
-    "mcp-server"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-06-25",
-   "pushed_at": "2026-11-05",
-   "age_days": 133,
-   "stars_per_day_lifetime": 7.54,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-06",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 28
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为多个 AI 代理提供视频编辑功能，包括添加字幕和特效",
-   "evidence": "topics: ai-agents, captions, chatcut, chatgpt, claude-skills, codex, codex-plugin, codex-skills, cursor, gemini-cli, mcp",
-   "transfer_forms": [
-    "skill",
-    "deploy"
-   ],
-   "line_candidates": [
-    "video",
     "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "Akillll-DuoHe/fy-code-animation",
-   "url": "https://github.com/Akillll-DuoHe/fy-code-animation",
-   "description": "把中文文案、画风提示词和声音做成前后连贯的代码动画（Remotion / Canvas / HTML）的 DeepSeek Harness 技能。341 画风库检索、语义分镜、镜头转场、角色表演、四案音乐与音效、检查返修。",
-   "stars": 207,
+   "repo": "davila7/claude-code-templates",
+   "url": "https://github.com/davila7/claude-code-templates",
+   "description": "Open-source registry and CLI for Claude Code components: agents, commands, skills, hooks, MCPs, settings and mods",
+   "stars": 33155,
    "topics": [
-    "animation",
-    "chinese",
-    "code-animation",
-    "deepseek-harness",
-    "dsh-skill",
-    "motion-design",
-    "remotion",
-    "skill"
+    "agent-skills",
+    "ai-agents",
+    "anthropic",
+    "anthropic-claude",
+    "claude",
+    "claude-code",
+    "claude-code-plugins",
+    "cli",
+    "mcp",
+    "registry"
    ],
-   "lang": "TypeScript",
-   "created_at": "2026-10-30",
-   "pushed_at": "2026-10-30",
-   "age_days": 6,
-   "stars_per_day_lifetime": 34.5,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
+   "lang": "Python",
+   "created_at": "2025-07-04",
+   "pushed_at": "2026-11-06",
+   "age_days": 490,
+   "stars_per_day_lifetime": 67.66,
+   "license": "MIT",
+   "license_family": "permissive",
    "found_by": {
-    "dimension": "chinese",
-    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-07",
+    "dimension": "category",
+    "query": "agent skill in:name,description stars:>300 pushed:>2026-08-08",
     "sort": "stars",
-    "query_breadth": 89,
-    "position": 88
+    "query_breadth": 100,
+    "position": 29
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "创建中文文案、画风提示词和声音的代码动画",
-   "evidence": "topics: animation, chinese, code-animation, deepseek-harness, dsh-skill, motion-design, remotion, skill",
+   "capability": "管理 Claude Code 组件的注册和 CLI",
+   "evidence": "Open-source registry and CLI for Claude Code components",
    "transfer_forms": [
-    "skill"
+    "mcp",
+    "library"
    ],
    "line_candidates": [
-    "video",
-    "image"
+    "modelpool"
    ],
    "distilled": true
   },
   {
-   "repo": "composio-community/awesome-claude-plugins",
-   "url": "https://github.com/composio-community/awesome-claude-plugins",
-   "description": "A curated list of Plugins that let you extend Claude Code with custom commands, agents, hooks, and MCP servers through the plugin system.",
-   "stars": 1979,
+   "repo": "EthanYoQ/Pagekin",
+   "url": "https://github.com/EthanYoQ/Pagekin",
+   "description": "Pagekin，免费 AI 小说写作软件，从设定、蓝图到正文、审稿、定稿；支持拆解仿写、续写、改写，可导入写作 Skill（如去 AI 味）。模型需自行配置，作品在本地。Pagekin (formerly AI Novel Writer): free, open-source AI novel writing app for long novels and web fiction. Imitate, continue, rewrite; import writing skills. Local-first, no model bundled. Windows & macOS.",
+   "stars": 2380,
    "topics": [
-    "anthropic",
-    "claude-ai",
-    "claude-code",
-    "claude-code-plugin",
-    "claude-code-plugin-marketplace",
-    "claude-code-plugins",
-    "claude-code-plugins-marketplace",
-    "claude-cowork",
-    "claude-desktop",
-    "claude-plugins",
-    "claude-skills",
-    "plugins"
+    "ai-novel",
+    "ai-writing",
+    "ai-writing-assistant",
+    "chinese",
+    "creative-writing",
+    "deepseek",
+    "desktop-app",
+    "electron",
+    "fiction-writing",
+    "llm",
+    "local-first",
+    "long-form-fiction"
    ],
-   "lang": "JavaScript",
-   "created_at": "2025-10-22",
+   "lang": "TypeScript",
+   "created_at": "2026-06-20",
+   "pushed_at": "2026-11-06",
+   "age_days": 139,
+   "stars_per_day_lifetime": 17.12,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 85,
+    "position": 4
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "AI 小说写作软件",
+   "evidence": "free, open-source AI novel writing app",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Klavis-AI/klavis",
+   "url": "https://github.com/Klavis-AI/klavis",
+   "description": "[DEPRECATED] Legacy Klavis AI MCP integrations. See klavis.ai for RL environments and training data.",
+   "stars": 5829,
+   "topics": [
+    "agents",
+    "ai",
+    "ai-agents",
+    "api",
+    "deprecated",
+    "developer-tools",
+    "discord",
+    "function-calling",
+    "integration",
+    "llm",
+    "mcp",
+    "mcp-client"
+   ],
+   "lang": "Python",
+   "created_at": "2025-04-14",
    "pushed_at": "2026-11-05",
-   "age_days": 379,
-   "stars_per_day_lifetime": 5.22,
-   "license": "NONE",
-   "license_family": "none",
+   "age_days": 571,
+   "stars_per_day_lifetime": 10.21,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp-server stars:>1000 pushed:>2026-10-07",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 61
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 Klavis AI MCP 集成",
+   "evidence": "Legacy Klavis AI MCP integrations",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "ChiR24/Unreal_mcp",
+   "url": "https://github.com/ChiR24/Unreal_mcp",
+   "description": "A comprehensive Model Context Protocol (MCP) server that enables AI assistants to control Unreal Engine through the native C++ Automation Bridge plugin. Built with TypeScript and C++.",
+   "stars": 1016,
+   "topics": [
+    "mcp",
+    "mcp-server",
+    "unreal-engine",
+    "unreal-engine-5"
+   ],
+   "lang": "C++",
+   "created_at": "2025-09-07",
+   "pushed_at": "2026-11-06",
+   "age_days": 425,
+   "stars_per_day_lifetime": 2.39,
+   "license": "MIT",
+   "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-06",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-07",
     "sort": "updated",
     "query_breadth": 100,
     "position": 29
@@ -682,10 +352,197 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供 Claude Code 扩展插件列表",
-   "evidence": "topics: anthropic, claude-ai, claude-code, claude-code-plugin, claude-code-plugin-marketplace, claude-code-plugins, clau",
+   "capability": "MCP 服务器控制 Unreal Engine",
+   "evidence": "comprehensive Model Context Protocol (MCP) server",
    "transfer_forms": [
+    "mcp",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "wanghao-SunSky/cs329z-chinese",
+   "url": "https://github.com/wanghao-SunSky/cs329z-chinese",
+   "description": "斯坦福 Stanford CS329Z Engineering AI Agents 中文教程：面向 Python 开发者的 AI 智能体课程，19 讲与 4 项实践，涵盖 LLM、RAG、工具调用、记忆、多智能体、评测与安全。完整 Markdown、在线与离线 HTML。Chinese course notes.",
+   "stars": 501,
+   "topics": [
+    "agent-memory",
+    "agentic-ai",
+    "ai-agents",
+    "chinese",
+    "chinese-tutorial",
+    "course-notes",
+    "cs329z",
+    "engineering-ai-agents",
+    "llm",
+    "llm-evaluation",
+    "multi-agent",
+    "python"
+   ],
+   "lang": "HTML",
+   "created_at": "2026-10-28",
+   "pushed_at": "2026-10-31",
+   "age_days": 9,
+   "stars_per_day_lifetime": 55.67,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 85,
+    "position": 48
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供斯坦福 CS329Z Engineering AI Agents 中文教程",
+   "evidence": "Chinese course notes",
+   "transfer_forms": [
+    "dataset",
     "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "cactus-compute/engine",
+   "url": "https://github.com/cactus-compute/engine",
+   "description": "2bit quants, kernels and runtime for consumer devices.",
+   "stars": 6181,
+   "topics": [
+    "ai",
+    "android",
+    "arm",
+    "edge",
+    "edge-ai",
+    "framework",
+    "ios",
+    "llamacpp",
+    "llm",
+    "llm-inference",
+    "llms",
+    "mobile"
+   ],
+   "lang": "C++",
+   "created_at": "2025-04-23",
+   "pushed_at": "2026-11-05",
+   "age_days": 562,
+   "stars_per_day_lifetime": 11.0,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 50
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "为消费设备提供 2bit quants 和 kernels",
+   "evidence": "2bit quants, kernels and runtime for consumer devices",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "jeszhou/overlay-studio",
+   "url": "https://github.com/jeszhou/overlay-studio",
+   "description": "给口播视频加动效层的编辑工作台:AI 读你的字幕稿自动编排,做出来的每个元素你都能自己改,导出透明动效层直接进剪映——原片一帧不压。",
+   "stars": 503,
+   "topics": [
+    "chinese",
+    "ffmpeg",
+    "motion-graphics",
+    "react",
+    "video"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-09-01",
+   "pushed_at": "2026-10-18",
+   "age_days": 66,
+   "stars_per_day_lifetime": 7.62,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 85,
+    "position": 77
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "视频编辑工作台，添加动效层",
+   "evidence": "给口播视频加动效层的编辑工作台",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "kalcaddle/kodbox",
+   "url": "https://github.com/kalcaddle/kodbox",
+   "description": "kodbox is a file manager for web. It is a newly designed product based on kodexplorer. It is also a web code editor, which allows you to develop websites directly within the web browser.You can run kodbox either online or locally,on Linux, Windows or Mac based platforms",
+   "stars": 3368,
+   "topics": [
+    "docx",
+    "file-explorer",
+    "file-manager",
+    "file-sharing",
+    "file-upload",
+    "file-viewer",
+    "filemanager",
+    "filesystem",
+    "free-software",
+    "javascript",
+    "markdown-editor",
+    "php"
+   ],
+   "lang": "PHP",
+   "created_at": "2021-04-07",
+   "pushed_at": "2026-11-05",
+   "age_days": 2039,
+   "stars_per_day_lifetime": 1.65,
+   "license": "NONE",
+   "license_family": "none",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 68
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供基于 PHP 的网页文件管理器和代码编辑器功能",
+   "evidence": "It is a file manager for web. It is also a web code editor, which allows you to develop websites directly within the web",
+   "transfer_forms": [
+    "unknown"
    ],
    "line_candidates": [
     "unknown"
@@ -693,160 +550,70 @@
    "distilled": true
   },
   {
-   "repo": "SNL-UCSB/paper-writing-skill",
-   "url": "https://github.com/SNL-UCSB/paper-writing-skill",
-   "description": "A Claude Code skill that encodes battle-tested editorial principles, section-specific rhetorical moves, and a structured writing pipeline for research papers. Brainstorm → Draft 0 → Evaluate → Write → Compress.",
-   "stars": 250,
+   "repo": "Azure-Samples/AI-Gateway",
+   "url": "https://github.com/Azure-Samples/AI-Gateway",
+   "description": "Labs to explore AI Models, MCP servers, and Agents with the AI Gateway powered by Azure API Management and Microsoft Foundry 🚀",
+   "stars": 1008,
    "topics": [
-    "academic-writing",
-    "claude-code",
-    "paper-writing",
-    "phd",
-    "research"
+    "a2a",
+    "agents",
+    "apimanagement",
+    "autogen",
+    "azure",
+    "foundry",
+    "genai",
+    "mcp",
+    "mcp-server",
+    "openai",
+    "openai-api"
    ],
-   "lang": "Shell",
-   "created_at": "2026-03-25",
-   "pushed_at": "2026-11-04",
-   "age_days": 225,
-   "stars_per_day_lifetime": 1.11,
+   "lang": "Jupyter Notebook",
+   "created_at": "2024-04-03",
+   "pushed_at": "2026-11-05",
+   "age_days": 947,
+   "stars_per_day_lifetime": 1.06,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-10-06",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-07",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 58
+    "position": 90
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供用于撰写研究论文的 Claude Code 技能",
-   "evidence": "topics: academic-writing, claude-code, paper-writing, phd, research",
+   "capability": "提供 Azure API Management 和 Microsoft Foundry 支持的 AI 模型实验和 MCP 服务器",
+   "evidence": "Labs to explore AI Models, MCP servers, and Agents with the AI Gateway powered by Azure API Management and Microsoft Fou",
    "transfer_forms": [
-    "skill"
+    "mcp",
+    "unknown"
    ],
    "line_candidates": [
+    "modelpool",
     "unknown"
    ],
    "distilled": true
   },
   {
-   "repo": "duyunzhoudyz/dyz-gongwen-skills",
-   "url": "https://github.com/duyunzhoudyz/dyz-gongwen-skills",
-   "description": "公文写作 Skills｜AI 公文写作助手：防编造、守保密、GB/T 9704 一键排版，覆盖 22 种文书，支持 Claude Code / Codex / Cursor",
-   "stars": 266,
-   "topics": [
-    "agent-skills",
-    "ai-writing",
-    "ai-writing-tool",
-    "chinese-official-document",
-    "chinese-writing",
-    "claude-code-skill",
-    "claude-skills",
-    "codex",
-    "cursor",
-    "deepseek",
-    "docx",
-    "gongwen"
-   ],
+   "repo": "Jakeschincariol/instagram-agent-skill",
+   "url": "https://github.com/Jakeschincariol/instagram-agent-skill",
+   "description": "Thirteen Claude skills that run an Instagram account: Reels off 26 scored hook formulas, a viral research skill, a caption linter, and a humanizer. Free, MIT.",
+   "stars": 5038,
+   "topics": [],
    "lang": "Python",
-   "created_at": "2026-10-15",
-   "pushed_at": "2026-11-04",
-   "age_days": 21,
-   "stars_per_day_lifetime": 12.67,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-10-06",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 75
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供 AI 公文写作助手，支持多种文书格式",
-   "evidence": "topics: agent-skills, ai-writing, ai-writing-tool, chinese-official-document, chinese-writing, claude-code-skill, claude",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "cafe3310/public-agent-skills",
-   "url": "https://github.com/cafe3310/public-agent-skills",
-   "description": "personal agent skills for better QoL",
-   "stars": 256,
-   "topics": [
-    "agent-skill-repository",
-    "gemini-cli",
-    "skills"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-02-18",
-   "pushed_at": "2026-11-04",
-   "age_days": 260,
-   "stars_per_day_lifetime": 0.98,
-   "license": "Apache-2.0",
+   "created_at": "2026-09-13",
+   "pushed_at": "2026-09-13",
+   "age_days": 54,
+   "stars_per_day_lifetime": 93.3,
+   "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-10-06",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 78
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供个人代理技能以提高生活质量",
-   "evidence": "topics: agent-skill-repository, gemini-cli, skills",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "JimLiu/baoyu-design",
-   "url": "https://github.com/JimLiu/baoyu-design",
-   "description": "Run Claude Design locally as an Agent Skill — Cursor, Codex, DeepSeek Harness & more. Produce polished UI mockups, prototypes, decks & wireframes as self-contained HTML, without claude.ai/design. Best with Opus or Claude.",
-   "stars": 6109,
-   "topics": [
-    "agent-skills",
-    "claude",
-    "claude-code",
-    "claude-design",
-    "cursor",
-    "design",
-    "dsh-plugin",
-    "dsh-plugins",
-    "prototyping",
-    "ui-design"
-   ],
-   "lang": "JavaScript",
-   "created_at": "2026-06-07",
-   "pushed_at": "2026-11-05",
-   "age_days": 151,
-   "stars_per_day_lifetime": 40.46,
-   "license": "NOASSERTION",
-   "license_family": "unknown",
-   "found_by": {
-    "dimension": "category",
-    "query": "agent skill in:name,description stars:>300 pushed:>2026-08-07",
+    "query": "skill in:name stars:>500 pushed:>2026-08-08",
     "sort": "stars",
     "query_breadth": 100,
     "position": 99
@@ -856,12 +623,14 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "本地运行 Claude Design 作为代理技能，用于 UI 设计和原型制作",
-   "evidence": "topics: agent-skills, claude, claude-code, claude-design, cursor, design, dsh-plugin, dsh-plugins, prototyping, ui-desig",
+   "capability": "提供运行 Instagram 账户的 Claude 技能，包括视频制作、标题检查和人类化功能",
+   "evidence": "Thirteen Claude skills that run an Instagram account: Reels off 26 scored hook formulas, a viral research skill, a capti",
    "transfer_forms": [
-    "skill"
+    "skill",
+    "unknown"
    ],
    "line_candidates": [
+    "unknown",
     "unknown"
    ],
    "distilled": true

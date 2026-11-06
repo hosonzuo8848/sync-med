@@ -9052,6 +9052,48 @@
    }
   },
   {
+   "repo": "davila7/claude-code-templates",
+   "url": "https://github.com/davila7/claude-code-templates",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 33155,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-06",
+   "created_at": "2025-07-04",
+   "stars_per_day_lifetime": 67.66,
+   "capability": "管理 Claude Code 组件的注册和 CLI",
+   "transfer_forms": [
+    "mcp",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "anthropic",
+    "anthropic-claude",
+    "claude",
+    "claude-code",
+    "claude-code-plugins",
+    "cli",
+    "mcp",
+    "registry"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "agent skill in:name,description stars:>300 pushed:>2026-08-08",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 29
+   }
+  },
+  {
    "repo": "anthropics/claude-plugins-official",
    "url": "https://github.com/anthropics/claude-plugins-official",
    "first_seen": "2026-08-02",
@@ -9306,6 +9348,50 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 13
+   }
+  },
+  {
+   "repo": "feder-cr/Jobs_Applier_AI_Agent",
+   "url": "https://github.com/feder-cr/Jobs_Applier_AI_Agent",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 32381,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-06",
+   "created_at": "2024-08-04",
+   "stars_per_day_lifetime": 39.3,
+   "capability": "AI 自动申请工作",
+   "transfer_forms": [
+    "mcp",
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-agent",
+    "ai-agents",
+    "automation",
+    "browser-automation",
+    "job-application",
+    "job-board",
+    "job-search",
+    "mcp",
+    "playwright",
+    "python",
+    "resume",
+    "terminal-app"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 49
    }
   },
   {
@@ -28440,6 +28526,49 @@
    }
   },
   {
+   "repo": "cactus-compute/engine",
+   "url": "https://github.com/cactus-compute/engine",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 6181,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "C++",
+   "pushed_at": "2026-11-05",
+   "created_at": "2025-04-23",
+   "stars_per_day_lifetime": 11.0,
+   "capability": "为消费设备提供 2bit quants 和 kernels",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai",
+    "android",
+    "arm",
+    "edge",
+    "edge-ai",
+    "framework",
+    "ios",
+    "llamacpp",
+    "llm",
+    "llm-inference",
+    "llms",
+    "mobile"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 50
+   }
+  },
+  {
    "repo": "getsentry/XcodeBuildMCP",
    "url": "https://github.com/getsentry/XcodeBuildMCP",
    "first_seen": "2026-07-30",
@@ -29580,6 +29709,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 37
+   }
+  },
+  {
+   "repo": "Klavis-AI/klavis",
+   "url": "https://github.com/Klavis-AI/klavis",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 5829,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-05",
+   "created_at": "2025-04-14",
+   "stars_per_day_lifetime": 10.21,
+   "capability": "提供 Klavis AI MCP 集成",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agents",
+    "ai",
+    "ai-agents",
+    "api",
+    "deprecated",
+    "developer-tools",
+    "discord",
+    "function-calling",
+    "integration",
+    "llm",
+    "mcp",
+    "mcp-client"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp-server stars:>1000 pushed:>2026-10-07",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 61
    }
   },
   {
@@ -32598,6 +32770,37 @@
     "sort": "stars",
     "query_breadth": 37,
     "position": 4
+   }
+  },
+  {
+   "repo": "Jakeschincariol/instagram-agent-skill",
+   "url": "https://github.com/Jakeschincariol/instagram-agent-skill",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 5038,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-09-13",
+   "created_at": "2026-09-13",
+   "stars_per_day_lifetime": 93.3,
+   "capability": "提供运行 Instagram 账户的 Claude 技能，包括视频制作、标题检查和人类化功能",
+   "transfer_forms": [
+    "skill",
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown",
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>500 pushed:>2026-08-08",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 99
    }
   },
   {
@@ -42631,6 +42834,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 65
+   }
+  },
+  {
+   "repo": "kalcaddle/kodbox",
+   "url": "https://github.com/kalcaddle/kodbox",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 3368,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "PHP",
+   "pushed_at": "2026-11-05",
+   "created_at": "2021-04-07",
+   "stars_per_day_lifetime": 1.65,
+   "capability": "提供基于 PHP 的网页文件管理器和代码编辑器功能",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "docx",
+    "file-explorer",
+    "file-manager",
+    "file-sharing",
+    "file-upload",
+    "file-viewer",
+    "filemanager",
+    "filesystem",
+    "free-software",
+    "javascript",
+    "markdown-editor",
+    "php"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 68
    }
   },
   {
@@ -53427,6 +53673,50 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 1
+   }
+  },
+  {
+   "repo": "EthanYoQ/Pagekin",
+   "url": "https://github.com/EthanYoQ/Pagekin",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 2380,
+   "license": "GPL-3.0",
+   "license_family": "copyleft",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-06",
+   "created_at": "2026-06-20",
+   "stars_per_day_lifetime": 17.12,
+   "capability": "AI 小说写作软件",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "ai-novel",
+    "ai-writing",
+    "ai-writing-assistant",
+    "chinese",
+    "creative-writing",
+    "deepseek",
+    "desktop-app",
+    "electron",
+    "fiction-writing",
+    "llm",
+    "local-first",
+    "long-form-fiction"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 85,
+    "position": 4
    }
   },
   {
@@ -73568,6 +73858,42 @@
    }
   },
   {
+   "repo": "ChiR24/Unreal_mcp",
+   "url": "https://github.com/ChiR24/Unreal_mcp",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 1016,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "C++",
+   "pushed_at": "2026-11-06",
+   "created_at": "2025-09-07",
+   "stars_per_day_lifetime": 2.39,
+   "capability": "MCP 服务器控制 Unreal Engine",
+   "transfer_forms": [
+    "mcp",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "mcp",
+    "mcp-server",
+    "unreal-engine",
+    "unreal-engine-5"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 29
+   }
+  },
+  {
    "repo": "titanwings/ex-skill",
    "url": "https://github.com/titanwings/ex-skill",
    "first_seen": "2026-08-13",
@@ -74022,6 +74348,50 @@
     "sort": "updated",
     "query_breadth": 57,
     "position": 20
+   }
+  },
+  {
+   "repo": "Azure-Samples/AI-Gateway",
+   "url": "https://github.com/Azure-Samples/AI-Gateway",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 1008,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Jupyter Notebook",
+   "pushed_at": "2026-11-05",
+   "created_at": "2024-04-03",
+   "stars_per_day_lifetime": 1.06,
+   "capability": "提供 Azure API Management 和 Microsoft Foundry 支持的 AI 模型实验和 MCP 服务器",
+   "transfer_forms": [
+    "mcp",
+    "unknown"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "topics": [
+    "a2a",
+    "agents",
+    "apimanagement",
+    "autogen",
+    "azure",
+    "foundry",
+    "genai",
+    "mcp",
+    "mcp-server",
+    "openai",
+    "openai-api"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "mcp server in:name,description stars:>1000 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 90
    }
   },
   {
@@ -84838,6 +85208,42 @@
    }
   },
   {
+   "repo": "jeszhou/overlay-studio",
+   "url": "https://github.com/jeszhou/overlay-studio",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 503,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "TypeScript",
+   "pushed_at": "2026-10-18",
+   "created_at": "2026-09-01",
+   "stars_per_day_lifetime": 7.62,
+   "capability": "视频编辑工作台，添加动效层",
+   "transfer_forms": [
+    "deploy"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "chinese",
+    "ffmpeg",
+    "motion-graphics",
+    "react",
+    "video"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 85,
+    "position": 77
+   }
+  },
+  {
    "repo": "jingyunstudio/jingyun-dsh",
    "url": "https://github.com/jingyunstudio/jingyun-dsh",
    "first_seen": "2026-09-20",
@@ -85152,6 +85558,50 @@
     "sort": "updated",
     "query_breadth": 56,
     "position": 4
+   }
+  },
+  {
+   "repo": "wanghao-SunSky/cs329z-chinese",
+   "url": "https://github.com/wanghao-SunSky/cs329z-chinese",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 501,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "HTML",
+   "pushed_at": "2026-10-31",
+   "created_at": "2026-10-28",
+   "stars_per_day_lifetime": 55.67,
+   "capability": "提供斯坦福 CS329Z Engineering AI Agents 中文教程",
+   "transfer_forms": [
+    "dataset",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-memory",
+    "agentic-ai",
+    "ai-agents",
+    "chinese",
+    "chinese-tutorial",
+    "course-notes",
+    "cs329z",
+    "engineering-ai-agents",
+    "llm",
+    "llm-evaluation",
+    "multi-agent",
+    "python"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-07",
+    "sort": "updated",
+    "query_breadth": 85,
+    "position": 48
    }
   },
   {
@@ -86066,6 +86516,39 @@
    "found_by": {
     "dimension": "category",
     "query": "skill in:name stars:>200 pushed:>2026-09-20",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 25
+   }
+  },
+  {
+   "repo": "lzwme/finance-quant-skills",
+   "url": "https://github.com/lzwme/finance-quant-skills",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 474,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Python",
+   "pushed_at": "2026-11-06",
+   "created_at": "2026-03-25",
+   "stars_per_day_lifetime": 2.1,
+   "capability": "维护金融量化交易领域的 Agent Skills",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "topics": [
+    "agent-skills",
+    "skills"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-07",
     "sort": "updated",
     "query_breadth": 100,
     "position": 25
@@ -114615,6 +115098,46 @@
    }
   },
   {
+   "repo": "shanleiguang/vModou",
+   "url": "https://github.com/shanleiguang/vModou",
+   "first_seen": "2026-11-06",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-06",
+   "stars": 21,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Perl",
+   "pushed_at": "2025-08-22",
+   "created_at": "2025-08-12",
+   "stars_per_day_lifetime": 0.05,
+   "capability": "纠正古籍扫描图像变形",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "topics": [
+    "ancient-books",
+    "chinese-tranditional",
+    "design-tools",
+    "distorted-images",
+    "distortion-correction",
+    "image-processing",
+    "imagemagick",
+    "perl",
+    "publisher"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "古籍 in:name,description stars:>20",
+    "sort": "stars",
+    "query_breadth": 49,
+    "position": 48
+   }
+  },
+  {
    "repo": "taskyoooo/ziwei-doushu-skill",
    "url": "https://github.com/taskyoooo/ziwei-doushu-skill",
    "first_seen": "2026-10-10",
@@ -115600,7 +116123,7 @@
    }
   }
  ],
- "updated": "2026-11-05",
+ "updated": "2026-11-06",
  "status_enum": [
   "pending",
   "debated",
