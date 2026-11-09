@@ -24,16 +24,16 @@
   "tag": "v1.0.0-skills.2"
  },
  "infiniflow/ragflow": {
-  "published_at": "2026-10-30T11:53:15Z",
-  "tag": "v1.0.0-rc3"
+  "published_at": "2026-11-06T12:31:31Z",
+  "tag": "v1.0.0"
  },
  "microsoft/graphrag": {
   "published_at": "2026-10-08T18:28:43Z",
   "tag": "v3.3.0"
  },
  "opendatalab/MinerU": {
-  "published_at": "2026-10-30T10:43:37Z",
-  "tag": "mineru-4.1.3-released"
+  "published_at": "2026-11-04T12:38:24Z",
+  "tag": "mineru-4.1.7-released"
  },
  "unclecode/crawl4ai": {
   "published_at": "2026-10-14T10:25:39Z",
