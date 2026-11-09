@@ -35,6 +35,12 @@
   "note": "Free — anonymous access to multiple AI models via DuckDuckGo.",
   "website": "https://duckduckgo.com/duckchat"
  },
+ "minimax-code": {
+  "hasFree": false,
+  "noAuth": true,
+  "note": "No API key stored by OmniRoute. The provider reads the local MiniMax Code profile to authenticate a run. You can also sign in to your MiniMax account from this ",
+  "website": "https://www.minimax.io"
+ },
  "uncloseai": {
   "hasFree": true,
   "noAuth": true,
