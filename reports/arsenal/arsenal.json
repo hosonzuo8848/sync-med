@@ -19142,6 +19142,43 @@
    }
   },
   {
+   "repo": "JStumpp/awesome-android",
+   "url": "https://github.com/JStumpp/awesome-android",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 12446,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-08",
+   "created_at": "2014-07-13",
+   "stars_per_day_lifetime": 2.76,
+   "capability": "提供 Android 开发包和资源的精选列表。",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "android-development",
+    "android-library",
+    "android-tutorial",
+    "awesome",
+    "awesome-list",
+    "awesome-list-awesome-list",
+    "list"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 45
+   }
+  },
+  {
    "repo": "langgptai/LangGPT",
    "url": "https://github.com/langgptai/LangGPT",
    "first_seen": "2026-08-06",
@@ -31796,6 +31833,50 @@
    }
   },
   {
+   "repo": "microsoft/TokenEconomizer",
+   "url": "https://github.com/microsoft/TokenEconomizer",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 5342,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-08",
+   "created_at": "2026-10-13",
+   "stars_per_day_lifetime": 197.85,
+   "capability": "为编码代理提供经验驱动的黑盒成本控制。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agentic-ai",
+    "agentic-coding",
+    "ai-coding",
+    "ai-coding-assistant",
+    "anthropic",
+    "artificial-intelligence",
+    "claude-code",
+    "codex",
+    "coding-agent",
+    "coding-agents",
+    "cost-optimization",
+    "cost-reduction"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:agentic-ai stars:>5000 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 82,
+    "position": 35
+   }
+  },
+  {
    "repo": "0xNyk/awesome-hermes-agent",
    "url": "https://github.com/0xNyk/awesome-hermes-agent",
    "first_seen": "2026-08-15",
@@ -40991,6 +41072,49 @@
    }
   },
   {
+   "repo": "wesammustafa/Claude-Code-Quest",
+   "url": "https://github.com/wesammustafa/Claude-Code-Quest",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 3656,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-09",
+   "created_at": "2025-08-17",
+   "stars_per_day_lifetime": 8.14,
+   "capability": "提供 Claude Code 指南，包含不同级别教程和练习。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "agentic-coding",
+    "ai-agents",
+    "anthropic",
+    "anthropic-claude",
+    "best-practices",
+    "claude",
+    "claude-ai",
+    "claude-code",
+    "claude-code-guide",
+    "claude-code-hooks",
+    "claude-code-plugins"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 32
+   }
+  },
+  {
    "repo": "opensumi/core",
    "url": "https://github.com/opensumi/core",
    "first_seen": "2026-08-16",
@@ -48933,6 +49057,48 @@
    }
   },
   {
+   "repo": "Windy3f3f3f3f/claude-code-from-scratch",
+   "url": "https://github.com/Windy3f3f3f3f/claude-code-from-scratch",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 2821,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-03-31",
+   "stars_per_day_lifetime": 12.65,
+   "capability": "从零复现 Claude Code 核心架构的 TypeScript/Python 教程。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-agent",
+    "anthropic",
+    "build-from-scratch",
+    "claude",
+    "claude-code",
+    "coding-agent",
+    "llm",
+    "tutorial",
+    "typescript"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 31
+   }
+  },
+  {
    "repo": "plenaryapp/awesome-rss-feeds",
    "url": "https://github.com/plenaryapp/awesome-rss-feeds",
    "first_seen": "2026-10-06",
@@ -56468,6 +56634,49 @@
    }
   },
   {
+   "repo": "Vincentwei1021/video-talkcraft",
+   "url": "https://github.com/Vincentwei1021/video-talkcraft",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 2220,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "HTML",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-08-22",
+   "stars_per_day_lifetime": 28.1,
+   "capability": "将 Claude Code 转换为运动设计工作室。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agent",
+    "claude",
+    "claude-code",
+    "explainer-video",
+    "kinetic-typography",
+    "motion-design",
+    "motion-graphics",
+    "narration",
+    "remotion",
+    "talking-head",
+    "video-production"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 56
+   }
+  },
+  {
    "repo": "NanoNets/Graft",
    "url": "https://github.com/NanoNets/Graft",
    "first_seen": "2026-08-13",
@@ -57679,6 +57888,50 @@
    }
   },
   {
+   "repo": "reacher-z/Awesome-REA",
+   "url": "https://github.com/reacher-z/Awesome-REA",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 2168,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-10-16",
+   "stars_per_day_lifetime": 90.33,
+   "capability": "收集网站、游戏、应用、二进制、固件和协议逆向工程的工具、案例和论文。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai-agents",
+    "android-reverse-engineering",
+    "awesome",
+    "awesome-list",
+    "awesome-resources",
+    "binary-analysis",
+    "decompilation",
+    "firmware-analysis",
+    "game-reversing",
+    "ghidra",
+    "ios-reverse-engineering"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 3
+   }
+  },
+  {
    "repo": "Xiangyu-CAS/xiaohongshu-ops-skill",
    "url": "https://github.com/Xiangyu-CAS/xiaohongshu-ops-skill",
    "first_seen": "2026-07-26",
@@ -58811,6 +59064,49 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 80
+   }
+  },
+  {
+   "repo": "poco-ai/Agentero",
+   "url": "https://github.com/poco-ai/Agentero",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 2108,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-07-07",
+   "stars_per_day_lifetime": 16.86,
+   "capability": "提供统一的人与 Agent 协作的科研工作台。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "academic",
+    "ai-agents",
+    "citations",
+    "desktop-app",
+    "dsh-plugin",
+    "knowledge-base",
+    "literature-review",
+    "llm",
+    "mcp",
+    "pdf",
+    "rag",
+    "research"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 53
    }
   },
   {
@@ -61828,6 +62124,51 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 99
+   }
+  },
+  {
+   "repo": "leepokai/Codync",
+   "url": "https://github.com/leepokai/Codync",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 2008,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Rust",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-03-18",
+   "stars_per_day_lifetime": 8.51,
+   "capability": "开源 Grok Bot 替代品，支持将多种 AI 代理作为机器人部署。",
+   "transfer_forms": [
+    "skill",
+    "architecture",
+    "deploy"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "acp",
+    "agent-client-protocol",
+    "ai-agents",
+    "ai-assistant",
+    "claude",
+    "claude-code",
+    "codex",
+    "coding-agents",
+    "cursor",
+    "gemini",
+    "gemini-cli",
+    "grok-bot-alternative"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 24
    }
   },
   {
@@ -72893,6 +73234,50 @@
    }
   },
   {
+   "repo": "Ebony-Vinyl/EAC-design-world",
+   "url": "https://github.com/Ebony-Vinyl/EAC-design-world",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 1107,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-08",
+   "created_at": "2026-10-17",
+   "stars_per_day_lifetime": 48.13,
+   "capability": "DeepSeek Harness 本地视频制作与设计插件，提供多轨剪辑、模板和设计体系。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai-design",
+    "ai-video",
+    "content-creation",
+    "cordis-plugin",
+    "deepseek",
+    "deepseek-harness",
+    "design-studio",
+    "design-systems",
+    "design-tools",
+    "dsh",
+    "dsh-plugin",
+    "ffmpeg"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:content-creation stars:>1000 pushed:>2026-08-11",
+    "sort": "stars",
+    "query_breadth": 18,
+    "position": 16
+   }
+  },
+  {
    "repo": "ModernRelay/omnigraph",
    "url": "https://github.com/ModernRelay/omnigraph",
    "first_seen": "2026-09-09",
@@ -82025,6 +82410,40 @@
    }
   },
   {
+   "repo": "MetaInFLow/Enterprise-ai-scenario-map-skill",
+   "url": "https://github.com/MetaInFLow/Enterprise-ai-scenario-map-skill",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 628,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-04-01",
+   "stars_per_day_lifetime": 2.83,
+   "capability": "为任何企业自动生成 AI 应用场景地图报告。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "enterprise-ai",
+    "open-source",
+    "skill"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 5
+   }
+  },
+  {
    "repo": "wzyn20051216/solidworks-automation-skill",
    "url": "https://github.com/wzyn20051216/solidworks-automation-skill",
    "first_seen": "2026-08-01",
@@ -87247,6 +87666,35 @@
    }
   },
   {
+   "repo": "ZenlixAI/skill-dock",
+   "url": "https://github.com/ZenlixAI/skill-dock",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 475,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-07-28",
+   "stars_per_day_lifetime": 4.57,
+   "capability": "提供 Agent 技能的开放注册和交付平台。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 16
+   }
+  },
+  {
    "repo": "sno-ai/sno-station-skills",
    "url": "https://github.com/sno-ai/sno-station-skills",
    "first_seen": "2026-10-20",
@@ -89564,6 +90012,41 @@
    }
   },
   {
+   "repo": "currents-dev/playwright-best-practices-skill",
+   "url": "https://github.com/currents-dev/playwright-best-practices-skill",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 420,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-08",
+   "created_at": "2026-01-27",
+   "stars_per_day_lifetime": 1.47,
+   "capability": "提供 Playwright 最佳实践的 AI 技能。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "ai-skill",
+    "ai-skills",
+    "playwright",
+    "playwright-typescript"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 90
+   }
+  },
+  {
    "repo": "ZeroPointRepo/awesome-hermes-skills",
    "url": "https://github.com/ZeroPointRepo/awesome-hermes-skills",
    "first_seen": "2026-08-18",
@@ -90267,6 +90750,50 @@
     "sort": "stars",
     "query_breadth": 5,
     "position": 4
+   }
+  },
+  {
+   "repo": "waynesutton/builder-skills",
+   "url": "https://github.com/waynesutton/builder-skills",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 403,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-01-14",
+   "stars_per_day_lifetime": 1.35,
+   "capability": "为 Convex 应用提供构建器技能，支持 Claude Code、Codex、Cursor 等。",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai",
+    "backend",
+    "builder-skills",
+    "claude",
+    "claude-code",
+    "claude-skills",
+    "codex",
+    "convex",
+    "cursor",
+    "database",
+    "skills"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 1
    }
   },
   {
@@ -92490,6 +93017,34 @@
     "sort": "stars",
     "query_breadth": 12,
     "position": 9
+   }
+  },
+  {
+   "repo": "MOKEAIGC/MOKEAIGC-work-V25",
+   "url": "https://github.com/MOKEAIGC/MOKEAIGC-work-V25",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 350,
+   "license": "NONE",
+   "license_family": "none",
+   "pushed_at": "2026-11-08",
+   "created_at": "2026-07-26",
+   "stars_per_day_lifetime": 3.3,
+   "capability": "将灵感或参考图转化为连贯的世界设定、生物设计与同场景多构图。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-11",
+    "sort": "stars",
+    "query_breadth": 91,
+    "position": 62
    }
   },
   {
@@ -101568,6 +102123,34 @@
    }
   },
   {
+   "repo": "guzhezao/scroll-web-skills",
+   "url": "https://github.com/guzhezao/scroll-web-skills",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 226,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-10-28",
+   "created_at": "2026-10-28",
+   "stars_per_day_lifetime": 18.83,
+   "capability": "AI 产品动画与滚动交互网页的提示词规范、模板和 Skills。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-11",
+    "sort": "stars",
+    "query_breadth": 91,
+    "position": 84
+   }
+  },
+  {
    "repo": "huaxialucaicaizi/ai-startup-skills",
    "url": "https://github.com/huaxialucaicaizi/ai-startup-skills",
    "first_seen": "2026-10-26",
@@ -103550,6 +104133,35 @@
    }
   },
   {
+   "repo": "houshifang/image",
+   "url": "https://github.com/houshifang/image",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 211,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-08",
+   "created_at": "2026-04-29",
+   "stars_per_day_lifetime": 1.09,
+   "capability": "提供 AI 图片提示词灵感库，覆盖多种设计场景。",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "image"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-11",
+    "sort": "stars",
+    "query_breadth": 91,
+    "position": 87
+   }
+  },
+  {
    "repo": "jing1312/nature-figure-skill",
    "url": "https://github.com/jing1312/nature-figure-skill",
    "first_seen": "2026-11-04",
@@ -104520,6 +105132,35 @@
    }
   },
   {
+   "repo": "aronhy/marketing-skill-hub",
+   "url": "https://github.com/aronhy/marketing-skill-hub",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 207,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Shell",
+   "pushed_at": "2026-11-08",
+   "created_at": "2026-11-02",
+   "stars_per_day_lifetime": 29.57,
+   "capability": "提供海外营销 Agent Skills。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-10",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 94
+   }
+  },
+  {
    "repo": "medusajs/medusa-agent-skills",
    "url": "https://github.com/medusajs/medusa-agent-skills",
    "first_seen": "2026-08-15",
@@ -105386,6 +106027,49 @@
     "sort": "stars",
     "query_breadth": 58,
     "position": 57
+   }
+  },
+  {
+   "repo": "CHENJIAMIAN/awesome-chatgpt-prompts-zh-CN",
+   "url": "https://github.com/CHENJIAMIAN/awesome-chatgpt-prompts-zh-CN",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 203,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "lang": "HTML",
+   "pushed_at": "2026-09-25",
+   "created_at": "2023-03-06",
+   "stars_per_day_lifetime": 0.15,
+   "capability": "提供 ChatGPT 提示词中文合集。",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai",
+    "aiprm",
+    "awesome-list",
+    "chatgpt",
+    "chatgpt-prompts",
+    "chinese",
+    "claude",
+    "dataset",
+    "gpt",
+    "llm",
+    "prompt-engineering",
+    "prompt-library"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "提示词 in:name,description stars:>200 pushed:>2026-08-11",
+    "sort": "stars",
+    "query_breadth": 91,
+    "position": 89
    }
   },
   {
@@ -108745,6 +109429,40 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 55
+   }
+  },
+  {
+   "repo": "Yht20927/douyin-cli",
+   "url": "https://github.com/Yht20927/douyin-cli",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 147,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-10-10",
+   "created_at": "2026-06-01",
+   "stars_per_day_lifetime": 0.91,
+   "capability": "抖音全自动评论管理工具，支持搜索、爬取评论、AI回复和运营仪表盘。",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "ai-agent",
+    "automation",
+    "douyin"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 49,
+    "position": 45
    }
   },
   {
@@ -113525,6 +114243,52 @@
    }
   },
   {
+   "repo": "Evvvvvvvan/XianYuSmart",
+   "url": "https://github.com/Evvvvvvvan/XianYuSmart",
+   "first_seen": "2026-11-09",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-09",
+   "stars": 101,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "lang": "Java",
+   "pushed_at": "2026-11-09",
+   "created_at": "2026-07-14",
+   "stars_per_day_lifetime": 0.86,
+   "capability": "闲鱼全流程自动化运营系统，支持商机挖掘、商品发布、AI客服等。",
+   "transfer_forms": [
+    "skill",
+    "architecture",
+    "deploy"
+   ],
+   "line_candidates": [
+    "video",
+    "modelpool"
+   ],
+   "topics": [
+    "ai-customer-service",
+    "auto-delivery",
+    "card-key",
+    "customer-service",
+    "docker",
+    "flyway",
+    "java",
+    "multi-tenant",
+    "mysql",
+    "non-commercial",
+    "rag",
+    "self-hosted"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "自动 发布 in:name,description stars:>100 pushed:>2026-08-11",
+    "sort": "stars",
+    "query_breadth": 27,
+    "position": 26
+   }
+  },
+  {
    "repo": "FishBottle7/opencode2dsh",
    "url": "https://github.com/FishBottle7/opencode2dsh",
    "first_seen": "2026-10-01",
@@ -117326,7 +118090,7 @@
    }
   }
  ],
- "updated": "2026-11-08",
+ "updated": "2026-11-09",
  "status_enum": [
   "pending",
   "debated",
