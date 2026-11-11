@@ -24018,6 +24018,42 @@
    }
   },
   {
+   "repo": "greatfrontend/awesome-front-end-system-design",
+   "url": "https://github.com/greatfrontend/awesome-front-end-system-design",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 8624,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-10",
+   "created_at": "2023-01-25",
+   "stars_per_day_lifetime": 6.22,
+   "capability": "提供前端系统设计资源",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "front-end",
+    "front-end-system-design",
+    "javascript",
+    "react",
+    "system-design",
+    "system-design-interview"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-12",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 70
+   }
+  },
+  {
    "repo": "detailyang/awesome-cheatsheet",
    "url": "https://github.com/detailyang/awesome-cheatsheet",
    "first_seen": "2026-10-21",
@@ -32682,6 +32718,35 @@
    }
   },
   {
+   "repo": "ownthink/KnowledgeGraphData",
+   "url": "https://github.com/ownthink/KnowledgeGraphData",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 5219,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Python",
+   "pushed_at": "2026-11-10",
+   "created_at": "2019-10-11",
+   "stars_per_day_lifetime": 2.02,
+   "capability": "提供史上最大规模1.4亿中文知识图谱开源下载",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "知识图谱 in:name,description stars:>200 pushed:>2026-08-13",
+    "sort": "stars",
+    "query_breadth": 15,
+    "position": 2
+   }
+  },
+  {
    "repo": "Q00/ouroboros",
    "url": "https://github.com/Q00/ouroboros",
    "first_seen": "2026-07-28",
@@ -37666,6 +37731,34 @@
    }
   },
   {
+   "repo": "janestreet/agent_skills",
+   "url": "https://github.com/janestreet/agent_skills",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 4207,
+   "license": "MIT",
+   "license_family": "permissive",
+   "pushed_at": "2026-11-03",
+   "created_at": "2026-11-03",
+   "stars_per_day_lifetime": 525.88,
+   "capability": "提供Agent技能",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skills in:name stars:>500 pushed:>2026-08-13",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 69
+   }
+  },
+  {
    "repo": "Ravencentric/awesome-arr",
    "url": "https://github.com/Ravencentric/awesome-arr",
    "first_seen": "2026-08-17",
@@ -38443,6 +38536,48 @@
     "sort": "stars",
     "query_breadth": 100,
     "position": 46
+   }
+  },
+  {
+   "repo": "FedML-AI/FedML",
+   "url": "https://github.com/FedML-AI/FedML",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 4070,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-11",
+   "created_at": "2020-07-21",
+   "stars_per_day_lifetime": 1.77,
+   "capability": "提供统一和可扩展的机器学习库，支持大规模分布式训练、模型服务和联邦学习",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "deep-learning",
+    "distributed-training",
+    "edge-ai",
+    "federated-learning",
+    "inference-engine",
+    "machine-learning",
+    "mlops",
+    "model-deployment",
+    "model-serving",
+    "on-device-training"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-12",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 50
    }
   },
   {
@@ -48864,6 +48999,49 @@
    }
   },
   {
+   "repo": "compozy/compozy",
+   "url": "https://github.com/compozy/compozy",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 2861,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Go",
+   "pushed_at": "2026-11-11",
+   "created_at": "2026-03-28",
+   "stars_per_day_lifetime": 12.55,
+   "capability": "为 AI 代理提供操作系统，包括自主控制平面和代理编排",
+   "transfer_forms": [
+    "architecture"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "acp",
+    "agent-client-protocol",
+    "agent-orchestration",
+    "ai-agents",
+    "automation",
+    "claude-code",
+    "cli",
+    "codex",
+    "coding-agents",
+    "cursor",
+    "developer-tools",
+    "golang"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-12",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 46
+   }
+  },
+  {
    "repo": "Java-Edge/Java-Interview-Tutorial",
    "url": "https://github.com/Java-Edge/Java-Interview-Tutorial",
    "first_seen": "2026-09-09",
@@ -50638,6 +50816,49 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 78
+   }
+  },
+  {
+   "repo": "neavo/LinguaGacha",
+   "url": "https://github.com/neavo/LinguaGacha",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 2676,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "TypeScript",
+   "pushed_at": "2026-11-11",
+   "created_at": "2025-02-04",
+   "stars_per_day_lifetime": 4.15,
+   "capability": "提供翻译特化的 AGENT Harness，支持多种格式的高质量翻译",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agent",
+    "ai-translation",
+    "epub",
+    "epub-translator",
+    "game-translation",
+    "llm",
+    "localization",
+    "pdf",
+    "pdf-translation",
+    "renpy",
+    "rpg-maker",
+    "subtitle-translation"
+   ],
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-12",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 26
    }
   },
   {
@@ -69034,6 +69255,35 @@
    }
   },
   {
+   "repo": "WhiteNightShadow/hello_js_reverse_skill",
+   "url": "https://github.com/WhiteNightShadow/hello_js_reverse_skill",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 1414,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Python",
+   "pushed_at": "2026-11-11",
+   "created_at": "2026-03-18",
+   "stars_per_day_lifetime": 5.94,
+   "capability": "AI-powered JS逆向工程Skill，覆盖加密还原、混淆分析等全链路场景",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-12",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 35
+   }
+  },
+  {
    "repo": "datawhalechina/hugging-multi-agent",
    "url": "https://github.com/datawhalechina/hugging-multi-agent",
    "first_seen": "2026-08-14",
@@ -69433,6 +69683,48 @@
     "sort": "updated",
     "query_breadth": 100,
     "position": 3
+   }
+  },
+  {
+   "repo": "nexscope-ai/eCommerce-Skills",
+   "url": "https://github.com/nexscope-ai/eCommerce-Skills",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 1376,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-11",
+   "created_at": "2026-03-18",
+   "stars_per_day_lifetime": 5.78,
+   "capability": "为 AI 代理提供电子商务技能，包括产品研究、营销自动化等",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "agent-skills",
+    "ai",
+    "ai-agent-skills",
+    "ai-agents",
+    "amazon-seller-tools",
+    "claude-code-skills",
+    "claude-skills",
+    "ecommerce",
+    "openclaw-skills",
+    "shopify-tools",
+    "tiktok-shop-automation"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-12",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 30
    }
   },
   {
@@ -78492,6 +78784,47 @@
     "sort": "stars",
     "query_breadth": 22,
     "position": 14
+   }
+  },
+  {
+   "repo": "nexscope-ai/Amazon-Skills",
+   "url": "https://github.com/nexscope-ai/Amazon-Skills",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 860,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-11",
+   "created_at": "2026-03-10",
+   "stars_per_day_lifetime": 3.5,
+   "capability": "为亚马逊卖家提供免费 AI 代理技能，包括关键词研究、竞争对手分析等",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "topics": [
+    "ai-agents",
+    "amazon",
+    "amazon-seller-automation",
+    "amazon-seller-tools",
+    "claude-code",
+    "claude-skills",
+    "ecommerce",
+    "openclaw",
+    "openclaw-skills",
+    "skills"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-12",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 29
    }
   },
   {
@@ -104282,6 +104615,35 @@
    }
   },
   {
+   "repo": "OutThisLife/brooklyn-skills",
+   "url": "https://github.com/OutThisLife/brooklyn-skills",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 214,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-11",
+   "created_at": "2026-07-23",
+   "stars_per_day_lifetime": 1.93,
+   "capability": "提供驱动最佳工程实践的技能",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-12",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 13
+   }
+  },
+  {
    "repo": "yennanliu/InvestSkill",
    "url": "https://github.com/yennanliu/InvestSkill",
    "first_seen": "2026-09-18",
@@ -110429,6 +110791,35 @@
    }
   },
   {
+   "repo": "JimmyLv/bibigpt-skill",
+   "url": "https://github.com/JimmyLv/bibigpt-skill",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 141,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "JavaScript",
+   "pushed_at": "2026-11-10",
+   "created_at": "2026-03-01",
+   "stars_per_day_lifetime": 0.55,
+   "capability": "为 Claude Code, Codex, ChatGPT & OpenClaw 提供视频总结代理技能，支持 YouTube/Bilibili/podcast 分发",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "found_by": {
+    "dimension": "category",
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 51,
+    "position": 46
+   }
+  },
+  {
    "repo": "DJChanahCJD/OtterHub",
    "url": "https://github.com/DJChanahCJD/OtterHub",
    "first_seen": "2026-08-02",
@@ -114821,6 +115212,35 @@
    }
   },
   {
+   "repo": "lixiaoxiao9888-create/short-drama-teardown",
+   "url": "https://github.com/lixiaoxiao9888-create/short-drama-teardown",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 102,
+   "license": "NONE",
+   "license_family": "none",
+   "lang": "Python",
+   "pushed_at": "2026-10-19",
+   "created_at": "2026-10-19",
+   "stars_per_day_lifetime": 4.43,
+   "capability": "将爆款短剧逆向还原为逐字稿、标准剧本与骨架分析卡",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-08-13",
+    "sort": "stars",
+    "query_breadth": 58,
+    "position": 56
+   }
+  },
+  {
    "repo": "small-bears/hospitals",
    "url": "https://github.com/small-bears/hospitals",
    "first_seen": "2026-08-18",
@@ -116127,6 +116547,46 @@
     "sort": "stars",
     "query_breadth": 51,
     "position": 50
+   }
+  },
+  {
+   "repo": "wangcanyu/daihuo-fanpai",
+   "url": "https://github.com/wangcanyu/daihuo-fanpai",
+   "first_seen": "2026-11-11",
+   "status": "pending",
+   "status_note": "",
+   "last_seen": "2026-11-11",
+   "stars": 101,
+   "license": "MIT",
+   "license_family": "permissive",
+   "lang": "Python",
+   "pushed_at": "2026-11-08",
+   "created_at": "2026-07-02",
+   "stars_per_day_lifetime": 0.77,
+   "capability": "反推爆款带货短视频，并重生成，支持剪映草稿交付的 agent 流水线",
+   "transfer_forms": [
+    "skill"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "topics": [
+    "agent",
+    "ai-video",
+    "claude-code",
+    "douyin",
+    "ecommerce-video",
+    "jianying",
+    "seedance",
+    "short-video",
+    "video-generation"
+   ],
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-08-13",
+    "sort": "stars",
+    "query_breadth": 58,
+    "position": 57
    }
   },
   {
@@ -118935,7 +119395,7 @@
    }
   }
  ],
- "updated": "2026-11-10",
+ "updated": "2026-11-11",
  "status_enum": [
   "pending",
   "debated",
