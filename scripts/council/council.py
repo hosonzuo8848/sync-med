@@ -118,6 +118,23 @@ def _intel_topic(c, gen_date):
     }
 
 
+def intel_seat_count(room, n_rows, has_gap):
+    """How many topic seats go to radar repositories.
+
+    A measured D1 gap keeps one seat. A one-seat meeting that has a gap
+    talks about the gap. With more seats, radar still takes the majority
+    of what is left, so a quiet GitHub day cannot erase the outward brief.
+    """
+    if room <= 0 or n_rows <= 0:
+        return 0
+    if has_gap and room == 1:
+        return 0
+    majority = max(1, (room * 2) // 3)
+    if has_gap:
+        majority = min(majority, room - 1)
+    return min(n_rows, majority)
+
+
 def triage(metrics, n_topics, manual_topic="", intel=None):
     scored = sorted(
         ({"m": m, "sev": probes.severity(m)} for m in metrics),
@@ -142,7 +159,8 @@ def triage(metrics, n_topics, manual_topic="", intel=None):
     rows = list(intel or [])
     if rows:
         room = max(0, n_topics - len(topics))
-        n_intel = max(1, (room * 2) // 3) if room else 0
+        has_gap = any(row["sev"] > 0.15 for row in scored)
+        n_intel = intel_seat_count(room, len(rows), has_gap)
         gen_date = (rows[0].get("_generated") or "")[:10]
         for c in rows[:n_intel]:
             topics.append(_intel_topic(c, gen_date))
