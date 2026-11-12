@@ -29,7 +29,7 @@ jobs:
   daily-report:
     name: Generate Daily Intel Report v3
     runs-on: ubuntu-latest   # 标准 runner, public repo 完全免费
-    timeout-minutes: 30      # 海量抓取 + 并行分析需要时间
+    timeout-minutes: 40      # room for crawl4ai setup plus at most 3 browser pages
 
     permissions:
       # write is ONLY for reports/arsenal/* (the council's input file + the
@@ -59,7 +59,12 @@ jobs:
       # footer boilerplate off article pages before they hit the LLM). Also an
       # optional import -- fetch_article_text returns "" if it's absent, so the
       # radar runs identically without it, just without the full-text excerpts.
-      - run: pip install --quiet lxml 'trafilatura>=1.8,<3'
+      # crawl4ai is the browser tier already used by p12/p15. eagle_fetch only
+      # calls it after plain HTTP comes back empty or blocked, and only up to
+      # EAGLE_BROWSER_MAX pages. It does not bypass a challenge page.
+      - run: |
+          pip install --quiet lxml 'trafilatura>=1.8,<3' crawl4ai
+          crawl4ai-setup
 
       - name: Run Intel Radar v3 (cloud mode)
         env:
@@ -91,6 +96,8 @@ jobs:
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
           SILICONFLOW_KEY:    ${{ secrets.SILICONFLOW_KEY }}
           CF_NEURON_BUDGET: '0'    # belt to llm_roster's braces
+          EAGLE_BROWSER: '1'
+          EAGLE_BROWSER_MAX: '3'
           ARSENAL_LLM_CALLS: '12'  # distillation cap, separate from the council's
         run: |
           EXTRA_ARGS=""

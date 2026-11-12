@@ -1305,22 +1305,27 @@ passing through as if the first-pass score alone proved real relevance.'
     # 从不读原文——同一句套话理由无从戳穿。现在用 eagle_fetch(三级降级:直连→r.jina.ai兜底,
     # 硬站吃外部IP信誉,2026-08-17实测过知乎403)深读条目原文,摘录喂进怀疑式核验。
     # 读不到 → 行为与旧版完全一致;深读计数必打印(绿勾零产出血案铁律)。
-    deep_ok = deep_jina = deep_fail = 0
+    deep_ok = deep_jina = deep_browser = deep_fail = 0
     try:
         from eagle_fetch import fetch_page as _eagle_fetch
+        from eagle_fetch import crawl4ai_fetcher_or_none as _browser_or_none
+        _browser = _browser_or_none()
     except ImportError:
         _eagle_fetch = None
+        _browser = None
     for item in top_items[:verify_n]:
         excerpt = ""
         if _eagle_fetch is not None and str(item.get("url", "")).startswith("http"):
             try:
-                fr = _eagle_fetch(item["url"], timeout=20)
+                fr = _eagle_fetch(item["url"], timeout=20, browser_fetcher=_browser)
                 if fr.ok and fr.chars > 200:
                     excerpt = fr.text[:1200]
                     item["deep_read"] = fr.tier
                     deep_ok += 1
                     if fr.tier == "jina":
                         deep_jina += 1
+                    elif fr.tier == "browser":
+                        deep_browser += 1
                 else:
                     deep_fail += 1
             except Exception:
@@ -1351,7 +1356,7 @@ passing through as if the first-pass score alone proved real relevance.'
             item["verify_note"] = ""
     print(f"  [Layer3 verify] {passed}/{checked} passed skeptical check "
           f"({checked}/{min(verify_n, len(top_items))} attempted) · "
-          f"deep-read ok={deep_ok} (jina-rescued={deep_jina}) fail={deep_fail}", flush=True)
+          f"deep-read ok={deep_ok} (browser={deep_browser} jina-rescued={deep_jina}) fail={deep_fail}", flush=True)
     return top_items
 
 

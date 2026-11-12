@@ -20,6 +20,7 @@ eagle_fetch —— SueAI 鹰眼统一采集引擎 v1(创始人 2026-08-17:「把
 antibot 特征库移植声明:_TIER1/_TIER2 正则源自 crawl4ai/antibot_detector.py
   (Apache-2.0 © unclecode & contributors,允许复制修改,保留本声明)。
 """
+import os
 import re
 import time
 from dataclasses import dataclass, field
@@ -121,6 +122,55 @@ def _fetch_http(url: str, timeout: float) -> tuple:
         return e.code, body
 
 
+def _browser_allowed() -> bool:
+    """Browser tier is Actions-only. Local batch compute stays off unless
+    EAGLE_BROWSER=1 is set on purpose for one probe."""
+    return (os.environ.get("GITHUB_ACTIONS") == "true"
+            or os.environ.get("EAGLE_BROWSER") == "1")
+
+
+_browser_used = 0
+
+
+def crawl4ai_fetcher(url: str, timeout: float) -> tuple:
+    """tier2 via crawl4ai (Apache-2.0), the same crawler p12/p15 already run.
+
+    Returns (status, html). Does not retry a blocked page and does not turn on
+    stealth. A cap (EAGLE_BROWSER_MAX, default 3) keeps one radar run from
+    launching a browser for every link.
+    """
+    global _browser_used
+    if not _browser_allowed():
+        raise RuntimeError("browser tier refused outside Actions")
+    cap = int(os.environ.get("EAGLE_BROWSER_MAX", "3") or "3")
+    if _browser_used >= cap:
+        raise RuntimeError("browser cap reached")
+    _browser_used += 1
+    import asyncio
+    from crawl4ai import AsyncWebCrawler
+
+    async def _run():
+        async with AsyncWebCrawler() as crawler:
+            r = await asyncio.wait_for(crawler.arun(url=url), timeout=timeout)
+        html = getattr(r, "html", None) or getattr(r, "markdown", None) or ""
+        status = 200 if getattr(r, "success", False) else 0
+        return status, html
+
+    return asyncio.run(_run())
+
+
+def crawl4ai_fetcher_or_none():
+    """None when the browser is not allowed or crawl4ai is not installed.
+    Callers then keep the http -> jina path unchanged."""
+    if not _browser_allowed():
+        return None
+    try:
+        import crawl4ai  # noqa: F401
+    except ImportError:
+        return None
+    return crawl4ai_fetcher
+
+
 def _fetch_jina(url: str, timeout: float, api_key: str = "") -> tuple:
     headers = {"User-Agent": "eagle-fetch/1.0"}
     if api_key:
@@ -196,7 +246,7 @@ if __name__ == "__main__":
     import io, json, sys
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", line_buffering=True)
     for u in sys.argv[1:]:
-        r = fetch_page(u)
+        r = fetch_page(u, browser_fetcher=crawl4ai_fetcher_or_none())
         print(json.dumps({"url": r.url, "ok": r.ok, "tier": r.tier, "status": r.status,
                           "chars": r.chars, "blocked_by": r.blocked_by, "ms": r.elapsed_ms,
                           "notes": r.notes, "head": r.text[:120]}, ensure_ascii=False))
