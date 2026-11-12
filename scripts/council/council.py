@@ -791,8 +791,14 @@ def main():
         return 3
 
     # --- stage 5 -----------------------------------------------------------
-    body = build_report(date_str, topics, results, metrics, skipped, bench_report,
-                        radar, judge, judge_independent, st, run_id, run_url)
+    # A format error must not drop the finished meeting. The 2026-11-12 dry run
+    # died here on a missing template field and never reached decisions.json.
+    try:
+        body = build_report(date_str, topics, results, metrics, skipped, bench_report,
+                            radar, judge, judge_independent, st, run_id, run_url)
+    except Exception as e:
+        log("report format FAILED: %s: %s" % (type(e).__name__, str(e)[:200]))
+        body = "report format failed: %s\n" % type(e).__name__
     outdir = os.path.join("reports", "council")
     os.makedirs(outdir, exist_ok=True)
     path = os.path.join(outdir, "%s.md" % date_str)
