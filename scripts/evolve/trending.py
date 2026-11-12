@@ -39,6 +39,146 @@ from _ai import d1, q                                       # noqa: E402
 # 星段切片 —— 每段的 total 都要压在 1000 以下,否则取不完。
 #   实测 created:>30d 各段规模:100..200 最大,>2000 很少。
 STAR_BANDS = ["100..200", "200..500", "500..1000", "1000..3000", ">3000"]
+# Pushed floor is stars:>500 inside sweep. Same numbers as before; a live
+# total above the search window is bisected, the floors are not raised.
+PUSHED_STAR_BANDS = ["500..1000", "1000..5000", ">5000"]
+# Search API hard window is 10 pages x 100. Not a collector star floor.
+GITHUB_SEARCH_WINDOW = 1000
+# A range of width 2^64 cannot occur for a star count. Past this, stop and
+# record the shortfall instead of recursing on a query that never shrinks.
+MAX_BAND_SPLITS = 64
+
+
+def search_cap(max_pages, per_page):
+    """How many hits one query may keep.
+
+    min(max_pages, pages_needed) used to clip a 2500-hit band to 1000.
+    sort=stars desc then stores the head and drops the low end, and the
+    process still exited 0. The API also will not return past 1000, so a
+    bigger max_pages does not widen this.
+    """
+    pages = int(max_pages)
+    size = int(per_page)
+    if pages <= 0 or size <= 0:
+        return 0
+    return min(pages * size, GITHUB_SEARCH_WINDOW)
+
+
+def parse_star_band(band):
+    """'500..1000' -> ('range', 500, 1000); '>5000' -> ('gt', 5000, None);
+    '750' -> ('eq', 750, 750). None when the slice cannot be cut.
+    """
+    s = str(band).strip()
+    if s.startswith(">"):
+        rest = s[1:]
+        if rest.isdigit():
+            return ("gt", int(rest), None)
+        return None
+    if ".." in s:
+        left, right = s.split("..", 1)
+        if left.isdigit() and right.isdigit():
+            return ("range", int(left), int(right))
+        return None
+    if s.isdigit():
+        n = int(s)
+        return ("eq", n, n)
+    return None
+
+
+def split_star_band(band):
+    """Cut one overflowing slice into two strictly narrower slices.
+
+    GitHub star ranges are inclusive, so the right half starts at mid+1.
+    Otherwise the midpoint is fetched twice or a one-star gap is dropped.
+    '>N' becomes 'N+1..(N+span)' plus a higher open tail (span=N, or 1
+    when N is 0). A single star count returns None: the caller records
+    the shortfall instead of keeping the first 1000 and exiting 0.
+    """
+    parsed = parse_star_band(band)
+    if not parsed:
+        return None
+    kind, lo, hi = parsed
+    if kind == "range":
+        if hi <= lo:
+            return None
+        mid = (lo + hi) // 2
+        right_lo = mid + 1
+        if mid < lo or right_lo > hi:
+            return None
+        left = "%d..%d" % (lo, mid)
+        right = "%d..%d" % (right_lo, hi)
+    elif kind == "gt":
+        span = lo if lo > 0 else 1
+        left_lo = lo + 1
+        left_hi = lo + span
+        if left_hi < left_lo:
+            return None
+        left = "%d..%d" % (left_lo, left_hi)
+        right = ">%d" % left_hi
+    else:
+        return None
+    if left == band or right == band:
+        return None
+    return (left, right)
+
+
+def band_action(total, band, cap, per_page, depth, max_depth):
+    """Decide one slice: fetch, split, short, or empty.
+
+    'fetch' is only legal when total <= cap. A band of 2500 must come
+    back as ('split', pair) or ('short', total-cap). It must not look
+    like a successful 10-page fetch.
+    """
+    total = int(total or 0)
+    cap = int(cap or 0)
+    per_page = int(per_page or 0)
+    depth = int(depth or 0)
+    if total <= 0 or per_page <= 0:
+        return ("empty", 0)
+    if total > cap:
+        parts = split_star_band(band) if depth < int(max_depth) else None
+        if parts:
+            return ("split", parts)
+        missed = total - cap if cap > 0 else total
+        return ("short", missed if missed > 0 else 0)
+    pages = (total + per_page - 1) // per_page
+    return ("fetch", pages)
+
+
+def exit_code(missed):
+    """0 only when nothing in the sweep was dropped.
+
+    The adopt workflow treats exit 0 as a finished month-board. Keeping
+    1000 of a 2500-hit band used to take that path.
+    """
+    try:
+        n = int(missed or 0)
+    except (TypeError, ValueError):
+        return 1
+    return 1 if n > 0 else 0
+
+
+def report_payload(rows, saved, pool_total, fresh, gap):
+    """Same four keys as before, plus how many hits the sweep did not keep."""
+    missed = 0
+    short_bands = []
+    if gap:
+        missed = int(gap.get("missed") or 0)
+        short_bands = list(gap.get("bands") or [])
+    return {
+        "swept": len(rows) if rows is not None else 0,
+        "saved": saved,
+        "pool_total": pool_total,
+        "new": fresh,
+        "missed": missed,
+        "short_bands": short_bands,
+    }
+
+
+def qualify(track, since, band, floor):
+    if band == floor:
+        return "%s:>%s %s" % (track, since, floor)
+    return "%s:>%s stars:%s" % (track, since, band)
 
 
 def gh(q_str, page=1, per_page=100):
@@ -72,42 +212,117 @@ def ensure_table():
             first_seen INTEGER, last_seen INTEGER)""")
 
 
-def sweep(days=30, tracks=("created", "pushed"), max_pages=10, per_page=100):
-    """把月榜全量扫下来。返回 {repo: row}。"""
+def _row_from_item(it, track, prev):
+    name = it.get("full_name")
+    if not name:
+        return None
+    return {
+        "repo": name, "url": it.get("html_url"),
+        "description": (it.get("description") or "")[:600],
+        "stars": it.get("stargazers_count") or 0,
+        "forks": it.get("forks_count") or 0,
+        "lang": it.get("language") or "",
+        "topics": ",".join(it.get("topics") or [])[:300],
+        "license": ((it.get("license") or {}) or {}).get("spdx_id") or "",
+        "created_at": (it.get("created_at") or "")[:10],
+        "pushed_at": (it.get("pushed_at") or "")[:10],
+        "found_by": (prev or {}).get("found_by") or f"trending:{track}",
+    }
+
+
+def sweep(days=30, tracks=("created", "pushed"), max_pages=10, per_page=100,
+          search=None, sleeper=None, bands_by_track=None):
+    """把月榜全量扫下来。返回 ({repo: row}, gap)。
+
+    gap['missed'] counts hits a slice did not store. Overflow is bisected
+    until each query fits the search window. A slice that cannot be cut
+    (one star count, or the split depth is exhausted) keeps the head it
+    can see and records the rest. search/sleeper exist so tests never
+    touch GitHub or the 2.2s pause; the default is still gh().
+    """
+    fn = search if search is not None else gh
+
+    def pause():
+        # Injected sleeper stays off the network path. Production still
+        # waits between pages: search is limited to 30 requests a minute.
+        if sleeper is not None:
+            sleeper()
+        else:
+            time.sleep(2.2)
+
     since = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
     got = {}
+    gap = {"missed": 0, "bands": []}
+    seen = set()
+
+    def walk(track, band, floor, depth):
+        qs = qualify(track, since, band, floor)
+        if qs in seen:
+            # A split that echoes the parent used to recurse forever, or
+            # return the same 1000 rows and call the band done.
+            return
+        seen.add(qs)
+        total, _ = fn(qs, page=1, per_page=1)
+        cap = search_cap(max_pages, per_page)
+        action, payload = band_action(
+            total, band, cap, per_page, depth, MAX_BAND_SPLITS)
+        if action == "split":
+            print(f"  [{track} {band}] total={total} cap={cap} split {payload[0]} + {payload[1]}",
+                  flush=True)
+            for sub in payload:
+                walk(track, sub, floor, depth + 1)
+            return
+        if action == "fetch":
+            pages = payload
+        elif action == "short" and cap and per_page:
+            pages = (min(total, cap) + per_page - 1) // per_page
+        else:
+            pages = 0
+        print(f"  [{track} {band}] total={total} → 取 {pages} 页", flush=True)
+        got_n = 0
+        for p in range(1, pages + 1):
+            _, items = fn(qs, page=p, per_page=per_page)
+            items = items or []
+            got_n += len(items)
+            for it in items:
+                row = _row_from_item(it, track, got.get(it.get("full_name")))
+                if row is None:
+                    continue
+                got[row["repo"]] = row
+            if not items:
+                break
+            pause()
+        if action == "short":
+            # total-cap under-counts when a page comes back short. The
+            # hole is whatever the query claimed minus what we actually
+            # received. Those missing rows are the low-star tail.
+            missed = total - got_n
+            if missed < 0:
+                missed = 0
+            if missed:
+                gap["missed"] += missed
+                gap["bands"].append({
+                    "track": track,
+                    "band": str(band),
+                    "total": total,
+                    "kept": got_n,
+                    "missed": missed,
+                })
+                print(f"  [{track} {band}] short total={total} kept={got_n} missed={missed}",
+                      flush=True)
+
     for track in tracks:
         # created = 本月新出现的爆款(最有价值);pushed = 老项目里还在快速前进的
         floor = "stars:>500" if track == "pushed" else "stars:>100"
-        bands = STAR_BANDS if track == "created" else ["500..1000", "1000..5000", ">5000"]
+        if bands_by_track and track in bands_by_track:
+            bands = list(bands_by_track[track])
+        elif track == "created":
+            bands = list(STAR_BANDS)
+        else:
+            bands = list(PUSHED_STAR_BANDS)
         for band in bands:
-            qs = f"{track}:>{since} stars:{band}" if band != floor else f"{track}:>{since} {floor}"
-            total, _ = gh(qs, page=1, per_page=1)
-            pages = min(max_pages, (total + per_page - 1) // per_page) if total else 0
-            print(f"  [{track} {band}] total={total} → 取 {pages} 页", flush=True)
-            for p in range(1, pages + 1):
-                _, items = gh(qs, page=p, per_page=per_page)
-                for it in items:
-                    name = it.get("full_name")
-                    if not name:
-                        continue
-                    prev = got.get(name)
-                    got[name] = {
-                        "repo": name, "url": it.get("html_url"),
-                        "description": (it.get("description") or "")[:600],
-                        "stars": it.get("stargazers_count") or 0,
-                        "forks": it.get("forks_count") or 0,
-                        "lang": it.get("language") or "",
-                        "topics": ",".join(it.get("topics") or [])[:300],
-                        "license": ((it.get("license") or {}) or {}).get("spdx_id") or "",
-                        "created_at": (it.get("created_at") or "")[:10],
-                        "pushed_at": (it.get("pushed_at") or "")[:10],
-                        "found_by": (prev or {}).get("found_by") or f"trending:{track}",
-                    }
-                if not items:
-                    break
-                time.sleep(2.2)          # search 限流 30/分,温和一点
-    return got
+            walk(track, band, floor, 0)
+    return got, gap
 
 
 def save(rows, batch=60):
@@ -172,20 +387,21 @@ def main():
     a = ap.parse_args()
 
     print(f"=== Trending 算子 · 月榜全量({a.days} 天)· 零 AI 调用 ===", flush=True)
-    rows = sweep(days=a.days, max_pages=a.max_pages)
+    rows, gap = sweep(days=a.days, max_pages=a.max_pages)
     n = save(rows)
     try:
         tot = d1("SELECT COUNT(*) c FROM gh_repo_pool")[0]["c"]
         fresh = d1(f"SELECT COUNT(*) c FROM gh_repo_pool WHERE first_seen>={int(time.time())-3600}")[0]["c"]
     except Exception:
         tot = fresh = -1
-    print(f"\n=== 本轮扫到 {len(rows)} 个,写库 {n} 条 → 后台累计 {tot} 个(本轮新增 {fresh})===", flush=True)
+    missed = gap["missed"]
+    print(f"\n=== 本轮扫到 {len(rows)} 个,写库 {n} 条 → 后台累计 {tot} 个(本轮新增 {fresh}) missed={missed} ===", flush=True)
     for r in sorted(rows.values(), key=lambda x: -x["stars"])[:10]:
         print(f"  {r['stars']:6d}★ {r['repo'][:44]:44s} {r['description'][:50]}", flush=True)
     if a.report:
-        json.dump({"swept": len(rows), "saved": n, "pool_total": tot, "new": fresh},
+        json.dump(report_payload(rows, n, tot, fresh, gap),
                   open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return 0
+    return exit_code(missed)
 
 
 if __name__ == "__main__":
