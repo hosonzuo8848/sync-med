@@ -102,6 +102,15 @@ def lane_policy():
 
 SCORE_SYS = '\u4f60\u662f\u300c\u53e4\u65b9AI\u661f\u56fe\u300d\u7684\u60c5\u62a5\u6253\u5206\u5668\u3002\u80cc\u666f:\u6211\u4eec\u505a\u4e2d\u533b\u53e4\u7c4dAI(\u5b66\u6d3e\u601d\u7ef4\u5206\u8eab/\u5224\u65ad\u5f15\u64ce/\u53e4\u7c4d\u51fa\u5904\u6eaf\u6e90/\u80b2\u4eba/\u8ba2\u9605\u53d8\u73b0)\u3002\n\u5bf9\u6bcf\u6761\u60c5\u62a5\u6253\u4e24\u4e2a\u5206(0-5):\n- leading \u9886\u5148\u5ea6: \u8fd9\u4e8b\u662f\u5426"\u522b\u4eba\u8fd8\u6ca1\u770b\u89c1/\u8fd8\u6ca1\u5927\u89c4\u6a21\u505a"(\u8d8a\u65e9\u671f\u8d8a\u51b7\u95e8\u8d8a\u9ad8;\u5237\u5c4f\u70ed\u70b9=\u4f4e)\n- transplant \u53ef\u79fb\u690d\u5ea6: \u2605\u6700\u9ad8\u5206\u7ed9"\u522b\u7684\u5782\u76f4\u884c\u4e1a/\u522b\u7684\u884c\u4e1a\u7684\u3010\u4ea7\u54c1\u6253\u6cd5\xb7\u5546\u4e1a\u6a21\u5f0f\xb7\u4fe1\u4efb\u673a\u5236\u3011"\u2014\u2014\u6cd5\u5f8bAI\u600e\u4e48\u505a\u51fa\u5904\u6eaf\u6e90\u3001\u589e\u957f\u56e2\u961f\u600e\u4e48\u505a\u7528\u6237\u7559\u5b58\u3001\u8d44\u672c\u600e\u4e48\u7ed9\u6309\u7ed3\u679c\u4ed8\u8d39\u5b9a\u4ef7\u3001\u522b\u7684\u4e13\u5bb6\u578bAI\u600e\u4e48\u590d\u73b0\u5224\u65ad,\u8fd9\u4e9b\u4e2d\u533b\u73a9\u5bb6\u7ed3\u6784\u4e0a\u4e0d\u770b\u3001\u5374\u80fd\u76f4\u63a5\u642c\u8fdb\u53e4\u65b9\u3002\'\u53c8\u4e00\u7bc7AI\u80fd\u529b\u8bba\u6587/\u65b0\u6a21\u578b/\u65b0\u7b97\u6cd5\'\u9664\u975e\u76f4\u63a5\u89e3\u9501\u4e00\u4e2a\u65b0\u4ea7\u54c1\u80fd\u529b,\u5426\u5219 transplant \u538b\u5230\u22642(\u90a3\u662f\u4eba\u4eba\u90fd\u5728\u770b\u7684\u7ea2\u6d77)\u3002\u7eaf\u786c\u4ef6/\u65e0\u5173=0\u3002\n\u53ea\u8f93\u51faJSON\u6570\u7ec4:[{"i":\u5e8f\u53f7,"leading":n,"transplant":n,"move":"\u4e00\u53e5\u79fb\u690d\u70b9(\u6ca1\u6709\u5219\u7a7a)"}]'
 
+class ScoreIncomplete(RuntimeError):
+    """A score batch came back with no closed JSON value.
+
+    That is not a judgment of zero hits. main() files the weekly issue
+    from whatever score_items returns, so a cut-off reply must fail the
+    run instead of shipping as an empty finished batch.
+    """
+
+
 def score_items(items):
     scored = []
     B = 14
@@ -109,7 +118,12 @@ def score_items(items):
         batch = items[s:s+B]
         lines = [f"{s+k}. [{it['lane']}] {it['title']} — {it['brief'][:120]}" for k, it in enumerate(batch)]
         try:
-            arr = pick_json(llm(SCORE_SYS, "\n".join(lines), max_tokens=1400)) or []
+            raw = llm(SCORE_SYS, "\n".join(lines), max_tokens=1400)
+            arr = pick_json(raw)
+            # pick_json returns None when the reply never closes. `or []`
+            # used to treat that cutoff as a finished batch of zero hits.
+            if arr is None:
+                raise ScoreIncomplete("truncated or unparseable score payload")
             for a in arr:
                 i = a.get("i")
                 if isinstance(i, int) and s <= i < s + len(batch) and i < len(items):
@@ -117,6 +131,8 @@ def score_items(items):
                     items[i]["transplant"] = int(a.get("transplant", 0))
                     items[i]["move"] = str(a.get("move", ""))[:120]
                     scored.append(items[i])
+        except ScoreIncomplete:
+            raise
         except Exception as ex:
             print(f"[score] \u6279{s}\u5931\u8d25: {str(ex)[:80]}", flush=True)
         print(f"[score] {min(s+B,len(items))}/{len(items)}", flush=True)
