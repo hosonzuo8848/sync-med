@@ -203,6 +203,10 @@ def main():
                "baseline": round(base, 4), "rows": rows},
               open(a.out, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     print(f"\n  结果表 {a.out} · 候选原文 {a.save_candidates}/")
+    produced = [r for r in rows if r.get("ok") and r.get("who") != "冠军(现役)"]
+    if not produced:
+        print("REFUSING GREEN: zero candidates. Calls failed before any comparison.")
+        return 1
     return 0
 
 

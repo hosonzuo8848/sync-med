@@ -116,8 +116,11 @@ jobs:
               qa = "—" if r["qualified"] is None else f"{r['qualified']}/{r['n']}"
               print(f"| {r['who']} | {ok} | {ok} | {sc} | {dl} | {qa} | {r['secs']}s | {str(r['note'])[:60]} |")
           win = [r for r in d["rows"] if r["ok"] and r["delta"] and r["delta"] > 0]
+          produced = [r for r in d["rows"] if r.get("ok") and r.get("supplier") not in (None, "-", "")]
           print()
-          if win:
+          if not produced:
+              print("> **Zero candidates.** Every model call failed before a comparison. This is not a champion win.")
+          elif win:
               b = max(win, key=lambda r: r["delta"])
               print(f"> ✅ **有免费模型胜过冠军**:`{b['supplier']}` {b['score']} vs 冠军 {d['baseline']}")
               print("> → 免费改进者可行,下一步接赛马机制,由人拍板晋升。")
@@ -154,8 +157,11 @@ jobs:
               qa = "-" if r["qualified"] is None else f"{r['qualified']}/{r['n']}"
               print(f"| {r['who']} | {ok} | {sc} | {dl} | {qa} | {r['secs']}s |")
           win = [r for r in d["rows"] if r["ok"] and r["delta"] and r["delta"] > 0]
+          produced = [r for r in d["rows"] if r.get("ok") and r.get("supplier") not in (None, "-", "")]
           print()
-          if win:
+          if not produced:
+              print("**Zero candidates.** Every model call failed before a comparison. This is not a champion win.")
+          elif win:
               b = max(win, key=lambda r: r["delta"])
               print(f"**本周有黑马跑赢冠军**:`{b['supplier']}` {b['score']} vs 冠军 {d['baseline']}")
               print("\n晋升由人拍板 —— 回复本 Issue「过」即执行晋升。")
