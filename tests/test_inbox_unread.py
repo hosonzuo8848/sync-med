@@ -44,3 +44,20 @@ class FailedInboxRead(unittest.TestCase):
             src = fh.read()
         main = src.split("def main(", 1)[1].split("\nif __name__", 1)[0]
         self.assertIn("should_publish(", main)
+
+    def test_purge_failure_is_not_a_clean_queue(self):
+        def boom(sql):
+            raise RuntimeError("down")
+
+        inbox.d1 = boom
+        n, failed = inbox.purge_stale_modules()
+        self.assertEqual(n, 0)
+        self.assertTrue(failed)
+        self.assertFalse(inbox.should_publish(False, False, True))
+
+    def test_nothing_stale_can_still_publish(self):
+        inbox.d1 = lambda sql: []
+        n, failed = inbox.purge_stale_modules()
+        self.assertEqual(n, 0)
+        self.assertFalse(failed)
+        self.assertTrue(inbox.should_publish(False, False, False))

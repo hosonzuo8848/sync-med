@@ -52,7 +52,7 @@ def purge_stale_modules():
                   "WHERE kind='repo' AND status IN ('adopt','watch','ticketed')")
     except Exception as e:
         print(f"  [清理] 取数失败:{str(e)[:70]}", flush=True)
-        return 0
+        return 0, True
     stale = []
     for r in rows:
         try:
@@ -62,7 +62,7 @@ def purge_stale_modules():
         if m and m not in MODULE_ORDER:
             stale.append((r["title"], m))
     if not stale:
-        return 0
+        return 0, False
     ids = ",".join(q(t) for t, _ in stale)
     try:
         d1(f"UPDATE evolve_candidates SET status='skip', "
@@ -70,10 +70,10 @@ def purge_stale_modules():
            f"WHERE title IN ({ids})")
     except Exception as e:
         print(f"  [清理] 写库失败:{str(e)[:70]}", flush=True)
-        return 0
+        return 0, True
     print(f"  [清理] {len(stale)} 条落在已删模块上的候选已降为 skip:"
           f"{', '.join(f'{t}({m})' for t, m in stale[:5])}", flush=True)
-    return len(stale)
+    return len(stale), False
 
 
 def fetch(status, limit=40):
@@ -86,9 +86,9 @@ def fetch(status, limit=40):
         return [], True
 
 
-def should_publish(adopt_failed, watch_failed):
-    """A failed read must not be published as an empty adopt queue."""
-    return not adopt_failed and not watch_failed
+def should_publish(adopt_failed, watch_failed, purge_failed=False):
+    """A failed read or a failed purge must not be published as a clean queue."""
+    return not adopt_failed and not watch_failed and not purge_failed
 
 
 def parse(r):
@@ -138,10 +138,10 @@ def main():
     ap.add_argument("--out", default=OUT)
     a = ap.parse_args()
 
-    purged = purge_stale_modules()      # 先清过期模块,再出收件箱
+    _n, purge_failed = purge_stale_modules()
     adopt_rows, adopt_failed = fetch("adopt")
     watch_rows, watch_failed = fetch("watch", 15)
-    if not should_publish(adopt_failed, watch_failed):
+    if not should_publish(adopt_failed, watch_failed, purge_failed):
         print("  [inbox] unread, not writing an empty queue", flush=True)
         return 1
     adopt = [parse(r) for r in adopt_rows]
