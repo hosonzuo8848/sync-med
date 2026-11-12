@@ -13,7 +13,8 @@ Two hard rails live in this file, because everything downstream trusts them:
      that fails to query degrades to skipped (never to a fabricated 0) -- a
      silent 0 would look like a catastrophic gap and would hijack the triage.
      A successful query whose denominator is 0 is the same non-measurement:
-     recall_from_counts returns None and the probe is skipped as "no sample".
+     denominator_empty is the single test, and both recall_from_counts and
+     daodu coverage return None so the probe is skipped as "no sample".
 
 Metric targets are deliberately plain constants rather than model-chosen: the
 triage ranking has to be recomputable by hand from the report, otherwise "why
@@ -107,15 +108,29 @@ def _m(key, organ, label_key, value, target, display, unit, higher_is_better=Tru
     }
 
 
+def denominator_empty(total):
+    """The only zero-denominator test for a measured rate.
+
+    Query success with an empty denominator is not a coverage of 0%.
+    Publishing 0.0 against a positive target scores a full shortfall
+    (daodu: (8-0)/8 * weight 1.0 = 1.0; recall: (90-0)/90 * 1.15 = 1.15)
+    and is_gap fires above 0.15. Callers return None so the existing
+    collect_metrics guard records "no sample". A numerator of 0 with a
+    positive denominator is a real 0% and must not come through here.
+    """
+    return total == 0
+
+
 def recall_from_counts(total, with_ev, sql=""):
     """Recall over a counted window. A zero denominator is not a rate.
 
     Writing 0.0 here against the 90 target used to score
     (90-0)/90 * ORGAN_WEIGHT["xunmai"] (1.15) = 1.15. is_gap fires above
-    0.15, so an empty week was triaged as a recall failure. Query errors
-    still raise; the caller skips those on the existing exception path.
+    0.15, so an empty week was triaged as a recall failure. The zero
+    test is denominator_empty; do not copy it. Query errors still raise;
+    the caller skips those on the existing exception path.
     """
-    if total == 0:
+    if denominator_empty(total):
         return None
     pct = with_ev * 100.0 / total
     return _m("xunmai_recall", "xunmai", "m_xunmai_recall", round(pct, 1), 90.0,
@@ -130,9 +145,9 @@ def collect_metrics():
     def guard(fn):
         try:
             m = fn()
-            # None means the probe ran and had nothing to measure (recall
-            # over an empty window). Appending a fabricated 0 would cross
-            # the 0.15 gap line. A raised error stays on the path below.
+            # None means the probe ran and had nothing to measure (a rate
+            # whose denominator is empty). Appending a fabricated 0 would
+            # cross the 0.15 gap line. A raised error stays on the path below.
             if m is None:
                 skipped.append("%s: %s" % (fn.__name__, "no sample"))
             elif m:
@@ -177,7 +192,12 @@ def collect_metrics():
         sql_a = "SELECT COUNT(DISTINCT book_id) c FROM book_daodu_ai WHERE status='visible'"
         sql_b = "SELECT COUNT(*) c FROM books_assets_v2 WHERE frontend_visible=1"
         have, total = _scalar(sql_a), _scalar(sql_b)
-        pct = (have * 100.0 / total) if total else 0.0
+        # Same hole as recall: 0 books used to publish 0.0 against target
+        # 8, and (8-0)/8 * daodu weight 1.0 = 1.0, above the 0.15 gap line.
+        # None is recorded by the guard above; do not add a second skip.
+        if denominator_empty(total):
+            return None
+        pct = have * 100.0 / total
         return _m("daodu_cov", "daodu", "m_daodu_cov", round(pct, 2), 8.0,
                   "%s/%s(%.2f%%)" % (have, total, pct), "%", sql=sql_a + " | " + sql_b)
 
