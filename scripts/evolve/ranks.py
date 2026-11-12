@@ -163,11 +163,13 @@ def list_files(repo, years):
     修法:年目录下遇到子目录再列一层(只递归一层,榜单结构不会更深)。
     """
     out = []
+    failed = False
     for y in years:
         try:
             entries = gh_json(f"repos/{repo}/contents/{y}")
         except Exception as e:
             if getattr(e, "code", 0) != 404:
+                failed = True
                 print(f"    列目录失败 {repo}/{y}:{str(e)[:60]}", flush=True)
             continue
         for f in entries:
@@ -181,8 +183,9 @@ def list_files(repo, years):
                         if g.get("type") == "file" and gn.endswith(".md"):
                             out.append((y, gn, g["path"]))
                 except Exception as e:
+                    failed = True
                     print(f"    列子目录失败 {repo}/{y}/{nm}:{str(e)[:60]}", flush=True)
-    return out
+    return out, failed
 
 
 def fetch_md(repo, path):
@@ -365,8 +368,13 @@ def _flush(vals, now):
         return 0, True
 
 
-def finish_code(parsed, save_failed, growth_failed):
-    """Rows were parsed but a write raised: that is not an empty board."""
+def finish_code(parsed, save_failed, growth_failed, list_failed=False):
+    """Rows were parsed but a write raised: that is not an empty board.
+
+    A directory that could not be listed is not zero periods either.
+    """
+    if list_failed:
+        return 1
     if parsed and (save_failed or growth_failed):
         return 1
     return 0
@@ -396,14 +404,16 @@ def main():
     print(f"=== Ranks 算子 · 榜单={','.join(sorted(kinds))} · 年份={years} · 零 AI 调用 ===", flush=True)
 
     all_rows, stat = [], {}
+    list_failed = False
     for repo, kind in SOURCES:
         if kind not in kinds:
             continue
-        files = list_files(repo, years)
+        files, kind_unread = list_files(repo, years)
+        list_failed = list_failed or kind_unread
         if a.recent > 0:
             files = sorted(files, key=lambda t: (t[0], t[1]), reverse=True)[:a.recent]
         print(f"\n  [{kind}] {repo}:{len(files)} 期", flush=True)
-        if not files:
+        if not files and not kind_unread:
             # 哨兵:2026-08-27 之前这里恒为 0 却一声不吭,整整 23 天没人发现
             # (404 被 list_files 静默吞 + workflow 那行 `|| echo 失败不致命` 两层盖住)。
             print(f"  [{kind}] ⚠️ 零期次 —— 上游目录结构可能又变了,或 years 参数不对。"
@@ -428,7 +438,7 @@ def main():
             # 有期次却零解析 = 上游改版式了。原文已 --snapshot 存仓,解析逻辑改了能重洗。
             print(f"  [{kind}] WARN {len(files)} 期全部解析为 0 条 —— 上游格式疑似变更,"
                   f"两套解析器都没命中,请人工看一期原文", flush=True)
-        stat[kind] = {"periods": len(files), "items": got}
+        stat[kind] = {"periods": len(files), "items": got, "list_failed": kind_unread}
         print(f"  [{kind}] 解析出 {got} 条", flush=True)
 
     n, save_failed = save(all_rows)
@@ -451,12 +461,13 @@ def main():
     if a.report:
         # by_kind 的期次/条数必须进报告 —— workflow 侧据此判定要不要开 Issue,
         # 治「只写进日志的产线一律视为没人看」(CLAUDE.md 第 8 条)。
-        empty = [k for k, v in stat.items() if v["items"] == 0]
+        empty = [k for k, v in stat.items() if v["items"] == 0 and not v.get("list_failed")]
         json.dump({"parsed": len(all_rows), "saved": n, "write_failed": save_failed,
                    "growth_saved": gn, "growth_failed": growth_failed,
+                   "list_failed": list_failed,
                    "pool_total": tot_show, "by_kind": stat, "empty_kinds": empty},
                   open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return finish_code(len(all_rows), save_failed, growth_failed)
+    return finish_code(len(all_rows), save_failed, growth_failed, list_failed)
 
 
 if __name__ == "__main__":
