@@ -296,7 +296,7 @@ def analyze_batch(batch: list, offset: int, model: str, use_gateway: bool) -> li
         response = _call_llm_sync(model, messages, max_tokens=1500, use_gateway=use_gateway)
     except Exception as e:
         print(f"    [分析] 批次失败: {e}")
-        return []
+        raise BatchUnscored("llm call failed") from e
 
     # A cut-off reply is BatchUnscored, not an empty finished batch.
     picks = parse_score_array(response)

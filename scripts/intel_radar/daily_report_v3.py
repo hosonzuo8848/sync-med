@@ -1140,7 +1140,7 @@ async def analyze_batch_async(
         )
     except Exception as e:
         print(f"    [\u6279{batch_idx}|{model}] LLM \u5931\u8d25: {e}", flush=True)
-        return []
+        raise BatchUnscored("llm call failed") from e
 
     
     # None from a cut-off reply used to fall through to [] and then [OK].

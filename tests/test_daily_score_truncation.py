@@ -72,3 +72,15 @@ class TruncatedDailyBatch(unittest.TestCase):
         self.assertEqual(picks[0]["score"], 5)
         self.assertEqual(picks[0]["_model"], "m")
         self.assertIn("[OK]", out)
+
+    def test_transport_failure_is_not_an_ok_zero(self):
+        def fake(model, messages, max_tokens=1500, use_gateway=True):
+            raise RuntimeError("down")
+
+        daily._call_llm_sync = fake
+        buf = StringIO()
+        with redirect_stdout(buf):
+            with self.assertRaises(daily.BatchUnscored) as ctx:
+                asyncio.run(daily.analyze_all_parallel([ITEM], False, ["m"]))
+        self.assertIn("llm call failed", str(ctx.exception).lower())
+        self.assertNotIn("[OK]", buf.getvalue())

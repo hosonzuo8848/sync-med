@@ -66,3 +66,15 @@ class TruncatedCompetitorBatch(unittest.TestCase):
         self.assertEqual(len(picks), 1)
         self.assertEqual(picks[0]["score"], 5)
         self.assertIn("] ->", out)
+
+    def test_transport_failure_is_not_a_zero_hit_line(self):
+        def fake(model, messages, max_tokens=1500, use_gateway=True):
+            raise RuntimeError("down")
+
+        radar._call_llm_sync = fake
+        buf = StringIO()
+        with redirect_stdout(buf):
+            with self.assertRaises(radar.BatchUnscored) as ctx:
+                radar.analyze_all([ITEM], ["m"], False, batch_size=20, sleep_s=0)
+        self.assertIn("llm call failed", str(ctx.exception).lower())
+        self.assertNotIn("] ->", buf.getvalue())
