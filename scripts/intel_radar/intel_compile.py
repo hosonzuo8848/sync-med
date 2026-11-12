@@ -273,16 +273,47 @@ def gh_api(method, path, body=None):
                                  headers={"Authorization": "Bearer " + GH, "Accept": "application/vnd.github+json", "Content-Type": "application/json", "User-Agent": UA})
     return json.loads(urllib.request.urlopen(req, timeout=60).read() or b"null")
 
-def mode_digest():
-    cand = d1("SELECT p.page_id, p.name_s, p.title, p.summary_md, p.facts_json, p.summarized_at, i.source AS src FROM wiki_pages p LEFT JOIN intel_items i ON i.intel_id = p.name_s WHERE p.kind='intel' AND p.status='published' AND p.summarized_at >= %d ORDER BY p.summarized_at DESC LIMIT 12" % (now() - 36 * 3600))
-    # rank: pages tagged only 'other' go last; founder favorites first; then freshest
+def _digest_description(r):
+    # The 2026-11-11 issue led with a repo whose GitHub description was empty,
+    # so the lead "what to try" line had nothing to quote and read as inference.
+    # D1 digest rows store that text at facts_json.github.description. The
+    # offline test also passes a top-level description. A page with no github
+    # object is not a blank repo: treating "missing" as blank would demote
+    # every non-repo page and leave the empty repo in front.
+    if "description" in r:
+        return str(r.get("description") or "").strip()
+    raw = r.get("facts_json")
+    if not raw:
+        return None
+    try:
+        facts = json.loads(raw) if isinstance(raw, str) else raw
+    except Exception:
+        return None
+    if not isinstance(facts, dict):
+        return None
+    gh = facts.get("github")
+    if not isinstance(gh, dict):
+        return None
+    return str(gh.get("description") or "").strip()
+
+def rank_digest_rows(rows):
+    # Blank repo descriptions sort after every row that has one. Among rows
+    # with a description the previous keys are unchanged: only-'other' last,
+    # founder favorites first, then freshest. This is not a numeric threshold;
+    # the 36h window and the top-3 cut stay where they are.
+    # One function for mode_digest and the offline test; do not copy this key.
     def _rank(r):
         try: tags = json.loads(r.get("facts_json") or "{}").get("tags") or []
         except Exception: tags = []
         only_other = 1 if (not tags or tags == ["other"]) else 0
         fav = 0 if str(r.get("src") or "").startswith("founder_fav") else 1
-        return (only_other, fav, -(r.get("summarized_at") or 0))
-    rows = sorted(cand, key=_rank)[:3]
+        blank = 1 if _digest_description(r) == "" else 0
+        return (blank, only_other, fav, -(r.get("summarized_at") or 0))
+    return sorted(rows, key=_rank)
+
+def mode_digest():
+    cand = d1("SELECT p.page_id, p.name_s, p.title, p.summary_md, p.facts_json, p.summarized_at, i.source AS src FROM wiki_pages p LEFT JOIN intel_items i ON i.intel_id = p.name_s WHERE p.kind='intel' AND p.status='published' AND p.summarized_at >= %d ORDER BY p.summarized_at DESC LIMIT 12" % (now() - 36 * 3600))
+    rows = rank_digest_rows(cand)[:3]
     day = time.strftime("%Y-%m-%d", time.gmtime(now() + 8 * 3600))
     title = "\U0001f985\u9e70\u773c\u65e5\u62a5 %s" % day
     if not rows:
