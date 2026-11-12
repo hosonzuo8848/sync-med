@@ -67,12 +67,16 @@ def d1(sql):
     return (j.get("result") or [{}])[0].get("results") or []
 
 
-def scalar(sql, default=0):
-    try:
-        r = d1(sql)
-        return list(r[0].values())[0] if r else default
-    except Exception:
-        return default
+def scalar(sql):
+    """Return one cell. A stored 0 stays 0. No row or a SQL NULL stays None.
+
+    A failed read raises. Swallowing it as 0 made judge() score a gap and
+    let track_goals() write that 0 back and halt a goal for no progress.
+    """
+    r = d1(sql)
+    if not r:
+        return None
+    return list(r[0].values())[0]
 
 
 # ══ 【观察】读真实指标 ══════════════════════════════════════════
@@ -130,12 +134,15 @@ def track_goals(o, dry):
     now = o["at"]
     reached, halted, running = [], [], []
     cur_map = {
-        "content_biocomp": o.get("bio_total") or 0,
-        "content_herb":    o.get("herb_total") or 0,
+        "content_biocomp": o.get("bio_total"),
+        "content_herb":    o.get("herb_total"),
         "model_chat":      ((o.get("champion") or [{}])[0].get("score") or 0),
     }
     for g in (o.get("goals") or []):
-        cur = float(cur_map.get(g["scope"], 0) or 0)
+        raw = cur_map.get(g["scope"], 0)
+        if g["scope"] in ("content_biocomp", "content_herb") and raw is None:
+            continue
+        cur = float(raw or 0)
         tgt = float(g["target_value"])
         last = g.get("last_value")
         rounds = (g.get("rounds_used") or 0) + 1
@@ -173,9 +180,10 @@ def judge(o):
     now = o["at"]
     issues, oks = [], []
 
-    c24 = o.get("content_24h") or 0
-    (oks if c24 >= TH["content_min_per_day"] else issues).append(
-        f"内容工厂 24h 新增 {c24} 条(阈值 ≥{TH['content_min_per_day']})")
+    c24 = o.get("content_24h")
+    if c24 is not None:
+        (oks if c24 >= TH["content_min_per_day"] else issues).append(
+            f"内容工厂 24h 新增 {c24} 条(阈值 ≥{TH['content_min_per_day']})")
 
     for r in (o.get("runs_24h") or []):
         req = r.get("req") or 0
