@@ -40,7 +40,10 @@ from _stack import scan_stack                               # noqa: E402
 
 def judge_once(champ, q):
     """用冠军大脑判一题,返回 verdict(失败返回 'ERR')。
-    注入家底清单,与 adopt.judge 生产判定同条件(否则家底盲区会被误算成判定力问题)。"""
+    注入家底清单,与 adopt.judge 生产判定同条件(否则家底盲区会被误算成判定力问题)。
+    A parsed body whose verdict is not adopt/watch/skip is not a failure and
+    is not a skip. Rewriting that token to skip matched the 17 skip keys.
+    """
     stack_ctx = (("\n\n【我们已在用的家底 —— 候选若命中其一即判 skip,这是家底不是新机会】\n"
                   + "\n".join(adopt.STACK_LINES)) if adopt.STACK_LINES else "")
     user = (f"项目:{q['repo']}\n星数:{q['stars']}\n语言:{q['lang']}\n"
@@ -50,9 +53,30 @@ def judge_once(champ, q):
                           max_tokens=500, json_mode=True, temperature=0)
         o = _parse_json(txt)
         v = str(o.get("verdict") or "").strip().lower()
-        return v if v in ("adopt", "watch", "skip") else "skip"
+        if v in ("adopt", "watch", "skip"):
+            return v
+        # Keep the raw token. Empty, "...", and any other word must not
+        # become skip before they are compared with the gold key.
+        return v
     except Exception as e:
         return f"ERR:{type(e).__name__}"
+
+
+def vote_correct(q, mode):
+    """Exact-direction hit via score_one, for one majority token.
+
+    score_one pays its verdict bucket only when verdict == want. Re-scoring
+    the gold key is that bucket: the 0.15 probe bonus (any non-adopt on a
+    probed item) and the 0.25 watch-on-skip partial do not reproduce it, so
+    they stay misses. That is the same boolean as mode == want for a legal
+    adopt/watch/skip token.
+
+    The token has to be the one judge_once returned. score_one cannot see
+    that a skip was manufactured from a placeholder.
+    """
+    got, _detail = score_one(q, {"verdict": mode})
+    exact, _exact_detail = score_one(q, {"verdict": q["want"]})
+    return got == exact and mode == q["want"]
 
 
 def main():
@@ -76,7 +100,8 @@ def main():
         consistency = round(cnt / a.repeat, 3)
         # 判对率用众数 verdict 走同一确定性判分(只看 verdict 对不对,不要求 current/beats,
         # 因为这里量的是「判定方向稳不稳、对不对」,不是完整答题分)
-        correct = (mode == q["want"])
+        # Illegal majorities never equal a gold key. Do not coerce them first.
+        correct = vote_correct(q, mode)
         rows.append(dict(repo=q["repo"], want=q["want"], votes=vs,
                          mode=mode, consistency=consistency, correct=correct))
         flag = "✅" if correct else "❌"
