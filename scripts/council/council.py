@@ -19,8 +19,9 @@ Five stages, each auditable on its own:
                  IN PARALLEL AND BLIND. No seat ever sees another's text at
                  this stage; that is the whole anti-convergence mechanism.
                  A plan with no acceptance-testable number is scrapped, and
-                 the report says which and why. A scrapped plan is not sent
-                 to critique, the vote, or the referee.
+                 the race table says which and why. A scrapped plan is not
+                 sent to critique, the vote, or the referee, and its full
+                 text is not pasted into the report body.
   3 critique  -- every seat attacks the OTHER seats' plans (never its own),
                  under a prompt that mandates suspicion-by-default and a
                  concrete failure scenario. Plans are anonymised to letters so
@@ -512,6 +513,35 @@ def race_table(plans):
     return "\n".join(rows)
 
 
+def report_plan_full_blocks(plans):
+    """Full-text blocks under the race table.
+
+    debatable() is the same gate critique, the vote, and the referee already
+    use. Pasting every ok plan let a 2026-11-12 number-less monologue read as
+    a candidate after it had been scrapped. race_table still prints that row
+    and its scrap flag; this list must not carry the prose.
+    """
+    blocks = []
+    for p in plans:
+        if not debatable(p):
+            continue
+        blocks.append(t(
+            "rpt_plan_full_h", letter=p["letter"], vendor=p["seat"]["vendor"],
+            body=p["text"][:4000]))
+        blocks.append("")
+    return blocks
+
+
+def critique_peer_count(plans):
+    """Section headline: other debatable plans, floored at zero.
+
+    The old line subtracted 1 from every ok plan. One numbered plan plus one
+    scrapped monologue then printed 1, while the critique prompt held no
+    peer for that numbered plan. A scrapped text is ok but not debatable.
+    """
+    return max(0, sum(1 for p in plans if debatable(p)) - 1)
+
+
 def _usage_kwargs(snap, dist, elapsed):
     """Every placeholder in zh.usage_tpl. Missing one raises KeyError after the
     meeting has already finished, which is how the 2026-11-12 dry run died."""
@@ -564,12 +594,9 @@ def build_report(date_str, topics, results, metrics, skipped, bench_report,
                   sev="%.3f" % tp["sev"], sql=(tp["sql"] or "-")[:150]), "",
                 t("rpt_h2_race", n=len([p for p in r["plans"] if p["ok"]])), "",
                 t("rpt_race_intro"), "", race_table(r["plans"]), ""]
-        for p in r["plans"]:
-            if p["ok"]:
-                out += [t("rpt_plan_full_h", letter=p["letter"], vendor=p["seat"]["vendor"],
-                          body=p["text"][:4000]), ""]
+        out += report_plan_full_blocks(r["plans"])
         out += [t("rpt_h2_critique"), "",
-                t("rpt_critique_intro", n=max(0, len([p for p in r["plans"] if p["ok"]]) - 1)), "",
+                t("rpt_critique_intro", n=critique_peer_count(r["plans"])), "",
                 t("rpt_matrix_head"), "", r["matrix_md"], "",
                 t("rpt_matrix_note"), "", t("rpt_rank_note"), ""]
         for c in r["critiques"]:

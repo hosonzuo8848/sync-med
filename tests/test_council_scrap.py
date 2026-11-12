@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-"""A scrapped plan stays on the race table and out of critique, votes, and the referee.
+"""A scrapped plan stays on the race table and out of critique, votes, the referee, and the report body.
 
 The 2026-11-12 dry run let a number-less monologue through on ok=True. It was
 vetoed, and any veto made the machine verdict watch. These tests fail that
 behavior: the monologue body must not enter a critique prompt, an all-scrapped
 slate must not call the referee, and a veto of only scrapped plans must not
-become watch. A veto of a numbered plan stays watch.
+become watch. A veto of a numbered plan stays watch. The report pastes only
+debatable full texts. The critique intro counts debatable plans minus one.
 """
 import os
 import sys
@@ -81,6 +82,28 @@ class ScrapGate(unittest.TestCase):
         ])
         self.assertIn(A_BODY, table)
         self.assertIn(B_BODY, table)
+
+    def test_report_body_pastes_numbered_plan_only_and_peer_count_is_zero(self):
+        # Old build_report pasted every ok text and set the critique intro to
+        # ok_count-1. That prints B_BODY as a candidate and a peer count of 1
+        # when only A is debatable. race_table must still show both rows.
+        plans = [_plan("A", A_BODY, True), _plan("B", B_BODY, False)]
+        table = council.race_table(plans)
+        self.assertIn(A_BODY, table)
+        self.assertIn(B_BODY, table)
+        self.assertIn(t("lbl_scrapped"), table)
+        self.assertIn(t("lbl_number_ok"), table)
+        body = "\n".join(council.report_plan_full_blocks(plans))
+        self.assertIn(A_BODY, body)
+        self.assertNotIn(B_BODY, body)
+        self.assertEqual(council.critique_peer_count(plans), 0)
+        self.assertEqual(
+            council.critique_peer_count([
+                _plan("A", A_BODY, True),
+                _plan("C", "PLAN-C-NUMBERED-BODY coverage 3% -> 9%", True),
+            ]),
+            1)
+        self.assertEqual(council.critique_peer_count([_plan("B", B_BODY, False)]), 0)
 
     def test_scrapped_body_stays_out_of_the_critique_prompt(self):
         plans = [_plan("A", A_BODY, True), _plan("B", B_BODY, False)]
