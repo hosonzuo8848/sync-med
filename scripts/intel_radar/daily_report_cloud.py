@@ -11,6 +11,7 @@ import urllib.error
 import urllib.parse
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from daily_report_v3 import BatchUnscored, parse_score_array
 
 
 
@@ -276,27 +277,11 @@ def analyze_relevance(papers: list) -> list:
         response = llm_chat([{"role": "user", "content": prompt}], max_tokens=2000)
     except RuntimeError as e:
         print(f"\u5931\u8d25: {e}")
-        return []
+        raise BatchUnscored("llm call failed") from e
 
-    
-    text = response.strip()
-    if text.startswith("```"):
-        lines = text.split("\n")
-        text = "\n".join(lines[1:-1] if lines[-1].strip() == "```" else lines[1:])
-
-    try:
-        picks = json.loads(text)
-    except json.JSONDecodeError:
-        m = re.search(r"\[.*\]", text, re.DOTALL)
-        if m:
-            try:
-                picks = json.loads(m.group())
-            except json.JSONDecodeError:
-                print(f"JSON \u89e3\u6790\u5931\u8d25,\u539f\u59cb\u56de\u590d:\n{text[:300]}")
-                return []
-        else:
-            print(f"\u65e0\u6cd5\u63d0\u53d6 JSON,\u539f\u59cb\u56de\u590d:\n{text[:300]}")
-            return []
+    # A cut-off reply is not an empty finished batch. main() files the issue
+    # from whatever this function returns.
+    picks = parse_score_array(response)
 
     results = []
     for pick in picks:
