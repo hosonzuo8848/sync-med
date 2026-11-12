@@ -269,6 +269,27 @@ def should_judge(judged_failed):
     return not judged_failed
 
 
+def record_verdict(out, verdict, line, stored, dry_run=False):
+    """A verdict that did not land is a failure, not an adoption.
+
+    dry_run keeps the proposal without a write. A stored skip still counts
+    as skip. A stored adopt or watch still appends the line.
+    """
+    if not dry_run and not stored:
+        out["fail"] = out.get("fail", 0) + 1
+        return False
+    if verdict == "skip":
+        out["skip"] = out.get("skip", 0) + 1
+    else:
+        out[verdict].append(line)
+    return True
+
+
+def finish_code(write_failed):
+    """1 when a judgment did not land. A clean round stays 0."""
+    return 1 if write_failed else 0
+
+
 _BRAIN = {"body": None, "vid": None}
 
 
@@ -529,6 +550,7 @@ def main():
     # 【2026-08-05】上一轮 run 30968296973 就挂在这:我加了用它的地方,**漏了定义**,
     #   `NameError: per_module is not defined` 整条产线挂掉 —— 又一次"只改一半"。
     per_module = {}
+    write_failed = False
     # 【2026-08-08 对抗审查·时间预算】星网把每候选最坏调用放大到 8 次,池子劣化时
     #   串行 120s 超时 ×15 次就吃光 workflow 30 分钟 —— 被 runner 杀掉的后果是
     #   report 不落盘、Issue 不开,而 D1 已逐条写入 → 报表与库不一致。
@@ -562,33 +584,37 @@ def main():
             if per_module[k] > 2:
                 v = "watch"
                 o["why"] = f"(自动降级)模块「{k}」本轮已采纳 2 条,同类堆叠没有意义"
-        if v == "skip":
-            out["skip"] += 1
+        if a.dry_run:
+            stored = False
         else:
-            out[v].append(line)
+            cid = "c_" + hashlib.sha1(name.encode("utf-8")).hexdigest()[:16]
+            note = json.dumps({k: o.get(k) for k in ("module", "metric", "how", "effort", "why")},
+                              ensure_ascii=False)[:900]
+            try:
+                d1("INSERT OR REPLACE INTO evolve_candidates "
+                   "(cand_id,kind,title,url,radar_run,score,status,verdict_note,created_at,updated_at) "
+                   f"VALUES ({q(cid)},'repo',{q(name)},{q(str(r.get('url') or '')[:300])},"
+                   f"{q(str(now))},{q(r.get('stars') or 0)},{q(v)},{q(note)},{now},{now})")
+                stored = True
+            except (Exception, SystemExit) as e:
+                print(f"    写库失败:{str(e)[:90]}", flush=True)
+                stored = False
+        landed = record_verdict(out, v, line, stored, dry_run=a.dry_run)
+        if not landed:
+            write_failed = True
+        elif v != "skip":
             print(f"  {'🎯' if v=='adopt' else '👀'} {name}({r.get('stars')}★)"
                   f" → {o.get('module')} · {o.get('metric')} · {o.get('effort')}", flush=True)
-        if a.dry_run:
-            continue
-        cid = "c_" + hashlib.sha1(name.encode("utf-8")).hexdigest()[:16]
-        note = json.dumps({k: o.get(k) for k in ("module", "metric", "how", "effort", "why")},
-                          ensure_ascii=False)[:900]
-        try:
-            d1("INSERT OR REPLACE INTO evolve_candidates "
-               "(cand_id,kind,title,url,radar_run,score,status,verdict_note,created_at,updated_at) "
-               f"VALUES ({q(cid)},'repo',{q(name)},{q(str(r.get('url') or '')[:300])},"
-               f"{q(str(now))},{q(r.get('stars') or 0)},{q(v)},{q(note)},{now},{now})")
-        except (Exception, SystemExit) as e:
-            print(f"    写库失败:{str(e)[:90]}", flush=True)
         if a.report and judged_n % 5 == 0:
             json.dump(out, open(a.report, "w", encoding="utf-8"),
                       ensure_ascii=False, indent=2)
 
     print(f"\n=== 本轮:采纳 {len(out['adopt'])} · 观望 {len(out['watch'])} · "
           f"不相关 {out['skip']} · 失败 {out['fail']} ===", flush=True)
+    out["write_failed"] = write_failed
     if a.report:
         json.dump(out, open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return 0
+    return finish_code(write_failed)
 
 
 if __name__ == "__main__":
