@@ -154,6 +154,36 @@ def _openai_chat(base, key, model, system, user, max_tokens, temperature, timeou
     }
 
 
+def _gateway_chat(base, key, model, system, user, max_tokens, temperature, timeout,
+                  extra=None):
+    """Internal free-pool gateway. Same body as content_factory/_ai.ask:
+    source=council, json off, no metered provider. extra is ignored."""
+    payload = {
+        "messages": [{"role": "system", "content": system},
+                     {"role": "user", "content": user}],
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+        "json": False,
+        "source": "council",
+    }
+    if model:
+        payload["model"] = model
+    d, _ = _post_json(base, payload, {
+        "Content-Type": "application/json; charset=utf-8",
+        "User-Agent": "sueai-council/1",
+        "X-Gateway-Key": key,
+    }, timeout)
+    txt = d.get("text") or ""
+    if not txt and d.get("choices"):
+        txt = ((d["choices"][0].get("message") or {}).get("content")) or ""
+    usage = d.get("usage") or {}
+    return strip_think(txt), {
+        "in": usage.get("prompt_tokens", 0),
+        "out": usage.get("completion_tokens", 0),
+        "neurons": 0.0,
+    }
+
+
 def _cf_chat(base, key, model, system, user, max_tokens, temperature, timeout,
              extra=None):
     """Cloudflare Workers AI REST. `base` is the account id. METERED.
@@ -262,6 +292,15 @@ def _bench():
     this repo already carries -- the defaults below happen to match today, and a
     vendor renaming a model must stay a secret edit, not a code push."""
     seats = []
+    gw_key = os.environ.get("GW_KEY", "").strip()
+    if gw_key:
+        seats.append({
+            "id": "gateway", "vendor": "free-gateway", "house": "gateway",
+            "model": os.environ.get("GW_MODEL", "").strip(),
+            "kind": "gateway", "keys": [gw_key],
+            "base": os.environ.get("GW_URL", "https://www.gufangai.com/api/gateway/chat").strip(),
+            "extra": None, "probe_tokens": 64,
+        })
     for sid, vkey, house, model, base, env_names, extra, ptok in _FREE_BENCH:
         raw = ""
         for name in env_names:
@@ -318,7 +357,13 @@ def call(seat, system, user, max_tokens=1200, temperature=0.6, timeout=150,
         key = _pick_key(seat)
         t0 = time.time()
         try:
-            fn = _cf_chat if seat["kind"] == "cf" else _openai_chat
+            kind = seat.get("kind")
+            if kind == "cf":
+                fn = _cf_chat
+            elif kind == "gateway":
+                fn = _gateway_chat
+            else:
+                fn = _openai_chat
             txt, usage = fn(seat["base"], key, seat["model"], system, user,
                             max_tokens, temperature, timeout, seat.get("extra"))
             dt = time.time() - t0

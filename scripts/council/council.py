@@ -107,7 +107,7 @@ def _intel_topic(c, gen_date):
                     forms="/".join(c.get("transfer_forms") or []) or "-"),
         "basis": t("basis_intel_tpl", date=gen_date,
                    dim=found.get("dimension") or "-",
-                   lines="/".join(c.get("line_candidates") or []) or "-"),
+                   wf="/".join(c.get("line_candidates") or []) or "-"),
         # Above every D1 gap on purpose: the founder's instruction on
         # 2026-07-26 was that this council exists to find new technology and
         # new trends, not to relitigate our own order count. D1 keeps the

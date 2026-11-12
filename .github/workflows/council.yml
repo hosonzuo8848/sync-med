@@ -108,6 +108,9 @@ jobs:
           #     product (and answered AppIdNoAuthError anyway). Xunfei's free
           #     embedding/OCR products are used elsewhere in this repo, untouched.
           CF_NEURON_BUDGET: '0'
+          # Judgment goes through the internal free pool. Empty secret = seat absent.
+          GW_KEY: ${{ secrets.GW_KEY }}
+          GW_URL: https://www.gufangai.com/api/gateway/chat
           # --- run shape ---
           MAX_LLM_CALLS: ${{ github.event.inputs.max_calls || '60' }}
           N_TOPICS:      ${{ github.event.inputs.topics || '3' }}
