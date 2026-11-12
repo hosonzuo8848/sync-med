@@ -111,6 +111,11 @@ jobs:
               print()
               print(f"> **WARNING 这些榜零解析：{', '.join(empty)}** —— 上游目录结构或版式可能又变了。")
               print("> 判据：正常状态下三个榜都该有条数。零解析不是正常状态。")
+          if d.get("write_failed") or d.get("growth_failed"):
+              print()
+              print("> **WARNING write unread** - a rank write failed, so a saved count of 0 is not an empty board.")
+          if d.get("pool_total") == "unread":
+              print("> **WARNING pool unread** - the pool count was not read.")
           PY
 
       - name: 缺口驱动采集(从我们的短板出发定向抓,不捡热门)

@@ -293,7 +293,7 @@ def ensure_growth_table():
 def save_growth(rows, batch=60):
     """把每一期的观测追加进 gh_growth。历史快照不会变,冲突即跳过 = 回填/重跑幂等。"""
     ensure_growth_table()
-    now, n = int(time.time()), 0
+    now, n, failed = int(time.time()), 0, False
     vals = []
     for r in rows:
         vals.append("(" + ",".join([
@@ -302,11 +302,15 @@ def save_growth(rows, batch=60):
             str(r.get("d_delta") or 0), str(r.get("w_delta") or 0), str(r.get("m_delta") or 0),
             q(r.get("born", "")), q((r.get("description") or "")[:300]), str(now)]) + ")")
         if len(vals) >= batch:
-            n += _flush_growth(vals)
+            added, bad = _flush_growth(vals)
+            n += added
+            failed = failed or bad
             vals = []
     if vals:
-        n += _flush_growth(vals)
-    return n
+        added, bad = _flush_growth(vals)
+        n += added
+        failed = failed or bad
+    return n, failed
 
 
 def _flush_growth(vals):
@@ -314,15 +318,15 @@ def _flush_growth(vals):
         d1("INSERT INTO gh_growth (repo,period,kind,rank,stars,d_delta,w_delta,m_delta,"
            "born,descr,ingested_at) VALUES " + ",".join(vals) +
            " ON CONFLICT(repo,period,kind) DO NOTHING")
-        return len(vals)
+        return len(vals), False
     except Exception as e:
         print(f"  [轨迹] 写库失败({len(vals)} 条):{str(e)[:130]}", flush=True)
-        return 0
+        return 0, True
 
 
 def save(rows, batch=50):
     ensure_table()
-    now, n = int(time.time()), 0
+    now, n, failed = int(time.time()), 0, False
     vals = []
     for r in rows:
         vals.append("(" + ",".join([
@@ -330,11 +334,15 @@ def save(rows, batch=50):
             q(r["born"]), q(r["found_by"]), str(now), str(now),
             str(r["star_delta"]), str(r["rank"]), "1"]) + ")")
         if len(vals) >= batch:
-            n += _flush(vals, now)
+            added, bad = _flush(vals, now)
+            n += added
+            failed = failed or bad
             vals = []
     if vals:
-        n += _flush(vals, now)
-    return n
+        added, bad = _flush(vals, now)
+        n += added
+        failed = failed or bad
+    return n, failed
 
 
 def _flush(vals, now):
@@ -351,10 +359,24 @@ def _flush(vals, now):
            "  description=CASE WHEN LENGTH(COALESCE(gh_repo_pool.description,''))<"
            "    LENGTH(excluded.description) THEN excluded.description ELSE gh_repo_pool.description END,"
            f"  last_seen={now}")
-        return len(vals)
+        return len(vals), False
     except Exception as e:
         print(f"  写库失败({len(vals)} 条):{str(e)[:140]}", flush=True)
-        return 0
+        return 0, True
+
+
+def finish_code(parsed, save_failed, growth_failed):
+    """Rows were parsed but a write raised: that is not an empty board."""
+    if parsed and (save_failed or growth_failed):
+        return 1
+    return 0
+
+
+def pool_total_field(total, failed):
+    """A failed pool count is not a number. A stored 0 stays 0."""
+    if failed:
+        return "unread"
+    return total
 
 
 def main():
@@ -409,17 +431,20 @@ def main():
         stat[kind] = {"periods": len(files), "items": got}
         print(f"  [{kind}] 解析出 {got} 条", flush=True)
 
-    n = save(all_rows)
+    n, save_failed = save(all_rows)
     # 轨迹表(纯加法,不影响 gh_repo_pool 的任何下游):每期一行,保住历史。
-    gn = save_growth(all_rows)
+    gn, growth_failed = save_growth(all_rows)
     print(f"  [轨迹] gh_growth 追加 {gn} 条观测", flush=True)
     try:
         tot = d1("SELECT COUNT(*) c FROM gh_repo_pool")[0]["c"]
         top = d1("SELECT repo,stars,star_delta,rank_hits FROM gh_repo_pool "
                  "WHERE star_delta>0 ORDER BY star_delta DESC LIMIT 10")
-    except Exception:
-        tot, top = -1, []
-    print(f"\n=== 解析 {len(all_rows)} 条 → 写库 {n} → 库内唯一仓 {tot} 个 ===", flush=True)
+        pool_failed = False
+    except Exception as e:
+        tot, top, pool_failed = None, [], True
+        print("  [pool] count unread: %s" % str(e)[:80], flush=True)
+    tot_show = pool_total_field(tot, pool_failed)
+    print(f"\n=== 解析 {len(all_rows)} 条 → 写库 {n} → 库内唯一仓 {tot_show} 个 ===", flush=True)
     print("  星速榜前十(这是 GitHub Search 拿不到的信号):", flush=True)
     for r in top:
         print(f"    +{r['star_delta']:>6}★/期  总{r['stars']:>7}★  上榜{r['rank_hits']}次  {r['repo']}", flush=True)
@@ -427,10 +452,11 @@ def main():
         # by_kind 的期次/条数必须进报告 —— workflow 侧据此判定要不要开 Issue,
         # 治「只写进日志的产线一律视为没人看」(CLAUDE.md 第 8 条)。
         empty = [k for k, v in stat.items() if v["items"] == 0]
-        json.dump({"parsed": len(all_rows), "saved": n, "growth_saved": gn,
-                   "pool_total": tot, "by_kind": stat, "empty_kinds": empty},
+        json.dump({"parsed": len(all_rows), "saved": n, "write_failed": save_failed,
+                   "growth_saved": gn, "growth_failed": growth_failed,
+                   "pool_total": tot_show, "by_kind": stat, "empty_kinds": empty},
                   open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return 0
+    return finish_code(len(all_rows), save_failed, growth_failed)
 
 
 if __name__ == "__main__":
