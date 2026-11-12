@@ -1078,6 +1078,45 @@ def build_items_text(batch: list, offset: int = 0) -> str:
 
 
 
+class BatchUnscored(RuntimeError):
+    """A score batch came back with no closed JSON array.
+
+    That is not a judgment of zero hits. analyze_all_parallel prints
+    [OK] and a hit count for every returned list, including [], so an
+    unclosed reply must fail the run instead of shipping as an empty
+    finished batch.
+    """
+
+
+def parse_score_array(text):
+    """Return a JSON array from a model reply.
+
+    A closed [] is a real judgment. A reply that never closes, or whose
+    extracted array still does not parse, raises BatchUnscored.
+    """
+    text = (text or "").strip()
+    if text.startswith("```"):
+        lines = text.split("\n")
+        inner = []
+        for line in lines[1:]:
+            if line.strip() == "```":
+                break
+            inner.append(line)
+        text = "\n".join(inner)
+    try:
+        picks = json.loads(text)
+    except json.JSONDecodeError:
+        m = re.search(r"\[.*?\]", text, re.DOTALL)
+        if m:
+            try:
+                picks = json.loads(m.group())
+            except json.JSONDecodeError:
+                raise BatchUnscored("truncated or unparseable score payload")
+        else:
+            raise BatchUnscored("truncated or unparseable score payload")
+    return picks
+
+
 async def analyze_batch_async(
     batch: list,
     batch_idx: int,
@@ -1104,28 +1143,8 @@ async def analyze_batch_async(
         return []
 
     
-    text = response.strip()
-    if text.startswith("```"):
-        lines = text.split("\n")
-        inner = []
-        for line in lines[1:]:
-            if line.strip() == "```":
-                break
-            inner.append(line)
-        text = "\n".join(inner)
-
-    try:
-        picks = json.loads(text)
-    except json.JSONDecodeError:
-        m = re.search(r"\[.*?\]", text, re.DOTALL)
-        if m:
-            try:
-                picks = json.loads(m.group())
-            except json.JSONDecodeError:
-                print(f"    [\u6279{batch_idx}|{model}] JSON \u89e3\u6790\u5931\u8d25,\u539f\u59cb: {text[:150]}", flush=True)
-                return []
-        else:
-            return []
+    # None from a cut-off reply used to fall through to [] and then [OK].
+    picks = parse_score_array(response)
 
     
     SCORE_TEXT_MAP = {
@@ -1167,9 +1186,17 @@ async def analyze_all_parallel(
 
     async def bounded_analyze(batch, batch_idx, offset, model):
         async with sem:
-            picks = await analyze_batch_async(
-                batch, batch_idx, offset, model, use_gateway, loop
-            )
+            try:
+                picks = await analyze_batch_async(
+                    batch, batch_idx, offset, model, use_gateway, loop
+                )
+            except BatchUnscored:
+                print(
+                    "    [UNSCORED] batch %03d/%s [%s]"
+                    % (batch_idx, n_batches, model),
+                    flush=True,
+                )
+                raise
             hit = len(picks)
             print(f"    [OK] \u6279{batch_idx:03d}/{n_batches} [{model}] "
                   f"-> {hit} \u6761\u547d\u4e2d (\u5171 {len(batch)} \u6761)", flush=True)
