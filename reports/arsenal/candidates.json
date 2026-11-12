@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-11-11",
+ "generated": "2026-11-12",
  "producer": "scripts/intel_radar/arsenal_radar.py",
  "consumer": "scripts/council (triage topic source)",
  "contract": "objective description and candidate options only; no adoption judgement, no score, no ranking",
@@ -41,75 +41,154 @@
  },
  "distill": {
   "seat": "zhipu",
-  "calls": 6,
-  "ok": 2
+  "calls": 8,
+  "ok": 3
  },
- "count": 13,
+ "count": 23,
  "candidates": [
   {
-   "repo": "JimmyLv/bibigpt-skill",
-   "url": "https://github.com/JimmyLv/bibigpt-skill",
-   "description": "Video summarizer agent skill for Claude Code, Codex, ChatGPT & OpenClaw — YouTube/Bilibili/podcast via BibiGPT CLI/MCP/API (bibi)",
-   "stars": 141,
-   "topics": [],
-   "lang": "JavaScript",
-   "created_at": "2026-03-01",
-   "pushed_at": "2026-11-10",
-   "age_days": 255,
-   "stars_per_day_lifetime": 0.55,
+   "repo": "mvalentsev/awesome-free-ai-coding",
+   "url": "https://github.com/mvalentsev/awesome-free-ai-coding",
+   "description": "📡 Legal free LLM APIs & coding agents — self-updating, probe-verified twice a week. Free tiers, no-card trials, free models.",
+   "stars": 215,
+   "topics": [
+    "ai-coding",
+    "awesome",
+    "awesome-list",
+    "claude",
+    "claude-code",
+    "coding-agents",
+    "developer-tools",
+    "free-ai",
+    "free-api",
+    "free-llm",
+    "free-llm-api",
+    "free-models"
+   ],
+   "lang": "Python",
+   "created_at": "2026-07-19",
+   "pushed_at": "2026-11-12",
+   "age_days": 116,
+   "stars_per_day_lifetime": 1.85,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "query": "free llm api in:name,description stars:>200 pushed:>2026-08-14",
     "sort": "stars",
-    "query_breadth": 51,
-    "position": 46
+    "query_breadth": 17,
+    "position": 15
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为 Claude Code, Codex, ChatGPT & OpenClaw 提供视频总结代理技能，支持 YouTube/Bilibili/podcast 分发",
-   "evidence": "Video summarizer agent skill for Claude Code, Codex, ChatGPT & OpenClaw",
+   "capability": "提供法律许可的免费LLM API和编码代理，每周更新两次，支持免费试用和模型访问。",
+   "evidence": "Legal free LLM APIs & coding agents — self-updating, probe-verified twice a week. Free tiers, no-card trials, free model",
    "transfer_forms": [
-    "skill"
+    "mcp",
+    "skill",
+    "library"
    ],
    "line_candidates": [
-    "video"
+    "modelpool",
+    "image"
    ],
    "distilled": true
   },
   {
-   "repo": "ownthink/KnowledgeGraphData",
-   "url": "https://github.com/ownthink/KnowledgeGraphData",
-   "description": "史上最大规模1.4亿中文知识图谱开源下载",
-   "stars": 5219,
-   "topics": [],
+   "repo": "cutetailbud/FastAIToken",
+   "url": "https://github.com/cutetailbud/FastAIToken",
+   "description": "FastAIToken是实际面向程序员coding群体和企业的AI中转站：一个API Key 接入Claude Code、Codex、GPT、Claude、Gemini、DeepSeek 等模型，最低0.06折",
+   "stars": 109,
+   "topics": [
+    "claude",
+    "deepseek-harness",
+    "gemini",
+    "glm",
+    "gpt",
+    "grok",
+    "h3",
+    "kimi",
+    "maas",
+    "qwen",
+    "seedance",
+    "wan3"
+   ],
    "lang": "Python",
-   "created_at": "2019-10-11",
+   "created_at": "2026-11-10",
    "pushed_at": "2026-11-10",
-   "age_days": 2588,
-   "stars_per_day_lifetime": 2.02,
-   "license": "NONE",
-   "license_family": "none",
+   "age_days": 2,
+   "stars_per_day_lifetime": 54.5,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
    "found_by": {
     "dimension": "chinese",
-    "query": "知识图谱 in:name,description stars:>200 pushed:>2026-08-13",
+    "query": "API 中转 in:name,description stars:>100 pushed:>2026-08-14",
     "sort": "stars",
-    "query_breadth": 15,
-    "position": 2
+    "query_breadth": 23,
+    "position": 21
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供史上最大规模1.4亿中文知识图谱开源下载",
-   "evidence": "史上最大规模1.4亿中文知识图谱开源下载",
+   "capability": "面向程序员和企业的AI中转站，提供多个模型的API Key接入。",
+   "evidence": "FastAIToken是实际面向程序员coding群体和企业的AI中转站：一个API Key 接入Claude Code、Codex、GPT、Claude、Gemini、DeepSeek 等模型，最低0.06折",
    "transfer_forms": [
-    "dataset"
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "drawdb-io/drawdb",
+   "url": "https://github.com/drawdb-io/drawdb",
+   "description": "Free, simple, and intuitive online database diagram editor and SQL generator.",
+   "stars": 40309,
+   "topics": [
+    "database",
+    "database-design",
+    "database-diagram",
+    "database-schema",
+    "dbml",
+    "diagram-editor",
+    "editor",
+    "er-diagram",
+    "erd",
+    "erdiagram",
+    "indexeddb",
+    "mariadb"
+   ],
+   "lang": "JavaScript",
+   "created_at": "2023-07-16",
+   "pushed_at": "2026-11-12",
+   "age_days": 1215,
+   "stars_per_day_lifetime": 33.18,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "stock",
+    "query": "topic:mcp stars:>2000 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 33
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "免费、简单直观的在线数据库图编辑器和SQL生成器。",
+   "evidence": "Free, simple, and intuitive online database diagram editor and SQL generator.",
+   "transfer_forms": [
+    "deploy",
+    "library"
    ],
    "line_candidates": [
     "unknown"
@@ -117,36 +196,173 @@
    "distilled": true
   },
   {
-   "repo": "neavo/LinguaGacha",
-   "url": "https://github.com/neavo/LinguaGacha",
-   "description": "翻译特化的 AGENT Harness · 一键高质量翻译 音频 视频 游戏 电子书 · PDF EPUB RPG ASMR GALGAME 等",
-   "stars": 2676,
+   "repo": "nexu-io/openmotion",
+   "url": "https://github.com/nexu-io/openmotion",
+   "description": "The open-source full-stack studio for Opus 5.5 motion video. Reverse engineering for any video. Code video with HTML: recreate, edit and render. BYOA + BYOK · Motion.md · Images, Video, Music & Voice.",
+   "stars": 9559,
    "topics": [
-    "ai-agent",
-    "ai-translation",
-    "epub",
-    "epub-translator",
-    "game-translation",
-    "llm",
-    "localization",
-    "pdf",
-    "pdf-translation",
-    "renpy",
-    "rpg-maker",
-    "subtitle-translation"
+    "agent-skills",
+    "agentic-ai",
+    "ai-agents",
+    "ai-video",
+    "byok",
+    "claude-code",
+    "codex",
+    "deepseek-harness",
+    "dsh-plugin",
+    "generative-ai",
+    "local-first",
+    "mcp"
    ],
    "lang": "TypeScript",
-   "created_at": "2025-02-04",
+   "created_at": "2026-05-11",
+   "pushed_at": "2026-11-12",
+   "age_days": 185,
+   "stars_per_day_lifetime": 51.67,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-08-14",
+    "sort": "stars",
+    "query_breadth": 28,
+    "position": 11
+   },
+   "matched_by_n_queries": 3,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "开源全栈视频制作工作室，支持反向工程和代码视频制作。",
+   "evidence": "The open-source full-stack studio for Opus 5.5 motion video. Reverse engineering for any video. Code video with HTML: re",
+   "transfer_forms": [
+    "mcp",
+    "deploy",
+    "architecture"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "threerocks/article2media",
+   "url": "https://github.com/threerocks/article2media",
+   "description": "把一篇文章或一条视频（抖音、B 站、YouTube，先转逐字稿）一键做成小红书图文、杂志长图、公众号排版和 AI 配音口播短视频的开源 Claude Code / Codex Skill。21 套主题，自动验收，零 npm 依赖。",
+   "stars": 239,
+   "topics": [
+    "agent-skills",
+    "bilibili",
+    "chinese",
+    "claude-code",
+    "claude-code-plugin",
+    "claude-code-skill",
+    "claude-skills",
+    "codex",
+    "content-repurposing",
+    "douyin",
+    "infographic",
+    "rednote"
+   ],
+   "lang": "JavaScript",
+   "created_at": "2026-11-08",
    "pushed_at": "2026-11-11",
-   "age_days": 645,
-   "stars_per_day_lifetime": 4.15,
-   "license": "NONE",
-   "license_family": "none",
+   "age_days": 4,
+   "stars_per_day_lifetime": 59.75,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-08-14",
+    "sort": "stars",
+    "query_breadth": 60,
+    "position": 44
+   },
+   "matched_by_n_queries": 2,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "将文章或视频一键制作成小红书图文、杂志长图、公众号排版和AI配音短视频。",
+   "evidence": "把一篇文章或一条视频（抖音、B 站、YouTube，先转逐字稿）一键做成小红书图文、杂志长图、公众号排版和 AI 配音口播短视频的开源 Claude Code / Codex Skill。21 套主题，自动验收，零 npm 依赖。",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "sixtysevenlf/dsh-blender-plugin",
+   "url": "https://github.com/sixtysevenlf/dsh-blender-plugin",
+   "description": "DSH × Blender 直连插件 v3.0.6：15 个模型工具让 AI 驱动 GUI Blender（视口 / 自定义视角 / 无头 worker / 作业层 / 事务回滚 / 配方库），34 family / 228 op 契约层；npm 安装 + addon zip，GUI 优先、无头备用；dsh-TUI 选中 chip / @ 提及 / /blender，随包建模 skill，支持 WSL / Windows / macOS。",
+   "stars": 2004,
+   "topics": [
+    "3d-modeling",
+    "ai-agent",
+    "automation",
+    "blender",
+    "bpy",
+    "cycles",
+    "dsh",
+    "dsh-plugin",
+    "tooling"
+   ],
+   "lang": "Python",
+   "created_at": "2026-09-13",
+   "pushed_at": "2026-11-11",
+   "age_days": 60,
+   "stars_per_day_lifetime": 33.4,
+   "license": "BSD-3-Clause",
+   "license_family": "permissive",
    "found_by": {
     "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-12",
+    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-13",
     "sort": "updated",
     "query_breadth": 100,
+    "position": 69
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "DSH × Blender 直连插件，提供15个模型工具和AI驱动GUI。",
+   "evidence": "DSH × Blender 直连插件 v3.0.6：15 个模型工具让 AI 驱动 GUI Blender（视口 / 自定义视角 / 无头 worker / 作业层 / 事务回滚 / 配方库），34 family / 228 op 契约层；",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "FlashML-org/FreeVideo",
+   "url": "https://github.com/FlashML-org/FreeVideo",
+   "description": "Make videos on the computer you already own. FreeVideo runs MiniMax H3 in as little as 8 GB of VRAM and 16 GB of RAM, and adapts its acceleration path to your hardware.",
+   "stars": 3007,
+   "topics": [
+    "diffusion-models",
+    "inference",
+    "minimax-h3",
+    "video-generation"
+   ],
+   "lang": "Python",
+   "created_at": "2026-09-13",
+   "pushed_at": "2026-11-11",
+   "age_days": 60,
+   "stars_per_day_lifetime": 50.12,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-08-14",
+    "sort": "stars",
+    "query_breadth": 28,
     "position": 26
    },
    "matched_by_n_queries": 1,
@@ -154,80 +370,11 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供翻译特化的 AGENT Harness，支持多种格式的高质量翻译",
-   "evidence": "翻译特化的 AGENT Harness · 一键高质量翻译 音频 视频 游戏 电子书",
+   "capability": "在个人电脑上制作视频，使用MiniMax H3模型，适应不同硬件。",
+   "evidence": "Make videos on the computer you already own. FreeVideo runs MiniMax H3 in as little as 8 GB of VRAM and 16 GB of RAM, an",
    "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "OutThisLife/brooklyn-skills",
-   "url": "https://github.com/OutThisLife/brooklyn-skills",
-   "description": "Skills that drive best-in-class engineering",
-   "stars": 214,
-   "topics": [],
-   "lang": "JavaScript",
-   "created_at": "2026-07-23",
-   "pushed_at": "2026-11-11",
-   "age_days": 111,
-   "stars_per_day_lifetime": 1.93,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-10-12",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 13
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "提供驱动最佳工程实践的技能",
-   "evidence": "Skills that drive best-in-class engineering",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "lixiaoxiao9888-create/short-drama-teardown",
-   "url": "https://github.com/lixiaoxiao9888-create/short-drama-teardown",
-   "description": "🔍 扒剧引擎 Short-Drama Teardown V3.1 · 把爆款短剧从成片视频逆向还原为逐字稿、标准剧本与骨架分析卡。双通道门禁锁（发链接 vs 直接发视频）+ 裸视频防乱人三把铁锁（同人归并 / 称谓锁名 / 逐句1:1绑画面）+ 防漏字双轨提取 + 画外音四维推导。Turn viral short-drama videos back into transcripts, screenplays and skeleton cards.",
-   "stars": 102,
-   "topics": [],
-   "lang": "Python",
-   "created_at": "2026-10-19",
-   "pushed_at": "2026-10-19",
-   "age_days": 23,
-   "stars_per_day_lifetime": 4.43,
-   "license": "NONE",
-   "license_family": "none",
-   "found_by": {
-    "dimension": "chinese",
-    "query": "短视频 in:name,description stars:>100 pushed:>2026-08-13",
-    "sort": "stars",
-    "query_breadth": 58,
-    "position": 56
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "将爆款短剧逆向还原为逐字稿、标准剧本与骨架分析卡",
-   "evidence": "Turn viral short-drama videos back into transcripts, screenplays and skeleton c",
-   "transfer_forms": [
-    "skill"
+    "deploy",
+    "library"
    ],
    "line_candidates": [
     "video"
@@ -235,174 +382,23 @@
    "distilled": true
   },
   {
-   "repo": "compozy/compozy",
-   "url": "https://github.com/compozy/compozy",
-   "description": "An operating system for AI agents. The autonomous control plane for your agents: see and steer every Claude Code, Codex, and Cursor session. Always-on agents check in on their own, and you step in only when one needs you.",
-   "stars": 2861,
-   "topics": [
-    "acp",
-    "agent-client-protocol",
-    "agent-orchestration",
-    "ai-agents",
-    "automation",
-    "claude-code",
-    "cli",
-    "codex",
-    "coding-agents",
-    "cursor",
-    "developer-tools",
-    "golang"
-   ],
-   "lang": "Go",
-   "created_at": "2026-03-28",
+   "repo": "ygtec-org/douyin-tv",
+   "url": "https://github.com/ygtec-org/douyin-tv",
+   "description": "专为Android TV设计的抖音客户端应用,通过WebView嵌入抖音网页,实现在智能电视上浏览和播放抖音短视频。",
+   "stars": 156,
+   "topics": [],
+   "lang": "Kotlin",
+   "created_at": "2025-12-03",
    "pushed_at": "2026-11-11",
-   "age_days": 228,
-   "stars_per_day_lifetime": 12.55,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:mcp stars:>2000 pushed:>2026-10-12",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 46
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为 AI 代理提供操作系统，包括自主控制平面和代理编排",
-   "evidence": "An operating system for AI agents. The autonomous control plane for your agents",
-   "transfer_forms": [
-    "architecture"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "nexscope-ai/Amazon-Skills",
-   "url": "https://github.com/nexscope-ai/Amazon-Skills",
-   "description": "Free AI agent skills for Amazon sellers—  keyword research, competitor analysis, listing audit & more. Works with OpenClaw, Claude Code, Cursor, Windsurf, Codex and any agent that supports the Skills format.",
-   "stars": 860,
-   "topics": [
-    "ai-agents",
-    "amazon",
-    "amazon-seller-automation",
-    "amazon-seller-tools",
-    "claude-code",
-    "claude-skills",
-    "ecommerce",
-    "openclaw",
-    "openclaw-skills",
-    "skills"
-   ],
-   "lang": "Python",
-   "created_at": "2026-03-10",
-   "pushed_at": "2026-11-11",
-   "age_days": 246,
-   "stars_per_day_lifetime": 3.5,
-   "license": "MIT",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-10-12",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 29
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "为亚马逊卖家提供免费 AI 代理技能，包括关键词研究、竞争对手分析等",
-   "evidence": "Free AI agent skills for Amazon sellers— keyword research, competitor analysis",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "unknown"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "wangcanyu/daihuo-fanpai",
-   "url": "https://github.com/wangcanyu/daihuo-fanpai",
-   "description": "反推爆款带货短视频 → 即梦/Seedance 重生成 → 剪映草稿交付的 agent 流水线。单日 16 条实战验证。作者:汪自立,7 年抖音直播操盘手(生鲜/珠宝/烘焙,单场 GMV 306 万),踩坑与打法全部固化成可复用 skill。",
-   "stars": 101,
-   "topics": [
-    "agent",
-    "ai-video",
-    "claude-code",
-    "douyin",
-    "ecommerce-video",
-    "jianying",
-    "seedance",
-    "short-video",
-    "video-generation"
-   ],
-   "lang": "Python",
-   "created_at": "2026-07-02",
-   "pushed_at": "2026-11-08",
-   "age_days": 132,
-   "stars_per_day_lifetime": 0.77,
+   "age_days": 344,
+   "stars_per_day_lifetime": 0.45,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "chinese",
-    "query": "短视频 in:name,description stars:>100 pushed:>2026-08-13",
+    "query": "短视频 in:name,description stars:>100 pushed:>2026-08-14",
     "sort": "stars",
-    "query_breadth": 58,
-    "position": 57
-   },
-   "matched_by_n_queries": 1,
-   "known_in_arsenal": false,
-   "new_to_us": true,
-   "stars_delta": null,
-   "stars_delta_window_days": null,
-   "capability": "反推爆款带货短视频，并重生成，支持剪映草稿交付的 agent 流水线",
-   "evidence": "反推爆款带货短视频 → 即梦/Seedance 重生成 → 剪映草稿交付的 agent 流水线",
-   "transfer_forms": [
-    "skill"
-   ],
-   "line_candidates": [
-    "video"
-   ],
-   "distilled": true
-  },
-  {
-   "repo": "FedML-AI/FedML",
-   "url": "https://github.com/FedML-AI/FedML",
-   "description": "FEDML - The unified and scalable ML library for large-scale distributed training, model serving, and federated learning. FEDML Launch, a cross-cloud scheduler, further enables running any AI jobs on any GPU cloud or on-premise cluster. Built on this library, TensorOpera AI (https://TensorOpera.ai) is your generative AI platform at scale.",
-   "stars": 4070,
-   "topics": [
-    "ai-agent",
-    "deep-learning",
-    "distributed-training",
-    "edge-ai",
-    "federated-learning",
-    "inference-engine",
-    "machine-learning",
-    "mlops",
-    "model-deployment",
-    "model-serving",
-    "on-device-training"
-   ],
-   "lang": "Python",
-   "created_at": "2020-07-21",
-   "pushed_at": "2026-11-11",
-   "age_days": 2304,
-   "stars_per_day_lifetime": 1.77,
-   "license": "Apache-2.0",
-   "license_family": "permissive",
-   "found_by": {
-    "dimension": "stock",
-    "query": "topic:ai-agent stars:>2000 pushed:>2026-10-12",
-    "sort": "updated",
-    "query_breadth": 100,
+    "query_breadth": 60,
     "position": 50
    },
    "matched_by_n_queries": 1,
@@ -410,8 +406,97 @@
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供统一和可扩展的机器学习库，支持大规模分布式训练、模型服务和联邦学习",
-   "evidence": "FEDML - The unified and scalable ML library for large-scale distributed training",
+   "capability": "专为Android TV设计的抖音客户端应用，通过WebView嵌入抖音网页。",
+   "evidence": "专为Android TV设计的抖音客户端应用,通过WebView嵌入抖音网页,实现在智能电视上浏览和播放抖音短视频。",
+   "transfer_forms": [
+    "deploy",
+    "architecture"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "ModelTC/LightX2V",
+   "url": "https://github.com/ModelTC/LightX2V",
+   "description": "Lightweight Image Video Action Generation Inference Framework",
+   "stars": 3002,
+   "topics": [
+    "auto-regressive-diffusion-model",
+    "diffusion-models",
+    "dreamzero",
+    "hunyuan-video",
+    "lingbot-world",
+    "ltx-video",
+    "qwen-image",
+    "video-generation",
+    "wan-video",
+    "world-models"
+   ],
+   "lang": "Python",
+   "created_at": "2025-03-24",
+   "pushed_at": "2026-11-12",
+   "age_days": 598,
+   "stars_per_day_lifetime": 5.02,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:video-generation stars:>3000 pushed:>2026-08-14",
+    "sort": "stars",
+    "query_breadth": 28,
+    "position": 27
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "轻量级图像视频动作生成推理框架。",
+   "evidence": "Lightweight Image Video Action Generation Inference Framework",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "video"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "xxjwxc/uber_go_guide_cn",
+   "url": "https://github.com/xxjwxc/uber_go_guide_cn",
+   "description": "Uber Go 语言编码规范中文版. The Uber Go Style Guide .",
+   "stars": 8175,
+   "topics": [
+    "chinese",
+    "cn",
+    "go",
+    "guide",
+    "style",
+    "uber"
+   ],
+   "lang": "",
+   "created_at": "2019-10-13",
+   "pushed_at": "2026-11-11",
+   "age_days": 2587,
+   "stars_per_day_lifetime": 3.16,
+   "license": "Apache-2.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 91,
+    "position": 26
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "Uber Go 语言编码规范中文版。",
+   "evidence": "Uber Go 语言编码规范中文版. The Uber Go Style Guide .",
    "transfer_forms": [
     "library"
    ],
@@ -421,46 +506,34 @@
    "distilled": true
   },
   {
-   "repo": "nexscope-ai/eCommerce-Skills",
-   "url": "https://github.com/nexscope-ai/eCommerce-Skills",
-   "description": "E-commerce skills for AI agents — product research, marketing automation, supply chain optimization, and business analytics for online sellers across Amazon, Shopify, Etsy, TikTok Shop, and all platforms.",
-   "stars": 1376,
-   "topics": [
-    "agent-skills",
-    "ai",
-    "ai-agent-skills",
-    "ai-agents",
-    "amazon-seller-tools",
-    "claude-code-skills",
-    "claude-skills",
-    "ecommerce",
-    "openclaw-skills",
-    "shopify-tools",
-    "tiktok-shop-automation"
-   ],
+   "repo": "QAQLeonard/a7c2-tools",
+   "url": "https://github.com/QAQLeonard/a7c2-tools",
+   "description": "Desktop tool for Sony A7C II (ILCE-7CM2) firmware 2.01: one-click FL2/FL3, custom Creative Looks (LUT/DCP), electronic shutter sound, Vertical Display and factory restore. Windows/macOS. | Sony A7C II 固件 2.01 桌面工具：一键安装 FL2/FL3、自定义创意外观、电子快门声、竖屏显示，并可一键恢复原厂。",
+   "stars": 1192,
+   "topics": [],
    "lang": "Python",
-   "created_at": "2026-03-18",
+   "created_at": "2026-10-17",
    "pushed_at": "2026-11-11",
-   "age_days": 238,
-   "stars_per_day_lifetime": 5.78,
-   "license": "MIT",
-   "license_family": "permissive",
+   "age_days": 26,
+   "stars_per_day_lifetime": 45.85,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-10-12",
-    "sort": "updated",
-    "query_breadth": 100,
-    "position": 30
+    "query": "auto publish douyin xiaohongshu in:name,description,readme stars:>100",
+    "sort": "stars",
+    "query_breadth": 52,
+    "position": 25
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "为 AI 代理提供电子商务技能，包括产品研究、营销自动化等",
-   "evidence": "E-commerce skills for AI agents — product research, marketing automation",
+   "capability": "提供 Sony A7C II 固件 2.01 的桌面工具，支持固件更新和自定义设置",
+   "evidence": "桌面工具：一键安装 F",
    "transfer_forms": [
-    "skill"
+    "unknown"
    ],
    "line_candidates": [
     "unknown"
@@ -468,32 +541,429 @@
    "distilled": true
   },
   {
-   "repo": "WhiteNightShadow/hello_js_reverse_skill",
-   "url": "https://github.com/WhiteNightShadow/hello_js_reverse_skill",
-   "description": "🔧 AI-powered JS逆向工程 Skill —— 覆盖加密还原、混淆分析、动态Cookie、WASM逆向、协议对抗等全链路场景，通过 Node.js 实现算法还原与模拟请求。适配 Claude Code / Claude.ai / 其他AI编码工具",
-   "stars": 1414,
-   "topics": [],
+   "repo": "aa1143/NamiAgent",
+   "url": "https://github.com/aa1143/NamiAgent",
+   "description": "零基础入门 AI Agent 的基础教程。不只是教程，也是一个能在本地跑起来的 Agent：读写文件、执行命令、MCP、长期记忆，自带网页端看清每一步。从 100 行最小循环开始，一课加一个能力，最后拆解 Claude Code、Codex 等主流 Agent",
+   "stars": 503,
+   "topics": [
+    "agent",
+    "ai-agent",
+    "chinese",
+    "claude-code",
+    "deepseek",
+    "from-scratch",
+    "llm",
+    "mcp",
+    "python",
+    "tutorial"
+   ],
    "lang": "Python",
-   "created_at": "2026-03-18",
-   "pushed_at": "2026-11-11",
-   "age_days": 238,
-   "stars_per_day_lifetime": 5.94,
+   "created_at": "2026-10-30",
+   "pushed_at": "2026-10-30",
+   "age_days": 13,
+   "stars_per_day_lifetime": 38.69,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "topic:chinese stars:>500 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 91,
+    "position": 73
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 AI Agent 入门教程和可本地运行的 Agent",
+   "evidence": "零基础入门 AI Agent 的基础教程。不只是教程，也是一个能在本地跑起来的 Agent",
+   "transfer_forms": [
+    "skill",
+    "architecture"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "Zleap-AI/SAG-Wiki",
+   "url": "https://github.com/Zleap-AI/SAG-Wiki",
+   "description": "A lightweight knowledge base for people and agents, with ultra fast indexing and most precise retrieval.",
+   "stars": 1084,
+   "topics": [
+    "knowledge-base",
+    "knowledge-graph",
+    "rag",
+    "rust",
+    "sag",
+    "sag-wiki",
+    "wiki"
+   ],
+   "lang": "Rust",
+   "created_at": "2026-10-18",
+   "pushed_at": "2026-11-12",
+   "age_days": 25,
+   "stars_per_day_lifetime": 43.36,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:knowledge-graph stars:>1000 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 63,
+    "position": 8
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "构建轻量级知识库，支持快速索引和精确检索",
+   "evidence": "A lightweight knowledge base for people and agents, with ultra fast indexing and most precise retrieval.",
+   "transfer_forms": [
+    "library"
+   ],
+   "line_candidates": [
+    "rag"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "AntiFox-AI/antifox",
+   "url": "https://github.com/AntiFox-AI/antifox",
+   "description": "AI 自主渗透测试平台 · 多智能体自主渗透测试（二次开发自 ARTEX）",
+   "stars": 567,
+   "topics": [],
+   "lang": "Go",
+   "created_at": "2026-10-09",
+   "pushed_at": "2026-10-31",
+   "age_days": 34,
+   "stars_per_day_lifetime": 16.68,
+   "license": "AGPL-3.0",
+   "license_family": "copyleft",
+   "found_by": {
+    "dimension": "chinese",
+    "query": "智能体 in:name,description stars:>200",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 99
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 AI 自主渗透测试平台，支持多智能体渗透测试",
+   "evidence": "AI 自主渗透测试平台 · 多智能体自主渗透测试（二次开发自 ARTEX）",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "georgezouq/awesome-ai-in-finance",
+   "url": "https://github.com/georgezouq/awesome-ai-in-finance",
+   "description": "🔬 A curated list of awesome LLMs & deep learning strategies & tools in financial market.",
+   "stars": 6741,
+   "topics": [
+    "analysis",
+    "awesome",
+    "awesome-list",
+    "cryptocurrency",
+    "deep-learning",
+    "financial",
+    "neural-network",
+    "quant",
+    "quantitative-finance",
+    "reinforcement-learning",
+    "stock-market",
+    "technology-analysis"
+   ],
+   "lang": "",
+   "created_at": "2018-08-29",
+   "pushed_at": "2026-11-12",
+   "age_days": 2997,
+   "stars_per_day_lifetime": 2.25,
+   "license": "CC0-1.0",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 7
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集金融市场中 LLM 和深度学习策略与工具的列表",
+   "evidence": "A curated list of awesome LLMs & deep learning strategies & tools in financial market.",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "songsummer920-dazzle/three-scope-map-skill",
+   "url": "https://github.com/songsummer920-dazzle/three-scope-map-skill",
+   "description": "3D Map",
+   "stars": 668,
+   "topics": [],
+   "lang": "TypeScript",
+   "created_at": "2026-05-19",
+   "pushed_at": "2026-11-12",
+   "age_days": 177,
+   "stars_per_day_lifetime": 3.77,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 24
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供 3D 地图相关功能",
+   "evidence": "3D Map",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "langfuse/langfuse",
+   "url": "https://github.com/langfuse/langfuse",
+   "description": "🪢 Open source AI engineering platform: AI Gateway, agent observability, evals, and prompt/skill management, built on OpenTelemetry. One open platform for every AI call and every agent. Self-host or use Langfuse Cloud.",
+   "stars": 37338,
+   "topics": [
+    "ai-gateway",
+    "analytics",
+    "evaluation",
+    "gateway",
+    "langchain",
+    "large-language-models",
+    "llama-index",
+    "llm",
+    "llm-evaluation",
+    "llm-gateway",
+    "llm-observability",
+    "llmops"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2023-05-18",
+   "pushed_at": "2026-11-12",
+   "age_days": 1274,
+   "stars_per_day_lifetime": 29.31,
+   "license": "NOASSERTION",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "agent skill in:name,description stars:>300 pushed:>2026-08-14",
+    "sort": "stars",
+    "query_breadth": 100,
+    "position": 26
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "开源 AI 工程平台，提供 AI 网关、代理可观察性、评估和提示/技能管理",
+   "evidence": "Open source AI engineering platform: AI Gateway, agent observability, evals, and prompt/skill management, built on OpenT",
+   "transfer_forms": [
+    "mcp",
+    "skill",
+    "architecture",
+    "deploy"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "grindinggear/skilltree-export",
+   "url": "https://github.com/grindinggear/skilltree-export",
+   "description": "Exported data for Path of Exile's Passive Skill Tree.",
+   "stars": 218,
+   "topics": [
+    "json",
+    "pathofexile"
+   ],
+   "lang": "",
+   "created_at": "2021-06-29",
+   "pushed_at": "2026-11-12",
+   "age_days": 1962,
+   "stars_per_day_lifetime": 0.11,
    "license": "NONE",
    "license_family": "none",
    "found_by": {
     "dimension": "category",
-    "query": "skill in:name stars:>200 pushed:>2026-10-12",
+    "query": "skill in:name stars:>200 pushed:>2026-10-13",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 35
+    "position": 36
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "AI-powered JS逆向工程Skill，覆盖加密还原、混淆分析等全链路场景",
-   "evidence": "AI-powered JS逆向工程Skill，覆盖加密还原、混淆分析等全链路场景",
+   "capability": "提供 Path of Exile 的被动技能树数据导出",
+   "evidence": "Exported data for Path of Exile's Passive Skill Tree.",
+   "transfer_forms": [
+    "unknown"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "zilliztech/claude-context",
+   "url": "https://github.com/zilliztech/claude-context",
+   "description": "Code search MCP for Claude Code. Make entire codebase the context for any coding agent.",
+   "stars": 12689,
+   "topics": [
+    "agent",
+    "agentic-rag",
+    "ai-coding",
+    "claude-code",
+    "code-generation",
+    "code-search",
+    "cursor",
+    "embedding",
+    "gemini-cli",
+    "mcp",
+    "merkle-tree",
+    "nodejs"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2025-06-06",
+   "pushed_at": "2026-11-11",
+   "age_days": 524,
+   "stars_per_day_lifetime": 24.22,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "topic:rag stars:>3000 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 58
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "为 Claude Code 提供代码搜索 MCP，使整个代码库成为任何编码代理的上下文",
+   "evidence": "Code search MCP for Claude Code. Make entire codebase the context for any coding agent.",
+   "transfer_forms": [
+    "skill",
+    "library"
+   ],
+   "line_candidates": [
+    "modelpool",
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "emptymalei/awesome-research",
+   "url": "https://github.com/emptymalei/awesome-research",
+   "description": ":seedling: a curated list of tools to help you with your research/life; I built a front end around this repo, please use the link below [I also maintain all the contents using the following website]",
+   "stars": 2818,
+   "topics": [
+    "awesome",
+    "awesome-list",
+    "awesomeness",
+    "list",
+    "research",
+    "research-tool",
+    "research-tools",
+    "tools"
+   ],
+   "lang": "",
+   "created_at": "2014-05-26",
+   "pushed_at": "2026-11-11",
+   "age_days": 4553,
+   "stars_per_day_lifetime": 0.62,
+   "license": "CC-BY-SA-4.0",
+   "license_family": "unknown",
+   "found_by": {
+    "dimension": "category",
+    "query": "awesome in:name stars:>2000 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 61
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "收集研究工具和生活的工具列表",
+   "evidence": ":seedling: a curated list of tools to help you with your research/life",
+   "transfer_forms": [
+    "dataset"
+   ],
+   "line_candidates": [
+    "unknown"
+   ],
+   "distilled": true
+  },
+  {
+   "repo": "goul4rt/lgpd-skills",
+   "url": "https://github.com/goul4rt/lgpd-skills",
+   "description": "Agent Skills de conformidade LGPD (Lei 13.709/2018), resoluções ANPD e ECA Digital (Lei 15.211/2025) — instaláveis em Claude Code, Codex, Gemini CLI, Cursor e OpenCode. 1 maestro (lgpd-audit) + 18 sub-skills.",
+   "stars": 201,
+   "topics": [
+    "lgpd",
+    "lgpd-claude",
+    "lgpd-skill"
+   ],
+   "lang": "TypeScript",
+   "created_at": "2026-05-29",
+   "pushed_at": "2026-11-11",
+   "age_days": 167,
+   "stars_per_day_lifetime": 1.2,
+   "license": "MIT",
+   "license_family": "permissive",
+   "found_by": {
+    "dimension": "category",
+    "query": "skill in:name stars:>200 pushed:>2026-10-13",
+    "sort": "updated",
+    "query_breadth": 100,
+    "position": 79
+   },
+   "matched_by_n_queries": 1,
+   "known_in_arsenal": false,
+   "new_to_us": true,
+   "stars_delta": null,
+   "stars_delta_window_days": null,
+   "capability": "提供符合LGPD法规的Claude Code、Codex等平台的技能",
+   "evidence": "Agent Skills de conformidade LGPD (Lei 13.709/2018), resoluções ANPD e ECA Digital (Lei 15.211/2025) — instaláveis em Cl",
    "transfer_forms": [
     "skill"
    ],
@@ -503,32 +973,32 @@
    "distilled": true
   },
   {
-   "repo": "janestreet/agent_skills",
-   "url": "https://github.com/janestreet/agent_skills",
-   "description": "Agent skills",
-   "stars": 4207,
+   "repo": "NVlabs/Skill2Env",
+   "url": "https://github.com/NVlabs/Skill2Env",
+   "description": "Reinforcing Agents with Collective Skills",
+   "stars": 201,
    "topics": [],
-   "lang": "",
-   "created_at": "2026-11-03",
-   "pushed_at": "2026-11-03",
-   "age_days": 8,
-   "stars_per_day_lifetime": 525.88,
-   "license": "MIT",
+   "lang": "Python",
+   "created_at": "2026-09-16",
+   "pushed_at": "2026-11-11",
+   "age_days": 57,
+   "stars_per_day_lifetime": 3.53,
+   "license": "Apache-2.0",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "skills in:name stars:>500 pushed:>2026-08-13",
-    "sort": "stars",
+    "query": "skill in:name stars:>200 pushed:>2026-10-13",
+    "sort": "updated",
     "query_breadth": 100,
-    "position": 69
+    "position": 80
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供Agent技能",
-   "evidence": "提供Agent skills",
+   "capability": "强化智能体技能的Python库",
+   "evidence": "Reinforcing Agents with Collective Skills",
    "transfer_forms": [
     "unknown"
    ],
@@ -538,41 +1008,47 @@
    "distilled": true
   },
   {
-   "repo": "greatfrontend/awesome-front-end-system-design",
-   "url": "https://github.com/greatfrontend/awesome-front-end-system-design",
-   "description": "Curated front end system design resources for interviews and learning",
-   "stars": 8624,
+   "repo": "iart-ai/motion-design-skills",
+   "url": "https://github.com/iart-ai/motion-design-skills",
+   "description": "Motion design fundamentals, engines, and brand elements as installable Claude Code skills — timing, typography, color, composition, After Effects, Remotion, logos, and backgrounds.",
+   "stars": 226,
    "topics": [
-    "front-end",
-    "front-end-system-design",
-    "javascript",
-    "react",
-    "system-design",
-    "system-design-interview"
+    "after-effects",
+    "agent-skills",
+    "ai-animation",
+    "claude-code",
+    "claude-skill",
+    "claude-skills",
+    "codex",
+    "cursor",
+    "deepseek",
+    "kinetic-typography",
+    "logo-animation",
+    "motion-background"
    ],
-   "lang": "",
-   "created_at": "2023-01-25",
-   "pushed_at": "2026-11-10",
-   "age_days": 1386,
-   "stars_per_day_lifetime": 6.22,
+   "lang": "HTML",
+   "created_at": "2026-06-22",
+   "pushed_at": "2026-11-11",
+   "age_days": 143,
+   "stars_per_day_lifetime": 1.58,
    "license": "MIT",
    "license_family": "permissive",
    "found_by": {
     "dimension": "category",
-    "query": "awesome in:name stars:>2000 pushed:>2026-10-12",
+    "query": "skill in:name stars:>200 pushed:>2026-10-13",
     "sort": "updated",
     "query_breadth": 100,
-    "position": 70
+    "position": 85
    },
    "matched_by_n_queries": 1,
    "known_in_arsenal": false,
    "new_to_us": true,
    "stars_delta": null,
    "stars_delta_window_days": null,
-   "capability": "提供前端系统设计资源",
-   "evidence": "Curated front end system design resources for interviews and learning",
+   "capability": "提供可安装为Claude Code技能的动态设计元素",
+   "evidence": "Motion design fundamentals, engines, and brand elements as installable Claude Code skills — timing, typography, color, c",
    "transfer_forms": [
-    "unknown"
+    "skill"
    ],
    "line_candidates": [
     "unknown"
