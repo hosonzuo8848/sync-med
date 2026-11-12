@@ -19,7 +19,8 @@ Five stages, each auditable on its own:
                  IN PARALLEL AND BLIND. No seat ever sees another's text at
                  this stage; that is the whole anti-convergence mechanism.
                  A plan with no acceptance-testable number is scrapped, and
-                 the report says which and why.
+                 the report says which and why. A scrapped plan is not sent
+                 to critique, the vote, or the referee.
   3 critique  -- every seat attacks the OTHER seats' plans (never its own),
                  under a prompt that mandates suspicion-by-default and a
                  concrete failure scenario. Plans are anonymised to letters so
@@ -236,6 +237,11 @@ def has_acceptance_number(numbers_section, whole):
     return len(_TWO_NUMS.findall(numbers_section or "")) >= 2
 
 
+def debatable(p):
+    """True only after the number gate. The report still prints the rest."""
+    return bool(p.get("ok")) and bool(p.get("numbered"))
+
+
 ALL_SECS = ["sec_where", "sec_numbers", "sec_risk", "sec_effort"]
 
 
@@ -277,7 +283,10 @@ def race(topic, racers, metrics_md, radar_md):
 def _anon(plans, exclude_letter=None):
     out = []
     for p in plans:
-        if not p["ok"] or p["letter"] == exclude_letter:
+        # A body with no acceptance number is already scrapped. Leaving it
+        # in the prompt is how that monologue got vetoed and the machine
+        # verdict flipped to watch.
+        if not debatable(p) or p["letter"] == exclude_letter:
             continue
         body = p["text"].strip()
         out.append(t("plan_anon_tpl", letter=p["letter"], body=body[:3000]))
@@ -351,9 +360,14 @@ def parse_ranking(text, letters):
 
 
 def critique(topic, plans, racers):
-    live = [p for p in plans if p["ok"]]
+    # Prompt bodies are numbered plans only. A scrapped seat may still
+    # speak, so it can attack a real plan. No numbered plan means no call.
+    live = [p for p in plans if debatable(p)]
+    speakers = [p for p in plans if p.get("ok")]
     letters = [p["letter"] for p in live]
     results = []
+    if not live:
+        return results
 
     def one(p_self):
         others = _anon(live, exclude_letter=p_self["letter"])
@@ -379,16 +393,19 @@ def critique(topic, plans, racers):
                 "flat": len({v["verdict"] for v in vd.values()}) <= 1 and len(vd) > 1,
                 "err": ""}
 
-    with ThreadPoolExecutor(max_workers=max(1, len(live))) as ex:
-        for r in ex.map(one, live):
+    with ThreadPoolExecutor(max_workers=max(1, len(speakers))) as ex:
+        for r in ex.map(one, speakers):
             if r:
                 results.append(r)
     return results
 
 
 def vote_matrix(plans, critiques):
-    """{plan_letter: {critic_seat_id: verdict}} plus the veto list."""
-    live = [p for p in plans if p["ok"]]
+    """{plan_letter: {critic_seat_id: verdict}} plus the veto list.
+
+    Only numbered plans are rows. A veto of a scrapped plan used to land
+    in `vetoes` and force _machine_verdict to watch."""
+    live = [p for p in plans if debatable(p)]
     matrix, vetoes = {}, []
     for p in live:
         matrix[p["letter"]] = {}
@@ -405,7 +422,9 @@ def vote_matrix(plans, critiques):
 
 
 def matrix_md(plans, critiques, matrix):
-    live = [p for p in plans if p["ok"]]
+    # Same gate as vote_matrix. A scrapped row would still look like a
+    # candidate the founder is being asked to weigh.
+    live = [p for p in plans if debatable(p)]
     critic_ids = [c["critic"]["id"] for c in critiques]
     head = "| " + t("plan_word") + " | " + " | ".join(critic_ids) + " |"
     sep = "|---" * (len(critic_ids) + 1) + "|"
@@ -429,7 +448,12 @@ def matrix_md(plans, critiques, matrix):
 # stage 4 -- verdict
 # ---------------------------------------------------------------------------
 def verdict(topic, plans, critiques, matrix_text, judge):
-    live = [p for p in plans if p["ok"]]
+    live = [p for p in plans if debatable(p)]
+    if not live:
+        # Nothing left states an acceptance number. Calling the referee
+        # would spend a budgeted seat on prose the number gate already
+        # scrapped, and a veto of that prose rewrites the machine verdict.
+        return "", "no-numbered-plan"
     crit_block = "\n\n".join(
         "[%s]\n%s" % (c["critic"]["id"], (c["text"] or "")[:2200]) for c in critiques if c["text"])
     user = t("verdict_user_tpl", title=topic["title"], current=topic["current"],
@@ -631,10 +655,15 @@ def _machine_verdict(r):
     Closed enum -- adopt / watch / drop / hold. Anything not derivable here
     stays `hold`; a decision we cannot justify from counts is not invented.
 
-      referee failed or no surviving plan -> hold (no grounds, say so)
-      any veto vote                       -> watch, NOT drop
+      no numbered plan left               -> hold, no-surviving-plan
+      referee failed                      -> hold, referee-failed
+      any veto of a numbered plan         -> watch, NOT drop
       critics all said the same thing     -> hold (flat review = no signal)
       otherwise                           -> adopt
+
+    no-surviving-plan is checked first. A veto stuck to a scrapped plan
+    must not fall through into watch, and the empty referee text left by
+    skipping that call must not be mislabeled referee-failed.
 
     The veto->watch mapping is the founder's rule in decision form (2026-06-20):
     "never write anyone off -- just put them further back; when the tech
@@ -642,10 +671,10 @@ def _machine_verdict(r):
     not to kill. Hard `drop` is left to the ledger's own dedup/skip path, which
     already has non-opinion grounds (already in-house, needs a standing host).
     """
+    if not any(debatable(p) for p in (r.get("plans") or [])):
+        return "hold", "no-surviving-plan"
     if (r.get("verdict_err") or "").strip() or not (r.get("verdict") or "").strip():
         return "hold", "referee-failed"
-    if not [p for p in (r.get("plans") or []) if p.get("ok")]:
-        return "hold", "no-surviving-plan"
     if r.get("vetoes"):
         return "watch", "veto:%d" % len(r["vetoes"])
     crits = r.get("critiques") or []
