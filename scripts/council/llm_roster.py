@@ -83,8 +83,16 @@ def budget_snapshot():
         return dict(_state)
 
 
-def _reserve_call():
+def _reserve_call(stage=""):
+    """Count one call. The last slot is kept for stage=verdict.
+
+    A dry run with a small cap spent every call on probes and the race, then
+    the referee raised BudgetExhausted and the meeting had no verdict
+    (2026-11-12, cap 12, judge text was that error).
+    """
     with _lock:
+        if stage != "verdict" and _state["calls"] >= max(0, MAX_CALLS - 1):
+            raise BudgetExhausted("holding the last call for the judge")
         if _state["calls"] >= MAX_CALLS:
             raise BudgetExhausted("LLM call cap reached: %d" % MAX_CALLS)
         _state["calls"] += 1
@@ -353,7 +361,7 @@ def call(seat, system, user, max_tokens=1200, temperature=0.6, timeout=150,
                            % seat.get("id"))
     last = None
     for attempt in range(retries + 1):
-        n = _reserve_call()
+        n = _reserve_call(stage)
         key = _pick_key(seat)
         t0 = time.time()
         try:
