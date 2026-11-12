@@ -46,7 +46,10 @@ TH = {
     "compliance_max_rate": 0.05,    # 合规拦截率上限 5%,超了说明提示词漂了
     "fail_max_rate":       0.20,    # 生成失败率上限 20%,超了说明模型或网关有问题
     "switch_margin":       5.0,     # 挑战者领先冠军多少分才建议换将
-    "race_stale_hours":    72,      # 赛马超过这么久没跑 = 评估环停摆
+    # Hours since the newest race_results.created_at. That column is the last
+    # stored comparison, not the last Evolve Race workflow run. A Sunday job can
+    # exit success after every model call 401s and still write no row.
+    "race_stale_hours":    72,
     "radar_stale_hours":   36,      # 情报雷达超过这么久没落库 = 发现环停摆
 }
 
@@ -100,6 +103,8 @@ def observe():
                                      "WHERE task='chat' AND enabled=1 AND score IS NOT NULL "
                                      "ORDER BY score DESC LIMIT 5"), [])
     safe("batch_models",  lambda: scalar("SELECT COUNT(*) FROM model_registry WHERE task='batch'"))
+    # Only the last stored comparison. No second query for the workflow run,
+    # so judge() must not turn this age into "the timer did not fire".
     safe("last_race",     lambda: scalar("SELECT MAX(created_at) FROM race_results"))
     # 发现环
     safe("candidates",    lambda: scalar("SELECT COUNT(*) FROM model_candidates"))
@@ -187,10 +192,20 @@ def judge(o):
                           f" —— 模型或网关异常")
 
     lr = o.get("last_race") or 0
+    # Same threshold, still an issue. The hours are only (now - last stored
+    # comparison). There is no job-run timestamp in o, so do not print a second age.
     if lr and (now - lr) > TH["race_stale_hours"] * 3600:
-        issues.append(f"⚠️ 评估环停摆:赛马已 {int((now-lr)/3600)} 小时没跑(阈值 {TH['race_stale_hours']}h)")
+        hours = int((now - lr) / 3600)
+        issues.append(
+            f"\u26a0\ufe0f \u8bc4\u4f30\u73af\u505c\u6446:"
+            f"\u6700\u540e\u4e00\u6b21\u6210\u529f\u6bd4\u8f83\u5df2 {hours} \u5c0f\u65f6\u524d"
+            f"(\u9608\u503c {TH['race_stale_hours']}h),"
+            f"\u4e0d\u4ee3\u8868\u6700\u8fd1\u4e00\u6b21\u4f5c\u4e1a\u6ca1\u89e6\u53d1")
     elif lr:
-        oks.append(f"评估环活着:赛马 {int((now-lr)/3600)} 小时前跑过")
+        hours = int((now - lr) / 3600)
+        oks.append(
+            f"\u8bc4\u4f30\u73af\u6d3b\u7740:"
+            f"\u6700\u540e\u4e00\u6b21\u6210\u529f\u6bd4\u8f83\u5728 {hours} \u5c0f\u65f6\u524d")
 
     ld = o.get("last_discover") or 0
     if ld and (now - ld) > TH["radar_stale_hours"] * 3600:
