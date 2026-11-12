@@ -421,6 +421,16 @@ def create_issue(title, body):
 CN_NUM = ["一", "二", "三", "四", "五", "六"]
 
 
+def success_rate(success, total):
+    """Percent, or None when nothing ran.
+
+    Zero runs is not a 0% success rate. A real 0 out of N stays 0.
+    """
+    if not total:
+        return None
+    return 100.0 * success / total
+
+
 def build_md(period, key, start, end, metrics, tables, prev, prev_key, extra):
     now = datetime.datetime.now(BJ).strftime("%Y-%m-%d %H:%M")
     # 小节号动态递增:日报没有"出勤/Actions"两节,写死一二三四会跳号(一 -> 四)。
@@ -519,20 +529,24 @@ def build_md(period, key, start, end, metrics, tables, prev, prev_key, extra):
 
     if extra.get("actions"):
         s = extra["actions"]
-        rate = (100.0 * s["success"] / s["total"]) if s["total"] else 0.0
+        rate = success_rate(s.get("success", 0), s.get("total", 0))
         L.append(head("本%s GitHub Actions 运行局面" % PERIOD_SHORT[period]))
         L.append("")
-        L.append("总 run %d 次：成功 %d · 失败 %d · 取消 %d，成功率 **%.1f%%**。"
-                 % (s["total"], s["success"], s.get("failure", 0),
-                    s.get("cancelled", 0), rate))
+        if rate is None:
+            L.append("total runs %d: no sample, not a success rate." % s.get("total", 0))
+        else:
+            L.append("总 run %d 次：成功 %d · 失败 %d · 取消 %d，成功率 **%.1f%%**。"
+                     % (s["total"], s["success"], s.get("failure", 0),
+                        s.get("cancelled", 0), rate))
         L.append("")
         if s["per_workflow"]:
             L.append("| workflow | run | 成功 | 失败 | 取消 | 成功率 |")
             L.append("|---|---:|---:|---:|---:|---:|")
             for name, e in sorted(s["per_workflow"].items(), key=lambda kv: -kv[1]["n"])[:40]:
-                r = (100.0 * e["success"] / e["n"]) if e["n"] else 0.0
-                L.append("| %s | %d | %d | %d | %d | %.0f%% |" % (
-                    name, e["n"], e["success"], e["failure"], e["cancelled"], r))
+                r = success_rate(e["success"], e["n"])
+                pct = "n/a" if r is None else "%.0f%%" % r
+                L.append("| %s | %d | %d | %d | %d | %s |" % (
+                    name, e["n"], e["success"], e["failure"], e["cancelled"], pct))
             L.append("")
 
     errs = [m for m in metrics.values() if m.get("err")] + [t for t in tables.values() if t.get("err")]
