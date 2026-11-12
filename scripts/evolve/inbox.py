@@ -80,10 +80,15 @@ def fetch(status, limit=40):
     try:
         return d1(f"SELECT title, url, score, verdict_note, updated_at FROM evolve_candidates "
                   f"WHERE kind='repo' AND status={q(status)} "
-                  f"ORDER BY COALESCE(score,0) DESC LIMIT {int(limit)}")
+                  f"ORDER BY COALESCE(score,0) DESC LIMIT {int(limit)}"), False
     except Exception as e:
         print(f"  取 {status} 失败:{str(e)[:80]}", flush=True)
-        return []
+        return [], True
+
+
+def should_publish(adopt_failed, watch_failed):
+    """A failed read must not be published as an empty adopt queue."""
+    return not adopt_failed and not watch_failed
 
 
 def parse(r):
@@ -134,8 +139,13 @@ def main():
     a = ap.parse_args()
 
     purged = purge_stale_modules()      # 先清过期模块,再出收件箱
-    adopt = [parse(r) for r in fetch("adopt")]
-    watch = [parse(r) for r in fetch("watch", 15)]
+    adopt_rows, adopt_failed = fetch("adopt")
+    watch_rows, watch_failed = fetch("watch", 15)
+    if not should_publish(adopt_failed, watch_failed):
+        print("  [inbox] unread, not writing an empty queue", flush=True)
+        return 1
+    adopt = [parse(r) for r in adopt_rows]
+    watch = [parse(r) for r in watch_rows]
     gaps = system_state()
     today = time.strftime("%Y-%m-%d")
 
