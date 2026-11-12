@@ -439,38 +439,48 @@ MAX_CO_READERS = 3
 _PATHS = {"v": None}
 
 
+def read_cognition(fp):
+    """Readers from one race file.
+
+    A missing file is a real empty council. A file that cannot be parsed
+    is unread: that is not the same as no qualified reader.
+    """
+    if not os.path.exists(fp):
+        return [], False
+    try:
+        with open(fp, encoding="utf-8") as fh:
+            d = json.load(fh)
+    except Exception as e:
+        print(f"  [星网] 读认知路径失败({type(e).__name__}),本轮单脑判定", flush=True)
+        return [], True
+    paths = []
+    base = d.get("baseline") or 0
+    champ = brain().strip()
+    for row in d.get("rows") or []:
+        b = (row.get("body") or "").strip()
+        if not (b and row.get("score") is not None and row["score"] >= base and b != champ):
+            continue
+        lost = [m for m in MODULE_NAMES if m not in b]
+        if lost:
+            print(f"  [星网] 淘汰读者 {row.get('who')}:丢了 {len(lost)} 个模块名"
+                  f"({'/'.join(lost[:3])}…)", flush=True)
+            continue
+        paths.append({"who": str(row.get("who") or "?"), "body": b,
+                      "score": row["score"]})
+    paths.sort(key=lambda p: -p["score"])
+    return paths[:MAX_CO_READERS], False
+
+
 def cognition_paths():
     """读者名单:赛马结果里 ≥基线的活体(与在位冠军去重)。缺文件/无合格行 → 空,退回单脑。"""
     if _PATHS["v"] is None:
-        paths = []
-        try:
-            fp = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                              "..", "..", "radar_race_result.json")
-            d = json.load(open(fp, encoding="utf-8"))
-            base = d.get("baseline") or 0
-            champ = brain().strip()
-            for row in d.get("rows") or []:
-                b = (row.get("body") or "").strip()
-                if not (b and row.get("score") is not None and row["score"] >= base and b != champ):
-                    continue
-                # 【2026-08-08 对抗审查·读者准入】赛场只考 8 字段、从不考模块清单;
-                #   而本产线的硬闸要求 module 必须在 MODULE_NAMES 里 —— 丢了清单的
-                #   高分 body 说不出准确模块名,每票 adopt/watch 都被降成 skip,
-                #   两个这样的读者就能 2S 绞杀冠军的 1A。清单不全 = 不配当读者。
-                lost = [m for m in MODULE_NAMES if m not in b]
-                if lost:
-                    print(f"  [星网] 淘汰读者 {row.get('who')}:丢了 {len(lost)} 个模块名"
-                          f"({'/'.join(lost[:3])}…)", flush=True)
-                    continue
-                paths.append({"who": str(row.get("who") or "?"), "body": b,
-                              "score": row["score"]})
-            paths.sort(key=lambda p: -p["score"])
-        except Exception as e:
-            print(f"  [星网] 读认知路径失败({type(e).__name__}),本轮单脑判定", flush=True)
-        _PATHS["v"] = paths[:MAX_CO_READERS]
-        if _PATHS["v"]:
+        fp = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "..", "..", "radar_race_result.json")
+        paths, failed = read_cognition(fp)
+        _PATHS["v"] = (paths, failed)
+        if paths:
             print("  [星网] 共判读者 " + " · ".join(
-                f"{p['who']}({p['score']:.2f})" for p in _PATHS["v"]), flush=True)
+                f"{p['who']}({p['score']:.2f})" for p in _PATHS["v"][0]), flush=True)
     return _PATHS["v"]
 
 
@@ -478,7 +488,8 @@ def co_judge(r, o):
     """星网共判:返回(终判 o, 票面说明)。冠军的 o 已在手,读者们各判一票。"""
     votes, adopt_o = [("冠军", o["verdict"])], (o if o["verdict"] == "adopt" else None)
     downgraded = 0
-    for p in cognition_paths():
+    paths, _starnet_failed = cognition_paths()
+    for p in paths:
         po, perr = judge(r, sys_body=p["body"])
         if perr:
             print(f"    ~ 读者 {p['who']} 判定失败不计票({str(perr)[:40]})", flush=True)
@@ -530,6 +541,9 @@ def main():
             with open(a.report, "w", encoding="utf-8") as fh:
                 json.dump(payload, fh, ensure_ascii=False, indent=2)
         return 1
+    _paths, starnet_failed = cognition_paths()
+    if starnet_failed:
+        print("  [adopt] starnet unread, single brain is not a full council", flush=True)
     fresh = [r for r in rows if str(r.get("repo") or r.get("full_name") or "") not in done]
 
     # 两级筛:① 零成本确定性预筛 → ② 模型精判(只花在过了预筛的身上)
@@ -577,7 +591,7 @@ def main():
             print(f"  ✗ {name}: {err}", flush=True)
             continue
         # 星网共判:初判 adopt/watch 的"有意思的书"才升级到多认知共读
-        if o["verdict"] in ("adopt", "watch") and not a.no_starnet and cognition_paths():
+        if o["verdict"] in ("adopt", "watch") and not a.no_starnet and _paths and not starnet_failed:
             v0 = o["verdict"]
             o, face = co_judge(r, o)
             print(f"  🕸️ {name}: 冠军初判 {v0} → 星网 {face} → 终判 {o['verdict']}", flush=True)
@@ -621,9 +635,11 @@ def main():
     out["write_failed"] = write_failed
     if pool_failed:
         out["pool_unread"] = True
+    if starnet_failed:
+        out["starnet_unread"] = True
     if a.report:
         json.dump(out, open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return finish_code(write_failed or pool_failed)
+    return finish_code(write_failed or pool_failed or starnet_failed)
 
 
 if __name__ == "__main__":
