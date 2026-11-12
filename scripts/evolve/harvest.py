@@ -65,8 +65,8 @@ def measure_gaps():
                      "now": f"{n} 节点,前台只画得出约 3%",
                      "pain": "大规模图无法在浏览器里读,降噪与层级布局是瓶颈",
                      "weight": 0.9})
-    except Exception:
-        pass
+    except Exception as e:
+        print("  [gap] graph count unread: %s" % str(e)[:80], flush=True)
 
     # 读不到实测数的已知短板 —— 明写"未量化",不冒充实测值
     gaps += [
