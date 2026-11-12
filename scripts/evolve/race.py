@@ -134,30 +134,117 @@ def run_exam(scope, body, items):
     return (sum(scores) / len(scores) if scores else 0.0), quals, [round(x, 3) for x in scores]
 
 
+def _iter_column_facts(columns):
+    """Yield (name, row) from bare names or PRAGMA table_info rows.
+
+    A bare name has row None. That input has no notnull flag; callers must
+    not invent one.
+    """
+    for col in columns or []:
+        if isinstance(col, dict):
+            name = col.get("name")
+            if isinstance(name, str) and name:
+                yield name, col
+        elif isinstance(col, str) and col:
+            yield col, None
+
+
+def _notnull_without_default(row):
+    """True when this PRAGMA row says NOT NULL and SQLite has no DEFAULT.
+
+    PRAGMA table_info.notnull is 0 or 1. A missing key is not a fact: bare
+    column names used to be all this function saw, and guessing would either
+    skip a stamp the table can store or emit an INSERT D1 rejects. The
+    rejection is caught in stamp_comparison, so the controller clock stays
+    stale with only "clock stamp failed". dflt_value is NULL when the column
+    has no DEFAULT; any other value is applied when the column is omitted.
+    """
+    if not isinstance(row, dict) or "notnull" not in row:
+        return False
+    flag = row.get("notnull")
+    if isinstance(flag, bool):
+        required = flag
+    elif isinstance(flag, (int, float)):
+        required = int(flag) != 0
+    elif isinstance(flag, str) and flag.strip().lower() in ("1", "true"):
+        required = True
+    else:
+        required = False
+    if not required:
+        return False
+    return row.get("dflt_value") is None
+
+
+def _filled_names(names, scope, n_produced, baseline):
+    """Columns this stamp knows how to fill. Order matches the INSERT."""
+    cols = set(names)
+    filled = []
+    if "created_at" in cols:
+        filled.append("created_at")
+    if "scope" in cols:
+        filled.append("scope")
+    if "n_produced" in cols:
+        filled.append("n_produced")
+    if "baseline" in cols and isinstance(baseline, (int, float)):
+        filled.append("baseline")
+    if "kind" in cols:
+        filled.append("kind")
+    return filled
+
+
+def _filled_value(name, scope, n_produced, baseline, now):
+    if name == "created_at":
+        return str(int(now))
+    if name == "scope":
+        return q(scope)
+    if name == "n_produced":
+        return str(int(n_produced))
+    if name == "baseline":
+        return str(round(float(baseline), 4))
+    if name == "kind":
+        return q("comparison")
+    raise KeyError(name)
+
+
+def unfilled_notnull_columns(columns, scope, n_produced, baseline):
+    """NOT NULL columns this stamp would omit and that have no default.
+
+    Empty when the input has no notnull flag. Do not guess those columns.
+    """
+    facts = list(_iter_column_facts(columns))
+    filled = set(_filled_names([name for name, _row in facts], scope, n_produced, baseline))
+    blocked = []
+    seen = set()
+    for name, row in facts:
+        if name in filled or name in seen:
+            continue
+        if _notnull_without_default(row):
+            blocked.append(name)
+            seen.add(name)
+    return blocked
+
+
 def comparison_stamp_sql(columns, scope, n_produced, baseline, now):
     """SQL for one stored comparison, or None when the table cannot record one.
 
     Only call this after at least one non-champion candidate was scored.
     A failed race must not insert, or the controller clock turns green
     on a run that never compared anything.
+
+    columns may be bare names or PRAGMA table_info rows. Names alone keep
+    the previous INSERT. When a row carries notnull, an unfilled NOT NULL
+    column with no dflt_value makes that INSERT fail at D1; return None
+    instead of sending it.
     """
-    cols = set(columns or [])
-    if "created_at" not in cols:
+    facts = list(_iter_column_facts(columns))
+    names = [name for name, _row in facts]
+    filled = _filled_names(names, scope, n_produced, baseline)
+    if "created_at" not in filled:
         return None
-    fields = ["created_at"]
-    values = [str(int(now))]
-    if "scope" in cols:
-        fields.append("scope")
-        values.append(q(scope))
-    if "n_produced" in cols:
-        fields.append("n_produced")
-        values.append(str(int(n_produced)))
-    if "baseline" in cols and isinstance(baseline, (int, float)):
-        fields.append("baseline")
-        values.append(str(round(float(baseline), 4)))
-    if "kind" in cols:
-        fields.append("kind")
-        values.append(q("comparison"))
+    if unfilled_notnull_columns(columns, scope, n_produced, baseline):
+        return None
+    fields = filled
+    values = [_filled_value(name, scope, n_produced, baseline, now) for name in fields]
     return "INSERT INTO race_results (%s) VALUES (%s)" % (",".join(fields), ",".join(values))
 
 
@@ -168,10 +255,15 @@ def stamp_comparison(scope, n_produced, baseline):
         return
     try:
         info = d1("PRAGMA table_info(race_results)")
-        cols = [row.get("name") for row in info if isinstance(row, dict)]
-        sql = comparison_stamp_sql(cols, scope, n_produced, baseline, int(time.time()))
+        now = int(time.time())
+        blocked = unfilled_notnull_columns(info, scope, n_produced, baseline)
+        sql = comparison_stamp_sql(info, scope, n_produced, baseline, now)
         if not sql:
-            print("clock stamp skipped: race_results.created_at is absent")
+            names = [name for name, _row in _iter_column_facts(info)]
+            if "created_at" not in names:
+                print("clock stamp skipped: race_results.created_at is absent")
+            if blocked:
+                print("clock stamp skipped: NOT NULL columns unfilled: %s" % ", ".join(blocked))
             return
         d1(sql)
         print("clock stamp wrote 1 comparison row")
