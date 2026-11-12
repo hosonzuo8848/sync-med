@@ -199,6 +199,7 @@ def load_repo_candidates(limit=400):
     合流之后三条路的采纳率可以直接对比,哪条标准更好不靠嘴说,靠数字。
     """
     rows = []
+    pool_failed = False
     try:
         # 【2026-08-05 实测修·鹰眼断在这】原来是 `ORDER BY stars DESC LIMIT 2000`,
         #   等于**每天从同一批高星头部捞**。那批已经判过 222 个,剩下的被预筛砍光,
@@ -238,11 +239,13 @@ def load_repo_candidates(limit=400):
         # SystemExit 必须接:d1() 缺凭据走 sys.exit,不接的话"走文件兜底"是死代码
         # (brain() 那处 2026-08-07 已实测抓过同款,这里是"只修一半"的补全)
         print(f"  [采集] 读月榜库失败({str(e)[:70]}),走文件兜底", flush=True)
+        pool_failed = True
     for p, tag in ((GAP_JSON, "缺口驱动"), (CAND_JSON, "热门榜快照")):
         if not os.path.exists(p):
             print(f"  [采集] 缺 {os.path.basename(p)}({tag}),跳过", flush=True)
             continue
-        d = json.load(open(p, encoding="utf-8"))
+        with open(p, encoding="utf-8") as fh:
+            d = json.load(fh)
         rs = d if isinstance(d, list) else (d.get("rows") or d.get("candidates") or [])
         print(f"  [采集] {tag}:{len(rs)} 个", flush=True)
         rows += rs
@@ -252,7 +255,7 @@ def load_repo_candidates(limit=400):
         if n and n not in seen:
             seen.add(n)
             out.append(r)
-    return out[:limit]
+    return out[:limit], pool_failed
 
 
 def already_judged():
@@ -514,14 +517,18 @@ def main():
     global STACK_NAMES, STACK_LINES
     STACK_NAMES, STACK_LINES = scan_stack()
     print(f"  [家底] 扫出 {len(STACK_NAMES)} 个已有技术名,判定前先拿它筛", flush=True)
-    rows = load_repo_candidates()
+    rows, pool_failed = load_repo_candidates()
+    if pool_failed:
+        print("  [adopt] pool unread, file rows are not a full harvest", flush=True)
     done, judged_failed = already_judged()
     if not should_judge(judged_failed):
         print("  [adopt] judged unread, not treating every candidate as new", flush=True)
         if a.report:
-            json.dump({"fail": 1, "judged_unread": True, "harvested": len(rows)},
-                      open(a.report, "w", encoding="utf-8"),
-                      ensure_ascii=False, indent=2)
+            payload = {"fail": 1, "judged_unread": True, "harvested": len(rows)}
+            if pool_failed:
+                payload["pool_unread"] = True
+            with open(a.report, "w", encoding="utf-8") as fh:
+                json.dump(payload, fh, ensure_ascii=False, indent=2)
         return 1
     fresh = [r for r in rows if str(r.get("repo") or r.get("full_name") or "") not in done]
 
@@ -612,9 +619,11 @@ def main():
     print(f"\n=== 本轮:采纳 {len(out['adopt'])} · 观望 {len(out['watch'])} · "
           f"不相关 {out['skip']} · 失败 {out['fail']} ===", flush=True)
     out["write_failed"] = write_failed
+    if pool_failed:
+        out["pool_unread"] = True
     if a.report:
         json.dump(out, open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return finish_code(write_failed)
+    return finish_code(write_failed or pool_failed)
 
 
 if __name__ == "__main__":
