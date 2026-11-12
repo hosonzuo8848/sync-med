@@ -258,9 +258,15 @@ def load_repo_candidates(limit=400):
 def already_judged():
     try:
         return {r["title"] for r in d1("SELECT title FROM evolve_candidates "
-                                       "WHERE kind='repo' AND status!='new'")}
-    except (Exception, SystemExit):
-        return set()
+                                       "WHERE kind='repo' AND status!='new'")}, False
+    except (Exception, SystemExit) as e:
+        print("  [judged] unread: %s" % str(e)[:80], flush=True)
+        return set(), True
+
+
+def should_judge(judged_failed):
+    """An unread judged set is not a measured empty set. Do not re-run everyone."""
+    return not judged_failed
 
 
 _BRAIN = {"body": None, "vid": None}
@@ -488,7 +494,14 @@ def main():
     STACK_NAMES, STACK_LINES = scan_stack()
     print(f"  [家底] 扫出 {len(STACK_NAMES)} 个已有技术名,判定前先拿它筛", flush=True)
     rows = load_repo_candidates()
-    done = already_judged()
+    done, judged_failed = already_judged()
+    if not should_judge(judged_failed):
+        print("  [adopt] judged unread, not treating every candidate as new", flush=True)
+        if a.report:
+            json.dump({"fail": 1, "judged_unread": True, "harvested": len(rows)},
+                      open(a.report, "w", encoding="utf-8"),
+                      ensure_ascii=False, indent=2)
+        return 1
     fresh = [r for r in rows if str(r.get("repo") or r.get("full_name") or "") not in done]
 
     # 两级筛:① 零成本确定性预筛 → ② 模型精判(只花在过了预筛的身上)
