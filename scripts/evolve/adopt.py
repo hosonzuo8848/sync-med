@@ -155,6 +155,19 @@ def _prefilter(r):
     return True, "命中:" + "/".join(hits[:3])
 
 
+def screen_candidate(row, stack_names):
+    """Hard-skip a repo we already run, then keep the existing word-list gate.
+
+    scan_stack() fills STACK_NAMES and already_have is imported, but the
+    prefilter loop only called _prefilter. Owned names such as crawl4ai still
+    entered judge() and spent a model call on a tool we already have.
+    """
+    repo = str(row.get("repo") or row.get("full_name") or "")
+    if already_have(repo, stack_names):
+        return False, "already_have"
+    return _prefilter(row)
+
+
 def load_repo_candidates(limit=400):
     """三条采集路线合流:**月榜全量库**(主)+ 缺口驱动 + 热门榜快照。
 
@@ -459,7 +472,8 @@ def main():
     # 两级筛:① 零成本确定性预筛 → ② 模型精判(只花在过了预筛的身上)
     kept, dropped = [], 0
     for r in fresh:
-        ok, why = _prefilter(r)
+        # already_have first: an owned name must not take a judge() slot.
+        ok, why = screen_candidate(r, STACK_NAMES)
         if ok:
             r["_pre"] = why
             kept.append(r)
