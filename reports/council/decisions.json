@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-09-02",
+ "updated": "2026-11-12",
  "decisions": [
   {
    "source": "arsenal:x1xhlol/system-prompts-and-models-of-ai-tools",
@@ -733,6 +733,16 @@
    "issue": 516,
    "topic": "新技术研判:matteocrippa/awesome-swift(26234星)— 收集 Swift 库和资源的列表",
    "verdict_ok": true
+  },
+  {
+   "source": "arsenal:drawdb-io/drawdb",
+   "decision": "hold",
+   "basis": "referee-failed",
+   "fingerprint": "ecf933eeaf3c1ca9",
+   "date": "2026-11-12",
+   "issue": null,
+   "topic": "候选仓 drawdb-io/drawdb(⭐40309):免费、简单直观的在线数据库图编辑器和SQL生成器。",
+   "verdict_ok": false
   }
  ]
 }
