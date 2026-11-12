@@ -1114,6 +1114,8 @@ def parse_score_array(text):
                 raise BatchUnscored("truncated or unparseable score payload")
         else:
             raise BatchUnscored("truncated or unparseable score payload")
+    if not isinstance(picks, list):
+        raise BatchUnscored("truncated or unparseable score payload")
     return picks
 
 

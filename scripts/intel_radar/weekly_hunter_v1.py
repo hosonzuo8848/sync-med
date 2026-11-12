@@ -122,7 +122,7 @@ def score_items(items):
             arr = pick_json(raw)
             # pick_json returns None when the reply never closes. `or []`
             # used to treat that cutoff as a finished batch of zero hits.
-            if arr is None:
+            if arr is None or not isinstance(arr, list):
                 raise ScoreIncomplete("truncated or unparseable score payload")
             for a in arr:
                 i = a.get("i")

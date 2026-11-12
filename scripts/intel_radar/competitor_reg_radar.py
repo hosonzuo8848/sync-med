@@ -301,9 +301,6 @@ def analyze_batch(batch: list, offset: int, model: str, use_gateway: bool) -> li
     # A cut-off reply is BatchUnscored, not an empty finished batch.
     picks = parse_score_array(response)
 
-    if not isinstance(picks, list):
-        return []
-
     cleaned = []
     for pick in picks:
         if not isinstance(pick, dict):

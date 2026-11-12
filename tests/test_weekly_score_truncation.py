@@ -60,3 +60,11 @@ class TruncatedScoreBatch(unittest.TestCase):
         self.assertEqual(scored[0]["leading"], 5)
         self.assertEqual(scored[0]["transplant"], 4)
         self.assertEqual(scored[0]["move"], "keep")
+
+    def test_object_payload_is_not_a_finished_empty_score(self):
+        # A closed object, or an array that never closes but contains one,
+        # is not a list of judgments. The old loop treated that as a
+        # finished batch and still printed the completion line.
+        with self.assertRaises(hunter.ScoreIncomplete) as ctx:
+            self._score('[{"i": 0, "leading": 5, "transplant": 4, "move": "keep"}')
+        self.assertIn("truncated", str(ctx.exception).lower())
