@@ -34,5 +34,11 @@ class JudgeReserve(unittest.TestCase):
             roster._reserve_call("verdict")
 
 
+class SensenovaThinking(unittest.TestCase):
+    def test_sensenova_seat_disables_thinking(self):
+        row = next(r for r in roster._FREE_BENCH if r[0] == "sensenova")
+        self.assertEqual(row[6], {"thinking": {"type": "disabled"}})
+
+
 if __name__ == "__main__":
     unittest.main()

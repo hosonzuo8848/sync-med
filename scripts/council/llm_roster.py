@@ -141,6 +141,9 @@ def _openai_chat(base, key, model, system, user, max_tokens, temperature, timeou
     learned the hard way in production, so do not "simplify" them away:
       - modelscope: {"enable_thinking": false} or the answer arrives polluted
         with chain-of-thought;
+      - sensenova: {"thinking": {"type": "disabled"}}. The 2026-11-12 council
+        kept the reasoning monologue as the plan, so the number check scrapped
+        it. Direct call the same day with thinking off returned the answer.
       - gemini-2.5-flash: {"reasoning_effort": "low"} or thinking eats the
         token budget and content comes back empty (the nested google:{} form
         is a 400 on the OpenAI-compat endpoint)."""
@@ -264,7 +267,8 @@ def _cf_chat(base, key, model, system, user, max_tokens, temperature, timeout,
 _FREE_BENCH = [
     # (id, zh vendor-label key, house, model, base, env var(s) with the key, extra, probe_tokens)
     ("sensenova", "v_sensenova", "deepseek", "deepseek-v4-flash",
-     "https://token.sensenova.cn/v1", ("SENSENOVA_API_KEY",), None, 512),
+     "https://token.sensenova.cn/v1", ("SENSENOVA_API_KEY",),
+     {"thinking": {"type": "disabled"}}, 512),
     ("longcat", "v_longcat", "longcat", "LongCat-2.0",
      "https://api.longcat.chat/openai/v1", ("LONGCAT_API_KEY",), None, 512),
     ("zhipu", "v_zhipu", "zhipu", "glm-4-flash",
