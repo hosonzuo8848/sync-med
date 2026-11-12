@@ -168,6 +168,28 @@ def screen_candidate(row, stack_names):
     return _prefilter(row)
 
 
+def tally_screen(rows, stack_names):
+    """Count owned skips apart from every other row that does not enter judge.
+
+    A single dropped counter added already_have and word-list cuts together,
+    so the round log could not say how many candidates were already in use.
+    owned is the screen_candidate reason exactly "already_have". other is
+    every remaining rejection. kept is the rows that enter judge, in input order.
+    """
+    kept = []
+    n_owned = 0
+    n_other = 0
+    for row in rows:
+        ok, why = screen_candidate(row, stack_names)
+        if ok:
+            kept.append(row)
+        elif why == "already_have":
+            n_owned += 1
+        else:
+            n_other += 1
+    return kept, n_owned, n_other
+
+
 def load_repo_candidates(limit=400):
     """三条采集路线合流:**月榜全量库**(主)+ 缺口驱动 + 热门榜快照。
 
@@ -470,18 +492,23 @@ def main():
     fresh = [r for r in rows if str(r.get("repo") or r.get("full_name") or "") not in done]
 
     # 两级筛:① 零成本确定性预筛 → ② 模型精判(只花在过了预筛的身上)
-    kept, dropped = [], 0
-    for r in fresh:
-        # already_have first: an owned name must not take a judge() slot.
+    # One dropped total hid already_have inside word-list cuts, so a round
+    # log could not say how many candidates were already in the stack.
+    kept, n_owned, n_other = tally_screen(fresh, STACK_NAMES)
+    dropped = n_owned + n_other
+    for r in kept:
+        # _pre carries the word-list reason onto rows that enter judge.
+        # tally_screen is pure and does not return that reason, so read it
+        # again from the same gate. Owned names are already absent from kept.
         ok, why = screen_candidate(r, STACK_NAMES)
         if ok:
             r["_pre"] = why
-            kept.append(r)
-        else:
-            dropped += 1
     todo = kept[:a.limit]
     print(f"=== Adopt 算子 · 采到 {len(rows)} · 已判 {len(done)} · "
-          f"预筛砍掉 {dropped}(零成本)· 本轮精判 {len(todo)} ===", flush=True)
+          f"预筛砍掉 {dropped}(零成本) "
+          f"\u5bb6\u5e95\u8df3\u8fc7 {n_owned} "
+          f"\u8bcd\u8868\u780d\u6389 {n_other}"
+          f" · 本轮精判 {len(todo)} ===", flush=True)
 
     out, now = {"adopt": [], "watch": [], "skip": 0, "fail": 0,
                 "prefilter_dropped": dropped, "harvested": len(rows)}, int(time.time())

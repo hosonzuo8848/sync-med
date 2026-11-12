@@ -59,6 +59,61 @@ class TestScreenCandidateAlreadyHave(unittest.TestCase):
         self.assertIn("screen_candidate(r, STACK_NAMES)", src)
         self.assertNotIn("_prefilter(", src)
 
+    def test_tally_screen_splits_owned_from_wordlist(self):
+        # Three rows: one owned hit, one word-list cut, one that clears the
+        # gate. A single dropped counter would report 2 and could not split
+        # them. Do not call main(), d1(), or scan_stack().
+        owned = _owned_row()
+        cut = {
+            "repo": "example/notes-app",
+            "description": "personal notes about cooking",
+        }
+        keep = {
+            "repo": "example/page-ocr",
+            "description": "ocr for scanned book pages",
+        }
+        stack = {"crawl4ai"}
+        pre_ok, _why = adopt._prefilter(owned)
+        self.assertTrue(pre_ok, "owned fixture must still clear the word list")
+        cut_ok, cut_why = adopt.screen_candidate(cut, stack)
+        self.assertFalse(cut_ok)
+        self.assertNotEqual(cut_why, "already_have")
+        rows = [owned, cut, keep]
+        kept, n_owned, n_other = adopt.tally_screen(rows, stack)
+        self.assertEqual(n_owned, 1)
+        self.assertEqual(n_other, 1)
+        self.assertEqual(len(kept), 1)
+        self.assertIs(kept[0], keep)
+        self.assertNotIn("_pre", owned)
+        self.assertNotIn("_pre", cut)
+        self.assertNotIn("_pre", keep)
+
+    def test_tally_screen_keeps_input_order(self):
+        first = {
+            "repo": "example/page-ocr",
+            "description": "ocr for scanned book pages",
+        }
+        second = {
+            "repo": "example/embed-index",
+            "description": "vector embed index",
+        }
+        kept, n_owned, n_other = adopt.tally_screen(
+            [first, _owned_row(), second], {"crawl4ai"})
+        self.assertEqual(n_owned, 1)
+        self.assertEqual(n_other, 0)
+        self.assertIs(kept[0], first)
+        self.assertIs(kept[1], second)
+
+    def test_main_reports_owned_and_other_separately(self):
+        # Source only. The old loop added every miss into one dropped.
+        src = inspect.getsource(adopt.main)
+        self.assertIn("tally_screen(fresh, STACK_NAMES)", src)
+        self.assertIn("n_owned", src)
+        self.assertIn("n_other", src)
+        self.assertNotIn("dropped += 1", src)
+        self.assertIn("\\u5bb6\\u5e95\\u8df3\\u8fc7", src)
+        self.assertIn("\\u8bcd\\u8868\\u780d\\u6389", src)
+
 
 if __name__ == "__main__":
     unittest.main()
