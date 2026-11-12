@@ -154,10 +154,15 @@ def gh_search(q, per_page=12):
         h["Authorization"] = "Bearer " + tok
     try:
         j = json.loads(urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=40).read())
-        return j.get("items") or []
+        return j.get("items") or [], False
     except Exception as e:
         print(f"    检索失败({str(e)[:60]}):{q[:60]}", flush=True)
-        return []
+        return [], True
+
+
+def finish_code(missed):
+    """1 when a search did not answer. A real empty page is not a miss."""
+    return 1 if missed else 0
 
 
 def main():
@@ -173,7 +178,7 @@ def main():
     for g in gaps:
         print(f"  [{g['weight']}] {g['module']} · {g['metric']} = {g['now']}", flush=True)
 
-    seen, rows = set(), []
+    seen, rows, missed = set(), [], 0
     for g in gaps[:a.top_gaps]:
         user = (f"模块:{g['module']}\n指标:{g['metric']}\n当前:{g['now']}\n痛点:{g['pain']}")
         try:
@@ -191,21 +196,24 @@ def main():
         qs = list(dict.fromkeys(base + good))
         print(f"\n  [{g['module']}] 检索式({len(base)} 兜底 + {len(good)} 模型):{qs}", flush=True)
         for qq in qs[:a.n_queries]:
-            for it in gh_search(str(qq), a.per_query):
-                name = it.get("full_name") or ""
-                if not name or name in seen:
-                    continue
-                seen.add(name)
-                rows.append({
-                    "repo": name, "url": it.get("html_url"),
-                    "description": it.get("description") or "",
-                    "stars": it.get("stargazers_count") or 0,
-                    "topics": it.get("topics") or [],
-                    "lang": it.get("language") or "",
-                    # 记下它是**为哪个缺口**抓回来的 —— 判定环据此追问"到底解没解决"
-                    "found_by": f"gap:{g['module']}/{g['metric']}",
-                    "gap_query": str(qq),
-                })
+            items, failed = gh_search(str(qq), a.per_query)
+            if failed:
+                missed += 1
+            else:
+                for it in items:
+                    name = it.get("full_name") or ""
+                    if not name or name in seen:
+                        continue
+                    seen.add(name)
+                    rows.append({
+                        "repo": name, "url": it.get("html_url"),
+                        "description": it.get("description") or "",
+                        "stars": it.get("stargazers_count") or 0,
+                        "topics": it.get("topics") or [],
+                        "lang": it.get("language") or "",
+                        "found_by": f"gap:{g['module']}/{g['metric']}",
+                        "gap_query": str(qq),
+                    })
             time.sleep(2)          # GitHub search 限流,温和一点(广采靠多角度检索式,不靠加速)
 
     os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)
@@ -218,7 +226,7 @@ def main():
                    "repos": [{"repo": r["repo"], "stars": r["stars"], "found_by": r["found_by"]}
                              for r in rows]},
                   open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return 0
+    return finish_code(missed)
 
 
 if __name__ == "__main__":
