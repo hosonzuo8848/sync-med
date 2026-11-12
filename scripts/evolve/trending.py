@@ -145,20 +145,35 @@ def band_action(total, band, cap, per_page, depth, max_depth):
     return ("fetch", pages)
 
 
-def exit_code(missed, write_failed=False):
+def exit_code(missed, write_failed=False, search_failed=False):
     """0 only when nothing in the sweep was dropped and the write landed.
 
     The adopt workflow treats exit 0 as a finished month-board. Keeping
     1000 of a 2500-hit band used to take that path. A failed insert that
-    returned 0 used to take it too.
+    returned 0 used to take it too. A query that raised and came back as
+    (0, []) used to take it as well.
     """
-    if write_failed:
+    if write_failed or search_failed:
         return 1
     try:
         n = int(missed or 0)
     except (TypeError, ValueError):
         return 1
     return 1 if n > 0 else 0
+
+
+def unpack_search(result):
+    """A 2-tuple is a closed answer, including a real 0.
+
+    A third True means the query did not answer. Do not turn that into
+    an empty band.
+    """
+    if not result or len(result) < 2:
+        return 0, [], True
+    items = result[1] or []
+    if len(result) >= 3 and result[2]:
+        return result[0], items, True
+    return result[0], items, False
 
 
 def report_payload(rows, saved, pool_total, fresh, gap, write_failed=False):
@@ -176,6 +191,7 @@ def report_payload(rows, saved, pool_total, fresh, gap, write_failed=False):
         "new": fresh,
         "missed": missed,
         "short_bands": short_bands,
+        "search_failed": bool(gap.get("search_failed")) if gap else False,
     }
 
 
@@ -195,7 +211,7 @@ def gh(q_str, page=1, per_page=100):
     for attempt in range(3):
         try:
             j = json.loads(urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=45).read())
-            return j.get("total_count", 0), (j.get("items") or [])
+            return j.get("total_count", 0), (j.get("items") or []), False
         except Exception as e:
             code = getattr(e, "code", 0)
             if code in (403, 429):          # 限流:退避重试,别放弃这一段
@@ -204,8 +220,8 @@ def gh(q_str, page=1, per_page=100):
                 time.sleep(nap)
                 continue
             print(f"    查询失败({str(e)[:60]}):{q_str[:60]}", flush=True)
-            return 0, []
-    return 0, []
+            return 0, [], True
+    return 0, [], True
 
 
 def ensure_table():
@@ -266,7 +282,18 @@ def sweep(days=30, tracks=("created", "pushed"), max_pages=10, per_page=100,
             # return the same 1000 rows and call the band done.
             return
         seen.add(qs)
-        total, _ = fn(qs, page=1, per_page=1)
+        total, _, failed = unpack_search(fn(qs, page=1, per_page=1))
+        if failed:
+            gap["search_failed"] = True
+            gap["bands"].append({
+                "track": track,
+                "band": str(band),
+                "total": None,
+                "kept": 0,
+                "unread": True,
+            })
+            print("  [%s %s] search unread" % (track, band), flush=True)
+            return
         cap = search_cap(max_pages, per_page)
         action, payload = band_action(
             total, band, cap, per_page, depth, MAX_BAND_SPLITS)
@@ -284,8 +311,14 @@ def sweep(days=30, tracks=("created", "pushed"), max_pages=10, per_page=100,
             pages = 0
         print(f"  [{track} {band}] total={total} → 取 {pages} 页", flush=True)
         got_n = 0
+        band_unread = False
         for p in range(1, pages + 1):
-            _, items = fn(qs, page=p, per_page=per_page)
+            _, items, page_failed = unpack_search(fn(qs, page=p, per_page=per_page))
+            if page_failed:
+                band_unread = True
+                gap["search_failed"] = True
+                print("  [%s %s] page %s unread" % (track, band, p), flush=True)
+                break
             items = items or []
             got_n += len(items)
             for it in items:
@@ -296,7 +329,15 @@ def sweep(days=30, tracks=("created", "pushed"), max_pages=10, per_page=100,
             if not items:
                 break
             pause()
-        if action == "short":
+        if band_unread:
+            gap["bands"].append({
+                "track": track,
+                "band": str(band),
+                "total": total,
+                "kept": got_n,
+                "unread": True,
+            })
+        elif action == "short":
             # total-cap under-counts when a page comes back short. The
             # hole is whatever the query claimed minus what we actually
             # received. Those missing rows are the low-star tail.
@@ -414,7 +455,7 @@ def main():
     if a.report:
         json.dump(report_payload(rows, n, tot_show, fresh_show, gap, write_failed),
                   open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return exit_code(missed, write_failed)
+    return exit_code(missed, write_failed, bool(gap.get("search_failed")))
 
 
 if __name__ == "__main__":
