@@ -1026,19 +1026,33 @@ def load_adoption():
     return rows
 
 
+def adoption_note_is_dropped(note):
+    """True when a note, after stripping, starts with DROPPED (any case).
+
+    Prefix, not a substring: "not DROPPED" is still a landing. Surrounding
+    whitespace does not change the refusal. This is the only copy of that
+    check. apply_adoption_to_ledger and adoption_snapshot both call it. A
+    second copy would drift, and the daily header would keep counting a row
+    the ledger already records as dropped: landed inflates, or a newer
+    refusal becomes last_date and paints the stall alarm green. A
+    refusal-only ledger must leave days_since None, never 0.
+    """
+    return str(note or "").strip().upper().startswith("DROPPED")
+
+
 def apply_adoption_to_ledger(doc):
     """Mirror adoption.txt onto arsenal.json's status field.
 
     adoption.txt is the authority; the ledger's `status` is a derived view kept
     in sync so the council reads one truth and not two.
 
-    A note that, after stripping, starts with DROPPED (any case) is a recorded
-    refusal, not a landing. Those rows are written status=dropped and keep the
-    original note. Writing them integrated claimed we shipped a thing the file
-    already refused (DietrichGebert/ponytail, 2026-08-05: the note began with
-    DROPPED and the ledger became integrated / "adopted 2026-08-05"). The
-    integrated-skip below does not apply to a refusal: a previous false landing
-    has to be correctable, or that stamp sticks on every later run.
+    A note that adoption_note_is_dropped accepts is a recorded refusal, not a
+    landing. Those rows are written status=dropped and keep the original note.
+    Writing them integrated claimed we shipped a thing the file already refused
+    (DietrichGebert/ponytail, 2026-08-05: the note began with DROPPED and the
+    ledger became integrated / "adopted 2026-08-05"). The integrated-skip below
+    does not apply to a refusal: a previous false landing has to be correctable,
+    or that stamp sticks on every later run.
 
     Every other row is still status=integrated, note "adopted <date>" or
     "adopted (stock)". An entry that is already integrated is left untouched.
@@ -1056,9 +1070,7 @@ def apply_adoption_to_ledger(doc):
     n = 0
     for r in load_adoption():
         raw_note = r.get("note") or ""
-        # Prefix, not a substring: "not DROPPED" is still a landing. Case and
-        # surrounding whitespace do not change the refusal.
-        dropped = str(raw_note).strip().upper().startswith("DROPPED")
+        dropped = adoption_note_is_dropped(raw_note)
         note = raw_note if dropped else (
             ("adopted %s" % r["date"]) if r["date"] else "adopted (stock)")
         e = by_repo.get(r["id"])
@@ -1122,9 +1134,15 @@ def adoption_snapshot(today=None, window_days=7):
     days_since is None when nothing dated has ever landed; callers must render
     that as "never", not as 0, or a cold start would look like a fresh landing.
     Entries dated '-' (pre-existing stock) count toward `landed` but cannot set
-    days_since, since we do not know when they landed."""
+    days_since, since we do not know when they landed.
+
+    Refusals (adoption_note_is_dropped) are omitted from landed, landed_recent,
+    last_id, last_date and days_since. Counting one would inflate the landing
+    total or clear the stall alarm. If every row is a refusal, days_since stays
+    None and stall stays true; 0 would look like a landing today."""
     today = today or datetime.date.today().isoformat()
-    rows = load_adoption()
+    rows = [r for r in load_adoption()
+            if not adoption_note_is_dropped(r.get("note"))]
     dated = sorted([r for r in rows if r["date"]], key=lambda r: r["date"])
     try:
         t = datetime.date.fromisoformat(today)
