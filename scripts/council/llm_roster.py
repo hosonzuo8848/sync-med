@@ -78,6 +78,30 @@ class BudgetExhausted(RuntimeError):
     pass
 
 
+class SeatFailed(RuntimeError):
+    """A seat's call ended. `retryable` is false for a permanent 4xx or an empty body."""
+
+    def __init__(self, seat_id, detail, retryable):
+        RuntimeError.__init__(self, "seat %s failed: %s" % (seat_id, detail))
+        self.retryable = bool(retryable)
+
+
+def _retryable(exc):
+    """429, 5xx, and transport failures can clear on the next try.
+
+    Any other 4xx, and an empty body, will come back the same. A dead probe
+    that retries those spends the meeting budget before the judge speaks
+    (2026-11-12 dry run, cap 12).
+    """
+    if isinstance(exc, urllib.error.HTTPError):
+        return exc.code in (408, 429) or exc.code >= 500
+    if isinstance(exc, (urllib.error.URLError, TimeoutError)):
+        return True
+    if "empty response" in str(exc):
+        return False
+    return True
+
+
 def budget_snapshot():
     with _lock:
         return dict(_state)
@@ -364,6 +388,7 @@ def call(seat, system, user, max_tokens=1200, temperature=0.6, timeout=150,
         raise RuntimeError("cf seat %s refused: disabled by founder's order 2026-07-25"
                            % seat.get("id"))
     last = None
+    last_retryable = True
     for attempt in range(retries + 1):
         n = _reserve_call(stage)
         key = _pick_key(seat)
@@ -395,18 +420,21 @@ def call(seat, system, user, max_tokens=1200, temperature=0.6, timeout=150,
                 except Exception:
                     pass
             last = detail
+            last_retryable = _retryable(e)
             with _lock:
                 _state["fails"] += 1
             CALL_LOG.append({"n": n, "seat": seat["id"], "stage": stage, "tag": tag,
                              "sec": round(dt, 1), "ok": False, "err": detail,
                              "in": 0, "out": 0, "neurons": 0.0})
+            if not last_retryable:
+                break
             if attempt < retries:
                 # free pools rate-limit per MINUTE, so a 3s nap just buys a
                 # second 429. Measured 2026-07-25: agnes and zhipu both answer
                 # 429 under burst while the key itself is perfectly healthy.
                 is_429 = isinstance(e, urllib.error.HTTPError) and e.code == 429
                 time.sleep((20 if is_429 else 3) + attempt * 4)
-    raise RuntimeError("seat %s failed: %s" % (seat["id"], last))
+    raise SeatFailed(seat["id"], last, last_retryable)
 
 
 def probe(seat, timeout=45, retries=2):
@@ -426,7 +454,8 @@ def probe(seat, timeout=45, retries=2):
         probed as dead. Hence per-seat `probe_tokens`. Probe tokens are free
         here; a mis-benched vendor is not.
       - one retry with a 6s nap. Free pools rate-limit per minute; 6s lands in
-        the same window. Now 2 retries with a widening wait.
+        the same window. Now 2 retries with a widening wait, and only when the
+        failure is retryable (429, 5xx, timeout). A 401 or an empty body stops.
     """
     live = []
     ptok = seat.get("probe_tokens") or 8
@@ -441,9 +470,13 @@ def probe(seat, timeout=45, retries=2):
                 break
             except BudgetExhausted:
                 return bool(live)
-            except Exception:
-                if attempt < retries:
+            except SeatFailed as e:
+                if attempt < retries and e.retryable:
                     time.sleep(12 + attempt * 12)
+                else:
+                    break
+            except Exception:
+                break
     if live:
         seat["keys"] = live
         return True
