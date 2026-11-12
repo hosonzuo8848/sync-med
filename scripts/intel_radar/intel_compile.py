@@ -5,7 +5,8 @@ jxxy.net/ai compiles every source into one fixed-template page. Blueprint: docs/
 
 MODE=facts   candidates = intel_items (importance='high' OR relevance_score>=0.7) AND source<>'bioRxiv' within DAYS,
              fetch full text (r.jina.ai, <=12KB), GitHub metadata/README for repos; write facts_json/body_md/refs,
-             status='facts'; skip when source_hash unchanged.
+             status='facts'; skip when source_hash unchanged. An existing page_id is not a skip.
+             ON CONFLICT refreshes books_n (full text -> 1) so mode_llm can select the row.
 MODE=llm     for status='facts' pages of kind intel (newest first, LIMIT): ask the gateway for six fixed sections as
              structured JSON; tier-1 sentences must carry a verbatim quote found in the fetched text, else downgrade;
              missing section / unknown names / too short -> gated (page stays facts-only).
@@ -144,7 +145,7 @@ def upsert(f, body, h):
     _BUF.append("INSERT INTO wiki_pages (page_id,kind,name_s,title,status,facts_json,body_md,summary_md,refs_json,source_hash,versions_n,books_n,prompt_ver,model,compiled_at) "
                 "VALUES (%s,'intel',%s,%s,'facts',%s,%s,NULL,%s,%s,%d,%d,NULL,NULL,%d) "
                 "ON CONFLICT(page_id) DO UPDATE SET title=excluded.title, status='facts', facts_json=excluded.facts_json, body_md=excluded.body_md, summary_md=NULL, "
-                "refs_json=excluded.refs_json, source_hash=excluded.source_hash, versions_n=excluded.versions_n, compiled_at=excluded.compiled_at"
+                "refs_json=excluded.refs_json, source_hash=excluded.source_hash, versions_n=excluded.versions_n, books_n=excluded.books_n, compiled_at=excluded.compiled_at"
                 % (qs(pid), qs(f["intel_id"]), qs(title), qs(json.dumps(f, ensure_ascii=False)[:48000]), qs(body[:60000]), qs(json.dumps(refs, ensure_ascii=False)), qs(h),
                    int(round(float(f.get("relevance") or 0) * 100)), 1 if f["fulltext_ok"] else 0, now()))
     _BUF.append("DELETE FROM wiki_refs WHERE page_id=%s" % qs(pid))
@@ -159,7 +160,10 @@ def mode_facts():
     made = skipped = nofull = 0
     for it in items:
         if made >= LIMIT: break
-        if not FORCE and it["intel_id"] in existing: skipped += 1; continue
+        # Existing name_s is not a skip. A no-fulltext insert stores books_n=0;
+        # the hash compare below is the header contract, and only an upsert can
+        # move books_n to 1 after the text arrives. Continuing here made that
+        # compare unreachable, so mode_llm never saw the page.
         f = build_facts(it)
         h = sha1(json.dumps({k: f[k] for k in ("title", "url", "text", "github")}, ensure_ascii=False, sort_keys=True))
         if not FORCE and existing.get(it["intel_id"]) == h: skipped += 1; continue
