@@ -113,24 +113,30 @@ def system_state():
       两件事我混了一个多月,这里先把它掰开。
     """
     out = []
+    failed = False
     try:
         r = d1("SELECT COUNT(*) c FROM gh_repo_pool")[0]["c"]
         j = d1("SELECT COUNT(*) c FROM evolve_candidates WHERE kind='repo'")[0]["c"]
         out.append(f"月榜库 **{r}** 个仓 · 已判 **{j}** · 待判 **{r-j}**")
-    except Exception:
-        pass
+    except Exception as e:
+        failed = True
+        print("  [status] pool unread: %s" % str(e)[:80], flush=True)
     try:
         rows = d1("SELECT status, COUNT(*) c FROM evolve_candidates WHERE kind='repo' GROUP BY status")
         m = {x["status"]: x["c"] for x in rows}
         out.append("判定分布:" + " · ".join(f"{k} {v}" for k, v in sorted(m.items(), key=lambda kv: -kv[1])))
-    except Exception:
-        pass
+    except Exception as e:
+        failed = True
+        print("  [status] verdict unread: %s" % str(e)[:80], flush=True)
     try:
         n = d1("SELECT COUNT(*) c FROM intel_items")[0]["c"]
         out.append(f"情报条目 **{n}** 条(雷达采集)")
-    except Exception:
-        pass
-    return out
+    except Exception as e:
+        failed = True
+        print("  [status] intel unread: %s" % str(e)[:80], flush=True)
+    if failed:
+        out.append("status unread")
+    return out, failed
 
 
 def main():
@@ -146,7 +152,7 @@ def main():
         return 1
     adopt = [parse(r) for r in adopt_rows]
     watch = [parse(r) for r in watch_rows]
-    gaps = system_state()
+    gaps, _status_failed = system_state()
     today = time.strftime("%Y-%m-%d")
 
     os.makedirs(os.path.dirname(a.out), exist_ok=True)

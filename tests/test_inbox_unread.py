@@ -61,3 +61,28 @@ class FailedInboxRead(unittest.TestCase):
         self.assertEqual(n, 0)
         self.assertFalse(failed)
         self.assertTrue(inbox.should_publish(False, False, False))
+
+    def test_failed_status_is_not_a_complete_picture(self):
+        def boom(sql):
+            raise RuntimeError("down")
+
+        inbox.d1 = boom
+        lines, failed = inbox.system_state()
+        self.assertTrue(failed)
+        self.assertIn("status unread", lines)
+
+    def test_a_real_status_count_stays(self):
+        def fake(sql):
+            if "GROUP BY" in sql:
+                return [{"status": "adopt", "c": 2}]
+            if "intel_items" in sql:
+                return [{"c": 7}]
+            if "gh_repo_pool" in sql:
+                return [{"c": 10}]
+            return [{"c": 3}]
+
+        inbox.d1 = fake
+        lines, failed = inbox.system_state()
+        self.assertFalse(failed)
+        self.assertTrue(any("10" in line for line in lines))
+        self.assertNotIn("status unread", lines)
