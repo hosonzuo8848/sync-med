@@ -1032,18 +1032,35 @@ def apply_adoption_to_ledger(doc):
     adoption.txt is the authority; the ledger's `status` is a derived view kept
     in sync so the council reads one truth and not two.
 
+    A note that, after stripping, starts with DROPPED (any case) is a recorded
+    refusal, not a landing. Those rows are written status=dropped and keep the
+    original note. Writing them integrated claimed we shipped a thing the file
+    already refused (DietrichGebert/ponytail, 2026-08-05: the note began with
+    DROPPED and the ledger became integrated / "adopted 2026-08-05"). The
+    integrated-skip below does not apply to a refusal: a previous false landing
+    has to be correctable, or that stamp sticks on every later run.
+
+    Every other row is still status=integrated, note "adopted <date>" or
+    "adopted (stock)". An entry that is already integrated is left untouched.
+
     Entries absent from the ledger are CREATED, not skipped. Measured on the
     real 330-entry ledger: none of the four things we actually run had ever been
     surfaced by a scan, so an update-only version moved zero rows and `integrated`
-    -- the terminal state of the whole lifecycle -- stayed permanently
+    -- the terminal state of a real landing -- stayed permanently
     unreachable, which is the same dead-field bug this file exists to fix. A
     thing in production belongs in the arsenal's history by definition. The row
     is stamped found_by=adoption.txt so it is never mistaken for a scan result,
-    and carries no stars/topics we did not measure."""
+    and carries no stars/topics we did not measure. A DROPPED row that was never
+    scanned is created the same way, but its status is dropped, not integrated."""
     by_repo = {e["repo"]: e for e in doc.get("entries", [])}
     n = 0
     for r in load_adoption():
-        note = ("adopted %s" % r["date"]) if r["date"] else "adopted (stock)"
+        raw_note = r.get("note") or ""
+        # Prefix, not a substring: "not DROPPED" is still a landing. Case and
+        # surrounding whitespace do not change the refusal.
+        dropped = str(raw_note).strip().upper().startswith("DROPPED")
+        note = raw_note if dropped else (
+            ("adopted %s" % r["date"]) if r["date"] else "adopted (stock)")
         e = by_repo.get(r["id"])
         if e is None:
             e = {"repo": r["id"],
@@ -1052,6 +1069,16 @@ def apply_adoption_to_ledger(doc):
                  "status_note": "", "found_by": {"dimension": "adoption.txt"}}
             doc.setdefault("entries", []).append(e)
             by_repo[r["id"]] = e
+        if dropped:
+            # Already correct: do not count it as a fresh apply. A wrong status
+            # (including a previous false "integrated") is rewritten here.
+            # Skipping every integrated row is what froze the ponytail stamp.
+            if e.get("status") == "dropped" and e.get("status_note") == raw_note:
+                continue
+            e["status"] = "dropped"
+            e["status_note"] = raw_note
+            n += 1
+            continue
         if e.get("status") == "integrated":
             continue
         e["status"] = "integrated"
