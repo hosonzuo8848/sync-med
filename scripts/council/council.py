@@ -542,6 +542,21 @@ def critique_peer_count(plans):
     return max(0, sum(1 for p in plans if debatable(p)) - 1)
 
 
+def report_seat_vendors(results):
+    """Seat vendors of debatable plans only, sorted and deduped.
+
+    The lead joined every ok seat. A vendor that only handed in a
+    number-less monologue then read as a formal participant. Empty means
+    nobody cleared the number gate; the caller still prints "-".
+    """
+    return sorted({
+        p["seat"]["vendor"]
+        for r in results
+        for p in r["plans"]
+        if debatable(p)
+    })
+
+
 def _usage_kwargs(snap, dist, elapsed):
     """Every placeholder in zh.usage_tpl. Missing one raises KeyError after the
     meeting has already finished, which is how the 2026-11-12 dry run died."""
@@ -559,8 +574,7 @@ def _usage_kwargs(snap, dist, elapsed):
 def build_report(date_str, topics, results, metrics, skipped, bench_report,
                  radar, judge, judge_independent, stage_times, run_id, run_url):
     snap = roster.budget_snapshot()
-    seats = ", ".join(sorted({p["seat"]["vendor"] for r in results
-                              for p in r["plans"] if p["ok"]})) or "-"
+    seats = ", ".join(report_seat_vendors(results)) or "-"
     dist = ", ".join("%s=%d" % (k, v) for k, v in sorted(
         _call_dist().items(), key=lambda kv: -kv[1]))
     out = [
