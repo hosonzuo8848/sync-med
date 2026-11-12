@@ -57,6 +57,8 @@ from daily_report_v3 import (  # 复用情报雷达同一套引擎,不重造轮�
     fetch_url,
     fetch_rss,
     _call_llm_sync,
+    BatchUnscored,
+    parse_score_array,
     ZHIPU_KEY,
     NVIDIA_KEY,
     ZHIPU_MODEL,
@@ -296,26 +298,8 @@ def analyze_batch(batch: list, offset: int, model: str, use_gateway: bool) -> li
         print(f"    [分析] 批次失败: {e}")
         return []
 
-    text = response.strip()
-    if text.startswith("```"):
-        inner = []
-        for line in text.split("\n")[1:]:
-            if line.strip() == "```":
-                break
-            inner.append(line)
-        text = "\n".join(inner)
-
-    try:
-        picks = json.loads(text)
-    except json.JSONDecodeError:
-        m = re.search(r"\[.*\]", text, re.DOTALL)
-        if not m:
-            return []
-        try:
-            picks = json.loads(m.group())
-        except json.JSONDecodeError:
-            print(f"    [分析] JSON 解析失败,原始: {text[:150]}")
-            return []
+    # A cut-off reply is BatchUnscored, not an empty finished batch.
+    picks = parse_score_array(response)
 
     if not isinstance(picks, list):
         return []
@@ -348,7 +332,15 @@ def analyze_all(all_items: list, models: list, use_gateway: bool,
         offset = bi * batch_size
         batch = all_items[offset:offset + batch_size]
         model = models[bi % len(models)]
-        got = analyze_batch(batch, offset, model, use_gateway)
+        try:
+            got = analyze_batch(batch, offset, model, use_gateway)
+        except BatchUnscored:
+            print(
+                "    [UNSCORED] batch %d/%d [%s]"
+                % (bi + 1, n_batches, model),
+                flush=True,
+            )
+            raise
         print(f"    批{bi + 1}/{n_batches} [{model}] -> {len(got)} 条命中 (共 {len(batch)} 条)", flush=True)
         picks.extend(got)
         time.sleep(sleep_s)
