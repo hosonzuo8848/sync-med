@@ -145,12 +145,15 @@ def band_action(total, band, cap, per_page, depth, max_depth):
     return ("fetch", pages)
 
 
-def exit_code(missed):
-    """0 only when nothing in the sweep was dropped.
+def exit_code(missed, write_failed=False):
+    """0 only when nothing in the sweep was dropped and the write landed.
 
     The adopt workflow treats exit 0 as a finished month-board. Keeping
-    1000 of a 2500-hit band used to take that path.
+    1000 of a 2500-hit band used to take that path. A failed insert that
+    returned 0 used to take it too.
     """
+    if write_failed:
+        return 1
     try:
         n = int(missed or 0)
     except (TypeError, ValueError):
@@ -158,7 +161,7 @@ def exit_code(missed):
     return 1 if n > 0 else 0
 
 
-def report_payload(rows, saved, pool_total, fresh, gap):
+def report_payload(rows, saved, pool_total, fresh, gap, write_failed=False):
     """Same four keys as before, plus how many hits the sweep did not keep."""
     missed = 0
     short_bands = []
@@ -168,6 +171,7 @@ def report_payload(rows, saved, pool_total, fresh, gap):
     return {
         "swept": len(rows) if rows is not None else 0,
         "saved": saved,
+        "write_failed": bool(write_failed),
         "pool_total": pool_total,
         "new": fresh,
         "missed": missed,
@@ -329,18 +333,22 @@ def save(rows, batch=60):
     """全量写进我们自己的后台。**采集端不筛**,筛在内部消化那一步。"""
     ensure_table()
     now = int(time.time())
-    vals, n = [], 0
+    vals, n, failed = [], 0, False
     for r in rows.values():
         vals.append("(" + ",".join([
             q(r["repo"]), q(r["url"]), q(r["description"]), str(r["stars"]), str(r["forks"]),
             q(r["lang"]), q(r["topics"]), q(r["license"]), q(r["created_at"]), q(r["pushed_at"]),
             q(r["found_by"]), str(now), str(now)]) + ")")
         if len(vals) >= batch:
-            n += _flush(vals, now)
+            added, bad = _flush(vals, now)
+            n += added
+            failed = failed or bad
             vals = []
     if vals:
-        n += _flush(vals, now)
-    return n
+        added, bad = _flush(vals, now)
+        n += added
+        failed = failed or bad
+    return n, failed
 
 
 def _flush(vals, now):
@@ -352,10 +360,10 @@ def _flush(vals, now):
            f" ON CONFLICT(repo) DO UPDATE SET stars=excluded.stars, forks=excluded.forks, "
            f"description=excluded.description, topics=excluded.topics, "
            f"pushed_at=excluded.pushed_at, last_seen={now}")
-        return len(vals)
+        return len(vals), False
     except Exception as e:
         print(f"  写库失败({len(vals)} 条):{str(e)[:130]}", flush=True)
-        return 0
+        return 0, True
 
 
 def _ensure_delta_cols():
@@ -388,20 +396,25 @@ def main():
 
     print(f"=== Trending 算子 · 月榜全量({a.days} 天)· 零 AI 调用 ===", flush=True)
     rows, gap = sweep(days=a.days, max_pages=a.max_pages)
-    n = save(rows)
+    n, write_failed = save(rows)
     try:
         tot = d1("SELECT COUNT(*) c FROM gh_repo_pool")[0]["c"]
         fresh = d1(f"SELECT COUNT(*) c FROM gh_repo_pool WHERE first_seen>={int(time.time())-3600}")[0]["c"]
-    except Exception:
-        tot = fresh = -1
+        pool_failed = False
+    except Exception as e:
+        tot = fresh = None
+        pool_failed = True
+        print("  [pool] count unread: %s" % str(e)[:80], flush=True)
     missed = gap["missed"]
-    print(f"\n=== 本轮扫到 {len(rows)} 个,写库 {n} 条 → 后台累计 {tot} 个(本轮新增 {fresh}) missed={missed} ===", flush=True)
+    tot_show = "unread" if pool_failed else tot
+    fresh_show = "unread" if pool_failed else fresh
+    print(f"\n=== 本轮扫到 {len(rows)} 个,写库 {n} 条 → 后台累计 {tot_show} 个(本轮新增 {fresh_show}) missed={missed} ===", flush=True)
     for r in sorted(rows.values(), key=lambda x: -x["stars"])[:10]:
         print(f"  {r['stars']:6d}★ {r['repo'][:44]:44s} {r['description'][:50]}", flush=True)
     if a.report:
-        json.dump(report_payload(rows, n, tot, fresh, gap),
+        json.dump(report_payload(rows, n, tot_show, fresh_show, gap, write_failed),
                   open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return exit_code(missed)
+    return exit_code(missed, write_failed)
 
 
 if __name__ == "__main__":
