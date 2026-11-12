@@ -470,6 +470,20 @@ def race_table(plans):
     return "\n".join(rows)
 
 
+def _usage_kwargs(snap, dist, elapsed):
+    """Every placeholder in zh.usage_tpl. Missing one raises KeyError after the
+    meeting has already finished, which is how the 2026-11-12 dry run died."""
+    return {
+        "calls": snap["calls"],
+        "cap": roster.MAX_CALLS,
+        "fails": snap["fails"],
+        "dist": dist or "-",
+        "neurons": snap["neurons"],
+        "nbudget": roster.CF_NEURON_BUDGET,
+        "elapsed": elapsed,
+    }
+
+
 def build_report(date_str, topics, results, metrics, skipped, bench_report,
                  radar, judge, judge_independent, stage_times, run_id, run_url):
     snap = roster.budget_snapshot()
@@ -535,8 +549,7 @@ def build_report(date_str, topics, results, metrics, skipped, bench_report,
                      accept=acc.replace("\n", " ")[:300]))
     out += ["", t("rpt_h2_seats"), "", seats_md(bench_report), "",
             t("rpt_h2_usage"), "",
-            t("usage_tpl", calls=snap["calls"], cap=roster.MAX_CALLS, fails=snap["fails"],
-              dist=dist or "-", elapsed=hhmmss(time.time() - T0)), "",
+            t("usage_tpl", **_usage_kwargs(snap, dist, hhmmss(time.time() - T0))), "",
             t("rpt_footer")]
     return "\n".join(out)
 
