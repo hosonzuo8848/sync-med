@@ -134,6 +134,51 @@ def run_exam(scope, body, items):
     return (sum(scores) / len(scores) if scores else 0.0), quals, [round(x, 3) for x in scores]
 
 
+def comparison_stamp_sql(columns, scope, n_produced, baseline, now):
+    """SQL for one stored comparison, or None when the table cannot record one.
+
+    Only call this after at least one non-champion candidate was scored.
+    A failed race must not insert, or the controller clock turns green
+    on a run that never compared anything.
+    """
+    cols = set(columns or [])
+    if "created_at" not in cols:
+        return None
+    fields = ["created_at"]
+    values = [str(int(now))]
+    if "scope" in cols:
+        fields.append("scope")
+        values.append(q(scope))
+    if "n_produced" in cols:
+        fields.append("n_produced")
+        values.append(str(int(n_produced)))
+    if "baseline" in cols and isinstance(baseline, (int, float)):
+        fields.append("baseline")
+        values.append(str(round(float(baseline), 4)))
+    if "kind" in cols:
+        fields.append("kind")
+        values.append(q("comparison"))
+    return "INSERT INTO race_results (%s) VALUES (%s)" % (",".join(fields), ",".join(values))
+
+
+def stamp_comparison(scope, n_produced, baseline):
+    """Best-effort write. A D1 miss must not hide a comparison that already happened."""
+    if n_produced < 1:
+        print("clock stamp refused: no candidate")
+        return
+    try:
+        info = d1("PRAGMA table_info(race_results)")
+        cols = [row.get("name") for row in info if isinstance(row, dict)]
+        sql = comparison_stamp_sql(cols, scope, n_produced, baseline, int(time.time()))
+        if not sql:
+            print("clock stamp skipped: race_results.created_at is absent")
+            return
+        d1(sql)
+        print("clock stamp wrote 1 comparison row")
+    except Exception as e:
+        print("clock stamp failed: %s" % str(e)[:160])
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scope", default="biocomp", help="biocomp / herb")
@@ -207,6 +252,7 @@ def main():
     if not produced:
         print("REFUSING GREEN: zero candidates. Calls failed before any comparison.")
         return 1
+    stamp_comparison(scope, len(produced), base)
     return 0
 
 
