@@ -12,6 +12,8 @@ Two hard rails live in this file, because everything downstream trusts them:
      topic can always be phrased as "current number -> target number". A metric
      that fails to query degrades to skipped (never to a fabricated 0) -- a
      silent 0 would look like a catastrophic gap and would hijack the triage.
+     A successful query whose denominator is 0 is the same non-measurement:
+     recall_from_counts returns None and the probe is skipped as "no sample".
 
 Metric targets are deliberately plain constants rather than model-chosen: the
 triage ranking has to be recomputable by hand from the report, otherwise "why
@@ -105,6 +107,21 @@ def _m(key, organ, label_key, value, target, display, unit, higher_is_better=Tru
     }
 
 
+def recall_from_counts(total, with_ev, sql=""):
+    """Recall over a counted window. A zero denominator is not a rate.
+
+    Writing 0.0 here against the 90 target used to score
+    (90-0)/90 * ORGAN_WEIGHT["xunmai"] (1.15) = 1.15. is_gap fires above
+    0.15, so an empty week was triaged as a recall failure. Query errors
+    still raise; the caller skips those on the existing exception path.
+    """
+    if total == 0:
+        return None
+    pct = with_ev * 100.0 / total
+    return _m("xunmai_recall", "xunmai", "m_xunmai_recall", round(pct, 1), 90.0,
+              "%s/%s(%.1f%%)" % (with_ev, total, pct), "%", sql=sql)
+
+
 def collect_metrics():
     """Probe every organ. Each probe is isolated: one failure never blanks the
     board and never fabricates a 0 (it is dropped, and reported as skipped)."""
@@ -113,7 +130,12 @@ def collect_metrics():
     def guard(fn):
         try:
             m = fn()
-            if m:
+            # None means the probe ran and had nothing to measure (recall
+            # over an empty window). Appending a fabricated 0 would cross
+            # the 0.15 gap line. A raised error stays on the path below.
+            if m is None:
+                skipped.append("%s: %s" % (fn.__name__, "no sample"))
+            elif m:
                 out.append(m)
         except Exception as e:
             skipped.append("%s: %s" % (fn.__name__, str(e)[:70]))
@@ -124,9 +146,7 @@ def collect_metrics():
                "FROM sue_call_logs WHERE created_at >= strftime('%s','now','-7 days')")
         r = d1_query(sql)[0]
         total, with_ev = r.get("total") or 0, r.get("with_ev") or 0
-        pct = (with_ev * 100.0 / total) if total else 0.0
-        return _m("xunmai_recall", "xunmai", "m_xunmai_recall", round(pct, 1), 90.0,
-                  "%s/%s(%.1f%%)" % (with_ev, total, pct), "%", sql=sql)
+        return recall_from_counts(total, with_ev, sql)
 
     def xunmai_vol():
         sql = ("SELECT COUNT(*) c FROM sue_call_logs "
