@@ -116,6 +116,8 @@ jobs:
               print("> **WARNING write unread** - a rank write failed, so a saved count of 0 is not an empty board.")
           if d.get("list_failed"):
               print("> **WARNING list unread** - a rank directory could not be listed, so zero periods is not an empty board.")
+          if d.get("fetch_failed"):
+              print("> **WARNING period unread** - a rank file could not be downloaded, so zero items is not a format change.")
           if d.get("pool_total") == "unread":
               print("> **WARNING pool unread** - the pool count was not read.")
           PY

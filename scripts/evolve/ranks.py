@@ -193,6 +193,20 @@ def fetch_md(repo, path):
     return base64.b64decode(j.get("content", "")).decode("utf-8", "replace")
 
 
+def read_period(fetch, repo, path, period):
+    """A raised fetch is an unread period, not an empty board."""
+    try:
+        return fetch(repo, path), False
+    except Exception as e:
+        print(f"    取 {period} 失败:{str(e)[:60]}", flush=True)
+        return "", True
+
+
+def format_changed(n_files, n_items, fetch_failed):
+    """Zero parsed rows means a format change only when every period was read."""
+    return bool(n_files) and n_items == 0 and not fetch_failed
+
+
 def parse(md, kind, period):
     """从一期榜单里解析出条目。**纯正则,不问模型。**"""
     rows = []
@@ -368,12 +382,13 @@ def _flush(vals, now):
         return 0, True
 
 
-def finish_code(parsed, save_failed, growth_failed, list_failed=False):
+def finish_code(parsed, save_failed, growth_failed, list_failed=False, fetch_failed=False):
     """Rows were parsed but a write raised: that is not an empty board.
 
-    A directory that could not be listed is not zero periods either.
+    A directory that could not be listed, or a period that could not be
+    downloaded, is not zero periods either.
     """
-    if list_failed:
+    if list_failed or fetch_failed:
         return 1
     if parsed and (save_failed or growth_failed):
         return 1
@@ -405,6 +420,7 @@ def main():
 
     all_rows, stat = [], {}
     list_failed = False
+    fetch_failed = False
     for repo, kind in SOURCES:
         if kind not in kinds:
             continue
@@ -419,12 +435,13 @@ def main():
             print(f"  [{kind}] ⚠️ 零期次 —— 上游目录结构可能又变了,或 years 参数不对。"
                   f"这不是正常状态,请查 {repo}/{years}", flush=True)
         got = 0
+        kind_fetch = False
         for y, name, path in files:
             period = f"{y}-{name.replace('.md','')}"
-            try:
-                md = fetch_md(repo, path)
-            except Exception as e:
-                print(f"    取 {period} 失败:{str(e)[:60]}", flush=True)
+            md, unread = read_period(fetch_md, repo, path, period)
+            if unread:
+                kind_fetch = True
+                fetch_failed = True
                 continue
             if a.snapshot:
                 dst = os.path.join(SNAP_DIR, kind, y)
@@ -434,11 +451,12 @@ def main():
             got += len(rows)
             all_rows += rows
             time.sleep(0.6)         # 温和,别把 API 配额打满
-        if files and got == 0:
+        if format_changed(len(files), got, kind_fetch):
             # 有期次却零解析 = 上游改版式了。原文已 --snapshot 存仓,解析逻辑改了能重洗。
             print(f"  [{kind}] WARN {len(files)} 期全部解析为 0 条 —— 上游格式疑似变更,"
                   f"两套解析器都没命中,请人工看一期原文", flush=True)
-        stat[kind] = {"periods": len(files), "items": got, "list_failed": kind_unread}
+        stat[kind] = {"periods": len(files), "items": got,
+                      "list_failed": kind_unread, "fetch_failed": kind_fetch}
         print(f"  [{kind}] 解析出 {got} 条", flush=True)
 
     n, save_failed = save(all_rows)
@@ -461,13 +479,14 @@ def main():
     if a.report:
         # by_kind 的期次/条数必须进报告 —— workflow 侧据此判定要不要开 Issue,
         # 治「只写进日志的产线一律视为没人看」(CLAUDE.md 第 8 条)。
-        empty = [k for k, v in stat.items() if v["items"] == 0 and not v.get("list_failed")]
+        empty = [k for k, v in stat.items()
+                 if v["items"] == 0 and not v.get("list_failed") and not v.get("fetch_failed")]
         json.dump({"parsed": len(all_rows), "saved": n, "write_failed": save_failed,
                    "growth_saved": gn, "growth_failed": growth_failed,
-                   "list_failed": list_failed,
+                   "list_failed": list_failed, "fetch_failed": fetch_failed,
                    "pool_total": tot_show, "by_kind": stat, "empty_kinds": empty},
                   open(a.report, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    return finish_code(len(all_rows), save_failed, growth_failed, list_failed)
+    return finish_code(len(all_rows), save_failed, growth_failed, list_failed, fetch_failed)
 
 
 if __name__ == "__main__":
