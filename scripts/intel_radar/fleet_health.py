@@ -10,8 +10,8 @@ UA = {"User-Agent": "FleetHealth/1.0", "Content-Type": "application/json"}
 REPO = os.environ.get("GITHUB_REPOSITORY", "hosonzuo8848/sync-med")
 TITLE = "\U0001F6A2 fleet-health"  # ship emoji
 
-def fetch(url, body=None, timeout=120):
-    req = urllib.request.Request(url, data=json.dumps(body).encode() if body else None, headers=UA)
+def fetch(url, body=None, timeout=120, headers=None):
+    req = urllib.request.Request(url, data=json.dumps(body).encode() if body else None, headers=headers or UA)
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8", "replace"))
 
@@ -44,11 +44,23 @@ def probe_health():
     return rows
 
 def probe_usage():
+    """(providers, cooling, failed). The usage endpoint requires X-Gateway-Key.
+
+    A failed read is not "no load and nothing cooling".
+    """
+    hdr = dict(UA, **({"X-Gateway-Key": os.environ["GW_KEY"]} if os.environ.get("GW_KEY") else {}))
     try:
-        j = fetch(f"{SITE}/api/gateway/usage", timeout=40)
-        return j.get("providers", []), j.get("cooling", [])
-    except Exception:
-        return [], []
+        j = fetch(f"{SITE}/api/gateway/usage", timeout=40, headers=hdr)
+        return j.get("providers", []), j.get("cooling", []), False
+    except Exception as e:
+        print("  [usage] unread: %s" % str(e)[:80], flush=True)
+        return [], [], True
+
+
+def cooling_line(cooling, failed):
+    if failed:
+        return "- cooling now: unread (usage endpoint failed)"
+    return f"- cooling now: {', '.join(c.get('provider') for c in cooling) if cooling else 'none (all active)'}"
 
 # ── 质量探针(2026-08-08 整合队列#6·拆 promptfoo「声明式断言测质量」机制自写)──
 #   连通性(probe_health)只答「网关通不通」,答不了「这个时段派来的模型会不会好好干活」。
@@ -161,7 +173,7 @@ def main():
     except Exception as e:
         rows = [("gateway/health", "DOWN", 0, str(e)[:60])]
     e2e_status, e2e_s, e2e_info = probe_e2e()
-    usage, cooling = probe_usage()
+    usage, cooling, usage_failed = probe_usage()
     try:
         q_ok, q_total, q_rows = probe_quality()
     except Exception as e:
@@ -193,7 +205,7 @@ def main():
         for u in usage[:12]:
             lines.append(f"| {u.get('provider')} | {u.get('calls')} | {u.get('ok')} | {u.get('tokens')} |")
         lines.append("")
-    lines.append(f"- cooling now: {', '.join(c.get('provider') for c in cooling) if cooling else 'none (all active)'}")
+    lines.append(cooling_line(cooling, usage_failed))
     lines.append(f"- providers down: {len(down)} (core down: {len(core_down)})")
     lines.append(f"- rule: ALERT if any core (modelscope/sensenova/cerebras) down, >=3 down, or e2e fail")
     lines.append(f"- ts: {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}")
