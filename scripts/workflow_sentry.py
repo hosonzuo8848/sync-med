@@ -104,6 +104,34 @@ def gh(path, method='GET', payload=None):
 
 
 
+def list_workflows(fetch=None, per_page=100):
+    """Every workflow, across pages. One page of 100 left the tail unchecked."""
+    fetch = fetch or gh
+    out, page = [], 1
+    while True:
+        d = fetch(f'/repos/{REPO}/actions/workflows?per_page={per_page}&page={page}')
+        got = d.get('workflows', []) or []
+        out += got
+        if len(got) < per_page or len(out) >= int(d.get('total_count') or 0):
+            return out
+        page += 1
+
+
+_MARK = '<!-- failed: %s -->'
+
+
+def failed_marker(files):
+    return _MARK % ','.join(sorted(files))
+
+
+def new_failures(old_body, files):
+    """Failed workflow files not listed in the previous body's marker."""
+    import re
+    m = re.search(r'<!-- failed: ([^>]*) -->', old_body or '')
+    before = set(x for x in (m.group(1).split(',') if m else []) if x)
+    return sorted(f for f in files if f not in before)
+
+
 _CRON_CACHE = {}
 
 def _cron_period_hours(fname):
@@ -148,7 +176,7 @@ def _cron_period_hours(fname):
 
 
 def main():
-    wfs = gh(f'/repos/{REPO}/actions/workflows?per_page=100').get('workflows', [])
+    wfs = list_workflows()
     now = datetime.datetime.now(datetime.timezone.utc)
 
     failed, stale, must_stall = [], [], []
@@ -230,6 +258,8 @@ def main():
             lines.append(f'- {n} (`{f}`) · 上次 {h} 小时前（该任务阈值 {lim}h）')
         lines += ['', '停摆先查"是不是没触发/被 cancel"，别先改代码——'
                       '「之前几天好好的、代码越改越停」是改坏停摆反模式。']
+    failed_files = [f for _, f, _, _ in failed]
+    lines += ['', failed_marker(failed_files)]
     body = '\n'.join(lines)
 
     if not GH_TOKEN:
@@ -238,8 +268,15 @@ def main():
     issues = gh(f'/repos/{REPO}/issues?state=open&labels=pipeline&per_page=20')
     hit = next((i for i in issues if i['title'].startswith('🏭 产线失败')), None)
     if hit:
+        fresh = new_failures(hit.get('body'), failed_files)
         gh(f"/repos/{REPO}/issues/{hit['number']}", 'PATCH', {'title': title, 'body': body})
         print(f"已更新 Issue #{hit['number']}")
+        if fresh:
+            # Editing a body notifies no one. A comment does, and only when
+            # the failed set gains a member, so a steady state stays quiet.
+            note = 'Newly failing since the last sentry pass: ' + ', '.join(f'`{f}`' for f in fresh)
+            gh(f"/repos/{REPO}/issues/{hit['number']}/comments", 'POST', {'body': note})
+            print('commented new failures: ' + ', '.join(fresh))
     else:
         r = gh(f'/repos/{REPO}/issues', 'POST', {'title': title, 'body': body, 'labels': ['pipeline']})
         print(f"已开 Issue #{r['number']}")
