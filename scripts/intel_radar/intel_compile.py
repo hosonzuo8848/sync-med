@@ -18,7 +18,7 @@ import os, sys, io, json, time, hashlib, re, urllib.request, urllib.error, urlli
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'content_factory'))
 from _ai import d1, GATEWAY, jev, JEV_STATS
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 MODE = os.environ.get("MODE") or "facts"; DAYS = int(os.environ.get("DAYS") or "1"); LIMIT = int(os.environ.get("LIMIT") or "40")
 FORCE = os.environ.get("FORCE") == "1"; KEY = os.environ.get("GW_KEY", ""); GH = os.environ.get("GH_TOKEN", ""); REPO = os.environ.get("GITHUB_REPOSITORY", "")
 PROMPT_VER = "intel_v1"; KIND = "intel"; TEXT_MAX = 12000
