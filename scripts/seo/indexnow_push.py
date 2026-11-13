@@ -24,12 +24,14 @@ import re
 import urllib.request
 import urllib.error
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HOST = os.environ.get("INDEXNOW_HOST", "www.gufangai.com")
 KEY = os.environ.get("INDEXNOW_KEY", "")
 SITEMAP = os.environ.get("SITEMAP_URL", "https://www.gufangai.com/sitemap.xml")
-BATCH = int(os.environ.get("INDEXNOW_BATCH", "5000"))
+# A scheduled run passes the empty workflow input, so the variable exists
+# but is "". get(..., default) would not fall back in that case.
+BATCH = int(os.environ.get("INDEXNOW_BATCH") or "5000")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 # 只推内容页(长尾价值高);列表/首页爬虫自己会来
 CONTENT_PAT = re.compile(r"/(fangji|reader|text-reader|daodu)/")
@@ -41,23 +43,32 @@ def fetch(url):
 
 
 def collect_urls():
-    """从 sitemap(索引→子图)收集内容页 URL。"""
+    """从 sitemap(索引→子图)收集内容页 URL。Returns (urls, sub_failed)."""
     root = fetch(SITEMAP)
     subs = re.findall(r"<loc>([^<]+sitemap-\d+\.xml)</loc>", root)
     if not subs:
         subs = [SITEMAP]
     out = []
+    sub_failed = False
     for s in subs:
         try:
             body = fetch(s)
         except Exception as e:                                   # noqa: BLE001
             print("  ! 子图取失败 %s: %s" % (s, str(e)[:80]))
+            sub_failed = True
             continue
         locs = re.findall(r"<loc>([^<]+)</loc>", body)
         picked = [u for u in locs if CONTENT_PAT.search(u)]
         print("  %s: %d 个 URL,其中内容页 %d" % (s.rsplit("/", 1)[-1], len(locs), len(picked)))
         out.extend(picked)
-    return out
+    return out, sub_failed
+
+
+def finish_code(sent, ok, sub_failed):
+    """1 when a batch was rejected or a sub-sitemap was not read."""
+    if sub_failed or ok < sent:
+        return 1
+    return 0
 
 
 def push(urls):
@@ -95,11 +106,11 @@ def main():
         print("indexnow_push: key 文件不可访问(%s)→ 先部署" % str(e)[:80])
         return 1
 
-    urls = collect_urls()
+    urls, sub_failed = collect_urls()
     print("内容页共 %d 个,按 %d 一批推送" % (len(urls), BATCH))
     if not urls:
         print("无内容页可推(sitemap 里没有 /fangji/ 等内容页?)")
-        return 0
+        return finish_code(0, 0, sub_failed)
     sent = ok = 0
     for i in range(0, len(urls), BATCH):
         chunk = urls[i:i + BATCH]
@@ -111,7 +122,7 @@ def main():
         else:
             print("  [批%d] %d 条 → HTTP %d %s" % (i // BATCH + 1, len(chunk), code, msg[:120]))
     print("IndexNow 推送完:提交 %d / 成功 %d 条。Bing/Yandex 通常几分钟到几小时内抓取。" % (sent, ok))
-    return 0
+    return finish_code(sent, ok, sub_failed)
 
 
 if __name__ == "__main__":

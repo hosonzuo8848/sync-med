@@ -29,5 +29,5 @@ jobs:
       - name: Push URLs to IndexNow
         env:
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
-          INDEXNOW_BATCH: ${{ github.event.inputs.batch }}
+          INDEXNOW_BATCH: ${{ github.event.inputs.batch || '5000' }}
         run: python scripts/seo/indexnow_push.py
