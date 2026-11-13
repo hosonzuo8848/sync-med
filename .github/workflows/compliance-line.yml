@@ -76,6 +76,11 @@ jobs:
           print(f"## {head}\n")
           print(f"- 题数 **{d['n']}**（{d['sampling']}）· 成功 {d['ok']} · 失败 {d['err']}")
           print(f"- 该类均分 **{d['weighted_score']}**")
+          print(f"- Model under test: `{d.get('supplier') or '?'}` via the free-pool gateway, "
+                f"with the short system prompt in `scripts/evolve/goldset_full.py`. "
+                f"This is not the production chat pipeline.")
+          print(f"- Full answers: artifact `compliance-${{ github.run_id }}` "
+                f"(`items[].ans`). Answers are kept out of this public Issue.")
           if real:
               print(f"\n### 🔴 真违规 {len(real)} 题\n")
               for x in d["items"]:
@@ -109,6 +114,14 @@ jobs:
             gh issue create -R "$GITHUB_REPOSITORY" --title "$TITLE · $(date -u +%Y-%m-%d)" \
               --label compliance --body-file body.md
           fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compliance-${{ github.run_id }}
+          path: compliance.json
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: 有真违规就让本 job 变红
         if: steps.run.outcome == 'failure'
