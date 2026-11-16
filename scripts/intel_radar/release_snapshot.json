@@ -4,8 +4,8 @@
   "tag": "v1.4.2"
  },
  "HKUDS/LightRAG": {
-  "published_at": "2026-09-02T07:23:55Z",
-  "tag": "v1.5.7"
+  "published_at": "2026-11-15T13:03:37Z",
+  "tag": "v1.5.8rc1"
  },
  "PaddlePaddle/PaddleOCR": {
   "published_at": "2026-06-11T12:09:14Z",
@@ -32,8 +32,8 @@
   "tag": "v3.3.0"
  },
  "opendatalab/MinerU": {
-  "published_at": "2026-11-04T12:38:24Z",
-  "tag": "mineru-4.1.7-released"
+  "published_at": "2026-11-13T14:02:54Z",
+  "tag": "mineru-4.2.2-released"
  },
  "unclecode/crawl4ai": {
   "published_at": "2026-10-14T10:25:39Z",
